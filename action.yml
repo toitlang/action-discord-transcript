@@ -1,0 +1,77 @@
+name: "discord transcript"
+description: "Create a discord transcript."
+branding:
+  icon: lock
+  color: green
+
+inputs:
+  discord-credentials:
+    description: "The Discord bot credentials."
+    required: true
+  guild-config:
+    description: "The guild configuration."
+    required: true
+  output-directory:
+    description: "The directory to store the transcript."
+    required: true
+
+runs:
+  using: "composite"
+  steps:
+    - name: Linux check
+      shell: bash
+      if: runner.os != 'Linux'
+      run: |
+        echo "This action only supports Linux."
+        exit 1
+
+    - name: Inputs
+      shell: bash
+      run: |
+        echo "Guild config: ${{ inputs.guild-config }}"
+        echo "Output directory: ${{ inputs.output-directory }}"
+
+    - name: Check that all required inputs are given
+      shell: bash
+      run: |
+        set -e
+        if [[ -z "${{ inputs.discord-credentials }}" ]]; then
+          echo "Input discord-credentials is missing."
+          exit 1
+        fi
+        if [[ -z "${{ inputs.guild-config }}" ]]; then
+          echo "Input guild-config is missing."
+          exit 1
+        fi
+        if [[ -z "${{ inputs.output-directory }}" ]]; then
+          echo "Input output-directory is missing."
+          exit 1
+        fi
+
+    - name: Install node packages.
+      shell: bash
+      working-directory: ${{ github.action_path }}
+      run: |
+        npm install
+
+    - name: Generate transcript
+      shell: bash
+      working-directory: ${{ github.action_path }}
+      run: |
+        # Store the credentials in '.env'.
+        echo "${{ inputs.discord-credentials }}" > .env
+        # Store the guild config in 'guild-config.yaml'.
+        echo "${{ inputs.guild-config }}" > guild-config.yaml
+        # Build the javascript from the typescript.
+        npm run build
+        mkdir out
+        # Generate the transcript.
+        node dist/index.js -o out guild-config.yaml
+        out="${{ inputs.output-directory }}"
+        # If out isn't absolute, make it absolute.
+        if [[ ! "$out" == /* ]]; then
+          out="${{ github.workspace }}/$out"
+        fi
+        # Move the transcript to the output directory.
+        mkdir -p "$out"
+        mv out/*/* "$out"

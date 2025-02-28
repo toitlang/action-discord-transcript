@@ -1,0 +1,27 @@
+{
+  "name": "discord-transcripts-action",
+  "version": "1.0.0",
+  "description": "Discord bot to generate HTML transcripts from help channels",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "dev": "tsc && node dist/index.js",
+    "dev:watch": "tsc -w & nodemon dist/index.js",
+    "start:dev": "ts-node src/index.ts"
+  },
+  "dependencies": {
+    "@skyra/discord-components-core": "^3.6.1",
+    "discord-html-transcripts": "^3.2.0",
+    "discord.js": "^14.14.1",
+    "dotenv": "^16.3.1",
+    "js-yaml": "^4.1.0"
+  },
+  "devDependencies": {
+    "@types/js-yaml": "^4.0.9",
+    "@types/node": "^22.13.5",
+    "nodemon": "^3.1.0",
+    "ts-node": "^10.9.1",
+    "typescript": "^5.8.2"
+  }
+}
