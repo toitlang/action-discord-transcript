@@ -26,7 +26,7 @@ env:
   GUILD_ID: '123456789012345678'
 ---
 - name: 'Run the transcript action'
-  uses: toitlang/action-discord-transcript@v1.0.0
+  uses: toitlang/action-discord-transcript@v1.0.1
   with:
     discord-token: ${{ secrets.DISCORD_TOKEN }}
     guild-id: { { env.GUILD_ID } }
