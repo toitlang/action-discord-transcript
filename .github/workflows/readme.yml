@@ -22,7 +22,7 @@ env:
   VERSION_MARKER: '${VERSION}'
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
   update:
