@@ -2,7 +2,6 @@
 # Use of this source code is governed by a Zero-Clause BSD license that can
 # be found in the BSD0-LICENSE file.
 
-
 name: Update README
 
 on:
@@ -12,12 +11,13 @@ on:
   workflow_dispatch:
     inputs:
       version:
-        description: "Update README to given version"
+        description: 'Update README to given version'
         required: true
         type: string
 
 env:
-  ACTION_VERSION: ${{ github.event.inputs.version || github.event.release.tag_name || '' }}
+  ACTION_VERSION:
+    ${{ github.event.inputs.version || github.event.release.tag_name || '' }}
   HASH_MARKER: '${HASH}'
   VERSION_MARKER: '${VERSION}'
 
@@ -36,7 +36,9 @@ jobs:
           ref: ${{ github.ref }}
 
       - name: Update the README
-        if: github.event_name == 'release' || github.event_name == 'workflow_dispatch'
+        if:
+          github.event_name == 'release' || github.event_name ==
+          'workflow_dispatch'
         run: |
           # Replace the old hash and version with the new hash and version in
           # the README.md file.
@@ -51,7 +53,9 @@ jobs:
       # Check that the README.md wasn't updated.
       # We must only change the README.md.in
       - name: README check
-        if: github.event_name != 'release' && github.event_name != 'workflow_dispatch'
+        if:
+          github.event_name != 'release' && github.event_name !=
+          'workflow_dispatch'
         run: |
           if [[ -n $(git diff --name-only main..HEAD README.md) ]]; then
             echo "README.md was updated. Please update README.md.in instead."
