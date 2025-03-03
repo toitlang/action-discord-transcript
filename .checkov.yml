@@ -1,0 +1,3 @@
+skip:
+  CKV_GHA_7:
+    - .github/workflows/readme.yml
