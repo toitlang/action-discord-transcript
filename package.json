@@ -1,27 +1,77 @@
 {
-  "name": "discord-transcripts-action",
+  "name": "action-discord-transcripts",
+  "description": "An action that generates transcripts of Discord help forums.",
   "version": "1.0.0",
-  "description": "Discord bot to generate HTML transcripts from help channels",
-  "main": "dist/index.js",
-  "scripts": {
-    "build": "tsc && npm run copy-css",
-    "copy-css": "cp src/styles.css dist/styles.css",
-    "start": "node dist/index.js",
-    "dev": "tsc && node dist/index.js",
-    "dev:watch": "tsc -w & nodemon dist/index.js",
-    "start:dev": "ts-node src/index.ts"
+  "author": "",
+  "type": "module",
+  "private": true,
+  "homepage": "https://github.com/actions/typescript-action",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/actions/typescript-action.git"
   },
+  "bugs": {
+    "url": "https://github.com/actions/typescript-action/issues"
+  },
+  "keywords": [
+    "actions"
+  ],
+  "exports": {
+    ".": "./dist/index.js"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "copy-css": "cp src/styles.css dist/styles.css",
+    "bundle": "npm run format:write && npm run package",
+    "ci-test": "NODE_OPTIONS=--experimental-vm-modules NODE_NO_WARNINGS=1 npx jest",
+    "coverage": "npx make-coverage-badge --output-path ./badges/coverage.svg",
+    "format:write": "npx prettier --write .",
+    "format:check": "npx prettier --check .",
+    "lint": "npx eslint .",
+    "local-action": "npx @github/local-action . src/main.ts .env",
+    "package": "npm run copy-css && npx rollup --config rollup.config.ts --configPlugin @rollup/plugin-typescript",
+    "package:watch": "npm run package -- --watch",
+    "test": "NODE_OPTIONS=--experimental-vm-modules NODE_NO_WARNINGS=1 npx jest",
+    "all": "npm run format:write && npm run lint && npm run test && npm run coverage && npm run package"
+  },
+  "license": "MIT",
   "dependencies": {
+    "@actions/core": "^1.11.1",
     "@skyra/discord-components-core": "^3.6.1",
     "discord-html-transcripts": "^3.2.0",
-    "discord.js": "^14.14.1",
-    "dotenv": "^16.3.1"
+    "discord.js": "^14.18.0"
   },
   "devDependencies": {
-    "@types/js-yaml": "^4.0.9",
-    "@types/node": "^22.13.5",
-    "nodemon": "^3.1.0",
-    "ts-node": "^10.9.1",
-    "typescript": "^5.8.2"
+    "@eslint/compat": "^1.2.7",
+    "@github/local-action": "^2.6.3",
+    "@jest/globals": "^29.7.0",
+    "@rollup/plugin-commonjs": "^28.0.1",
+    "@rollup/plugin-json": "^6.1.0",
+    "@rollup/plugin-node-resolve": "^16.0.0",
+    "@rollup/plugin-typescript": "^12.1.1",
+    "@types/jest": "^29.5.14",
+    "@types/node": "^20.17.19",
+    "@typescript-eslint/eslint-plugin": "^8.24.1",
+    "@typescript-eslint/parser": "^8.24.1",
+    "eslint": "^9.21.0",
+    "eslint-config-prettier": "^10.0.1",
+    "eslint-import-resolver-typescript": "^3.8.3",
+    "eslint-plugin-import": "^2.31.0",
+    "eslint-plugin-jest": "^28.11.0",
+    "eslint-plugin-prettier": "^5.2.3",
+    "jest": "^29.7.0",
+    "make-coverage-badge": "^1.2.0",
+    "prettier": "^3.5.2",
+    "prettier-eslint": "^16.3.0",
+    "rollup": "^4.34.8",
+    "ts-jest": "^29.2.6",
+    "ts-jest-resolver": "^2.0.1",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.7.3"
+  },
+  "optionalDependencies": {
+    "@rollup/rollup-linux-x64-gnu": "*"
   }
 }
