@@ -1,7 +1,7 @@
 {
-  "name": "typescript-action",
-  "description": "GitHub Actions TypeScript template",
-  "version": "0.0.0",
+  "name": "action-discord-transcripts",
+  "description": "An action that generates transcripts of Discord help forums.",
+  "version": "1.0.0",
   "author": "",
   "type": "module",
   "private": true,
@@ -23,6 +23,7 @@
     "node": ">=20"
   },
   "scripts": {
+    "copy-css": "cp src/styles.css dist/styles.css",
     "bundle": "npm run format:write && npm run package",
     "ci-test": "NODE_OPTIONS=--experimental-vm-modules NODE_NO_WARNINGS=1 npx jest",
     "coverage": "npx make-coverage-badge --output-path ./badges/coverage.svg",
@@ -30,20 +31,24 @@
     "format:check": "npx prettier --check .",
     "lint": "npx eslint .",
     "local-action": "npx @github/local-action . src/main.ts .env",
-    "package": "npx rollup --config rollup.config.ts --configPlugin @rollup/plugin-typescript",
+    "package": "npm run copy-css && npx rollup --config rollup.config.ts --configPlugin @rollup/plugin-typescript",
     "package:watch": "npm run package -- --watch",
     "test": "NODE_OPTIONS=--experimental-vm-modules NODE_NO_WARNINGS=1 npx jest",
     "all": "npm run format:write && npm run lint && npm run test && npm run coverage && npm run package"
   },
   "license": "MIT",
   "dependencies": {
-    "@actions/core": "^1.11.1"
+    "@actions/core": "^1.11.1",
+    "@skyra/discord-components-core": "^3.6.1",
+    "discord-html-transcripts": "^3.2.0",
+    "discord.js": "^14.18.0"
   },
   "devDependencies": {
     "@eslint/compat": "^1.2.7",
     "@github/local-action": "^2.6.3",
     "@jest/globals": "^29.7.0",
     "@rollup/plugin-commonjs": "^28.0.1",
+    "@rollup/plugin-json": "^6.1.0",
     "@rollup/plugin-node-resolve": "^16.0.0",
     "@rollup/plugin-typescript": "^12.1.1",
     "@types/jest": "^29.5.14",
