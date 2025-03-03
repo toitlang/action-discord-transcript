@@ -21,6 +21,9 @@ env:
   HASH_MARKER: '${HASH}'
   VERSION_MARKER: '${VERSION}'
 
+permissions:
+  contents: read
+
 jobs:
   update:
     runs-on: ubuntu-latest
