@@ -1,5 +1,9 @@
-import * as fs from "fs";
-import * as path from "path";
+// Copyright (C) 2025 Toit language
+// Use of this source code is governed by an MIT-style license that can be
+// found in the LICENSE file.
+
+import * as fs from 'fs';
+import * as path from 'path';
 
 // Define interface for transcript object
 interface Transcript {
