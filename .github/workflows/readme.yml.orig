@@ -1,11 +1,7 @@
-# Copyright (C) 2025 Toit contributors
-# Use of this source code is governed by a Zero-Clause BSD license that can
-# be found in the BSD0-LICENSE file.
-
-
 name: Update README
 
 on:
+<<<<<<< HEAD
   push:
   release:
     types: [published]
@@ -20,6 +16,9 @@ env:
   ACTION_VERSION: ${{ github.event.inputs.version || github.event.release.tag_name || '' }}
   HASH_MARKER: '${HASH}'
   VERSION_MARKER: '${VERSION}'
+=======
+  workflow_dispatch:
+>>>>>>> main
 
 jobs:
   update:
@@ -31,9 +30,10 @@ jobs:
         with:
           fetch-depth: 0
           ref: main
+<<<<<<< HEAD
 
       - name: Update the README
-        if: github.event_name == 'release' || github.event_name == 'workflow_dispatch'
+        if: github.event_name == 'release'
         run: |
           # Replace the old hash and version with the new hash and version in
           # the README.md file.
@@ -53,3 +53,5 @@ jobs:
             echo "README.md was updated. Please update README.md.in instead."
             exit 1
           fi
+=======
+>>>>>>> main
