@@ -14,23 +14,40 @@ channel.
    These are used as '.env' file, and have the same structure as the tutorial bot.
 - `guild-id`: The guild ID. You can find this by right-clicking on the server icon
    and selecting "Copy ID".
-- `output-directory`: The directory where the transcripts will be saved.
+- `transcript-directory`: The directory where the transcripts are/will be saved.
+
+If an existing directory is specified, then the action will only fetch threads that
+have been modified or don't exist yet.
 
 ## Example
 
 ```yaml
+env:
+  # Don't forget to put the guild ID in quotes.
+  GUILD_ID: '123456789012345678'
+
+...
+
        - name: "Run the transcript action"
          uses: toitlang/action-discord-transcript@v1.0.0
          with:
            discord-credentials: ${{ secrets.DISCORD_CREDENTIALS }}
            guild-id: {{ env.GUILD_ID }}
-           output-directory: "transcripts"
+           transcript-directory: transcripts
 ```
 
-Typically, this step is followed by a step that uploads the transcript to the
-gh-pages branch of the repository.
+Typically, this step is followed by a step that commits the output, and one
+that uploads the transcript to the gh-pages branch of the repository.
 
 ```yaml
+      - name: "Commit the transcripts"
+        run: |
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git config --global user.name "github-actions[bot]"
+          git add transcripts
+          git commit -m "Update transcripts"
+          git push
+
       - name: "Upload to gh-pages"
         uses: peaceiris/actions-gh-pages@v4
         with:

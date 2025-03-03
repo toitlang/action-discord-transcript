@@ -34,24 +34,27 @@ interface TranscriptItem {
   lastActivity: Date | null;
 }
 
+type Index = { [key: string]: TranscriptItem };
+
 function usage() {
-  console.log("Usage: node index.js [-o output_directory] guild_id");
+  console.log("Updates the transcripts for a guild.");
+  console.log("Usage: node index.js --dir transcript_directory guild_id");
   process.exit(1);
 }
 
 // Parse command line arguments.
 function parseArgs(): { outputDir: string; guildId: string } {
   const args = process.argv.slice(2);
-  let outputDir = "./transcripts";
+  let outputDir = '';
   let guildId: string | undefined = undefined;
 
   for (let i = 0; i < args.length; i++) {
-    if (args[i] === "-o" || args[i] === "--output") {
+    if (args[i] === "-d" || args[i] === "--dir") {
       if (i + 1 < args.length) {
         outputDir = args[i + 1];
         i++; // Skip next argument since we used it.
       } else {
-        console.error("Error: Output directory path is missing");
+        console.error("Error: Directory path is missing");
         process.exit(1);
       }
     } else if (!guildId) {
@@ -63,6 +66,12 @@ function parseArgs(): { outputDir: string; guildId: string } {
 
   if (!guildId) {
     console.error("Error: Missing guild id");
+    usage();
+    throw "UNREACHABLE";
+  }
+
+  if (!outputDir) {
+    console.error("Error: Missing output directory");
     usage();
     throw "UNREACHABLE";
   }
@@ -220,24 +229,59 @@ async function processGuild(
   clientUser: ClientUser | null
 ): Promise<void> {
   const threads = await processHelpChannel(guild, client.user);
+  let oldIndex: Index = {};
 
   // Create output directory if it doesn't exist.
   if (!fs.existsSync(outputDir)) {
     fs.mkdirSync(outputDir, { recursive: true });
+  } else {
+    // Try to read the old index.json file.
+    const oldIndexJsonPath = path.join(outputDir, "index.json");
+    if (fs.existsSync(oldIndexJsonPath)) {
+      const oldIndexJson = fs.readFileSync(oldIndexJsonPath, "utf8");
+      oldIndex = JSON.parse(oldIndexJson, (key, value) => {
+        if (key === "lastActivity") {
+          return value ? new Date(value) : null;
+        }
+        return value;
+      }
+      );
+    }
   }
 
-  const index: TranscriptItem[] = [];
+  const index: Index = {};
 
   let failed = 0;
   for (const thread of threads) {
     const displayName = thread.name;
+    const safeThreadName = sanitizeThreadName(displayName);
+    const filename = `${thread.id}-${safeThreadName}.html`;
+    const lastActivity = thread.lastMessage?.createdAt || thread.archivedAt;
+
+    const newEntry : TranscriptItem = {
+      filename: filename,
+      displayName: displayName,
+      isArchived: thread.archived || false,
+      lastActivity: lastActivity,
+    };
+    const oldEntry = oldIndex[thread.id];
+    if (oldEntry) {
+      // If the existing entry is the same, skip the thread.
+      if (
+        oldEntry.filename === newEntry.filename &&
+        oldEntry.displayName === newEntry.displayName &&
+        oldEntry.isArchived === newEntry.isArchived &&
+        oldEntry.lastActivity?.toISOString() === newEntry.lastActivity?.toISOString()
+      ) {
+        console.log(`Skipping unchanged thread: ${displayName}`);
+        index[thread.id] = oldEntry;
+        continue;
+      }
+    }
+
     console.log(`Generating transcript for thread: ${displayName}`);
 
     try {
-      // Create a valid filename.
-      const safeThreadName = sanitizeThreadName(displayName);
-      const filename = `${thread.id}-${safeThreadName}.html`;
-
       // Generate transcript for the thread.
       const attachment = await discordTranscripts.createTranscript(thread, {
         filename: filename,
@@ -252,15 +296,17 @@ async function processGuild(
 
       // Access the attachment data directly.
       fs.writeFileSync(filePath, attachment.attachment as Buffer);
-      const lastActivity = thread.lastMessage?.createdAt || thread.archivedAt;
-      index.push({
-        filename: filename,
-        displayName: displayName,
-        isArchived: thread.archived || false,
-        lastActivity: lastActivity,
-      });
+      if (oldEntry && oldEntry.filename != filename) {
+        // Delete the old file if the filename changed.
+        const oldFilePath = path.join(outputDir, oldEntry.filename);
+        if (fs.existsSync(oldFilePath)) {
+          fs.unlinkSync(oldFilePath);
+          console.log(`Deleted old transcript: ${oldEntry.filename}`);
+        }
+      }
 
       console.log(`Transcript saved to: ${filePath}`);
+      index[thread.id] = newEntry;
     } catch (threadError) {
       failed++;
       console.error(
@@ -280,7 +326,7 @@ async function processGuild(
   console.log(`Transcripts saved to: ${path.resolve(outputDir)}`);
 
   // Create the index.
-  const sortedIndex = index.sort((a, b) => {
+  const sortedTranscriptEntries = Object.values(index).sort((a, b) => {
     // Sort by lastActivity timestamp (most recent first)
     // If no timestamp available, put at the bottom
     if (!a.lastActivity) return 1;
@@ -290,7 +336,7 @@ async function processGuild(
     );
   });
 
-  const indexHtml = generateGuildIndex(guild.name, sortedIndex);
+  const indexHtml = generateGuildIndex(guild.name, sortedTranscriptEntries);
   const indexPath = path.join(outputDir, "index.html");
   fs.writeFileSync(indexPath, indexHtml);
   // Copy the stylesheet to the output directory.
@@ -300,7 +346,7 @@ async function processGuild(
 
   // Emit the index.json file.
   const indexJsonPath = path.join(outputDir, "index.json");
-  fs.writeFileSync(indexJsonPath, JSON.stringify(sortedIndex, null, 2));
+  fs.writeFileSync(indexJsonPath, JSON.stringify(index, null, 2));
   console.log(`Generated index.json for guild ${guild.name}.`);
 }
 
