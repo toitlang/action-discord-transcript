@@ -1,24 +1,21 @@
-name: The name of your action here
-description: Provide a description here
-author: Your name or organization here
+# Copyright (C) 2025 Toit contributors
+# Use of this source code is governed by an MIT-style license that can be
+# found in the LICENSE file.
 
-# Add your action's branding here. This will appear on the GitHub Marketplace.
-branding:
-  icon: heart
-  color: red
+name: 'Discord transcript'
+description: 'Create a Discord transcript.'
 
-# Define your inputs here.
 inputs:
-  milliseconds:
-    description: Your input description here
+  discord-token:
+    description: 'The Discord bot credentials.'
     required: true
-    default: '1000'
-
-# Define your outputs here.
-outputs:
-  time:
-    description: Your output description here
+  guild-id:
+    description: 'The guild id.'
+    required: true
+  transcript-directory:
+    description: 'The directory to store the transcript.'
+    required: true
 
 runs:
-  using: node20
-  main: dist/index.js
+  using: 'node20'
+  main: 'dist/index.js'

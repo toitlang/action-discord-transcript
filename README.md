@@ -10,14 +10,13 @@ channel.
 
 ### Inputs
 
-- `discord-credentials`: The credentials to authenticate against the Discord API.
-   These are used as '.env' file, and have the same structure as the tutorial bot.
-- `guild-id`: The guild ID. You can find this by right-clicking on the server icon
-   and selecting "Copy ID".
+- `discord-token`: The authentication token of the Discord bot.
+- `guild-id`: The guild ID. You can find this by right-clicking on the server
+  icon and selecting "Copy ID".
 - `transcript-directory`: The directory where the transcripts are/will be saved.
 
-If an existing directory is specified, then the action will only fetch threads that
-have been modified or don't exist yet.
+If an existing directory is specified, then the action will only fetch threads
+that have been modified or don't exist yet.
 
 ## Example
 
@@ -25,40 +24,39 @@ have been modified or don't exist yet.
 env:
   # Don't forget to put the guild ID in quotes.
   GUILD_ID: '123456789012345678'
-
-...
-
-       - name: "Run the transcript action"
-         uses: toitlang/action-discord-transcript@v1.0.0
-         with:
-           discord-credentials: ${{ secrets.DISCORD_CREDENTIALS }}
-           guild-id: {{ env.GUILD_ID }}
-           transcript-directory: transcripts
+---
+- name: 'Run the transcript action'
+  uses: toitlang/action-discord-transcript@v1.0.0
+  with:
+    discord-token: ${{ secrets.DISCORD_TOKEN }}
+    guild-id: { { env.GUILD_ID } }
+    transcript-directory: transcripts
 ```
 
-Typically, this step is followed by a step that commits the output, and one
-that uploads the transcript to the gh-pages branch of the repository.
+Typically, this step is followed by a step that commits the output, and one that
+uploads the transcript to the gh-pages branch of the repository.
 
 ```yaml
-      - name: "Commit the transcripts"
-        run: |
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git config --global user.name "github-actions[bot]"
-          git add transcripts
-          git commit -m "Update transcripts"
-          git push
+- name: 'Commit the transcripts'
+  run: |
+    git config --global user.email "github-actions[bot]@users.noreply.github.com"
+    git config --global user.name "github-actions[bot]"
+    git add transcripts
+    git commit -m "Update transcripts"
+    git push
 
-      - name: "Upload to gh-pages"
-        uses: peaceiris/actions-gh-pages@v4
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: transcripts
-          cname: "example.com"
+- name: 'Upload to gh-pages'
+  uses: peaceiris/actions-gh-pages@v4
+  with:
+    github_token: ${{ secrets.GITHUB_TOKEN }}
+    publish_dir: transcripts
+    cname: 'example.com'
 ```
 
 ## Output
 
-The output directory contains an html file for each thread in the #help forum.
+The transcript directory contains an HMTL file for each thread in the #help
+forum.
 
 In addition, the output directory contains a `index.html` file that links to all
 the transcripts.
@@ -66,31 +64,52 @@ the transcripts.
 Finally, it also produces an `index.json` file that contains the metadata for
 each transcript. This can be used to generate a more complex index page.
 
+## Incremental updates
+
+If the transcript directory already exists and contains the index.json file,
+then the action will only fetch threads that have been modified or don't exist
+yet.
+
 ## Run locally
 
 You can also just run the transcript generation locally.
 
-Install the dependencies and build the project:
+Make sure to run with Node 20. Use, for example, `nvm` to install it. The
+repository contains a `.nvmrc` file that specifies the node version that works.
+It also contains a `.node-version` file that is used by GitHub to fetch the
+correct version.
+
+If you have nvm installed, but not automatically activated in your .bashrc, you
+will need to do
+
+```bash
+source /usr/share/nvm/init-nvm.sh
+```
+
+Then run `nvm install` to install the correct version of node.
+
+Install the dependencies.
 
 ```bash
 npm install
-npm run build
 ```
 
-Save the Discord credentials to a `.env` file. These are in the same format as
-the tutorial bot.
+Save the Discord credentials and your input parameters to a `.env` file. Use the
+.env.example as a starting point.
 
 ```bash
-APP_ID=your-discord-app-id
-PUBLIC_KEY=your-discord-public-key
-DISCORD_TOKEN=your-discord-token
+INPUT_discord-token=YOUR_DISCORD_TOKEN
+INPUT_guild-id=YOUR_GUILD_ID
+INPUT_transcript-directory=transcripts
 ```
 
 Run the script.
 
 ```bash
-# Either run the script directly
-npm run start:dev -- -o out-folder your-guild-id
-# Or run the script with the compiled code
-npm run start -- -o out-folder your-guild-id
+npm run local-action
 ```
+
+## References
+
+This repository is based on the
+[TypeScript Action template](https://github.com/actions/typescript-action).

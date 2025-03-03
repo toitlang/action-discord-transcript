@@ -1,27 +1,341 @@
+// Copyright (C) 2025 Toit contributors
+// Use of this source code is governed by an MIT-style license that can be
+// found in the LICENSE file.
+
 import * as core from '@actions/core'
-import { wait } from './wait.js'
 
-/**
- * The main function for the action.
- *
- * @returns Resolves when the action is complete.
- */
-export async function run(): Promise<void> {
-  try {
-    const ms: string = core.getInput('milliseconds')
+import * as discordTranscripts from 'discord-html-transcripts'
+import {
+  ChannelType,
+  Client,
+  Events,
+  ForumChannel,
+  GatewayIntentBits,
+  Guild,
+  PublicThreadChannel
+} from 'discord.js'
+import * as fs from 'fs'
+import * as path from 'path'
+import { fileURLToPath } from 'url'
+import { generateGuildIndex } from './index-generator.js'
 
-    // Debug logs are only output if the `ACTIONS_STEP_DEBUG` secret is true
-    core.debug(`Waiting ${ms} milliseconds ...`)
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = path.dirname(__filename)
 
-    // Log the current timestamp, wait, then log the new timestamp
-    core.debug(new Date().toTimeString())
-    await wait(parseInt(ms, 10))
-    core.debug(new Date().toTimeString())
+const DISCORD_TOKEN = core.getInput('discord-token')
+const GUILD_ID = core.getInput('guild-id')
+const TRANSCRIPT_DIR = core.getInput('transcript-directory')
 
-    // Set outputs for other workflow steps to use
-    core.setOutput('time', new Date().toTimeString())
-  } catch (error) {
-    // Fail the workflow run if an error occurs
-    if (error instanceof Error) core.setFailed(error.message)
+if (!DISCORD_TOKEN) {
+  throw new Error('Missing required input: discord-token')
+}
+if (!GUILD_ID) {
+  throw new Error('Missing required input: guild-id')
+}
+if (!TRANSCRIPT_DIR) {
+  throw new Error('Missing required input: transcript-directory')
+}
+
+type HelpThread = PublicThreadChannel<true>
+
+interface TranscriptItem {
+  filename: string
+  displayName: string
+  isArchived: boolean
+  lastActivity: Date | null
+}
+
+type Index = { [key: string]: TranscriptItem }
+
+// Create Discord client with necessary intents.
+const client = new Client({
+  intents: [
+    GatewayIntentBits.Guilds,
+    GatewayIntentBits.GuildMessages,
+    GatewayIntentBits.MessageContent
+  ]
+})
+
+// Fetch all threads from the forum channel with pagination.
+async function fetchAllThreads(
+  forumChannel: ForumChannel,
+  active: boolean
+): Promise<Array<HelpThread>> {
+  const activeStr = active ? 'active' : 'archived'
+  const helpThreads = new Array<HelpThread>()
+  let hasMoreThreads = true
+  let beforeId: string | null = null
+  let fetchCount = 0
+
+  while (hasMoreThreads) {
+    try {
+      fetchCount++
+      // Set pagination options
+      const options: {
+        limit: number
+        archived?: Record<string, never>
+        before?: string
+      } = {
+        limit: 100
+      }
+      if (!active) options.archived = {}
+      if (beforeId) options.before = beforeId
+
+      const fetchedThreads = await forumChannel.threads.fetch(options)
+      console.log(
+        `Fetched ${fetchedThreads.threads.size} ${activeStr} threads from forum #${forumChannel.name} (batch ${fetchCount})`
+      )
+
+      // No more threads to fetch.
+      if (fetchedThreads.threads.size === 0) {
+        console.log(
+          `No more threads to fetch from #${forumChannel.name}, breaking out of pagination loop`
+        )
+        break
+      }
+
+      // Add fetched threads to our collection.
+      fetchedThreads.threads.forEach((thread) => {
+        helpThreads.push(thread as HelpThread)
+      })
+
+      // Find the oldest thread ID for pagination.
+      let oldestSnowflake: string | null = null
+      for (const [threadId] of fetchedThreads.threads) {
+        if (!oldestSnowflake || threadId < oldestSnowflake) {
+          oldestSnowflake = threadId
+        }
+      }
+
+      // If we found an older thread ID, use it for the next page.
+      if (oldestSnowflake && oldestSnowflake !== beforeId) {
+        beforeId = oldestSnowflake
+        console.log(`Next pagination will fetch threads before ID: ${beforeId}`)
+      } else {
+        // If we didn't get a new oldest ID or it's the same as before, we're done.
+        console.log(
+          `No new thread IDs found or same as before, ending pagination for #${forumChannel.name}`
+        )
+        hasMoreThreads = false
+      }
+
+      // Safety check: if we fetched fewer threads than the limit, we're probably done.
+      if (fetchedThreads.threads.size < 100) {
+        console.log(
+          `Fetched fewer than limit (${fetchedThreads.threads.size} < 100), ending pagination`
+        )
+        hasMoreThreads = false
+      }
+
+      // Safety check: bail out after 20 iterations to prevent infinite loops.
+      if (fetchCount >= 20) {
+        console.log(`Reached maximum fetch count (20), stopping pagination`)
+        hasMoreThreads = false
+      }
+    } catch (error) {
+      console.error(
+        `Error fetching thread batch from #${forumChannel.name}:`,
+        error instanceof Error ? error.message : String(error)
+      )
+      hasMoreThreads = false
+    }
   }
+
+  console.log(
+    `Completed pagination for #${forumChannel.name}, found ${helpThreads.length} total ${activeStr} threads`
+  )
+  return helpThreads
+}
+
+async function processHelpChannel(guild: Guild): Promise<HelpThread[]> {
+  console.log(`Processing guild: ${guild.name}`)
+
+  try {
+    // Fetch all channels and find the help channel.
+    const channels = await guild.channels.fetch()
+
+    for (const [, channel] of channels) {
+      // Skip if channel doesn't exist.
+      if (!channel) continue
+      if (channel.name != 'help') continue
+      if (channel.type != ChannelType.GuildForum) continue
+
+      const forumChannel = channel as ForumChannel
+      // Get ALL threads in the forum using pagination
+      const activeThreads = await fetchAllThreads(forumChannel, true)
+      const passiveThreads = await fetchAllThreads(forumChannel, false)
+      const helpThreads = activeThreads.concat(passiveThreads)
+      console.log(
+        `Found total of ${helpThreads.length} threads in forum #${channel.name}`
+      )
+      return helpThreads
+    }
+  } catch (error) {
+    console.error(
+      `Error processing channels in guild ${guild.name}:`,
+      error instanceof Error ? error.message : String(error)
+    )
+  }
+  throw 'Could not find help channel'
+}
+
+// Function to sanitize names so they can be used as filenames.
+function sanitizeThreadName(name: string): string {
+  const sanitized = name.replace(/[^\w\s-]/gi, '-')
+  return sanitized
+}
+
+async function processGuild(guild: Guild): Promise<void> {
+  const threads = await processHelpChannel(guild)
+  let oldIndex: Index = {}
+
+  // Create output directory if it doesn't exist.
+  if (!fs.existsSync(TRANSCRIPT_DIR)) {
+    fs.mkdirSync(TRANSCRIPT_DIR, { recursive: true })
+  } else {
+    // Try to read the old index.json file.
+    const oldIndexJsonPath = path.join(TRANSCRIPT_DIR, 'index.json')
+    if (fs.existsSync(oldIndexJsonPath)) {
+      const oldIndexJson = fs.readFileSync(oldIndexJsonPath, 'utf8')
+      oldIndex = JSON.parse(oldIndexJson, (key, value) => {
+        if (key === 'lastActivity') {
+          return value ? new Date(value) : null
+        }
+        return value
+      })
+    }
+  }
+
+  const index: Index = {}
+
+  let failed = 0
+  for (const thread of threads) {
+    const displayName = thread.name
+    const safeThreadName = sanitizeThreadName(displayName)
+    const filename = `${thread.id}-${safeThreadName}.html`
+    const lastActivity = thread.lastMessage?.createdAt || thread.archivedAt
+
+    const newEntry: TranscriptItem = {
+      filename: filename,
+      displayName: displayName,
+      isArchived: thread.archived || false,
+      lastActivity: lastActivity
+    }
+    const oldEntry = oldIndex[thread.id]
+    if (oldEntry) {
+      // If the existing entry is the same, skip the thread.
+      if (
+        oldEntry.filename === newEntry.filename &&
+        oldEntry.displayName === newEntry.displayName &&
+        oldEntry.isArchived === newEntry.isArchived &&
+        oldEntry.lastActivity?.toISOString() ===
+          newEntry.lastActivity?.toISOString()
+      ) {
+        console.log(`Skipping unchanged thread: ${displayName}`)
+        index[thread.id] = oldEntry
+        continue
+      }
+    }
+
+    console.log(`Generating transcript for thread: ${displayName}`)
+
+    try {
+      // Generate transcript for the thread.
+      const attachment = await discordTranscripts.createTranscript(thread, {
+        filename: filename,
+        poweredBy: false,
+        saveImages: true,
+        footerText: '{number} messages in total',
+        hydrate: true
+      })
+
+      // Save the transcript to the output directory.
+      const filePath = path.join(TRANSCRIPT_DIR, filename)
+
+      // Access the attachment data directly.
+      fs.writeFileSync(filePath, attachment.attachment as Buffer)
+      if (oldEntry && oldEntry.filename != filename) {
+        // Delete the old file if the filename changed.
+        const oldFilePath = path.join(TRANSCRIPT_DIR, oldEntry.filename)
+        if (fs.existsSync(oldFilePath)) {
+          fs.unlinkSync(oldFilePath)
+          console.log(`Deleted old transcript: ${oldEntry.filename}`)
+        }
+      }
+
+      console.log(`Transcript saved to: ${filePath}`)
+      index[thread.id] = newEntry
+    } catch (threadError) {
+      failed++
+      console.error(
+        `Error generating transcript for thread: ${displayName}:`,
+        threadError instanceof Error ? threadError.message : String(threadError)
+      )
+      // Continue to the next thread instead of failing.
+      continue
+    }
+  }
+
+  const successful = threads.length - failed
+  console.log(`Successfully processed ${successful} thread(s)`)
+  if (failed > 0) {
+    console.error(`Failed to process ${failed} thread(s)`)
+  }
+  console.log(`Transcripts saved to: ${path.resolve(TRANSCRIPT_DIR)}`)
+
+  // Create the index.
+  const sortedTranscriptEntries = Object.values(index).sort((a, b) => {
+    // Sort by lastActivity timestamp (most recent first)
+    // If no timestamp available, put at the bottom
+    if (!a.lastActivity) return 1
+    if (!b.lastActivity) return -1
+    return (
+      new Date(b.lastActivity).getTime() - new Date(a.lastActivity).getTime()
+    )
+  })
+
+  const indexHtml = generateGuildIndex(guild.name, sortedTranscriptEntries)
+  const indexPath = path.join(TRANSCRIPT_DIR, 'index.html')
+  fs.writeFileSync(indexPath, indexHtml)
+  // Copy the stylesheet to the output directory.
+  const stylesPath = path.join(TRANSCRIPT_DIR, 'styles.css')
+  fs.copyFileSync(path.join(__dirname, 'styles.css'), stylesPath)
+  console.log(`Generated index.html for guild ${guild.name}.`)
+
+  // Emit the index.json file.
+  const indexJsonPath = path.join(TRANSCRIPT_DIR, 'index.json')
+  fs.writeFileSync(indexJsonPath, JSON.stringify(index, null, 2))
+  console.log(`Generated index.json for guild ${guild.name}.`)
+}
+
+client.once(Events.ClientReady, async (readyClient: Client) => {
+  console.log(`Logged in as ${readyClient.user?.tag}`)
+
+  try {
+    // Process specified guilds.
+    console.log('Generating transcripts for channels...')
+    console.log('Looking for guild:', GUILD_ID)
+
+    const guild = await client.guilds.fetch(GUILD_ID)
+    console.log(`Found guild: ${guild.name}`)
+
+    await processGuild(guild)
+  } catch (error) {
+    console.error(
+      'An error occurred:',
+      error instanceof Error ? error.message : String(error)
+    )
+  } finally {
+    // Disconnect the bot after processing.
+    client.destroy()
+    console.log('Bot disconnected.')
+  }
+})
+
+// Login to Discord with the bot token.
+client.login(DISCORD_TOKEN)
+
+// Export a run function.
+export async function run(): Promise<void> {
+  await client.login(DISCORD_TOKEN)
 }

@@ -2,14 +2,11 @@
 // Use of this source code is governed by an MIT-style license that can be
 // found in the LICENSE file.
 
-import * as fs from 'fs';
-import * as path from 'path';
-
 // Define interface for transcript object
 interface Transcript {
-  filename: string;
-  displayName: string;
-  lastActivity: Date | null;
+  filename: string
+  displayName: string
+  lastActivity: Date | null
 }
 
 // Function to generate index.html for a guild.
@@ -50,12 +47,12 @@ export function generateGuildIndex(
                                 ? `<span class="timestamp" data-timestamp="${new Date(
                                     thread.lastActivity
                                   ).toISOString()}"></span>`
-                                : ""
+                                : ''
                             }
                         </li>
                         `
                           )
-                          .join("")}
+                          .join('')}
                     </ul>
                 </div>
             </div>
@@ -71,5 +68,5 @@ export function generateGuildIndex(
       });
     </script>
 </body>
-</html>`;
+</html>`
 }
