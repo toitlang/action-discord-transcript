@@ -1,72 +1,21 @@
-# Copyright (C) 2025 Toit language
+# Copyright (C) 2025 Toit contributors
 # Use of this source code is governed by an MIT-style license that can be
 # found in the LICENSE file.
 
-name: "Discord transcript"
-description: "Create a Discord transcript."
+name: 'Discord transcript'
+description: 'Create a Discord transcript.'
 
 inputs:
-  discord-credentials:
-    description: "The Discord bot credentials."
+  discord-token:
+    description: 'The Discord bot credentials.'
     required: true
   guild-id:
-    description: "The guild id."
+    description: 'The guild id.'
     required: true
   transcript-directory:
-    description: "The directory to store the transcript."
+    description: 'The directory to store the transcript.'
     required: true
 
 runs:
-  using: "composite"
-  steps:
-    - name: Linux check
-      shell: bash
-      if: runner.os != 'Linux'
-      run: |
-        echo "This action only supports Linux."
-        exit 1
-
-    - name: Inputs
-      shell: bash
-      run: |
-        echo "Guild ID: ${{ inputs.guild-id }}"
-        echo "Output directory: ${{ inputs.transcript-directory }}"
-
-    - name: Check that all required inputs are given
-      shell: bash
-      run: |
-        set -e
-        if [[ -z "${{ inputs.discord-credentials }}" ]]; then
-          echo "Input discord-credentials is missing."
-          exit 1
-        fi
-        if [[ -z "${{ inputs.guild-id }}" ]]; then
-          echo "Input guild ID is missing."
-          exit 1
-        fi
-        if [[ -z "${{ inputs.transcript-directory }}" ]]; then
-          echo "Input transcript-directory is missing."
-          exit 1
-        fi
-
-    - name: Install node packages
-      shell: bash
-      working-directory: ${{ github.action_path }}
-      run: |
-        npm install
-
-    - name: Generate transcript
-      shell: bash
-      working-directory: ${{ github.action_path }}
-      run: |
-        # Store the credentials in '.env'.
-        echo "${{ inputs.discord-credentials }}" > .env
-        # Build the javascript from the typescript.
-        npm run build
-        out="${{ inputs.transcript-directory }}"
-        # If out isn't absolute, make it absolute.
-        if [[ ! "$out" == /* ]]; then
-          out="${{ github.workspace }}/$out"
-        fi
-        # Generate the transcript.
-        node dist/index.js --dir "$out" ${{ inputs.guild-id }}
+  using: 'node20'
+  main: 'dist/index.js'
