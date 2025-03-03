@@ -303505,72 +303505,65 @@ const client = new srcExports.Client({
         srcExports.GatewayIntentBits.MessageContent
     ]
 });
-// Fetch all threads from the forum channel with pagination.
-async function fetchAllThreads(forumChannel, active) {
-    const activeStr = active ? 'active' : 'archived';
+async function fetchActiveThreads(forumChannel) {
     const helpThreads = new Array();
-    let hasMoreThreads = true;
-    let beforeId = null;
-    let fetchCount = 0;
-    while (hasMoreThreads) {
+    try {
+        const fetchedThreads = await forumChannel.threads.fetchActive();
+        console.log(`Fetched ${fetchedThreads.threads.size} active threads from forum #${forumChannel.name}`);
+        fetchedThreads.threads.forEach((thread) => {
+            helpThreads.push(thread);
+        });
+    }
+    catch (error) {
+        console.error(`Error fetching active threads from #${forumChannel.name}:`, error instanceof Error ? error.message : String(error));
+    }
+    return helpThreads;
+}
+// Fetch all threads from the forum channel with pagination.
+async function fetchArchivedThreads(forumChannel, cutoffDate) {
+    const helpThreads = new Array();
+    let beforeId = undefined;
+    while (true) {
         try {
-            fetchCount++;
-            // Set pagination options
-            const options = {
-                limit: 100
-            };
-            if (!active)
-                options.archived = {};
+            const options = { limit: 100 };
             if (beforeId)
                 options.before = beforeId;
-            const fetchedThreads = await forumChannel.threads.fetch(options);
-            console.log(`Fetched ${fetchedThreads.threads.size} ${activeStr} threads from forum #${forumChannel.name} (batch ${fetchCount})`);
+            const fetched = await forumChannel.threads.fetchArchived(options);
+            console.log(`Fetched ${fetched.threads.size} archived threads from forum #${forumChannel.name}`);
             // No more threads to fetch.
-            if (fetchedThreads.threads.size === 0) {
-                console.log(`No more threads to fetch from #${forumChannel.name}, breaking out of pagination loop`);
+            if (fetched.threads.size === 0)
+                break;
+            // Add fetched threads to our collection.
+            const fetchedThreads = new Array();
+            fetched.threads.forEach((thread) => {
+                fetchedThreads.push(thread);
+            });
+            // Sort the fetched threads.
+            // This shouldn't be necessary, but can't hurt.
+            fetchedThreads.sort((a, b) => (b.archiveTimestamp ?? 0) - (a.archiveTimestamp ?? 0));
+            helpThreads.push(...fetchedThreads);
+            const newestThread = fetchedThreads[0];
+            // If the newest thread is older than the cutoff date, we're done.
+            if (cutoffDate && newestThread.archivedAt && newestThread.archivedAt < cutoffDate) {
+                console.log(`Newest thread is older than cutoff date, ending pagination for #${forumChannel.name}`);
                 break;
             }
-            // Add fetched threads to our collection.
-            fetchedThreads.threads.forEach((thread) => {
-                helpThreads.push(thread);
-            });
-            // Find the oldest thread ID for pagination.
-            let oldestSnowflake = null;
-            for (const [threadId] of fetchedThreads.threads) {
-                if (!oldestSnowflake || threadId < oldestSnowflake) {
-                    oldestSnowflake = threadId;
-                }
-            }
-            // If we found an older thread ID, use it for the next page.
-            if (oldestSnowflake && oldestSnowflake !== beforeId) {
-                beforeId = oldestSnowflake;
-                console.log(`Next pagination will fetch threads before ID: ${beforeId}`);
-            }
-            else {
-                // If we didn't get a new oldest ID or it's the same as before, we're done.
-                console.log(`No new thread IDs found or same as before, ending pagination for #${forumChannel.name}`);
-                hasMoreThreads = false;
-            }
-            // Safety check: if we fetched fewer threads than the limit, we're probably done.
-            if (fetchedThreads.threads.size < 100) {
-                console.log(`Fetched fewer than limit (${fetchedThreads.threads.size} < 100), ending pagination`);
-                hasMoreThreads = false;
-            }
-            // Safety check: bail out after 20 iterations to prevent infinite loops.
-            if (fetchCount >= 20) {
-                console.log(`Reached maximum fetch count (20), stopping pagination`);
-                hasMoreThreads = false;
+            const oldestThread = fetchedThreads[fetchedThreads.length - 1];
+            beforeId = oldestThread.id;
+            if (!fetched.hasMore) {
+                console.log(`No more archived threads to fetch, ending pagination for #${forumChannel.name}`);
+                break;
             }
         }
         catch (error) {
             console.error(`Error fetching thread batch from #${forumChannel.name}:`, error instanceof Error ? error.message : String(error));
-            hasMoreThreads = false;
+            break;
         }
     }
-    console.log(`Completed pagination for #${forumChannel.name}, found ${helpThreads.length} total ${activeStr} threads`);
+    console.log(`Completed pagination for #${forumChannel.name}, found ${helpThreads.length} total archived threads`);
     return helpThreads;
 }
-async function processHelpChannel(guild) {
+async function processHelpChannel(guild, oldIndex) {
     console.log(`Processing guild: ${guild.name}`);
     try {
         // Fetch all channels and find the help channel.
@@ -303585,8 +303578,20 @@ async function processHelpChannel(guild) {
                 continue;
             const forumChannel = channel;
             // Get ALL threads in the forum using pagination
-            const activeThreads = await fetchAllThreads(forumChannel, true);
-            const passiveThreads = await fetchAllThreads(forumChannel, false);
+            const activeThreads = await fetchActiveThreads(forumChannel);
+            let cutOffDate = undefined;
+            if (oldIndex) {
+                // Find the most recent archived thread in the index.
+                for (const threadId in oldIndex) {
+                    const thread = oldIndex[threadId];
+                    if (thread.isArchived && thread.lastActivity) {
+                        if (!cutOffDate || thread.lastActivity > cutOffDate) {
+                            cutOffDate = thread.lastActivity;
+                        }
+                    }
+                }
+            }
+            const passiveThreads = await fetchArchivedThreads(forumChannel, cutOffDate);
             const helpThreads = activeThreads.concat(passiveThreads);
             console.log(`Found total of ${helpThreads.length} threads in forum #${channel.name}`);
             return helpThreads;
@@ -303603,10 +303608,9 @@ function sanitizeThreadName(name) {
     return sanitized;
 }
 async function processGuild(guild) {
-    const threads = await processHelpChannel(guild);
     let oldIndex = {};
-    // Create output directory if it doesn't exist.
     if (!fs.existsSync(TRANSCRIPT_DIR)) {
+        // Create output directory if it doesn't exist.
         fs.mkdirSync(TRANSCRIPT_DIR, { recursive: true });
     }
     else {
@@ -303622,6 +303626,7 @@ async function processGuild(guild) {
             });
         }
     }
+    const threads = await processHelpChannel(guild, oldIndex);
     const index = {};
     let failed = 0;
     for (const thread of threads) {
