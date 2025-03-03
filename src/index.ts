@@ -1,3 +1,7 @@
+// Copyright (C) 2025 Toit language
+// Use of this source code is governed by an MIT-style license that can be
+// found in the LICENSE file.
+
 import dotenv from 'dotenv';
 dotenv.config();
 
@@ -72,7 +76,7 @@ function parseArgs(): { outputDir: string; configFiles: string[] } {
 
 const { outputDir, configFiles } = parseArgs();
 
-// Parse configuration files and build guild/channel mappings
+// Parse configuration files and build guild/channel mappings.
 function parseConfigFiles(configFiles: string[]): GuildConfig[] {
   const guildConfigs: GuildConfig[] = [];
 
@@ -131,7 +135,7 @@ function ensureGuildDirectory(outputDir: string, guildName: string): string {
   return guildDir;
 }
 
-// Fetch all threads from a forum channel with pagination
+// Fetch all threads from a forum channel with pagination.
 async function fetchAllThreads(forumChannel: ForumChannel, active: boolean): Promise<Collection<string, PublicThreadChannel<true>>> {
   const activeStr = active ? 'active' : 'archived';
   const allThreads = new Collection<string, PublicThreadChannel<true>>();
@@ -156,18 +160,18 @@ async function fetchAllThreads(forumChannel: ForumChannel, active: boolean): Pro
       const fetchedThreads = await forumChannel.threads.fetch(options);
       console.log(`Fetched ${fetchedThreads.threads.size} ${activeStr} threads from forum #${forumChannel.name} (batch ${fetchCount})`);
 
-      // No more threads to fetch
+      // No more threads to fetch.
       if (fetchedThreads.threads.size === 0) {
         console.log(`No more threads to fetch from #${forumChannel.name}, breaking out of pagination loop`);
         break;
       }
 
-      // Add fetched threads to our collection
+      // Add fetched threads to our collection.
       fetchedThreads.threads.forEach((thread, threadId) => {
         allThreads.set(threadId, thread as PublicThreadChannel<true>);
       });
 
-      // Find the oldest thread ID for pagination
+      // Find the oldest thread ID for pagination.
       let oldestSnowflake: string | null = null;
       for (const [threadId] of fetchedThreads.threads) {
         if (!oldestSnowflake || threadId < oldestSnowflake) {
@@ -175,23 +179,23 @@ async function fetchAllThreads(forumChannel: ForumChannel, active: boolean): Pro
         }
       }
 
-      // If we found an older thread ID, use it for the next page
+      // If we found an older thread ID, use it for the next page.
       if (oldestSnowflake && oldestSnowflake !== beforeId) {
         beforeId = oldestSnowflake;
         console.log(`Next pagination will fetch threads before ID: ${beforeId}`);
       } else {
-        // If we didn't get a new oldest ID or it's the same as before, we're done
+        // If we didn't get a new oldest ID or it's the same as before, we're done.
         console.log(`No new thread IDs found or same as before, ending pagination for #${forumChannel.name}`);
         hasMoreThreads = false;
       }
 
-      // Safety check: if we fetched fewer threads than the limit, we're probably done
+      // Safety check: if we fetched fewer threads than the limit, we're probably done.
       if (fetchedThreads.threads.size < 100) {
         console.log(`Fetched fewer than limit (${fetchedThreads.threads.size} < 100), ending pagination`);
         hasMoreThreads = false;
       }
 
-      // Safety check: bail out after 20 iterations to prevent infinite loops
+      // Safety check: bail out after 20 iterations to prevent infinite loops.
       if (fetchCount >= 20) {
         console.log(`Reached maximum fetch count (20), stopping pagination`);
         hasMoreThreads = false;

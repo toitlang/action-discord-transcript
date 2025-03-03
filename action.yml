@@ -1,5 +1,9 @@
-name: "discord transcript"
-description: "Create a discord transcript."
+# Copyright (C) 2025 Toit language
+# Use of this source code is governed by an MIT-style license that can be
+# found in the LICENSE file.
+
+name: "Discord transcript"
+description: "Create a Discord transcript."
 branding:
   icon: lock
   color: green
@@ -48,7 +52,7 @@ runs:
           exit 1
         fi
 
-    - name: Install node packages.
+    - name: Install node packages
       shell: bash
       working-directory: ${{ github.action_path }}
       run: |

@@ -1,3 +1,7 @@
+// Copyright (C) 2025 Toit language
+// Use of this source code is governed by an MIT-style license that can be
+// found in the LICENSE file.
+
 import * as fs from 'fs';
 import * as path from 'path';
 import { sanitizeFilename } from './utils';
@@ -227,8 +231,8 @@ export function generateGuildIndex(guildDir: string, guildName: string, transcri
                     <ul class="channels-list forum-channels">
                         ${threads
                             .sort((a, b) => {
-                                // Sort by lastActivity timestamp (most recent first)
-                                // If no timestamp available, put at the bottom
+                                // Sort by lastActivity timestamp (most recent first).
+                                // If no timestamp available, put at the bottom.
                                 if (!a.lastActivity) return 1;
                                 if (!b.lastActivity) return -1;
                                 return new Date(b.lastActivity).getTime() - new Date(a.lastActivity).getTime();
