@@ -33,7 +33,7 @@ jobs:
           ref: main
 
       - name: Update the README
-        if: github.event_name == 'release'
+        if: github.event_name == 'release' || github.event_name == 'workflow_dispatch'
         run: |
           # Replace the old hash and version with the new hash and version in
           # the README.md file.
