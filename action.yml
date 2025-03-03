@@ -4,16 +4,13 @@
 
 name: "Discord transcript"
 description: "Create a Discord transcript."
-branding:
-  icon: lock
-  color: green
 
 inputs:
   discord-credentials:
     description: "The Discord bot credentials."
     required: true
-  guild-config:
-    description: "The guild configuration."
+  guild-id:
+    description: "The guild id."
     required: true
   output-directory:
     description: "The directory to store the transcript."
@@ -32,7 +29,7 @@ runs:
     - name: Inputs
       shell: bash
       run: |
-        echo "Guild config: ${{ inputs.guild-config }}"
+        echo "Guild ID: ${{ inputs.guild-id }}"
         echo "Output directory: ${{ inputs.output-directory }}"
 
     - name: Check that all required inputs are given
@@ -43,8 +40,8 @@ runs:
           echo "Input discord-credentials is missing."
           exit 1
         fi
-        if [[ -z "${{ inputs.guild-config }}" ]]; then
-          echo "Input guild-config is missing."
+        if [[ -z "${{ inputs.guild-id }}" ]]; then
+          echo "Input guild ID is missing."
           exit 1
         fi
         if [[ -z "${{ inputs.output-directory }}" ]]; then
@@ -64,13 +61,11 @@ runs:
       run: |
         # Store the credentials in '.env'.
         echo "${{ inputs.discord-credentials }}" > .env
-        # Store the guild config in 'guild-config.yaml'.
-        echo "${{ inputs.guild-config }}" > guild-config.yaml
         # Build the javascript from the typescript.
         npm run build
         mkdir out
         # Generate the transcript.
-        node dist/index.js -o out guild-config.yaml
+        node dist/index.js -o out ${{ inputs.guild-id }}
         out="${{ inputs.output-directory }}"
         # If out isn't absolute, make it absolute.
         if [[ ! "$out" == /* ]]; then
@@ -78,4 +73,4 @@ runs:
         fi
         # Move the transcript to the output directory.
         mkdir -p "$out"
-        mv out/*/* "$out"
+        mv out/* "$out"
