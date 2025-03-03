@@ -2,6 +2,8 @@
 # Use of this source code is governed by a Zero-Clause BSD license that can
 # be found in the BSD0-LICENSE file.
 
+# checkov:skip=CKV_GHA_7: We want to be have inputs to workflow dispatches.
+
 name: Update README
 
 on:
