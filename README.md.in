@@ -65,8 +65,8 @@ Finally, it also produces an `index.json` file that contains the metadata for
 each transcript. This can be used to generate a more complex index page.
 
 Here is a screenshot of the generated index page for the
-[Toit Discord page](https://chat.toit.io) (served at the
-[Toit help](https://help.toit.io) page).
+[Toit Discord page](https://chat.toit.io), served at the
+[Toit help](https://help.toit.io) page.
 
 ![Index page](./screens/toit-help-screen.png)
 
