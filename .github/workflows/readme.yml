@@ -29,7 +29,15 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout
+      - name: Checkout for release
+        if: github.event_name == 'release'
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          ref: main
+
+      - name: Checkout for push
+        if: github.event_name != 'release'
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
