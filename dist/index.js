@@ -303544,7 +303544,9 @@ async function fetchArchivedThreads(forumChannel, cutoffDate) {
             helpThreads.push(...fetchedThreads);
             const newestThread = fetchedThreads[0];
             // If the newest thread is older than the cutoff date, we're done.
-            if (cutoffDate && newestThread.archivedAt && newestThread.archivedAt < cutoffDate) {
+            if (cutoffDate &&
+                newestThread.archivedAt &&
+                newestThread.archivedAt < cutoffDate) {
                 console.log(`Newest thread is older than cutoff date, ending pagination for #${forumChannel.name}`);
                 break;
             }

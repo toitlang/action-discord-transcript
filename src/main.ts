@@ -57,7 +57,9 @@ const client = new Client({
   ]
 })
 
-async function fetchActiveThreads(forumChannel: ForumChannel): Promise<Array<HelpThread>> {
+async function fetchActiveThreads(
+  forumChannel: ForumChannel
+): Promise<Array<HelpThread>> {
   const helpThreads = new Array<HelpThread>()
   try {
     const fetched = await forumChannel.threads.fetchActive()
@@ -79,7 +81,7 @@ async function fetchActiveThreads(forumChannel: ForumChannel): Promise<Array<Hel
 // Fetch all threads from the forum channel with pagination.
 async function fetchArchivedThreads(
   forumChannel: ForumChannel,
-  cutoffDate: Date | undefined,
+  cutoffDate: Date | undefined
 ): Promise<Array<HelpThread>> {
   const helpThreads = new Array<HelpThread>()
   let beforeId: string | undefined = undefined
@@ -104,14 +106,20 @@ async function fetchArchivedThreads(
 
       // Sort the fetched threads.
       // This shouldn't be necessary, but can't hurt.
-      fetchedThreads.sort((a, b) => (b.archiveTimestamp ?? 0) - (a.archiveTimestamp ?? 0));
+      fetchedThreads.sort(
+        (a, b) => (b.archiveTimestamp ?? 0) - (a.archiveTimestamp ?? 0)
+      )
 
       helpThreads.push(...fetchedThreads)
 
       const newestThread = fetchedThreads[0]
 
       // If the newest thread is older than the cutoff date, we're done.
-      if (cutoffDate && newestThread.archivedAt && newestThread.archivedAt < cutoffDate) {
+      if (
+        cutoffDate &&
+        newestThread.archivedAt &&
+        newestThread.archivedAt < cutoffDate
+      ) {
         console.log(
           `Newest thread is older than cutoff date, ending pagination for #${forumChannel.name}`
         )
@@ -142,7 +150,10 @@ async function fetchArchivedThreads(
   return helpThreads
 }
 
-async function processHelpChannel(guild: Guild, oldIndex: Index | undefined): Promise<HelpThread[]> {
+async function processHelpChannel(
+  guild: Guild,
+  oldIndex: Index | undefined
+): Promise<HelpThread[]> {
   console.log(`Processing guild: ${guild.name}`)
 
   try {
@@ -171,7 +182,10 @@ async function processHelpChannel(guild: Guild, oldIndex: Index | undefined): Pr
         }
       }
 
-      const passiveThreads = await fetchArchivedThreads(forumChannel, cutOffDate)
+      const passiveThreads = await fetchArchivedThreads(
+        forumChannel,
+        cutOffDate
+      )
       const helpThreads = activeThreads.concat(passiveThreads)
       console.log(
         `Found total of ${helpThreads.length} threads in forum #${channel.name}`
