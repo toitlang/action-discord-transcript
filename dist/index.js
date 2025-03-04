@@ -303508,9 +303508,9 @@ const client = new srcExports.Client({
 async function fetchActiveThreads(forumChannel) {
     const helpThreads = new Array();
     try {
-        const fetchedThreads = await forumChannel.threads.fetchActive();
-        console.log(`Fetched ${fetchedThreads.threads.size} active threads from forum #${forumChannel.name}`);
-        fetchedThreads.threads.forEach((thread) => {
+        const fetched = await forumChannel.threads.fetchActive();
+        console.log(`Fetched ${fetched.threads.size} active threads from forum #${forumChannel.name}`);
+        fetched.threads.forEach((thread) => {
             helpThreads.push(thread);
         });
     }
@@ -303577,7 +303577,6 @@ async function processHelpChannel(guild, oldIndex) {
             if (channel.type != srcExports.ChannelType.GuildForum)
                 continue;
             const forumChannel = channel;
-            // Get ALL threads in the forum using pagination
             const activeThreads = await fetchActiveThreads(forumChannel);
             let cutOffDate = undefined;
             if (oldIndex) {

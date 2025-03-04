@@ -60,11 +60,11 @@ const client = new Client({
 async function fetchActiveThreads(forumChannel: ForumChannel): Promise<Array<HelpThread>> {
   const helpThreads = new Array<HelpThread>()
   try {
-    const fetchedThreads = await forumChannel.threads.fetchActive()
+    const fetched = await forumChannel.threads.fetchActive()
     console.log(
-      `Fetched ${fetchedThreads.threads.size} active threads from forum #${forumChannel.name}`
+      `Fetched ${fetched.threads.size} active threads from forum #${forumChannel.name}`
     )
-    fetchedThreads.threads.forEach((thread) => {
+    fetched.threads.forEach((thread) => {
       helpThreads.push(thread as HelpThread)
     })
   } catch (error) {
@@ -108,7 +108,7 @@ async function fetchArchivedThreads(
 
       helpThreads.push(...fetchedThreads)
 
-      const newestThread = fetchedThreads[0];
+      const newestThread = fetchedThreads[0]
 
       // If the newest thread is older than the cutoff date, we're done.
       if (cutoffDate && newestThread.archivedAt && newestThread.archivedAt < cutoffDate) {
@@ -156,7 +156,6 @@ async function processHelpChannel(guild: Guild, oldIndex: Index | undefined): Pr
       if (channel.type != ChannelType.GuildForum) continue
 
       const forumChannel = channel as ForumChannel
-      // Get ALL threads in the forum using pagination
       const activeThreads = await fetchActiveThreads(forumChannel)
 
       let cutOffDate: Date | undefined = undefined
