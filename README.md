@@ -10,7 +10,8 @@ channel.
 
 ### Inputs
 
-- `discord-token`: The authentication token of the Discord bot.
+- `discord-token`: The authentication token of the Discord bot. See below for
+  instructions on how to create a bot and get the token.
 - `guild-id`: The guild ID. You can find this by right-clicking on the server
   icon and selecting "Copy ID".
 - `transcript-directory`: The directory where the transcripts are/will be saved.
@@ -26,7 +27,7 @@ env:
   GUILD_ID: '123456789012345678'
 ---
 - name: 'Run the transcript action'
-  uses: toitlang/action-discord-transcript@v1.0.2
+  uses: toitlang/action-discord-transcript@v1.1.0
   with:
     discord-token: ${{ secrets.DISCORD_TOKEN }}
     guild-id: { { env.GUILD_ID } }
@@ -63,6 +64,12 @@ the transcripts.
 
 Finally, it also produces an `index.json` file that contains the metadata for
 each transcript. This can be used to generate a more complex index page.
+
+Here is a screenshot of the generated index page for the
+[Toit Discord page](https://chat.toit.io), served at the
+[Toit help](https://help.toit.io) page.
+
+![Index page](./screens/toit-help-screen.png)
 
 ## Incremental updates
 
@@ -108,6 +115,36 @@ Run the script.
 ```bash
 npm run local-action
 ```
+
+## Discord bot
+
+The following instructions mirror the ones provided on Discord's official
+[quick-start
+guide](https://discord.com/developers/docs/quick-start/getting-started}
+
+To create a Discord bot, follow these steps:
+
+- Create a
+  [new application](https://discord.com/developers/applications?new_application=true)
+- In the 'Installation' tab:
+  - Unselect 'User Install'.
+  - Switch the Install link to 'None'.
+  - Save the changes.
+- In the 'Bot' tab:
+  - click on 'Reset Token'. This will generate a new token. You will need this
+    token as input to the action. Typically it is saved as a GitHub action
+    secret.
+  - Disable 'Public bot'.
+  - Enable 'Message content intent'.
+  - Save the changes
+- In the 'OAuth2' tab:
+  - In the scopes select 'bot'. This opens up the bot permissions.
+  - In the bot permissions, select 'View Channels' and 'Read Message History'.
+  - Copy the URL and paste it in your browser. This will open a page that allows
+    you to add the bot to a server. Select the server where you want to run the
+    action.
+
+You can uninstall a bot by kicking it from the server.
 
 ## References
 
