@@ -201,12 +201,6 @@ async function processHelpChannel(
   throw 'Could not find help channel'
 }
 
-// Function to sanitize names so they can be used as filenames.
-function sanitizeThreadName(name: string): string {
-  const sanitized = name.replace(/[^\w\s-]/gi, '-')
-  return sanitized
-}
-
 async function processGuild(guild: Guild): Promise<void> {
   let oldIndex: Index = {}
   if (!fs.existsSync(TRANSCRIPT_DIR)) {
