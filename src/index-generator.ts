@@ -9,6 +9,11 @@ interface Transcript {
   lastActivity: Date | null
 }
 
+function encodeFilename(filename: string): string {
+  // Encode the filename to be URL-safe, but don't escape '/'.
+  return encodeURIComponent(filename).replace(/%2F/g, '/')
+}
+
 // Function to generate index.html for a guild.
 export function generateGuildIndex(
   guildName: string,
@@ -39,7 +44,7 @@ export function generateGuildIndex(
                           .map(
                             (thread) => `
                         <li class="channel-item">
-                            <a href="./${thread.filename}">${
+                            <a href="./${encodeFilename(thread.filename)}">${
                               thread.displayName
                             }</a>
                             ${

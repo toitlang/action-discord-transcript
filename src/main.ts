@@ -233,8 +233,7 @@ async function processGuild(guild: Guild): Promise<void> {
   let failed = 0
   for (const thread of threads) {
     const displayName = thread.name
-    const safeThreadName = sanitizeThreadName(displayName)
-    const filename = `${thread.id}-${safeThreadName}.html`
+    const filename = `${thread.id}.html`
     const lastActivity = thread.lastMessage?.createdAt || thread.archivedAt
 
     const newEntry: TranscriptItem = {
