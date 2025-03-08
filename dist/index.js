@@ -303429,6 +303429,10 @@ var srcExports = requireSrc();
 // Copyright (C) 2025 Toit language
 // Use of this source code is governed by an MIT-style license that can be
 // found in the LICENSE file.
+function encodeFilename(filename) {
+    // Encode the filename to be URL-safe, but don't escape '/'.
+    return encodeURIComponent(filename).replace(/%2F/g, '/');
+}
 // Function to generate index.html for a guild.
 function generateGuildIndex(guildName, threads) {
     return `<!DOCTYPE html>
@@ -303455,7 +303459,7 @@ function generateGuildIndex(guildName, threads) {
                         ${threads
         .map((thread) => `
                         <li class="channel-item">
-                            <a href="./${thread.filename}">${thread.displayName}</a>
+                            <a href="./${encodeFilename(thread.filename)}">${thread.displayName}</a>
                             ${thread.lastActivity
         ? `<span class="timestamp" data-timestamp="${new Date(thread.lastActivity).toISOString()}"></span>`
         : ''}
@@ -303603,11 +303607,6 @@ async function processHelpChannel(guild, oldIndex) {
     }
     throw 'Could not find help channel';
 }
-// Function to sanitize names so they can be used as filenames.
-function sanitizeThreadName(name) {
-    const sanitized = name.replace(/[^\w\s-]/gi, '-');
-    return sanitized;
-}
 async function processGuild(guild) {
     let oldIndex = {};
     if (!fs.existsSync(TRANSCRIPT_DIR)) {
@@ -303632,8 +303631,7 @@ async function processGuild(guild) {
     let failed = 0;
     for (const thread of threads) {
         const displayName = thread.name;
-        const safeThreadName = sanitizeThreadName(displayName);
-        const filename = `${thread.id}-${safeThreadName}.html`;
+        const filename = `${thread.id}.html`;
         const lastActivity = thread.lastMessage?.createdAt || thread.archivedAt;
         const newEntry = {
             filename: filename,

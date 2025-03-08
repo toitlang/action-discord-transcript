@@ -201,12 +201,6 @@ async function processHelpChannel(
   throw 'Could not find help channel'
 }
 
-// Function to sanitize names so they can be used as filenames.
-function sanitizeThreadName(name: string): string {
-  const sanitized = name.replace(/[^\w\s-]/gi, '-')
-  return sanitized
-}
-
 async function processGuild(guild: Guild): Promise<void> {
   let oldIndex: Index = {}
   if (!fs.existsSync(TRANSCRIPT_DIR)) {
@@ -233,8 +227,7 @@ async function processGuild(guild: Guild): Promise<void> {
   let failed = 0
   for (const thread of threads) {
     const displayName = thread.name
-    const safeThreadName = sanitizeThreadName(displayName)
-    const filename = `${thread.id}-${safeThreadName}.html`
+    const filename = `${thread.id}.html`
     const lastActivity = thread.lastMessage?.createdAt || thread.archivedAt
 
     const newEntry: TranscriptItem = {
