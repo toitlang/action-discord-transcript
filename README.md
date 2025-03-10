@@ -119,8 +119,7 @@ npm run local-action
 ## Discord bot
 
 The following instructions mirror the ones provided on Discord's official
-[quick-start
-guide](https://discord.com/developers/docs/quick-start/getting-started)
+[quick-start guide](https://discord.com/developers/docs/quick-start/getting-started)
 
 To create a Discord bot, follow these steps:
 
