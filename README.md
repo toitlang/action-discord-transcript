@@ -131,7 +131,7 @@ To create a Discord bot, follow these steps:
   - Save the changes.
 - In the 'Bot' tab:
   - click on 'Reset Token'. This will generate a new token. You will need this
-    token as input to the action. Typically it is saved as a GitHub action
+    token as input to the action. Typically it is saved as a GitHub Action
     secret.
   - Disable 'Public bot'.
   - Enable 'Message content intent'.
