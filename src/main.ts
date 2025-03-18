@@ -169,6 +169,18 @@ async function processHelpChannel(
       const forumChannel = channel as ForumChannel
       const activeThreads = await fetchActiveThreads(forumChannel)
 
+      // Fetch the last message for each active thread.
+      for (const thread of activeThreads) {
+        try {
+          await thread.messages.fetch({ limit: 1 })
+        } catch (error) {
+          console.error(
+            `Error fetching messages for thread ${thread.name} (${thread.id}):`,
+            error instanceof Error ? error.message : String(error)
+          )
+        }
+      }
+
       let cutOffDate: Date | undefined = undefined
       if (oldIndex) {
         // Find the most recent archived thread in the index.

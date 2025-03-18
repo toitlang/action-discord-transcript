@@ -303584,6 +303584,15 @@ async function processHelpChannel(guild, oldIndex) {
                 continue;
             const forumChannel = channel;
             const activeThreads = await fetchActiveThreads(forumChannel);
+            // Fetch the last message for each active thread.
+            for (const thread of activeThreads) {
+                try {
+                    await thread.messages.fetch({ limit: 1 });
+                }
+                catch (error) {
+                    console.error(`Error fetching messages for thread ${thread.name} (${thread.id}):`, error instanceof Error ? error.message : String(error));
+                }
+            }
             let cutOffDate = undefined;
             if (oldIndex) {
                 // Find the most recent archived thread in the index.
