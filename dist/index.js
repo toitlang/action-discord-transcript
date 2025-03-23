@@ -303700,6 +303700,12 @@ async function processGuild(guild) {
     }
     console.log(`Transcripts saved to: ${path.resolve(TRANSCRIPT_DIR)}`);
     // Create the index.
+    // Add the old index entries to the new index.
+    for (const threadId in oldIndex) {
+        if (!index[threadId]) {
+            index[threadId] = oldIndex[threadId];
+        }
+    }
     const sortedTranscriptEntries = Object.values(index).sort((a, b) => {
         // Sort by lastActivity timestamp (most recent first)
         // If no timestamp available, put at the bottom
