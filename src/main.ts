@@ -310,7 +310,6 @@ async function processGuild(guild: Guild): Promise<void> {
   }
   console.log(`Transcripts saved to: ${path.resolve(TRANSCRIPT_DIR)}`)
 
-  // Create the index.
   // Add the old index entries to the new index.
   for (const threadId in oldIndex) {
     if (!index[threadId]) {
