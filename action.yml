@@ -2,8 +2,11 @@
 # Use of this source code is governed by an MIT-style license that can be
 # found in the LICENSE file.
 
-name: 'Discord transcript'
-description: 'Create a Discord transcript.'
+name: 'Discord help exporter'
+description: 'Create a Discord transcript for the help forum.'
+branding:
+  icon: help-circle
+  color: yellow
 
 inputs:
   discord-token:
