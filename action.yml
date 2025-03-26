@@ -3,7 +3,7 @@
 # found in the LICENSE file.
 
 name: 'Discord help exporter'
-description: 'Create a Discord transcript for the help forum.'
+description: 'Create transcripts for a Discord help forum.'
 branding:
   icon: help-circle
   color: yellow
