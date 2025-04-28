@@ -20,15 +20,15 @@ import require$$1$3 from 'node:util';
 import require$$0$9 from 'node:events';
 import require$$0$b from 'worker_threads';
 import require$$2$2 from 'perf_hooks';
-import require$$5$2 from 'util/types';
+import require$$5$1 from 'util/types';
 import require$$4$2 from 'async_hooks';
 import require$$1$4 from 'console';
 import require$$7$1, { fileURLToPath } from 'url';
 import require$$3$1 from 'zlib';
-import require$$6 from 'string_decoder';
+import require$$6$1 from 'string_decoder';
 import require$$0$c from 'diagnostics_channel';
 import require$$2$3 from 'child_process';
-import require$$6$1 from 'timers';
+import require$$6$2 from 'timers';
 import require$$2$5 from 'node:path';
 import require$$0$h from 'node:process';
 import require$$0$e from 'node:assert';
@@ -37,18 +37,18 @@ import require$$2$4 from 'node:http';
 import require$$0$d from 'node:buffer';
 import require$$7$2 from 'node:querystring';
 import require$$0$g from 'node:diagnostics_channel';
-import require$$5$3 from 'node:tls';
+import require$$5$2 from 'node:tls';
 import require$$1$5 from 'node:zlib';
-import require$$5$5 from 'node:perf_hooks';
+import require$$5$4 from 'node:perf_hooks';
 import require$$8$1 from 'node:util/types';
-import require$$5$4 from 'node:worker_threads';
+import require$$5$3 from 'node:worker_threads';
 import require$$1$6 from 'node:url';
-import require$$5$6 from 'node:async_hooks';
+import require$$5$5 from 'node:async_hooks';
 import require$$1$7 from 'node:console';
 import require$$1$8 from 'node:dns';
 import require$$0$i from 'node:timers';
 import require$$1$9 from 'node:fs/promises';
-import require$$6$2 from 'timers/promises';
+import require$$6$3 from 'timers/promises';
 import require$$15 from 'process';
 import require$$4$3 from 'node:timers/promises';
 import require$$9 from 'node:child_process';
@@ -3619,7 +3619,7 @@ function requireUtil$e () {
 	const { performance } = require$$2$2;
 	const { isBlobLike, toUSVString, ReadableStreamFrom } = requireUtil$f();
 	const assert = require$$0$6;
-	const { isUint8Array } = require$$5$2;
+	const { isUint8Array } = require$$5$1;
 
 	let supportedHashes = [];
 
@@ -6716,7 +6716,7 @@ function requireBody$1 () {
 	const { kBodyUsed } = requireSymbols$a();
 	const assert = require$$0$6;
 	const { isErrored } = requireUtil$f();
-	const { isUint8Array, isArrayBuffer } = require$$5$2;
+	const { isUint8Array, isArrayBuffer } = require$$5$1;
 	const { File: UndiciFile } = requireFile$1();
 	const { parseMIMEType, serializeAMimeType } = requireDataURL();
 
@@ -19615,7 +19615,7 @@ function requireUtil$c () {
 	const { DOMException } = requireConstants$a();
 	const { serializeAMimeType, parseMIMEType } = requireDataURL();
 	const { types } = require$$0$4;
-	const { StringDecoder } = require$$6;
+	const { StringDecoder } = require$$6$1;
 	const { btoa } = require$$7;
 
 	/** @type {PropertyDescriptor} */
@@ -26149,7 +26149,7 @@ function requireToolrunner () {
 	const path = __importStar(path__default);
 	const io = __importStar(requireIo());
 	const ioUtil = __importStar(requireIoUtil());
-	const timers_1 = require$$6$1;
+	const timers_1 = require$$6$2;
 	/* eslint-disable @typescript-eslint/unbound-method */
 	const IS_WINDOWS = process.platform === 'win32';
 	/*
@@ -26768,7 +26768,7 @@ function requireExec () {
 	};
 	Object.defineProperty(exec, "__esModule", { value: true });
 	exec.getExecOutput = exec.exec = void 0;
-	const string_decoder_1 = require$$6;
+	const string_decoder_1 = require$$6$1;
 	const tr = __importStar(requireToolrunner());
 	/**
 	 * Exec a command.
@@ -27926,7 +27926,7 @@ function requireV10$5 () {
 		__exportStar(requireCommon$3(), exports);
 		exports.GatewayVersion = '10';
 		/**
-		 * https://discord.com/developers/docs/topics/opcodes-and-status-codes#gateway-gateway-opcodes
+		 * @see {@link https://discord.com/developers/docs/topics/opcodes-and-status-codes#gateway-gateway-opcodes}
 		 */
 		var GatewayOpcodes;
 		(function (GatewayOpcodes) {
@@ -27981,7 +27981,7 @@ function requireV10$5 () {
 		    GatewayOpcodes[GatewayOpcodes["RequestSoundboardSounds"] = 31] = "RequestSoundboardSounds";
 		})(GatewayOpcodes || (exports.GatewayOpcodes = GatewayOpcodes = {}));
 		/**
-		 * https://discord.com/developers/docs/topics/opcodes-and-status-codes#gateway-gateway-close-event-codes
+		 * @see {@link https://discord.com/developers/docs/topics/opcodes-and-status-codes#gateway-gateway-close-event-codes}
 		 */
 		var GatewayCloseCodes;
 		(function (GatewayCloseCodes) {
@@ -27992,25 +27992,25 @@ function requireV10$5 () {
 		    /**
 		     * You sent an invalid Gateway opcode or an invalid payload for an opcode. Don't do that!
 		     *
-		     * See https://discord.com/developers/docs/topics/gateway-events#payload-structure
+		     * @see {@link https://discord.com/developers/docs/topics/gateway-events#payload-structure}
 		     */
 		    GatewayCloseCodes[GatewayCloseCodes["UnknownOpcode"] = 4001] = "UnknownOpcode";
 		    /**
 		     * You sent an invalid payload to us. Don't do that!
 		     *
-		     * See https://discord.com/developers/docs/topics/gateway#sending-events
+		     * @see {@link https://discord.com/developers/docs/topics/gateway#sending-events}
 		     */
 		    GatewayCloseCodes[GatewayCloseCodes["DecodeError"] = 4002] = "DecodeError";
 		    /**
 		     * You sent us a payload prior to identifying
 		     *
-		     * See https://discord.com/developers/docs/topics/gateway-events#identify
+		     * @see {@link https://discord.com/developers/docs/topics/gateway-events#identify}
 		     */
 		    GatewayCloseCodes[GatewayCloseCodes["NotAuthenticated"] = 4003] = "NotAuthenticated";
 		    /**
 		     * The account token sent with your identify payload is incorrect
 		     *
-		     * See https://discord.com/developers/docs/topics/gateway-events#identify
+		     * @see {@link https://discord.com/developers/docs/topics/gateway-events#identify}
 		     */
 		    GatewayCloseCodes[GatewayCloseCodes["AuthenticationFailed"] = 4004] = "AuthenticationFailed";
 		    /**
@@ -28020,7 +28020,7 @@ function requireV10$5 () {
 		    /**
 		     * The sequence sent when resuming the session was invalid. Reconnect and start a new session
 		     *
-		     * See https://discord.com/developers/docs/topics/gateway-events#resume
+		     * @see {@link https://discord.com/developers/docs/topics/gateway-events#resume}
 		     */
 		    GatewayCloseCodes[GatewayCloseCodes["InvalidSeq"] = 4007] = "InvalidSeq";
 		    /**
@@ -28034,13 +28034,13 @@ function requireV10$5 () {
 		    /**
 		     * You sent us an invalid shard when identifying
 		     *
-		     * See https://discord.com/developers/docs/topics/gateway#sharding
+		     * @see {@link https://discord.com/developers/docs/topics/gateway#sharding}
 		     */
 		    GatewayCloseCodes[GatewayCloseCodes["InvalidShard"] = 4010] = "InvalidShard";
 		    /**
 		     * The session would have handled too many guilds - you are required to shard your connection in order to connect
 		     *
-		     * See https://discord.com/developers/docs/topics/gateway#sharding
+		     * @see {@link https://discord.com/developers/docs/topics/gateway#sharding}
 		     */
 		    GatewayCloseCodes[GatewayCloseCodes["ShardingRequired"] = 4011] = "ShardingRequired";
 		    /**
@@ -28050,21 +28050,20 @@ function requireV10$5 () {
 		    /**
 		     * You sent an invalid intent for a Gateway Intent. You may have incorrectly calculated the bitwise value
 		     *
-		     * See https://discord.com/developers/docs/topics/gateway#gateway-intents
+		     * @see {@link https://discord.com/developers/docs/topics/gateway#gateway-intents}
 		     */
 		    GatewayCloseCodes[GatewayCloseCodes["InvalidIntents"] = 4013] = "InvalidIntents";
 		    /**
 		     * You sent a disallowed intent for a Gateway Intent. You may have tried to specify an intent that you have not
 		     * enabled or are not whitelisted for
 		     *
-		     * See https://discord.com/developers/docs/topics/gateway#gateway-intents
-		     *
-		     * See https://discord.com/developers/docs/topics/gateway#privileged-intents
+		     * @see {@link https://discord.com/developers/docs/topics/gateway#gateway-intents}
+		     * @see {@link https://discord.com/developers/docs/topics/gateway#privileged-intents}
 		     */
 		    GatewayCloseCodes[GatewayCloseCodes["DisallowedIntents"] = 4014] = "DisallowedIntents";
 		})(GatewayCloseCodes || (exports.GatewayCloseCodes = GatewayCloseCodes = {}));
 		/**
-		 * https://discord.com/developers/docs/topics/gateway#list-of-intents
+		 * @see {@link https://discord.com/developers/docs/topics/gateway#list-of-intents}
 		 */
 		var GatewayIntentBits;
 		(function (GatewayIntentBits) {
@@ -28072,12 +28071,12 @@ function requireV10$5 () {
 		    GatewayIntentBits[GatewayIntentBits["GuildMembers"] = 2] = "GuildMembers";
 		    GatewayIntentBits[GatewayIntentBits["GuildModeration"] = 4] = "GuildModeration";
 		    /**
-		     * @deprecated This is the old name for {@apilink GatewayIntentBits#GuildModeration}
+		     * @deprecated This is the old name for {@link GatewayIntentBits.GuildModeration}
 		     */
 		    GatewayIntentBits[GatewayIntentBits["GuildBans"] = 4] = "GuildBans";
 		    GatewayIntentBits[GatewayIntentBits["GuildExpressions"] = 8] = "GuildExpressions";
 		    /**
-		     * @deprecated This is the old name for {@apilink GatewayIntentBits#GuildExpressions}
+		     * @deprecated This is the old name for {@link GatewayIntentBits.GuildExpressions}
 		     */
 		    GatewayIntentBits[GatewayIntentBits["GuildEmojisAndStickers"] = 8] = "GuildEmojisAndStickers";
 		    GatewayIntentBits[GatewayIntentBits["GuildIntegrations"] = 16] = "GuildIntegrations";
@@ -28099,7 +28098,7 @@ function requireV10$5 () {
 		    GatewayIntentBits[GatewayIntentBits["DirectMessagePolls"] = 33554432] = "DirectMessagePolls";
 		})(GatewayIntentBits || (exports.GatewayIntentBits = GatewayIntentBits = {}));
 		/**
-		 * https://discord.com/developers/docs/topics/gateway-events#receive-events
+		 * @see {@link https://discord.com/developers/docs/topics/gateway-events#receive-events}
 		 */
 		var GatewayDispatchEvents;
 		(function (GatewayDispatchEvents) {
@@ -28180,7 +28179,7 @@ function requireV10$5 () {
 		    GatewayDispatchEvents["WebhooksUpdate"] = "WEBHOOKS_UPDATE";
 		})(GatewayDispatchEvents || (exports.GatewayDispatchEvents = GatewayDispatchEvents = {}));
 		/**
-		 * https://discord.com/developers/docs/topics/gateway-events#voice-channel-effect-send-animation-types
+		 * @see {@link https://discord.com/developers/docs/topics/gateway-events#voice-channel-effect-send-animation-types}
 		 */
 		var VoiceChannelEffectSendAnimationType;
 		(function (VoiceChannelEffectSendAnimationType) {
@@ -28233,7 +28232,7 @@ function requireGlobals () {
 		Object.defineProperty(exports, "__esModule", { value: true });
 		exports.FormattingPatterns = void 0;
 		/**
-		 * https://discord.com/developers/docs/reference#message-formatting-formats
+		 * @see {@link https://discord.com/developers/docs/reference#message-formatting-formats}
 		 */
 		exports.FormattingPatterns = {
 		    /**
@@ -28365,7 +28364,7 @@ function requireCommon$2 () {
 		Object.defineProperty(exports, "__esModule", { value: true });
 		exports.PermissionFlagsBits = void 0;
 		/**
-		 * https://discord.com/developers/docs/topics/permissions#permissions-bitwise-permission-flags
+		 * @see {@link https://discord.com/developers/docs/topics/permissions#permissions-bitwise-permission-flags}
 		 *
 		 * These flags are exported as `BigInt`s and NOT numbers. Wrapping them in `Number()`
 		 * may cause issues, try to use BigInts as much as possible or modules that can
@@ -28542,7 +28541,7 @@ function requireCommon$2 () {
 		    /**
 		     * Allows management and editing of emojis, stickers, and soundboard sounds
 		     *
-		     * @deprecated This is the old name for {@apilink PermissionFlagsBits#ManageGuildExpressions}
+		     * @deprecated This is the old name for {@link PermissionFlagsBits.ManageGuildExpressions}
 		     */
 		    ManageEmojisAndStickers: 1n << 30n,
 		    /**
@@ -28598,7 +28597,7 @@ function requireCommon$2 () {
 		     */
 		    SendMessagesInThreads: 1n << 38n,
 		    /**
-		     * Allows for using Activities (applications with the {@apilink ApplicationFlags.Embedded} flag) in a voice channel
+		     * Allows for using Activities (applications with the {@link ApplicationFlags.Embedded} flag) in a voice channel
 		     *
 		     * Applies to channel types: Voice
 		     */
@@ -28677,7 +28676,7 @@ function requireApplication$2 () {
 	Object.defineProperty(application$1, "__esModule", { value: true });
 	application$1.ApplicationWebhookEventStatus = application$1.ApplicationRoleConnectionMetadataType = application$1.ApplicationFlags = void 0;
 	/**
-	 * https://discord.com/developers/docs/resources/application#application-object-application-flags
+	 * @see {@link https://discord.com/developers/docs/resources/application#application-object-application-flags}
 	 */
 	var ApplicationFlags;
 	(function (ApplicationFlags) {
@@ -28715,12 +28714,14 @@ function requireApplication$2 () {
 	    ApplicationFlags[ApplicationFlags["GatewayPresenceLimited"] = 8192] = "GatewayPresenceLimited";
 	    /**
 	     * Intent required for bots in 100 or more servers to receive member-related events like `guild_member_add`.
-	     * See list of member-related events [under `GUILD_MEMBERS`](https://discord.com/developers/docs/topics/gateway#list-of-intents)
+	     *
+	     * @see List of member-related events {@link https://discord.com/developers/docs/topics/gateway#list-of-intents | under `GUILD_MEMBERS`}
 	     */
 	    ApplicationFlags[ApplicationFlags["GatewayGuildMembers"] = 16384] = "GatewayGuildMembers";
 	    /**
 	     * Intent required for bots in under 100 servers to receive member-related events like `guild_member_add`, found in Bot Settings.
-	     * See list of member-related events [under `GUILD_MEMBERS`](https://discord.com/developers/docs/topics/gateway#list-of-intents)
+	     *
+	     * @see List of member-related events {@link https://discord.com/developers/docs/topics/gateway#list-of-intents | under `GUILD_MEMBERS`}
 	     */
 	    ApplicationFlags[ApplicationFlags["GatewayGuildMembersLimited"] = 32768] = "GatewayGuildMembersLimited";
 	    /**
@@ -28732,11 +28733,11 @@ function requireApplication$2 () {
 	     */
 	    ApplicationFlags[ApplicationFlags["Embedded"] = 131072] = "Embedded";
 	    /**
-	     * Intent required for bots in 100 or more servers to receive [message content](https://support-dev.discord.com/hc/en-us/articles/4404772028055)
+	     * Intent required for bots in 100 or more servers to receive {@link https://support-dev.discord.com/hc/en-us/articles/4404772028055 | message content}
 	     */
 	    ApplicationFlags[ApplicationFlags["GatewayMessageContent"] = 262144] = "GatewayMessageContent";
 	    /**
-	     * Intent required for bots in under 100 servers to receive [message content](https://support-dev.discord.com/hc/en-us/articles/4404772028055),
+	     * Intent required for bots in under 100 servers to receive {@link https://support-dev.discord.com/hc/en-us/articles/4404772028055 | message content},
 	     * found in Bot Settings
 	     */
 	    ApplicationFlags[ApplicationFlags["GatewayMessageContentLimited"] = 524288] = "GatewayMessageContentLimited";
@@ -28745,12 +28746,12 @@ function requireApplication$2 () {
 	     */
 	    ApplicationFlags[ApplicationFlags["EmbeddedFirstParty"] = 1048576] = "EmbeddedFirstParty";
 	    /**
-	     * Indicates if an app has registered global [application commands](https://discord.com/developers/docs/interactions/application-commands)
+	     * Indicates if an app has registered global {@link https://discord.com/developers/docs/interactions/application-commands | application commands}
 	     */
 	    ApplicationFlags[ApplicationFlags["ApplicationCommandBadge"] = 8388608] = "ApplicationCommandBadge";
 	})(ApplicationFlags || (application$1.ApplicationFlags = ApplicationFlags = {}));
 	/**
-	 * https://discord.com/developers/docs/resources/application-role-connection-metadata#application-role-connection-metadata-object-application-role-connection-metadata-type
+	 * @see {@link https://discord.com/developers/docs/resources/application-role-connection-metadata#application-role-connection-metadata-object-application-role-connection-metadata-type}
 	 */
 	var ApplicationRoleConnectionMetadataType;
 	(function (ApplicationRoleConnectionMetadataType) {
@@ -28788,7 +28789,7 @@ function requireApplication$2 () {
 	    ApplicationRoleConnectionMetadataType[ApplicationRoleConnectionMetadataType["BooleanNotEqual"] = 8] = "BooleanNotEqual";
 	})(ApplicationRoleConnectionMetadataType || (application$1.ApplicationRoleConnectionMetadataType = ApplicationRoleConnectionMetadataType = {}));
 	/**
-	 * https://discord.com/developers/docs/resources/application#application-object-application-event-webhook-status
+	 * @see {@link https://discord.com/developers/docs/resources/application#application-object-application-event-webhook-status}
 	 */
 	var ApplicationWebhookEventStatus;
 	(function (ApplicationWebhookEventStatus) {
@@ -28822,7 +28823,7 @@ function requireAuditLog$1 () {
 	Object.defineProperty(auditLog$1, "__esModule", { value: true });
 	auditLog$1.AuditLogOptionsType = auditLog$1.AuditLogEvent = void 0;
 	/**
-	 * https://discord.com/developers/docs/resources/audit-log#audit-log-entry-object-audit-log-events
+	 * @see {@link https://discord.com/developers/docs/resources/audit-log#audit-log-entry-object-audit-log-events}
 	 */
 	var AuditLogEvent;
 	(function (AuditLogEvent) {
@@ -28915,7 +28916,7 @@ function requireAutoModeration$1 () {
 	Object.defineProperty(autoModeration$1, "__esModule", { value: true });
 	autoModeration$1.AutoModerationActionType = autoModeration$1.AutoModerationRuleEventType = autoModeration$1.AutoModerationRuleKeywordPresetType = autoModeration$1.AutoModerationRuleTriggerType = void 0;
 	/**
-	 * https://discord.com/developers/docs/resources/auto-moderation#auto-moderation-rule-object-trigger-types
+	 * @see {@link https://discord.com/developers/docs/resources/auto-moderation#auto-moderation-rule-object-trigger-types}
 	 */
 	var AutoModerationRuleTriggerType;
 	(function (AutoModerationRuleTriggerType) {
@@ -28941,7 +28942,7 @@ function requireAutoModeration$1 () {
 	    AutoModerationRuleTriggerType[AutoModerationRuleTriggerType["MemberProfile"] = 6] = "MemberProfile";
 	})(AutoModerationRuleTriggerType || (autoModeration$1.AutoModerationRuleTriggerType = AutoModerationRuleTriggerType = {}));
 	/**
-	 * https://discord.com/developers/docs/resources/auto-moderation#auto-moderation-rule-object-keyword-preset-types
+	 * @see {@link https://discord.com/developers/docs/resources/auto-moderation#auto-moderation-rule-object-keyword-preset-types}
 	 */
 	var AutoModerationRuleKeywordPresetType;
 	(function (AutoModerationRuleKeywordPresetType) {
@@ -28959,7 +28960,7 @@ function requireAutoModeration$1 () {
 	    AutoModerationRuleKeywordPresetType[AutoModerationRuleKeywordPresetType["Slurs"] = 3] = "Slurs";
 	})(AutoModerationRuleKeywordPresetType || (autoModeration$1.AutoModerationRuleKeywordPresetType = AutoModerationRuleKeywordPresetType = {}));
 	/**
-	 * https://discord.com/developers/docs/resources/auto-moderation#auto-moderation-rule-object-event-types
+	 * @see {@link https://discord.com/developers/docs/resources/auto-moderation#auto-moderation-rule-object-event-types}
 	 */
 	var AutoModerationRuleEventType;
 	(function (AutoModerationRuleEventType) {
@@ -28973,7 +28974,7 @@ function requireAutoModeration$1 () {
 	    AutoModerationRuleEventType[AutoModerationRuleEventType["MemberUpdate"] = 2] = "MemberUpdate";
 	})(AutoModerationRuleEventType || (autoModeration$1.AutoModerationRuleEventType = AutoModerationRuleEventType = {}));
 	/**
-	 * https://discord.com/developers/docs/resources/auto-moderation#auto-moderation-action-object-action-types
+	 * @see {@link https://discord.com/developers/docs/resources/auto-moderation#auto-moderation-action-object-action-types}
 	 */
 	var AutoModerationActionType;
 	(function (AutoModerationActionType) {
@@ -29010,9 +29011,9 @@ function requireChannel$3 () {
 	 * Types extracted from https://discord.com/developers/docs/resources/channel
 	 */
 	Object.defineProperty(channel$3, "__esModule", { value: true });
-	channel$3.ChannelFlags = channel$3.SelectMenuDefaultValueType = channel$3.TextInputStyle = channel$3.ButtonStyle = channel$3.ComponentType = channel$3.AllowedMentionsTypes = channel$3.AttachmentFlags = channel$3.EmbedType = channel$3.ThreadMemberFlags = channel$3.ThreadAutoArchiveDuration = channel$3.OverwriteType = channel$3.MessageFlags = channel$3.MessageReferenceType = channel$3.MessageActivityType = channel$3.MessageType = channel$3.VideoQualityMode = channel$3.ChannelType = channel$3.ForumLayoutType = channel$3.SortOrderType = void 0;
+	channel$3.ChannelFlags = channel$3.SeparatorSpacingSize = channel$3.UnfurledMediaItemLoadingState = channel$3.SelectMenuDefaultValueType = channel$3.TextInputStyle = channel$3.ButtonStyle = channel$3.ComponentType = channel$3.AllowedMentionsTypes = channel$3.AttachmentFlags = channel$3.EmbedType = channel$3.ThreadMemberFlags = channel$3.ThreadAutoArchiveDuration = channel$3.OverwriteType = channel$3.MessageFlags = channel$3.MessageReferenceType = channel$3.MessageActivityType = channel$3.MessageType = channel$3.VideoQualityMode = channel$3.ChannelType = channel$3.ForumLayoutType = channel$3.SortOrderType = void 0;
 	/**
-	 * https://discord.com/developers/docs/resources/channel/#channel-object-sort-order-types
+	 * @see {@link https://discord.com/developers/docs/resources/channel/#channel-object-sort-order-types}
 	 */
 	var SortOrderType;
 	(function (SortOrderType) {
@@ -29026,7 +29027,7 @@ function requireChannel$3 () {
 	    SortOrderType[SortOrderType["CreationDate"] = 1] = "CreationDate";
 	})(SortOrderType || (channel$3.SortOrderType = SortOrderType = {}));
 	/**
-	 * https://discord.com/developers/docs/resources/channel/#channel-object-forum-layout-types
+	 * @see {@link https://discord.com/developers/docs/resources/channel/#channel-object-forum-layout-types}
 	 */
 	var ForumLayoutType;
 	(function (ForumLayoutType) {
@@ -29044,7 +29045,7 @@ function requireChannel$3 () {
 	    ForumLayoutType[ForumLayoutType["GalleryView"] = 2] = "GalleryView";
 	})(ForumLayoutType || (channel$3.ForumLayoutType = ForumLayoutType = {}));
 	/**
-	 * https://discord.com/developers/docs/resources/channel#channel-object-channel-types
+	 * @see {@link https://discord.com/developers/docs/resources/channel#channel-object-channel-types}
 	 */
 	var ChannelType;
 	(function (ChannelType) {
@@ -29067,13 +29068,13 @@ function requireChannel$3 () {
 	    /**
 	     * An organizational category that contains up to 50 channels
 	     *
-	     * See https://support.discord.com/hc/articles/115001580171
+	     * @see {@link https://support.discord.com/hc/articles/115001580171}
 	     */
 	    ChannelType[ChannelType["GuildCategory"] = 4] = "GuildCategory";
 	    /**
 	     * A channel that users can follow and crosspost into their own guild
 	     *
-	     * See https://support.discord.com/hc/articles/360032008192
+	     * @see {@link https://support.discord.com/hc/articles/360032008192}
 	     */
 	    ChannelType[ChannelType["GuildAnnouncement"] = 5] = "GuildAnnouncement";
 	    /**
@@ -29091,13 +29092,13 @@ function requireChannel$3 () {
 	    /**
 	     * A voice channel for hosting events with an audience
 	     *
-	     * See https://support.discord.com/hc/articles/1500005513722
+	     * @see {@link https://support.discord.com/hc/articles/1500005513722}
 	     */
 	    ChannelType[ChannelType["GuildStageVoice"] = 13] = "GuildStageVoice";
 	    /**
 	     * The channel in a Student Hub containing the listed servers
 	     *
-	     * See https://support.discord.com/hc/articles/4406046651927
+	     * @see {@link https://support.discord.com/hc/articles/4406046651927}
 	     */
 	    ChannelType[ChannelType["GuildDirectory"] = 14] = "GuildDirectory";
 	    /**
@@ -29107,35 +29108,34 @@ function requireChannel$3 () {
 	    /**
 	     * A channel like forum channels but contains media for server subscriptions
 	     *
-	     * See https://creator-support.discord.com/hc/articles/14346342766743
+	     * @see {@link https://creator-support.discord.com/hc/articles/14346342766743}
 	     */
 	    ChannelType[ChannelType["GuildMedia"] = 16] = "GuildMedia";
 	    // EVERYTHING BELOW THIS LINE SHOULD BE OLD NAMES FOR RENAMED ENUM MEMBERS //
 	    /**
 	     * A channel that users can follow and crosspost into their own guild
 	     *
-	     * @deprecated This is the old name for {@apilink ChannelType#GuildAnnouncement}
-	     *
-	     * See https://support.discord.com/hc/articles/360032008192
+	     * @deprecated This is the old name for {@link ChannelType.GuildAnnouncement}
+	     * @see {@link https://support.discord.com/hc/articles/360032008192}
 	     */
 	    ChannelType[ChannelType["GuildNews"] = 5] = "GuildNews";
 	    /**
 	     * A temporary sub-channel within a Guild Announcement channel
 	     *
-	     * @deprecated This is the old name for {@apilink ChannelType#AnnouncementThread}
+	     * @deprecated This is the old name for {@link ChannelType.AnnouncementThread}
 	     */
 	    // eslint-disable-next-line @typescript-eslint/no-duplicate-enum-values
 	    ChannelType[ChannelType["GuildNewsThread"] = 10] = "GuildNewsThread";
 	    /**
 	     * A temporary sub-channel within a Guild Text channel
 	     *
-	     * @deprecated This is the old name for {@apilink ChannelType#PublicThread}
+	     * @deprecated This is the old name for {@link ChannelType.PublicThread}
 	     */
 	    ChannelType[ChannelType["GuildPublicThread"] = 11] = "GuildPublicThread";
 	    /**
 	     * A temporary sub-channel within a Guild Text channel that is only viewable by those invited and those with the Manage Threads permission
 	     *
-	     * @deprecated This is the old name for {@apilink ChannelType#PrivateThread}
+	     * @deprecated This is the old name for {@link ChannelType.PrivateThread}
 	     */
 	    ChannelType[ChannelType["GuildPrivateThread"] = 12] = "GuildPrivateThread";
 	})(ChannelType || (channel$3.ChannelType = ChannelType = {}));
@@ -29151,7 +29151,7 @@ function requireChannel$3 () {
 	    VideoQualityMode[VideoQualityMode["Full"] = 2] = "Full";
 	})(VideoQualityMode || (channel$3.VideoQualityMode = VideoQualityMode = {}));
 	/**
-	 * https://discord.com/developers/docs/resources/channel#message-object-message-types
+	 * @see {@link https://discord.com/developers/docs/resources/channel#message-object-message-types}
 	 */
 	var MessageType;
 	(function (MessageType) {
@@ -29198,7 +29198,7 @@ function requireChannel$3 () {
 	    MessageType[MessageType["PollResult"] = 46] = "PollResult";
 	})(MessageType || (channel$3.MessageType = MessageType = {}));
 	/**
-	 * https://discord.com/developers/docs/resources/channel#message-object-message-activity-types
+	 * @see {@link https://discord.com/developers/docs/resources/channel#message-object-message-activity-types}
 	 */
 	var MessageActivityType;
 	(function (MessageActivityType) {
@@ -29208,7 +29208,7 @@ function requireChannel$3 () {
 	    MessageActivityType[MessageActivityType["JoinRequest"] = 5] = "JoinRequest";
 	})(MessageActivityType || (channel$3.MessageActivityType = MessageActivityType = {}));
 	/**
-	 * https://discord.com/developers/docs/resources/channel#message-reference-types
+	 * @see {@link https://discord.com/developers/docs/resources/channel#message-reference-types}
 	 */
 	var MessageReferenceType;
 	(function (MessageReferenceType) {
@@ -29222,7 +29222,7 @@ function requireChannel$3 () {
 	    MessageReferenceType[MessageReferenceType["Forward"] = 1] = "Forward";
 	})(MessageReferenceType || (channel$3.MessageReferenceType = MessageReferenceType = {}));
 	/**
-	 * https://discord.com/developers/docs/resources/channel#message-object-message-flags
+	 * @see {@link https://discord.com/developers/docs/resources/channel#message-object-message-flags}
 	 */
 	var MessageFlags;
 	(function (MessageFlags) {
@@ -29278,6 +29278,10 @@ function requireChannel$3 () {
 	     * This message has a snapshot (via Message Forwarding)
 	     */
 	    MessageFlags[MessageFlags["HasSnapshot"] = 16384] = "HasSnapshot";
+	    /**
+	     * This flag is required to use new components
+	     */
+	    MessageFlags[MessageFlags["IsComponentsV2"] = 32768] = "IsComponentsV2";
 	})(MessageFlags || (channel$3.MessageFlags = MessageFlags = {}));
 	var OverwriteType;
 	(function (OverwriteType) {
@@ -29311,7 +29315,7 @@ function requireChannel$3 () {
 	    ThreadMemberFlags[ThreadMemberFlags["NoMessages"] = 8] = "NoMessages";
 	})(ThreadMemberFlags || (channel$3.ThreadMemberFlags = ThreadMemberFlags = {}));
 	/**
-	 * https://discord.com/developers/docs/resources/channel#embed-object-embed-types
+	 * @see {@link https://discord.com/developers/docs/resources/channel#embed-object-embed-types}
 	 */
 	var EmbedType;
 	(function (EmbedType) {
@@ -29351,7 +29355,7 @@ function requireChannel$3 () {
 	    EmbedType["PollResult"] = "poll_result";
 	})(EmbedType || (channel$3.EmbedType = EmbedType = {}));
 	/**
-	 * https://discord.com/developers/docs/resources/channel#attachment-object-attachment-structure-attachment-flags
+	 * @see {@link https://discord.com/developers/docs/resources/channel#attachment-object-attachment-structure-attachment-flags}
 	 */
 	var AttachmentFlags;
 	(function (AttachmentFlags) {
@@ -29361,12 +29365,12 @@ function requireChannel$3 () {
 	    AttachmentFlags[AttachmentFlags["IsRemix"] = 4] = "IsRemix";
 	})(AttachmentFlags || (channel$3.AttachmentFlags = AttachmentFlags = {}));
 	/**
-	 * https://discord.com/developers/docs/resources/channel#allowed-mentions-object-allowed-mention-types
+	 * @see {@link https://discord.com/developers/docs/resources/channel#allowed-mentions-object-allowed-mention-types}
 	 */
 	var AllowedMentionsTypes;
 	(function (AllowedMentionsTypes) {
 	    /**
-	     * Controls @everyone and @here mentions
+	     * Controls `@everyone` and `@here` mentions
 	     */
 	    AllowedMentionsTypes["Everyone"] = "everyone";
 	    /**
@@ -29379,7 +29383,7 @@ function requireChannel$3 () {
 	    AllowedMentionsTypes["User"] = "users";
 	})(AllowedMentionsTypes || (channel$3.AllowedMentionsTypes = AllowedMentionsTypes = {}));
 	/**
-	 * https://discord.com/developers/docs/interactions/message-components#component-object-component-types
+	 * @see {@link https://discord.com/developers/docs/interactions/message-components#component-object-component-types}
 	 */
 	var ComponentType;
 	(function (ComponentType) {
@@ -29415,16 +29419,24 @@ function requireChannel$3 () {
 	     * Select menu for channels
 	     */
 	    ComponentType[ComponentType["ChannelSelect"] = 8] = "ChannelSelect";
+	    ComponentType[ComponentType["Section"] = 9] = "Section";
+	    ComponentType[ComponentType["TextDisplay"] = 10] = "TextDisplay";
+	    ComponentType[ComponentType["Thumbnail"] = 11] = "Thumbnail";
+	    ComponentType[ComponentType["MediaGallery"] = 12] = "MediaGallery";
+	    ComponentType[ComponentType["File"] = 13] = "File";
+	    ComponentType[ComponentType["Separator"] = 14] = "Separator";
+	    ComponentType[ComponentType["ContentInventoryEntry"] = 16] = "ContentInventoryEntry";
+	    ComponentType[ComponentType["Container"] = 17] = "Container";
 	    // EVERYTHING BELOW THIS LINE SHOULD BE OLD NAMES FOR RENAMED ENUM MEMBERS //
 	    /**
 	     * Select menu for picking from defined text options
 	     *
-	     * @deprecated This is the old name for {@apilink ComponentType#StringSelect}
+	     * @deprecated This is the old name for {@link ComponentType.StringSelect}
 	     */
 	    ComponentType[ComponentType["SelectMenu"] = 3] = "SelectMenu";
 	})(ComponentType || (channel$3.ComponentType = ComponentType = {}));
 	/**
-	 * https://discord.com/developers/docs/interactions/message-components#button-object-button-styles
+	 * @see {@link https://discord.com/developers/docs/interactions/message-components#button-object-button-styles}
 	 */
 	var ButtonStyle;
 	(function (ButtonStyle) {
@@ -29436,7 +29448,7 @@ function requireChannel$3 () {
 	    ButtonStyle[ButtonStyle["Premium"] = 6] = "Premium";
 	})(ButtonStyle || (channel$3.ButtonStyle = ButtonStyle = {}));
 	/**
-	 * https://discord.com/developers/docs/interactions/message-components#text-inputs-text-input-styles
+	 * @see {@link https://discord.com/developers/docs/interactions/message-components#text-inputs-text-input-styles}
 	 */
 	var TextInputStyle;
 	(function (TextInputStyle) {
@@ -29444,7 +29456,7 @@ function requireChannel$3 () {
 	    TextInputStyle[TextInputStyle["Paragraph"] = 2] = "Paragraph";
 	})(TextInputStyle || (channel$3.TextInputStyle = TextInputStyle = {}));
 	/**
-	 * https://discord.com/developers/docs/interactions/message-components#select-menu-object-select-default-value-structure
+	 * @see {@link https://discord.com/developers/docs/interactions/message-components#select-menu-object-select-default-value-structure}
 	 */
 	var SelectMenuDefaultValueType;
 	(function (SelectMenuDefaultValueType) {
@@ -29452,8 +29464,20 @@ function requireChannel$3 () {
 	    SelectMenuDefaultValueType["Role"] = "role";
 	    SelectMenuDefaultValueType["User"] = "user";
 	})(SelectMenuDefaultValueType || (channel$3.SelectMenuDefaultValueType = SelectMenuDefaultValueType = {}));
+	var UnfurledMediaItemLoadingState;
+	(function (UnfurledMediaItemLoadingState) {
+	    UnfurledMediaItemLoadingState[UnfurledMediaItemLoadingState["Unknown"] = 0] = "Unknown";
+	    UnfurledMediaItemLoadingState[UnfurledMediaItemLoadingState["Loading"] = 1] = "Loading";
+	    UnfurledMediaItemLoadingState[UnfurledMediaItemLoadingState["LoadedSuccess"] = 2] = "LoadedSuccess";
+	    UnfurledMediaItemLoadingState[UnfurledMediaItemLoadingState["LoadedNotFound"] = 3] = "LoadedNotFound";
+	})(UnfurledMediaItemLoadingState || (channel$3.UnfurledMediaItemLoadingState = UnfurledMediaItemLoadingState = {}));
+	var SeparatorSpacingSize;
+	(function (SeparatorSpacingSize) {
+	    SeparatorSpacingSize[SeparatorSpacingSize["Small"] = 1] = "Small";
+	    SeparatorSpacingSize[SeparatorSpacingSize["Large"] = 2] = "Large";
+	})(SeparatorSpacingSize || (channel$3.SeparatorSpacingSize = SeparatorSpacingSize = {}));
 	/**
-	 * https://discord.com/developers/docs/resources/channel#channel-object-channel-flags
+	 * @see {@link https://discord.com/developers/docs/resources/channel#channel-object-channel-flags}
 	 */
 	var ChannelFlags;
 	(function (ChannelFlags) {
@@ -29529,7 +29553,7 @@ function requireGateway$1 () {
 	Object.defineProperty(gateway$1, "__esModule", { value: true });
 	gateway$1.ActivityFlags = gateway$1.ActivityType = gateway$1.ActivityPlatform = gateway$1.PresenceUpdateStatus = void 0;
 	/**
-	 * https://discord.com/developers/docs/topics/gateway-events#update-presence-status-types
+	 * @see {@link https://discord.com/developers/docs/topics/gateway-events#update-presence-status-types}
 	 */
 	var PresenceUpdateStatus;
 	(function (PresenceUpdateStatus) {
@@ -29558,37 +29582,37 @@ function requireGateway$1 () {
 	    ActivityPlatform["PS5"] = "ps5";
 	})(ActivityPlatform || (gateway$1.ActivityPlatform = ActivityPlatform = {}));
 	/**
-	 * https://discord.com/developers/docs/topics/gateway-events#activity-object-activity-types
+	 * @see {@link https://discord.com/developers/docs/topics/gateway-events#activity-object-activity-types}
 	 */
 	var ActivityType;
 	(function (ActivityType) {
 	    /**
-	     * Playing {game}
+	     * Playing \{game\}
 	     */
 	    ActivityType[ActivityType["Playing"] = 0] = "Playing";
 	    /**
-	     * Streaming {details}
+	     * Streaming \{details\}
 	     */
 	    ActivityType[ActivityType["Streaming"] = 1] = "Streaming";
 	    /**
-	     * Listening to {name}
+	     * Listening to \{name\}
 	     */
 	    ActivityType[ActivityType["Listening"] = 2] = "Listening";
 	    /**
-	     * Watching {details}
+	     * Watching \{details\}
 	     */
 	    ActivityType[ActivityType["Watching"] = 3] = "Watching";
 	    /**
-	     * {emoji} {state}
+	     * \{emoji\} \{state\}
 	     */
 	    ActivityType[ActivityType["Custom"] = 4] = "Custom";
 	    /**
-	     * Competing in {name}
+	     * Competing in \{name\}
 	     */
 	    ActivityType[ActivityType["Competing"] = 5] = "Competing";
 	})(ActivityType || (gateway$1.ActivityType = ActivityType = {}));
 	/**
-	 * https://discord.com/developers/docs/topics/gateway-events#activity-object-activity-flags
+	 * @see {@link https://discord.com/developers/docs/topics/gateway-events#activity-object-activity-flags}
 	 */
 	var ActivityFlags;
 	(function (ActivityFlags) {
@@ -29619,7 +29643,7 @@ function requireGuild$2 () {
 	Object.defineProperty(guild$1, "__esModule", { value: true });
 	guild$1.GuildOnboardingPromptType = guild$1.GuildOnboardingMode = guild$1.MembershipScreeningFieldType = guild$1.GuildWidgetStyle = guild$1.IntegrationExpireBehavior = guild$1.GuildMemberFlags = guild$1.GuildFeature = guild$1.GuildSystemChannelFlags = guild$1.GuildHubType = guild$1.GuildPremiumTier = guild$1.GuildVerificationLevel = guild$1.GuildNSFWLevel = guild$1.GuildMFALevel = guild$1.GuildExplicitContentFilter = guild$1.GuildDefaultMessageNotifications = void 0;
 	/**
-	 * https://discord.com/developers/docs/resources/guild#guild-object-default-message-notification-level
+	 * @see {@link https://discord.com/developers/docs/resources/guild#guild-object-default-message-notification-level}
 	 */
 	var GuildDefaultMessageNotifications;
 	(function (GuildDefaultMessageNotifications) {
@@ -29627,7 +29651,7 @@ function requireGuild$2 () {
 	    GuildDefaultMessageNotifications[GuildDefaultMessageNotifications["OnlyMentions"] = 1] = "OnlyMentions";
 	})(GuildDefaultMessageNotifications || (guild$1.GuildDefaultMessageNotifications = GuildDefaultMessageNotifications = {}));
 	/**
-	 * https://discord.com/developers/docs/resources/guild#guild-object-explicit-content-filter-level
+	 * @see {@link https://discord.com/developers/docs/resources/guild#guild-object-explicit-content-filter-level}
 	 */
 	var GuildExplicitContentFilter;
 	(function (GuildExplicitContentFilter) {
@@ -29636,7 +29660,7 @@ function requireGuild$2 () {
 	    GuildExplicitContentFilter[GuildExplicitContentFilter["AllMembers"] = 2] = "AllMembers";
 	})(GuildExplicitContentFilter || (guild$1.GuildExplicitContentFilter = GuildExplicitContentFilter = {}));
 	/**
-	 * https://discord.com/developers/docs/resources/guild#guild-object-mfa-level
+	 * @see {@link https://discord.com/developers/docs/resources/guild#guild-object-mfa-level}
 	 */
 	var GuildMFALevel;
 	(function (GuildMFALevel) {
@@ -29644,7 +29668,7 @@ function requireGuild$2 () {
 	    GuildMFALevel[GuildMFALevel["Elevated"] = 1] = "Elevated";
 	})(GuildMFALevel || (guild$1.GuildMFALevel = GuildMFALevel = {}));
 	/**
-	 * https://discord.com/developers/docs/resources/guild#guild-object-guild-nsfw-level
+	 * @see {@link https://discord.com/developers/docs/resources/guild#guild-object-guild-nsfw-level}
 	 */
 	var GuildNSFWLevel;
 	(function (GuildNSFWLevel) {
@@ -29654,7 +29678,7 @@ function requireGuild$2 () {
 	    GuildNSFWLevel[GuildNSFWLevel["AgeRestricted"] = 3] = "AgeRestricted";
 	})(GuildNSFWLevel || (guild$1.GuildNSFWLevel = GuildNSFWLevel = {}));
 	/**
-	 * https://discord.com/developers/docs/resources/guild#guild-object-verification-level
+	 * @see {@link https://discord.com/developers/docs/resources/guild#guild-object-verification-level}
 	 */
 	var GuildVerificationLevel;
 	(function (GuildVerificationLevel) {
@@ -29680,7 +29704,7 @@ function requireGuild$2 () {
 	    GuildVerificationLevel[GuildVerificationLevel["VeryHigh"] = 4] = "VeryHigh";
 	})(GuildVerificationLevel || (guild$1.GuildVerificationLevel = GuildVerificationLevel = {}));
 	/**
-	 * https://discord.com/developers/docs/resources/guild#guild-object-premium-tier
+	 * @see {@link https://discord.com/developers/docs/resources/guild#guild-object-premium-tier}
 	 */
 	var GuildPremiumTier;
 	(function (GuildPremiumTier) {
@@ -29696,7 +29720,7 @@ function requireGuild$2 () {
 	    GuildHubType[GuildHubType["College"] = 2] = "College";
 	})(GuildHubType || (guild$1.GuildHubType = GuildHubType = {}));
 	/**
-	 * https://discord.com/developers/docs/resources/guild#guild-object-system-channel-flags
+	 * @see {@link https://discord.com/developers/docs/resources/guild#guild-object-system-channel-flags}
 	 */
 	var GuildSystemChannelFlags;
 	(function (GuildSystemChannelFlags) {
@@ -29726,7 +29750,7 @@ function requireGuild$2 () {
 	    GuildSystemChannelFlags[GuildSystemChannelFlags["SuppressRoleSubscriptionPurchaseNotificationReplies"] = 32] = "SuppressRoleSubscriptionPurchaseNotificationReplies";
 	})(GuildSystemChannelFlags || (guild$1.GuildSystemChannelFlags = GuildSystemChannelFlags = {}));
 	/**
-	 * https://discord.com/developers/docs/resources/guild#guild-object-guild-features
+	 * @see {@link https://discord.com/developers/docs/resources/guild#guild-object-guild-features}
 	 */
 	var GuildFeature;
 	(function (GuildFeature) {
@@ -29741,7 +29765,7 @@ function requireGuild$2 () {
 	    /**
 	     * Guild is using the old permissions configuration behavior
 	     *
-	     * See https://discord.com/developers/docs/change-log#upcoming-application-command-permission-changes
+	     * @see {@link https://discord.com/developers/docs/change-log#upcoming-application-command-permission-changes}
 	     */
 	    GuildFeature["ApplicationCommandPermissionsV2"] = "APPLICATION_COMMAND_PERMISSIONS_V2";
 	    /**
@@ -29783,8 +29807,7 @@ function requireGuild$2 () {
 	    /**
 	     * Guild is a Student Hub
 	     *
-	     * See https://support.discord.com/hc/articles/4406046651927
-	     *
+	     * @see {@link https://support.discord.com/hc/articles/4406046651927}
 	     * @unstable This feature is currently not documented by Discord, but has known value
 	     */
 	    GuildFeature["Hub"] = "HUB";
@@ -29799,8 +29822,7 @@ function requireGuild$2 () {
 	    /**
 	     * Guild is in a Student Hub
 	     *
-	     * See https://support.discord.com/hc/articles/4406046651927
-	     *
+	     * @see {@link https://support.discord.com/hc/articles/4406046651927}
 	     * @unstable This feature is currently not documented by Discord, but has known value
 	     */
 	    GuildFeature["LinkedToHub"] = "LINKED_TO_HUB";
@@ -29881,7 +29903,7 @@ function requireGuild$2 () {
 	    GuildFeature["WelcomeScreenEnabled"] = "WELCOME_SCREEN_ENABLED";
 	})(GuildFeature || (guild$1.GuildFeature = GuildFeature = {}));
 	/**
-	 * https://discord.com/developers/docs/resources/guild#guild-member-object-guild-member-flags
+	 * @see {@link https://discord.com/developers/docs/resources/guild#guild-member-object-guild-member-flags}
 	 */
 	var GuildMemberFlags;
 	(function (GuildMemberFlags) {
@@ -29919,6 +29941,7 @@ function requireGuild$2 () {
 	    GuildMemberFlags[GuildMemberFlags["AutomodQuarantinedUsernameOrGuildNickname"] = 128] = "AutomodQuarantinedUsernameOrGuildNickname";
 	    /**
 	     * @deprecated
+	     * {@link https://github.com/discord/discord-api-docs/pull/7113 | discord-api-docs#7113}
 	     */
 	    GuildMemberFlags[GuildMemberFlags["AutomodQuarantinedBio"] = 256] = "AutomodQuarantinedBio";
 	    /**
@@ -29927,7 +29950,7 @@ function requireGuild$2 () {
 	    GuildMemberFlags[GuildMemberFlags["DmSettingsUpsellAcknowledged"] = 512] = "DmSettingsUpsellAcknowledged";
 	})(GuildMemberFlags || (guild$1.GuildMemberFlags = GuildMemberFlags = {}));
 	/**
-	 * https://discord.com/developers/docs/resources/guild#integration-object-integration-expire-behaviors
+	 * @see {@link https://discord.com/developers/docs/resources/guild#integration-object-integration-expire-behaviors}
 	 */
 	var IntegrationExpireBehavior;
 	(function (IntegrationExpireBehavior) {
@@ -29935,7 +29958,7 @@ function requireGuild$2 () {
 	    IntegrationExpireBehavior[IntegrationExpireBehavior["Kick"] = 1] = "Kick";
 	})(IntegrationExpireBehavior || (guild$1.IntegrationExpireBehavior = IntegrationExpireBehavior = {}));
 	/**
-	 * https://discord.com/developers/docs/resources/guild#get-guild-widget-image-widget-style-options
+	 * @see {@link https://discord.com/developers/docs/resources/guild#get-guild-widget-image-widget-style-options}
 	 */
 	var GuildWidgetStyle;
 	(function (GuildWidgetStyle) {
@@ -29969,7 +29992,7 @@ function requireGuild$2 () {
 	    MembershipScreeningFieldType["Terms"] = "TERMS";
 	})(MembershipScreeningFieldType || (guild$1.MembershipScreeningFieldType = MembershipScreeningFieldType = {}));
 	/**
-	 * https://discord.com/developers/docs/resources/guild#guild-onboarding-object-onboarding-mode
+	 * @see {@link https://discord.com/developers/docs/resources/guild#guild-onboarding-object-onboarding-mode}
 	 */
 	var GuildOnboardingMode;
 	(function (GuildOnboardingMode) {
@@ -29983,7 +30006,7 @@ function requireGuild$2 () {
 	    GuildOnboardingMode[GuildOnboardingMode["OnboardingAdvanced"] = 1] = "OnboardingAdvanced";
 	})(GuildOnboardingMode || (guild$1.GuildOnboardingMode = GuildOnboardingMode = {}));
 	/**
-	 * https://discord.com/developers/docs/resources/guild#guild-onboarding-object-prompt-types
+	 * @see {@link https://discord.com/developers/docs/resources/guild#guild-onboarding-object-prompt-types}
 	 */
 	var GuildOnboardingPromptType;
 	(function (GuildOnboardingPromptType) {
@@ -30004,7 +30027,7 @@ function requireGuildScheduledEvent$2 () {
 	Object.defineProperty(guildScheduledEvent$1, "__esModule", { value: true });
 	guildScheduledEvent$1.GuildScheduledEventPrivacyLevel = guildScheduledEvent$1.GuildScheduledEventStatus = guildScheduledEvent$1.GuildScheduledEventEntityType = guildScheduledEvent$1.GuildScheduledEventRecurrenceRuleMonth = guildScheduledEvent$1.GuildScheduledEventRecurrenceRuleWeekday = guildScheduledEvent$1.GuildScheduledEventRecurrenceRuleFrequency = void 0;
 	/**
-	 * https://discord.com/developers/docs/resources/guild-scheduled-event#guild-scheduled-event-recurrence-rule-object-guild-scheduled-event-recurrence-rule-frequency
+	 * @see {@link https://discord.com/developers/docs/resources/guild-scheduled-event#guild-scheduled-event-recurrence-rule-object-guild-scheduled-event-recurrence-rule-frequency}
 	 */
 	var GuildScheduledEventRecurrenceRuleFrequency;
 	(function (GuildScheduledEventRecurrenceRuleFrequency) {
@@ -30014,7 +30037,7 @@ function requireGuildScheduledEvent$2 () {
 	    GuildScheduledEventRecurrenceRuleFrequency[GuildScheduledEventRecurrenceRuleFrequency["Daily"] = 3] = "Daily";
 	})(GuildScheduledEventRecurrenceRuleFrequency || (guildScheduledEvent$1.GuildScheduledEventRecurrenceRuleFrequency = GuildScheduledEventRecurrenceRuleFrequency = {}));
 	/**
-	 * https://discord.com/developers/docs/resources/guild-scheduled-event#guild-scheduled-event-recurrence-rule-object-guild-scheduled-event-recurrence-rule-weekday
+	 * @see {@link https://discord.com/developers/docs/resources/guild-scheduled-event#guild-scheduled-event-recurrence-rule-object-guild-scheduled-event-recurrence-rule-weekday}
 	 */
 	var GuildScheduledEventRecurrenceRuleWeekday;
 	(function (GuildScheduledEventRecurrenceRuleWeekday) {
@@ -30027,7 +30050,7 @@ function requireGuildScheduledEvent$2 () {
 	    GuildScheduledEventRecurrenceRuleWeekday[GuildScheduledEventRecurrenceRuleWeekday["Sunday"] = 6] = "Sunday";
 	})(GuildScheduledEventRecurrenceRuleWeekday || (guildScheduledEvent$1.GuildScheduledEventRecurrenceRuleWeekday = GuildScheduledEventRecurrenceRuleWeekday = {}));
 	/**
-	 * https://discord.com/developers/docs/resources/guild-scheduled-event#guild-scheduled-event-recurrence-rule-object-guild-scheduled-event-recurrence-rule-month
+	 * @see {@link https://discord.com/developers/docs/resources/guild-scheduled-event#guild-scheduled-event-recurrence-rule-object-guild-scheduled-event-recurrence-rule-month}
 	 */
 	var GuildScheduledEventRecurrenceRuleMonth;
 	(function (GuildScheduledEventRecurrenceRuleMonth) {
@@ -30045,7 +30068,7 @@ function requireGuildScheduledEvent$2 () {
 	    GuildScheduledEventRecurrenceRuleMonth[GuildScheduledEventRecurrenceRuleMonth["December"] = 12] = "December";
 	})(GuildScheduledEventRecurrenceRuleMonth || (guildScheduledEvent$1.GuildScheduledEventRecurrenceRuleMonth = GuildScheduledEventRecurrenceRuleMonth = {}));
 	/**
-	 * https://discord.com/developers/docs/resources/guild-scheduled-event#guild-scheduled-event-object-guild-scheduled-event-entity-types
+	 * @see {@link https://discord.com/developers/docs/resources/guild-scheduled-event#guild-scheduled-event-object-guild-scheduled-event-entity-types}
 	 */
 	var GuildScheduledEventEntityType;
 	(function (GuildScheduledEventEntityType) {
@@ -30054,7 +30077,7 @@ function requireGuildScheduledEvent$2 () {
 	    GuildScheduledEventEntityType[GuildScheduledEventEntityType["External"] = 3] = "External";
 	})(GuildScheduledEventEntityType || (guildScheduledEvent$1.GuildScheduledEventEntityType = GuildScheduledEventEntityType = {}));
 	/**
-	 * https://discord.com/developers/docs/resources/guild-scheduled-event#guild-scheduled-event-object-guild-scheduled-event-status
+	 * @see {@link https://discord.com/developers/docs/resources/guild-scheduled-event#guild-scheduled-event-object-guild-scheduled-event-status}
 	 */
 	var GuildScheduledEventStatus;
 	(function (GuildScheduledEventStatus) {
@@ -30064,7 +30087,7 @@ function requireGuildScheduledEvent$2 () {
 	    GuildScheduledEventStatus[GuildScheduledEventStatus["Canceled"] = 4] = "Canceled";
 	})(GuildScheduledEventStatus || (guildScheduledEvent$1.GuildScheduledEventStatus = GuildScheduledEventStatus = {}));
 	/**
-	 * https://discord.com/developers/docs/resources/guild-scheduled-event#guild-scheduled-event-object-guild-scheduled-event-privacy-level
+	 * @see {@link https://discord.com/developers/docs/resources/guild-scheduled-event#guild-scheduled-event-object-guild-scheduled-event-privacy-level}
 	 */
 	var GuildScheduledEventPrivacyLevel;
 	(function (GuildScheduledEventPrivacyLevel) {
@@ -30189,7 +30212,7 @@ function requireShared () {
 	Object.defineProperty(shared, "__esModule", { value: true });
 	shared.ApplicationCommandOptionType = void 0;
 	/**
-	 * https://discord.com/developers/docs/interactions/application-commands#application-command-object-application-command-option-type
+	 * @see {@link https://discord.com/developers/docs/interactions/application-commands#application-command-object-application-command-option-type}
 	 */
 	var ApplicationCommandOptionType;
 	(function (ApplicationCommandOptionType) {
@@ -30318,7 +30341,7 @@ function requirePermissions$1 () {
 	Object.defineProperty(permissions$1, "__esModule", { value: true });
 	permissions$1.APIApplicationCommandPermissionsConstant = permissions$1.ApplicationCommandPermissionType = void 0;
 	/**
-	 * https://discord.com/developers/docs/interactions/application-commands#application-command-permissions-object-application-command-permission-type
+	 * @see {@link https://discord.com/developers/docs/interactions/application-commands#application-command-permissions-object-application-command-permission-type}
 	 */
 	var ApplicationCommandPermissionType;
 	(function (ApplicationCommandPermissionType) {
@@ -30327,7 +30350,7 @@ function requirePermissions$1 () {
 	    ApplicationCommandPermissionType[ApplicationCommandPermissionType["Channel"] = 3] = "Channel";
 	})(ApplicationCommandPermissionType || (permissions$1.ApplicationCommandPermissionType = ApplicationCommandPermissionType = {}));
 	/**
-	 * https://discord.com/developers/docs/interactions/application-commands#application-command-permissions-object-application-command-permissions-constants
+	 * @see {@link https://discord.com/developers/docs/interactions/application-commands#application-command-permissions-object-application-command-permissions-constants}
 	 */
 	permissions$1.APIApplicationCommandPermissionsConstant = {
 	    // eslint-disable-next-line unicorn/prefer-native-coercion-functions
@@ -30348,6 +30371,18 @@ function requireEntryPoint () {
 	Object.defineProperty(entryPoint, "__esModule", { value: true });
 	
 	return entryPoint;
+}
+
+var internals$1 = {};
+
+var hasRequiredInternals$1;
+
+function requireInternals$1 () {
+	if (hasRequiredInternals$1) return internals$1;
+	hasRequiredInternals$1 = 1;
+	Object.defineProperty(internals$1, "__esModule", { value: true });
+	
+	return internals$1;
 }
 
 var hasRequiredApplicationCommands;
@@ -30376,8 +30411,9 @@ function requireApplicationCommands () {
 		__exportStar(requireContextMenu(), exports);
 		__exportStar(requirePermissions$1(), exports);
 		__exportStar(requireEntryPoint(), exports);
+		__exportStar(requireInternals$1(), exports);
 		/**
-		 * https://discord.com/developers/docs/interactions/application-commands#application-command-object-application-command-types
+		 * @see {@link https://discord.com/developers/docs/interactions/application-commands#application-command-object-application-command-types}
 		 */
 		var ApplicationCommandType;
 		(function (ApplicationCommandType) {
@@ -30399,7 +30435,7 @@ function requireApplicationCommands () {
 		    ApplicationCommandType[ApplicationCommandType["PrimaryEntryPoint"] = 4] = "PrimaryEntryPoint";
 		})(ApplicationCommandType || (exports.ApplicationCommandType = ApplicationCommandType = {}));
 		/**
-		 * https://discord.com/developers/docs/resources/application#application-object-application-integration-types
+		 * @see {@link https://discord.com/developers/docs/resources/application#application-object-application-integration-types}
 		 */
 		var ApplicationIntegrationType;
 		(function (ApplicationIntegrationType) {
@@ -30413,7 +30449,7 @@ function requireApplicationCommands () {
 		    ApplicationIntegrationType[ApplicationIntegrationType["UserInstall"] = 1] = "UserInstall";
 		})(ApplicationIntegrationType || (exports.ApplicationIntegrationType = ApplicationIntegrationType = {}));
 		/**
-		 * https://discord.com/developers/docs/interactions/receiving-and-responding#interaction-object-interaction-context-types
+		 * @see {@link https://discord.com/developers/docs/interactions/receiving-and-responding#interaction-object-interaction-context-types}
 		 */
 		var InteractionContextType;
 		(function (InteractionContextType) {
@@ -30431,7 +30467,7 @@ function requireApplicationCommands () {
 		    InteractionContextType[InteractionContextType["PrivateChannel"] = 2] = "PrivateChannel";
 		})(InteractionContextType || (exports.InteractionContextType = InteractionContextType = {}));
 		/**
-		 * https://discord.com/developers/docs/interactions/application-commands#application-command-object-entry-point-command-handler-types
+		 * @see {@link https://discord.com/developers/docs/interactions/application-commands#application-command-object-entry-point-command-handler-types}
 		 */
 		var EntryPointCommandHandlerType;
 		(function (EntryPointCommandHandlerType) {
@@ -30520,7 +30556,7 @@ function requireResponses () {
 	Object.defineProperty(responses, "__esModule", { value: true });
 	responses.InteractionResponseType = responses.InteractionType = void 0;
 	/**
-	 * https://discord.com/developers/docs/interactions/receiving-and-responding#interaction-object-interaction-type
+	 * @see {@link https://discord.com/developers/docs/interactions/receiving-and-responding#interaction-object-interaction-type}
 	 */
 	var InteractionType;
 	(function (InteractionType) {
@@ -30531,7 +30567,7 @@ function requireResponses () {
 	    InteractionType[InteractionType["ModalSubmit"] = 5] = "ModalSubmit";
 	})(InteractionType || (responses.InteractionType = InteractionType = {}));
 	/**
-	 * https://discord.com/developers/docs/interactions/receiving-and-responding#interaction-response-object-interaction-callback-type
+	 * @see {@link https://discord.com/developers/docs/interactions/receiving-and-responding#interaction-response-object-interaction-callback-type}
 	 */
 	var InteractionResponseType;
 	(function (InteractionResponseType) {
@@ -30566,7 +30602,8 @@ function requireResponses () {
 	    /**
 	     * Respond to an interaction with an upgrade button, only available for apps with monetization enabled
 	     *
-	     * @deprecated See https://discord.com/developers/docs/change-log#premium-apps-new-premium-button-style-deep-linking-url-schemes
+	     * @deprecated Send a button with Premium type instead.
+	     * {@link https://discord.com/developers/docs/change-log#premium-apps-new-premium-button-style-deep-linking-url-schemes | Learn more here}
 	     */
 	    InteractionResponseType[InteractionResponseType["PremiumRequired"] = 10] = "PremiumRequired";
 	    /**
@@ -30627,7 +30664,7 @@ function requireInvite$2 () {
 	Object.defineProperty(invite$1, "__esModule", { value: true });
 	invite$1.InviteTargetType = invite$1.InviteType = void 0;
 	/**
-	 * https://discord.com/developers/docs/resources/invite#invite-object-invite-types
+	 * @see {@link https://discord.com/developers/docs/resources/invite#invite-object-invite-types}
 	 */
 	var InviteType;
 	(function (InviteType) {
@@ -30636,7 +30673,7 @@ function requireInvite$2 () {
 	    InviteType[InviteType["Friend"] = 2] = "Friend";
 	})(InviteType || (invite$1.InviteType = InviteType = {}));
 	/**
-	 * https://discord.com/developers/docs/resources/invite#invite-object-invite-target-types
+	 * @see {@link https://discord.com/developers/docs/resources/invite#invite-object-invite-target-types}
 	 */
 	var InviteTargetType;
 	(function (InviteTargetType) {
@@ -30657,7 +30694,7 @@ function requireMonetization$1 () {
 	Object.defineProperty(monetization$1, "__esModule", { value: true });
 	monetization$1.SubscriptionStatus = monetization$1.SKUType = monetization$1.SKUFlags = monetization$1.EntitlementType = void 0;
 	/**
-	 * https://discord.com/developers/docs/monetization/entitlements#entitlement-object-entitlement-types
+	 * @see {@link https://discord.com/developers/docs/monetization/entitlements#entitlement-object-entitlement-types}
 	 */
 	var EntitlementType;
 	(function (EntitlementType) {
@@ -30695,7 +30732,7 @@ function requireMonetization$1 () {
 	    EntitlementType[EntitlementType["ApplicationSubscription"] = 8] = "ApplicationSubscription";
 	})(EntitlementType || (monetization$1.EntitlementType = EntitlementType = {}));
 	/**
-	 * https://discord.com/developers/docs/monetization/skus#sku-object-sku-flags
+	 * @see {@link https://discord.com/developers/docs/monetization/skus#sku-object-sku-flags}
 	 */
 	var SKUFlags;
 	(function (SKUFlags) {
@@ -30714,7 +30751,7 @@ function requireMonetization$1 () {
 	    SKUFlags[SKUFlags["UserSubscription"] = 256] = "UserSubscription";
 	})(SKUFlags || (monetization$1.SKUFlags = SKUFlags = {}));
 	/**
-	 * https://discord.com/developers/docs/resources/sku#sku-object-sku-types
+	 * @see {@link https://discord.com/developers/docs/resources/sku#sku-object-sku-types}
 	 */
 	var SKUType;
 	(function (SKUType) {
@@ -30736,7 +30773,7 @@ function requireMonetization$1 () {
 	    SKUType[SKUType["SubscriptionGroup"] = 6] = "SubscriptionGroup";
 	})(SKUType || (monetization$1.SKUType = SKUType = {}));
 	/**
-	 * https://discord.com/developers/docs/resources/subscription#subscription-statuses
+	 * @see {@link https://discord.com/developers/docs/resources/subscription#subscription-statuses}
 	 */
 	var SubscriptionStatus;
 	(function (SubscriptionStatus) {
@@ -30776,10 +30813,10 @@ function requireOauth2$1 () {
 	     */
 	    OAuth2Scopes["Bot"] = "bot";
 	    /**
-	     * Allows [/users/@me/connections](https://discord.com/developers/docs/resources/user#get-user-connections)
+	     * Allows {@link https://discord.com/developers/docs/resources/user#get-user-connections | `/users/@me/connections`}
 	     * to return linked third-party accounts
 	     *
-	     * See https://discord.com/developers/docs/resources/user#get-user-connections
+	     * @see {@link https://discord.com/developers/docs/resources/user#get-user-connections}
 	     */
 	    OAuth2Scopes["Connections"] = "connections";
 	    /**
@@ -30787,41 +30824,41 @@ function requireOauth2$1 () {
 	     */
 	    OAuth2Scopes["DMChannelsRead"] = "dm_channels.read";
 	    /**
-	     * Enables [/users/@me](https://discord.com/developers/docs/resources/user#get-current-user) to return an `email`
+	     * Enables {@link https://discord.com/developers/docs/resources/user#get-current-user | `/users/@me`} to return an `email`
 	     *
-	     * See https://discord.com/developers/docs/resources/user#get-current-user
+	     * @see {@link https://discord.com/developers/docs/resources/user#get-current-user}
 	     */
 	    OAuth2Scopes["Email"] = "email";
 	    /**
-	     * Allows [/users/@me](https://discord.com/developers/docs/resources/user#get-current-user) without `email`
+	     * Allows {@link https://discord.com/developers/docs/resources/user#get-current-user | `/users/@me`} without `email`
 	     *
-	     * See https://discord.com/developers/docs/resources/user#get-current-user
+	     * @see {@link https://discord.com/developers/docs/resources/user#get-current-user}
 	     */
 	    OAuth2Scopes["Identify"] = "identify";
 	    /**
-	     * Allows [/users/@me/guilds](https://discord.com/developers/docs/resources/user#get-current-user-guilds)
+	     * Allows {@link https://discord.com/developers/docs/resources/user#get-current-user-guilds | `/users/@me/guilds`}
 	     * to return basic information about all of a user's guilds
 	     *
-	     * See https://discord.com/developers/docs/resources/user#get-current-user-guilds
+	     * @see {@link https://discord.com/developers/docs/resources/user#get-current-user-guilds}
 	     */
 	    OAuth2Scopes["Guilds"] = "guilds";
 	    /**
-	     * Allows [/guilds/{guild.id}/members/{user.id}](https://discord.com/developers/docs/resources/guild#add-guild-member)
+	     * Allows {@link https://discord.com/developers/docs/resources/guild#add-guild-member | `/guilds/[guild.id]/members/[user.id]`}
 	     * to be used for joining users to a guild
 	     *
-	     * See https://discord.com/developers/docs/resources/guild#add-guild-member
+	     * @see {@link https://discord.com/developers/docs/resources/guild#add-guild-member}
 	     */
 	    OAuth2Scopes["GuildsJoin"] = "guilds.join";
 	    /**
-	     * Allows /users/@me/guilds/{guild.id}/member to return a user's member information in a guild
+	     * Allows /users/\@me/guilds/\{guild.id\}/member to return a user's member information in a guild
 	     *
-	     * See https://discord.com/developers/docs/resources/user#get-current-user-guild-member
+	     * @see {@link https://discord.com/developers/docs/resources/user#get-current-user-guild-member}
 	     */
 	    OAuth2Scopes["GuildsMembersRead"] = "guilds.members.read";
 	    /**
 	     * Allows your app to join users to a group dm
 	     *
-	     * See https://discord.com/developers/docs/resources/channel#group-dm-add-recipient
+	     * @see {@link https://discord.com/developers/docs/resources/channel#group-dm-add-recipient}
 	     */
 	    OAuth2Scopes["GroupDMJoins"] = "gdm.join";
 	    /**
@@ -30837,6 +30874,18 @@ function requireOauth2$1 () {
 	     * For local rpc server access, this allows you to control a user's local Discord client - requires Discord approval
 	     */
 	    OAuth2Scopes["RPC"] = "rpc";
+	    /**
+	     * For local rpc server access, this allows you to update a user's activity - requires Discord approval
+	     */
+	    OAuth2Scopes["RPCActivitiesWrite"] = "rpc.activities.write";
+	    /**
+	     * For local rpc server access, this allows you to read a user's voice settings and listen for voice events - requires Discord approval
+	     */
+	    OAuth2Scopes["RPCVoiceRead"] = "rpc.voice.read";
+	    /**
+	     * For local rpc server access, this allows you to update a user's voice settings - requires Discord approval
+	     */
+	    OAuth2Scopes["RPCVoiceWrite"] = "rpc.voice.write";
 	    /**
 	     * For local rpc server api access, this allows you to receive notifications pushed out to the user - requires Discord approval
 	     */
@@ -30876,25 +30925,25 @@ function requireOauth2$1 () {
 	    /**
 	     * Allows your app to update a user's activity - requires Discord approval (NOT REQUIRED FOR GAMESDK ACTIVITY MANAGER)
 	     *
-	     * See https://discord.com/developers/docs/game-sdk/activities
+	     * @see {@link https://discord.com/developers/docs/game-sdk/activities}
 	     */
 	    OAuth2Scopes["ActivitiesWrite"] = "activities.write";
 	    /**
 	     * Allows your app to use Application Commands in a guild
 	     *
-	     * See https://discord.com/developers/docs/interactions/application-commands
+	     * @see {@link https://discord.com/developers/docs/interactions/application-commands}
 	     */
 	    OAuth2Scopes["ApplicationsCommands"] = "applications.commands";
 	    /**
 	     * Allows your app to update its Application Commands via this bearer token - client credentials grant only
 	     *
-	     * See https://discord.com/developers/docs/interactions/application-commands
+	     * @see {@link https://discord.com/developers/docs/interactions/application-commands}
 	     */
 	    OAuth2Scopes["ApplicationsCommandsUpdate"] = "applications.commands.update";
 	    /**
 	     * Allows your app to update permissions for its commands using a Bearer token - client credentials grant only
 	     *
-	     * See https://discord.com/developers/docs/interactions/application-commands
+	     * @see {@link https://discord.com/developers/docs/interactions/application-commands}
 	     */
 	    OAuth2Scopes["ApplicationCommandsPermissionsUpdate"] = "applications.commands.permissions.update";
 	})(OAuth2Scopes || (oauth2$1.OAuth2Scopes = OAuth2Scopes = {}));
@@ -30915,7 +30964,7 @@ function requirePermissions () {
 	Object.defineProperty(permissions, "__esModule", { value: true });
 	permissions.RoleFlags = void 0;
 	/**
-	 * https://discord.com/developers/docs/topics/permissions#role-object-role-flags
+	 * @see {@link https://discord.com/developers/docs/topics/permissions#role-object-role-flags}
 	 */
 	var RoleFlags;
 	(function (RoleFlags) {
@@ -30941,7 +30990,7 @@ function requirePoll$2 () {
 	Object.defineProperty(poll$1, "__esModule", { value: true });
 	poll$1.PollLayoutType = void 0;
 	/**
-	 * https://discord.com/developers/docs/resources/poll#layout-type
+	 * @see {@link https://discord.com/developers/docs/resources/poll#layout-type}
 	 */
 	var PollLayoutType;
 	(function (PollLayoutType) {
@@ -30979,7 +31028,7 @@ function requireStageInstance$2 () {
 	Object.defineProperty(stageInstance$1, "__esModule", { value: true });
 	stageInstance$1.StageInstancePrivacyLevel = void 0;
 	/**
-	 * https://discord.com/developers/docs/resources/stage-instance#stage-instance-object-privacy-level
+	 * @see {@link https://discord.com/developers/docs/resources/stage-instance#stage-instance-object-privacy-level}
 	 */
 	var StageInstancePrivacyLevel;
 	(function (StageInstancePrivacyLevel) {
@@ -30987,6 +31036,7 @@ function requireStageInstance$2 () {
 	     * The stage instance is visible publicly, such as on stage discovery
 	     *
 	     * @deprecated
+	     * {@link https://github.com/discord/discord-api-docs/pull/4296 | discord-api-docs#4296}
 	     */
 	    StageInstancePrivacyLevel[StageInstancePrivacyLevel["Public"] = 1] = "Public";
 	    /**
@@ -31011,7 +31061,7 @@ function requireSticker$2 () {
 	Object.defineProperty(sticker$1, "__esModule", { value: true });
 	sticker$1.StickerFormatType = sticker$1.StickerType = void 0;
 	/**
-	 * https://discord.com/developers/docs/resources/sticker#sticker-object-sticker-types
+	 * @see {@link https://discord.com/developers/docs/resources/sticker#sticker-object-sticker-types}
 	 */
 	var StickerType;
 	(function (StickerType) {
@@ -31025,7 +31075,7 @@ function requireSticker$2 () {
 	    StickerType[StickerType["Guild"] = 2] = "Guild";
 	})(StickerType || (sticker$1.StickerType = StickerType = {}));
 	/**
-	 * https://discord.com/developers/docs/resources/sticker#sticker-object-sticker-format-types
+	 * @see {@link https://discord.com/developers/docs/resources/sticker#sticker-object-sticker-format-types}
 	 */
 	var StickerFormatType;
 	(function (StickerFormatType) {
@@ -31051,7 +31101,7 @@ function requireTeams () {
 	Object.defineProperty(teams, "__esModule", { value: true });
 	teams.TeamMemberRole = teams.TeamMemberMembershipState = void 0;
 	/**
-	 * https://discord.com/developers/docs/topics/teams#data-models-membership-state-enum
+	 * @see {@link https://discord.com/developers/docs/topics/teams#data-models-membership-state-enum}
 	 */
 	var TeamMemberMembershipState;
 	(function (TeamMemberMembershipState) {
@@ -31059,7 +31109,7 @@ function requireTeams () {
 	    TeamMemberMembershipState[TeamMemberMembershipState["Accepted"] = 2] = "Accepted";
 	})(TeamMemberMembershipState || (teams.TeamMemberMembershipState = TeamMemberMembershipState = {}));
 	/**
-	 * https://discord.com/developers/docs/topics/teams#team-member-roles-team-member-role-types
+	 * @see {@link https://discord.com/developers/docs/topics/teams#team-member-roles-team-member-role-types}
 	 */
 	var TeamMemberRole;
 	(function (TeamMemberRole) {
@@ -31099,7 +31149,7 @@ function requireUser$3 () {
 	Object.defineProperty(user$2, "__esModule", { value: true });
 	user$2.ConnectionVisibility = user$2.ConnectionService = user$2.UserPremiumType = user$2.UserFlags = void 0;
 	/**
-	 * https://discord.com/developers/docs/resources/user#user-object-user-flags
+	 * @see {@link https://discord.com/developers/docs/resources/user#user-object-user-flags}
 	 */
 	var UserFlags;
 	(function (UserFlags) {
@@ -31144,7 +31194,7 @@ function requireUser$3 () {
 	     */
 	    UserFlags[UserFlags["PremiumEarlySupporter"] = 512] = "PremiumEarlySupporter";
 	    /**
-	     * User is a [team](https://discord.com/developers/docs/topics/teams)
+	     * User is a {@link https://discord.com/developers/docs/topics/teams | team}
 	     */
 	    UserFlags[UserFlags["TeamPseudoUser"] = 1024] = "TeamPseudoUser";
 	    /**
@@ -31168,7 +31218,7 @@ function requireUser$3 () {
 	     */
 	    UserFlags[UserFlags["CertifiedModerator"] = 262144] = "CertifiedModerator";
 	    /**
-	     * Bot uses only [HTTP interactions](https://discord.com/developers/docs/interactions/receiving-and-responding#receiving-an-interaction) and is shown in the online member list
+	     * Bot uses only {@link https://discord.com/developers/docs/interactions/receiving-and-responding#receiving-an-interaction | HTTP interactions} and is shown in the online member list
 	     */
 	    UserFlags[UserFlags["BotHTTPInteractions"] = 524288] = "BotHTTPInteractions";
 	    /**
@@ -31182,35 +31232,35 @@ function requireUser$3 () {
 	     */
 	    UserFlags[UserFlags["DisablePremium"] = 2097152] = "DisablePremium";
 	    /**
-	     * User is an [Active Developer](https://support-dev.discord.com/hc/articles/10113997751447)
+	     * User is an {@link https://support-dev.discord.com/hc/articles/10113997751447 | Active Developer}
 	     */
 	    UserFlags[UserFlags["ActiveDeveloper"] = 4194304] = "ActiveDeveloper";
 	    /**
-	     * User's account has been [quarantined](https://support.discord.com/hc/articles/6461420677527) based on recent activity
+	     * User's account has been {@link https://support.discord.com/hc/articles/6461420677527 | quarantined} based on recent activity
 	     *
 	     * @unstable This user flag is currently not documented by Discord but has a known value which we will try to keep up to date.
 	     * @privateRemarks
 	     *
-	     * This value would be 1 << 44, but bit shifting above 1 << 30 requires bigints
+	     * This value would be `1 << 44`, but bit shifting above `1 << 30` requires bigints
 	     */
 	    UserFlags[UserFlags["Quarantined"] = 17592186044416] = "Quarantined";
 	    /**
 	     * @unstable This user flag is currently not documented by Discord but has a known value which we will try to keep up to date.
 	     * @privateRemarks
 	     *
-	     * This value would be 1 << 50, but bit shifting above 1 << 30 requires bigints
+	     * This value would be `1 << 50`, but bit shifting above `1 << 30` requires bigints
 	     */
 	    UserFlags[UserFlags["Collaborator"] = 1125899906842624] = "Collaborator";
 	    /**
 	     * @unstable This user flag is currently not documented by Discord but has a known value which we will try to keep up to date.
 	     * @privateRemarks
 	     *
-	     * This value would be 1 << 51, but bit shifting above 1 << 30 requires bigints
+	     * This value would be `1 << 51`, but bit shifting above `1 << 30` requires bigints
 	     */
 	    UserFlags[UserFlags["RestrictedCollaborator"] = 2251799813685248] = "RestrictedCollaborator";
 	})(UserFlags || (user$2.UserFlags = UserFlags = {}));
 	/**
-	 * https://discord.com/developers/docs/resources/user#user-object-premium-types
+	 * @see {@link https://discord.com/developers/docs/resources/user#user-object-premium-types}
 	 */
 	var UserPremiumType;
 	(function (UserPremiumType) {
@@ -31246,7 +31296,7 @@ function requireUser$3 () {
 	    ConnectionService["Twitch"] = "twitch";
 	    ConnectionService["X"] = "twitter";
 	    /**
-	     * @deprecated This is the old name for {@apilink ConnectionService#X}
+	     * @deprecated This is the old name for {@link ConnectionService.X}
 	     */
 	    ConnectionService["Twitter"] = "twitter";
 	    ConnectionService["Xbox"] = "xbox";
@@ -31295,7 +31345,7 @@ function requireWebhook$2 () {
 	Object.defineProperty(webhook$1, "__esModule", { value: true });
 	webhook$1.WebhookType = webhook$1.ApplicationWebhookEventType = webhook$1.ApplicationWebhookType = void 0;
 	/**
-	 * https://discord.com/developers/docs/events/webhook-events#webhook-types
+	 * @see {@link https://discord.com/developers/docs/events/webhook-events#webhook-types}
 	 */
 	var ApplicationWebhookType;
 	(function (ApplicationWebhookType) {
@@ -31309,7 +31359,7 @@ function requireWebhook$2 () {
 	    ApplicationWebhookType[ApplicationWebhookType["Event"] = 1] = "Event";
 	})(ApplicationWebhookType || (webhook$1.ApplicationWebhookType = ApplicationWebhookType = {}));
 	/**
-	 * https://discord.com/developers/docs/events/webhook-events#event-types
+	 * @see {@link https://discord.com/developers/docs/events/webhook-events#event-types}
 	 */
 	var ApplicationWebhookEventType;
 	(function (ApplicationWebhookEventType) {
@@ -31327,7 +31377,7 @@ function requireWebhook$2 () {
 	    ApplicationWebhookEventType["QuestUserEnrollment"] = "QUEST_USER_ENROLLMENT";
 	})(ApplicationWebhookEventType || (webhook$1.ApplicationWebhookEventType = ApplicationWebhookEventType = {}));
 	/**
-	 * https://discord.com/developers/docs/resources/webhook#webhook-object-webhook-types
+	 * @see {@link https://discord.com/developers/docs/resources/webhook#webhook-object-webhook-types}
 	 */
 	var WebhookType;
 	(function (WebhookType) {
@@ -31470,6 +31520,7 @@ const RoleFlags = mod$3.RoleFlags;
 const SKUFlags = mod$3.SKUFlags;
 const SKUType = mod$3.SKUType;
 const SelectMenuDefaultValueType = mod$3.SelectMenuDefaultValueType;
+const SeparatorSpacingSize = mod$3.SeparatorSpacingSize;
 const SortOrderType = mod$3.SortOrderType;
 const StageInstancePrivacyLevel = mod$3.StageInstancePrivacyLevel;
 const StickerFormatType = mod$3.StickerFormatType;
@@ -31480,6 +31531,7 @@ const TeamMemberRole = mod$3.TeamMemberRole;
 const TextInputStyle = mod$3.TextInputStyle;
 const ThreadAutoArchiveDuration = mod$3.ThreadAutoArchiveDuration;
 const ThreadMemberFlags = mod$3.ThreadMemberFlags;
+const UnfurledMediaItemLoadingState = mod$3.UnfurledMediaItemLoadingState;
 const UserFlags = mod$3.UserFlags;
 const UserPremiumType = mod$3.UserPremiumType;
 const VideoQualityMode = mod$3.VideoQualityMode;
@@ -31557,6 +31609,7 @@ var v10$6 = /*#__PURE__*/Object.freeze({
 	SKUFlags: SKUFlags,
 	SKUType: SKUType,
 	SelectMenuDefaultValueType: SelectMenuDefaultValueType,
+	SeparatorSpacingSize: SeparatorSpacingSize,
 	SortOrderType: SortOrderType,
 	StageInstancePrivacyLevel: StageInstancePrivacyLevel,
 	StickerFormatType: StickerFormatType,
@@ -31567,6 +31620,7 @@ var v10$6 = /*#__PURE__*/Object.freeze({
 	TextInputStyle: TextInputStyle,
 	ThreadAutoArchiveDuration: ThreadAutoArchiveDuration,
 	ThreadMemberFlags: ThreadMemberFlags,
+	UnfurledMediaItemLoadingState: UnfurledMediaItemLoadingState,
 	UserFlags: UserFlags,
 	UserPremiumType: UserPremiumType,
 	VideoQualityMode: VideoQualityMode,
@@ -31610,7 +31664,7 @@ function requireCommon$1 () {
 	Object.defineProperty(common$1, "__esModule", { value: true });
 	common$1.Locale = common$1.RESTJSONErrorCodes = void 0;
 	/**
-	 * https://discord.com/developers/docs/topics/opcodes-and-status-codes#json-json-error-codes
+	 * @see {@link https://discord.com/developers/docs/topics/opcodes-and-status-codes#json-json-error-codes}
 	 */
 	var RESTJSONErrorCodes;
 	(function (RESTJSONErrorCodes) {
@@ -31840,7 +31894,7 @@ function requireCommon$1 () {
 	    RESTJSONErrorCodes[RESTJSONErrorCodes["CannotExpireANonPollMessage"] = 520006] = "CannotExpireANonPollMessage";
 	})(RESTJSONErrorCodes || (common$1.RESTJSONErrorCodes = RESTJSONErrorCodes = {}));
 	/**
-	 * https://discord.com/developers/docs/reference#locales
+	 * @see {@link https://discord.com/developers/docs/reference#locales}
 	 */
 	var Locale;
 	(function (Locale) {
@@ -31927,7 +31981,7 @@ function requireChannel$1 () {
 	Object.defineProperty(channel$1, "__esModule", { value: true });
 	channel$1.ReactionType = void 0;
 	/**
-	 * https://discord.com/developers/docs/resources/channel#get-reactions-reaction-types
+	 * @see {@link https://discord.com/developers/docs/resources/channel#get-reactions-reaction-types}
 	 */
 	var ReactionType;
 	(function (ReactionType) {
@@ -32020,7 +32074,7 @@ function requireMonetization () {
 	Object.defineProperty(monetization, "__esModule", { value: true });
 	monetization.EntitlementOwnerType = void 0;
 	/**
-	 * https://discord.com/developers/docs/resources/entitlement#create-test-entitlement
+	 * @see {@link https://discord.com/developers/docs/resources/entitlement#create-test-entitlement}
 	 */
 	var EntitlementOwnerType;
 	(function (EntitlementOwnerType) {
@@ -32645,7 +32699,7 @@ function requireV10$3 () {
 		     * - GET   `/users/{user.id}`
 		     * - PATCH `/users/@me`
 		     *
-		     * @param [userId] The user ID, defaulted to `@me`
+		     * @param [userId] - The user ID, defaulted to `@me`
 		     */
 		    user(userId = '@me') {
 		        return `/users/${userId}`;
@@ -33195,7 +33249,7 @@ function requireV10$3 () {
 		     * Route for:
 		     * - GET `/embed/avatars/{index}.png`
 		     *
-		     * The value for `index` parameter depends on whether the user is [migrated to the new username system](https://discord.com/developers/docs/change-log#unique-usernames-on-discord).
+		     * The value for `index` parameter depends on whether the user is {@link https://discord.com/developers/docs/change-log#unique-usernames-on-discord | migrated to the new username system}.
 		     * For users on the new username system, `index` will be `(user.id >> 22) % 6`.
 		     * For users on the legacy username system, `index` will be `user.discriminator % 5`.
 		     *
@@ -33386,7 +33440,7 @@ function requireV10$3 () {
 		    authorizationURL: `${exports.RouteBases.api}${exports.Routes.oauth2Authorization()}`,
 		    tokenURL: `${exports.RouteBases.api}${exports.Routes.oauth2TokenExchange()}`,
 		    /**
-		     * See https://tools.ietf.org/html/rfc7009
+		     * @see {@link https://tools.ietf.org/html/rfc7009}
 		     */
 		    tokenRevocationURL: `${exports.RouteBases.api}${exports.Routes.oauth2TokenRevocation()}`,
 		};
@@ -33440,39 +33494,241 @@ function requireCommon () {
 	if (hasRequiredCommon) return common;
 	hasRequiredCommon = 1;
 	Object.defineProperty(common, "__esModule", { value: true });
-	common.RPCCloseEventCodes = common.RPCErrorCodes = void 0;
+	common.RPCCloseEventCodes = common.RPCErrorCodes = common.RelationshipType = common.VoiceConnectionStates = common.RPCVoiceShortcutKeyComboKeyType = common.RPCVoiceSettingsModeType = common.RPCDeviceType = void 0;
+	var RPCDeviceType;
+	(function (RPCDeviceType) {
+	    RPCDeviceType["AudioInput"] = "audioinput";
+	    RPCDeviceType["AudioOutput"] = "audiooutput";
+	    RPCDeviceType["VideoInput"] = "videoinput";
+	})(RPCDeviceType || (common.RPCDeviceType = RPCDeviceType = {}));
+	var RPCVoiceSettingsModeType;
+	(function (RPCVoiceSettingsModeType) {
+	    RPCVoiceSettingsModeType["PushToTalk"] = "PUSH_TO_TALK";
+	    RPCVoiceSettingsModeType["VoiceActivity"] = "VOICE_ACTIVITY";
+	})(RPCVoiceSettingsModeType || (common.RPCVoiceSettingsModeType = RPCVoiceSettingsModeType = {}));
 	/**
-	 * https://discord.com/developers/docs/topics/opcodes-and-status-codes#rpc-rpc-error-codes
+	 * @see {@link https://discord.com/developers/docs/topics/rpc#getvoicesettings-key-types}
+	 */
+	var RPCVoiceShortcutKeyComboKeyType;
+	(function (RPCVoiceShortcutKeyComboKeyType) {
+	    RPCVoiceShortcutKeyComboKeyType[RPCVoiceShortcutKeyComboKeyType["KeyboardKey"] = 0] = "KeyboardKey";
+	    RPCVoiceShortcutKeyComboKeyType[RPCVoiceShortcutKeyComboKeyType["MouseButton"] = 1] = "MouseButton";
+	    RPCVoiceShortcutKeyComboKeyType[RPCVoiceShortcutKeyComboKeyType["KeyboardModifierKey"] = 2] = "KeyboardModifierKey";
+	    RPCVoiceShortcutKeyComboKeyType[RPCVoiceShortcutKeyComboKeyType["GamepadButton"] = 3] = "GamepadButton";
+	})(RPCVoiceShortcutKeyComboKeyType || (common.RPCVoiceShortcutKeyComboKeyType = RPCVoiceShortcutKeyComboKeyType = {}));
+	var VoiceConnectionStates;
+	(function (VoiceConnectionStates) {
+	    /**
+	     * TCP disconnected
+	     */
+	    VoiceConnectionStates["Disconnected"] = "DISCONNECTED";
+	    /**
+	     * Waiting for voice endpoint
+	     */
+	    VoiceConnectionStates["AwaitingEndpoint"] = "AWAITING_ENDPOINT";
+	    /**
+	     * TCP authenticating
+	     */
+	    VoiceConnectionStates["Authenticating"] = "AUTHENTICATING";
+	    /**
+	     * TCP connecting
+	     */
+	    VoiceConnectionStates["Connecting"] = "CONNECTING";
+	    /**
+	     * TCP connected
+	     */
+	    VoiceConnectionStates["Connected"] = "CONNECTED";
+	    /**
+	     * TCP connected, Voice disconnected
+	     */
+	    VoiceConnectionStates["VoiceDisconnected"] = "VOICE_DISCONNECTED";
+	    /**
+	     * TCP connected, Voice connecting
+	     */
+	    VoiceConnectionStates["VoiceConnecting"] = "VOICE_CONNECTING";
+	    /**
+	     * TCP connected, Voice connected
+	     */
+	    VoiceConnectionStates["VoiceConnected"] = "VOICE_CONNECTED";
+	    /**
+	     * No route to host
+	     */
+	    VoiceConnectionStates["NoRoute"] = "NO_ROUTE";
+	    /**
+	     * WebRTC ice checking
+	     */
+	    VoiceConnectionStates["IceChecking"] = "ICE_CHECKING";
+	})(VoiceConnectionStates || (common.VoiceConnectionStates = VoiceConnectionStates = {}));
+	/**
+	 * @unstable
+	 */
+	var RelationshipType;
+	(function (RelationshipType) {
+	    RelationshipType[RelationshipType["None"] = 0] = "None";
+	    RelationshipType[RelationshipType["Friend"] = 1] = "Friend";
+	    RelationshipType[RelationshipType["Blocked"] = 2] = "Blocked";
+	    RelationshipType[RelationshipType["PendingIncoming"] = 3] = "PendingIncoming";
+	    RelationshipType[RelationshipType["PendingOutgoing"] = 4] = "PendingOutgoing";
+	    RelationshipType[RelationshipType["Implicit"] = 5] = "Implicit";
+	})(RelationshipType || (common.RelationshipType = RelationshipType = {}));
+	/**
+	 * @see {@link https://discord.com/developers/docs/topics/opcodes-and-status-codes#rpc-rpc-error-codes}
 	 */
 	var RPCErrorCodes;
 	(function (RPCErrorCodes) {
+	    /**
+	     * An unknown error occurred.
+	     */
 	    RPCErrorCodes[RPCErrorCodes["UnknownError"] = 1000] = "UnknownError";
+	    /**
+	     * @unstable
+	     */
+	    RPCErrorCodes[RPCErrorCodes["ServiceUnavailable"] = 1001] = "ServiceUnavailable";
+	    /**
+	     * @unstable
+	     */
+	    RPCErrorCodes[RPCErrorCodes["TransactionAborted"] = 1002] = "TransactionAborted";
+	    /**
+	     * You sent an invalid payload.
+	     */
 	    RPCErrorCodes[RPCErrorCodes["InvalidPayload"] = 4000] = "InvalidPayload";
+	    /**
+	     * Invalid command name specified.
+	     */
 	    RPCErrorCodes[RPCErrorCodes["InvalidCommand"] = 4002] = "InvalidCommand";
+	    /**
+	     * Invalid guild ID specified.
+	     */
 	    RPCErrorCodes[RPCErrorCodes["InvalidGuild"] = 4003] = "InvalidGuild";
+	    /**
+	     * Invalid event name specified.
+	     */
 	    RPCErrorCodes[RPCErrorCodes["InvalidEvent"] = 4004] = "InvalidEvent";
+	    /**
+	     * Invalid channel ID specified.
+	     */
 	    RPCErrorCodes[RPCErrorCodes["InvalidChannel"] = 4005] = "InvalidChannel";
+	    /**
+	     * You lack permissions to access the given resource.
+	     */
 	    RPCErrorCodes[RPCErrorCodes["InvalidPermissions"] = 4006] = "InvalidPermissions";
+	    /**
+	     * An invalid OAuth2 application ID was used to authorize or authenticate with.
+	     */
 	    RPCErrorCodes[RPCErrorCodes["InvalidClientId"] = 4007] = "InvalidClientId";
+	    /**
+	     * An invalid OAuth2 application origin was used to authorize or authenticate with.
+	     */
 	    RPCErrorCodes[RPCErrorCodes["InvalidOrigin"] = 4008] = "InvalidOrigin";
+	    /**
+	     * An invalid OAuth2 token was used to authorize or authenticate with.
+	     */
 	    RPCErrorCodes[RPCErrorCodes["InvalidToken"] = 4009] = "InvalidToken";
+	    /**
+	     * The specified user ID was invalid.
+	     */
 	    RPCErrorCodes[RPCErrorCodes["InvalidUser"] = 4010] = "InvalidUser";
+	    /**
+	     * @unstable
+	     */
+	    RPCErrorCodes[RPCErrorCodes["InvalidInvite"] = 4011] = "InvalidInvite";
+	    /**
+	     * @unstable
+	     */
+	    RPCErrorCodes[RPCErrorCodes["InvalidActivityJoinRequest"] = 4012] = "InvalidActivityJoinRequest";
+	    /**
+	     * @unstable
+	     */
+	    RPCErrorCodes[RPCErrorCodes["InvalidEntitlement"] = 4013] = "InvalidEntitlement";
+	    /**
+	     * @unstable
+	     */
+	    RPCErrorCodes[RPCErrorCodes["InvalidGiftCode"] = 4014] = "InvalidGiftCode";
+	    /**
+	     * A standard OAuth2 error occurred; check the data object for the OAuth2 error details.
+	     */
 	    RPCErrorCodes[RPCErrorCodes["OAuth2Error"] = 5000] = "OAuth2Error";
+	    /**
+	     * An asynchronous `SELECT_TEXT_CHANNEL`/`SELECT_VOICE_CHANNEL` command timed out.
+	     */
 	    RPCErrorCodes[RPCErrorCodes["SelectChannelTimedOut"] = 5001] = "SelectChannelTimedOut";
+	    /**
+	     * An asynchronous `GET_GUILD` command timed out.
+	     */
 	    RPCErrorCodes[RPCErrorCodes["GetGuildTimedOut"] = 5002] = "GetGuildTimedOut";
+	    /**
+	     * You tried to join a user to a voice channel but the user was already in one.
+	     */
 	    RPCErrorCodes[RPCErrorCodes["SelectVoiceForceRequired"] = 5003] = "SelectVoiceForceRequired";
+	    /**
+	     * You tried to capture more than one shortcut key at once.
+	     */
 	    RPCErrorCodes[RPCErrorCodes["CaptureShortcutAlreadyListening"] = 5004] = "CaptureShortcutAlreadyListening";
+	    /**
+	     * @unstable
+	     */
+	    RPCErrorCodes[RPCErrorCodes["InvalidActivitySecret"] = 5005] = "InvalidActivitySecret";
+	    /**
+	     * @unstable
+	     */
+	    RPCErrorCodes[RPCErrorCodes["NoEligibleActivity"] = 5006] = "NoEligibleActivity";
+	    /**
+	     * @unstable
+	     */
+	    RPCErrorCodes[RPCErrorCodes["PurchaseCanceled"] = 5007] = "PurchaseCanceled";
+	    /**
+	     * @unstable
+	     */
+	    RPCErrorCodes[RPCErrorCodes["PurchaseError"] = 5008] = "PurchaseError";
+	    /**
+	     * @unstable
+	     */
+	    RPCErrorCodes[RPCErrorCodes["UnauthorizedForAchievement"] = 5009] = "UnauthorizedForAchievement";
+	    /**
+	     * @unstable
+	     */
+	    RPCErrorCodes[RPCErrorCodes["RateLimited"] = 5010] = "RateLimited";
 	})(RPCErrorCodes || (common.RPCErrorCodes = RPCErrorCodes = {}));
 	/**
-	 * https://discord.com/developers/docs/topics/opcodes-and-status-codes#rpc-rpc-close-event-codes
+	 * @see {@link https://discord.com/developers/docs/topics/opcodes-and-status-codes#rpc-rpc-close-event-codes}
 	 */
 	var RPCCloseEventCodes;
 	(function (RPCCloseEventCodes) {
+	    /**
+	     * @unstable
+	     */
+	    RPCCloseEventCodes[RPCCloseEventCodes["CloseNormal"] = 1000] = "CloseNormal";
+	    /**
+	     * @unstable
+	     */
+	    RPCCloseEventCodes[RPCCloseEventCodes["CloseUnsupported"] = 1003] = "CloseUnsupported";
+	    /**
+	     * @unstable
+	     */
+	    RPCCloseEventCodes[RPCCloseEventCodes["CloseAbnormal"] = 1006] = "CloseAbnormal";
+	    /**
+	     * You connected to the RPC server with an invalid client ID.
+	     */
 	    RPCCloseEventCodes[RPCCloseEventCodes["InvalidClientId"] = 4000] = "InvalidClientId";
+	    /**
+	     * You connected to the RPC server with an invalid origin.
+	     */
 	    RPCCloseEventCodes[RPCCloseEventCodes["InvalidOrigin"] = 4001] = "InvalidOrigin";
+	    /**
+	     * You are being rate limited.
+	     */
 	    RPCCloseEventCodes[RPCCloseEventCodes["RateLimited"] = 4002] = "RateLimited";
+	    /**
+	     * The OAuth2 token associated with a connection was revoked, get a new one!
+	     */
 	    RPCCloseEventCodes[RPCCloseEventCodes["TokenRevoked"] = 4003] = "TokenRevoked";
+	    /**
+	     * The RPC Server version specified in the connection string was not valid.
+	     */
 	    RPCCloseEventCodes[RPCCloseEventCodes["InvalidVersion"] = 4004] = "InvalidVersion";
+	    /**
+	     * The encoding specified in the connection string was not valid.
+	     */
 	    RPCCloseEventCodes[RPCCloseEventCodes["InvalidEncoding"] = 4005] = "InvalidEncoding";
 	})(RPCCloseEventCodes || (common.RPCCloseEventCodes = RPCCloseEventCodes = {}));
 	
@@ -33500,7 +33756,288 @@ function requireV10$2 () {
 		    for (var p in m) if (p !== "default" && !Object.prototype.hasOwnProperty.call(exports, p)) __createBinding(exports, m, p);
 		};
 		Object.defineProperty(exports, "__esModule", { value: true });
+		exports.RPCEvents = exports.RPCCommands = exports.RPCVersion = void 0;
 		__exportStar(requireCommon(), exports);
+		exports.RPCVersion = '1';
+		/**
+		 * @see {@link https://discord.com/developers/docs/topics/rpc#commands-and-events-rpc-commands}
+		 */
+		var RPCCommands;
+		(function (RPCCommands) {
+		    /**
+		     * @unstable
+		     */
+		    RPCCommands["AcceptActivityInvite"] = "ACCEPT_ACTIVITY_INVITE";
+		    /**
+		     * @unstable
+		     */
+		    RPCCommands["ActivityInviteUser"] = "ACTIVITY_INVITE_USER";
+		    /**
+		     * Used to authenticate an existing client with your app
+		     */
+		    RPCCommands["Authenticate"] = "AUTHENTICATE";
+		    /**
+		     * Used to authorize a new client with your app
+		     */
+		    RPCCommands["Authorize"] = "AUTHORIZE";
+		    /**
+		     * @unstable
+		     */
+		    RPCCommands["BraintreePopupBridgeCallback"] = "BRAINTREE_POPUP_BRIDGE_CALLBACK";
+		    /**
+		     * @unstable
+		     */
+		    RPCCommands["BrowserHandoff"] = "BROWSER_HANDOFF";
+		    /**
+		     * 	used to reject a Rich Presence Ask to Join request
+		     *
+		     * @unstable the documented similarly named command `CLOSE_ACTIVITY_REQUEST` does not exist, but `CLOSE_ACTIVITY_JOIN_REQUEST` does
+		     */
+		    RPCCommands["CloseActivityJoinRequest"] = "CLOSE_ACTIVITY_JOIN_REQUEST";
+		    /**
+		     * @unstable
+		     */
+		    RPCCommands["ConnectionsCallback"] = "CONNECTIONS_CALLBACK";
+		    RPCCommands["CreateChannelInvite"] = "CREATE_CHANNEL_INVITE";
+		    /**
+		     * @unstable
+		     */
+		    RPCCommands["DeepLink"] = "DEEP_LINK";
+		    /**
+		     * Event dispatch
+		     */
+		    RPCCommands["Dispatch"] = "DISPATCH";
+		    /**
+		     * @unstable
+		     */
+		    RPCCommands["GetApplicationTicket"] = "GET_APPLICATION_TICKET";
+		    /**
+		     * Used to retrieve channel information from the client
+		     */
+		    RPCCommands["GetChannel"] = "GET_CHANNEL";
+		    /**
+		     * Used to retrieve a list of channels for a guild from the client
+		     */
+		    RPCCommands["GetChannels"] = "GET_CHANNELS";
+		    /**
+		     * @unstable
+		     */
+		    RPCCommands["GetEntitlementTicket"] = "GET_ENTITLEMENT_TICKET";
+		    /**
+		     * @unstable
+		     */
+		    RPCCommands["GetEntitlements"] = "GET_ENTITLEMENTS";
+		    /**
+		     * Used to retrieve guild information from the client
+		     */
+		    RPCCommands["GetGuild"] = "GET_GUILD";
+		    /**
+		     * Used to retrieve a list of guilds from the client
+		     */
+		    RPCCommands["GetGuilds"] = "GET_GUILDS";
+		    /**
+		     * @unstable
+		     */
+		    RPCCommands["GetImage"] = "GET_IMAGE";
+		    /**
+		     * @unstable
+		     */
+		    RPCCommands["GetNetworkingConfig"] = "GET_NETWORKING_CONFIG";
+		    /**
+		     * @unstable
+		     */
+		    RPCCommands["GetRelationships"] = "GET_RELATIONSHIPS";
+		    /**
+		     * Used to get the current voice channel the client is in
+		     */
+		    RPCCommands["GetSelectedVoiceChannel"] = "GET_SELECTED_VOICE_CHANNEL";
+		    /**
+		     * @unstable
+		     */
+		    RPCCommands["GetSkus"] = "GET_SKUS";
+		    /**
+		     * @unstable
+		     */
+		    RPCCommands["GetUser"] = "GET_USER";
+		    /**
+		     * Used to retrieve the client's voice settings
+		     */
+		    RPCCommands["GetVoiceSettings"] = "GET_VOICE_SETTINGS";
+		    /**
+		     * @unstable
+		     */
+		    RPCCommands["GiftCodeBrowser"] = "GIFT_CODE_BROWSER";
+		    /**
+		     * @unstable
+		     */
+		    RPCCommands["GuildTemplateBrowser"] = "GUILD_TEMPLATE_BROWSER";
+		    /**
+		     * @unstable
+		     */
+		    RPCCommands["InviteBrowser"] = "INVITE_BROWSER";
+		    /**
+		     * @unstable
+		     */
+		    RPCCommands["NetworkingCreateToken"] = "NETWORKING_CREATE_TOKEN";
+		    /**
+		     * @unstable
+		     */
+		    RPCCommands["NetworkingPeerMetrics"] = "NETWORKING_PEER_METRICS";
+		    /**
+		     * @unstable
+		     */
+		    RPCCommands["NetworkingSystemMetrics"] = "NETWORKING_SYSTEM_METRICS";
+		    /**
+		     * @unstable
+		     */
+		    RPCCommands["OpenOverlayActivityInvite"] = "OPEN_OVERLAY_ACTIVITY_INVITE";
+		    /**
+		     * @unstable
+		     */
+		    RPCCommands["OpenOverlayGuildInvite"] = "OPEN_OVERLAY_GUILD_INVITE";
+		    /**
+		     * @unstable
+		     */
+		    RPCCommands["OpenOverlayVoiceSettings"] = "OPEN_OVERLAY_VOICE_SETTINGS";
+		    /**
+		     * @unstable
+		     */
+		    RPCCommands["Overlay"] = "OVERLAY";
+		    /**
+		     * Used to join or leave a text channel, group dm, or dm
+		     */
+		    RPCCommands["SelectTextChannel"] = "SELECT_TEXT_CHANNEL";
+		    /**
+		     * Used to join or leave a voice channel, group dm, or dm
+		     */
+		    RPCCommands["SelectVoiceChannel"] = "SELECT_VOICE_CHANNEL";
+		    /**
+		     * Used to consent to a Rich Presence Ask to Join request
+		     */
+		    RPCCommands["SendActivityJoinInvite"] = "SEND_ACTIVITY_JOIN_INVITE";
+		    /**
+		     * Used to update a user's Rich Presence
+		     */
+		    RPCCommands["SetActivity"] = "SET_ACTIVITY";
+		    /**
+		     * Used to send info about certified hardware devices
+		     */
+		    RPCCommands["SetCertifiedDevices"] = "SET_CERTIFIED_DEVICES";
+		    /**
+		     * @unstable
+		     */
+		    RPCCommands["SetOverlayLocked"] = "SET_OVERLAY_LOCKED";
+		    /**
+		     * Used to change voice settings of users in voice channels
+		     */
+		    RPCCommands["SetUserVoiceSettings"] = "SET_USER_VOICE_SETTINGS";
+		    RPCCommands["SetUserVoiceSettings2"] = "SET_USER_VOICE_SETTINGS_2";
+		    /**
+		     * Used to set the client's voice settings
+		     */
+		    RPCCommands["SetVoiceSettings"] = "SET_VOICE_SETTINGS";
+		    RPCCommands["SetVoiceSettings2"] = "SET_VOICE_SETTINGS_2";
+		    /**
+		     * @unstable
+		     */
+		    RPCCommands["StartPurchase"] = "START_PURCHASE";
+		    /**
+		     * Used to subscribe to an RPC event
+		     */
+		    RPCCommands["Subscribe"] = "SUBSCRIBE";
+		    /**
+		     * Used to unsubscribe from an RPC event
+		     */
+		    RPCCommands["Unsubscribe"] = "UNSUBSCRIBE";
+		    /**
+		     * @unstable
+		     */
+		    RPCCommands["ValidateApplication"] = "VALIDATE_APPLICATION";
+		})(RPCCommands || (exports.RPCCommands = RPCCommands = {}));
+		/**
+		 * @see {@link https://discord.com/developers/docs/topics/rpc#commands-and-events-rpc-events}
+		 */
+		var RPCEvents;
+		(function (RPCEvents) {
+		    /**
+		     * @unstable
+		     */
+		    RPCEvents["ActivityInvite"] = "ACTIVITY_INVITE";
+		    RPCEvents["ActivityJoin"] = "ACTIVITY_JOIN";
+		    RPCEvents["ActivityJoinRequest"] = "ACTIVITY_JOIN_REQUEST";
+		    RPCEvents["ActivitySpectate"] = "ACTIVITY_SPECTATE";
+		    RPCEvents["ChannelCreate"] = "CHANNEL_CREATE";
+		    RPCEvents["CurrentUserUpdate"] = "CURRENT_USER_UPDATE";
+		    /**
+		     * @unstable
+		     */
+		    RPCEvents["EntitlementCreate"] = "ENTITLEMENT_CREATE";
+		    /**
+		     * @unstable
+		     */
+		    RPCEvents["EntitlementDelete"] = "ENTITLEMENT_DELETE";
+		    RPCEvents["Error"] = "ERROR";
+		    /**
+		     * @unstable
+		     */
+		    RPCEvents["GameJoin"] = "GAME_JOIN";
+		    /**
+		     * @unstable
+		     */
+		    RPCEvents["GameSpectate"] = "GAME_SPECTATE";
+		    RPCEvents["GuildCreate"] = "GUILD_CREATE";
+		    RPCEvents["GuildStatus"] = "GUILD_STATUS";
+		    /**
+		     * Dispatches message objects, with the exception of deletions, which only contains the id in the message object.
+		     */
+		    RPCEvents["MessageCreate"] = "MESSAGE_CREATE";
+		    /**
+		     * Dispatches message objects, with the exception of deletions, which only contains the id in the message object.
+		     */
+		    RPCEvents["MessageDelete"] = "MESSAGE_DELETE";
+		    /**
+		     * Dispatches message objects, with the exception of deletions, which only contains the id in the message object.
+		     */
+		    RPCEvents["MessageUpdate"] = "MESSAGE_UPDATE";
+		    /**
+		     * This event requires the `rpc.notifications.read` {@link https://discord.com/developers/docs/topics/oauth2#shared-resources-oauth2-scopes | OAuth2 scope}.
+		     */
+		    RPCEvents["NotificationCreate"] = "NOTIFICATION_CREATE";
+		    /**
+		     * @unstable
+		     */
+		    RPCEvents["Overlay"] = "OVERLAY";
+		    /**
+		     * @unstable
+		     */
+		    RPCEvents["OverlayUpdate"] = "OVERLAY_UPDATE";
+		    RPCEvents["Ready"] = "READY";
+		    /**
+		     * @unstable
+		     */
+		    RPCEvents["RelationshipUpdate"] = "RELATIONSHIP_UPDATE";
+		    RPCEvents["SpeakingStart"] = "SPEAKING_START";
+		    RPCEvents["SpeakingStop"] = "SPEAKING_STOP";
+		    RPCEvents["VoiceChannelSelect"] = "VOICE_CHANNEL_SELECT";
+		    RPCEvents["VoiceConnectionStatus"] = "VOICE_CONNECTION_STATUS";
+		    RPCEvents["VoiceSettingsUpdate"] = "VOICE_SETTINGS_UPDATE";
+		    /**
+		     * @unstable
+		     */
+		    RPCEvents["VoiceSettingsUpdate2"] = "VOICE_SETTINGS_UPDATE_2";
+		    /**
+		     * Dispatches channel voice state objects
+		     */
+		    RPCEvents["VoiceStateCreate"] = "VOICE_STATE_CREATE";
+		    /**
+		     * Dispatches channel voice state objects
+		     */
+		    RPCEvents["VoiceStateDelete"] = "VOICE_STATE_DELETE";
+		    /**
+		     * Dispatches channel voice state objects
+		     */
+		    RPCEvents["VoiceStateUpdate"] = "VOICE_STATE_UPDATE";
+		})(RPCEvents || (exports.RPCEvents = RPCEvents = {}));
 		
 	} (v10$3));
 	return v10$3;
@@ -33510,12 +34047,28 @@ var v10Exports$1 = requireV10$2();
 var mod$1 = /*@__PURE__*/getDefaultExportFromCjs(v10Exports$1);
 
 const RPCCloseEventCodes = mod$1.RPCCloseEventCodes;
+const RPCCommands = mod$1.RPCCommands;
+const RPCDeviceType = mod$1.RPCDeviceType;
 const RPCErrorCodes = mod$1.RPCErrorCodes;
+const RPCEvents = mod$1.RPCEvents;
+const RPCVersion = mod$1.RPCVersion;
+const RPCVoiceSettingsModeType = mod$1.RPCVoiceSettingsModeType;
+const RPCVoiceShortcutKeyComboKeyType = mod$1.RPCVoiceShortcutKeyComboKeyType;
+const RelationshipType = mod$1.RelationshipType;
+const VoiceConnectionStates = mod$1.VoiceConnectionStates;
 
 var v10$2 = /*#__PURE__*/Object.freeze({
 	__proto__: null,
 	RPCCloseEventCodes: RPCCloseEventCodes,
+	RPCCommands: RPCCommands,
+	RPCDeviceType: RPCDeviceType,
 	RPCErrorCodes: RPCErrorCodes,
+	RPCEvents: RPCEvents,
+	RPCVersion: RPCVersion,
+	RPCVoiceSettingsModeType: RPCVoiceSettingsModeType,
+	RPCVoiceShortcutKeyComboKeyType: RPCVoiceShortcutKeyComboKeyType,
+	RelationshipType: RelationshipType,
+	VoiceConnectionStates: VoiceConnectionStates,
 	default: mod$1
 });
 
@@ -33547,7 +34100,7 @@ function requireV10$1 () {
 	/**
 	 * A type-guard check for DM interactions
 	 *
-	 * @param interaction The interaction to check against
+	 * @param interaction - The interaction to check against
 	 * @returns A boolean that indicates if the interaction was received in a DM channel
 	 */
 	function isDMInteraction(interaction) {
@@ -33556,7 +34109,7 @@ function requireV10$1 () {
 	/**
 	 * A type-guard check for guild interactions
 	 *
-	 * @param interaction The interaction to check against
+	 * @param interaction - The interaction to check against
 	 * @returns A boolean that indicates if the interaction was received in a guild
 	 */
 	function isGuildInteraction(interaction) {
@@ -33566,7 +34119,7 @@ function requireV10$1 () {
 	/**
 	 * A type-guard check for DM application command interactions
 	 *
-	 * @param interaction The application command interaction to check against
+	 * @param interaction - The application command interaction to check against
 	 * @returns A boolean that indicates if the application command interaction was received in a DM channel
 	 */
 	function isApplicationCommandDMInteraction(interaction) {
@@ -33575,7 +34128,7 @@ function requireV10$1 () {
 	/**
 	 * A type-guard check for guild application command interactions
 	 *
-	 * @param interaction The interaction to check against
+	 * @param interaction - The interaction to check against
 	 * @returns A boolean that indicates if the application command interaction was received in a guild
 	 */
 	function isApplicationCommandGuildInteraction(interaction) {
@@ -33585,7 +34138,7 @@ function requireV10$1 () {
 	/**
 	 * A type-guard check for DM message component interactions
 	 *
-	 * @param interaction The message component interaction to check against
+	 * @param interaction - The message component interaction to check against
 	 * @returns A boolean that indicates if the message component interaction was received in a DM channel
 	 */
 	function isMessageComponentDMInteraction(interaction) {
@@ -33594,7 +34147,7 @@ function requireV10$1 () {
 	/**
 	 * A type-guard check for guild message component interactions
 	 *
-	 * @param interaction The interaction to check against
+	 * @param interaction - The interaction to check against
 	 * @returns A boolean that indicates if the message component interaction was received in a guild
 	 */
 	function isMessageComponentGuildInteraction(interaction) {
@@ -33604,7 +34157,7 @@ function requireV10$1 () {
 	/**
 	 * A type-guard check for buttons that have a `url` attached to them.
 	 *
-	 * @param component The button to check against
+	 * @param component - The button to check against
 	 * @returns A boolean that indicates if the button has a `url` attached to it
 	 */
 	function isLinkButton(component) {
@@ -33613,7 +34166,7 @@ function requireV10$1 () {
 	/**
 	 * A type-guard check for buttons that have a `custom_id` attached to them.
 	 *
-	 * @param component The button to check against
+	 * @param component - The button to check against
 	 * @returns A boolean that indicates if the button has a `custom_id` attached to it
 	 */
 	function isInteractionButton(component) {
@@ -33623,7 +34176,7 @@ function requireV10$1 () {
 	/**
 	 * A type-guard check for message component interactions
 	 *
-	 * @param interaction The interaction to check against
+	 * @param interaction - The interaction to check against
 	 * @returns A boolean that indicates if the interaction is a message component
 	 */
 	function isMessageComponentInteraction(interaction) {
@@ -33632,7 +34185,7 @@ function requireV10$1 () {
 	/**
 	 * A type-guard check for button message component interactions
 	 *
-	 * @param interaction The message component interaction to check against
+	 * @param interaction - The message component interaction to check against
 	 * @returns A boolean that indicates if the message component is a button
 	 */
 	function isMessageComponentButtonInteraction(interaction) {
@@ -33641,7 +34194,7 @@ function requireV10$1 () {
 	/**
 	 * A type-guard check for select menu message component interactions
 	 *
-	 * @param interaction The message component interaction to check against
+	 * @param interaction - The message component interaction to check against
 	 * @returns A boolean that indicates if the message component is a select menu
 	 */
 	function isMessageComponentSelectMenuInteraction(interaction) {
@@ -33657,7 +34210,7 @@ function requireV10$1 () {
 	/**
 	 * A type-guard check for chat input application commands.
 	 *
-	 * @param interaction The interaction to check against
+	 * @param interaction - The interaction to check against
 	 * @returns A boolean that indicates if the interaction is a chat input application command
 	 */
 	function isChatInputApplicationCommandInteraction(interaction) {
@@ -33666,7 +34219,7 @@ function requireV10$1 () {
 	/**
 	 * A type-guard check for context menu application commands.
 	 *
-	 * @param interaction The interaction to check against
+	 * @param interaction - The interaction to check against
 	 * @returns A boolean that indicates if the interaction is a context menu application command
 	 */
 	function isContextMenuApplicationCommandInteraction(interaction) {
@@ -33712,7 +34265,7 @@ var v10 = /*#__PURE__*/Object.freeze({
 	isMessageComponentSelectMenuInteraction: isMessageComponentSelectMenuInteraction
 });
 
-var require$$5$1 = /*@__PURE__*/getAugmentedNamespace(v10);
+var require$$6 = /*@__PURE__*/getAugmentedNamespace(v10);
 
 var hasRequiredV10;
 
@@ -33741,7 +34294,8 @@ function requireV10 () {
 		__exportStar(require$$2, exports);
 		__exportStar(require$$3, exports);
 		__exportStar(require$$4, exports);
-		exports.Utils = require$$5$1;
+		__exportStar(requireInternals(), exports);
+		exports.Utils = require$$6;
 		
 	} (v10$a));
 	return v10$a;
@@ -35152,22 +35706,19 @@ function requireTree$1 () {
 		    mime: leaf.info.mime,
 		    extension: leaf.info.extension,
 		});
-		const isMatchingNode = (tree, path) => tree && path.length === 0;
-		const head = (arr) => arr[0];
-		const tail = (arr) => arr.slice(1, arr.length);
+		const isLeafNode = (tree, path) => tree && path.length === 0;
 		const merge = (node, tree) => {
 		    if (node.bytes.length === 0)
 		        return tree;
-		    const currentByte = head(node.bytes); // 0
-		    const path = tail(node.bytes); // [1,2]
+		    const [currentByte, ...path] = node.bytes;
 		    const currentTree = tree.bytes[currentByte];
 		    // traversed to end. Just add key to leaf.
-		    if (isMatchingNode(currentTree, path)) {
+		    if (isLeafNode(currentTree, path)) {
 		        const matchingNode = tree.bytes[currentByte];
 		        tree.bytes[currentByte] = {
 		            ...matchingNode,
 		            matches: [
-		                ...(matchingNode.matches ? matchingNode.matches : []),
+		                ...(matchingNode.matches ?? []),
 		                createMatch(node),
 		            ],
 		        };
@@ -35176,14 +35727,9 @@ function requireTree$1 () {
 		    // Path exists already, Merge subtree
 		    if (tree.bytes[currentByte]) {
 		        tree.bytes[currentByte] = exports.merge(exports.createNode(node.typename, path, node.info), tree.bytes[currentByte]);
-		        return tree;
 		    }
-		    // Tree did not exist before
-		    if (!tree.bytes[currentByte]) {
-		        tree.bytes[currentByte] = {
-		            ...tree.bytes[currentByte],
-		            ...exports.createComplexNode(node.typename, path, node.info),
-		        };
+		    else { // Tree did not exist before
+		        tree.bytes[currentByte] = exports.createComplexNode(node.typename, path, node.info);
 		    }
 		    return tree;
 		};
@@ -35197,8 +35743,7 @@ function requireTree$1 () {
 		        bytes: {},
 		        matches: undefined,
 		    };
-		    const currentKey = head(bytes); // 0
-		    const path = tail(bytes); // [1,2]
+		    const [currentKey, ...path] = bytes;
 		    if (bytes.length === 0) {
 		        return {
 		            matches: [
@@ -35223,1160 +35768,1170 @@ var hasRequiredPatternTree;
 function requirePatternTree () {
 	if (hasRequiredPatternTree) return patternTree;
 	hasRequiredPatternTree = 1;
-	Object.defineProperty(patternTree, "__esModule", { value: true });
-	const toHex_1 = requireToHex();
-	const tree_1 = requireTree$1();
-	// https://en.wikipedia.org/wiki/List_of_file_signatures
-	let tree = {
-	    noOffset: null,
-	    offset: {},
-	};
-	const add = (typename, signature, additionalInfo, offset) => {
-	    if (offset) {
-	        const existing = tree.offset[toHex_1.toHex(offset)];
-	        if (!existing) {
-	            tree.offset[toHex_1.toHex(offset)] = tree_1.createComplexNode(typename, signature.map((e) => e.toLowerCase()), additionalInfo);
-	        }
-	        else {
-	            const merged = tree_1.merge(tree_1.createNode(typename, signature.map((e) => e.toLowerCase()), additionalInfo), { ...existing });
-	            tree.offset[toHex_1.toHex(offset)] = merged;
-	        }
-	    }
-	    else {
-	        if (tree.noOffset === null) {
-	            tree.noOffset = tree_1.createComplexNode(typename, signature.map((e) => e.toLowerCase()), additionalInfo);
-	        }
-	        else {
-	            tree.noOffset = tree_1.merge(tree_1.createNode(typename, signature.map((e) => e.toLowerCase()), additionalInfo), tree.noOffset);
-	        }
-	    }
-	};
-	add("gif", ["0x47", "0x49", "0x46", "0x38", "0x37", "0x61"], {
-	    mime: "image/gif",
-	    extension: "gif",
-	});
-	add("gif", ["0x47", "0x49", "0x46", "0x38", "0x39", "0x61"], {
-	    mime: "image/gif",
-	    extension: "gif",
-	});
-	add("jpg", ["0xFF", "0xD8", "0xFF"], {
-	    mime: "image/jpeg",
-	    extension: "jpeg",
-	});
-	add("webp", [
-	    "0x52",
-	    "0x49",
-	    "0x46",
-	    "0x46",
-	    "?",
-	    "?",
-	    "?",
-	    "?",
-	    "0x57",
-	    "0x45",
-	    "0x42",
-	    "0x50",
-	], { mime: "image/webp", extension: "webp" });
-	add("heif", ["0x66", "0x74", "0x79", "0x70", "0x6D", "0x69", "0x66", "0x31"], { mime: "image/heif", extension: "heif" }, 4);
-	add("heif", ["0x66", "0x74", "0x79", "0x70", "0x68", "0x65", "0x69", "0x63"], { mime: "image/heif", extension: "heic" }, 4);
-	add("rpm", ["0xed", "0xab", "0xee", "0xdb"]);
-	add("bin", ["0x53", "0x50", "0x30", "0x31"], {
-	    mime: "application/octet-stream",
-	    extension: "bin",
-	});
-	add("pic", ["0x00"]);
-	add("pif", ["0x00"]);
-	add("sea", ["0x00"]);
-	add("ytr", ["0x00"]);
-	// 66747970
-	// 6D703432
-	add("mp4", ["0x66", "0x74", "0x79", "0x70"], { mime: "video/mp4", extension: "mp4" }, 0x4);
-	add("ttf", ["0x00", "0x01", "0x00", "0x00", "0x00"], {
-	    mime: "font/ttf",
-	    extension: "ttf",
-	});
-	add("otf", ["0x4F", "0x54", "0x54", "0x4F"], {
-	    mime: "font/otf",
-	    extension: "otf",
-	});
-	add("eot", ["0x50", "0x4C"], {
-	    mime: "application/vnd.ms-fontobject",
-	    extension: "eot",
-	});
-	add("woff", ["0x77", "0x4F", "0x46", "0x46"], {
-	    mime: "font/woff",
-	    extension: "woff",
-	});
-	add("woff2", ["0x77", "0x4F", "0x46", "0x32"], {
-	    mime: "font/woff2",
-	    extension: "woff2",
-	});
-	add("pdb", [
-	    "0x00",
-	    "0x00",
-	    "0x00",
-	    "0x00",
-	    "0x00",
-	    "0x00",
-	    "0x00",
-	    "0x00",
-	    "0x00",
-	    "0x00",
-	    "0x00",
-	    "0x00",
-	    "0x00",
-	    "0x00",
-	    "0x00",
-	    "0x00",
-	    "0x00",
-	    "0x00",
-	    "0x00",
-	    "0x00",
-	    "0x00",
-	    "0x00",
-	    "0x00",
-	    "0x00",
-	]);
-	add("dba", ["0xBE", "0xBA", "0xFE", "0xCA"]);
-	add("dba2", ["0x00", "0x01", "0x42", "0x44"]);
-	add("tda", ["0x00", "0x01", "0x44", "0x54"]);
-	add("tda2", ["0x00", "0x01", "0x00", "0x00"]);
-	add("ico", ["0x00", "0x00", "0x01", "0x00"], {
-	    mime: "image/x-icon",
-	    extension: "ico",
-	});
-	add("3gp", ["0x66", "0x74", "0x79", "0x70", "0x33", "0x67"]);
-	add("z", ["0x1F", "0x9D"]);
-	add("tar.z", ["0x1F", "0xA0"]);
-	add("bac", [
-	    "0x42",
-	    "0x41",
-	    "0x43",
-	    "0x4B",
-	    "0x4D",
-	    "0x49",
-	    "0x4B",
-	    "0x45",
-	    "0x44",
-	    "0x49",
-	    "0x53",
-	    "0x4B",
-	]);
-	add("bz2", ["0x42", "0x5A", "0x68"], {
-	    mime: "application/x-bzip2",
-	    extension: "bz2",
-	});
-	add("tif", ["0x49", "0x49", "0x2A", "0x00"], {
-	    mime: "image/tiff",
-	    extension: "tif",
-	});
-	add("tiff", ["0x4D", "0x4D", "0x00", "0x2A"], {
-	    mime: "image/tiff",
-	    extension: "tiff",
-	});
-	add("cr2", [
-	    "0x49",
-	    "0x49",
-	    "0x2A",
-	    "0x00",
-	    "0x10",
-	    "0x00",
-	    "0x00",
-	    "0x00",
-	    "0x43",
-	    "0x52",
-	]);
-	add("cin", ["0x80", "0x2A", "0x5F", "0xD7"]);
-	add("cin1", ["0x52", "0x4E", "0x43", "0x01"]);
-	add("cin2", ["0x52", "0x4E", "0x43", "0x02"]);
-	add("dpx", ["0x53", "0x44", "0x50", "0x58"]);
-	add("dpx2", ["0x58", "0x50", "0x44", "0x53"]);
-	add("exr", ["0x76", "0x2F", "0x31", "0x01"]);
-	add("bpg", ["0x42", "0x50", "0x47", "0xFB"]);
-	add("ilbm", [
-	    "0x46",
-	    "0x4F",
-	    "0x52",
-	    "0x4D",
-	    "?",
-	    "?",
-	    "?",
-	    "?",
-	    "0x49",
-	    "0x4C",
-	    "0x42",
-	    "0x4D",
-	]);
-	add("8svx", [
-	    "0x46",
-	    "0x4F",
-	    "0x52",
-	    "0x4D",
-	    "?",
-	    "?",
-	    "?",
-	    "?",
-	    "0x38",
-	    "0x53",
-	    "0x56",
-	    "0x58",
-	]);
-	add("acbm", [
-	    "0x46",
-	    "0x4F",
-	    "0x52",
-	    "0x4D",
-	    "?",
-	    "?",
-	    "?",
-	    "?",
-	    "0x41",
-	    "0x43",
-	    "0x42",
-	    "0x4D",
-	]);
-	add("anbm", [
-	    "0x46",
-	    "0x4F",
-	    "0x52",
-	    "0x4D",
-	    "?",
-	    "?",
-	    "?",
-	    "?",
-	    "0x41",
-	    "0x4E",
-	    "0x42",
-	    "0x4D",
-	]);
-	add("anim", [
-	    "0x46",
-	    "0x4F",
-	    "0x52",
-	    "0x4D",
-	    "?",
-	    "?",
-	    "?",
-	    "?",
-	    "0x41",
-	    "0x4E",
-	    "0x49",
-	    "0x4D",
-	]);
-	add("faxx", [
-	    "0x46",
-	    "0x4F",
-	    "0x52",
-	    "0x4D",
-	    "?",
-	    "?",
-	    "?",
-	    "?",
-	    "0x46",
-	    "0x41",
-	    "0x58",
-	    "0x58",
-	]);
-	add("ftxt", [
-	    "0x46",
-	    "0x4F",
-	    "0x52",
-	    "0x4D",
-	    "?",
-	    "?",
-	    "?",
-	    "?",
-	    "0x46",
-	    "0x54",
-	    "0x58",
-	    "0x54",
-	]);
-	add("smus", [
-	    "0x46",
-	    "0x4F",
-	    "0x52",
-	    "0x4D",
-	    "?",
-	    "?",
-	    "?",
-	    "?",
-	    "0x53",
-	    "0x4D",
-	    "0x55",
-	    "0x53",
-	]);
-	add("cmus", [
-	    "0x46",
-	    "0x4F",
-	    "0x52",
-	    "0x4D",
-	    "?",
-	    "?",
-	    "?",
-	    "?",
-	    "0x43",
-	    "0x4D",
-	    "0x55",
-	    "0x53",
-	]);
-	add("yuvn", [
-	    "0x46",
-	    "0x4F",
-	    "0x52",
-	    "0x4D",
-	    "?",
-	    "?",
-	    "?",
-	    "?",
-	    "0x59",
-	    "0x55",
-	    "0x56",
-	    "0x4E",
-	]);
-	add("iff", [
-	    "0x46",
-	    "0x4F",
-	    "0x52",
-	    "0x4D",
-	    "?",
-	    "?",
-	    "?",
-	    "?",
-	    "0x46",
-	    "0x41",
-	    "0x4E",
-	    "0x54",
-	]);
-	add("aiff", [
-	    "0x46",
-	    "0x4F",
-	    "0x52",
-	    "0x4D",
-	    "?",
-	    "?",
-	    "?",
-	    "?",
-	    "0x41",
-	    "0x49",
-	    "0x46",
-	    "0x46",
-	], { mime: "audio/x-aiff", extension: "aiff" });
-	add("idx", ["0x49", "0x4E", "0x44", "0x58"]);
-	add("lz", ["0x4C", "0x5A", "0x49", "0x50"]);
-	add("exe", ["0x4D", "0x5A"]);
-	add("zip", ["0x50", "0x4B", "0x03", "0x04"], {
-	    mime: "application/zip",
-	    extension: "zip",
-	});
-	add("zip", ["0x50", "0x4B", "0x05", "0x06"], {
-	    mime: "application/zip",
-	    extension: "zip",
-	});
-	add("zip", ["0x50", "0x4B", "0x07", "0x08"], {
-	    mime: "application/zip",
-	    extension: "zip",
-	});
-	add("jar", ["0x50", "0x4B", "0x03", "0x04"], {
-	    mime: "application/java-archive",
-	    extension: "jar",
-	});
-	add("jar", ["0x50", "0x4B", "0x05", "0x06"], {
-	    mime: "application/java-archive",
-	    extension: "jar",
-	});
-	add("jar", ["0x50", "0x4B", "0x07", "0x08"], {
-	    mime: "application/java-archive",
-	    extension: "jar",
-	});
-	add("odt", ["0x50", "0x4B", "0x03", "0x04"], {
-	    mime: "application/vnd.oasis.opendocument.text",
-	    extension: "odt",
-	});
-	add("odt", ["0x50", "0x4B", "0x05", "0x06"], {
-	    mime: "application/vnd.oasis.opendocument.text",
-	    extension: "odt",
-	});
-	add("odt", ["0x50", "0x4B", "0x07", "0x08"], {
-	    mime: "application/vnd.oasis.opendocument.text",
-	    extension: "odt",
-	});
-	add("ods", ["0x50", "0x4B", "0x03", "0x04"], {
-	    mime: "application/vnd.oasis.opendocument.spreadsheet",
-	    extension: "ods",
-	});
-	add("ods", ["0x50", "0x4B", "0x05", "0x06"], {
-	    mime: "application/vnd.oasis.opendocument.spreadsheet",
-	    extension: "ods",
-	});
-	add("ods", ["0x50", "0x4B", "0x07", "0x08"], {
-	    mime: "application/vnd.oasis.opendocument.spreadsheet",
-	    extension: "ods",
-	});
-	add("odp", ["0x50", "0x4B", "0x03", "0x04"], {
-	    mime: "application/vnd.oasis.opendocument.presentation",
-	    extension: "odp",
-	});
-	add("odp", ["0x50", "0x4B", "0x05", "0x06"], {
-	    mime: "application/vnd.oasis.opendocument.presentation",
-	    extension: "odp",
-	});
-	add("odp", ["0x50", "0x4B", "0x07", "0x08"], {
-	    mime: "application/vnd.oasis.opendocument.presentation",
-	    extension: "odp",
-	});
-	add("docx", ["0x50", "0x4B", "0x03", "0x04"], {
-	    mime: "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
-	    extension: "docx",
-	});
-	add("docx", ["0x50", "0x4B", "0x05", "0x06"], {
-	    mime: "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
-	    extension: "docx",
-	});
-	add("docx", ["0x50", "0x4B", "0x07", "0x08"], {
-	    mime: "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
-	    extension: "docx",
-	});
-	add("xlsx", ["0x50", "0x4B", "0x03", "0x04"], {
-	    mime: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
-	    extension: "xlsx",
-	});
-	add("xlsx", ["0x50", "0x4B", "0x05", "0x06"], {
-	    mime: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
-	    extension: "xlsx",
-	});
-	add("xlsx", ["0x50", "0x4B", "0x07", "0x08"], {
-	    mime: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
-	    extension: "xlsx",
-	});
-	add("pptx", ["0x50", "0x4B", "0x03", "0x04"], {
-	    mime: "application/vnd.openxmlformats-officedocument.presentationml.presentation",
-	    extension: "pptx",
-	});
-	add("pptx", ["0x50", "0x4B", "0x05", "0x06"], {
-	    mime: "application/vnd.openxmlformats-officedocument.presentationml.presentation",
-	    extension: "pptx",
-	});
-	add("pptx", ["0x50", "0x4B", "0x07", "0x08"], {
-	    mime: "application/vnd.openxmlformats-officedocument.presentationml.presentation",
-	    extension: "pptx",
-	});
-	add("vsdx", ["0x50", "0x4B", "0x03", "0x04"], {
-	    mime: "application/vnd.ms-visio.drawing",
-	    extension: "vsdx",
-	});
-	add("vsdx", ["0x50", "0x4B", "0x05", "0x06"], {
-	    mime: "application/vnd.ms-visio.drawing",
-	    extension: "vsdx",
-	});
-	add("vsdx", ["0x50", "0x4B", "0x07", "0x08"], {
-	    mime: "application/vnd.ms-visio.drawing",
-	    extension: "vsdx",
-	});
-	add("apk", ["0x50", "0x4B", "0x03", "0x04"], {
-	    mime: "application/vnd.android.package-archive",
-	    extension: "apk",
-	});
-	add("apk", ["0x50", "0x4B", "0x05", "0x06"], {
-	    mime: "application/vnd.android.package-archive",
-	    extension: "apk",
-	});
-	add("apk", ["0x50", "0x4B", "0x07", "0x08"], {
-	    mime: "application/vnd.android.package-archive",
-	    extension: "apk",
-	});
-	add("aar", ["0x50", "0x4B", "0x03", "0x04"], {
-	    mime: "application/vnd.android.package-archive",
-	    extension: "aar",
-	});
-	add("aar", ["0x50", "0x4B", "0x05", "0x06"], {
-	    mime: "application/vnd.android.package-archive",
-	    extension: "aar",
-	});
-	add("aar", ["0x50", "0x4B", "0x07", "0x08"], {
-	    mime: "application/vnd.android.package-archive",
-	    extension: "aar",
-	});
-	add("rar", ["0x52", "0x61", "0x72", "0x21", "0x1A", "0x07", "0x00"], {
-	    mime: "application/vnd.rar",
-	    extension: "rar",
-	});
-	add("rar", ["0x52", "0x61", "0x72", "0x21", "0x1A", "0x07", "0x01", "0x00"], {
-	    mime: "application/vnd.rar",
-	    extension: "rar",
-	});
-	add("rar", ["0x7F", "0x45", "0x4C", "0x46"], {
-	    mime: "application/vnd.rar",
-	    extension: "rar",
-	});
-	add("png", ["0x89", "0x50", "0x4E", "0x47", "0x0D", "0x0A", "0x1A", "0x0A"], {
-	    mime: "image/png",
-	    extension: "png",
-	});
-	add("apng", ["0x89", "0x50", "0x4E", "0x47", "0x0D", "0x0A", "0x1A", "0x0A"], {
-	    mime: "image/apng",
-	    extension: "apng",
-	});
-	add("class", ["0xCA", "0xFE", "0xBA", "0xBE"]);
-	add("class", ["0xEF", "0xBB", "0xBF"]);
-	add("class", ["0xFE", "0xed", "0xFA", "0xCE"], undefined, 0x1000);
-	add("class", ["0xFE", "0xed", "0xFA", "0xCF"], undefined, 0x1000);
-	add("class", ["0xCE", "0xFA", "0xed", "0xFE"]);
-	add("class", ["0xCF", "0xFA", "0xed", "0xFE"]);
-	add("class", ["0xFF", "0xFE"]);
-	add("class", ["0xFF", "0xFE"]);
-	add("class", ["0xFF", "0xFE", "0x00", "0x00"]);
-	add("ps", ["0x25", "0x21", "0x50", "0x53"], {
-	    mime: "application/postscript",
-	    extension: ".ps"
-	});
-	add("pdf", ["0x25", "0x50", "0x44", "0x46"], {
-	    mime: "application/pdf",
-	    extension: "pdf",
-	});
-	add("asf", [
-	    "0x30",
-	    "0x26",
-	    "0xB2",
-	    "0x75",
-	    "0x8E",
-	    "0x66",
-	    "0xCF",
-	    "0x11",
-	    "0xA6",
-	    "0xD9",
-	    "0x00",
-	    "0xAA",
-	    "0x00",
-	    "0x62",
-	    "0xCE",
-	    "0x6C",
-	]);
-	add("wma", [
-	    "0x30",
-	    "0x26",
-	    "0xB2",
-	    "0x75",
-	    "0x8E",
-	    "0x66",
-	    "0xCF",
-	    "0x11",
-	    "0xA6",
-	    "0xD9",
-	    "0x00",
-	    "0xAA",
-	    "0x00",
-	    "0x62",
-	    "0xCE",
-	    "0x6C",
-	]);
-	add("wmv", [
-	    "0x30",
-	    "0x26",
-	    "0xB2",
-	    "0x75",
-	    "0x8E",
-	    "0x66",
-	    "0xCF",
-	    "0x11",
-	    "0xA6",
-	    "0xD9",
-	    "0x00",
-	    "0xAA",
-	    "0x00",
-	    "0x62",
-	    "0xCE",
-	    "0x6C",
-	]);
-	add("deploymentimage", [
-	    "0x24",
-	    "0x53",
-	    "0x44",
-	    "0x49",
-	    "0x30",
-	    "0x30",
-	    "0x30",
-	    "0x31",
-	]);
-	// ogg video ' theora'
-	add("ogv", [
-	    "0x4F",
-	    "0x67",
-	    "0x67",
-	    "0x53",
-	    "?",
-	    "?",
-	    "?",
-	    "?",
-	    "?",
-	    "?",
-	    "?",
-	    "?",
-	    "?",
-	    "?",
-	    "?",
-	    "?",
-	    "?",
-	    "?",
-	    "?",
-	    "?",
-	    "?",
-	    "?",
-	    "?",
-	    "?",
-	    "?",
-	    "?",
-	    "?",
-	    "?",
-	    "0x80",
-	    "0x74",
-	    "0x68",
-	    "0x65",
-	    "0x6F",
-	    "0x72",
-	    "0x61",
-	], {
-	    mime: "video/ogg",
-	    extension: "ogv",
-	});
-	// ogg video '\x01video'
-	add("ogm", [
-	    "0x4F",
-	    "0x67",
-	    "0x67",
-	    "0x53",
-	    "?",
-	    "?",
-	    "?",
-	    "?",
-	    "?",
-	    "?",
-	    "?",
-	    "?",
-	    "?",
-	    "?",
-	    "?",
-	    "?",
-	    "?",
-	    "?",
-	    "?",
-	    "?",
-	    "?",
-	    "?",
-	    "?",
-	    "?",
-	    "?",
-	    "?",
-	    "?",
-	    "?",
-	    "0x01",
-	    "0x76",
-	    "0x69",
-	    "0x64",
-	    "0x65",
-	    "0x6F",
-	    "0x00",
-	], {
-	    mime: "video/ogg",
-	    extension: "ogm",
-	});
-	// ogg audio ' FLAC'
-	add("oga", [
-	    "0x4F",
-	    "0x67",
-	    "0x67",
-	    "0x53",
-	    "?",
-	    "?",
-	    "?",
-	    "?",
-	    "?",
-	    "?",
-	    "?",
-	    "?",
-	    "?",
-	    "?",
-	    "?",
-	    "?",
-	    "?",
-	    "?",
-	    "?",
-	    "?",
-	    "?",
-	    "?",
-	    "?",
-	    "?",
-	    "?",
-	    "?",
-	    "?",
-	    "?",
-	    "0x7F",
-	    "0x46",
-	    "0x4C",
-	    "0x41",
-	    "0x43",
-	], {
-	    mime: "audio/ogg",
-	    extension: "oga",
-	});
-	// ogg audio 'Speex  '
-	add("spx", [
-	    "0x4F",
-	    "0x67",
-	    "0x67",
-	    "0x53",
-	    "?",
-	    "?",
-	    "?",
-	    "?",
-	    "?",
-	    "?",
-	    "?",
-	    "?",
-	    "?",
-	    "?",
-	    "?",
-	    "?",
-	    "?",
-	    "?",
-	    "?",
-	    "?",
-	    "?",
-	    "?",
-	    "?",
-	    "?",
-	    "?",
-	    "?",
-	    "?",
-	    "?",
-	    "0x53",
-	    "0x70",
-	    "0x65",
-	    "0x65",
-	    "0x78",
-	    "0x20",
-	    "0x20",
-	], {
-	    mime: "audio/ogg",
-	    extension: "spx",
-	});
-	// ogg audio '\x01vorbis '
-	add("ogg", [
-	    "0x4F",
-	    "0x67",
-	    "0x67",
-	    "0x53",
-	    "?",
-	    "?",
-	    "?",
-	    "?",
-	    "?",
-	    "?",
-	    "?",
-	    "?",
-	    "?",
-	    "?",
-	    "?",
-	    "?",
-	    "?",
-	    "?",
-	    "?",
-	    "?",
-	    "?",
-	    "?",
-	    "?",
-	    "?",
-	    "?",
-	    "?",
-	    "?",
-	    "?",
-	    "0x01",
-	    "0x76",
-	    "0x6F",
-	    "0x72",
-	    "0x62",
-	    "0x69",
-	    "0x73",
-	], {
-	    mime: "audio/ogg",
-	    extension: "ogg",
-	});
-	// default OGG container
-	add("ogx", ["0x4F", "0x67", "0x67", "0x53"], {
-	    mime: "application/ogg",
-	    extension: "ogx",
-	});
-	add("psd", ["0x38", "0x42", "0x50", "0x53"], {
-	    mime: "application/x-photoshop",
-	    extension: "psd",
-	});
-	add("clip", ["0x43", "0x53", "0x46", "0x43", "0x48", "0x55", "0x4e", "0x4b"]);
-	add("wav", [
-	    "0x52",
-	    "0x49",
-	    "0x46",
-	    "0x46",
-	    "?",
-	    "?",
-	    "?",
-	    "?",
-	    "0x57",
-	    "0x41",
-	    "0x56",
-	    "0x45",
-	], { mime: "audio/x-wav", extension: "wav" });
-	add("avi", [
-	    "0x52",
-	    "0x49",
-	    "0x46",
-	    "0x46",
-	    "?",
-	    "?",
-	    "?",
-	    "?",
-	    "0x41",
-	    "0x56",
-	    "0x49",
-	    "0x20",
-	], { mime: "video/x-msvideo", extension: "avi" });
-	add("mp3", ["0xFF", "0xFB"], { mime: "audio/mpeg", extension: "mp3" });
-	add("mp3", ["0xFF", "0xF3"], { mime: "audio/mpeg", extension: "mp3" });
-	add("mp3", ["0xFF", "0xF2"], { mime: "audio/mpeg", extension: "mp3" });
-	add("mp3", ["0x49", "0x44", "0x33"], { mime: "audio/mpeg", extension: "mp3" });
-	add("bmp", ["0x42", "0x4D"], { mime: "image/bmp", extension: "bmp" });
-	add("iso", ["0x43", "0x44", "0x30", "0x30", "0x31"]);
-	add("flac", ["0x66", "0x4C", "0x61", "0x43"]);
-	add("mid", ["0x4D", "0x54", "0x68", "0x64"], {
-	    mime: "audio/midi",
-	    extension: "mid",
-	});
-	add("midi", ["0x4D", "0x54", "0x68", "0x64"], {
-	    mime: "audio/midi",
-	    extension: "midi",
-	});
-	add("doc", ["0xD0", "0xCF", "0x11", "0xE0", "0xA1", "0xB1", "0x1A", "0xE1"], {
-	    mime: "application/msword",
-	    extension: "doc",
-	});
-	add("xls", ["0xD0", "0xCF", "0x11", "0xE0", "0xA1", "0xB1", "0x1A", "0xE1"], {
-	    mime: "application/vnd.ms-excel",
-	    extension: "xls",
-	});
-	add("ppt", ["0xD0", "0xCF", "0x11", "0xE0", "0xA1", "0xB1", "0x1A", "0xE1"], {
-	    mime: "application/vnd.ms-powerpoint",
-	    extension: "ppt",
-	});
-	add("msg", ["0xD0", "0xCF", "0x11", "0xE0", "0xA1", "0xB1", "0x1A", "0xE1"]);
-	add("dex", ["0x64", "0x65", "0x78", "0x0A", "0x30", "0x33", "0x35", "0x00"]);
-	add("vmdk", ["0x4B", "0x44", "0x4D"]);
-	add("crx", ["0x43", "0x72", "0x32", "0x34"]);
-	add("fh8", ["0x41", "0x47", "0x44", "0x33"]);
-	add("cwk", [
-	    "0x05",
-	    "0x07",
-	    "0x00",
-	    "0x00",
-	    "0x42",
-	    "0x4F",
-	    "0x42",
-	    "0x4F",
-	    "0x05",
-	    "0x07",
-	    "0x00",
-	    "0x00",
-	    "0x00",
-	    "0x00",
-	    "0x00",
-	    "0x00",
-	    "0x00",
-	    "0x00",
-	    "0x00",
-	    "0x00",
-	    "0x00",
-	    "0x01",
-	]);
-	add("cwk", [
-	    "0x06",
-	    "0x07",
-	    "0xE1",
-	    "0x00",
-	    "0x42",
-	    "0x4F",
-	    "0x42",
-	    "0x4F",
-	    "0x06",
-	    "0x07",
-	    "0xE1",
-	    "0x00",
-	    "0x00",
-	    "0x00",
-	    "0x00",
-	    "0x00",
-	    "0x00",
-	    "0x00",
-	    "0x00",
-	    "0x00",
-	    "0x00",
-	    "0x01",
-	]);
-	add("toast", ["0x45", "0x52", "0x02", "0x00", "0x00", "0x00"]);
-	add("toast", ["0x8B", "0x45", "0x52", "0x02", "0x00", "0x00", "0x00"]);
-	add("dmg", ["0x78", "0x01", "0x73", "0x0D", "0x62", "0x62", "0x60"]);
-	add("xar", ["0x78", "0x61", "0x72", "0x21"]);
-	add("dat", ["0x50", "0x4D", "0x4F", "0x43", "0x43", "0x4D", "0x4F", "0x43"]);
-	add("nes", ["0x4E", "0x45", "0x53", "0x1A"]);
-	add("tar", ["0x75", "0x73", "0x74", "0x61", "0x72", "0x00", "0x30", "0x30"], {
-	    // As per Mozilla documentation available at:
-	    // https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types/Common_types
-	    // or wikipedia page:
-	    // https://en.wikipedia.org/wiki/List_of_archive_formats
-	    mime: "application/x-tar",
-	    extension: "tar"
-	}, 0x101);
-	add("tar", ["0x75", "0x73", "0x74", "0x61", "0x72", "0x20", "0x20", "0x00"], {
-	    mime: "application/x-tar",
-	    extension: "tar"
-	}, 0x101);
-	add("tox", ["0x74", "0x6F", "0x78", "0x33"]);
-	add("mlv", ["0x4D", "0x4C", "0x56", "0x49"]);
-	add("windowsupdate", [
-	    "0x44",
-	    "0x43",
-	    "0x4D",
-	    "0x01",
-	    "0x50",
-	    "0x41",
-	    "0x33",
-	    "0x30",
-	]);
-	add("7z", ["0x37", "0x7A", "0xBC", "0xAF", "0x27", "0x1C"], {
-	    mime: "application/x-7z-compressed",
-	    extension: "7z",
-	});
-	add("gz", ["0x1F", "0x8B"], { mime: "application/gzip", extension: "gz" });
-	add("tar.gz", ["0x1F", "0x8B"], {
-	    mime: "application/gzip",
-	    extension: "tar.gz",
-	});
-	add("xz", ["0xFD", "0x37", "0x7A", "0x58", "0x5A", "0x00", "0x00"], {
-	    mime: "application/gzip",
-	    extension: "xz",
-	});
-	add("tar.xz", ["0xFD", "0x37", "0x7A", "0x58", "0x5A", "0x00", "0x00"], {
-	    mime: "application/gzip",
-	    extension: "tar.xz",
-	});
-	add("lz2", ["0x04", "0x22", "0x4D", "0x18"]);
-	add("cab", ["0x4D", "0x53", "0x43", "0x46"]);
-	add("mkv", ["0x1A", "0x45", "0xDF", "0xA3"], {
-	    mime: "video/x-matroska",
-	    extension: "mkv",
-	});
-	add("mka", ["0x1A", "0x45", "0xDF", "0xA3"], {
-	    mime: "audio/x-matroska",
-	    extension: "mka",
-	});
-	add("mks", ["0x1A", "0x45", "0xDF", "0xA3"], {
-	    mime: "video/x-matroska",
-	    extension: "mks",
-	});
-	add("mk3d", ["0x1A", "0x45", "0xDF", "0xA3"]);
-	add("webm", ["0x1A", "0x45", "0xDF", "0xA3"], {
-	    mime: "audio/webm",
-	    extension: "webm",
-	});
-	add("dcm", ["0x44", "0x49", "0x43", "0x4D"], undefined, 0x80);
-	add("xml", ["0x3C", "0x3f", "0x78", "0x6d", "0x6C", "0x20"], {
-	    mime: "application/xml",
-	    extension: "xml",
-	});
-	add("wasm", ["0x00", "0x61", "0x73", "0x6d"], {
-	    mime: "application/wasm",
-	    extension: "wasm",
-	});
-	add("lep", ["0xCF", "0x84", "0x01"]);
-	add("swf", ["0x43", "0x57", "0x53"], {
-	    mime: "application/x-shockwave-flash",
-	    extension: "swf",
-	});
-	add("swf", ["0x46", "0x57", "0x53"], {
-	    mime: "application/x-shockwave-flash",
-	    extension: "swf",
-	});
-	add("deb", ["0x21", "0x3C", "0x61", "0x72", "0x63", "0x68", "0x3E"]);
-	add("rtf", ["0x7B", "0x5C", "0x72", "0x74", "0x66", "0x31"], {
-	    mime: "application/rtf",
-	    extension: "rtf",
-	});
-	add("m2p", ["0x00", "0x00", "0x01", "0xBA"]);
-	add("vob", ["0x00", "0x00", "0x01", "0xBA"]);
-	add("mpg", ["0x00", "0x00", "0x01", "0xBA"], {
-	    mime: "video/mpeg",
-	    extension: "mpg",
-	});
-	add("mpeg", ["0x00", "0x00", "0x01", "0xBA"], {
-	    mime: "video/mpeg",
-	    extension: "mpeg",
-	});
-	add("mpeg", ["0x47"], { mime: "video/mpeg", extension: "mpeg" });
-	add("mpeg", ["0x00", "0x00", "0x01", "0xB3"], {
-	    mime: "video/mpeg",
-	    extension: "mpeg",
-	});
-	// mov 'free' TODO: find test file
-	add("mov", ["0x66", "0x72", "0x65", "0x65"], {
-	    mime: "video/quicktime",
-	    extension: "mov",
-	}, 0x4);
-	// mov 'mdat'
-	add("mov", ["0x6D", "0x64", "0x61", "0x74"], {
-	    mime: "video/quicktime",
-	    extension: "mov",
-	}, 0x4);
-	// mov 'moov' TODO: find test file
-	add("mov", ["0x6D", "0x6F", "0x6F", "0x76"], {
-	    mime: "video/quicktime",
-	    extension: "mov",
-	}, 0x4);
-	// move 'wide' TODO: find test file
-	add("mov", ["0x77", "0x69", "0x64", "0x65"], {
-	    mime: "video/quicktime",
-	    extension: "mov",
-	}, 0x4);
-	// mov 'ftypqt'
-	add("mov", ["0x66", "0x74", "0x79", "0x70", "0x71", "0x74"], {
-	    mime: "video/quicktime",
-	    extension: "mov",
-	}, 0x4);
-	add("hl2demo", ["0x48", "0x4C", "0x32", "0x44", "0x45", "0x4D", "0x4F"]);
-	add("txt", ["0xEF", "0xBB", "0xBF"], {
-	    mime: "text/plain; charset=UTF-8",
-	    extension: "txt",
-	});
-	add("txt", ["0xFF", "0xFE"], {
-	    mime: "text/plain; charset=UTF-16LE",
-	    extension: "txt",
-	});
-	add("txt", ["0xFE", "0xFF"], {
-	    mime: "text/plain; charset=UTF-16BE",
-	    extension: "txt",
-	});
-	add("txt", ["0xFF", "0xFE", "0x00", "0x00"], {
-	    mime: "text/plain; charset=UTF-32LE",
-	    extension: "txt",
-	});
-	add("txt", ["0x00", "0x00", "0xFE", "0xFF"], {
-	    mime: "text/plain; charset=UTF-32BE",
-	    extension: "txt",
-	});
-	add("SubRip", ["0x31", "0x0D", "0x0A", "0x30", "0x30", "0x3A"], {
-	    mime: "application/x-subrip",
-	    extension: "srt",
-	});
-	add("WebVTT", [
-	    "0xEF",
-	    "0xBB",
-	    "0xBF",
-	    "0x57",
-	    "0x45",
-	    "0x42",
-	    "0x56",
-	    "0x54",
-	    "0x54",
-	    "0x0A",
-	], {
-	    mime: "text/vtt",
-	    extension: "vtt",
-	});
-	add("WebVTT", [
-	    "0xEF",
-	    "0xBB",
-	    "0xBF",
-	    "0x57",
-	    "0x45",
-	    "0x42",
-	    "0x56",
-	    "0x54",
-	    "0x54",
-	    "0x0D",
-	], {
-	    mime: "text/vtt",
-	    extension: "vtt",
-	});
-	add("WebVTT", [
-	    "0xEF",
-	    "0xBB",
-	    "0xBF",
-	    "0x57",
-	    "0x45",
-	    "0x42",
-	    "0x56",
-	    "0x54",
-	    "0x54",
-	    "0x20",
-	], {
-	    mime: "text/vtt",
-	    extension: "vtt",
-	});
-	add("WebVTT", [
-	    "0xEF",
-	    "0xBB",
-	    "0xBF",
-	    "0x57",
-	    "0x45",
-	    "0x42",
-	    "0x56",
-	    "0x54",
-	    "0x54",
-	    "0x09",
-	], {
-	    mime: "text/vtt",
-	    extension: "vtt",
-	});
-	add("WebVTT", ["0x57", "0x45", "0x42", "0x56", "0x54", "0x54", "0x0A"], {
-	    mime: "text/vtt",
-	    extension: "vtt",
-	});
-	add("WebVTT", ["0x57", "0x45", "0x42", "0x56", "0x54", "0x54", "0x0D"], {
-	    mime: "text/vtt",
-	    extension: "vtt",
-	});
-	add("WebVTT", ["0x57", "0x45", "0x42", "0x56", "0x54", "0x54", "0x20"], {
-	    mime: "text/vtt",
-	    extension: "vtt",
-	});
-	add("WebVTT", ["0x57", "0x45", "0x42", "0x56", "0x54", "0x54", "0x09"], {
-	    mime: "text/vtt",
-	    extension: "vtt",
-	});
-	add("Json", ["0x7B"], {
-	    mime: "application/json",
-	    extension: ".json",
-	});
-	add("Json", ["0x5B"], {
-	    mime: "application/json",
-	    extension: ".json",
-	});
-	add("ELF", ["0x7F", "0x45", "0x4C", "0x46"], {
-	    mime: "application/x-executable",
-	    extension: ".elf",
-	});
-	add("Mach-O", ["0xFE", "0xED", "0xFA", "0xC"], {
-	    mime: "application/x-mach-binary",
-	    extension: ".o",
-	});
-	add("Mach-O", ["0xFE", "0xED", "0xFA", "0xCF"], {
-	    mime: "application/x-executable",
-	    extension: "elf",
-	});
-	add("EML", ["0x52", "0x65", "0x63", "0x65", "0x69", "0x76", "0x65", "0x64", "0x3A"], {
-	    mime: "message/rfc822",
-	    extension: ".eml",
-	});
-	add("SVG", ["0x3c", "0x73", "0x76", "0x67"], {
-	    mime: "image/svg+xml",
-	    extension: "svg",
-	});
-	patternTree.default = () => tree;
+	(function (exports) {
+		Object.defineProperty(exports, "__esModule", { value: true });
+		exports.createTree = exports.add = void 0;
+		const toHex_1 = requireToHex();
+		const tree_1 = requireTree$1();
+		// https://en.wikipedia.org/wiki/List_of_file_signatures
+		let tree = {
+		    noOffset: null,
+		    offset: {},
+		};
+		const add = (typename, signature, additionalInfo, offset) => {
+		    if (offset) {
+		        const existing = tree.offset[toHex_1.toHex(offset)];
+		        if (!existing) {
+		            tree.offset[toHex_1.toHex(offset)] = tree_1.createComplexNode(typename, signature.map((e) => e.toLowerCase()), additionalInfo);
+		        }
+		        else {
+		            const merged = tree_1.merge(tree_1.createNode(typename, signature.map((e) => e.toLowerCase()), additionalInfo), { ...existing });
+		            tree.offset[toHex_1.toHex(offset)] = merged;
+		        }
+		    }
+		    else {
+		        if (tree.noOffset === null) {
+		            tree.noOffset = tree_1.createComplexNode(typename, signature.map((e) => e.toLowerCase()), additionalInfo);
+		        }
+		        else {
+		            tree.noOffset = tree_1.merge(tree_1.createNode(typename, signature.map((e) => e.toLowerCase()), additionalInfo), tree.noOffset);
+		        }
+		    }
+		};
+		exports.add = add;
+		exports.add("gif", ["0x47", "0x49", "0x46", "0x38", "0x37", "0x61"], {
+		    mime: "image/gif",
+		    extension: "gif",
+		});
+		exports.add("gif", ["0x47", "0x49", "0x46", "0x38", "0x39", "0x61"], {
+		    mime: "image/gif",
+		    extension: "gif",
+		});
+		exports.add("jpg", ["0xFF", "0xD8", "0xFF"], {
+		    mime: "image/jpeg",
+		    extension: "jpeg",
+		});
+		exports.add("webp", [
+		    "0x52",
+		    "0x49",
+		    "0x46",
+		    "0x46",
+		    "?",
+		    "?",
+		    "?",
+		    "?",
+		    "0x57",
+		    "0x45",
+		    "0x42",
+		    "0x50",
+		], { mime: "image/webp", extension: "webp" });
+		exports.add("heif", ["0x66", "0x74", "0x79", "0x70", "0x6D", "0x69", "0x66", "0x31"], { mime: "image/heif", extension: "heif" }, 4);
+		exports.add("heif", ["0x66", "0x74", "0x79", "0x70", "0x68", "0x65", "0x69", "0x63"], { mime: "image/heif", extension: "heic" }, 4);
+		exports.add("rpm", ["0xed", "0xab", "0xee", "0xdb"]);
+		exports.add("bin", ["0x53", "0x50", "0x30", "0x31"], {
+		    mime: "application/octet-stream",
+		    extension: "bin",
+		});
+		exports.add("pic", ["0x00"]);
+		exports.add("pif", ["0x00"]);
+		exports.add("sea", ["0x00"]);
+		exports.add("ytr", ["0x00"]);
+		// 66747970
+		// 6D703432
+		exports.add("mp4", ["0x66", "0x74", "0x79", "0x70"], { mime: "video/mp4", extension: "mp4" }, 0x4);
+		exports.add("ttf", ["0x00", "0x01", "0x00", "0x00", "0x00"], {
+		    mime: "font/ttf",
+		    extension: "ttf",
+		});
+		exports.add("otf", ["0x4F", "0x54", "0x54", "0x4F"], {
+		    mime: "font/otf",
+		    extension: "otf",
+		});
+		exports.add("eot", ["0x50", "0x4C"], {
+		    mime: "application/vnd.ms-fontobject",
+		    extension: "eot",
+		});
+		exports.add("woff", ["0x77", "0x4F", "0x46", "0x46"], {
+		    mime: "font/woff",
+		    extension: "woff",
+		});
+		exports.add("woff2", ["0x77", "0x4F", "0x46", "0x32"], {
+		    mime: "font/woff2",
+		    extension: "woff2",
+		});
+		exports.add("pdb", [
+		    "0x00",
+		    "0x00",
+		    "0x00",
+		    "0x00",
+		    "0x00",
+		    "0x00",
+		    "0x00",
+		    "0x00",
+		    "0x00",
+		    "0x00",
+		    "0x00",
+		    "0x00",
+		    "0x00",
+		    "0x00",
+		    "0x00",
+		    "0x00",
+		    "0x00",
+		    "0x00",
+		    "0x00",
+		    "0x00",
+		    "0x00",
+		    "0x00",
+		    "0x00",
+		    "0x00",
+		]);
+		exports.add("dba", ["0xBE", "0xBA", "0xFE", "0xCA"]);
+		exports.add("dba2", ["0x00", "0x01", "0x42", "0x44"]);
+		exports.add("tda", ["0x00", "0x01", "0x44", "0x54"]);
+		exports.add("tda2", ["0x00", "0x01", "0x00", "0x00"]);
+		exports.add("ico", ["0x00", "0x00", "0x01", "0x00"], {
+		    mime: "image/x-icon",
+		    extension: "ico",
+		});
+		exports.add("3gp", ["0x66", "0x74", "0x79", "0x70", "0x33", "0x67"]);
+		exports.add("z", ["0x1F", "0x9D"]);
+		exports.add("tar.z", ["0x1F", "0xA0"]);
+		exports.add("bac", [
+		    "0x42",
+		    "0x41",
+		    "0x43",
+		    "0x4B",
+		    "0x4D",
+		    "0x49",
+		    "0x4B",
+		    "0x45",
+		    "0x44",
+		    "0x49",
+		    "0x53",
+		    "0x4B",
+		]);
+		exports.add("bz2", ["0x42", "0x5A", "0x68"], {
+		    mime: "application/x-bzip2",
+		    extension: "bz2",
+		});
+		exports.add("tif", ["0x49", "0x49", "0x2A", "0x00"], {
+		    mime: "image/tiff",
+		    extension: "tif",
+		});
+		exports.add("tiff", ["0x4D", "0x4D", "0x00", "0x2A"], {
+		    mime: "image/tiff",
+		    extension: "tiff",
+		});
+		exports.add("cr2", [
+		    "0x49",
+		    "0x49",
+		    "0x2A",
+		    "0x00",
+		    "0x10",
+		    "0x00",
+		    "0x00",
+		    "0x00",
+		    "0x43",
+		    "0x52",
+		]);
+		exports.add("cin", ["0x80", "0x2A", "0x5F", "0xD7"]);
+		exports.add("cin1", ["0x52", "0x4E", "0x43", "0x01"]);
+		exports.add("cin2", ["0x52", "0x4E", "0x43", "0x02"]);
+		exports.add("dpx", ["0x53", "0x44", "0x50", "0x58"]);
+		exports.add("dpx2", ["0x58", "0x50", "0x44", "0x53"]);
+		exports.add("exr", ["0x76", "0x2F", "0x31", "0x01"]);
+		exports.add("bpg", ["0x42", "0x50", "0x47", "0xFB"]);
+		exports.add("ilbm", [
+		    "0x46",
+		    "0x4F",
+		    "0x52",
+		    "0x4D",
+		    "?",
+		    "?",
+		    "?",
+		    "?",
+		    "0x49",
+		    "0x4C",
+		    "0x42",
+		    "0x4D",
+		]);
+		exports.add("8svx", [
+		    "0x46",
+		    "0x4F",
+		    "0x52",
+		    "0x4D",
+		    "?",
+		    "?",
+		    "?",
+		    "?",
+		    "0x38",
+		    "0x53",
+		    "0x56",
+		    "0x58",
+		]);
+		exports.add("acbm", [
+		    "0x46",
+		    "0x4F",
+		    "0x52",
+		    "0x4D",
+		    "?",
+		    "?",
+		    "?",
+		    "?",
+		    "0x41",
+		    "0x43",
+		    "0x42",
+		    "0x4D",
+		]);
+		exports.add("anbm", [
+		    "0x46",
+		    "0x4F",
+		    "0x52",
+		    "0x4D",
+		    "?",
+		    "?",
+		    "?",
+		    "?",
+		    "0x41",
+		    "0x4E",
+		    "0x42",
+		    "0x4D",
+		]);
+		exports.add("anim", [
+		    "0x46",
+		    "0x4F",
+		    "0x52",
+		    "0x4D",
+		    "?",
+		    "?",
+		    "?",
+		    "?",
+		    "0x41",
+		    "0x4E",
+		    "0x49",
+		    "0x4D",
+		]);
+		exports.add("faxx", [
+		    "0x46",
+		    "0x4F",
+		    "0x52",
+		    "0x4D",
+		    "?",
+		    "?",
+		    "?",
+		    "?",
+		    "0x46",
+		    "0x41",
+		    "0x58",
+		    "0x58",
+		]);
+		exports.add("ftxt", [
+		    "0x46",
+		    "0x4F",
+		    "0x52",
+		    "0x4D",
+		    "?",
+		    "?",
+		    "?",
+		    "?",
+		    "0x46",
+		    "0x54",
+		    "0x58",
+		    "0x54",
+		]);
+		exports.add("smus", [
+		    "0x46",
+		    "0x4F",
+		    "0x52",
+		    "0x4D",
+		    "?",
+		    "?",
+		    "?",
+		    "?",
+		    "0x53",
+		    "0x4D",
+		    "0x55",
+		    "0x53",
+		]);
+		exports.add("cmus", [
+		    "0x46",
+		    "0x4F",
+		    "0x52",
+		    "0x4D",
+		    "?",
+		    "?",
+		    "?",
+		    "?",
+		    "0x43",
+		    "0x4D",
+		    "0x55",
+		    "0x53",
+		]);
+		exports.add("yuvn", [
+		    "0x46",
+		    "0x4F",
+		    "0x52",
+		    "0x4D",
+		    "?",
+		    "?",
+		    "?",
+		    "?",
+		    "0x59",
+		    "0x55",
+		    "0x56",
+		    "0x4E",
+		]);
+		exports.add("iff", [
+		    "0x46",
+		    "0x4F",
+		    "0x52",
+		    "0x4D",
+		    "?",
+		    "?",
+		    "?",
+		    "?",
+		    "0x46",
+		    "0x41",
+		    "0x4E",
+		    "0x54",
+		]);
+		exports.add("aiff", [
+		    "0x46",
+		    "0x4F",
+		    "0x52",
+		    "0x4D",
+		    "?",
+		    "?",
+		    "?",
+		    "?",
+		    "0x41",
+		    "0x49",
+		    "0x46",
+		    "0x46",
+		], { mime: "audio/x-aiff", extension: "aiff" });
+		exports.add("idx", ["0x49", "0x4E", "0x44", "0x58"]);
+		exports.add("lz", ["0x4C", "0x5A", "0x49", "0x50"]);
+		exports.add("exe", ["0x4D", "0x5A"]);
+		exports.add("zip", ["0x50", "0x4B", "0x03", "0x04"], {
+		    mime: "application/zip",
+		    extension: "zip",
+		});
+		exports.add("zip", ["0x50", "0x4B", "0x05", "0x06"], {
+		    mime: "application/zip",
+		    extension: "zip",
+		});
+		exports.add("zip", ["0x50", "0x4B", "0x07", "0x08"], {
+		    mime: "application/zip",
+		    extension: "zip",
+		});
+		exports.add("jar", ["0x50", "0x4B", "0x03", "0x04"], {
+		    mime: "application/java-archive",
+		    extension: "jar",
+		});
+		exports.add("jar", ["0x50", "0x4B", "0x05", "0x06"], {
+		    mime: "application/java-archive",
+		    extension: "jar",
+		});
+		exports.add("jar", ["0x50", "0x4B", "0x07", "0x08"], {
+		    mime: "application/java-archive",
+		    extension: "jar",
+		});
+		exports.add("odt", ["0x50", "0x4B", "0x03", "0x04"], {
+		    mime: "application/vnd.oasis.opendocument.text",
+		    extension: "odt",
+		});
+		exports.add("odt", ["0x50", "0x4B", "0x05", "0x06"], {
+		    mime: "application/vnd.oasis.opendocument.text",
+		    extension: "odt",
+		});
+		exports.add("odt", ["0x50", "0x4B", "0x07", "0x08"], {
+		    mime: "application/vnd.oasis.opendocument.text",
+		    extension: "odt",
+		});
+		exports.add("ods", ["0x50", "0x4B", "0x03", "0x04"], {
+		    mime: "application/vnd.oasis.opendocument.spreadsheet",
+		    extension: "ods",
+		});
+		exports.add("ods", ["0x50", "0x4B", "0x05", "0x06"], {
+		    mime: "application/vnd.oasis.opendocument.spreadsheet",
+		    extension: "ods",
+		});
+		exports.add("ods", ["0x50", "0x4B", "0x07", "0x08"], {
+		    mime: "application/vnd.oasis.opendocument.spreadsheet",
+		    extension: "ods",
+		});
+		exports.add("odp", ["0x50", "0x4B", "0x03", "0x04"], {
+		    mime: "application/vnd.oasis.opendocument.presentation",
+		    extension: "odp",
+		});
+		exports.add("odp", ["0x50", "0x4B", "0x05", "0x06"], {
+		    mime: "application/vnd.oasis.opendocument.presentation",
+		    extension: "odp",
+		});
+		exports.add("odp", ["0x50", "0x4B", "0x07", "0x08"], {
+		    mime: "application/vnd.oasis.opendocument.presentation",
+		    extension: "odp",
+		});
+		exports.add("docx", ["0x50", "0x4B", "0x03", "0x04"], {
+		    mime: "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+		    extension: "docx",
+		});
+		exports.add("docx", ["0x50", "0x4B", "0x05", "0x06"], {
+		    mime: "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+		    extension: "docx",
+		});
+		exports.add("docx", ["0x50", "0x4B", "0x07", "0x08"], {
+		    mime: "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+		    extension: "docx",
+		});
+		exports.add("xlsx", ["0x50", "0x4B", "0x03", "0x04"], {
+		    mime: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+		    extension: "xlsx",
+		});
+		exports.add("xlsx", ["0x50", "0x4B", "0x05", "0x06"], {
+		    mime: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+		    extension: "xlsx",
+		});
+		exports.add("xlsx", ["0x50", "0x4B", "0x07", "0x08"], {
+		    mime: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+		    extension: "xlsx",
+		});
+		exports.add("pptx", ["0x50", "0x4B", "0x03", "0x04"], {
+		    mime: "application/vnd.openxmlformats-officedocument.presentationml.presentation",
+		    extension: "pptx",
+		});
+		exports.add("pptx", ["0x50", "0x4B", "0x05", "0x06"], {
+		    mime: "application/vnd.openxmlformats-officedocument.presentationml.presentation",
+		    extension: "pptx",
+		});
+		exports.add("pptx", ["0x50", "0x4B", "0x07", "0x08"], {
+		    mime: "application/vnd.openxmlformats-officedocument.presentationml.presentation",
+		    extension: "pptx",
+		});
+		exports.add("vsdx", ["0x50", "0x4B", "0x03", "0x04"], {
+		    mime: "application/vnd.ms-visio.drawing",
+		    extension: "vsdx",
+		});
+		exports.add("vsdx", ["0x50", "0x4B", "0x05", "0x06"], {
+		    mime: "application/vnd.ms-visio.drawing",
+		    extension: "vsdx",
+		});
+		exports.add("vsdx", ["0x50", "0x4B", "0x07", "0x08"], {
+		    mime: "application/vnd.ms-visio.drawing",
+		    extension: "vsdx",
+		});
+		exports.add("apk", ["0x50", "0x4B", "0x03", "0x04"], {
+		    mime: "application/vnd.android.package-archive",
+		    extension: "apk",
+		});
+		exports.add("apk", ["0x50", "0x4B", "0x05", "0x06"], {
+		    mime: "application/vnd.android.package-archive",
+		    extension: "apk",
+		});
+		exports.add("apk", ["0x50", "0x4B", "0x07", "0x08"], {
+		    mime: "application/vnd.android.package-archive",
+		    extension: "apk",
+		});
+		exports.add("aar", ["0x50", "0x4B", "0x03", "0x04"], {
+		    mime: "application/vnd.android.package-archive",
+		    extension: "aar",
+		});
+		exports.add("aar", ["0x50", "0x4B", "0x05", "0x06"], {
+		    mime: "application/vnd.android.package-archive",
+		    extension: "aar",
+		});
+		exports.add("aar", ["0x50", "0x4B", "0x07", "0x08"], {
+		    mime: "application/vnd.android.package-archive",
+		    extension: "aar",
+		});
+		exports.add("rar", ["0x52", "0x61", "0x72", "0x21", "0x1A", "0x07", "0x00"], {
+		    mime: "application/vnd.rar",
+		    extension: "rar",
+		});
+		exports.add("rar", ["0x52", "0x61", "0x72", "0x21", "0x1A", "0x07", "0x01", "0x00"], {
+		    mime: "application/vnd.rar",
+		    extension: "rar",
+		});
+		exports.add("rar", ["0x7F", "0x45", "0x4C", "0x46"], {
+		    mime: "application/vnd.rar",
+		    extension: "rar",
+		});
+		exports.add("png", ["0x89", "0x50", "0x4E", "0x47", "0x0D", "0x0A", "0x1A", "0x0A"], {
+		    mime: "image/png",
+		    extension: "png",
+		});
+		exports.add("apng", ["0x89", "0x50", "0x4E", "0x47", "0x0D", "0x0A", "0x1A", "0x0A"], {
+		    mime: "image/apng",
+		    extension: "apng",
+		});
+		exports.add("class", ["0xCA", "0xFE", "0xBA", "0xBE"]);
+		exports.add("class", ["0xEF", "0xBB", "0xBF"]);
+		exports.add("class", ["0xFE", "0xed", "0xFA", "0xCE"], undefined, 0x1000);
+		exports.add("class", ["0xFE", "0xed", "0xFA", "0xCF"], undefined, 0x1000);
+		exports.add("class", ["0xCE", "0xFA", "0xed", "0xFE"]);
+		exports.add("class", ["0xCF", "0xFA", "0xed", "0xFE"]);
+		exports.add("class", ["0xFF", "0xFE"]);
+		exports.add("class", ["0xFF", "0xFE"]);
+		exports.add("class", ["0xFF", "0xFE", "0x00", "0x00"]);
+		exports.add("ps", ["0x25", "0x21", "0x50", "0x53"], {
+		    mime: "application/postscript",
+		    extension: ".ps",
+		});
+		exports.add("pdf", ["0x25", "0x50", "0x44", "0x46"], {
+		    mime: "application/pdf",
+		    extension: "pdf",
+		});
+		exports.add("asf", [
+		    "0x30",
+		    "0x26",
+		    "0xB2",
+		    "0x75",
+		    "0x8E",
+		    "0x66",
+		    "0xCF",
+		    "0x11",
+		    "0xA6",
+		    "0xD9",
+		    "0x00",
+		    "0xAA",
+		    "0x00",
+		    "0x62",
+		    "0xCE",
+		    "0x6C",
+		]);
+		exports.add("wma", [
+		    "0x30",
+		    "0x26",
+		    "0xB2",
+		    "0x75",
+		    "0x8E",
+		    "0x66",
+		    "0xCF",
+		    "0x11",
+		    "0xA6",
+		    "0xD9",
+		    "0x00",
+		    "0xAA",
+		    "0x00",
+		    "0x62",
+		    "0xCE",
+		    "0x6C",
+		]);
+		exports.add("wmv", [
+		    "0x30",
+		    "0x26",
+		    "0xB2",
+		    "0x75",
+		    "0x8E",
+		    "0x66",
+		    "0xCF",
+		    "0x11",
+		    "0xA6",
+		    "0xD9",
+		    "0x00",
+		    "0xAA",
+		    "0x00",
+		    "0x62",
+		    "0xCE",
+		    "0x6C",
+		]);
+		exports.add("deploymentimage", [
+		    "0x24",
+		    "0x53",
+		    "0x44",
+		    "0x49",
+		    "0x30",
+		    "0x30",
+		    "0x30",
+		    "0x31",
+		]);
+		// ogg video ' theora'
+		exports.add("ogv", [
+		    "0x4F",
+		    "0x67",
+		    "0x67",
+		    "0x53",
+		    "?",
+		    "?",
+		    "?",
+		    "?",
+		    "?",
+		    "?",
+		    "?",
+		    "?",
+		    "?",
+		    "?",
+		    "?",
+		    "?",
+		    "?",
+		    "?",
+		    "?",
+		    "?",
+		    "?",
+		    "?",
+		    "?",
+		    "?",
+		    "?",
+		    "?",
+		    "?",
+		    "?",
+		    "0x80",
+		    "0x74",
+		    "0x68",
+		    "0x65",
+		    "0x6F",
+		    "0x72",
+		    "0x61",
+		], {
+		    mime: "video/ogg",
+		    extension: "ogv",
+		});
+		// ogg video '\x01video'
+		exports.add("ogm", [
+		    "0x4F",
+		    "0x67",
+		    "0x67",
+		    "0x53",
+		    "?",
+		    "?",
+		    "?",
+		    "?",
+		    "?",
+		    "?",
+		    "?",
+		    "?",
+		    "?",
+		    "?",
+		    "?",
+		    "?",
+		    "?",
+		    "?",
+		    "?",
+		    "?",
+		    "?",
+		    "?",
+		    "?",
+		    "?",
+		    "?",
+		    "?",
+		    "?",
+		    "?",
+		    "0x01",
+		    "0x76",
+		    "0x69",
+		    "0x64",
+		    "0x65",
+		    "0x6F",
+		    "0x00",
+		], {
+		    mime: "video/ogg",
+		    extension: "ogm",
+		});
+		// ogg audio ' FLAC'
+		exports.add("oga", [
+		    "0x4F",
+		    "0x67",
+		    "0x67",
+		    "0x53",
+		    "?",
+		    "?",
+		    "?",
+		    "?",
+		    "?",
+		    "?",
+		    "?",
+		    "?",
+		    "?",
+		    "?",
+		    "?",
+		    "?",
+		    "?",
+		    "?",
+		    "?",
+		    "?",
+		    "?",
+		    "?",
+		    "?",
+		    "?",
+		    "?",
+		    "?",
+		    "?",
+		    "?",
+		    "0x7F",
+		    "0x46",
+		    "0x4C",
+		    "0x41",
+		    "0x43",
+		], {
+		    mime: "audio/ogg",
+		    extension: "oga",
+		});
+		// ogg audio 'Speex  '
+		exports.add("spx", [
+		    "0x4F",
+		    "0x67",
+		    "0x67",
+		    "0x53",
+		    "?",
+		    "?",
+		    "?",
+		    "?",
+		    "?",
+		    "?",
+		    "?",
+		    "?",
+		    "?",
+		    "?",
+		    "?",
+		    "?",
+		    "?",
+		    "?",
+		    "?",
+		    "?",
+		    "?",
+		    "?",
+		    "?",
+		    "?",
+		    "?",
+		    "?",
+		    "?",
+		    "?",
+		    "0x53",
+		    "0x70",
+		    "0x65",
+		    "0x65",
+		    "0x78",
+		    "0x20",
+		    "0x20",
+		], {
+		    mime: "audio/ogg",
+		    extension: "spx",
+		});
+		// ogg audio '\x01vorbis '
+		exports.add("ogg", [
+		    "0x4F",
+		    "0x67",
+		    "0x67",
+		    "0x53",
+		    "?",
+		    "?",
+		    "?",
+		    "?",
+		    "?",
+		    "?",
+		    "?",
+		    "?",
+		    "?",
+		    "?",
+		    "?",
+		    "?",
+		    "?",
+		    "?",
+		    "?",
+		    "?",
+		    "?",
+		    "?",
+		    "?",
+		    "?",
+		    "?",
+		    "?",
+		    "?",
+		    "?",
+		    "0x01",
+		    "0x76",
+		    "0x6F",
+		    "0x72",
+		    "0x62",
+		    "0x69",
+		    "0x73",
+		], {
+		    mime: "audio/ogg",
+		    extension: "ogg",
+		});
+		// default OGG container
+		exports.add("ogx", ["0x4F", "0x67", "0x67", "0x53"], {
+		    mime: "application/ogg",
+		    extension: "ogx",
+		});
+		exports.add("psd", ["0x38", "0x42", "0x50", "0x53"], {
+		    mime: "application/x-photoshop",
+		    extension: "psd",
+		});
+		exports.add("clip", ["0x43", "0x53", "0x46", "0x43", "0x48", "0x55", "0x4e", "0x4b"]);
+		exports.add("wav", [
+		    "0x52",
+		    "0x49",
+		    "0x46",
+		    "0x46",
+		    "?",
+		    "?",
+		    "?",
+		    "?",
+		    "0x57",
+		    "0x41",
+		    "0x56",
+		    "0x45",
+		], { mime: "audio/x-wav", extension: "wav" });
+		exports.add("avi", [
+		    "0x52",
+		    "0x49",
+		    "0x46",
+		    "0x46",
+		    "?",
+		    "?",
+		    "?",
+		    "?",
+		    "0x41",
+		    "0x56",
+		    "0x49",
+		    "0x20",
+		], { mime: "video/x-msvideo", extension: "avi" });
+		exports.add("mp3", ["0xFF", "0xFB"], { mime: "audio/mpeg", extension: "mp3" });
+		exports.add("mp3", ["0xFF", "0xF3"], { mime: "audio/mpeg", extension: "mp3" });
+		exports.add("mp3", ["0xFF", "0xF2"], { mime: "audio/mpeg", extension: "mp3" });
+		exports.add("mp3", ["0x49", "0x44", "0x33"], { mime: "audio/mpeg", extension: "mp3" });
+		exports.add("bmp", ["0x42", "0x4D"], { mime: "image/bmp", extension: "bmp" });
+		exports.add("iso", ["0x43", "0x44", "0x30", "0x30", "0x31"]);
+		exports.add("flac", ["0x66", "0x4C", "0x61", "0x43"]);
+		exports.add("mid", ["0x4D", "0x54", "0x68", "0x64"], {
+		    mime: "audio/midi",
+		    extension: "mid",
+		});
+		exports.add("midi", ["0x4D", "0x54", "0x68", "0x64"], {
+		    mime: "audio/midi",
+		    extension: "midi",
+		});
+		exports.add("doc", ["0xD0", "0xCF", "0x11", "0xE0", "0xA1", "0xB1", "0x1A", "0xE1"], {
+		    mime: "application/msword",
+		    extension: "doc",
+		});
+		exports.add("xls", ["0xD0", "0xCF", "0x11", "0xE0", "0xA1", "0xB1", "0x1A", "0xE1"], {
+		    mime: "application/vnd.ms-excel",
+		    extension: "xls",
+		});
+		exports.add("ppt", ["0xD0", "0xCF", "0x11", "0xE0", "0xA1", "0xB1", "0x1A", "0xE1"], {
+		    mime: "application/vnd.ms-powerpoint",
+		    extension: "ppt",
+		});
+		exports.add("msg", ["0xD0", "0xCF", "0x11", "0xE0", "0xA1", "0xB1", "0x1A", "0xE1"]);
+		exports.add("dex", ["0x64", "0x65", "0x78", "0x0A", "0x30", "0x33", "0x35", "0x00"]);
+		exports.add("vmdk", ["0x4B", "0x44", "0x4D"]);
+		exports.add("crx", ["0x43", "0x72", "0x32", "0x34"]);
+		exports.add("fh8", ["0x41", "0x47", "0x44", "0x33"]);
+		exports.add("cwk", [
+		    "0x05",
+		    "0x07",
+		    "0x00",
+		    "0x00",
+		    "0x42",
+		    "0x4F",
+		    "0x42",
+		    "0x4F",
+		    "0x05",
+		    "0x07",
+		    "0x00",
+		    "0x00",
+		    "0x00",
+		    "0x00",
+		    "0x00",
+		    "0x00",
+		    "0x00",
+		    "0x00",
+		    "0x00",
+		    "0x00",
+		    "0x00",
+		    "0x01",
+		]);
+		exports.add("cwk", [
+		    "0x06",
+		    "0x07",
+		    "0xE1",
+		    "0x00",
+		    "0x42",
+		    "0x4F",
+		    "0x42",
+		    "0x4F",
+		    "0x06",
+		    "0x07",
+		    "0xE1",
+		    "0x00",
+		    "0x00",
+		    "0x00",
+		    "0x00",
+		    "0x00",
+		    "0x00",
+		    "0x00",
+		    "0x00",
+		    "0x00",
+		    "0x00",
+		    "0x01",
+		]);
+		exports.add("toast", ["0x45", "0x52", "0x02", "0x00", "0x00", "0x00"]);
+		exports.add("toast", ["0x8B", "0x45", "0x52", "0x02", "0x00", "0x00", "0x00"]);
+		exports.add("dmg", ["0x78", "0x01", "0x73", "0x0D", "0x62", "0x62", "0x60"]);
+		exports.add("xar", ["0x78", "0x61", "0x72", "0x21"]);
+		exports.add("dat", ["0x50", "0x4D", "0x4F", "0x43", "0x43", "0x4D", "0x4F", "0x43"]);
+		exports.add("nes", ["0x4E", "0x45", "0x53", "0x1A"]);
+		exports.add("tar", ["0x75", "0x73", "0x74", "0x61", "0x72", "0x00", "0x30", "0x30"], {
+		    // As per Mozilla documentation available at:
+		    // https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types/Common_types
+		    // or wikipedia page:
+		    // https://en.wikipedia.org/wiki/List_of_archive_formats
+		    mime: "application/x-tar",
+		    extension: "tar",
+		}, 0x101);
+		exports.add("tar", ["0x75", "0x73", "0x74", "0x61", "0x72", "0x20", "0x20", "0x00"], {
+		    mime: "application/x-tar",
+		    extension: "tar",
+		}, 0x101);
+		exports.add("tox", ["0x74", "0x6F", "0x78", "0x33"]);
+		exports.add("mlv", ["0x4D", "0x4C", "0x56", "0x49"]);
+		exports.add("windowsupdate", [
+		    "0x44",
+		    "0x43",
+		    "0x4D",
+		    "0x01",
+		    "0x50",
+		    "0x41",
+		    "0x33",
+		    "0x30",
+		]);
+		exports.add("7z", ["0x37", "0x7A", "0xBC", "0xAF", "0x27", "0x1C"], {
+		    mime: "application/x-7z-compressed",
+		    extension: "7z",
+		});
+		exports.add("gz", ["0x1F", "0x8B"], { mime: "application/gzip", extension: "gz" });
+		exports.add("tar.gz", ["0x1F", "0x8B"], {
+		    mime: "application/gzip",
+		    extension: "tar.gz",
+		});
+		exports.add("xz", ["0xFD", "0x37", "0x7A", "0x58", "0x5A", "0x00", "0x00"], {
+		    mime: "application/gzip",
+		    extension: "xz",
+		});
+		exports.add("tar.xz", ["0xFD", "0x37", "0x7A", "0x58", "0x5A", "0x00", "0x00"], {
+		    mime: "application/gzip",
+		    extension: "tar.xz",
+		});
+		exports.add("lz2", ["0x04", "0x22", "0x4D", "0x18"]);
+		exports.add("cab", ["0x4D", "0x53", "0x43", "0x46"]);
+		exports.add("mkv", ["0x1A", "0x45", "0xDF", "0xA3"], {
+		    mime: "video/x-matroska",
+		    extension: "mkv",
+		});
+		exports.add("mka", ["0x1A", "0x45", "0xDF", "0xA3"], {
+		    mime: "audio/x-matroska",
+		    extension: "mka",
+		});
+		exports.add("mks", ["0x1A", "0x45", "0xDF", "0xA3"], {
+		    mime: "video/x-matroska",
+		    extension: "mks",
+		});
+		exports.add("mk3d", ["0x1A", "0x45", "0xDF", "0xA3"]);
+		exports.add("webm", ["0x1A", "0x45", "0xDF", "0xA3"], {
+		    mime: "audio/webm",
+		    extension: "webm",
+		});
+		exports.add("dcm", ["0x44", "0x49", "0x43", "0x4D"], undefined, 0x80);
+		exports.add("xml", ["0x3C", "0x3f", "0x78", "0x6d", "0x6C", "0x20"], {
+		    mime: "application/xml",
+		    extension: "xml",
+		});
+		exports.add("wasm", ["0x00", "0x61", "0x73", "0x6d"], {
+		    mime: "application/wasm",
+		    extension: "wasm",
+		});
+		exports.add("lep", ["0xCF", "0x84", "0x01"]);
+		exports.add("swf", ["0x43", "0x57", "0x53"], {
+		    mime: "application/x-shockwave-flash",
+		    extension: "swf",
+		});
+		exports.add("swf", ["0x46", "0x57", "0x53"], {
+		    mime: "application/x-shockwave-flash",
+		    extension: "swf",
+		});
+		exports.add("deb", ["0x21", "0x3C", "0x61", "0x72", "0x63", "0x68", "0x3E"]);
+		exports.add("rtf", ["0x7B", "0x5C", "0x72", "0x74", "0x66", "0x31"], {
+		    mime: "application/rtf",
+		    extension: "rtf",
+		});
+		exports.add("m2p", ["0x00", "0x00", "0x01", "0xBA"]);
+		exports.add("vob", ["0x00", "0x00", "0x01", "0xBA"]);
+		exports.add("mpg", ["0x00", "0x00", "0x01", "0xBA"], {
+		    mime: "video/mpeg",
+		    extension: "mpg",
+		});
+		exports.add("mpeg", ["0x00", "0x00", "0x01", "0xBA"], {
+		    mime: "video/mpeg",
+		    extension: "mpeg",
+		});
+		exports.add("mpeg", ["0x47"], { mime: "video/mpeg", extension: "mpeg" });
+		exports.add("mpeg", ["0x00", "0x00", "0x01", "0xB3"], {
+		    mime: "video/mpeg",
+		    extension: "mpeg",
+		});
+		// mov 'free' TODO: find test file
+		exports.add("mov", ["0x66", "0x72", "0x65", "0x65"], {
+		    mime: "video/quicktime",
+		    extension: "mov",
+		}, 0x4);
+		// mov 'mdat'
+		exports.add("mov", ["0x6D", "0x64", "0x61", "0x74"], {
+		    mime: "video/quicktime",
+		    extension: "mov",
+		}, 0x4);
+		// mov 'moov' TODO: find test file
+		exports.add("mov", ["0x6D", "0x6F", "0x6F", "0x76"], {
+		    mime: "video/quicktime",
+		    extension: "mov",
+		}, 0x4);
+		// move 'wide' TODO: find test file
+		exports.add("mov", ["0x77", "0x69", "0x64", "0x65"], {
+		    mime: "video/quicktime",
+		    extension: "mov",
+		}, 0x4);
+		// mov 'ftypqt'
+		exports.add("mov", ["0x66", "0x74", "0x79", "0x70", "0x71", "0x74"], {
+		    mime: "video/quicktime",
+		    extension: "mov",
+		}, 0x4);
+		exports.add("hl2demo", ["0x48", "0x4C", "0x32", "0x44", "0x45", "0x4D", "0x4F"]);
+		exports.add("txt", ["0xEF", "0xBB", "0xBF"], {
+		    mime: "text/plain; charset=UTF-8",
+		    extension: "txt",
+		});
+		exports.add("txt", ["0xFF", "0xFE"], {
+		    mime: "text/plain; charset=UTF-16LE",
+		    extension: "txt",
+		});
+		exports.add("txt", ["0xFE", "0xFF"], {
+		    mime: "text/plain; charset=UTF-16BE",
+		    extension: "txt",
+		});
+		exports.add("txt", ["0xFF", "0xFE", "0x00", "0x00"], {
+		    mime: "text/plain; charset=UTF-32LE",
+		    extension: "txt",
+		});
+		exports.add("txt", ["0x00", "0x00", "0xFE", "0xFF"], {
+		    mime: "text/plain; charset=UTF-32BE",
+		    extension: "txt",
+		});
+		exports.add("SubRip", ["0x31", "0x0D", "0x0A", "0x30", "0x30", "0x3A"], {
+		    mime: "application/x-subrip",
+		    extension: "srt",
+		});
+		exports.add("WebVTT", [
+		    "0xEF",
+		    "0xBB",
+		    "0xBF",
+		    "0x57",
+		    "0x45",
+		    "0x42",
+		    "0x56",
+		    "0x54",
+		    "0x54",
+		    "0x0A",
+		], {
+		    mime: "text/vtt",
+		    extension: "vtt",
+		});
+		exports.add("WebVTT", [
+		    "0xEF",
+		    "0xBB",
+		    "0xBF",
+		    "0x57",
+		    "0x45",
+		    "0x42",
+		    "0x56",
+		    "0x54",
+		    "0x54",
+		    "0x0D",
+		], {
+		    mime: "text/vtt",
+		    extension: "vtt",
+		});
+		exports.add("WebVTT", [
+		    "0xEF",
+		    "0xBB",
+		    "0xBF",
+		    "0x57",
+		    "0x45",
+		    "0x42",
+		    "0x56",
+		    "0x54",
+		    "0x54",
+		    "0x20",
+		], {
+		    mime: "text/vtt",
+		    extension: "vtt",
+		});
+		exports.add("WebVTT", [
+		    "0xEF",
+		    "0xBB",
+		    "0xBF",
+		    "0x57",
+		    "0x45",
+		    "0x42",
+		    "0x56",
+		    "0x54",
+		    "0x54",
+		    "0x09",
+		], {
+		    mime: "text/vtt",
+		    extension: "vtt",
+		});
+		exports.add("WebVTT", ["0x57", "0x45", "0x42", "0x56", "0x54", "0x54", "0x0A"], {
+		    mime: "text/vtt",
+		    extension: "vtt",
+		});
+		exports.add("WebVTT", ["0x57", "0x45", "0x42", "0x56", "0x54", "0x54", "0x0D"], {
+		    mime: "text/vtt",
+		    extension: "vtt",
+		});
+		exports.add("WebVTT", ["0x57", "0x45", "0x42", "0x56", "0x54", "0x54", "0x20"], {
+		    mime: "text/vtt",
+		    extension: "vtt",
+		});
+		exports.add("WebVTT", ["0x57", "0x45", "0x42", "0x56", "0x54", "0x54", "0x09"], {
+		    mime: "text/vtt",
+		    extension: "vtt",
+		});
+		exports.add("Json", ["0x7B"], {
+		    mime: "application/json",
+		    extension: ".json",
+		});
+		exports.add("Json", ["0x5B"], {
+		    mime: "application/json",
+		    extension: ".json",
+		});
+		exports.add("ELF", ["0x7F", "0x45", "0x4C", "0x46"], {
+		    mime: "application/x-executable",
+		    extension: ".elf",
+		});
+		exports.add("Mach-O", ["0xFE", "0xED", "0xFA", "0xC"], {
+		    mime: "application/x-mach-binary",
+		    extension: ".o",
+		});
+		exports.add("Mach-O", ["0xFE", "0xED", "0xFA", "0xCF"], {
+		    mime: "application/x-executable",
+		    extension: "elf",
+		});
+		exports.add("EML", ["0x52", "0x65", "0x63", "0x65", "0x69", "0x76", "0x65", "0x64", "0x3A"], {
+		    mime: "message/rfc822",
+		    extension: ".eml",
+		});
+		exports.add("SVG", ["0x3c", "0x73", "0x76", "0x67"], {
+		    mime: "image/svg+xml",
+		    extension: "svg",
+		});
+		exports.add("avif", ["0x66", "0x74", "0x79", "0x70", "0x61", "0x76", "0x69", "0x66"], {
+		    mime: "image/avif",
+		    extension: "avif",
+		}, 4);
+		const createTree = () => tree;
+		exports.createTree = createTree;
+		exports.default = () => tree; 
+	} (patternTree));
 	return patternTree;
 }
 
@@ -36386,14 +36941,11 @@ function requireDist$8 () {
 	if (hasRequiredDist$8) return dist$7;
 	hasRequiredDist$8 = 1;
 	(function (exports) {
-		var __importDefault = (dist$7 && dist$7.__importDefault) || function (mod) {
-		    return (mod && mod.__esModule) ? mod : { "default": mod };
-		};
 		Object.defineProperty(exports, "__esModule", { value: true });
-		exports.filetypeextension = exports.filetypemime = exports.filetypename = exports.filetypeinfo = void 0;
-		const pattern_tree_1 = __importDefault(requirePatternTree());
+		exports.register = exports.filetypeextension = exports.filetypemime = exports.filetypename = exports.filetypeinfo = void 0;
+		const pattern_tree_1 = requirePatternTree();
 		const toHex_1 = requireToHex();
-		const patternTree = pattern_tree_1.default();
+		const patternTree = pattern_tree_1.createTree();
 		const filetypeinfo = (bytes) => {
 		    let tree = patternTree;
 		    for (const k of Object.keys(tree.offset)) {
@@ -36444,7 +36996,11 @@ function requireDist$8 () {
 		const filetypeextension = (bytes) => exports.filetypeinfo(bytes)
 		    .map((e) => (e.extension ? e.extension : null))
 		    .filter((x) => x !== null);
-		exports.filetypeextension = filetypeextension; 
+		exports.filetypeextension = filetypeextension;
+		const register = (typename, signature, additionalInfo, offset) => {
+		    pattern_tree_1.add(typename, signature, additionalInfo, offset);
+		};
+		exports.register = register; 
 	} (dist$7));
 	return dist$7;
 }
@@ -36657,10 +37213,13 @@ function requireWeb () {
 	}
 	__name(getDefaultStrategy, "getDefaultStrategy");
 
+	// src/lib/CDN.ts
+	var import_v102 = requireV10();
+
 	// src/lib/utils/constants.ts
 	var import_util = requireDist$b();
 	var import_v10 = requireV10();
-	var DefaultUserAgent = `DiscordBot (https://discord.js.org, 2.4.3)`;
+	var DefaultUserAgent = `DiscordBot (https://discord.js.org, 2.5.0)`;
 	var DefaultUserAgentAppendix = (0, import_util.getUserAgentAppendix)();
 	var DefaultRestOptions = {
 	  agent: null,
@@ -36698,7 +37257,17 @@ function requireWeb () {
 	})(RESTEvents || {});
 	var ALLOWED_EXTENSIONS = ["webp", "png", "jpg", "jpeg", "gif"];
 	var ALLOWED_STICKER_EXTENSIONS = ["png", "json", "gif"];
-	var ALLOWED_SIZES = [16, 32, 64, 128, 256, 512, 1024, 2048, 4096];
+	var ALLOWED_SIZES = [
+	  16,
+	  32,
+	  64,
+	  128,
+	  256,
+	  512,
+	  1024,
+	  2048,
+	  4096
+	];
 	var OverwrittenMimeTypes = {
 	  // https://github.com/discordjs/discord.js/issues/8557
 	  "image/apng": "image/png"
@@ -37057,6 +37626,14 @@ function requireWeb () {
 	   */
 	  guildScheduledEventCover(scheduledEventId, coverHash, options) {
 	    return this.makeURL(`/guild-events/${scheduledEventId}/${coverHash}`, options);
+	  }
+	  /**
+	   * Generates a URL for a soundboard sound.
+	   *
+	   * @param soundId - The soundboard sound id
+	   */
+	  soundboardSound(soundId) {
+	    return `${this.cdn}${import_v102.CDNRoutes.soundboardSound(soundId)}`;
 	  }
 	  /**
 	   * Constructs the URL for the resource, checking whether or not `hash` starts with `a_` if `dynamic` is set to `true`.
@@ -37982,7 +38559,7 @@ ${flattened}` : error.message || flattened || "Unknown Error";
 	};
 
 	// src/shared.ts
-	var version = "2.4.3";
+	var version = "2.5.0";
 
 	// src/web.ts
 	setDefaultStrategy(fetch);
@@ -38105,6 +38682,7 @@ function requireErrorCodes () {
 	 * @property {'GuildChannelUnowned'} GuildChannelUnowned
 	 * @property {'GuildOwned'} GuildOwned
 	 * @property {'GuildMembersTimeout'} GuildMembersTimeout
+	 * @property {'GuildSoundboardSoundsTimeout'} GuildSoundboardSoundsTimeout
 	 * @property {'GuildUncachedMe'} GuildUncachedMe
 	 * @property {'ChannelNotCached'} ChannelNotCached
 	 * @property {'StageChannelResolve'} StageChannelResolve
@@ -38130,6 +38708,8 @@ function requireErrorCodes () {
 	 * @property {'MissingManageEmojisAndStickersPermission'} MissingManageEmojisAndStickersPermission
 	 * <warn>This property is deprecated. Use `MissingManageGuildExpressionsPermission` instead.</warn>
 	 *
+
+	 * @property {'NotGuildSoundboardSound'} NotGuildSoundboardSound
 	 * @property {'NotGuildSticker'} NotGuildSticker
 
 	 * @property {'ReactionResolveUser'} ReactionResolveUser
@@ -38265,6 +38845,7 @@ function requireErrorCodes () {
 	  'GuildChannelUnowned',
 	  'GuildOwned',
 	  'GuildMembersTimeout',
+	  'GuildSoundboardSoundsTimeout',
 	  'GuildUncachedMe',
 	  'ChannelNotCached',
 	  'StageChannelResolve',
@@ -38289,6 +38870,7 @@ function requireErrorCodes () {
 	  'MissingManageGuildExpressionsPermission',
 	  'MissingManageEmojisAndStickersPermission',
 
+	  'NotGuildSoundboardSound',
 	  'NotGuildSticker',
 
 	  'ReactionResolveUser',
@@ -38445,6 +39027,7 @@ function requireMessages () {
 	  [DjsErrorCodes.GuildChannelUnowned]: "The fetched channel does not belong to this manager's guild.",
 	  [DjsErrorCodes.GuildOwned]: 'Guild is owned by the client.',
 	  [DjsErrorCodes.GuildMembersTimeout]: "Members didn't arrive in time.",
+	  [DjsErrorCodes.GuildSoundboardSoundsTimeout]: "Soundboard sounds didn't arrive in time.",
 	  [DjsErrorCodes.GuildUncachedMe]: 'The client user as a member of this guild is uncached.',
 	  [DjsErrorCodes.ChannelNotCached]: 'Could not find the channel where this message came from in the cache!',
 	  [DjsErrorCodes.StageChannelResolve]: 'Could not resolve channel to a stage channel.',
@@ -38472,6 +39055,8 @@ function requireMessages () {
 	  [DjsErrorCodes.MissingManageEmojisAndStickersPermission]: guild =>
 	    `Client must have Manage Emojis and Stickers permission in guild ${guild} to see emoji authors.`,
 
+	  [DjsErrorCodes.NotGuildSoundboardSound]: action =>
+	    `Soundboard sound is a default (non-guild) soundboard sound and can't be ${action}.`,
 	  [DjsErrorCodes.NotGuildSticker]: 'Sticker is a standard (non-guild) sticker and has no author.',
 
 	  [DjsErrorCodes.ReactionResolveUser]: "Couldn't resolve the user id to remove from the reaction.",
@@ -39144,7 +39729,7 @@ function requireTransformers () {
 	return Transformers;
 }
 
-var version = "14.18.0";
+var version = "14.19.1";
 var require$$39 = {
 	version: version};
 
@@ -42771,7 +43356,7 @@ function requireConnect () {
 	    let socket;
 	    if (protocol === 'https:') {
 	      if (!tls) {
-	        tls = require$$5$3;
+	        tls = require$$5$2;
 	      }
 	      servername = servername || options.servername || util.getServerName(host) || null;
 
@@ -44196,7 +44781,7 @@ function requireWebidl () {
 	hasRequiredWebidl = 1;
 
 	const { types, inspect } = require$$1$3;
-	const { markAsUncloneable } = require$$5$4;
+	const { markAsUncloneable } = require$$5$3;
 	const { toUSVString } = requireUtil$8();
 
 	/** @type {import('../../../types/webidl').Webidl} */
@@ -44903,7 +45488,7 @@ function requireUtil$7 () {
 	const { redirectStatusSet, referrerPolicySet: referrerPolicyTokens, badPortsSet } = requireConstants$4();
 	const { getGlobalOrigin } = requireGlobal$1();
 	const { collectASequenceOfCodePoints, collectAnHTTPQuotedString, removeChars, parseMIMEType } = requireDataUrl();
-	const { performance } = require$$5$5;
+	const { performance } = require$$5$4;
 	const { isBlobLike, ReadableStreamFrom, isValidHTTPToken, normalizedMethodRecordsBase } = requireUtil$8();
 	const assert = require$$0$e;
 	const { isUint8Array } = require$$8$1;
@@ -53092,7 +53677,7 @@ function requireApiRequest () {
 	const { InvalidArgumentError, RequestAbortedError } = requireErrors();
 	const util = requireUtil$8();
 	const { getResolveErrorBodyCallback } = requireUtil$6();
-	const { AsyncResource } = require$$5$6;
+	const { AsyncResource } = require$$5$5;
 
 	class RequestHandler extends AsyncResource {
 	  constructor (opts, callback) {
@@ -53380,7 +53965,7 @@ function requireApiStream () {
 	const { InvalidArgumentError, InvalidReturnValueError } = requireErrors();
 	const util = requireUtil$8();
 	const { getResolveErrorBodyCallback } = requireUtil$6();
-	const { AsyncResource } = require$$5$6;
+	const { AsyncResource } = require$$5$5;
 	const { addSignal, removeSignal } = requireAbortSignal();
 
 	class StreamHandler extends AsyncResource {
@@ -53614,7 +54199,7 @@ function requireApiPipeline () {
 	  RequestAbortedError
 	} = requireErrors();
 	const util = requireUtil$8();
-	const { AsyncResource } = require$$5$6;
+	const { AsyncResource } = require$$5$5;
 	const { addSignal, removeSignal } = requireAbortSignal();
 	const assert = require$$0$e;
 
@@ -53863,7 +54448,7 @@ function requireApiUpgrade () {
 	hasRequiredApiUpgrade = 1;
 
 	const { InvalidArgumentError, SocketError } = requireErrors();
-	const { AsyncResource } = require$$5$6;
+	const { AsyncResource } = require$$5$5;
 	const util = requireUtil$8();
 	const { addSignal, removeSignal } = requireAbortSignal();
 	const assert = require$$0$e;
@@ -53979,7 +54564,7 @@ function requireApiConnect () {
 	hasRequiredApiConnect = 1;
 
 	const assert = require$$0$e;
-	const { AsyncResource } = require$$5$6;
+	const { AsyncResource } = require$$5$5;
 	const { InvalidArgumentError, SocketError } = requireErrors();
 	const util = requireUtil$8();
 	const { addSignal, removeSignal } = requireAbortSignal();
@@ -60826,7 +61411,7 @@ function requireUtil$5 () {
 	const { getEncoding } = requireEncoding();
 	const { serializeAMimeType, parseMIMEType } = requireDataUrl();
 	const { types } = require$$1$3;
-	const { StringDecoder } = require$$6;
+	const { StringDecoder } = require$$6$1;
 	const { btoa } = require$$0$d;
 
 	/** @type {PropertyDescriptor} */
@@ -63489,7 +64074,7 @@ function requireEvents$1 () {
 	const { webidl } = requireWebidl();
 	const { kEnumerableProperty } = requireUtil$8();
 	const { kConstruct } = requireSymbols$5();
-	const { MessagePort } = require$$5$4;
+	const { MessagePort } = require$$5$3;
 
 	/**
 	 * @see https://html.spec.whatwg.org/multipage/comms.html#messageevent
@@ -67928,7 +68513,7 @@ ${content}
 	})(GuildNavigationMentions || {});
 
 	// src/index.ts
-	var version = "0.6.0";
+	var version = "0.6.1";
 	
 	return dist$5;
 }
@@ -70999,6 +71584,7 @@ function requirePartials () {
 	 * @property {number} Reaction The partial to receive uncached reactions.
 	 * @property {number} GuildScheduledEvent The partial to receive uncached guild scheduled events.
 	 * @property {number} ThreadMember The partial to receive uncached thread members.
+	 * @property {number} SoundboardSound The partial to receive uncached soundboard sounds.
 	 */
 
 	// JSDoc for IntelliSense purposes
@@ -71014,6 +71600,7 @@ function requirePartials () {
 	  'Reaction',
 	  'GuildScheduledEvent',
 	  'ThreadMember',
+	  'SoundboardSound',
 	]);
 	return Partials;
 }
@@ -71137,6 +71724,10 @@ function requireAction () {
 	    return this.getPayload({ user_id: id }, manager, id, Partials.ThreadMember, false);
 	  }
 
+	  getSoundboardSound(data, guild) {
+	    return this.getPayload(data, guild.soundboardSounds, data.sound_id, Partials.SoundboardSound);
+	  }
+
 	  spreadInjectedData(data) {
 	    return Object.fromEntries(Object.getOwnPropertySymbols(data).map(symbol => [symbol, data[symbol]]));
 	  }
@@ -71194,6 +71785,10 @@ function requireEvents () {
 	 * @property {string} GuildScheduledEventUpdate guildScheduledEventUpdate
 	 * @property {string} GuildScheduledEventUserAdd guildScheduledEventUserAdd
 	 * @property {string} GuildScheduledEventUserRemove guildScheduledEventUserRemove
+	 * @property {string} GuildSoundboardSoundCreate guildSoundboardSoundCreate
+	 * @property {string} GuildSoundboardSoundDelete guildSoundboardSoundDelete
+	 * @property {string} GuildSoundboardSoundsUpdate guildSoundboardSoundsUpdate
+	 * @property {string} GuildSoundboardSoundUpdate guildSoundboardSoundUpdate
 	 * @property {string} GuildStickerCreate stickerCreate
 	 * @property {string} GuildStickerDelete stickerDelete
 	 * @property {string} GuildStickerUpdate stickerUpdate
@@ -71214,6 +71809,7 @@ function requireEvents () {
 	 * @property {string} MessageReactionRemoveEmoji messageReactionRemoveEmoji
 	 * @property {string} MessageUpdate messageUpdate
 	 * @property {string} PresenceUpdate presenceUpdate
+	 * @property {string} SoundboardSounds soundboardSounds
 	 * @property {string} ShardDisconnect shardDisconnect
 	 * @property {string} ShardError shardError
 	 * @property {string} ShardReady shardReady
@@ -71285,6 +71881,10 @@ function requireEvents () {
 	  GuildScheduledEventUpdate: 'guildScheduledEventUpdate',
 	  GuildScheduledEventUserAdd: 'guildScheduledEventUserAdd',
 	  GuildScheduledEventUserRemove: 'guildScheduledEventUserRemove',
+	  GuildSoundboardSoundCreate: 'guildSoundboardSoundCreate',
+	  GuildSoundboardSoundDelete: 'guildSoundboardSoundDelete',
+	  GuildSoundboardSoundsUpdate: 'guildSoundboardSoundsUpdate',
+	  GuildSoundboardSoundUpdate: 'guildSoundboardSoundUpdate',
 	  GuildStickerCreate: 'stickerCreate',
 	  GuildStickerDelete: 'stickerDelete',
 	  GuildStickerUpdate: 'stickerUpdate',
@@ -71305,6 +71905,7 @@ function requireEvents () {
 	  MessageReactionRemoveEmoji: 'messageReactionRemoveEmoji',
 	  MessageUpdate: 'messageUpdate',
 	  PresenceUpdate: 'presenceUpdate',
+	  SoundboardSounds: 'soundboardSounds',
 	  Raw: 'raw',
 	  ShardDisconnect: 'shardDisconnect',
 	  ShardError: 'shardError',
@@ -72619,6 +73220,5528 @@ function requireMessageCollector () {
 
 	MessageCollector_1 = MessageCollector;
 	return MessageCollector_1;
+}
+
+var GuildScheduledEvent = {};
+
+var hasRequiredGuildScheduledEvent;
+
+function requireGuildScheduledEvent () {
+	if (hasRequiredGuildScheduledEvent) return GuildScheduledEvent;
+	hasRequiredGuildScheduledEvent = 1;
+
+	const { DiscordSnowflake } = /*@__PURE__*/ requireCjs$2();
+	const { GuildScheduledEventStatus, GuildScheduledEventEntityType, RouteBases } = requireV10();
+	const Base = requireBase();
+	const { DiscordjsError, ErrorCodes } = requireErrors$1();
+
+	/**
+	 * Represents a scheduled event in a {@link Guild}.
+	 * @extends {Base}
+	 */
+	let GuildScheduledEvent$1 = class GuildScheduledEvent extends Base {
+	  constructor(client, data) {
+	    super(client);
+
+	    /**
+	     * The id of the guild scheduled event
+	     * @type {Snowflake}
+	     */
+	    this.id = data.id;
+
+	    /**
+	     * The id of the guild this guild scheduled event belongs to
+	     * @type {Snowflake}
+	     */
+	    this.guildId = data.guild_id;
+
+	    this._patch(data);
+	  }
+
+	  _patch(data) {
+	    if ('channel_id' in data) {
+	      /**
+	       * The channel id in which the scheduled event will be hosted,
+	       * or `null` if entity type is {@link GuildScheduledEventEntityType.External}
+	       * @type {?Snowflake}
+	       */
+	      this.channelId = data.channel_id;
+	    } else {
+	      this.channelId ??= null;
+	    }
+
+	    if ('creator_id' in data) {
+	      /**
+	       * The id of the user that created this guild scheduled event
+	       * @type {?Snowflake}
+	       */
+	      this.creatorId = data.creator_id;
+	    } else {
+	      this.creatorId ??= null;
+	    }
+
+	    if ('name' in data) {
+	      /**
+	       * The name of the guild scheduled event
+	       * @type {?string}
+	       */
+	      this.name = data.name;
+	    } else {
+	      // Only if partial.
+	      this.name ??= null;
+	    }
+
+	    if ('description' in data) {
+	      /**
+	       * The description of the guild scheduled event
+	       * @type {?string}
+	       */
+	      this.description = data.description;
+	    } else {
+	      this.description ??= null;
+	    }
+
+	    if ('scheduled_start_time' in data) {
+	      /**
+	       * The timestamp the guild scheduled event will start at
+	       * @type {?number}
+	       */
+	      this.scheduledStartTimestamp = Date.parse(data.scheduled_start_time);
+	    } else {
+	      this.scheduledStartTimestamp ??= null;
+	    }
+
+	    if ('scheduled_end_time' in data) {
+	      /**
+	       * The timestamp the guild scheduled event will end at
+	       * or `null` if the event does not have a scheduled time to end
+	       * @type {?number}
+	       */
+	      this.scheduledEndTimestamp = data.scheduled_end_time ? Date.parse(data.scheduled_end_time) : null;
+	    } else {
+	      this.scheduledEndTimestamp ??= null;
+	    }
+
+	    if ('privacy_level' in data) {
+	      /**
+	       * The privacy level of the guild scheduled event
+	       * @type {?GuildScheduledEventPrivacyLevel}
+	       */
+	      this.privacyLevel = data.privacy_level;
+	    } else {
+	      // Only if partial.
+	      this.privacyLevel ??= null;
+	    }
+
+	    if ('status' in data) {
+	      /**
+	       * The status of the guild scheduled event
+	       * @type {?GuildScheduledEventStatus}
+	       */
+	      this.status = data.status;
+	    } else {
+	      // Only if partial.
+	      this.status ??= null;
+	    }
+
+	    if ('entity_type' in data) {
+	      /**
+	       * The type of hosting entity associated with the scheduled event
+	       * @type {?GuildScheduledEventEntityType}
+	       */
+	      this.entityType = data.entity_type;
+	    } else {
+	      // Only if partial.
+	      this.entityType ??= null;
+	    }
+
+	    if ('entity_id' in data) {
+	      /**
+	       * The id of the hosting entity associated with the scheduled event
+	       * @type {?Snowflake}
+	       */
+	      this.entityId = data.entity_id;
+	    } else {
+	      this.entityId ??= null;
+	    }
+
+	    if ('user_count' in data) {
+	      /**
+	       * The number of users who are subscribed to this guild scheduled event
+	       * @type {?number}
+	       */
+	      this.userCount = data.user_count;
+	    } else {
+	      this.userCount ??= null;
+	    }
+
+	    if ('creator' in data) {
+	      /**
+	       * The user that created this guild scheduled event
+	       * @type {?User}
+	       */
+	      this.creator = this.client.users._add(data.creator);
+	    } else {
+	      this.creator ??= this.client.users.resolve(this.creatorId);
+	    }
+
+	    /* eslint-disable max-len */
+	    /**
+	     * Represents the additional metadata for a {@link GuildScheduledEvent}
+	     * @see {@link https://discord.com/developers/docs/resources/guild-scheduled-event#guild-scheduled-event-object-guild-scheduled-event-entity-metadata}
+	     * @typedef {Object} GuildScheduledEventEntityMetadata
+	     * @property {?string} location The location of the guild scheduled event
+	     */
+	    /* eslint-enable max-len */
+
+	    if ('entity_metadata' in data) {
+	      if (data.entity_metadata) {
+	        /**
+	         * Additional metadata
+	         * @type {?GuildScheduledEventEntityMetadata}
+	         */
+	        this.entityMetadata = {
+	          location: data.entity_metadata.location ?? this.entityMetadata?.location ?? null,
+	        };
+	      } else {
+	        this.entityMetadata = null;
+	      }
+	    } else {
+	      this.entityMetadata ??= null;
+	    }
+
+	    if ('image' in data) {
+	      /**
+	       * The cover image hash for this scheduled event
+	       * @type {?string}
+	       */
+	      this.image = data.image;
+	    } else {
+	      this.image ??= null;
+	    }
+
+	    /**
+	     * Represents the recurrence rule for a {@link GuildScheduledEvent}.
+	     * @typedef {Object} GuildScheduledEventRecurrenceRule
+	     * @property {number} startTimestamp The timestamp the recurrence rule interval starts at
+	     * @property {Date} startAt The time the recurrence rule interval starts at
+	     * @property {?number} endTimestamp The timestamp the recurrence rule interval ends at
+	     * @property {?Date} endAt The time the recurrence rule interval ends at
+	     * @property {GuildScheduledEventRecurrenceRuleFrequency} frequency How often the event occurs
+	     * @property {number} interval The spacing between the events
+	     * @property {?GuildScheduledEventRecurrenceRuleWeekday[]} byWeekday The days within a week to recur on
+	     * @property {?GuildScheduledEventRecurrenceRuleNWeekday[]} byNWeekday The days within a week to recur on
+	     * @property {?GuildScheduledEventRecurrenceRuleMonth[]} byMonth The months to recur on
+	     * @property {?number[]} byMonthDay The days within a month to recur on
+	     * @property {?number[]} byYearDay The days within a year to recur on
+	     * @property {?number} count The total amount of times the event is allowed to recur before stopping
+	     */
+
+	    /**
+	     * @typedef {Object} GuildScheduledEventRecurrenceRuleNWeekday
+	     * @property {number} n The week to recur on
+	     * @property {GuildScheduledEventRecurrenceRuleWeekday} day The day within the week to recur on
+	     */
+
+	    if ('recurrence_rule' in data) {
+	      /**
+	       * The recurrence rule for this scheduled event
+	       * @type {?GuildScheduledEventRecurrenceRule}
+	       */
+	      this.recurrenceRule = data.recurrence_rule && {
+	        startTimestamp: Date.parse(data.recurrence_rule.start),
+	        get startAt() {
+	          return new Date(this.startTimestamp);
+	        },
+	        endTimestamp: data.recurrence_rule.end && Date.parse(data.recurrence_rule.end),
+	        get endAt() {
+	          return this.endTimestamp && new Date(this.endTimestamp);
+	        },
+	        frequency: data.recurrence_rule.frequency,
+	        interval: data.recurrence_rule.interval,
+	        byWeekday: data.recurrence_rule.by_weekday,
+	        byNWeekday: data.recurrence_rule.by_n_weekday,
+	        byMonth: data.recurrence_rule.by_month,
+	        byMonthDay: data.recurrence_rule.by_month_day,
+	        byYearDay: data.recurrence_rule.by_year_day,
+	        count: data.recurrence_rule.count,
+	      };
+	    } else {
+	      this.recurrenceRule ??= null;
+	    }
+	  }
+
+	  /**
+	   * Whether this guild scheduled event is partial.
+	   * @type {boolean}
+	   * @readonly
+	   */
+	  get partial() {
+	    return this.name === null;
+	  }
+
+	  /**
+	   * The URL of this scheduled event's cover image
+	   * @param {BaseImageURLOptions} [options={}] Options for image URL
+	   * @returns {?string}
+	   */
+	  coverImageURL(options = {}) {
+	    return this.image && this.client.rest.cdn.guildScheduledEventCover(this.id, this.image, options);
+	  }
+
+	  /**
+	   * The timestamp the guild scheduled event was created at
+	   * @type {number}
+	   * @readonly
+	   */
+	  get createdTimestamp() {
+	    return DiscordSnowflake.timestampFrom(this.id);
+	  }
+
+	  /**
+	   * The time the guild scheduled event was created at
+	   * @type {Date}
+	   * @readonly
+	   */
+	  get createdAt() {
+	    return new Date(this.createdTimestamp);
+	  }
+
+	  /**
+	   * The time the guild scheduled event will start at
+	   * <info>This can be potentially `null` only when it's an {@link GuildAuditLogsEntry#target}</info>
+	   * @type {?Date}
+	   * @readonly
+	   */
+	  get scheduledStartAt() {
+	    return this.scheduledStartTimestamp && new Date(this.scheduledStartTimestamp);
+	  }
+
+	  /**
+	   * The time the guild scheduled event will end at,
+	   * or `null` if the event does not have a scheduled time to end
+	   * @type {?Date}
+	   * @readonly
+	   */
+	  get scheduledEndAt() {
+	    return this.scheduledEndTimestamp && new Date(this.scheduledEndTimestamp);
+	  }
+
+	  /**
+	   * The channel associated with this scheduled event
+	   * @type {?(VoiceChannel|StageChannel)}
+	   * @readonly
+	   */
+	  get channel() {
+	    return this.client.channels.resolve(this.channelId);
+	  }
+
+	  /**
+	   * The guild this scheduled event belongs to
+	   * @type {?Guild}
+	   * @readonly
+	   */
+	  get guild() {
+	    return this.client.guilds.resolve(this.guildId);
+	  }
+
+	  /**
+	   * The URL to the guild scheduled event
+	   * @type {string}
+	   * @readonly
+	   */
+	  get url() {
+	    return `${RouteBases.scheduledEvent}/${this.guildId}/${this.id}`;
+	  }
+
+	  /**
+	   * Options used to create an invite URL to a {@link GuildScheduledEvent}
+	   * @typedef {InviteCreateOptions} GuildScheduledEventInviteURLCreateOptions
+	   * @property {GuildInvitableChannelResolvable} [channel] The channel to create the invite in.
+	   * <warn>This is required when the `entityType` of `GuildScheduledEvent` is
+	   * {@link GuildScheduledEventEntityType.External}, gets ignored otherwise</warn>
+	   */
+
+	  /**
+	   * Creates an invite URL to this guild scheduled event.
+	   * @param {GuildScheduledEventInviteURLCreateOptions} [options] The options to create the invite
+	   * @returns {Promise<string>}
+	   */
+	  async createInviteURL(options) {
+	    let channelId = this.channelId;
+	    if (this.entityType === GuildScheduledEventEntityType.External) {
+	      if (!options?.channel) throw new DiscordjsError(ErrorCodes.InviteOptionsMissingChannel);
+	      channelId = this.guild.channels.resolveId(options.channel);
+	      if (!channelId) throw new DiscordjsError(ErrorCodes.GuildChannelResolve);
+	    }
+	    const invite = await this.guild.invites.create(channelId, options);
+	    return `${RouteBases.invite}/${invite.code}?event=${this.id}`;
+	  }
+
+	  /**
+	   * Edits this guild scheduled event.
+	   * @param {GuildScheduledEventEditOptions} options The options to edit the guild scheduled event
+	   * @returns {Promise<GuildScheduledEvent>}
+	   * @example
+	   * // Edit a guild scheduled event
+	   * guildScheduledEvent.edit({ name: 'Party' })
+	   *  .then(guildScheduledEvent => console.log(guildScheduledEvent))
+	   *  .catch(console.error);
+	   */
+	  edit(options) {
+	    return this.guild.scheduledEvents.edit(this.id, options);
+	  }
+
+	  /**
+	   * Fetches this guild scheduled event.
+	   * @param {boolean} [force=true] Whether to skip the cache check and request the API
+	   * @returns {Promise<GuildScheduledEvent>}
+	   */
+	  fetch(force = true) {
+	    return this.guild.scheduledEvents.fetch({ guildScheduledEvent: this.id, force });
+	  }
+
+	  /**
+	   * Deletes this guild scheduled event.
+	   * @returns {Promise<GuildScheduledEvent>}
+	   * @example
+	   * // Delete a guild scheduled event
+	   * guildScheduledEvent.delete()
+	   *  .then(guildScheduledEvent => console.log(guildScheduledEvent))
+	   *  .catch(console.error);
+	   */
+	  async delete() {
+	    await this.guild.scheduledEvents.delete(this.id);
+	    return this;
+	  }
+
+	  /**
+	   * Sets a new name for the guild scheduled event.
+	   * @param {string} name The new name of the guild scheduled event
+	   * @param {string} [reason] The reason for changing the name
+	   * @returns {Promise<GuildScheduledEvent>}
+	   * @example
+	   * // Set name of a guild scheduled event
+	   * guildScheduledEvent.setName('Birthday Party')
+	   *  .then(guildScheduledEvent => console.log(`Set the name to: ${guildScheduledEvent.name}`))
+	   *  .catch(console.error);
+	   */
+	  setName(name, reason) {
+	    return this.edit({ name, reason });
+	  }
+
+	  /**
+	   * Sets a new time to schedule the event at.
+	   * @param {DateResolvable} scheduledStartTime The time to schedule the event at
+	   * @param {string} [reason] The reason for changing the scheduled start time
+	   * @returns {Promise<GuildScheduledEvent>}
+	   * @example
+	   * // Set start time of a guild scheduled event
+	   * guildScheduledEvent.setScheduledStartTime('2022-09-24T00:00:00+05:30')
+	   *  .then(guildScheduledEvent => console.log(`Set the start time to: ${guildScheduledEvent.scheduledStartTime}`))
+	   *  .catch(console.error);
+	   */
+	  setScheduledStartTime(scheduledStartTime, reason) {
+	    return this.edit({ scheduledStartTime, reason });
+	  }
+
+	  // TODO: scheduledEndTime gets reset on passing null but it hasn't been documented
+	  /**
+	   * Sets a new time to end the event at.
+	   * @param {DateResolvable} scheduledEndTime The time to end the event at
+	   * @param {string} [reason] The reason for changing the scheduled end time
+	   * @returns {Promise<GuildScheduledEvent>}
+	   * @example
+	   * // Set end time of a guild scheduled event
+	   * guildScheduledEvent.setScheduledEndTime('2022-09-25T00:00:00+05:30')
+	   *  .then(guildScheduledEvent => console.log(`Set the end time to: ${guildScheduledEvent.scheduledEndTime}`))
+	   *  .catch(console.error);
+	   */
+	  setScheduledEndTime(scheduledEndTime, reason) {
+	    return this.edit({ scheduledEndTime, reason });
+	  }
+
+	  /**
+	   * Sets the new description of the guild scheduled event.
+	   * @param {string} description The description of the guild scheduled event
+	   * @param {string} [reason] The reason for changing the description
+	   * @returns {Promise<GuildScheduledEvent>}
+	   * @example
+	   * // Set description of a guild scheduled event
+	   * guildScheduledEvent.setDescription('A virtual birthday party')
+	   *  .then(guildScheduledEvent => console.log(`Set the description to: ${guildScheduledEvent.description}`))
+	   *  .catch(console.error);
+	   */
+	  setDescription(description, reason) {
+	    return this.edit({ description, reason });
+	  }
+
+	  /**
+	   * Sets the new status of the guild scheduled event.
+	   * <info>If you're working with TypeScript, use this method in conjunction with status type-guards
+	   * like {@link GuildScheduledEvent#isScheduled} to get only valid status as suggestion</info>
+	   * @param {GuildScheduledEventStatus} status The status of the guild scheduled event
+	   * @param {string} [reason] The reason for changing the status
+	   * @returns {Promise<GuildScheduledEvent>}
+	   * @example
+	   * // Set status of a guild scheduled event
+	   * guildScheduledEvent.setStatus(GuildScheduledEventStatus.Active)
+	   *  .then(guildScheduledEvent => console.log(`Set the status to: ${guildScheduledEvent.status}`))
+	   *  .catch(console.error);
+	   */
+	  setStatus(status, reason) {
+	    return this.edit({ status, reason });
+	  }
+
+	  /**
+	   * Sets the new location of the guild scheduled event.
+	   * @param {string} location The location of the guild scheduled event
+	   * @param {string} [reason] The reason for changing the location
+	   * @returns {Promise<GuildScheduledEvent>}
+	   * @example
+	   * // Set location of a guild scheduled event
+	   * guildScheduledEvent.setLocation('Earth')
+	   *  .then(guildScheduledEvent => console.log(`Set the location to: ${guildScheduledEvent.entityMetadata.location}`))
+	   *  .catch(console.error);
+	   */
+	  setLocation(location, reason) {
+	    return this.edit({ entityMetadata: { location }, reason });
+	  }
+
+	  /**
+	   * Fetches subscribers of this guild scheduled event.
+	   * @param {FetchGuildScheduledEventSubscribersOptions} [options] Options for fetching the subscribers
+	   * @returns {Promise<Collection<Snowflake, GuildScheduledEventUser>>}
+	   */
+	  fetchSubscribers(options) {
+	    return this.guild.scheduledEvents.fetchSubscribers(this.id, options);
+	  }
+
+	  /**
+	   * When concatenated with a string, this automatically concatenates the event's URL instead of the object.
+	   * @returns {string}
+	   * @example
+	   * // Logs: Event: https://discord.com/events/412345678901234567/499876543211234567
+	   * console.log(`Event: ${guildScheduledEvent}`);
+	   */
+	  toString() {
+	    return this.url;
+	  }
+
+	  /**
+	   * Indicates whether this guild scheduled event has an {@link GuildScheduledEventStatus.Active} status.
+	   * @returns {boolean}
+	   */
+	  isActive() {
+	    return this.status === GuildScheduledEventStatus.Active;
+	  }
+
+	  /**
+	   * Indicates whether this guild scheduled event has a {@link GuildScheduledEventStatus.Canceled} status.
+	   * @returns {boolean}
+	   */
+	  isCanceled() {
+	    return this.status === GuildScheduledEventStatus.Canceled;
+	  }
+
+	  /**
+	   * Indicates whether this guild scheduled event has a {@link GuildScheduledEventStatus.Completed} status.
+	   * @returns {boolean}
+	   */
+	  isCompleted() {
+	    return this.status === GuildScheduledEventStatus.Completed;
+	  }
+
+	  /**
+	   * Indicates whether this guild scheduled event has a {@link GuildScheduledEventStatus.Scheduled} status.
+	   * @returns {boolean}
+	   */
+	  isScheduled() {
+	    return this.status === GuildScheduledEventStatus.Scheduled;
+	  }
+	};
+
+	GuildScheduledEvent.GuildScheduledEvent = GuildScheduledEvent$1;
+	return GuildScheduledEvent;
+}
+
+var Application_1;
+var hasRequiredApplication;
+
+function requireApplication () {
+	if (hasRequiredApplication) return Application_1;
+	hasRequiredApplication = 1;
+
+	const { DiscordSnowflake } = /*@__PURE__*/ requireCjs$2();
+	const Base = requireBase();
+
+	/**
+	 * Represents an OAuth2 Application.
+	 * @extends {Base}
+	 * @abstract
+	 */
+	class Application extends Base {
+	  constructor(client, data) {
+	    super(client);
+	    this._patch(data);
+	  }
+
+	  _patch(data) {
+	    /**
+	     * The application's id
+	     * @type {Snowflake}
+	     */
+	    this.id = data.id;
+
+	    if ('name' in data) {
+	      /**
+	       * The name of the application
+	       * @type {?string}
+	       */
+	      this.name = data.name;
+	    } else {
+	      this.name ??= null;
+	    }
+
+	    if ('description' in data) {
+	      /**
+	       * The application's description
+	       * @type {?string}
+	       */
+	      this.description = data.description;
+	    } else {
+	      this.description ??= null;
+	    }
+
+	    if ('icon' in data) {
+	      /**
+	       * The application's icon hash
+	       * @type {?string}
+	       */
+	      this.icon = data.icon;
+	    } else {
+	      this.icon ??= null;
+	    }
+
+	    if ('terms_of_service_url' in data) {
+	      /**
+	       * The URL of the application's terms of service
+	       * @type {?string}
+	       */
+	      this.termsOfServiceURL = data.terms_of_service_url;
+	    } else {
+	      this.termsOfServiceURL ??= null;
+	    }
+
+	    if ('privacy_policy_url' in data) {
+	      /**
+	       * The URL of the application's privacy policy
+	       * @type {?string}
+	       */
+	      this.privacyPolicyURL = data.privacy_policy_url;
+	    } else {
+	      this.privacyPolicyURL ??= null;
+	    }
+
+	    if ('rpc_origins' in data) {
+	      /**
+	       * The application's RPC origins, if enabled
+	       * @type {string[]}
+	       */
+	      this.rpcOrigins = data.rpc_origins;
+	    } else {
+	      this.rpcOrigins ??= [];
+	    }
+
+	    if ('cover_image' in data) {
+	      /**
+	       * The hash of the application's cover image
+	       * @type {?string}
+	       */
+	      this.cover = data.cover_image;
+	    } else {
+	      this.cover ??= null;
+	    }
+
+	    if ('verify_key' in data) {
+	      /**
+	       * The hex-encoded key for verification in interactions and the GameSDK's GetTicket
+	       * @type {?string}
+	       */
+	      this.verifyKey = data.verify_key;
+	    } else {
+	      this.verifyKey ??= null;
+	    }
+	  }
+
+	  /**
+	   * The timestamp the application was created at
+	   * @type {number}
+	   * @readonly
+	   */
+	  get createdTimestamp() {
+	    return DiscordSnowflake.timestampFrom(this.id);
+	  }
+
+	  /**
+	   * The time the application was created at
+	   * @type {Date}
+	   * @readonly
+	   */
+	  get createdAt() {
+	    return new Date(this.createdTimestamp);
+	  }
+
+	  /**
+	   * A link to the application's icon.
+	   * @param {ImageURLOptions} [options={}] Options for the image URL
+	   * @returns {?string}
+	   */
+	  iconURL(options = {}) {
+	    return this.icon && this.client.rest.cdn.appIcon(this.id, this.icon, options);
+	  }
+
+	  /**
+	   * A link to this application's cover image.
+	   * @param {ImageURLOptions} [options={}] Options for the image URL
+	   * @returns {?string}
+	   */
+	  coverURL(options = {}) {
+	    return this.cover && this.client.rest.cdn.appIcon(this.id, this.cover, options);
+	  }
+
+	  /**
+	   * When concatenated with a string, this automatically returns the application's name instead of the
+	   * Application object.
+	   * @returns {?string}
+	   * @example
+	   * // Logs: Application name: My App
+	   * console.log(`Application name: ${application}`);
+	   */
+	  toString() {
+	    return this.name;
+	  }
+
+	  toJSON() {
+	    return super.toJSON({ createdTimestamp: true });
+	  }
+	}
+
+	Application_1 = Application;
+	return Application_1;
+}
+
+var IntegrationApplication_1;
+var hasRequiredIntegrationApplication;
+
+function requireIntegrationApplication () {
+	if (hasRequiredIntegrationApplication) return IntegrationApplication_1;
+	hasRequiredIntegrationApplication = 1;
+
+	const Application = requireApplication();
+
+	/**
+	 * Represents an Integration's OAuth2 Application.
+	 * @extends {Application}
+	 */
+	class IntegrationApplication extends Application {
+	  _patch(data) {
+	    super._patch(data);
+
+	    if ('bot' in data) {
+	      /**
+	       * The bot user for this application
+	       * @type {?User}
+	       */
+	      this.bot = this.client.users._add(data.bot);
+	    } else {
+	      this.bot ??= null;
+	    }
+
+	    if ('terms_of_service_url' in data) {
+	      /**
+	       * The URL of the application's terms of service
+	       * @type {?string}
+	       */
+	      this.termsOfServiceURL = data.terms_of_service_url;
+	    } else {
+	      this.termsOfServiceURL ??= null;
+	    }
+
+	    if ('privacy_policy_url' in data) {
+	      /**
+	       * The URL of the application's privacy policy
+	       * @type {?string}
+	       */
+	      this.privacyPolicyURL = data.privacy_policy_url;
+	    } else {
+	      this.privacyPolicyURL ??= null;
+	    }
+
+	    if ('rpc_origins' in data) {
+	      /**
+	       * The Array of RPC origin URLs
+	       * @type {string[]}
+	       */
+	      this.rpcOrigins = data.rpc_origins;
+	    } else {
+	      this.rpcOrigins ??= [];
+	    }
+
+	    if ('hook' in data) {
+	      /**
+	       * Whether the application can be default hooked by the client
+	       * @type {?boolean}
+	       */
+	      this.hook = data.hook;
+	    } else {
+	      this.hook ??= null;
+	    }
+
+	    if ('cover_image' in data) {
+	      /**
+	       * The hash of the application's cover image
+	       * @type {?string}
+	       */
+	      this.cover = data.cover_image;
+	    } else {
+	      this.cover ??= null;
+	    }
+
+	    if ('verify_key' in data) {
+	      /**
+	       * The hex-encoded key for verification in interactions and the GameSDK's GetTicket
+	       * @type {?string}
+	       */
+	      this.verifyKey = data.verify_key;
+	    } else {
+	      this.verifyKey ??= null;
+	    }
+	  }
+	}
+
+	IntegrationApplication_1 = IntegrationApplication;
+	return IntegrationApplication_1;
+}
+
+var InviteStageInstance_1;
+var hasRequiredInviteStageInstance;
+
+function requireInviteStageInstance () {
+	if (hasRequiredInviteStageInstance) return InviteStageInstance_1;
+	hasRequiredInviteStageInstance = 1;
+
+	const { Collection } = requireDist$7();
+	const Base = requireBase();
+
+	/**
+	 * Represents the data about a public {@link StageInstance} in an {@link Invite}.
+	 * @extends {Base}
+	 * @deprecated
+	 */
+	class InviteStageInstance extends Base {
+	  constructor(client, data, channelId, guildId) {
+	    super(client);
+
+	    /**
+	     * The id of the stage channel this invite is for
+	     * @type {Snowflake}
+	     */
+	    this.channelId = channelId;
+
+	    /**
+	     * The stage channel's guild id
+	     * @type {Snowflake}
+	     */
+	    this.guildId = guildId;
+
+	    /**
+	     * The members speaking in the stage channel
+	     * @type {Collection<Snowflake, GuildMember>}
+	     */
+	    this.members = new Collection();
+
+	    this._patch(data);
+	  }
+
+	  _patch(data) {
+	    if ('topic' in data) {
+	      /**
+	       * The topic of the stage instance
+	       * @type {string}
+	       */
+	      this.topic = data.topic;
+	    }
+
+	    if ('participant_count' in data) {
+	      /**
+	       * The number of users in the stage channel
+	       * @type {number}
+	       */
+	      this.participantCount = data.participant_count;
+	    }
+
+	    if ('speaker_count' in data) {
+	      /**
+	       * The number of users speaking in the stage channel
+	       * @type {number}
+	       */
+	      this.speakerCount = data.speaker_count;
+	    }
+
+	    this.members.clear();
+	    for (const rawMember of data.members) {
+	      const member = this.guild.members._add(rawMember);
+	      this.members.set(member.id, member);
+	    }
+	  }
+
+	  /**
+	   * The stage channel this invite is for
+	   * @type {?StageChannel}
+	   * @readonly
+	   */
+	  get channel() {
+	    return this.client.channels.resolve(this.channelId);
+	  }
+
+	  /**
+	   * The guild of the stage channel this invite is for
+	   * @type {?Guild}
+	   * @readonly
+	   */
+	  get guild() {
+	    return this.client.guilds.resolve(this.guildId);
+	  }
+	}
+
+	InviteStageInstance_1 = InviteStageInstance;
+	return InviteStageInstance_1;
+}
+
+var BaseGuild_1;
+var hasRequiredBaseGuild;
+
+function requireBaseGuild () {
+	if (hasRequiredBaseGuild) return BaseGuild_1;
+	hasRequiredBaseGuild = 1;
+
+	const { makeURLSearchParams } = requireWeb();
+	const { DiscordSnowflake } = /*@__PURE__*/ requireCjs$2();
+	const { Routes, GuildFeature } = requireV10();
+	const Base = requireBase();
+
+	/**
+	 * The base class for {@link Guild}, {@link OAuth2Guild} and {@link InviteGuild}.
+	 * @extends {Base}
+	 * @abstract
+	 */
+	class BaseGuild extends Base {
+	  constructor(client, data) {
+	    super(client);
+
+	    /**
+	     * The guild's id
+	     * @type {Snowflake}
+	     */
+	    this.id = data.id;
+
+	    /**
+	     * The name of this guild
+	     * @type {string}
+	     */
+	    this.name = data.name;
+
+	    /**
+	     * The icon hash of this guild
+	     * @type {?string}
+	     */
+	    this.icon = data.icon;
+
+	    /**
+	     * An array of features available to this guild
+	     * @type {GuildFeature[]}
+	     */
+	    this.features = data.features;
+	  }
+
+	  /**
+	   * The timestamp this guild was created at
+	   * @type {number}
+	   * @readonly
+	   */
+	  get createdTimestamp() {
+	    return DiscordSnowflake.timestampFrom(this.id);
+	  }
+
+	  /**
+	   * The time this guild was created at
+	   * @type {Date}
+	   * @readonly
+	   */
+	  get createdAt() {
+	    return new Date(this.createdTimestamp);
+	  }
+
+	  /**
+	   * The acronym that shows up in place of a guild icon
+	   * @type {string}
+	   * @readonly
+	   */
+	  get nameAcronym() {
+	    return this.name
+	      .replace(/'s /g, ' ')
+	      .replace(/\w+/g, e => e[0])
+	      .replace(/\s/g, '');
+	  }
+
+	  /**
+	   * Whether this guild is partnered
+	   * @type {boolean}
+	   * @readonly
+	   */
+	  get partnered() {
+	    return this.features.includes(GuildFeature.Partnered);
+	  }
+
+	  /**
+	   * Whether this guild is verified
+	   * @type {boolean}
+	   * @readonly
+	   */
+	  get verified() {
+	    return this.features.includes(GuildFeature.Verified);
+	  }
+
+	  /**
+	   * The URL to this guild's icon.
+	   * @param {ImageURLOptions} [options={}] Options for the image URL
+	   * @returns {?string}
+	   */
+	  iconURL(options = {}) {
+	    return this.icon && this.client.rest.cdn.icon(this.id, this.icon, options);
+	  }
+
+	  /**
+	   * Fetches this guild.
+	   * @returns {Promise<Guild>}
+	   */
+	  async fetch() {
+	    const data = await this.client.rest.get(Routes.guild(this.id), {
+	      query: makeURLSearchParams({ with_counts: true }),
+	    });
+	    return this.client.guilds._add(data);
+	  }
+
+	  /**
+	   * When concatenated with a string, this automatically returns the guild's name instead of the Guild object.
+	   * @returns {string}
+	   */
+	  toString() {
+	    return this.name;
+	  }
+	}
+
+	BaseGuild_1 = BaseGuild;
+	return BaseGuild_1;
+}
+
+var AnonymousGuild_1;
+var hasRequiredAnonymousGuild;
+
+function requireAnonymousGuild () {
+	if (hasRequiredAnonymousGuild) return AnonymousGuild_1;
+	hasRequiredAnonymousGuild = 1;
+
+	const BaseGuild = requireBaseGuild();
+
+	/**
+	 * Bundles common attributes and methods between {@link Guild} and {@link InviteGuild}
+	 * @extends {BaseGuild}
+	 * @abstract
+	 */
+	class AnonymousGuild extends BaseGuild {
+	  constructor(client, data, immediatePatch = true) {
+	    super(client, data);
+	    if (immediatePatch) this._patch(data);
+	  }
+
+	  _patch(data) {
+	    if ('features' in data) this.features = data.features;
+
+	    if ('splash' in data) {
+	      /**
+	       * The hash of the guild invite splash image
+	       * @type {?string}
+	       */
+	      this.splash = data.splash;
+	    }
+
+	    if ('banner' in data) {
+	      /**
+	       * The hash of the guild banner
+	       * @type {?string}
+	       */
+	      this.banner = data.banner;
+	    }
+
+	    if ('description' in data) {
+	      /**
+	       * The description of the guild, if any
+	       * @type {?string}
+	       */
+	      this.description = data.description;
+	    }
+
+	    if ('verification_level' in data) {
+	      /**
+	       * The verification level of the guild
+	       * @type {GuildVerificationLevel}
+	       */
+	      this.verificationLevel = data.verification_level;
+	    }
+
+	    if ('vanity_url_code' in data) {
+	      /**
+	       * The vanity invite code of the guild, if any
+	       * @type {?string}
+	       */
+	      this.vanityURLCode = data.vanity_url_code;
+	    }
+
+	    if ('nsfw_level' in data) {
+	      /**
+	       * The NSFW level of this guild
+	       * @type {GuildNSFWLevel}
+	       */
+	      this.nsfwLevel = data.nsfw_level;
+	    }
+
+	    if ('premium_subscription_count' in data) {
+	      /**
+	       * The total number of boosts for this server
+	       * @type {?number}
+	       */
+	      this.premiumSubscriptionCount = data.premium_subscription_count;
+	    } else {
+	      this.premiumSubscriptionCount ??= null;
+	    }
+	  }
+
+	  /**
+	   * The URL to this guild's banner.
+	   * @param {ImageURLOptions} [options={}] Options for the image URL
+	   * @returns {?string}
+	   */
+	  bannerURL(options = {}) {
+	    return this.banner && this.client.rest.cdn.banner(this.id, this.banner, options);
+	  }
+
+	  /**
+	   * The URL to this guild's invite splash image.
+	   * @param {ImageURLOptions} [options={}] Options for the image URL
+	   * @returns {?string}
+	   */
+	  splashURL(options = {}) {
+	    return this.splash && this.client.rest.cdn.splash(this.id, this.splash, options);
+	  }
+	}
+
+	AnonymousGuild_1 = AnonymousGuild;
+	return AnonymousGuild_1;
+}
+
+var Emoji = {};
+
+var hasRequiredEmoji$1;
+
+function requireEmoji$1 () {
+	if (hasRequiredEmoji$1) return Emoji;
+	hasRequiredEmoji$1 = 1;
+
+	const process = require$$0$h;
+	const { formatEmoji } = requireDist$6();
+	const { DiscordSnowflake } = /*@__PURE__*/ requireCjs$2();
+	const Base = requireBase();
+
+	let deprecationEmittedForURL = false;
+
+	/**
+	 * Represents an emoji, see {@link ApplicationEmoji}, {@link GuildEmoji} and {@link ReactionEmoji}.
+	 * @extends {Base}
+	 */
+	let Emoji$1 = class Emoji extends Base {
+	  constructor(client, emoji) {
+	    super(client);
+	    /**
+	     * Whether or not the emoji is animated
+	     * @type {?boolean}
+	     */
+	    this.animated = emoji.animated ?? null;
+
+	    /**
+	     * The emoji's name
+	     * @type {?string}
+	     */
+	    this.name = emoji.name ?? null;
+
+	    /**
+	     * The emoji's id
+	     * @type {?Snowflake}
+	     */
+	    this.id = emoji.id ?? null;
+	  }
+
+	  /**
+	   * The identifier of this emoji, used for message reactions
+	   * @type {string}
+	   * @readonly
+	   */
+	  get identifier() {
+	    if (this.id) return `${this.animated ? 'a:' : ''}${this.name}:${this.id}`;
+	    return encodeURIComponent(this.name);
+	  }
+
+	  /**
+	   * Returns a URL for the emoji or `null` if this is not a custom emoji.
+	   * @param {BaseImageURLOptions} [options] Options for the image URL
+	   * @returns {?string}
+	   */
+	  imageURL(options) {
+	    return this.id && this.client.rest.cdn.emoji(this.id, options);
+	  }
+
+	  /**
+	   * Returns a URL for the emoji or `null` if this is not a custom emoji.
+	   * @type {?string}
+	   * @readonly
+	   * @deprecated Use {@link Emoji#imageURL} instead.
+	   */
+	  get url() {
+	    if (!deprecationEmittedForURL) {
+	      process.emitWarning('The Emoji#url getter is deprecated. Use Emoji#imageURL() instead.', 'DeprecationWarning');
+	      deprecationEmittedForURL = true;
+	    }
+
+	    return this.imageURL({ extension: this.animated ? 'gif' : 'png' });
+	  }
+
+	  /**
+	   * The timestamp the emoji was created at, or null if unicode
+	   * @type {?number}
+	   * @readonly
+	   */
+	  get createdTimestamp() {
+	    return this.id && DiscordSnowflake.timestampFrom(this.id);
+	  }
+
+	  /**
+	   * The time the emoji was created at, or null if unicode
+	   * @type {?Date}
+	   * @readonly
+	   */
+	  get createdAt() {
+	    return this.id && new Date(this.createdTimestamp);
+	  }
+
+	  /**
+	   * When concatenated with a string, this automatically returns the text required to form a graphical emoji on Discord
+	   * instead of the Emoji object.
+	   * @returns {string}
+	   * @example
+	   * // Send a custom emoji from a guild:
+	   * const emoji = guild.emojis.cache.first();
+	   * msg.channel.send(`Hello! ${emoji}`);
+	   * @example
+	   * // Send the emoji used in a reaction to the channel the reaction is part of
+	   * reaction.message.channel.send(`The emoji used was: ${reaction.emoji}`);
+	   */
+	  toString() {
+	    return this.id ? formatEmoji({ animated: this.animated, id: this.id, name: this.name }) : this.name;
+	  }
+
+	  toJSON() {
+	    const json = super.toJSON({
+	      guild: 'guildId',
+	      createdTimestamp: true,
+	      identifier: true,
+	    });
+	    json.imageURL = this.imageURL();
+	    return json;
+	  }
+	};
+
+	Emoji.Emoji = Emoji$1;
+	return Emoji;
+}
+
+var WelcomeChannel_1;
+var hasRequiredWelcomeChannel;
+
+function requireWelcomeChannel () {
+	if (hasRequiredWelcomeChannel) return WelcomeChannel_1;
+	hasRequiredWelcomeChannel = 1;
+
+	const Base = requireBase();
+	const { Emoji } = requireEmoji$1();
+
+	/**
+	 * Represents a channel link in a guild's welcome screen.
+	 * @extends {Base}
+	 */
+	class WelcomeChannel extends Base {
+	  constructor(guild, data) {
+	    super(guild.client);
+
+	    /**
+	     * The guild for this welcome channel
+	     * @type {Guild|InviteGuild}
+	     */
+	    this.guild = guild;
+
+	    /**
+	     * The description of this welcome channel
+	     * @type {string}
+	     */
+	    this.description = data.description;
+
+	    /**
+	     * The raw emoji data
+	     * @type {Object}
+	     * @private
+	     */
+	    this._emoji = {
+	      name: data.emoji_name,
+	      id: data.emoji_id,
+	    };
+
+	    /**
+	     * The id of this welcome channel
+	     * @type {Snowflake}
+	     */
+	    this.channelId = data.channel_id;
+	  }
+
+	  /**
+	   * The channel of this welcome channel
+	   * @type {?(TextChannel|NewsChannel|ForumChannel|MediaChannel)}
+	   */
+	  get channel() {
+	    return this.client.channels.resolve(this.channelId);
+	  }
+
+	  /**
+	   * The emoji of this welcome channel
+	   * @type {GuildEmoji|Emoji}
+	   */
+	  get emoji() {
+	    return this.client.emojis.cache.get(this._emoji.id) ?? new Emoji(this.client, this._emoji);
+	  }
+	}
+
+	WelcomeChannel_1 = WelcomeChannel;
+	return WelcomeChannel_1;
+}
+
+var WelcomeScreen_1;
+var hasRequiredWelcomeScreen;
+
+function requireWelcomeScreen () {
+	if (hasRequiredWelcomeScreen) return WelcomeScreen_1;
+	hasRequiredWelcomeScreen = 1;
+
+	const { Collection } = requireDist$7();
+	const { GuildFeature } = requireV10();
+	const Base = requireBase();
+	const WelcomeChannel = requireWelcomeChannel();
+
+	/**
+	 * Represents a welcome screen.
+	 * @extends {Base}
+	 */
+	class WelcomeScreen extends Base {
+	  constructor(guild, data) {
+	    super(guild.client);
+
+	    /**
+	     * The guild for this welcome screen
+	     * @type {Guild}
+	     */
+	    this.guild = guild;
+
+	    /**
+	     * The description of this welcome screen
+	     * @type {?string}
+	     */
+	    this.description = data.description ?? null;
+
+	    /**
+	     * Collection of welcome channels belonging to this welcome screen
+	     * @type {Collection<Snowflake, WelcomeChannel>}
+	     */
+	    this.welcomeChannels = new Collection();
+
+	    for (const channel of data.welcome_channels) {
+	      const welcomeChannel = new WelcomeChannel(this.guild, channel);
+	      this.welcomeChannels.set(welcomeChannel.channelId, welcomeChannel);
+	    }
+	  }
+
+	  /**
+	   * Whether the welcome screen is enabled on the guild
+	   * @type {boolean}
+	   */
+	  get enabled() {
+	    return this.guild.features.includes(GuildFeature.WelcomeScreenEnabled);
+	  }
+	}
+
+	WelcomeScreen_1 = WelcomeScreen;
+	return WelcomeScreen_1;
+}
+
+var InviteGuild_1;
+var hasRequiredInviteGuild;
+
+function requireInviteGuild () {
+	if (hasRequiredInviteGuild) return InviteGuild_1;
+	hasRequiredInviteGuild = 1;
+
+	const AnonymousGuild = requireAnonymousGuild();
+	const WelcomeScreen = requireWelcomeScreen();
+
+	/**
+	 * Represents a guild received from an invite, includes welcome screen data if available.
+	 * @extends {AnonymousGuild}
+	 */
+	class InviteGuild extends AnonymousGuild {
+	  constructor(client, data) {
+	    super(client, data);
+
+	    /**
+	     * The welcome screen for this invite guild
+	     * @type {?WelcomeScreen}
+	     */
+	    this.welcomeScreen = data.welcome_screen !== undefined ? new WelcomeScreen(this, data.welcome_screen) : null;
+	  }
+	}
+
+	InviteGuild_1 = InviteGuild;
+	return InviteGuild_1;
+}
+
+var Invite_1;
+var hasRequiredInvite;
+
+function requireInvite () {
+	if (hasRequiredInvite) return Invite_1;
+	hasRequiredInvite = 1;
+
+	const { RouteBases, Routes, PermissionFlagsBits } = requireV10();
+	const Base = requireBase();
+	const { GuildScheduledEvent } = requireGuildScheduledEvent();
+	const IntegrationApplication = requireIntegrationApplication();
+	const InviteStageInstance = requireInviteStageInstance();
+	const { DiscordjsError, ErrorCodes } = requireErrors$1();
+
+	/**
+	 * Represents an invitation to a guild channel.
+	 * @extends {Base}
+	 */
+	class Invite extends Base {
+	  /**
+	   * A regular expression that matches Discord invite links.
+	   * The `code` group property is present on the `exec()` result of this expression.
+	   * @type {RegExp}
+	   * @memberof Invite
+	   */
+	  static InvitesPattern = /discord(?:(?:app)?\.com\/invite|\.gg(?:\/invite)?)\/(?<code>[\w-]{2,255})/i;
+
+	  constructor(client, data) {
+	    super(client);
+
+	    /**
+	     * The type of this invite
+	     * @type {InviteType}
+	     */
+	    this.type = data.type;
+
+	    this._patch(data);
+	  }
+
+	  _patch(data) {
+	    const InviteGuild = requireInviteGuild();
+	    /**
+	     * The guild the invite is for including welcome screen data if present
+	     * @type {?(Guild|InviteGuild)}
+	     */
+	    this.guild ??= null;
+	    if (data.guild) {
+	      this.guild = this.client.guilds.cache.get(data.guild.id) ?? new InviteGuild(this.client, data.guild);
+	    }
+
+	    if ('code' in data) {
+	      /**
+	       * The code for this invite
+	       * @type {string}
+	       */
+	      this.code = data.code;
+	    }
+
+	    if ('approximate_presence_count' in data) {
+	      /**
+	       * The approximate number of online members of the guild this invite is for
+	       * <info>This is only available when the invite was fetched through {@link Client#fetchInvite}.</info>
+	       * @type {?number}
+	       */
+	      this.presenceCount = data.approximate_presence_count;
+	    } else {
+	      this.presenceCount ??= null;
+	    }
+
+	    if ('approximate_member_count' in data) {
+	      /**
+	       * The approximate total number of members of the guild this invite is for
+	       * <info>This is only available when the invite was fetched through {@link Client#fetchInvite}.</info>
+	       * @type {?number}
+	       */
+	      this.memberCount = data.approximate_member_count;
+	    } else {
+	      this.memberCount ??= null;
+	    }
+
+	    if ('temporary' in data) {
+	      /**
+	       * Whether or not this invite only grants temporary membership
+	       * <info>This is only available when the invite was fetched through {@link GuildInviteManager#fetch}
+	       * or created through {@link GuildInviteManager#create}.</info>
+	       * @type {?boolean}
+	       */
+	      this.temporary = data.temporary ?? null;
+	    } else {
+	      this.temporary ??= null;
+	    }
+
+	    if ('max_age' in data) {
+	      /**
+	       * The maximum age of the invite, in seconds, 0 if never expires
+	       * <info>This is only available when the invite was fetched through {@link GuildInviteManager#fetch}
+	       * or created through {@link GuildInviteManager#create}.</info>
+	       * @type {?number}
+	       */
+	      this.maxAge = data.max_age;
+	    } else {
+	      this.maxAge ??= null;
+	    }
+
+	    if ('uses' in data) {
+	      /**
+	       * How many times this invite has been used
+	       * <info>This is only available when the invite was fetched through {@link GuildInviteManager#fetch}
+	       * or created through {@link GuildInviteManager#create}.</info>
+	       * @type {?number}
+	       */
+	      this.uses = data.uses;
+	    } else {
+	      this.uses ??= null;
+	    }
+
+	    if ('max_uses' in data) {
+	      /**
+	       * The maximum uses of this invite
+	       * <info>This is only available when the invite was fetched through {@link GuildInviteManager#fetch}
+	       * or created through {@link GuildInviteManager#create}.</info>
+	       * @type {?number}
+	       */
+	      this.maxUses = data.max_uses;
+	    } else {
+	      this.maxUses ??= null;
+	    }
+
+	    if ('inviter_id' in data) {
+	      /**
+	       * The user's id who created this invite
+	       * @type {?Snowflake}
+	       */
+	      this.inviterId = data.inviter_id;
+	    } else {
+	      this.inviterId ??= null;
+	    }
+
+	    if ('inviter' in data) {
+	      this.client.users._add(data.inviter);
+	      this.inviterId = data.inviter.id;
+	    }
+
+	    if ('target_user' in data) {
+	      /**
+	       * The user whose stream to display for this voice channel stream invite
+	       * @type {?User}
+	       */
+	      this.targetUser = this.client.users._add(data.target_user);
+	    } else {
+	      this.targetUser ??= null;
+	    }
+
+	    if ('target_application' in data) {
+	      /**
+	       * The embedded application to open for this voice channel embedded application invite
+	       * @type {?IntegrationApplication}
+	       */
+	      this.targetApplication = new IntegrationApplication(this.client, data.target_application);
+	    } else {
+	      this.targetApplication ??= null;
+	    }
+
+	    if ('target_type' in data) {
+	      /**
+	       * The target type
+	       * @type {?InviteTargetType}
+	       */
+	      this.targetType = data.target_type;
+	    } else {
+	      this.targetType ??= null;
+	    }
+
+	    if ('channel_id' in data) {
+	      /**
+	       * The id of the channel this invite is for
+	       * @type {?Snowflake}
+	       */
+	      this.channelId = data.channel_id;
+	    }
+
+	    if ('channel' in data) {
+	      /**
+	       * The channel this invite is for
+	       * @type {?BaseChannel}
+	       */
+	      this.channel =
+	        this.client.channels._add(data.channel, this.guild, { cache: false }) ??
+	        this.client.channels.resolve(this.channelId);
+
+	      this.channelId ??= data.channel.id;
+	    }
+
+	    if ('created_at' in data) {
+	      /**
+	       * The timestamp this invite was created at
+	       * @type {?number}
+	       */
+	      this.createdTimestamp = Date.parse(data.created_at);
+	    } else {
+	      this.createdTimestamp ??= null;
+	    }
+
+	    if ('expires_at' in data) {
+	      this._expiresTimestamp = data.expires_at && Date.parse(data.expires_at);
+	    } else {
+	      this._expiresTimestamp ??= null;
+	    }
+
+	    if ('stage_instance' in data) {
+	      /**
+	       * The stage instance data if there is a public {@link StageInstance} in the stage channel this invite is for
+	       * @type {?InviteStageInstance}
+	       * @deprecated
+	       */
+	      this.stageInstance = new InviteStageInstance(this.client, data.stage_instance, this.channel.id, this.guild.id);
+	    } else {
+	      this.stageInstance ??= null;
+	    }
+
+	    if ('guild_scheduled_event' in data) {
+	      /**
+	       * The guild scheduled event data if there is a {@link GuildScheduledEvent} in the channel this invite is for
+	       * @type {?GuildScheduledEvent}
+	       */
+	      this.guildScheduledEvent = new GuildScheduledEvent(this.client, data.guild_scheduled_event);
+	    } else {
+	      this.guildScheduledEvent ??= null;
+	    }
+	  }
+
+	  /**
+	   * The time the invite was created at
+	   * @type {?Date}
+	   * @readonly
+	   */
+	  get createdAt() {
+	    return this.createdTimestamp && new Date(this.createdTimestamp);
+	  }
+
+	  /**
+	   * Whether the invite is deletable by the client user
+	   * @type {boolean}
+	   * @readonly
+	   */
+	  get deletable() {
+	    const guild = this.guild;
+	    if (!guild || !this.client.guilds.cache.has(guild.id)) return false;
+	    if (!guild.members.me) throw new DiscordjsError(ErrorCodes.GuildUncachedMe);
+	    return Boolean(
+	      this.channel?.permissionsFor(this.client.user).has(PermissionFlagsBits.ManageChannels, false) ||
+	        guild.members.me.permissions.has(PermissionFlagsBits.ManageGuild),
+	    );
+	  }
+
+	  /**
+	   * The timestamp the invite will expire at
+	   * @type {?number}
+	   * @readonly
+	   */
+	  get expiresTimestamp() {
+	    return (
+	      this._expiresTimestamp ??
+	      (this.createdTimestamp && this.maxAge ? this.createdTimestamp + this.maxAge * 1_000 : null)
+	    );
+	  }
+
+	  /**
+	   * The time the invite will expire at
+	   * @type {?Date}
+	   * @readonly
+	   */
+	  get expiresAt() {
+	    return this.expiresTimestamp && new Date(this.expiresTimestamp);
+	  }
+
+	  /**
+	   * The user who created this invite
+	   * @type {?User}
+	   * @readonly
+	   */
+	  get inviter() {
+	    return this.inviterId && this.client.users.resolve(this.inviterId);
+	  }
+
+	  /**
+	   * The URL to the invite
+	   * @type {string}
+	   * @readonly
+	   */
+	  get url() {
+	    return `${RouteBases.invite}/${this.code}`;
+	  }
+
+	  /**
+	   * Deletes this invite.
+	   * @param {string} [reason] Reason for deleting this invite
+	   * @returns {Promise<Invite>}
+	   */
+	  async delete(reason) {
+	    await this.client.rest.delete(Routes.invite(this.code), { reason });
+	    return this;
+	  }
+
+	  /**
+	   * When concatenated with a string, this automatically concatenates the invite's URL instead of the object.
+	   * @returns {string}
+	   * @example
+	   * // Logs: Invite: https://discord.gg/A1b2C3
+	   * console.log(`Invite: ${invite}`);
+	   */
+	  toString() {
+	    return this.url;
+	  }
+
+	  toJSON() {
+	    return super.toJSON({
+	      url: true,
+	      expiresTimestamp: true,
+	      presenceCount: false,
+	      memberCount: false,
+	      uses: false,
+	      channel: 'channelId',
+	      inviter: 'inviterId',
+	      guild: 'guildId',
+	    });
+	  }
+
+	  valueOf() {
+	    return this.code;
+	  }
+	}
+
+	Invite_1 = Invite;
+	return Invite_1;
+}
+
+var GuildTemplate_1;
+var hasRequiredGuildTemplate;
+
+function requireGuildTemplate () {
+	if (hasRequiredGuildTemplate) return GuildTemplate_1;
+	hasRequiredGuildTemplate = 1;
+
+	const { setTimeout, clearTimeout } = require$$0$i;
+	const { RouteBases, Routes } = requireV10();
+	const Base = requireBase();
+	const { resolveImage } = requireDataResolver();
+	const Events = requireEvents();
+
+	/**
+	 * Represents the template for a guild.
+	 * @extends {Base}
+	 */
+	class GuildTemplate extends Base {
+	  /**
+	   * A regular expression that matches guild template links.
+	   * The `code` group property is present on the `exec()` result of this expression.
+	   * @type {RegExp}
+	   * @memberof GuildTemplate
+	   */
+	  static GuildTemplatesPattern = /discord(?:app)?\.(?:com\/template|new)\/(?<code>[\w-]{2,255})/i;
+
+	  constructor(client, data) {
+	    super(client);
+	    this._patch(data);
+	  }
+
+	  _patch(data) {
+	    if ('code' in data) {
+	      /**
+	       * The unique code of this template
+	       * @type {string}
+	       */
+	      this.code = data.code;
+	    }
+
+	    if ('name' in data) {
+	      /**
+	       * The name of this template
+	       * @type {string}
+	       */
+	      this.name = data.name;
+	    }
+
+	    if ('description' in data) {
+	      /**
+	       * The description of this template
+	       * @type {?string}
+	       */
+	      this.description = data.description;
+	    }
+
+	    if ('usage_count' in data) {
+	      /**
+	       * The amount of times this template has been used
+	       * @type {number}
+	       */
+	      this.usageCount = data.usage_count;
+	    }
+
+	    if ('creator_id' in data) {
+	      /**
+	       * The id of the user that created this template
+	       * @type {Snowflake}
+	       */
+	      this.creatorId = data.creator_id;
+	    }
+
+	    if ('creator' in data) {
+	      /**
+	       * The user that created this template
+	       * @type {User}
+	       */
+	      this.creator = this.client.users._add(data.creator);
+	    }
+
+	    if ('created_at' in data) {
+	      /**
+	       * The timestamp of when this template was created at
+	       * @type {number}
+	       */
+	      this.createdTimestamp = Date.parse(data.created_at);
+	    }
+
+	    if ('updated_at' in data) {
+	      /**
+	       * The timestamp of when this template was last synced to the guild
+	       * @type {number}
+	       */
+	      this.updatedTimestamp = Date.parse(data.updated_at);
+	    }
+
+	    if ('source_guild_id' in data) {
+	      /**
+	       * The id of the guild that this template belongs to
+	       * @type {Snowflake}
+	       */
+	      this.guildId = data.source_guild_id;
+	    }
+
+	    if ('serialized_source_guild' in data) {
+	      /**
+	       * The data of the guild that this template would create
+	       * @type {APIGuild}
+	       */
+	      this.serializedGuild = data.serialized_source_guild;
+	    }
+
+	    /**
+	     * Whether this template has unsynced changes
+	     * @type {?boolean}
+	     */
+	    this.unSynced = 'is_dirty' in data ? Boolean(data.is_dirty) : null;
+
+	    return this;
+	  }
+
+	  /**
+	   * Creates a guild based on this template.
+	   * <warn>This is only available to bots in fewer than 10 guilds.</warn>
+	   * @param {string} name The name of the guild
+	   * @param {BufferResolvable|Base64Resolvable} [icon] The icon for the guild
+	   * @returns {Promise<Guild>}
+	   */
+	  async createGuild(name, icon) {
+	    const { client } = this;
+	    const data = await client.rest.post(Routes.template(this.code), {
+	      body: {
+	        name,
+	        icon: await resolveImage(icon),
+	      },
+	    });
+
+	    if (client.guilds.cache.has(data.id)) return client.guilds.cache.get(data.id);
+
+	    return new Promise(resolve => {
+	      const resolveGuild = guild => {
+	        client.off(Events.GuildCreate, handleGuild);
+	        client.decrementMaxListeners();
+	        resolve(guild);
+	      };
+
+	      const handleGuild = guild => {
+	        if (guild.id === data.id) {
+	          clearTimeout(timeout);
+	          resolveGuild(guild);
+	        }
+	      };
+
+	      client.incrementMaxListeners();
+	      client.on(Events.GuildCreate, handleGuild);
+
+	      const timeout = setTimeout(() => resolveGuild(client.guilds._add(data)), 10_000).unref();
+	    });
+	  }
+
+	  /**
+	   * Options used to edit a guild template.
+	   * @typedef {Object} GuildTemplateEditOptions
+	   * @property {string} [name] The name of this template
+	   * @property {string} [description] The description of this template
+	   */
+
+	  /**
+	   * Updates the metadata of this template.
+	   * @param {GuildTemplateEditOptions} [options] Options for editing the template
+	   * @returns {Promise<GuildTemplate>}
+	   */
+	  async edit({ name, description } = {}) {
+	    const data = await this.client.rest.patch(Routes.guildTemplate(this.guildId, this.code), {
+	      body: { name, description },
+	    });
+	    return this._patch(data);
+	  }
+
+	  /**
+	   * Deletes this template.
+	   * @returns {Promise<GuildTemplate>}
+	   */
+	  async delete() {
+	    await this.client.rest.delete(Routes.guildTemplate(this.guildId, this.code));
+	    return this;
+	  }
+
+	  /**
+	   * Syncs this template to the current state of the guild.
+	   * @returns {Promise<GuildTemplate>}
+	   */
+	  async sync() {
+	    const data = await this.client.rest.put(Routes.guildTemplate(this.guildId, this.code));
+	    return this._patch(data);
+	  }
+
+	  /**
+	   * The time when this template was created at
+	   * @type {Date}
+	   * @readonly
+	   */
+	  get createdAt() {
+	    return new Date(this.createdTimestamp);
+	  }
+
+	  /**
+	   * The time when this template was last synced to the guild
+	   * @type {Date}
+	   * @readonly
+	   */
+	  get updatedAt() {
+	    return new Date(this.updatedTimestamp);
+	  }
+
+	  /**
+	   * The guild that this template belongs to
+	   * @type {?Guild}
+	   * @readonly
+	   */
+	  get guild() {
+	    return this.client.guilds.resolve(this.guildId);
+	  }
+
+	  /**
+	   * The URL of this template
+	   * @type {string}
+	   * @readonly
+	   */
+	  get url() {
+	    return `${RouteBases.template}/${this.code}`;
+	  }
+
+	  /**
+	   * When concatenated with a string, this automatically returns the template's code instead of the template object.
+	   * @returns {string}
+	   * @example
+	   * // Logs: Template: FKvmczH2HyUf
+	   * console.log(`Template: ${guildTemplate}!`);
+	   */
+	  toString() {
+	    return this.code;
+	  }
+	}
+
+	GuildTemplate_1 = GuildTemplate;
+	return GuildTemplate_1;
+}
+
+var DataResolver;
+var hasRequiredDataResolver;
+
+function requireDataResolver () {
+	if (hasRequiredDataResolver) return DataResolver;
+	hasRequiredDataResolver = 1;
+
+	const { Buffer } = require$$0$d;
+	const fs = require$$1$9;
+	const path = require$$2$5;
+	const { fetch } = requireUndici();
+	const { DiscordjsError, DiscordjsTypeError, ErrorCodes } = requireErrors$1();
+	const Invite = requireInvite();
+
+	/**
+	 * Data that can be resolved to give an invite code. This can be:
+	 * * An invite code
+	 * * An invite URL
+	 * @typedef {string} InviteResolvable
+	 */
+
+	/**
+	 * Data that can be resolved to give a template code. This can be:
+	 * * A template code
+	 * * A template URL
+	 * @typedef {string} GuildTemplateResolvable
+	 */
+
+	/**
+	 * Resolves the string to a code based on the passed regex.
+	 * @param {string} data The string to resolve
+	 * @param {RegExp} regex The RegExp used to extract the code
+	 * @returns {string}
+	 * @private
+	 */
+	function resolveCode(data, regex) {
+	  return regex.exec(data)?.[1] ?? data;
+	}
+
+	/**
+	 * Resolves InviteResolvable to an invite code.
+	 * @param {InviteResolvable} data The invite resolvable to resolve
+	 * @returns {string}
+	 * @private
+	 */
+	function resolveInviteCode(data) {
+	  return resolveCode(data, Invite.InvitesPattern);
+	}
+
+	/**
+	 * Resolves GuildTemplateResolvable to a template code.
+	 * @param {GuildTemplateResolvable} data The template resolvable to resolve
+	 * @returns {string}
+	 * @private
+	 */
+	function resolveGuildTemplateCode(data) {
+	  const GuildTemplate = requireGuildTemplate();
+	  return resolveCode(data, GuildTemplate.GuildTemplatesPattern);
+	}
+
+	/**
+	 * Data that can be resolved to give a Buffer. This can be:
+	 * * A Buffer
+	 * * The path to a local file
+	 * * A URL <warn>When provided a URL, discord.js will fetch the URL internally in order to create a Buffer.
+	 * This can pose a security risk when the URL has not been sanitized</warn>
+	 * @typedef {string|Buffer} BufferResolvable
+	 */
+
+	/**
+	 * @external Stream
+	 * @see {@link https://nodejs.org/api/stream.html}
+	 */
+
+	/**
+	 * @typedef {Object} ResolvedFile
+	 * @property {Buffer} data Buffer containing the file data
+	 * @property {string} [contentType] Content-Type of the file
+	 * @private
+	 */
+
+	/**
+	 * Resolves a BufferResolvable to a Buffer.
+	 * @param {BufferResolvable|Stream} resource The buffer or stream resolvable to resolve
+	 * @returns {Promise<ResolvedFile>}
+	 * @private
+	 */
+	async function resolveFile(resource) {
+	  if (Buffer.isBuffer(resource)) return { data: resource };
+
+	  if (typeof resource[Symbol.asyncIterator] === 'function') {
+	    const buffers = [];
+	    for await (const data of resource) buffers.push(Buffer.from(data));
+	    return { data: Buffer.concat(buffers) };
+	  }
+
+	  if (typeof resource === 'string') {
+	    if (/^https?:\/\//.test(resource)) {
+	      const res = await fetch(resource);
+	      return { data: Buffer.from(await res.arrayBuffer()), contentType: res.headers.get('content-type') };
+	    }
+
+	    const file = path.resolve(resource);
+
+	    const stats = await fs.stat(file);
+	    if (!stats.isFile()) throw new DiscordjsError(ErrorCodes.FileNotFound, file);
+	    return { data: await fs.readFile(file) };
+	  }
+
+	  throw new DiscordjsTypeError(ErrorCodes.ReqResourceType);
+	}
+
+	/**
+	 * Data that resolves to give a Base64 string, typically for image uploading. This can be:
+	 * * A Buffer
+	 * * A base64 string
+	 * @typedef {Buffer|string} Base64Resolvable
+	 */
+
+	/**
+	 * Resolves a Base64Resolvable to a Base 64 string.
+	 * @param {Base64Resolvable} data The base 64 resolvable you want to resolve
+	 * @param {string} [contentType='image/jpg'] The content type of the data
+	 * @returns {?string}
+	 * @private
+	 */
+	function resolveBase64(data, contentType = 'image/jpg') {
+	  if (Buffer.isBuffer(data)) return `data:${contentType};base64,${data.toString('base64')}`;
+	  return data;
+	}
+
+	/**
+	 * Resolves a Base64Resolvable, a string, or a BufferResolvable to a Base 64 image.
+	 * @param {BufferResolvable|Base64Resolvable} image The image to be resolved
+	 * @returns {Promise<?string>}
+	 * @private
+	 */
+	async function resolveImage(image) {
+	  if (!image) return null;
+	  if (typeof image === 'string' && image.startsWith('data:')) {
+	    return image;
+	  }
+	  const file = await resolveFile(image);
+	  return resolveBase64(file.data);
+	}
+
+	DataResolver = { resolveCode, resolveInviteCode, resolveGuildTemplateCode, resolveImage, resolveBase64, resolveFile };
+	return DataResolver;
+}
+
+var MessageFlagsBitField_1;
+var hasRequiredMessageFlagsBitField;
+
+function requireMessageFlagsBitField () {
+	if (hasRequiredMessageFlagsBitField) return MessageFlagsBitField_1;
+	hasRequiredMessageFlagsBitField = 1;
+
+	const { MessageFlags } = requireV10();
+	const BitField = requireBitField();
+
+	/**
+	 * Data structure that makes it easy to interact with a {@link Message#flags} bitfield.
+	 * @extends {BitField}
+	 */
+	class MessageFlagsBitField extends BitField {
+	  /**
+	   * Numeric message flags.
+	   * @type {MessageFlags}
+	   * @memberof MessageFlagsBitField
+	   */
+	  static Flags = MessageFlags;
+	}
+
+	/**
+	 * @name MessageFlagsBitField
+	 * @kind constructor
+	 * @memberof MessageFlagsBitField
+	 * @param {BitFieldResolvable} [bits=0] Bit(s) to read from
+	 */
+
+	/**
+	 * Data that can be resolved to give a message flags bit field. This can be:
+	 * * A string (see {@link MessageFlagsBitField.Flags})
+	 * * A message flag
+	 * * An instance of {@link MessageFlagsBitField}
+	 * * An array of `MessageFlagsResolvable`
+	 * @typedef {string|number|MessageFlagsBitField|MessageFlagsResolvable[]} MessageFlagsResolvable
+	 */
+
+	/**
+	 * Bitfield of the packed bits
+	 * @type {number}
+	 * @name MessageFlagsBitField#bitfield
+	 */
+
+	MessageFlagsBitField_1 = MessageFlagsBitField;
+	return MessageFlagsBitField_1;
+}
+
+var BaseInteraction_1;
+var hasRequiredBaseInteraction;
+
+function requireBaseInteraction () {
+	if (hasRequiredBaseInteraction) return BaseInteraction_1;
+	hasRequiredBaseInteraction = 1;
+
+	const { deprecate } = require$$1$3;
+	const { Collection } = requireDist$7();
+	const { DiscordSnowflake } = /*@__PURE__*/ requireCjs$2();
+	const { InteractionType, ApplicationCommandType, ComponentType } = requireV10();
+	const Base = requireBase();
+	const { SelectMenuTypes } = requireConstants$1();
+	const PermissionsBitField = requirePermissionsBitField();
+
+	/**
+	 * Represents an interaction.
+	 * @extends {Base}
+	 * @abstract
+	 */
+	class BaseInteraction extends Base {
+	  constructor(client, data) {
+	    super(client);
+
+	    /**
+	     * The interaction's type
+	     * @type {InteractionType}
+	     */
+	    this.type = data.type;
+
+	    /**
+	     * The interaction's id
+	     * @type {Snowflake}
+	     */
+	    this.id = data.id;
+
+	    /**
+	     * The interaction's token
+	     * @type {string}
+	     * @name BaseInteraction#token
+	     * @readonly
+	     */
+	    Object.defineProperty(this, 'token', { value: data.token });
+
+	    /**
+	     * The application's id
+	     * @type {Snowflake}
+	     */
+	    this.applicationId = data.application_id;
+
+	    /**
+	     * The id of the channel this interaction was sent in
+	     * @type {?Snowflake}
+	     */
+	    this.channelId = data.channel?.id ?? null;
+
+	    /**
+	     * The id of the guild this interaction was sent in
+	     * @type {?Snowflake}
+	     */
+	    this.guildId = data.guild_id ?? null;
+
+	    /**
+	     * The user who created this interaction
+	     * @type {User}
+	     */
+	    this.user = this.client.users._add(data.user ?? data.member.user);
+
+	    /**
+	     * If this interaction was sent in a guild, the member which sent it
+	     * @type {?(GuildMember|APIInteractionGuildMember)}
+	     */
+	    this.member = data.member ? (this.guild?.members._add(data.member) ?? data.member) : null;
+
+	    /**
+	     * The version
+	     * @type {number}
+	     */
+	    this.version = data.version;
+
+	    /**
+	     * Set of permissions the application or bot has within the channel the interaction was sent from
+	     * @type {Readonly<PermissionsBitField>}
+	     */
+	    this.appPermissions = new PermissionsBitField(data.app_permissions).freeze();
+
+	    /**
+	     * The permissions of the member, if one exists, in the channel this interaction was executed in
+	     * @type {?Readonly<PermissionsBitField>}
+	     */
+	    this.memberPermissions = data.member?.permissions
+	      ? new PermissionsBitField(data.member.permissions).freeze()
+	      : null;
+
+	    /**
+	     * The locale of the user who invoked this interaction
+	     * @type {Locale}
+	     */
+	    this.locale = data.locale;
+
+	    /**
+	     * The preferred locale from the guild this interaction was sent in
+	     * @type {?Locale}
+	     */
+	    this.guildLocale = data.guild_locale ?? null;
+
+	    /**
+	     * The entitlements for the invoking user, representing access to premium SKUs
+	     * @type {Collection<Snowflake, Entitlement>}
+	     */
+	    this.entitlements = data.entitlements.reduce(
+	      (coll, entitlement) => coll.set(entitlement.id, this.client.application.entitlements._add(entitlement)),
+	      new Collection(),
+	    );
+
+	    /* eslint-disable max-len */
+	    /**
+	     * Mapping of installation contexts that the interaction was authorized for the related user or guild ids
+	     * @type {APIAuthorizingIntegrationOwnersMap}
+	     * @see {@link https://discord.com/developers/docs/interactions/receiving-and-responding#interaction-object-authorizing-integration-owners-object}
+	     */
+	    this.authorizingIntegrationOwners = data.authorizing_integration_owners;
+	    /* eslint-enable max-len */
+
+	    /**
+	     * Context where the interaction was triggered from
+	     * @type {?InteractionContextType}
+	     */
+	    this.context = data.context ?? null;
+	  }
+
+	  /**
+	   * The timestamp the interaction was created at
+	   * @type {number}
+	   * @readonly
+	   */
+	  get createdTimestamp() {
+	    return DiscordSnowflake.timestampFrom(this.id);
+	  }
+
+	  /**
+	   * The time the interaction was created at
+	   * @type {Date}
+	   * @readonly
+	   */
+	  get createdAt() {
+	    return new Date(this.createdTimestamp);
+	  }
+
+	  /**
+	   * The channel this interaction was sent in
+	   * @type {?TextBasedChannels}
+	   * @readonly
+	   */
+	  get channel() {
+	    return this.client.channels.cache.get(this.channelId) ?? null;
+	  }
+
+	  /**
+	   * The guild this interaction was sent in
+	   * @type {?Guild}
+	   * @readonly
+	   */
+	  get guild() {
+	    return this.client.guilds.cache.get(this.guildId) ?? null;
+	  }
+
+	  /**
+	   * Indicates whether this interaction is received from a guild.
+	   * @returns {boolean}
+	   */
+	  inGuild() {
+	    return Boolean(this.guildId && this.member);
+	  }
+
+	  /**
+	   * Indicates whether this interaction is received from a cached guild.
+	   * @returns {boolean}
+	   */
+	  inCachedGuild() {
+	    return Boolean(this.guild && this.member);
+	  }
+
+	  /**
+	   * Indicates whether or not this interaction is received from an uncached guild.
+	   * @returns {boolean}
+	   */
+	  inRawGuild() {
+	    return Boolean(this.guildId && !this.guild && this.member);
+	  }
+
+	  /**
+	   * Indicates whether this interaction is an {@link AutocompleteInteraction}
+	   * @returns {boolean}
+	   */
+	  isAutocomplete() {
+	    return this.type === InteractionType.ApplicationCommandAutocomplete;
+	  }
+
+	  /**
+	   * Indicates whether this interaction is a {@link CommandInteraction}
+	   * @returns {boolean}
+	   */
+	  isCommand() {
+	    return this.type === InteractionType.ApplicationCommand;
+	  }
+
+	  /**
+	   * Indicates whether this interaction is a {@link ChatInputCommandInteraction}.
+	   * @returns {boolean}
+	   */
+	  isChatInputCommand() {
+	    return this.type === InteractionType.ApplicationCommand && this.commandType === ApplicationCommandType.ChatInput;
+	  }
+
+	  /**
+	   * Indicates whether this interaction is a {@link ContextMenuCommandInteraction}
+	   * @returns {boolean}
+	   */
+	  isContextMenuCommand() {
+	    return (
+	      this.type === InteractionType.ApplicationCommand &&
+	      [ApplicationCommandType.User, ApplicationCommandType.Message].includes(this.commandType)
+	    );
+	  }
+
+	  /**
+	   * Indicates whether this interaction is a {@link MessageComponentInteraction}
+	   * @returns {boolean}
+	   */
+	  isMessageComponent() {
+	    return this.type === InteractionType.MessageComponent;
+	  }
+
+	  /**
+	   * Indicates whether this interaction is a {@link ModalSubmitInteraction}
+	   * @returns {boolean}
+	   */
+	  isModalSubmit() {
+	    return this.type === InteractionType.ModalSubmit;
+	  }
+
+	  /**
+	   * Indicates whether this interaction is a {@link UserContextMenuCommandInteraction}
+	   * @returns {boolean}
+	   */
+	  isUserContextMenuCommand() {
+	    return this.isContextMenuCommand() && this.commandType === ApplicationCommandType.User;
+	  }
+
+	  /**
+	   * Indicates whether this interaction is a {@link MessageContextMenuCommandInteraction}
+	   * @returns {boolean}
+	   */
+	  isMessageContextMenuCommand() {
+	    return this.isContextMenuCommand() && this.commandType === ApplicationCommandType.Message;
+	  }
+
+	  /**
+	   * Indicates whether this interaction is a {@link ButtonInteraction}.
+	   * @returns {boolean}
+	   */
+	  isButton() {
+	    return this.type === InteractionType.MessageComponent && this.componentType === ComponentType.Button;
+	  }
+
+	  /**
+	   * Indicates whether this interaction is a {@link StringSelectMenuInteraction}.
+	   * @returns {boolean}
+	   * @deprecated Use {@link BaseInteraction#isStringSelectMenu} instead.
+	   */
+	  isSelectMenu() {
+	    return this.isStringSelectMenu();
+	  }
+
+	  /**
+	   * Indicates whether this interaction is a select menu of any known type.
+	   * @returns {boolean}
+	   */
+	  isAnySelectMenu() {
+	    return this.type === InteractionType.MessageComponent && SelectMenuTypes.includes(this.componentType);
+	  }
+
+	  /**
+	   * Indicates whether this interaction is a {@link StringSelectMenuInteraction}.
+	   * @returns {boolean}
+	   */
+	  isStringSelectMenu() {
+	    return this.type === InteractionType.MessageComponent && this.componentType === ComponentType.StringSelect;
+	  }
+
+	  /**
+	   * Indicates whether this interaction is a {@link UserSelectMenuInteraction}
+	   * @returns {boolean}
+	   */
+	  isUserSelectMenu() {
+	    return this.type === InteractionType.MessageComponent && this.componentType === ComponentType.UserSelect;
+	  }
+
+	  /**
+	   * Indicates whether this interaction is a {@link RoleSelectMenuInteraction}
+	   * @returns {boolean}
+	   */
+	  isRoleSelectMenu() {
+	    return this.type === InteractionType.MessageComponent && this.componentType === ComponentType.RoleSelect;
+	  }
+
+	  /**
+	   * Indicates whether this interaction is a {@link ChannelSelectMenuInteraction}
+	   * @returns {boolean}
+	   */
+	  isChannelSelectMenu() {
+	    return this.type === InteractionType.MessageComponent && this.componentType === ComponentType.ChannelSelect;
+	  }
+
+	  /**
+	   * Indicates whether this interaction is a {@link MentionableSelectMenuInteraction}
+	   * @returns {boolean}
+	   */
+	  isMentionableSelectMenu() {
+	    return this.type === InteractionType.MessageComponent && this.componentType === ComponentType.MentionableSelect;
+	  }
+
+	  /**
+	   * Indicates whether this interaction can be replied to.
+	   * @returns {boolean}
+	   */
+	  isRepliable() {
+	    return ![InteractionType.Ping, InteractionType.ApplicationCommandAutocomplete].includes(this.type);
+	  }
+	}
+
+	BaseInteraction.prototype.isSelectMenu = deprecate(
+	  BaseInteraction.prototype.isSelectMenu,
+	  'BaseInteraction#isSelectMenu() is deprecated. Use BaseInteraction#isStringSelectMenu() instead.',
+	);
+
+	BaseInteraction_1 = BaseInteraction;
+	return BaseInteraction_1;
+}
+
+var Message = {};
+
+var ApplicationRoleConnectionMetadata = {};
+
+var hasRequiredApplicationRoleConnectionMetadata;
+
+function requireApplicationRoleConnectionMetadata () {
+	if (hasRequiredApplicationRoleConnectionMetadata) return ApplicationRoleConnectionMetadata;
+	hasRequiredApplicationRoleConnectionMetadata = 1;
+
+	/**
+	 * Role connection metadata object for an application.
+	 */
+	let ApplicationRoleConnectionMetadata$1 = class ApplicationRoleConnectionMetadata {
+	  constructor(data) {
+	    /**
+	     * The name of this metadata field
+	     * @type {string}
+	     */
+	    this.name = data.name;
+
+	    /**
+	     * The name localizations for this metadata field
+	     * @type {?Object<Locale, string>}
+	     */
+	    this.nameLocalizations = data.name_localizations ?? null;
+
+	    /**
+	     * The description of this metadata field
+	     * @type {string}
+	     */
+	    this.description = data.description;
+
+	    /**
+	     * The description localizations for this metadata field
+	     * @type {?Object<Locale, string>}
+	     */
+	    this.descriptionLocalizations = data.description_localizations ?? null;
+
+	    /**
+	     * The dictionary key for this metadata field
+	     * @type {string}
+	     */
+	    this.key = data.key;
+
+	    /**
+	     * The type of this metadata field
+	     * @type {ApplicationRoleConnectionMetadataType}
+	     */
+	    this.type = data.type;
+	  }
+	};
+
+	ApplicationRoleConnectionMetadata.ApplicationRoleConnectionMetadata = ApplicationRoleConnectionMetadata$1;
+	return ApplicationRoleConnectionMetadata;
+}
+
+var TeamMember_1;
+var hasRequiredTeamMember;
+
+function requireTeamMember () {
+	if (hasRequiredTeamMember) return TeamMember_1;
+	hasRequiredTeamMember = 1;
+
+	const Base = requireBase();
+
+	/**
+	 * Represents a Client OAuth2 Application Team Member.
+	 * @extends {Base}
+	 */
+	class TeamMember extends Base {
+	  constructor(team, data) {
+	    super(team.client);
+
+	    /**
+	     * The Team this member is part of
+	     * @type {Team}
+	     */
+	    this.team = team;
+
+	    this._patch(data);
+	  }
+
+	  _patch(data) {
+	    if ('permissions' in data) {
+	      /**
+	       * The permissions this Team Member has with regard to the team
+	       * @type {string[]}
+	       * @deprecated Use {@link TeamMember#role} instead.
+	       */
+	      this.permissions = data.permissions;
+	    }
+
+	    if ('membership_state' in data) {
+	      /**
+	       * The permissions this Team Member has with regard to the team
+	       * @type {TeamMemberMembershipState}
+	       */
+	      this.membershipState = data.membership_state;
+	    }
+
+	    if ('user' in data) {
+	      /**
+	       * The user for this Team Member
+	       * @type {User}
+	       */
+	      this.user = this.client.users._add(data.user);
+	    }
+
+	    if ('role' in data) {
+	      /**
+	       * The role of this Team Member
+	       * @type {TeamMemberRole}
+	       */
+	      this.role = data.role;
+	    }
+	  }
+
+	  /**
+	   * The Team Member's id
+	   * @type {Snowflake}
+	   * @readonly
+	   */
+	  get id() {
+	    return this.user.id;
+	  }
+
+	  /**
+	   * When concatenated with a string, this automatically returns the team member's mention instead of the
+	   * TeamMember object.
+	   * @returns {string}
+	   * @example
+	   * // Logs: Team Member's mention: <@123456789012345678>
+	   * console.log(`Team Member's mention: ${teamMember}`);
+	   */
+	  toString() {
+	    return this.user.toString();
+	  }
+	}
+
+	TeamMember_1 = TeamMember;
+	return TeamMember_1;
+}
+
+var Team_1;
+var hasRequiredTeam;
+
+function requireTeam () {
+	if (hasRequiredTeam) return Team_1;
+	hasRequiredTeam = 1;
+
+	const { Collection } = requireDist$7();
+	const { DiscordSnowflake } = /*@__PURE__*/ requireCjs$2();
+	const Base = requireBase();
+	const TeamMember = requireTeamMember();
+
+	/**
+	 * Represents a Client OAuth2 Application Team.
+	 * @extends {Base}
+	 */
+	class Team extends Base {
+	  constructor(client, data) {
+	    super(client);
+	    this._patch(data);
+	  }
+
+	  _patch(data) {
+	    /**
+	     * The Team's id
+	     * @type {Snowflake}
+	     */
+	    this.id = data.id;
+
+	    if ('name' in data) {
+	      /**
+	       * The name of the Team
+	       * @type {string}
+	       */
+	      this.name = data.name;
+	    }
+
+	    if ('icon' in data) {
+	      /**
+	       * The Team's icon hash
+	       * @type {?string}
+	       */
+	      this.icon = data.icon;
+	    } else {
+	      this.icon ??= null;
+	    }
+
+	    if ('owner_user_id' in data) {
+	      /**
+	       * The Team's owner id
+	       * @type {?Snowflake}
+	       */
+	      this.ownerId = data.owner_user_id;
+	    } else {
+	      this.ownerId ??= null;
+	    }
+	    /**
+	     * The Team's members
+	     * @type {Collection<Snowflake, TeamMember>}
+	     */
+	    this.members = new Collection();
+
+	    for (const memberData of data.members) {
+	      const member = new TeamMember(this, memberData);
+	      this.members.set(member.id, member);
+	    }
+	  }
+
+	  /**
+	   * The owner of this team
+	   * @type {?TeamMember}
+	   * @readonly
+	   */
+	  get owner() {
+	    return this.members.get(this.ownerId) ?? null;
+	  }
+
+	  /**
+	   * The timestamp the team was created at
+	   * @type {number}
+	   * @readonly
+	   */
+	  get createdTimestamp() {
+	    return DiscordSnowflake.timestampFrom(this.id);
+	  }
+
+	  /**
+	   * The time the team was created at
+	   * @type {Date}
+	   * @readonly
+	   */
+	  get createdAt() {
+	    return new Date(this.createdTimestamp);
+	  }
+
+	  /**
+	   * A link to the team's icon.
+	   * @param {ImageURLOptions} [options={}] Options for the image URL
+	   * @returns {?string}
+	   */
+	  iconURL(options = {}) {
+	    return this.icon && this.client.rest.cdn.teamIcon(this.id, this.icon, options);
+	  }
+
+	  /**
+	   * When concatenated with a string, this automatically returns the Team's name instead of the
+	   * Team object.
+	   * @returns {string}
+	   * @example
+	   * // Logs: Team name: My Team
+	   * console.log(`Team name: ${team}`);
+	   */
+	  toString() {
+	    return this.name;
+	  }
+
+	  toJSON() {
+	    return super.toJSON({ createdTimestamp: true });
+	  }
+	}
+
+	Team_1 = Team;
+	return Team_1;
+}
+
+var ApplicationCommandPermissionsManager_1;
+var hasRequiredApplicationCommandPermissionsManager;
+
+function requireApplicationCommandPermissionsManager () {
+	if (hasRequiredApplicationCommandPermissionsManager) return ApplicationCommandPermissionsManager_1;
+	hasRequiredApplicationCommandPermissionsManager = 1;
+
+	const { Collection } = requireDist$7();
+	const { ApplicationCommandPermissionType, RESTJSONErrorCodes, Routes } = requireV10();
+	const BaseManager = requireBaseManager();
+	const { DiscordjsError, DiscordjsTypeError, ErrorCodes } = requireErrors$1();
+
+	/**
+	 * Manages API methods for permissions of Application Commands.
+	 * @extends {BaseManager}
+	 */
+	class ApplicationCommandPermissionsManager extends BaseManager {
+	  constructor(manager) {
+	    super(manager.client);
+
+	    /**
+	     * The manager or command that this manager belongs to
+	     * @type {ApplicationCommandManager|ApplicationCommand}
+	     * @private
+	     */
+	    this.manager = manager;
+
+	    /**
+	     * The guild that this manager acts on
+	     * @type {?Guild}
+	     */
+	    this.guild = manager.guild ?? null;
+
+	    /**
+	     * The id of the guild that this manager acts on
+	     * @type {?Snowflake}
+	     */
+	    this.guildId = manager.guildId ?? manager.guild?.id ?? null;
+
+	    /**
+	     * The id of the command this manager acts on
+	     * @type {?Snowflake}
+	     */
+	    this.commandId = manager.id ?? null;
+	  }
+
+	  /**
+	   * The APIRouter path to the commands
+	   * @param {Snowflake} guildId The guild's id to use in the path,
+	   * @param {Snowflake} [commandId] The application command's id
+	   * @returns {string}
+	   * @private
+	   */
+	  permissionsPath(guildId, commandId) {
+	    if (commandId) {
+	      return Routes.applicationCommandPermissions(this.client.application.id, guildId, commandId);
+	    }
+
+	    return Routes.guildApplicationCommandsPermissions(this.client.application.id, guildId);
+	  }
+
+	  /* eslint-disable max-len */
+	  /**
+	   * The object returned when fetching permissions for an application command.
+	   * @typedef {Object} ApplicationCommandPermissions
+	   * @property {Snowflake} id The role, user, or channel's id. Can also be a
+	   * {@link https://discord.com/developers/docs/interactions/application-commands#application-command-permissions-object-application-command-permissions-constants permission constant}.
+	   * @property {ApplicationCommandPermissionType} type Whether this permission is for a role or a user
+	   * @property {boolean} permission Whether the role or user has the permission to use this command
+	   */
+	  /* eslint-enable max-len */
+
+	  /**
+	   * Options for managing permissions for one or more Application Commands
+	   * <warn>When passing these options to a manager where `guildId` is `null`,
+	   * `guild` is a required parameter</warn>
+	   * @typedef {Object} BaseApplicationCommandPermissionsOptions
+	   * @property {GuildResolvable} [guild] The guild to modify / check permissions for
+	   * <warn>Ignored when the manager has a non-null `guildId` property</warn>
+	   * @property {ApplicationCommandResolvable} [command] The command to modify / check permissions for
+	   * <warn>Ignored when the manager has a non-null `commandId` property</warn>
+	   */
+
+	  /**
+	   * Fetches the permissions for one or multiple commands. Providing the client's id as the "command id" will fetch
+	   * *only* the guild level permissions
+	   * @param {BaseApplicationCommandPermissionsOptions} [options] Options used to fetch permissions
+	   * @returns {Promise<ApplicationCommandPermissions[]|Collection<Snowflake, ApplicationCommandPermissions[]>>}
+	   * @example
+	   * // Fetch permissions for one command
+	   * guild.commands.permissions.fetch({ command: '123456789012345678' })
+	   *   .then(perms => console.log(`Fetched ${perms.length} overwrites`))
+	   *   .catch(console.error);
+	   * @example
+	   * // Fetch permissions for all commands in a guild
+	   * client.application.commands.permissions.fetch({ guild: '123456789012345678' })
+	   *   .then(perms => console.log(`Fetched permissions for ${perms.size} commands`))
+	   *   .catch(console.error);
+	   * @example
+	   * // Fetch guild level permissions
+	   * guild.commands.permissions.fetch({ command: client.user.id })
+	   *   .then(perms => console.log(`Fetched ${perms.length} guild level permissions`))
+	   *   .catch(console.error);
+	   */
+	  async fetch({ guild, command } = {}) {
+	    const { guildId, commandId } = this._validateOptions(guild, command);
+	    if (commandId) {
+	      const data = await this.client.rest.get(this.permissionsPath(guildId, commandId));
+	      return data.permissions;
+	    }
+
+	    const data = await this.client.rest.get(this.permissionsPath(guildId));
+	    return data.reduce((coll, perm) => coll.set(perm.id, perm.permissions), new Collection());
+	  }
+
+	  /**
+	   * Options used to set permissions for one or more Application Commands in a guild
+	   * <warn>Omitting the `command` parameter edits the guild wide permissions
+	   * when the manager's `commandId` is `null`</warn>
+	   * @typedef {BaseApplicationCommandPermissionsOptions} ApplicationCommandPermissionsEditOptions
+	   * @property {ApplicationCommandPermissions[]} permissions The new permissions for the guild or overwrite
+	   * @property {string} token The bearer token to use that authorizes the permission edit
+	   */
+
+	  /**
+	   * Sets the permissions for the guild or a command overwrite.
+	   * @param {ApplicationCommandPermissionsEditOptions} options Options used to set permissions
+	   * @returns {Promise<ApplicationCommandPermissions[]|Collection<Snowflake, ApplicationCommandPermissions[]>>}
+	   * @example
+	   * // Set a permission overwrite for a command
+	   * client.application.commands.permissions.set({
+	   *  guild: '892455839386304532',
+	   *  command: '123456789012345678',
+	   *  token: 'TotallyRealToken',
+	   *  permissions: [
+	   *    {
+	   *      id: '876543210987654321',
+	   *      type: ApplicationCommandPermissionType.User,
+	   *      permission: false,
+	   *    },
+	   * ]})
+	   *   .then(console.log)
+	   *   .catch(console.error);
+	   * @example
+	   * // Set the permissions used for the guild (commands without overwrites)
+	   * guild.commands.permissions.set({ token: 'TotallyRealToken', permissions: [
+	   *   {
+	   *     id: '123456789012345678',
+	   *     permissions: [{
+	   *       id: '876543210987654321',
+	   *       type: ApplicationCommandPermissionType.User,
+	   *       permission: false,
+	   *     }],
+	   *   },
+	   * ]})
+	   *   .then(console.log)
+	   *   .catch(console.error);
+	   */
+	  async set({ guild, command, permissions, token } = {}) {
+	    if (!token) {
+	      throw new DiscordjsError(ErrorCodes.ApplicationCommandPermissionsTokenMissing);
+	    }
+	    let { guildId, commandId } = this._validateOptions(guild, command);
+
+	    if (!Array.isArray(permissions)) {
+	      throw new DiscordjsTypeError(
+	        ErrorCodes.InvalidType,
+	        'permissions',
+	        'Array of ApplicationCommandPermissions',
+	        true,
+	      );
+	    }
+
+	    if (!commandId) {
+	      commandId = this.client.user.id;
+	    }
+	    const data = await this.client.rest.put(this.permissionsPath(guildId, commandId), {
+	      body: { permissions },
+	      auth: false,
+	      headers: { Authorization: `Bearer ${token}` },
+	    });
+	    return data.permissions;
+	  }
+
+	  /**
+	   * Add permissions to a command.
+	   * @param {ApplicationCommandPermissionsEditOptions} options Options used to add permissions
+	   * @returns {Promise<ApplicationCommandPermissions[]>}
+	   * @example
+	   * // Add a rule to block a role from using a command
+	   * guild.commands.permissions.add({ command: '123456789012345678', token: 'TotallyRealToken', permissions: [
+	   *   {
+	   *     id: '876543211234567890',
+	   *     type: ApplicationCommandPermissionType.Role,
+	   *     permission: false
+	   *   },
+	   * ]})
+	   *   .then(console.log)
+	   *   .catch(console.error);
+	   */
+	  async add({ guild, command, permissions, token } = {}) {
+	    if (!token) {
+	      throw new DiscordjsError(ErrorCodes.ApplicationCommandPermissionsTokenMissing);
+	    }
+	    let { guildId, commandId } = this._validateOptions(guild, command);
+	    if (!commandId) {
+	      commandId = this.client.user.id;
+	    }
+	    if (!Array.isArray(permissions)) {
+	      throw new DiscordjsTypeError(
+	        ErrorCodes.InvalidType,
+	        'permissions',
+	        'Array of ApplicationCommandPermissions',
+	        true,
+	      );
+	    }
+
+	    let existingPermissions = [];
+	    try {
+	      existingPermissions = await this.fetch({ guild: guildId, command: commandId });
+	    } catch (error) {
+	      if (error.code !== RESTJSONErrorCodes.UnknownApplicationCommandPermissions) throw error;
+	    }
+
+	    const newPermissions = permissions.slice();
+	    for (const existingPermission of existingPermissions) {
+	      if (!newPermissions.some(newPermission => newPermission.id === existingPermission.id)) {
+	        newPermissions.push(existingPermission);
+	      }
+	    }
+
+	    return this.set({ guild: guildId, command: commandId, permissions: newPermissions, token });
+	  }
+
+	  /**
+	   * A static snowflake that identifies the everyone role for application command permissions.
+	   * It is the same as the guild id
+	   * @typedef {Snowflake} RolePermissionConstant
+	   */
+
+	  /**
+	   * A static snowflake that identifies the "all channels" entity for application command permissions.
+	   * It will be the result of the calculation `guildId - 1`
+	   * @typedef {Snowflake} ChannelPermissionConstant
+	   */
+
+	  /**
+	   * Options used to remove permissions from a command
+	   * <warn>Omitting the `command` parameter removes from the guild wide permissions
+	   * when the managers `commandId` is `null`</warn>
+	   * <warn>At least one of `users`, `roles`, and `channels` is required</warn>
+	   * @typedef {BaseApplicationCommandPermissionsOptions} RemoveApplicationCommandPermissionsOptions
+	   * @property {string} token The bearer token to use that authorizes the permission removal
+	   * @property {UserResolvable[]} [users] The user(s) to remove
+	   * @property {Array<RoleResolvable|RolePermissionConstant>} [roles] The role(s) to remove
+	   * @property {Array<GuildChannelResolvable|ChannelPermissionConstant>} [channels] The channel(s) to remove
+	   */
+
+	  /**
+	   * Remove permissions from a command.
+	   * @param {RemoveApplicationCommandPermissionsOptions} options Options used to remove permissions
+	   * @returns {Promise<ApplicationCommandPermissions[]>}
+	   * @example
+	   * // Remove a user permission from this command
+	   * guild.commands.permissions.remove({
+	   *  command: '123456789012345678', users: '876543210123456789', token: 'TotallyRealToken',
+	   * })
+	   *   .then(console.log)
+	   *   .catch(console.error);
+	   * @example
+	   * // Remove multiple roles from this command
+	   * guild.commands.permissions.remove({
+	   *   command: '123456789012345678', roles: ['876543210123456789', '765432101234567890'], token: 'TotallyRealToken',
+	   * })
+	   *    .then(console.log)
+	   *    .catch(console.error);
+	   */
+	  async remove({ guild, command, users, roles, channels, token } = {}) {
+	    if (!token) {
+	      throw new DiscordjsError(ErrorCodes.ApplicationCommandPermissionsTokenMissing);
+	    }
+	    let { guildId, commandId } = this._validateOptions(guild, command);
+	    if (!commandId) {
+	      commandId = this.client.user.id;
+	    }
+
+	    if (!users && !roles && !channels) {
+	      throw new DiscordjsTypeError(ErrorCodes.InvalidType, 'users OR roles OR channels', 'Array or Resolvable', true);
+	    }
+
+	    let resolvedUserIds = [];
+	    if (Array.isArray(users)) {
+	      for (const user of users) {
+	        const userId = this.client.users.resolveId(user);
+	        if (!userId) throw new DiscordjsTypeError(ErrorCodes.InvalidElement, 'Array', 'users', user);
+	        resolvedUserIds.push(userId);
+	      }
+	    }
+
+	    let resolvedRoleIds = [];
+	    if (Array.isArray(roles)) {
+	      for (const role of roles) {
+	        if (typeof role === 'string') {
+	          resolvedRoleIds.push(role);
+	          continue;
+	        }
+	        if (!this.guild) throw new DiscordjsError(ErrorCodes.GuildUncachedEntityResolve, 'roles');
+	        const roleId = this.guild.roles.resolveId(role);
+	        if (!roleId) throw new DiscordjsTypeError(ErrorCodes.InvalidElement, 'Array', 'users', role);
+	        resolvedRoleIds.push(roleId);
+	      }
+	    }
+
+	    let resolvedChannelIds = [];
+	    if (Array.isArray(channels)) {
+	      for (const channel of channels) {
+	        if (typeof channel === 'string') {
+	          resolvedChannelIds.push(channel);
+	          continue;
+	        }
+	        if (!this.guild) throw new DiscordjsError(ErrorCodes.GuildUncachedEntityResolve, 'channels');
+	        const channelId = this.guild.channels.resolveId(channel);
+	        if (!channelId) throw new DiscordjsTypeError(ErrorCodes.InvalidElement, 'Array', 'channels', channel);
+	        resolvedChannelIds.push(channelId);
+	      }
+	    }
+
+	    let existing = [];
+	    try {
+	      existing = await this.fetch({ guild: guildId, command: commandId });
+	    } catch (error) {
+	      if (error.code !== RESTJSONErrorCodes.UnknownApplicationCommandPermissions) throw error;
+	    }
+
+	    const permissions = existing.filter(perm => {
+	      switch (perm.type) {
+	        case ApplicationCommandPermissionType.Role:
+	          return !resolvedRoleIds.includes(perm.id);
+	        case ApplicationCommandPermissionType.User:
+	          return !resolvedUserIds.includes(perm.id);
+	        case ApplicationCommandPermissionType.Channel:
+	          return !resolvedChannelIds.includes(perm.id);
+	      }
+	      return true;
+	    });
+
+	    return this.set({ guild: guildId, command: commandId, permissions, token });
+	  }
+
+	  /**
+	   * Options used to check the existence of permissions on a command
+	   * <warn>The `command` parameter is not optional when the managers `commandId` is `null`</warn>
+	   * @typedef {BaseApplicationCommandPermissionsOptions} HasApplicationCommandPermissionsOptions
+	   * @property {ApplicationCommandPermissionIdResolvable} permissionId The entity to check if a permission exists for
+	   * on this command.
+	   * @property {ApplicationCommandPermissionType} [permissionType] Check for a specific type of permission
+	   */
+
+	  /**
+	   * Check whether a permission exists for a user, role, or channel
+	   * @param {HasApplicationCommandPermissionsOptions} options Options used to check permissions
+	   * @returns {Promise<boolean>}
+	   * @example
+	   * guild.commands.permissions.has({ command: '123456789012345678', permissionId: '876543210123456789' })
+	   *  .then(console.log)
+	   *  .catch(console.error);
+	   */
+	  async has({ guild, command, permissionId, permissionType }) {
+	    const { guildId, commandId } = this._validateOptions(guild, command);
+	    if (!commandId) throw new DiscordjsTypeError(ErrorCodes.InvalidType, 'command', 'ApplicationCommandResolvable');
+
+	    if (!permissionId) {
+	      throw new DiscordjsTypeError(
+	        ErrorCodes.InvalidType,
+	        'permissionId',
+	        'UserResolvable, RoleResolvable, ChannelResolvable, or Permission Constant',
+	      );
+	    }
+	    let resolvedId = permissionId;
+	    if (typeof permissionId !== 'string') {
+	      resolvedId = this.client.users.resolveId(permissionId);
+	      if (!resolvedId) {
+	        if (!this.guild) throw new DiscordjsError(ErrorCodes.GuildUncachedEntityResolve, 'roles');
+	        resolvedId = this.guild.roles.resolveId(permissionId);
+	      }
+	      if (!resolvedId) {
+	        resolvedId = this.guild.channels.resolveId(permissionId);
+	      }
+	      if (!resolvedId) {
+	        throw new DiscordjsTypeError(
+	          ErrorCodes.InvalidType,
+	          'permissionId',
+	          'UserResolvable, RoleResolvable, ChannelResolvable, or Permission Constant',
+	        );
+	      }
+	    }
+
+	    let existing = [];
+	    try {
+	      existing = await this.fetch({ guild: guildId, command: commandId });
+	    } catch (error) {
+	      if (error.code !== RESTJSONErrorCodes.UnknownApplicationCommandPermissions) throw error;
+	    }
+
+	    // Check permission type if provided for the single edge case where a channel id is the same as the everyone role id
+	    return existing.some(perm => perm.id === resolvedId && (permissionType ?? perm.type) === perm.type);
+	  }
+
+	  _validateOptions(guild, command) {
+	    const guildId = this.guildId ?? this.client.guilds.resolveId(guild);
+	    if (!guildId) throw new DiscordjsError(ErrorCodes.GlobalCommandPermissions);
+	    let commandId = this.commandId;
+	    if (command && !commandId) {
+	      commandId = this.manager.resolveId?.(command);
+	      if (!commandId && this.guild) {
+	        commandId = this.guild.commands.resolveId(command);
+	      }
+	      commandId ??= this.client.application?.commands.resolveId(command);
+	      if (!commandId) {
+	        throw new DiscordjsTypeError(ErrorCodes.InvalidType, 'command', 'ApplicationCommandResolvable', true);
+	      }
+	    }
+	    return { guildId, commandId };
+	  }
+	}
+
+	ApplicationCommandPermissionsManager_1 = ApplicationCommandPermissionsManager;
+
+	/* eslint-disable max-len */
+	/**
+	 * Data that resolves to an id used for an application command permission
+	 * @typedef {UserResolvable|RoleResolvable|GuildChannelResolvable|RolePermissionConstant|ChannelPermissionConstant} ApplicationCommandPermissionIdResolvable
+	 */
+	return ApplicationCommandPermissionsManager_1;
+}
+
+var fastDeepEqual;
+var hasRequiredFastDeepEqual;
+
+function requireFastDeepEqual () {
+	if (hasRequiredFastDeepEqual) return fastDeepEqual;
+	hasRequiredFastDeepEqual = 1;
+
+	// do not edit .js files directly - edit src/index.jst
+
+
+
+	fastDeepEqual = function equal(a, b) {
+	  if (a === b) return true;
+
+	  if (a && b && typeof a == 'object' && typeof b == 'object') {
+	    if (a.constructor !== b.constructor) return false;
+
+	    var length, i, keys;
+	    if (Array.isArray(a)) {
+	      length = a.length;
+	      if (length != b.length) return false;
+	      for (i = length; i-- !== 0;)
+	        if (!equal(a[i], b[i])) return false;
+	      return true;
+	    }
+
+
+
+	    if (a.constructor === RegExp) return a.source === b.source && a.flags === b.flags;
+	    if (a.valueOf !== Object.prototype.valueOf) return a.valueOf() === b.valueOf();
+	    if (a.toString !== Object.prototype.toString) return a.toString() === b.toString();
+
+	    keys = Object.keys(a);
+	    length = keys.length;
+	    if (length !== Object.keys(b).length) return false;
+
+	    for (i = length; i-- !== 0;)
+	      if (!Object.prototype.hasOwnProperty.call(b, keys[i])) return false;
+
+	    for (i = length; i-- !== 0;) {
+	      var key = keys[i];
+
+	      if (!equal(a[key], b[key])) return false;
+	    }
+
+	    return true;
+	  }
+
+	  // true if both NaN, false otherwise
+	  return a!==a && b!==b;
+	};
+	return fastDeepEqual;
+}
+
+var ApplicationCommand_1;
+var hasRequiredApplicationCommand;
+
+function requireApplicationCommand () {
+	if (hasRequiredApplicationCommand) return ApplicationCommand_1;
+	hasRequiredApplicationCommand = 1;
+
+	const { DiscordSnowflake } = /*@__PURE__*/ requireCjs$2();
+	const { ApplicationCommandOptionType } = requireV10();
+	const isEqual = requireFastDeepEqual();
+	const Base = requireBase();
+	const ApplicationCommandPermissionsManager = requireApplicationCommandPermissionsManager();
+	const PermissionsBitField = requirePermissionsBitField();
+
+	/**
+	 * Represents an application command.
+	 * @extends {Base}
+	 */
+	class ApplicationCommand extends Base {
+	  constructor(client, data, guild, guildId) {
+	    super(client);
+
+	    /**
+	     * The command's id
+	     * @type {Snowflake}
+	     */
+	    this.id = data.id;
+
+	    /**
+	     * The parent application's id
+	     * @type {Snowflake}
+	     */
+	    this.applicationId = data.application_id;
+
+	    /**
+	     * The guild this command is part of
+	     * @type {?Guild}
+	     */
+	    this.guild = guild ?? null;
+
+	    /**
+	     * The guild's id this command is part of, this may be non-null when `guild` is `null` if the command
+	     * was fetched from the `ApplicationCommandManager`
+	     * @type {?Snowflake}
+	     */
+	    this.guildId = guild?.id ?? guildId ?? null;
+
+	    /**
+	     * The manager for permissions of this command on its guild or arbitrary guilds when the command is global
+	     * @type {ApplicationCommandPermissionsManager}
+	     */
+	    this.permissions = new ApplicationCommandPermissionsManager(this);
+
+	    /**
+	     * The type of this application command
+	     * @type {ApplicationCommandType}
+	     */
+	    this.type = data.type;
+
+	    /**
+	     * Whether this command is age-restricted (18+)
+	     * @type {boolean}
+	     */
+	    this.nsfw = data.nsfw ?? false;
+
+	    this._patch(data);
+	  }
+
+	  _patch(data) {
+	    if ('name' in data) {
+	      /**
+	       * The name of this command
+	       * @type {string}
+	       */
+	      this.name = data.name;
+	    }
+
+	    if ('name_localizations' in data) {
+	      /**
+	       * The name localizations for this command
+	       * @type {?Object<Locale, string>}
+	       */
+	      this.nameLocalizations = data.name_localizations;
+	    } else {
+	      this.nameLocalizations ??= null;
+	    }
+
+	    if ('name_localized' in data) {
+	      /**
+	       * The localized name for this command
+	       * @type {?string}
+	       */
+	      this.nameLocalized = data.name_localized;
+	    } else {
+	      this.nameLocalized ??= null;
+	    }
+
+	    if ('description' in data) {
+	      /**
+	       * The description of this command
+	       * @type {string}
+	       */
+	      this.description = data.description;
+	    }
+
+	    if ('description_localizations' in data) {
+	      /**
+	       * The description localizations for this command
+	       * @type {?Object<Locale, string>}
+	       */
+	      this.descriptionLocalizations = data.description_localizations;
+	    } else {
+	      this.descriptionLocalizations ??= null;
+	    }
+
+	    if ('description_localized' in data) {
+	      /**
+	       * The localized description for this command
+	       * @type {?string}
+	       */
+	      this.descriptionLocalized = data.description_localized;
+	    } else {
+	      this.descriptionLocalized ??= null;
+	    }
+
+	    if ('options' in data) {
+	      /**
+	       * The options of this command
+	       * @type {ApplicationCommandOption[]}
+	       */
+	      this.options = data.options.map(option => this.constructor.transformOption(option, true));
+	    } else {
+	      this.options ??= [];
+	    }
+
+	    if ('default_member_permissions' in data) {
+	      /**
+	       * The default bitfield used to determine whether this command be used in a guild
+	       * @type {?Readonly<PermissionsBitField>}
+	       */
+	      this.defaultMemberPermissions = data.default_member_permissions
+	        ? new PermissionsBitField(BigInt(data.default_member_permissions)).freeze()
+	        : null;
+	    } else {
+	      this.defaultMemberPermissions ??= null;
+	    }
+
+	    if ('dm_permission' in data) {
+	      /**
+	       * Whether the command can be used in DMs
+	       * <info>This property is always `null` on guild commands</info>
+	       * @type {?boolean}
+	       * @deprecated Use {@link ApplicationCommand#contexts} instead.
+	       */
+	      this.dmPermission = data.dm_permission;
+	    } else {
+	      this.dmPermission ??= null;
+	    }
+
+	    if ('integration_types' in data) {
+	      /**
+	       * Installation context(s) where the command is available
+	       * <info>Only for globally-scoped commands</info>
+	       * @type {?ApplicationIntegrationType[]}
+	       */
+	      this.integrationTypes = data.integration_types;
+	    } else {
+	      this.integrationTypes ??= null;
+	    }
+
+	    if ('contexts' in data) {
+	      /**
+	       * Interaction context(s) where the command can be used
+	       * <info>Only for globally-scoped commands</info>
+	       * @type {?InteractionContextType[]}
+	       */
+	      this.contexts = data.contexts;
+	    } else {
+	      this.contexts ??= null;
+	    }
+
+	    if ('version' in data) {
+	      /**
+	       * Autoincrementing version identifier updated during substantial record changes
+	       * @type {Snowflake}
+	       */
+	      this.version = data.version;
+	    }
+	  }
+
+	  /**
+	   * The timestamp the command was created at
+	   * @type {number}
+	   * @readonly
+	   */
+	  get createdTimestamp() {
+	    return DiscordSnowflake.timestampFrom(this.id);
+	  }
+
+	  /**
+	   * The time the command was created at
+	   * @type {Date}
+	   * @readonly
+	   */
+	  get createdAt() {
+	    return new Date(this.createdTimestamp);
+	  }
+
+	  /**
+	   * The manager that this command belongs to
+	   * @type {ApplicationCommandManager}
+	   * @readonly
+	   */
+	  get manager() {
+	    return (this.guild ?? this.client.application).commands;
+	  }
+
+	  /**
+	   * Data for creating or editing an application command.
+	   * @typedef {Object} ApplicationCommandData
+	   * @property {string} name The name of the command, must be in all lowercase if type is
+	   * {@link ApplicationCommandType.ChatInput}
+	   * @property {Object<Locale, string>} [nameLocalizations] The localizations for the command name
+	   * @property {string} description The description of the command, if type is {@link ApplicationCommandType.ChatInput}
+	   * @property {boolean} [nsfw] Whether the command is age-restricted
+	   * @property {Object<Locale, string>} [descriptionLocalizations] The localizations for the command description,
+	   * if type is {@link ApplicationCommandType.ChatInput}
+	   * @property {ApplicationCommandType} [type=ApplicationCommandType.ChatInput] The type of the command
+	   * @property {ApplicationCommandOptionData[]} [options] Options for the command
+	   * @property {?PermissionResolvable} [defaultMemberPermissions] The bitfield used to determine the default permissions
+	   * a member needs in order to run the command
+	   * @property {boolean} [dmPermission] Whether the command is enabled in DMs
+	   */
+
+	  /**
+	   * An option for an application command or subcommand.
+	   * <info>In addition to the listed properties, when used as a parameter,
+	   * API style `snake_case` properties can be used for compatibility with generators like `@discordjs/builders`.</info>
+	   * <warn>Note that providing a value for the `camelCase` counterpart for any `snake_case` property
+	   * will discard the provided `snake_case` property.</warn>
+	   * @typedef {Object} ApplicationCommandOptionData
+	   * @property {ApplicationCommandOptionType} type The type of the option
+	   * @property {string} name The name of the option
+	   * @property {Object<Locale, string>} [nameLocalizations] The name localizations for the option
+	   * @property {string} description The description of the option
+	   * @property {Object<Locale, string>} [descriptionLocalizations] The description localizations for the option
+	   * @property {boolean} [autocomplete] Whether the autocomplete interaction is enabled for a
+	   * {@link ApplicationCommandOptionType.String}, {@link ApplicationCommandOptionType.Integer} or
+	   * {@link ApplicationCommandOptionType.Number} option
+	   * @property {boolean} [required] Whether the option is required
+	   * @property {ApplicationCommandOptionChoiceData[]} [choices] The choices of the option for the user to pick from
+	   * @property {ApplicationCommandOptionData[]} [options] Additional options if this option is a subcommand (group)
+	   * @property {ChannelType[]} [channelTypes] When the option type is channel,
+	   * the allowed types of channels that can be selected
+	   * @property {number} [minValue] The minimum value for an {@link ApplicationCommandOptionType.Integer} or
+	   * {@link ApplicationCommandOptionType.Number} option
+	   * @property {number} [maxValue] The maximum value for an {@link ApplicationCommandOptionType.Integer} or
+	   * {@link ApplicationCommandOptionType.Number} option
+	   * @property {number} [minLength] The minimum length for an {@link ApplicationCommandOptionType.String} option
+	   * (maximum of `6000`)
+	   * @property {number} [maxLength] The maximum length for an {@link ApplicationCommandOptionType.String} option
+	   * (maximum of `6000`)
+	   */
+
+	  /**
+	   * @typedef {Object} ApplicationCommandOptionChoiceData
+	   * @property {string} name The name of the choice
+	   * @property {Object<Locale, string>} [nameLocalizations] The localized names for this choice
+	   * @property {string|number} value The value of the choice
+	   */
+
+	  /**
+	   * Edits this application command.
+	   * @param {Partial<ApplicationCommandData>} data The data to update the command with
+	   * @returns {Promise<ApplicationCommand>}
+	   * @example
+	   * // Edit the description of this command
+	   * command.edit({
+	   *   description: 'New description',
+	   * })
+	   *   .then(console.log)
+	   *   .catch(console.error);
+	   */
+	  edit(data) {
+	    return this.manager.edit(this, data, this.guildId);
+	  }
+
+	  /**
+	   * Edits the name of this ApplicationCommand
+	   * @param {string} name The new name of the command
+	   * @returns {Promise<ApplicationCommand>}
+	   */
+	  setName(name) {
+	    return this.edit({ name });
+	  }
+
+	  /**
+	   * Edits the localized names of this ApplicationCommand
+	   * @param {Object<Locale, string>} nameLocalizations The new localized names for the command
+	   * @returns {Promise<ApplicationCommand>}
+	   * @example
+	   * // Edit the name localizations of this command
+	   * command.setLocalizedNames({
+	   *   'en-GB': 'test',
+	   *   'pt-BR': 'teste',
+	   * })
+	   *   .then(console.log)
+	   *   .catch(console.error)
+	   */
+	  setNameLocalizations(nameLocalizations) {
+	    return this.edit({ nameLocalizations });
+	  }
+
+	  /**
+	   * Edits the description of this ApplicationCommand
+	   * @param {string} description The new description of the command
+	   * @returns {Promise<ApplicationCommand>}
+	   */
+	  setDescription(description) {
+	    return this.edit({ description });
+	  }
+
+	  /**
+	   * Edits the localized descriptions of this ApplicationCommand
+	   * @param {Object<Locale, string>} descriptionLocalizations The new localized descriptions for the command
+	   * @returns {Promise<ApplicationCommand>}
+	   * @example
+	   * // Edit the description localizations of this command
+	   * command.setDescriptionLocalizations({
+	   *   'en-GB': 'A test command',
+	   *   'pt-BR': 'Um comando de teste',
+	   * })
+	   *   .then(console.log)
+	   *   .catch(console.error)
+	   */
+	  setDescriptionLocalizations(descriptionLocalizations) {
+	    return this.edit({ descriptionLocalizations });
+	  }
+
+	  /**
+	   * Edits the default member permissions of this ApplicationCommand
+	   * @param {?PermissionResolvable} defaultMemberPermissions The default member permissions required to run this command
+	   * @returns {Promise<ApplicationCommand>}
+	   */
+	  setDefaultMemberPermissions(defaultMemberPermissions) {
+	    return this.edit({ defaultMemberPermissions });
+	  }
+
+	  /**
+	   * Edits the DM permission of this ApplicationCommand
+	   * @param {boolean} [dmPermission=true] Whether the command can be used in DMs
+	   * @returns {Promise<ApplicationCommand>}
+	   */
+	  setDMPermission(dmPermission = true) {
+	    return this.edit({ dmPermission });
+	  }
+
+	  /**
+	   * Edits the options of this ApplicationCommand
+	   * @param {ApplicationCommandOptionData[]} options The options to set for this command
+	   * @returns {Promise<ApplicationCommand>}
+	   */
+	  setOptions(options) {
+	    return this.edit({ options });
+	  }
+
+	  /**
+	   * Deletes this command.
+	   * @returns {Promise<ApplicationCommand>}
+	   * @example
+	   * // Delete this command
+	   * command.delete()
+	   *   .then(console.log)
+	   *   .catch(console.error);
+	   */
+	  delete() {
+	    return this.manager.delete(this, this.guildId);
+	  }
+
+	  /**
+	   * Whether this command equals another command. It compares all properties, so for most operations
+	   * it is advisable to just compare `command.id === command2.id` as it is much faster and is often
+	   * what most users need.
+	   * @param {ApplicationCommand|ApplicationCommandData|APIApplicationCommand} command The command to compare with
+	   * @param {boolean} [enforceOptionOrder=false] Whether to strictly check that options and choices are in the same
+	   * order in the array <info>The client may not always respect this ordering!</info>
+	   * @returns {boolean}
+	   */
+	  equals(command, enforceOptionOrder = false) {
+	    // If given an id, check if the id matches
+	    if (command.id && this.id !== command.id) return false;
+
+	    let defaultMemberPermissions = null;
+	    let dmPermission = command.dmPermission ?? command.dm_permission;
+
+	    if ('default_member_permissions' in command) {
+	      defaultMemberPermissions = command.default_member_permissions
+	        ? new PermissionsBitField(BigInt(command.default_member_permissions)).bitfield
+	        : null;
+	    }
+
+	    if ('defaultMemberPermissions' in command) {
+	      defaultMemberPermissions =
+	        command.defaultMemberPermissions !== null
+	          ? new PermissionsBitField(command.defaultMemberPermissions).bitfield
+	          : null;
+	    }
+
+	    // Check top level parameters
+	    if (
+	      command.name !== this.name ||
+	      ('description' in command && command.description !== this.description) ||
+	      ('version' in command && command.version !== this.version) ||
+	      (command.type && command.type !== this.type) ||
+	      ('nsfw' in command && command.nsfw !== this.nsfw) ||
+	      // Future proof for options being nullable
+	      // TODO: remove ?? 0 on each when nullable
+	      (command.options?.length ?? 0) !== (this.options?.length ?? 0) ||
+	      defaultMemberPermissions !== (this.defaultMemberPermissions?.bitfield ?? null) ||
+	      (dmPermission !== undefined && dmPermission !== this.dmPermission) ||
+	      !isEqual(command.nameLocalizations ?? command.name_localizations ?? {}, this.nameLocalizations ?? {}) ||
+	      !isEqual(
+	        command.descriptionLocalizations ?? command.description_localizations ?? {},
+	        this.descriptionLocalizations ?? {},
+	      ) ||
+	      !isEqual(command.integrationTypes ?? command.integration_types ?? [], this.integrationTypes ?? []) ||
+	      !isEqual(command.contexts ?? [], this.contexts ?? [])
+	    ) {
+	      return false;
+	    }
+
+	    if (command.options) {
+	      return this.constructor.optionsEqual(this.options, command.options, enforceOptionOrder);
+	    }
+	    return true;
+	  }
+
+	  /**
+	   * Recursively checks that all options for an {@link ApplicationCommand} are equal to the provided options.
+	   * In most cases it is better to compare using {@link ApplicationCommand#equals}
+	   * @param {ApplicationCommandOptionData[]} existing The options on the existing command,
+	   * should be {@link ApplicationCommand#options}
+	   * @param {ApplicationCommandOptionData[]|APIApplicationCommandOption[]} options The options to compare against
+	   * @param {boolean} [enforceOptionOrder=false] Whether to strictly check that options and choices are in the same
+	   * order in the array <info>The client may not always respect this ordering!</info>
+	   * @returns {boolean}
+	   */
+	  static optionsEqual(existing, options, enforceOptionOrder = false) {
+	    if (existing.length !== options.length) return false;
+	    if (enforceOptionOrder) {
+	      return existing.every((option, index) => this._optionEquals(option, options[index], enforceOptionOrder));
+	    }
+	    const newOptions = new Map(options.map(option => [option.name, option]));
+	    for (const option of existing) {
+	      const foundOption = newOptions.get(option.name);
+	      if (!foundOption || !this._optionEquals(option, foundOption)) return false;
+	    }
+	    return true;
+	  }
+
+	  /**
+	   * Checks that an option for an {@link ApplicationCommand} is equal to the provided option
+	   * In most cases it is better to compare using {@link ApplicationCommand#equals}
+	   * @param {ApplicationCommandOptionData} existing The option on the existing command,
+	   * should be from {@link ApplicationCommand#options}
+	   * @param {ApplicationCommandOptionData|APIApplicationCommandOption} option The option to compare against
+	   * @param {boolean} [enforceOptionOrder=false] Whether to strictly check that options or choices are in the same
+	   * order in their array <info>The client may not always respect this ordering!</info>
+	   * @returns {boolean}
+	   * @private
+	   */
+	  static _optionEquals(existing, option, enforceOptionOrder = false) {
+	    if (
+	      option.name !== existing.name ||
+	      option.type !== existing.type ||
+	      option.description !== existing.description ||
+	      option.autocomplete !== existing.autocomplete ||
+	      (option.required ??
+	        ([ApplicationCommandOptionType.Subcommand, ApplicationCommandOptionType.SubcommandGroup].includes(option.type)
+	          ? undefined
+	          : false)) !== existing.required ||
+	      option.choices?.length !== existing.choices?.length ||
+	      option.options?.length !== existing.options?.length ||
+	      (option.channelTypes ?? option.channel_types)?.length !== existing.channelTypes?.length ||
+	      (option.minValue ?? option.min_value) !== existing.minValue ||
+	      (option.maxValue ?? option.max_value) !== existing.maxValue ||
+	      (option.minLength ?? option.min_length) !== existing.minLength ||
+	      (option.maxLength ?? option.max_length) !== existing.maxLength ||
+	      !isEqual(option.nameLocalizations ?? option.name_localizations ?? {}, existing.nameLocalizations ?? {}) ||
+	      !isEqual(
+	        option.descriptionLocalizations ?? option.description_localizations ?? {},
+	        existing.descriptionLocalizations ?? {},
+	      )
+	    ) {
+	      return false;
+	    }
+
+	    if (existing.choices) {
+	      if (
+	        enforceOptionOrder &&
+	        !existing.choices.every(
+	          (choice, index) =>
+	            choice.name === option.choices[index].name &&
+	            choice.value === option.choices[index].value &&
+	            isEqual(
+	              choice.nameLocalizations ?? {},
+	              option.choices[index].nameLocalizations ?? option.choices[index].name_localizations ?? {},
+	            ),
+	        )
+	      ) {
+	        return false;
+	      }
+	      if (!enforceOptionOrder) {
+	        const newChoices = new Map(option.choices.map(choice => [choice.name, choice]));
+	        for (const choice of existing.choices) {
+	          const foundChoice = newChoices.get(choice.name);
+	          if (!foundChoice || foundChoice.value !== choice.value) return false;
+	        }
+	      }
+	    }
+
+	    if (existing.channelTypes) {
+	      const newTypes = option.channelTypes ?? option.channel_types;
+	      for (const type of existing.channelTypes) {
+	        if (!newTypes.includes(type)) return false;
+	      }
+	    }
+
+	    if (existing.options) {
+	      return this.optionsEqual(existing.options, option.options, enforceOptionOrder);
+	    }
+	    return true;
+	  }
+
+	  /**
+	   * An option for an application command or subcommand.
+	   * @typedef {Object} ApplicationCommandOption
+	   * @property {ApplicationCommandOptionType} type The type of the option
+	   * @property {string} name The name of the option
+	   * @property {Object<Locale, string>} [nameLocalizations] The localizations for the option name
+	   * @property {string} [nameLocalized] The localized name for this option
+	   * @property {string} description The description of the option
+	   * @property {Object<Locale, string>} [descriptionLocalizations] The localizations for the option description
+	   * @property {string} [descriptionLocalized] The localized description for this option
+	   * @property {boolean} [required] Whether the option is required
+	   * @property {boolean} [autocomplete] Whether the autocomplete interaction is enabled for a
+	   * {@link ApplicationCommandOptionType.String}, {@link ApplicationCommandOptionType.Integer} or
+	   * {@link ApplicationCommandOptionType.Number} option
+	   * @property {ApplicationCommandOptionChoice[]} [choices] The choices of the option for the user to pick from
+	   * @property {ApplicationCommandOption[]} [options] Additional options if this option is a subcommand (group)
+	   * @property {ApplicationCommandOptionAllowedChannelTypes[]} [channelTypes] When the option type is channel,
+	   * the allowed types of channels that can be selected
+	   * @property {number} [minValue] The minimum value for an {@link ApplicationCommandOptionType.Integer} or
+	   * {@link ApplicationCommandOptionType.Number} option
+	   * @property {number} [maxValue] The maximum value for an {@link ApplicationCommandOptionType.Integer} or
+	   * {@link ApplicationCommandOptionType.Number} option
+	   * @property {number} [minLength] The minimum length for an {@link ApplicationCommandOptionType.String} option
+	   * (maximum of `6000`)
+	   * @property {number} [maxLength] The maximum length for an {@link ApplicationCommandOptionType.String} option
+	   * (maximum of `6000`)
+	   */
+
+	  /**
+	   * A choice for an application command option.
+	   * @typedef {Object} ApplicationCommandOptionChoice
+	   * @property {string} name The name of the choice
+	   * @property {?string} nameLocalized The localized name of the choice in the provided locale, if any
+	   * @property {?Object<string, string>} [nameLocalizations] The localized names for this choice
+	   * @property {string|number} value The value of the choice
+	   */
+
+	  /**
+	   * Transforms an {@link ApplicationCommandOptionData} object into something that can be used with the API.
+	   * @param {ApplicationCommandOptionData|ApplicationCommandOption} option The option to transform
+	   * @param {boolean} [received] Whether this option has been received from Discord
+	   * @returns {APIApplicationCommandOption}
+	   * @private
+	   */
+	  static transformOption(option, received) {
+	    const channelTypesKey = received ? 'channelTypes' : 'channel_types';
+	    const minValueKey = received ? 'minValue' : 'min_value';
+	    const maxValueKey = received ? 'maxValue' : 'max_value';
+	    const minLengthKey = received ? 'minLength' : 'min_length';
+	    const maxLengthKey = received ? 'maxLength' : 'max_length';
+	    const nameLocalizationsKey = received ? 'nameLocalizations' : 'name_localizations';
+	    const nameLocalizedKey = received ? 'nameLocalized' : 'name_localized';
+	    const descriptionLocalizationsKey = received ? 'descriptionLocalizations' : 'description_localizations';
+	    const descriptionLocalizedKey = received ? 'descriptionLocalized' : 'description_localized';
+	    return {
+	      type: option.type,
+	      name: option.name,
+	      [nameLocalizationsKey]: option.nameLocalizations ?? option.name_localizations,
+	      [nameLocalizedKey]: option.nameLocalized ?? option.name_localized,
+	      description: option.description,
+	      [descriptionLocalizationsKey]: option.descriptionLocalizations ?? option.description_localizations,
+	      [descriptionLocalizedKey]: option.descriptionLocalized ?? option.description_localized,
+	      required:
+	        option.required ??
+	        (option.type === ApplicationCommandOptionType.Subcommand ||
+	        option.type === ApplicationCommandOptionType.SubcommandGroup
+	          ? undefined
+	          : false),
+	      autocomplete: option.autocomplete,
+	      choices: option.choices?.map(choice => ({
+	        name: choice.name,
+	        [nameLocalizedKey]: choice.nameLocalized ?? choice.name_localized,
+	        [nameLocalizationsKey]: choice.nameLocalizations ?? choice.name_localizations,
+	        value: choice.value,
+	      })),
+	      options: option.options?.map(opt => this.transformOption(opt, received)),
+	      [channelTypesKey]: option.channelTypes ?? option.channel_types,
+	      [minValueKey]: option.minValue ?? option.min_value,
+	      [maxValueKey]: option.maxValue ?? option.max_value,
+	      [minLengthKey]: option.minLength ?? option.min_length,
+	      [maxLengthKey]: option.maxLength ?? option.max_length,
+	    };
+	  }
+	}
+
+	ApplicationCommand_1 = ApplicationCommand;
+
+	/* eslint-disable max-len */
+	/**
+	 * @external ApplicationCommandOptionAllowedChannelTypes
+	 * @see {@link https://discord.js.org/docs/packages/builders/stable/ApplicationCommandOptionAllowedChannelTypes:TypeAlias}
+	 */
+	return ApplicationCommand_1;
+}
+
+var ApplicationCommandManager_1;
+var hasRequiredApplicationCommandManager;
+
+function requireApplicationCommandManager () {
+	if (hasRequiredApplicationCommandManager) return ApplicationCommandManager_1;
+	hasRequiredApplicationCommandManager = 1;
+
+	const { Collection } = requireDist$7();
+	const { makeURLSearchParams } = requireWeb();
+	const { isJSONEncodable } = requireDist$b();
+	const { Routes } = requireV10();
+	const ApplicationCommandPermissionsManager = requireApplicationCommandPermissionsManager();
+	const CachedManager = requireCachedManager();
+	const { DiscordjsTypeError, ErrorCodes } = requireErrors$1();
+	const ApplicationCommand = requireApplicationCommand();
+	const PermissionsBitField = requirePermissionsBitField();
+
+	/**
+	 * Manages API methods for application commands and stores their cache.
+	 * @extends {CachedManager}
+	 */
+	class ApplicationCommandManager extends CachedManager {
+	  constructor(client, iterable) {
+	    super(client, ApplicationCommand, iterable);
+
+	    /**
+	     * The manager for permissions of arbitrary commands on arbitrary guilds
+	     * @type {ApplicationCommandPermissionsManager}
+	     */
+	    this.permissions = new ApplicationCommandPermissionsManager(this);
+	  }
+
+	  /**
+	   * The cache of this manager
+	   * @type {Collection<Snowflake, ApplicationCommand>}
+	   * @name ApplicationCommandManager#cache
+	   */
+
+	  _add(data, cache, guildId) {
+	    return super._add(data, cache, { extras: [this.guild, guildId] });
+	  }
+
+	  /**
+	   * The APIRouter path to the commands
+	   * @param {Snowflake} [options.id] The application command's id
+	   * @param {Snowflake} [options.guildId] The guild's id to use in the path,
+	   * ignored when using a {@link GuildApplicationCommandManager}
+	   * @returns {string}
+	   * @private
+	   */
+	  commandPath({ id, guildId } = {}) {
+	    if (this.guild ?? guildId) {
+	      if (id) {
+	        return Routes.applicationGuildCommand(this.client.application.id, this.guild?.id ?? guildId, id);
+	      }
+
+	      return Routes.applicationGuildCommands(this.client.application.id, this.guild?.id ?? guildId);
+	    }
+
+	    if (id) {
+	      return Routes.applicationCommand(this.client.application.id, id);
+	    }
+
+	    return Routes.applicationCommands(this.client.application.id);
+	  }
+
+	  /**
+	   * Data that resolves to give an ApplicationCommand object. This can be:
+	   * * An ApplicationCommand object
+	   * * A Snowflake
+	   * @typedef {ApplicationCommand|Snowflake} ApplicationCommandResolvable
+	   */
+
+	  /**
+	   * Data that resolves to the data of an ApplicationCommand
+	   * @typedef {ApplicationCommandData|APIApplicationCommand} ApplicationCommandDataResolvable
+	   */
+
+	  /**
+	   * Options used to fetch data from Discord
+	   * @typedef {Object} BaseFetchOptions
+	   * @property {boolean} [cache=true] Whether to cache the fetched data if it wasn't already
+	   * @property {boolean} [force=false] Whether to skip the cache check and request the API
+	   */
+
+	  /**
+	   * Options used to fetch Application Commands from Discord
+	   * @typedef {BaseFetchOptions} FetchApplicationCommandOptions
+	   * @property {Snowflake} [guildId] The guild's id to fetch commands for, for when the guild is not cached
+	   * @property {Locale} [locale] The locale to use when fetching this command
+	   * @property {boolean} [withLocalizations] Whether to fetch all localization data
+	   */
+
+	  /**
+	   * Obtains one or multiple application commands from Discord, or the cache if it's already available.
+	   * @param {Snowflake|FetchApplicationCommandOptions} [id] Options for fetching application command(s)
+	   * @param {FetchApplicationCommandOptions} [options] Additional options for this fetch
+	   * @returns {Promise<ApplicationCommand|Collection<Snowflake, ApplicationCommand>>}
+	   * @example
+	   * // Fetch a single command
+	   * client.application.commands.fetch('123456789012345678')
+	   *   .then(command => console.log(`Fetched command ${command.name}`))
+	   *   .catch(console.error);
+	   * @example
+	   * // Fetch all commands
+	   * guild.commands.fetch()
+	   *   .then(commands => console.log(`Fetched ${commands.size} commands`))
+	   *   .catch(console.error);
+	   */
+	  async fetch(id, { guildId, cache = true, force = false, locale, withLocalizations } = {}) {
+	    if (typeof id === 'object') {
+	      ({ guildId, cache = true, locale, withLocalizations } = id);
+	    } else if (id) {
+	      if (!force) {
+	        const existing = this.cache.get(id);
+	        if (existing) return existing;
+	      }
+	      const command = await this.client.rest.get(this.commandPath({ id, guildId }));
+	      return this._add(command, cache);
+	    }
+
+	    const data = await this.client.rest.get(this.commandPath({ guildId }), {
+	      headers: {
+	        'X-Discord-Locale': locale,
+	      },
+	      query: makeURLSearchParams({ with_localizations: withLocalizations }),
+	    });
+	    return data.reduce((coll, command) => coll.set(command.id, this._add(command, cache, guildId)), new Collection());
+	  }
+
+	  /**
+	   * Creates an application command.
+	   * @param {ApplicationCommandDataResolvable} command The command
+	   * @param {Snowflake} [guildId] The guild's id to create this command in,
+	   * ignored when using a {@link GuildApplicationCommandManager}
+	   * @returns {Promise<ApplicationCommand>}
+	   * @example
+	   * // Create a new command
+	   * client.application.commands.create({
+	   *   name: 'test',
+	   *   description: 'A test command',
+	   * })
+	   *   .then(console.log)
+	   *   .catch(console.error);
+	   */
+	  async create(command, guildId) {
+	    const data = await this.client.rest.post(this.commandPath({ guildId }), {
+	      body: this.constructor.transformCommand(command),
+	    });
+	    return this._add(data, true, guildId);
+	  }
+
+	  /**
+	   * Sets all the commands for this application or guild.
+	   * @param {ApplicationCommandDataResolvable[]} commands The commands
+	   * @param {Snowflake} [guildId] The guild's id to create the commands in,
+	   * ignored when using a {@link GuildApplicationCommandManager}
+	   * @returns {Promise<Collection<Snowflake, ApplicationCommand>>}
+	   * @example
+	   * // Set all commands to just this one
+	   * client.application.commands.set([
+	   *   {
+	   *     name: 'test',
+	   *     description: 'A test command',
+	   *   },
+	   * ])
+	   *   .then(console.log)
+	   *   .catch(console.error);
+	   * @example
+	   * // Remove all commands
+	   * guild.commands.set([])
+	   *   .then(console.log)
+	   *   .catch(console.error);
+	   */
+	  async set(commands, guildId) {
+	    const data = await this.client.rest.put(this.commandPath({ guildId }), {
+	      body: commands.map(command => this.constructor.transformCommand(command)),
+	    });
+	    return data.reduce(
+	      (collection, command) => collection.set(command.id, this._add(command, true, guildId)),
+	      new Collection(),
+	    );
+	  }
+
+	  /**
+	   * Edits an application command.
+	   * @param {ApplicationCommandResolvable} command The command to edit
+	   * @param {Partial<ApplicationCommandDataResolvable>} data The data to update the command with
+	   * @param {Snowflake} [guildId] The guild's id where the command registered,
+	   * ignored when using a {@link GuildApplicationCommandManager}
+	   * @returns {Promise<ApplicationCommand>}
+	   * @example
+	   * // Edit an existing command
+	   * client.application.commands.edit('123456789012345678', {
+	   *   description: 'New description',
+	   * })
+	   *   .then(console.log)
+	   *   .catch(console.error);
+	   */
+	  async edit(command, data, guildId) {
+	    const id = this.resolveId(command);
+	    if (!id) throw new DiscordjsTypeError(ErrorCodes.InvalidType, 'command', 'ApplicationCommandResolvable');
+
+	    const patched = await this.client.rest.patch(this.commandPath({ id, guildId }), {
+	      body: this.constructor.transformCommand(data),
+	    });
+	    return this._add(patched, true, guildId);
+	  }
+
+	  /**
+	   * Deletes an application command.
+	   * @param {ApplicationCommandResolvable} command The command to delete
+	   * @param {Snowflake} [guildId] The guild's id where the command is registered,
+	   * ignored when using a {@link GuildApplicationCommandManager}
+	   * @returns {Promise<?ApplicationCommand>}
+	   * @example
+	   * // Delete a command
+	   * guild.commands.delete('123456789012345678')
+	   *   .then(console.log)
+	   *   .catch(console.error);
+	   */
+	  async delete(command, guildId) {
+	    const id = this.resolveId(command);
+	    if (!id) throw new DiscordjsTypeError(ErrorCodes.InvalidType, 'command', 'ApplicationCommandResolvable');
+
+	    await this.client.rest.delete(this.commandPath({ id, guildId }));
+
+	    const cached = this.cache.get(id);
+	    this.cache.delete(id);
+	    return cached ?? null;
+	  }
+
+	  /**
+	   * Transforms an {@link ApplicationCommandData} object into something that can be used with the API.
+	   * @param {ApplicationCommandDataResolvable} command The command to transform
+	   * @returns {APIApplicationCommand}
+	   * @private
+	   */
+	  static transformCommand(command) {
+	    if (isJSONEncodable(command)) return command.toJSON();
+
+	    let default_member_permissions;
+
+	    if ('default_member_permissions' in command) {
+	      default_member_permissions = command.default_member_permissions
+	        ? new PermissionsBitField(BigInt(command.default_member_permissions)).bitfield.toString()
+	        : command.default_member_permissions;
+	    }
+
+	    if ('defaultMemberPermissions' in command) {
+	      default_member_permissions =
+	        command.defaultMemberPermissions !== null
+	          ? new PermissionsBitField(command.defaultMemberPermissions).bitfield.toString()
+	          : command.defaultMemberPermissions;
+	    }
+
+	    return {
+	      name: command.name,
+	      name_localizations: command.nameLocalizations ?? command.name_localizations,
+	      description: command.description,
+	      nsfw: command.nsfw,
+	      description_localizations: command.descriptionLocalizations ?? command.description_localizations,
+	      type: command.type,
+	      options: command.options?.map(option => ApplicationCommand.transformOption(option)),
+	      default_member_permissions,
+	      dm_permission: command.dmPermission ?? command.dm_permission,
+	      integration_types: command.integrationTypes ?? command.integration_types,
+	      contexts: command.contexts,
+	    };
+	  }
+	}
+
+	ApplicationCommandManager_1 = ApplicationCommandManager;
+	return ApplicationCommandManager_1;
+}
+
+var ApplicationEmoji_1;
+var hasRequiredApplicationEmoji;
+
+function requireApplicationEmoji () {
+	if (hasRequiredApplicationEmoji) return ApplicationEmoji_1;
+	hasRequiredApplicationEmoji = 1;
+
+	const { Emoji } = requireEmoji$1();
+
+	/**
+	 * Represents a custom emoji.
+	 * @extends {Emoji}
+	 */
+	class ApplicationEmoji extends Emoji {
+	  constructor(client, data, application) {
+	    super(client, data);
+
+	    /**
+	     * The application this emoji originates from
+	     * @type {ClientApplication}
+	     */
+	    this.application = application;
+
+	    /**
+	     * The user who created this emoji
+	     * @type {?User}
+	     */
+	    this.author = null;
+
+	    this.managed = null;
+	    this.requiresColons = null;
+
+	    this._patch(data);
+	  }
+
+	  _patch(data) {
+	    if ('name' in data) this.name = data.name;
+	    if (data.user) this.author = this.client.users._add(data.user);
+
+	    if ('managed' in data) {
+	      /**
+	       * Whether this emoji is managed by an external service
+	       * @type {?boolean}
+	       */
+	      this.managed = data.managed;
+	    }
+
+	    if ('require_colons' in data) {
+	      /**
+	       * Whether or not this emoji requires colons surrounding it
+	       * @type {?boolean}
+	       */
+	      this.requiresColons = data.require_colons;
+	    }
+	  }
+
+	  /**
+	   * Fetches the author for this emoji
+	   * @returns {Promise<User>}
+	   */
+	  fetchAuthor() {
+	    return this.application.emojis.fetchAuthor(this);
+	  }
+
+	  /**
+	   * Data for editing an emoji.
+	   * @typedef {Object} ApplicationEmojiEditOptions
+	   * @property {string} [name] The name of the emoji
+	   */
+
+	  /**
+	   * Edits the emoji.
+	   * @param {ApplicationEmojiEditOptions} options The options to provide
+	   * @returns {Promise<ApplicationEmoji>}
+	   * @example
+	   * // Edit an emoji
+	   * emoji.edit({ name: 'newemoji' })
+	   *   .then(emoji => console.log(`Edited emoji ${emoji}`))
+	   *   .catch(console.error);
+	   */
+	  edit(options) {
+	    return this.application.emojis.edit(this.id, options);
+	  }
+
+	  /**
+	   * Sets the name of the emoji.
+	   * @param {string} name The new name for the emoji
+	   * @returns {Promise<ApplicationEmoji>}
+	   */
+	  setName(name) {
+	    return this.edit({ name });
+	  }
+
+	  /**
+	   * Deletes the emoji.
+	   * @returns {Promise<ApplicationEmoji>}
+	   */
+	  async delete() {
+	    await this.application.emojis.delete(this.id);
+	    return this;
+	  }
+
+	  /**
+	   * Whether this emoji is the same as another one.
+	   * @param {ApplicationEmoji|APIEmoji} other The emoji to compare it to
+	   * @returns {boolean}
+	   */
+	  equals(other) {
+	    if (other instanceof ApplicationEmoji) {
+	      return (
+	        other.animated === this.animated &&
+	        other.id === this.id &&
+	        other.name === this.name &&
+	        other.managed === this.managed &&
+	        other.requiresColons === this.requiresColons
+	      );
+	    }
+
+	    return other.id === this.id && other.name === this.name;
+	  }
+	}
+
+	ApplicationEmoji_1 = ApplicationEmoji;
+	return ApplicationEmoji_1;
+}
+
+var ApplicationEmojiManager_1;
+var hasRequiredApplicationEmojiManager;
+
+function requireApplicationEmojiManager () {
+	if (hasRequiredApplicationEmojiManager) return ApplicationEmojiManager_1;
+	hasRequiredApplicationEmojiManager = 1;
+
+	const { Collection } = requireDist$7();
+	const { Routes } = requireV10();
+	const CachedManager = requireCachedManager();
+	const { DiscordjsTypeError, ErrorCodes } = requireErrors$1();
+	const ApplicationEmoji = requireApplicationEmoji();
+	const { resolveImage } = requireDataResolver();
+
+	/**
+	 * Manages API methods for ApplicationEmojis and stores their cache.
+	 * @extends {CachedManager}
+	 */
+	class ApplicationEmojiManager extends CachedManager {
+	  constructor(application, iterable) {
+	    super(application.client, ApplicationEmoji, iterable);
+
+	    /**
+	     * The application this manager belongs to
+	     * @type {ClientApplication}
+	     */
+	    this.application = application;
+	  }
+
+	  _add(data, cache) {
+	    return super._add(data, cache, { extras: [this.application] });
+	  }
+
+	  /**
+	   * Options used for creating an emoji of the application
+	   * @typedef {Object} ApplicationEmojiCreateOptions
+	   * @property {BufferResolvable|Base64Resolvable} attachment The image for the emoji
+	   * @property {string} name The name for the emoji
+	   */
+
+	  /**
+	   * Creates a new custom emoji of the application.
+	   * @param {ApplicationEmojiCreateOptions} options Options for creating the emoji
+	   * @returns {Promise<Emoji>} The created emoji
+	   * @example
+	   * // Create a new emoji from a URL
+	   * application.emojis.create({ attachment: 'https://i.imgur.com/w3duR07.png', name: 'rip' })
+	   *   .then(emoji => console.log(`Created new emoji with name ${emoji.name}!`))
+	   *   .catch(console.error);
+	   * @example
+	   * // Create a new emoji from a file on your computer
+	   * application.emojis.create({ attachment: './memes/banana.png', name: 'banana' })
+	   *   .then(emoji => console.log(`Created new emoji with name ${emoji.name}!`))
+	   *   .catch(console.error);
+	   */
+	  async create({ attachment, name }) {
+	    attachment = await resolveImage(attachment);
+	    if (!attachment) throw new DiscordjsTypeError(ErrorCodes.ReqResourceType);
+
+	    const body = { image: attachment, name };
+
+	    const emoji = await this.client.rest.post(Routes.applicationEmojis(this.application.id), { body });
+	    return this._add(emoji);
+	  }
+
+	  /**
+	   * Obtains one or more emojis from Discord, or the emoji cache if they're already available.
+	   * @param {Snowflake} [id] The emoji's id
+	   * @param {BaseFetchOptions} [options] Additional options for this fetch
+	   * @returns {Promise<ApplicationEmoji|Collection<Snowflake, ApplicationEmoji>>}
+	   * @example
+	   * // Fetch all emojis from the application
+	   * application.emojis.fetch()
+	   *   .then(emojis => console.log(`There are ${emojis.size} emojis.`))
+	   *   .catch(console.error);
+	   * @example
+	   * // Fetch a single emoji
+	   * application.emojis.fetch('222078108977594368')
+	   *   .then(emoji => console.log(`The emoji name is: ${emoji.name}`))
+	   *   .catch(console.error);
+	   */
+	  async fetch(id, { cache = true, force = false } = {}) {
+	    if (id) {
+	      if (!force) {
+	        const existing = this.cache.get(id);
+	        if (existing) return existing;
+	      }
+	      const emoji = await this.client.rest.get(Routes.applicationEmoji(this.application.id, id));
+	      return this._add(emoji, cache);
+	    }
+
+	    const { items: data } = await this.client.rest.get(Routes.applicationEmojis(this.application.id));
+	    const emojis = new Collection();
+	    for (const emoji of data) emojis.set(emoji.id, this._add(emoji, cache));
+	    return emojis;
+	  }
+
+	  /**
+	   * Deletes an emoji.
+	   * @param {EmojiResolvable} emoji The Emoji resolvable to delete
+	   * @returns {Promise<void>}
+	   */
+	  async delete(emoji) {
+	    const id = this.resolveId(emoji);
+	    if (!id) throw new DiscordjsTypeError(ErrorCodes.InvalidType, 'emoji', 'EmojiResolvable', true);
+	    await this.client.rest.delete(Routes.applicationEmoji(this.application.id, id));
+	  }
+
+	  /**
+	   * Edits an emoji.
+	   * @param {EmojiResolvable} emoji The Emoji resolvable to edit
+	   * @param {ApplicationEmojiEditOptions} options The options to provide
+	   * @returns {Promise<ApplicationEmoji>}
+	   */
+	  async edit(emoji, options) {
+	    const id = this.resolveId(emoji);
+	    if (!id) throw new DiscordjsTypeError(ErrorCodes.InvalidType, 'emoji', 'EmojiResolvable', true);
+
+	    const newData = await this.client.rest.patch(Routes.applicationEmoji(this.application.id, id), {
+	      body: {
+	        name: options.name,
+	      },
+	    });
+	    const existing = this.cache.get(id);
+	    if (existing) {
+	      existing._patch(newData);
+	      return existing;
+	    }
+	    return this._add(newData);
+	  }
+
+	  /**
+	   * Fetches the author for this emoji
+	   * @param {EmojiResolvable} emoji The emoji to fetch the author of
+	   * @returns {Promise<User>}
+	   */
+	  async fetchAuthor(emoji) {
+	    const id = this.resolveId(emoji);
+	    if (!id) throw new DiscordjsTypeError(ErrorCodes.InvalidType, 'emoji', 'EmojiResolvable', true);
+
+	    const data = await this.client.rest.get(Routes.applicationEmoji(this.application.id, id));
+
+	    return this._add(data).author;
+	  }
+	}
+
+	ApplicationEmojiManager_1 = ApplicationEmojiManager;
+	return ApplicationEmojiManager_1;
+}
+
+var EntitlementManager = {};
+
+var Entitlement = {};
+
+var hasRequiredEntitlement;
+
+function requireEntitlement () {
+	if (hasRequiredEntitlement) return Entitlement;
+	hasRequiredEntitlement = 1;
+
+	const Base = requireBase();
+
+	/**
+	 * Represents an Entitlement
+	 * @extends {Base}
+	 */
+	let Entitlement$1 = class Entitlement extends Base {
+	  constructor(client, data) {
+	    super(client);
+
+	    /**
+	     * The id of the entitlement
+	     * @type {Snowflake}
+	     */
+	    this.id = data.id;
+
+	    this._patch(data);
+	  }
+
+	  _patch(data) {
+	    if ('sku_id' in data) {
+	      /**
+	       * The id of the associated SKU
+	       * @type {Snowflake}
+	       */
+	      this.skuId = data.sku_id;
+	    }
+
+	    if ('user_id' in data) {
+	      /**
+	       * The id of the user that is granted access to this entitlement's SKU
+	       * @type {Snowflake}
+	       */
+	      this.userId = data.user_id;
+	    }
+
+	    if ('guild_id' in data) {
+	      /**
+	       * The id of the guild that is granted access to this entitlement's SKU
+	       * @type {?Snowflake}
+	       */
+	      this.guildId = data.guild_id;
+	    } else {
+	      this.guildId ??= null;
+	    }
+
+	    if ('application_id' in data) {
+	      /**
+	       * The id of the parent application
+	       * @type {Snowflake}
+	       */
+	      this.applicationId = data.application_id;
+	    }
+
+	    if ('type' in data) {
+	      /**
+	       * The type of this entitlement
+	       * @type {EntitlementType}
+	       */
+	      this.type = data.type;
+	    }
+
+	    if ('deleted' in data) {
+	      /**
+	       * Whether this entitlement was deleted
+	       * @type {boolean}
+	       */
+	      this.deleted = data.deleted;
+	    }
+
+	    if ('starts_at' in data) {
+	      /**
+	       * The timestamp at which this entitlement is valid
+	       * @type {?number}
+	       */
+	      this.startsTimestamp = data.starts_at ? Date.parse(data.starts_at) : null;
+	    } else {
+	      this.startsTimestamp ??= null;
+	    }
+
+	    if ('ends_at' in data) {
+	      /**
+	       * The timestamp at which this entitlement is no longer valid
+	       * @type {?number}
+	       */
+	      this.endsTimestamp = data.ends_at ? Date.parse(data.ends_at) : null;
+	    } else {
+	      this.endsTimestamp ??= null;
+	    }
+
+	    if ('consumed' in data) {
+	      /**
+	       * Whether this entitlement has been consumed
+	       * @type {boolean}
+	       */
+	      this.consumed = data.consumed;
+	    } else {
+	      this.consumed ??= false;
+	    }
+	  }
+
+	  /**
+	   * The guild that is granted access to this entitlement's SKU
+	   * @type {?Guild}
+	   */
+	  get guild() {
+	    if (!this.guildId) return null;
+	    return this.client.guilds.cache.get(this.guildId) ?? null;
+	  }
+
+	  /**
+	   * The start date at which this entitlement is valid
+	   * @type {?Date}
+	   */
+	  get startsAt() {
+	    return this.startsTimestamp && new Date(this.startsTimestamp);
+	  }
+
+	  /**
+	   * The end date at which this entitlement is no longer valid
+	   * @type {?Date}
+	   */
+	  get endsAt() {
+	    return this.endsTimestamp && new Date(this.endsTimestamp);
+	  }
+
+	  /**
+	   * Indicates whether this entitlement is active
+	   * @returns {boolean}
+	   */
+	  isActive() {
+	    return !this.deleted && (!this.endsTimestamp || this.endsTimestamp > Date.now());
+	  }
+
+	  /**
+	   * Indicates whether this entitlement is a test entitlement
+	   * @returns {boolean}
+	   */
+	  isTest() {
+	    return this.startsTimestamp === null;
+	  }
+
+	  /**
+	   * Indicates whether this entitlement is a user subscription
+	   * @returns {boolean}
+	   */
+	  isUserSubscription() {
+	    return this.guildId === null;
+	  }
+
+	  /**
+	   * Indicates whether this entitlement is a guild subscription
+	   * @returns {boolean}
+	   */
+	  isGuildSubscription() {
+	    return this.guildId !== null;
+	  }
+
+	  /**
+	   * Fetches the user that is granted access to this entitlement's SKU
+	   * @returns {Promise<User>}
+	   */
+	  fetchUser() {
+	    return this.client.users.fetch(this.userId);
+	  }
+
+	  /**
+	   * Marks this entitlement as consumed
+	   * <info>Only available for One-Time Purchase consumable SKUs.</info>
+	   * @returns {Promise<void>}
+	   */
+	  async consume() {
+	    await this.client.application.entitlements.consume(this.id);
+	  }
+	};
+
+	Entitlement.Entitlement = Entitlement$1;
+	return Entitlement;
+}
+
+var hasRequiredEntitlementManager;
+
+function requireEntitlementManager () {
+	if (hasRequiredEntitlementManager) return EntitlementManager;
+	hasRequiredEntitlementManager = 1;
+
+	const { Collection } = requireDist$7();
+	const { makeURLSearchParams } = requireWeb();
+	const { Routes, EntitlementOwnerType } = requireV10();
+	const CachedManager = requireCachedManager();
+	const { ErrorCodes, DiscordjsTypeError } = requireErrors$1();
+	const { Entitlement } = requireEntitlement();
+	const { resolveSKUId } = requireUtil();
+
+	/**
+	 * Manages API methods for entitlements and stores their cache.
+	 * @extends {CachedManager}
+	 */
+	let EntitlementManager$1 = class EntitlementManager extends CachedManager {
+	  constructor(client, iterable) {
+	    super(client, Entitlement, iterable);
+	  }
+
+	  /**
+	   * The cache of this manager
+	   * @type {Collection<Snowflake, Entitlement>}
+	   * @name EntitlementManager#cache
+	   */
+
+	  /**
+	   * Data that resolves to give an Entitlement object. This can be:
+	   * * An Entitlement object
+	   * * A Snowflake
+	   * @typedef {Entitlement|Snowflake} EntitlementResolvable
+	   */
+
+	  /**
+	   * Data that resolves to give a SKU object. This can be:
+	   * * A SKU object
+	   * * A Snowflake
+	   * @typedef {SKU|Snowflake} SKUResolvable
+	   */
+
+	  /**
+	   * Options used to fetch an entitlement
+	   * @typedef {BaseFetchOptions} FetchEntitlementOptions
+	   * @property {EntitlementResolvable} entitlement The entitlement to fetch
+	   */
+
+	  /**
+	   * Options used to fetch entitlements
+	   * @typedef {Object} FetchEntitlementsOptions
+	   * @property {number} [limit] The maximum number of entitlements to fetch
+	   * @property {GuildResolvable} [guild] The guild to fetch entitlements for
+	   * @property {UserResolvable} [user] The user to fetch entitlements for
+	   * @property {SKUResolvable[]} [skus] The SKUs to fetch entitlements for
+	   * @property {boolean} [excludeEnded] Whether to exclude ended entitlements
+	   * @property {boolean} [excludeDeleted] Whether to exclude deleted entitlements
+	   * @property {boolean} [cache=true] Whether to cache the fetched entitlements
+	   * @property {Snowflake} [before] Consider only entitlements before this entitlement id
+	   * @property {Snowflake} [after] Consider only entitlements after this entitlement id
+	   * <warn>If both `before` and `after` are provided, only `before` is respected</warn>
+	   */
+
+	  /**
+	   * Fetches entitlements for this application
+	   * @param {EntitlementResolvable|FetchEntitlementOptions|FetchEntitlementsOptions} [options]
+	   * Options for fetching the entitlements
+	   * @returns {Promise<Entitlement|Collection<Snowflake, Entitlement>>}
+	   */
+	  async fetch(options) {
+	    if (!options) return this._fetchMany(options);
+	    const { entitlement, cache, force } = options;
+	    const resolvedEntitlement = this.resolveId(entitlement ?? options);
+
+	    if (resolvedEntitlement) {
+	      return this._fetchSingle({ entitlement: resolvedEntitlement, cache, force });
+	    }
+
+	    return this._fetchMany(options);
+	  }
+
+	  async _fetchSingle({ entitlement, cache, force = false }) {
+	    if (!force) {
+	      const existing = this.cache.get(entitlement);
+
+	      if (existing) {
+	        return existing;
+	      }
+	    }
+
+	    const data = await this.client.rest.get(Routes.entitlement(this.client.application.id, entitlement));
+	    return this._add(data, cache);
+	  }
+
+	  async _fetchMany({ limit, guild, user, skus, excludeEnded, excludeDeleted, cache, before, after } = {}) {
+	    const query = makeURLSearchParams({
+	      limit,
+	      guild_id: guild && this.client.guilds.resolveId(guild),
+	      user_id: user && this.client.users.resolveId(user),
+	      sku_ids: skus?.map(sku => resolveSKUId(sku)).join(','),
+	      exclude_ended: excludeEnded,
+	      exclude_deleted: excludeDeleted,
+	      before,
+	      after,
+	    });
+
+	    const entitlements = await this.client.rest.get(Routes.entitlements(this.client.application.id), { query });
+
+	    return entitlements.reduce(
+	      (coll, entitlement) => coll.set(entitlement.id, this._add(entitlement, cache)),
+	      new Collection(),
+	    );
+	  }
+
+	  /**
+	   * Options used to create a test entitlement
+	   * <info>Either `guild` or `user` must be provided, but not both</info>
+	   * @typedef {Object} EntitlementCreateOptions
+	   * @property {SKUResolvable} sku The id of the SKU to create the entitlement for
+	   * @property {GuildResolvable} [guild] The guild to create the entitlement for
+	   * @property {UserResolvable} [user] The user to create the entitlement for
+	   */
+
+	  /**
+	   * Creates a test entitlement
+	   * @param {EntitlementCreateOptions} options Options for creating the test entitlement
+	   * @returns {Promise<Entitlement>}
+	   */
+	  async createTest({ sku, guild, user }) {
+	    const skuId = resolveSKUId(sku);
+	    if (!skuId) throw new DiscordjsTypeError(ErrorCodes.InvalidType, 'sku', 'SKUResolvable');
+
+	    if ((guild && user) || (!guild && !user)) {
+	      throw new DiscordjsTypeError(ErrorCodes.EntitlementCreateInvalidOwner);
+	    }
+
+	    const resolved = guild ? this.client.guilds.resolveId(guild) : this.client.users.resolveId(user);
+	    if (!resolved) {
+	      const name = guild ? 'guild' : 'user';
+	      const type = guild ? 'GuildResolvable' : 'UserResolvable';
+	      throw new DiscordjsTypeError(ErrorCodes.InvalidType, name, type);
+	    }
+
+	    const entitlement = await this.client.rest.post(Routes.entitlements(this.client.application.id), {
+	      body: {
+	        sku_id: skuId,
+	        owner_id: resolved,
+	        owner_type: guild ? EntitlementOwnerType.Guild : EntitlementOwnerType.User,
+	      },
+	    });
+	    return new Entitlement(this.client, entitlement);
+	  }
+
+	  /**
+	   * Deletes a test entitlement
+	   * @param {EntitlementResolvable} entitlement The entitlement to delete
+	   * @returns {Promise<void>}
+	   */
+	  async deleteTest(entitlement) {
+	    const resolved = this.resolveId(entitlement);
+	    if (!resolved) throw new DiscordjsTypeError(ErrorCodes.InvalidType, 'entitlement', 'EntitlementResolvable');
+
+	    await this.client.rest.delete(Routes.entitlement(this.client.application.id, resolved));
+	  }
+
+	  /**
+	   * Marks an entitlement as consumed
+	   * <info>Only available for One-Time Purchase consumable SKUs.</info>
+	   * @param {Snowflake} entitlementId The id of the entitlement to consume
+	   * @returns {Promise<void>}
+	   */
+	  async consume(entitlementId) {
+	    await this.client.rest.post(Routes.consumeEntitlement(this.client.application.id, entitlementId));
+	  }
+	};
+
+	EntitlementManager.EntitlementManager = EntitlementManager$1;
+	return EntitlementManager;
+}
+
+var SubscriptionManager = {};
+
+var Subscription = {};
+
+var hasRequiredSubscription;
+
+function requireSubscription () {
+	if (hasRequiredSubscription) return Subscription;
+	hasRequiredSubscription = 1;
+
+	const Base = requireBase();
+
+	/**
+	 * Represents a Subscription
+	 * @extends {Base}
+	 */
+	let Subscription$1 = class Subscription extends Base {
+	  constructor(client, data) {
+	    super(client);
+
+	    /**
+	     * The id of the subscription
+	     * @type {Snowflake}
+	     */
+	    this.id = data.id;
+
+	    /**
+	     * The id of the user who subscribed
+	     * @type {Snowflake}
+	     */
+	    this.userId = data.user_id;
+
+	    this._patch(data);
+	  }
+
+	  _patch(data) {
+	    /**
+	     * The SKU ids subscribed to
+	     * @type {Snowflake[]}
+	     */
+	    this.skuIds = data.sku_ids;
+
+	    /**
+	     * The entitlement ids granted for this subscription
+	     * @type {Snowflake[]}
+	     */
+	    this.entitlementIds = data.entitlement_ids;
+
+	    /**
+	     * The timestamp the current subscription period will start at
+	     * @type {number}
+	     */
+	    this.currentPeriodStartTimestamp = Date.parse(data.current_period_start);
+
+	    /**
+	     * The timestamp the current subscription period will end at
+	     * @type {number}
+	     */
+	    this.currentPeriodEndTimestamp = Date.parse(data.current_period_end);
+
+	    /**
+	     * The current status of the subscription
+	     * @type {SubscriptionStatus}
+	     */
+	    this.status = data.status;
+
+	    if ('renewal_sku_ids' in data) {
+	      /**
+	       * The SKU ids that this user will be subscribed to at renewal
+	       * @type {?Snowflake[]}
+	       */
+	      this.renewalSkuIds = data.renewal_sku_ids;
+	    }
+
+	    if ('canceled_at' in data) {
+	      /**
+	       * The timestamp of when the subscription was canceled
+	       * @type {?number}
+	       */
+	      this.canceledTimestamp = data.canceled_at ? Date.parse(data.canceled_at) : null;
+	    } else {
+	      this.canceledTimestamp ??= null;
+	    }
+
+	    if ('country' in data) {
+	      /**
+	       * ISO 3166-1 alpha-2 country code of the payment source used to purchase the subscription.
+	       * Missing unless queried with a private OAuth scope.
+	       * @type {?string}
+	       */
+	      this.country = data.country;
+	    } else {
+	      this.country ??= null;
+	    }
+	  }
+
+	  /**
+	   * The time the subscription was canceled
+	   * @type {?Date}
+	   * @readonly
+	   */
+	  get canceledAt() {
+	    return this.canceledTimestamp && new Date(this.canceledTimestamp);
+	  }
+
+	  /**
+	   * The time the current subscription period will start at
+	   * @type {Date}
+	   * @readonly
+	   */
+	  get currentPeriodStartAt() {
+	    return new Date(this.currentPeriodStartTimestamp);
+	  }
+
+	  /**
+	   * The time the current subscription period will end at
+	   * @type {Date}
+	   * @readonly
+	   */
+	  get currentPeriodEndAt() {
+	    return new Date(this.currentPeriodEndTimestamp);
+	  }
+	};
+
+	Subscription.Subscription = Subscription$1;
+	return Subscription;
+}
+
+var hasRequiredSubscriptionManager;
+
+function requireSubscriptionManager () {
+	if (hasRequiredSubscriptionManager) return SubscriptionManager;
+	hasRequiredSubscriptionManager = 1;
+
+	const { Collection } = requireDist$7();
+	const { makeURLSearchParams } = requireWeb();
+	const { Routes } = requireV10();
+	const CachedManager = requireCachedManager();
+	const { DiscordjsTypeError, ErrorCodes } = requireErrors$1();
+	const { Subscription } = requireSubscription();
+	const { resolveSKUId } = requireUtil();
+
+	/**
+	 * Manages API methods for subscriptions and stores their cache.
+	 * @extends {CachedManager}
+	 */
+	let SubscriptionManager$1 = class SubscriptionManager extends CachedManager {
+	  constructor(client, iterable) {
+	    super(client, Subscription, iterable);
+	  }
+
+	  /**
+	   * The cache of this manager
+	   * @type {Collection<Snowflake, Subscription>}
+	   * @name SubscriptionManager#cache
+	   */
+
+	  /**
+	   * Options used to fetch a subscription
+	   * @typedef {BaseFetchOptions} FetchSubscriptionOptions
+	   * @property {SKUResolvable} sku The SKU to fetch the subscription for
+	   * @property {Snowflake} subscriptionId The id of the subscription to fetch
+	   */
+
+	  /**
+	   * Options used to fetch subscriptions
+	   * @typedef {Object} FetchSubscriptionsOptions
+	   * @property {Snowflake} [after] Consider only subscriptions after this subscription id
+	   * @property {Snowflake} [before] Consider only subscriptions before this subscription id
+	   * @property {number} [limit] The maximum number of subscriptions to fetch
+	   * @property {SKUResolvable} sku The SKU to fetch subscriptions for
+	   * @property {UserResolvable} user The user to fetch entitlements for
+	   * <warn>If both `before` and `after` are provided, only `before` is respected</warn>
+	   */
+
+	  /**
+	   * Fetches subscriptions for this application
+	   * @param {FetchSubscriptionOptions|FetchSubscriptionsOptions} [options={}] Options for fetching the subscriptions
+	   * @returns {Promise<Subscription|Collection<Snowflake, Subscription>>}
+	   */
+	  async fetch(options = {}) {
+	    if (typeof options !== 'object') throw new DiscordjsTypeError(ErrorCodes.InvalidType, 'options', 'object', true);
+
+	    const { after, before, cache, limit, sku, subscriptionId, user } = options;
+
+	    const skuId = resolveSKUId(sku);
+
+	    if (!skuId) throw new DiscordjsTypeError(ErrorCodes.InvalidType, 'sku', 'SKUResolvable');
+
+	    if (subscriptionId) {
+	      const subscription = await this.client.rest.get(Routes.skuSubscription(skuId, subscriptionId));
+
+	      return this._add(subscription, cache);
+	    }
+
+	    const query = makeURLSearchParams({
+	      limit,
+	      user_id: this.client.users.resolveId(user) ?? undefined,
+	      sku_id: skuId,
+	      before,
+	      after,
+	    });
+
+	    const subscriptions = await this.client.rest.get(Routes.skuSubscriptions(skuId), { query });
+
+	    return subscriptions.reduce(
+	      (coll, subscription) => coll.set(subscription.id, this._add(subscription, cache)),
+	      new Collection(),
+	    );
+	  }
+	};
+
+	SubscriptionManager.SubscriptionManager = SubscriptionManager$1;
+	return SubscriptionManager;
+}
+
+var ApplicationFlagsBitField_1;
+var hasRequiredApplicationFlagsBitField;
+
+function requireApplicationFlagsBitField () {
+	if (hasRequiredApplicationFlagsBitField) return ApplicationFlagsBitField_1;
+	hasRequiredApplicationFlagsBitField = 1;
+
+	const { ApplicationFlags } = requireV10();
+	const BitField = requireBitField();
+
+	/**
+	 * Data structure that makes it easy to interact with a {@link ClientApplication#flags} bitfield.
+	 * @extends {BitField}
+	 */
+	class ApplicationFlagsBitField extends BitField {
+	  /**
+	   * Numeric application flags. All available properties:
+	   * @type {ApplicationFlags}
+	   * @memberof ApplicationFlagsBitField
+	   */
+	  static Flags = ApplicationFlags;
+	}
+
+	/**
+	 * @name ApplicationFlagsBitField
+	 * @kind constructor
+	 * @memberof ApplicationFlagsBitField
+	 * @param {BitFieldResolvable} [bits=0] Bit(s) to read from
+	 */
+
+	/**
+	 * Bitfield of the packed bits
+	 * @type {number}
+	 * @name ApplicationFlagsBitField#bitfield
+	 */
+
+	/**
+	 * Data that can be resolved to give an application flag bit field. This can be:
+	 * * A string (see {@link ApplicationFlagsBitField.Flags})
+	 * * An application flag
+	 * * An instance of ApplicationFlagsBitField
+	 * * An Array of ApplicationFlagsResolvable
+	 * @typedef {string|number|ApplicationFlagsBitField|ApplicationFlagsResolvable[]} ApplicationFlagsResolvable
+	 */
+
+	ApplicationFlagsBitField_1 = ApplicationFlagsBitField;
+	return ApplicationFlagsBitField_1;
+}
+
+var ClientApplication_1;
+var hasRequiredClientApplication;
+
+function requireClientApplication () {
+	if (hasRequiredClientApplication) return ClientApplication_1;
+	hasRequiredClientApplication = 1;
+
+	const { Collection } = requireDist$7();
+	const { Routes } = requireV10();
+	const { ApplicationRoleConnectionMetadata } = requireApplicationRoleConnectionMetadata();
+	const { SKU } = requireSKU();
+	const Team = requireTeam();
+	const Application = requireApplication();
+	const ApplicationCommandManager = requireApplicationCommandManager();
+	const ApplicationEmojiManager = requireApplicationEmojiManager();
+	const { EntitlementManager } = requireEntitlementManager();
+	const { SubscriptionManager } = requireSubscriptionManager();
+	const ApplicationFlagsBitField = requireApplicationFlagsBitField();
+	const { resolveImage } = requireDataResolver();
+	const PermissionsBitField = requirePermissionsBitField();
+
+	/**
+	 * @typedef {Object} ClientApplicationInstallParams
+	 * @property {OAuth2Scopes[]} scopes Scopes that will be set upon adding this application
+	 * @property {Readonly<PermissionsBitField>} permissions Permissions that will be requested for the integrated role
+	 */
+
+	/**
+	 * Represents a client application.
+	 * @extends {Application}
+	 */
+	class ClientApplication extends Application {
+	  constructor(client, data) {
+	    super(client, data);
+
+	    /**
+	     * The application command manager for this application
+	     * @type {ApplicationCommandManager}
+	     */
+	    this.commands = new ApplicationCommandManager(this.client);
+
+	    /**
+	     * The application emoji manager for this application
+	     * @type {ApplicationEmojiManager}
+	     */
+	    this.emojis = new ApplicationEmojiManager(this);
+
+	    /**
+	     * The entitlement manager for this application
+	     * @type {EntitlementManager}
+	     */
+	    this.entitlements = new EntitlementManager(this.client);
+
+	    /**
+	     * The subscription manager for this application
+	     * @type {SubscriptionManager}
+	     */
+	    this.subscriptions = new SubscriptionManager(this.client);
+	  }
+
+	  _patch(data) {
+	    super._patch(data);
+
+	    /**
+	     * The tags this application has (max of 5)
+	     * @type {string[]}
+	     */
+	    this.tags = data.tags ?? [];
+
+	    if ('install_params' in data) {
+	      /**
+	       * Settings for this application's default in-app authorization
+	       * @type {?ClientApplicationInstallParams}
+	       */
+	      this.installParams = {
+	        scopes: data.install_params.scopes,
+	        permissions: new PermissionsBitField(data.install_params.permissions).freeze(),
+	      };
+	    } else {
+	      this.installParams ??= null;
+	    }
+
+	    /**
+	     * OAuth2 installation parameters.
+	     * @typedef {Object} IntegrationTypesConfigurationParameters
+	     * @property {OAuth2Scopes[]} scopes Scopes that will be set upon adding this application
+	     * @property {Readonly<PermissionsBitField>} permissions Permissions that will be requested for the integrated role
+	     */
+
+	    /**
+	     * The application's supported installation context data.
+	     * @typedef {Object} IntegrationTypesConfigurationContext
+	     * @property {?IntegrationTypesConfigurationParameters} oauth2InstallParams
+	     * Scopes and permissions regarding the installation context
+	     */
+
+	    /**
+	     * The application's supported installation context data.
+	     * @typedef {Object} IntegrationTypesConfiguration
+	     * @property {IntegrationTypesConfigurationContext} [0] Scopes and permissions
+	     * regarding the guild-installation context
+	     * @property {IntegrationTypesConfigurationContext} [1] Scopes and permissions
+	     * regarding the user-installation context
+	     */
+
+	    if ('integration_types_config' in data) {
+	      /**
+	       * Default scopes and permissions for each supported installation context.
+	       * The keys are stringified variants of {@link ApplicationIntegrationType}.
+	       * @type {?IntegrationTypesConfiguration}
+	       */
+	      this.integrationTypesConfig = Object.fromEntries(
+	        Object.entries(data.integration_types_config).map(([key, config]) => {
+	          let oauth2InstallParams = null;
+	          if (config.oauth2_install_params) {
+	            oauth2InstallParams = {
+	              scopes: config.oauth2_install_params.scopes,
+	              permissions: new PermissionsBitField(config.oauth2_install_params.permissions).freeze(),
+	            };
+	          }
+
+	          const context = {
+	            oauth2InstallParams,
+	          };
+
+	          return [key, context];
+	        }),
+	      );
+	    } else {
+	      this.integrationTypesConfig ??= null;
+	    }
+
+	    if ('custom_install_url' in data) {
+	      /**
+	       * This application's custom installation URL
+	       * @type {?string}
+	       */
+	      this.customInstallURL = data.custom_install_url;
+	    } else {
+	      this.customInstallURL = null;
+	    }
+
+	    if ('flags' in data) {
+	      /**
+	       * The flags this application has
+	       * @type {ApplicationFlagsBitField}
+	       */
+	      this.flags = new ApplicationFlagsBitField(data.flags).freeze();
+	    }
+
+	    if ('approximate_guild_count' in data) {
+	      /**
+	       * An approximate amount of guilds this application is in.
+	       * @type {?number}
+	       */
+	      this.approximateGuildCount = data.approximate_guild_count;
+	    } else {
+	      this.approximateGuildCount ??= null;
+	    }
+
+	    if ('approximate_user_install_count' in data) {
+	      /**
+	       * An approximate amount of users that have installed this application.
+	       * @type {?number}
+	       */
+	      this.approximateUserInstallCount = data.approximate_user_install_count;
+	    } else {
+	      this.approximateUserInstallCount ??= null;
+	    }
+
+	    if ('guild_id' in data) {
+	      /**
+	       * The id of the guild associated with this application.
+	       * @type {?Snowflake}
+	       */
+	      this.guildId = data.guild_id;
+	    } else {
+	      this.guildId ??= null;
+	    }
+
+	    if ('bot_require_code_grant' in data) {
+	      /**
+	       * If this application's bot requires a code grant when using the OAuth2 flow
+	       * @type {?boolean}
+	       */
+	      this.botRequireCodeGrant = data.bot_require_code_grant;
+	    } else {
+	      this.botRequireCodeGrant ??= null;
+	    }
+
+	    if ('bot' in data) {
+	      /**
+	       * The bot associated with this application.
+	       * @type {?User}
+	       */
+	      this.bot = this.client.users._add(data.bot);
+	    } else {
+	      this.bot ??= null;
+	    }
+
+	    if ('bot_public' in data) {
+	      /**
+	       * If this application's bot is public
+	       * @type {?boolean}
+	       */
+	      this.botPublic = data.bot_public;
+	    } else {
+	      this.botPublic ??= null;
+	    }
+
+	    if ('interactions_endpoint_url' in data) {
+	      /**
+	       * This application's interaction endpoint URL.
+	       * @type {?string}
+	       */
+	      this.interactionsEndpointURL = data.interactions_endpoint_url;
+	    } else {
+	      this.interactionsEndpointURL ??= null;
+	    }
+
+	    if ('role_connections_verification_url' in data) {
+	      /**
+	       * This application's role connection verification entry point URL
+	       * @type {?string}
+	       */
+	      this.roleConnectionsVerificationURL = data.role_connections_verification_url;
+	    } else {
+	      this.roleConnectionsVerificationURL ??= null;
+	    }
+
+	    if ('event_webhooks_url' in data) {
+	      /**
+	       * This application's URL to receive event webhooks
+	       * @type {?string}
+	       */
+	      this.eventWebhooksURL = data.event_webhooks_url;
+	    } else {
+	      this.eventWebhooksURL ??= null;
+	    }
+
+	    if ('event_webhooks_status' in data) {
+	      /**
+	       * This application's event webhooks status
+	       * @type {?ApplicationWebhookEventStatus}
+	       */
+	      this.eventWebhooksStatus = data.event_webhooks_status;
+	    } else {
+	      this.eventWebhooksStatus ??= null;
+	    }
+
+	    if ('event_webhooks_types' in data) {
+	      /**
+	       * List of event webhooks types this application subscribes to
+	       * @type {?ApplicationWebhookEventType[]}
+	       */
+	      this.eventWebhooksTypes = data.event_webhooks_types;
+	    } else {
+	      this.eventWebhooksTypes ??= null;
+	    }
+
+	    /**
+	     * The owner of this OAuth application
+	     * @type {?(User|Team)}
+	     */
+	    this.owner = data.team
+	      ? new Team(this.client, data.team)
+	      : data.owner
+	        ? this.client.users._add(data.owner)
+	        : (this.owner ?? null);
+	  }
+
+	  /**
+	   * The guild associated with this application.
+	   * @type {?Guild}
+	   * @readonly
+	   */
+	  get guild() {
+	    return this.client.guilds.cache.get(this.guildId) ?? null;
+	  }
+
+	  /**
+	   * Whether this application is partial
+	   * @type {boolean}
+	   * @readonly
+	   */
+	  get partial() {
+	    return !this.name;
+	  }
+
+	  /**
+	   * Options used for editing an application.
+	   * @typedef {Object} ClientApplicationEditOptions
+	   * @property {string} [customInstallURL] The application's custom installation URL
+	   * @property {string} [description] The application's description
+	   * @property {string} [roleConnectionsVerificationURL] The application's role connection verification URL
+	   * @property {ClientApplicationInstallParams} [installParams]
+	   * Settings for the application's default in-app authorization
+	   * @property {ApplicationFlagsResolvable} [flags] The flags for the application
+	   * @property {?(BufferResolvable|Base64Resolvable)} [icon] The application's icon
+	   * @property {?(BufferResolvable|Base64Resolvable)} [coverImage] The application's cover image
+	   * @property {string} [interactionsEndpointURL] The application's interaction endpoint URL
+	   * @property {string} [eventWebhooksURL] The application's event webhooks URL
+	   * @property {ApplicationWebhookEventStatus.Enabled|ApplicationWebhookEventStatus.Disabled} [eventWebhooksStatus]
+	   * The application's event webhooks status.
+	   * @property {ApplicationWebhookEventType[]} [eventWebhooksTypes] The application's event webhooks types
+	   * @property {string[]} [tags] The application's tags
+	   */
+
+	  /**
+	   * Edits this application.
+	   * @param {ClientApplicationEditOptions} [options] The options for editing this application
+	   * @returns {Promise<ClientApplication>}
+	   */
+	  async edit({
+	    customInstallURL,
+	    description,
+	    roleConnectionsVerificationURL,
+	    installParams,
+	    flags,
+	    icon,
+	    coverImage,
+	    interactionsEndpointURL,
+	    eventWebhooksURL,
+	    eventWebhooksStatus,
+	    eventWebhooksTypes,
+	    tags,
+	  } = {}) {
+	    const data = await this.client.rest.patch(Routes.currentApplication(), {
+	      body: {
+	        custom_install_url: customInstallURL,
+	        description,
+	        role_connections_verification_url: roleConnectionsVerificationURL,
+	        install_params: installParams,
+	        flags: flags === undefined ? undefined : ApplicationFlagsBitField.resolve(flags),
+	        icon: icon && (await resolveImage(icon)),
+	        cover_image: coverImage && (await resolveImage(coverImage)),
+	        interactions_endpoint_url: interactionsEndpointURL,
+	        event_webhooks_url: eventWebhooksURL,
+	        event_webhooks_status: eventWebhooksStatus,
+	        event_webhooks_types: eventWebhooksTypes,
+	        tags,
+	      },
+	    });
+
+	    this._patch(data);
+	    return this;
+	  }
+
+	  /**
+	   * Obtains this application from Discord.
+	   * @returns {Promise<ClientApplication>}
+	   */
+	  async fetch() {
+	    const data = await this.client.rest.get(Routes.currentApplication());
+	    this._patch(data);
+	    return this;
+	  }
+
+	  /**
+	   * Gets this application's role connection metadata records
+	   * @returns {Promise<ApplicationRoleConnectionMetadata[]>}
+	   */
+	  async fetchRoleConnectionMetadataRecords() {
+	    const metadata = await this.client.rest.get(Routes.applicationRoleConnectionMetadata(this.client.user.id));
+	    return metadata.map(data => new ApplicationRoleConnectionMetadata(data));
+	  }
+
+	  /**
+	   * Data for creating or editing an application role connection metadata.
+	   * @typedef {Object} ApplicationRoleConnectionMetadataEditOptions
+	   * @property {string} name The name of the metadata field
+	   * @property {?Object<Locale, string>} [nameLocalizations] The name localizations for the metadata field
+	   * @property {string} description The description of the metadata field
+	   * @property {?Object<Locale, string>} [descriptionLocalizations] The description localizations for the metadata field
+	   * @property {string} key The dictionary key of the metadata field
+	   * @property {ApplicationRoleConnectionMetadataType} type The type of the metadata field
+	   */
+
+	  /**
+	   * Updates this application's role connection metadata records
+	   * @param {ApplicationRoleConnectionMetadataEditOptions[]} records The new role connection metadata records
+	   * @returns {Promise<ApplicationRoleConnectionMetadata[]>}
+	   */
+	  async editRoleConnectionMetadataRecords(records) {
+	    const newRecords = await this.client.rest.put(Routes.applicationRoleConnectionMetadata(this.client.user.id), {
+	      body: records.map(record => ({
+	        type: record.type,
+	        key: record.key,
+	        name: record.name,
+	        name_localizations: record.nameLocalizations,
+	        description: record.description,
+	        description_localizations: record.descriptionLocalizations,
+	      })),
+	    });
+
+	    return newRecords.map(data => new ApplicationRoleConnectionMetadata(data));
+	  }
+
+	  /**
+	   * Gets this application's SKUs
+	   * @returns {Promise<Collection<Snowflake, SKU>>}
+	   */
+	  async fetchSKUs() {
+	    const skus = await this.client.rest.get(Routes.skus(this.id));
+	    return skus.reduce((coll, sku) => coll.set(sku.id, new SKU(this.client, sku)), new Collection());
+	  }
+	}
+
+	ClientApplication_1 = ClientApplication;
+	return ClientApplication_1;
 }
 
 var dist$4 = {exports: {}};
@@ -78142,60 +84265,6 @@ ${pairsBlock}`;
 	return cjs;
 }
 
-var fastDeepEqual;
-var hasRequiredFastDeepEqual;
-
-function requireFastDeepEqual () {
-	if (hasRequiredFastDeepEqual) return fastDeepEqual;
-	hasRequiredFastDeepEqual = 1;
-
-	// do not edit .js files directly - edit src/index.jst
-
-
-
-	fastDeepEqual = function equal(a, b) {
-	  if (a === b) return true;
-
-	  if (a && b && typeof a == 'object' && typeof b == 'object') {
-	    if (a.constructor !== b.constructor) return false;
-
-	    var length, i, keys;
-	    if (Array.isArray(a)) {
-	      length = a.length;
-	      if (length != b.length) return false;
-	      for (i = length; i-- !== 0;)
-	        if (!equal(a[i], b[i])) return false;
-	      return true;
-	    }
-
-
-
-	    if (a.constructor === RegExp) return a.source === b.source && a.flags === b.flags;
-	    if (a.valueOf !== Object.prototype.valueOf) return a.valueOf() === b.valueOf();
-	    if (a.toString !== Object.prototype.toString) return a.toString() === b.toString();
-
-	    keys = Object.keys(a);
-	    length = keys.length;
-	    if (length !== Object.keys(b).length) return false;
-
-	    for (i = length; i-- !== 0;)
-	      if (!Object.prototype.hasOwnProperty.call(b, keys[i])) return false;
-
-	    for (i = length; i-- !== 0;) {
-	      var key = keys[i];
-
-	      if (!equal(a[key], b[key])) return false;
-	    }
-
-	    return true;
-	  }
-
-	  // true if both NaN, false otherwise
-	  return a!==a && b!==b;
-	};
-	return fastDeepEqual;
-}
-
 /**
  * Utility function that works like `Object.apply`, but copies getters and setters properly as well.  Additionally gives
  * the option to exclude properties by name.
@@ -78629,21 +84698,28 @@ function requireDist$5 () {
 		  ChannelSelectMenuBuilder: () => ChannelSelectMenuBuilder,
 		  ComponentAssertions: () => Assertions_exports2,
 		  ComponentBuilder: () => ComponentBuilder,
-		  ContextMenuCommandAssertions: () => Assertions_exports6,
+		  ComponentsV2Assertions: () => Assertions_exports4,
+		  ContainerBuilder: () => ContainerBuilder,
+		  ContextMenuCommandAssertions: () => Assertions_exports7,
 		  ContextMenuCommandBuilder: () => ContextMenuCommandBuilder,
 		  EmbedAssertions: () => Assertions_exports,
 		  EmbedBuilder: () => EmbedBuilder,
+		  FileBuilder: () => FileBuilder,
+		  MediaGalleryBuilder: () => MediaGalleryBuilder,
+		  MediaGalleryItemBuilder: () => MediaGalleryItemBuilder,
 		  MentionableSelectMenuBuilder: () => MentionableSelectMenuBuilder,
-		  ModalAssertions: () => Assertions_exports4,
+		  ModalAssertions: () => Assertions_exports5,
 		  ModalBuilder: () => ModalBuilder,
 		  RoleSelectMenuBuilder: () => RoleSelectMenuBuilder,
+		  SectionBuilder: () => SectionBuilder,
 		  SelectMenuBuilder: () => StringSelectMenuBuilder,
 		  SelectMenuOptionBuilder: () => StringSelectMenuOptionBuilder,
+		  SeparatorBuilder: () => SeparatorBuilder,
 		  SharedNameAndDescription: () => SharedNameAndDescription,
 		  SharedSlashCommand: () => SharedSlashCommand,
 		  SharedSlashCommandOptions: () => SharedSlashCommandOptions,
 		  SharedSlashCommandSubcommands: () => SharedSlashCommandSubcommands,
-		  SlashCommandAssertions: () => Assertions_exports5,
+		  SlashCommandAssertions: () => Assertions_exports6,
 		  SlashCommandAttachmentOption: () => SlashCommandAttachmentOption,
 		  SlashCommandBooleanOption: () => SlashCommandBooleanOption,
 		  SlashCommandBuilder: () => SlashCommandBuilder,
@@ -78658,8 +84734,10 @@ function requireDist$5 () {
 		  SlashCommandUserOption: () => SlashCommandUserOption,
 		  StringSelectMenuBuilder: () => StringSelectMenuBuilder,
 		  StringSelectMenuOptionBuilder: () => StringSelectMenuOptionBuilder,
+		  TextDisplayBuilder: () => TextDisplayBuilder,
 		  TextInputAssertions: () => Assertions_exports3,
 		  TextInputBuilder: () => TextInputBuilder,
+		  ThumbnailBuilder: () => ThumbnailBuilder,
 		  UserSelectMenuBuilder: () => UserSelectMenuBuilder,
 		  createComponentBuilder: () => createComponentBuilder,
 		  disableValidators: () => disableValidators,
@@ -78667,6 +84745,7 @@ function requireDist$5 () {
 		  enableValidators: () => enableValidators,
 		  isValidationEnabled: () => isValidationEnabled,
 		  normalizeArray: () => normalizeArray,
+		  resolveBuilder: () => resolveBuilder,
 		  version: () => version
 		});
 		module.exports = __toCommonJS(src_exports);
@@ -78983,6 +85062,7 @@ function requireDist$5 () {
 		  defaultValidator: () => defaultValidator,
 		  disabledValidator: () => disabledValidator,
 		  emojiValidator: () => emojiValidator,
+		  idValidator: () => idValidator,
 		  jsonOptionValidator: () => jsonOptionValidator,
 		  labelValueDescriptionValidator: () => labelValueDescriptionValidator,
 		  minMaxValidator: () => minMaxValidator,
@@ -79085,6 +85165,7 @@ function requireDist$5 () {
 		};
 
 		// src/components/Assertions.ts
+		var idValidator = import_shapeshift2.s.number().safeInt().greaterThanOrEqual(1).lessThan(4294967296).setValidationEnabled(isValidationEnabled);
 		var customIdValidator = import_shapeshift2.s.string().lengthGreaterThanOrEqual(1).lengthLessThanOrEqual(100).setValidationEnabled(isValidationEnabled);
 		var emojiValidator = import_shapeshift2.s.object({
 		  id: import_shapeshift2.s.string(),
@@ -79152,7 +85233,7 @@ function requireDist$5 () {
 		__name(validateRequiredButtonParameters, "validateRequiredButtonParameters");
 
 		// src/components/ActionRow.ts
-		var import_v1011 = requireV10();
+		var import_v1019 = requireV10();
 
 		// src/components/Component.ts
 		var ComponentBuilder = class {
@@ -79171,10 +85252,26 @@ function requireDist$5 () {
 		  constructor(data) {
 		    this.data = data;
 		  }
+		  /**
+		   * Sets the id (not the custom id) for this component.
+		   *
+		   * @param id - The id for this component
+		   */
+		  setId(id) {
+		    this.data.id = idValidator.parse(id);
+		    return this;
+		  }
+		  /**
+		   * Clears the id of this component, defaulting to a default incremented id.
+		   */
+		  clearId() {
+		    this.data.id = void 0;
+		    return this;
+		  }
 		};
 
 		// src/components/Components.ts
-		var import_v1010 = requireV10();
+		var import_v1018 = requireV10();
 
 		// src/components/button/Button.ts
 		var import_v102 = requireV10();
@@ -79955,33 +86052,828 @@ function requireDist$5 () {
 		  }
 		};
 
+		// src/components/v2/Container.ts
+		var import_v1015 = requireV10();
+
+		// src/components/v2/Assertions.ts
+		var Assertions_exports4 = {};
+		__export(Assertions_exports4, {
+		  accessoryPredicate: () => accessoryPredicate,
+		  assertReturnOfBuilder: () => assertReturnOfBuilder,
+		  containerColorPredicate: () => containerColorPredicate,
+		  descriptionPredicate: () => descriptionPredicate2,
+		  dividerPredicate: () => dividerPredicate,
+		  filePredicate: () => filePredicate,
+		  spacingPredicate: () => spacingPredicate,
+		  spoilerPredicate: () => spoilerPredicate,
+		  textDisplayContentPredicate: () => textDisplayContentPredicate,
+		  unfurledMediaItemPredicate: () => unfurledMediaItemPredicate,
+		  validateComponentArray: () => validateComponentArray
+		});
+		var import_shapeshift4 = /*@__PURE__*/ requireCjs();
+		var import_v1011 = requireV10();
+
+		// src/components/v2/Thumbnail.ts
+		var import_v1010 = requireV10();
+		var ThumbnailBuilder = class extends ComponentBuilder {
+		  static {
+		    __name(this, "ThumbnailBuilder");
+		  }
+		  /**
+		   * Creates a new thumbnail from API data.
+		   *
+		   * @param data - The API data to create this thumbnail with
+		   * @example
+		   * Creating a thumbnail from an API data object:
+		   * ```ts
+		   * const thumbnaik = new ThumbnailBuilder({
+		   * 	description: 'some text',
+		   *  media: {
+		   *      url: 'https://cdn.discordapp.com/embed/avatars/4.png',
+		   *  },
+		   * });
+		   * ```
+		   * @example
+		   * Creating a thumbnail using setters and API data:
+		   * ```ts
+		   * const thumbnail = new ThumbnailBuilder({
+		   * 	media: {
+		   *      url: 'attachment://image.png',
+		   *  },
+		   * })
+		   * 	.setDescription('alt text');
+		   * ```
+		   */
+		  constructor(data = {}) {
+		    super({
+		      type: import_v1010.ComponentType.Thumbnail,
+		      ...data,
+		      media: data.media ? { url: data.media.url } : void 0
+		    });
+		  }
+		  /**
+		   * Sets the description of this thumbnail.
+		   *
+		   * @param description - The description to use
+		   */
+		  setDescription(description) {
+		    this.data.description = descriptionPredicate2.parse(description);
+		    return this;
+		  }
+		  /**
+		   * Clears the description of this thumbnail.
+		   */
+		  clearDescription() {
+		    this.data.description = void 0;
+		    return this;
+		  }
+		  /**
+		   * Sets the spoiler status of this thumbnail.
+		   *
+		   * @param spoiler - The spoiler status to use
+		   */
+		  setSpoiler(spoiler = true) {
+		    this.data.spoiler = spoilerPredicate.parse(spoiler);
+		    return this;
+		  }
+		  /**
+		   * Sets the media URL of this thumbnail.
+		   *
+		   * @param url - The URL to use
+		   */
+		  setURL(url) {
+		    this.data.media = unfurledMediaItemPredicate.parse({ url });
+		    return this;
+		  }
+		  /**
+		   * {@inheritdoc ComponentBuilder.toJSON}
+		   */
+		  toJSON() {
+		    unfurledMediaItemPredicate.parse(this.data.media);
+		    return { ...this.data };
+		  }
+		};
+
+		// src/components/v2/Assertions.ts
+		var unfurledMediaItemPredicate = import_shapeshift4.s.object({
+		  url: import_shapeshift4.s.string().url(
+		    { allowedProtocols: ["http:", "https:", "attachment:"] },
+		    { message: "Invalid protocol for media URL. Must be http:, https:, or attachment:" }
+		  )
+		}).setValidationEnabled(isValidationEnabled);
+		var descriptionPredicate2 = import_shapeshift4.s.string().lengthGreaterThanOrEqual(1).lengthLessThanOrEqual(1024).setValidationEnabled(isValidationEnabled);
+		var filePredicate = import_shapeshift4.s.object({
+		  url: import_shapeshift4.s.string().url({ allowedProtocols: ["attachment:"] }, { message: "Invalid protocol for file URL. Must be attachment:" })
+		}).setValidationEnabled(isValidationEnabled);
+		var spoilerPredicate = import_shapeshift4.s.boolean();
+		var dividerPredicate = import_shapeshift4.s.boolean();
+		var spacingPredicate = import_shapeshift4.s.nativeEnum(import_v1011.SeparatorSpacingSize);
+		var textDisplayContentPredicate = import_shapeshift4.s.string().lengthGreaterThanOrEqual(1).lengthLessThanOrEqual(4e3).setValidationEnabled(isValidationEnabled);
+		var accessoryPredicate = import_shapeshift4.s.instance(ButtonBuilder).or(import_shapeshift4.s.instance(ThumbnailBuilder)).setValidationEnabled(isValidationEnabled);
+		var containerColorPredicate = colorPredicate.nullish();
+		function assertReturnOfBuilder(input, ExpectedInstanceOf) {
+		  import_shapeshift4.s.instance(ExpectedInstanceOf).parse(input);
+		}
+		__name(assertReturnOfBuilder, "assertReturnOfBuilder");
+		function validateComponentArray(input, min, max, ExpectedInstanceOf) {
+		  (ExpectedInstanceOf ? import_shapeshift4.s.instance(ExpectedInstanceOf) : import_shapeshift4.s.instance(ComponentBuilder)).array().lengthGreaterThanOrEqual(min).lengthLessThanOrEqual(max).parse(input);
+		}
+		__name(validateComponentArray, "validateComponentArray");
+
+		// src/components/v2/File.ts
+		var import_v1012 = requireV10();
+		var FileBuilder = class extends ComponentBuilder {
+		  static {
+		    __name(this, "FileBuilder");
+		  }
+		  /**
+		   * Creates a new file from API data.
+		   *
+		   * @param data - The API data to create this file with
+		   * @example
+		   * Creating a file from an API data object:
+		   * ```ts
+		   * const file = new FileBuilder({
+		   * 	spoiler: true,
+		   * 	file: {
+		   * 		url: 'attachment://file.png',
+		   * 	},
+		   * });
+		   * ```
+		   * @example
+		   * Creating a file using setters and API data:
+		   * ```ts
+		   * const file = new FileBuilder({
+		   * 	file: {
+		   * 		url: 'attachment://image.jpg',
+		   * 	},
+		   * })
+		   * 	.setSpoiler(false);
+		   * ```
+		   */
+		  constructor(data = {}) {
+		    super({ type: import_v1012.ComponentType.File, ...data, file: data.file ? { url: data.file.url } : void 0 });
+		  }
+		  /**
+		   * Sets the spoiler status of this file.
+		   *
+		   * @param spoiler - The spoiler status to use
+		   */
+		  setSpoiler(spoiler = true) {
+		    this.data.spoiler = spoilerPredicate.parse(spoiler);
+		    return this;
+		  }
+		  /**
+		   * Sets the media URL of this file.
+		   *
+		   * @param url - The URL to use
+		   */
+		  setURL(url) {
+		    this.data.file = filePredicate.parse({ url });
+		    return this;
+		  }
+		  /**
+		   * {@inheritDoc ComponentBuilder.toJSON}
+		   */
+		  toJSON() {
+		    filePredicate.parse(this.data.file);
+		    return { ...this.data, file: { ...this.data.file } };
+		  }
+		};
+
+		// src/components/v2/Separator.ts
+		var import_v1013 = requireV10();
+		var SeparatorBuilder = class extends ComponentBuilder {
+		  static {
+		    __name(this, "SeparatorBuilder");
+		  }
+		  /**
+		   * Creates a new separator from API data.
+		   *
+		   * @param data - The API data to create this separator with
+		   * @example
+		   * Creating a separator from an API data object:
+		   * ```ts
+		   * const separator = new SeparatorBuilder({
+		   * 	spacing: SeparatorSpacingSize.Small,
+		   *  divider: true,
+		   * });
+		   * ```
+		   * @example
+		   * Creating a separator using setters and API data:
+		   * ```ts
+		   * const separator = new SeparatorBuilder({
+		   * 	spacing: SeparatorSpacingSize.Large,
+		   * })
+		   * 	.setDivider(false);
+		   * ```
+		   */
+		  constructor(data = {}) {
+		    super({
+		      type: import_v1013.ComponentType.Separator,
+		      ...data
+		    });
+		  }
+		  /**
+		   * Sets whether this separator should show a divider line.
+		   *
+		   * @param divider - Whether to show a divider line
+		   */
+		  setDivider(divider = true) {
+		    this.data.divider = dividerPredicate.parse(divider);
+		    return this;
+		  }
+		  /**
+		   * Sets the spacing of this separator.
+		   *
+		   * @param spacing - The spacing to use
+		   */
+		  setSpacing(spacing) {
+		    this.data.spacing = spacingPredicate.parse(spacing);
+		    return this;
+		  }
+		  /**
+		   * Clears the spacing of this separator.
+		   */
+		  clearSpacing() {
+		    this.data.spacing = void 0;
+		    return this;
+		  }
+		  /**
+		   * {@inheritDoc ComponentBuilder.toJSON}
+		   */
+		  toJSON() {
+		    return { ...this.data };
+		  }
+		};
+
+		// src/components/v2/TextDisplay.ts
+		var import_v1014 = requireV10();
+		var TextDisplayBuilder = class extends ComponentBuilder {
+		  static {
+		    __name(this, "TextDisplayBuilder");
+		  }
+		  /**
+		   * Creates a new text display from API data.
+		   *
+		   * @param data - The API data to create this text display with
+		   * @example
+		   * Creating a text display from an API data object:
+		   * ```ts
+		   * const textDisplay = new TextDisplayBuilder({
+		   * 	content: 'some text',
+		   * });
+		   * ```
+		   * @example
+		   * Creating a text display using setters and API data:
+		   * ```ts
+		   * const textDisplay = new TextDisplayBuilder({
+		   * 	content: 'old text',
+		   * })
+		   * 	.setContent('new text');
+		   * ```
+		   */
+		  constructor(data = {}) {
+		    super({
+		      type: import_v1014.ComponentType.TextDisplay,
+		      ...data
+		    });
+		  }
+		  /**
+		   * Sets the text of this text display.
+		   *
+		   * @param content - The text to use
+		   */
+		  setContent(content) {
+		    this.data.content = textDisplayContentPredicate.parse(content);
+		    return this;
+		  }
+		  /**
+		   * {@inheritDoc ComponentBuilder.toJSON}
+		   */
+		  toJSON() {
+		    textDisplayContentPredicate.parse(this.data.content);
+		    return { ...this.data };
+		  }
+		};
+
+		// src/components/v2/Container.ts
+		var ContainerBuilder = class extends ComponentBuilder {
+		  static {
+		    __name(this, "ContainerBuilder");
+		  }
+		  /**
+		   * The components within this container.
+		   */
+		  components;
+		  /**
+		   * Creates a new container from API data.
+		   *
+		   * @param data - The API data to create this container with
+		   * @example
+		   * Creating a container from an API data object:
+		   * ```ts
+		   * const container = new ContainerBuilder({
+		   * 	components: [
+		   * 		{
+		   * 			content: "Some text here",
+		   * 			type: ComponentType.TextDisplay,
+		   * 		},
+		   * 	],
+		   * });
+		   * ```
+		   * @example
+		   * Creating a container using setters and API data:
+		   * ```ts
+		   * const container = new ContainerBuilder({
+		   * 	components: [
+		   * 		{
+		   * 			content: "# Heading",
+		   * 			type: ComponentType.TextDisplay,
+		   * 		},
+		   * 	],
+		   * })
+		   * 	.addComponents(separator, section);
+		   * ```
+		   */
+		  constructor({ components, ...data } = {}) {
+		    super({ type: import_v1015.ComponentType.Container, ...data });
+		    this.components = components?.map((component) => createComponentBuilder(component)) ?? [];
+		  }
+		  /**
+		   * Sets the accent color of this container.
+		   *
+		   * @param color - The color to use
+		   */
+		  setAccentColor(color) {
+		    containerColorPredicate.parse(color);
+		    if (Array.isArray(color)) {
+		      const [red, green, blue] = color;
+		      this.data.accent_color = (red << 16) + (green << 8) + blue;
+		      return this;
+		    }
+		    this.data.accent_color = color;
+		    return this;
+		  }
+		  /**
+		   * Clears the accent color of this container.
+		   */
+		  clearAccentColor() {
+		    this.data.accent_color = void 0;
+		    return this;
+		  }
+		  /**
+		   * Adds action row components to this container.
+		   *
+		   * @param components - The action row components to add
+		   */
+		  addActionRowComponents(...components) {
+		    this.components.push(
+		      ...normalizeArray(components).map((component) => resolveBuilder(component, ActionRowBuilder))
+		    );
+		    return this;
+		  }
+		  /**
+		   * Adds file components to this container.
+		   *
+		   * @param components - The file components to add
+		   */
+		  addFileComponents(...components) {
+		    this.components.push(...normalizeArray(components).map((component) => resolveBuilder(component, FileBuilder)));
+		    return this;
+		  }
+		  /**
+		   * Adds media gallery components to this container.
+		   *
+		   * @param components - The media gallery components to add
+		   */
+		  addMediaGalleryComponents(...components) {
+		    this.components.push(
+		      ...normalizeArray(components).map((component) => resolveBuilder(component, MediaGalleryBuilder))
+		    );
+		    return this;
+		  }
+		  /**
+		   * Adds section components to this container.
+		   *
+		   * @param components - The section components to add
+		   */
+		  addSectionComponents(...components) {
+		    this.components.push(...normalizeArray(components).map((component) => resolveBuilder(component, SectionBuilder)));
+		    return this;
+		  }
+		  /**
+		   * Adds separator components to this container.
+		   *
+		   * @param components - The separator components to add
+		   */
+		  addSeparatorComponents(...components) {
+		    this.components.push(...normalizeArray(components).map((component) => resolveBuilder(component, SeparatorBuilder)));
+		    return this;
+		  }
+		  /**
+		   * Adds text display components to this container.
+		   *
+		   * @param components - The text display components to add
+		   */
+		  addTextDisplayComponents(...components) {
+		    this.components.push(
+		      ...normalizeArray(components).map((component) => resolveBuilder(component, TextDisplayBuilder))
+		    );
+		    return this;
+		  }
+		  /**
+		   * Removes, replaces, or inserts components for this container.
+		   *
+		   * @param index - The index to start removing, replacing or inserting components
+		   * @param deleteCount - The amount of components to remove
+		   * @param components - The components to set
+		   */
+		  spliceComponents(index, deleteCount, ...components) {
+		    this.components.splice(
+		      index,
+		      deleteCount,
+		      ...normalizeArray(components).map(
+		        (component) => component instanceof ComponentBuilder ? component : createComponentBuilder(component)
+		      )
+		    );
+		    return this;
+		  }
+		  /**
+		   * Sets the spoiler status of this container.
+		   *
+		   * @param spoiler - The spoiler status to use
+		   */
+		  setSpoiler(spoiler = true) {
+		    this.data.spoiler = spoilerPredicate.parse(spoiler);
+		    return this;
+		  }
+		  /**
+		   * {@inheritDoc ComponentBuilder.toJSON}
+		   */
+		  toJSON() {
+		    validateComponentArray(this.components, 1, 10);
+		    return {
+		      ...this.data,
+		      components: this.components.map((component) => component.toJSON())
+		    };
+		  }
+		};
+
+		// src/components/v2/MediaGallery.ts
+		var import_v1016 = requireV10();
+
+		// src/components/v2/MediaGalleryItem.ts
+		var MediaGalleryItemBuilder = class {
+		  static {
+		    __name(this, "MediaGalleryItemBuilder");
+		  }
+		  /**
+		   * The API data associated with this media gallery item.
+		   */
+		  data;
+		  /**
+		   * Creates a new media gallery item from API data.
+		   *
+		   * @param data - The API data to create this media gallery item with
+		   * @example
+		   * Creating a media gallery item from an API data object:
+		   * ```ts
+		   * const item = new MediaGalleryItemBuilder({
+		   * 	description: "Some text here",
+		   * 	media: {
+		   * 		url: 'https://cdn.discordapp.com/embed/avatars/2.png',
+		   * 	},
+		   * });
+		   * ```
+		   * @example
+		   * Creating a media gallery item using setters and API data:
+		   * ```ts
+		   * const item = new MediaGalleryItemBuilder({
+		   * 	media: {
+		   * 		url: 'https://cdn.discordapp.com/embed/avatars/5.png',
+		   * 	},
+		   * })
+		   * 	.setDescription("alt text");
+		   * ```
+		   */
+		  constructor(data = {}) {
+		    this.data = data;
+		  }
+		  /**
+		   * Sets the description of this media gallery item.
+		   *
+		   * @param description - The description to use
+		   */
+		  setDescription(description) {
+		    this.data.description = descriptionPredicate2.parse(description);
+		    return this;
+		  }
+		  /**
+		   * Clears the description of this media gallery item.
+		   */
+		  clearDescription() {
+		    this.data.description = void 0;
+		    return this;
+		  }
+		  /**
+		   * Sets the spoiler status of this media gallery item.
+		   *
+		   * @param spoiler - The spoiler status to use
+		   */
+		  setSpoiler(spoiler = true) {
+		    this.data.spoiler = spoilerPredicate.parse(spoiler);
+		    return this;
+		  }
+		  /**
+		   * Sets the media URL of this media gallery item.
+		   *
+		   * @param url - The URL to use
+		   */
+		  setURL(url) {
+		    this.data.media = unfurledMediaItemPredicate.parse({ url });
+		    return this;
+		  }
+		  /**
+		   * Serializes this builder to API-compatible JSON data.
+		   *
+		   * @remarks
+		   * This method runs validations on the data before serializing it.
+		   * As such, it may throw an error if the data is invalid.
+		   */
+		  toJSON() {
+		    unfurledMediaItemPredicate.parse(this.data.media);
+		    return { ...this.data };
+		  }
+		};
+
+		// src/components/v2/MediaGallery.ts
+		var MediaGalleryBuilder = class extends ComponentBuilder {
+		  static {
+		    __name(this, "MediaGalleryBuilder");
+		  }
+		  /**
+		   * The components within this container.
+		   */
+		  items;
+		  /**
+		   * Creates a new media gallery from API data.
+		   *
+		   * @param data - The API data to create this media gallery with
+		   * @example
+		   * Creating a media gallery from an API data object:
+		   * ```ts
+		   * const mediaGallery = new MediaGalleryBuilder({
+		   * 	items: [
+		   * 		{
+		   * 			description: "Some text here",
+		   * 			media: {
+		   * 				url: 'https://cdn.discordapp.com/embed/avatars/2.png',
+		   * 			},
+		   * 		},
+		   * 	],
+		   * });
+		   * ```
+		   * @example
+		   * Creating a media gallery using setters and API data:
+		   * ```ts
+		   * const mediaGallery = new MediaGalleryBuilder({
+		   * 	items: [
+		   * 		{
+		   * 			description: "alt text",
+		   * 			media: {
+		   * 				url: 'https://cdn.discordapp.com/embed/avatars/5.png',
+		   * 			},
+		   * 		},
+		   * 	],
+		   * })
+		   * 	.addItems(item2, item3);
+		   * ```
+		   */
+		  constructor({ items, ...data } = {}) {
+		    super({ type: import_v1016.ComponentType.MediaGallery, ...data });
+		    this.items = items?.map((item) => new MediaGalleryItemBuilder(item)) ?? [];
+		  }
+		  /**
+		   * Adds items to this media gallery.
+		   *
+		   * @param items - The items to add
+		   */
+		  addItems(...items) {
+		    this.items.push(
+		      ...normalizeArray(items).map((input) => {
+		        const result = resolveBuilder(input, MediaGalleryItemBuilder);
+		        assertReturnOfBuilder(result, MediaGalleryItemBuilder);
+		        return result;
+		      })
+		    );
+		    return this;
+		  }
+		  /**
+		   * Removes, replaces, or inserts media gallery items for this media gallery.
+		   *
+		   * @param index - The index to start removing, replacing or inserting items
+		   * @param deleteCount - The amount of items to remove
+		   * @param items - The items to insert
+		   */
+		  spliceItems(index, deleteCount, ...items) {
+		    this.items.splice(
+		      index,
+		      deleteCount,
+		      ...normalizeArray(items).map((input) => {
+		        const result = resolveBuilder(input, MediaGalleryItemBuilder);
+		        assertReturnOfBuilder(result, MediaGalleryItemBuilder);
+		        return result;
+		      })
+		    );
+		    return this;
+		  }
+		  /**
+		   * {@inheritDoc ComponentBuilder.toJSON}
+		   */
+		  toJSON() {
+		    validateComponentArray(this.items, 1, 10, MediaGalleryItemBuilder);
+		    return {
+		      ...this.data,
+		      items: this.items.map((item) => item.toJSON())
+		    };
+		  }
+		};
+
+		// src/components/v2/Section.ts
+		var import_v1017 = requireV10();
+		var SectionBuilder = class extends ComponentBuilder {
+		  static {
+		    __name(this, "SectionBuilder");
+		  }
+		  /**
+		   * The components within this section.
+		   */
+		  components;
+		  /**
+		   * The accessory of this section.
+		   */
+		  accessory;
+		  /**
+		   * Creates a new section from API data.
+		   *
+		   * @param data - The API data to create this section with
+		   * @example
+		   * Creating a section from an API data object:
+		   * ```ts
+		   * const section = new SectionBuilder({
+		   * 	components: [
+		   * 		{
+		   * 			content: "Some text here",
+		   * 			type: ComponentType.TextDisplay,
+		   * 		},
+		   * 	],
+		   *  accessory: {
+		   *      media: {
+		   *          url: 'https://cdn.discordapp.com/embed/avatars/3.png',
+		   *      },
+		   *  }
+		   * });
+		   * ```
+		   * @example
+		   * Creating a section using setters and API data:
+		   * ```ts
+		   * const section = new SectionBuilder({
+		   * 	components: [
+		   * 		{
+		   * 			content: "# Heading",
+		   * 			type: ComponentType.TextDisplay,
+		   * 		},
+		   * 	],
+		   * })
+		   * 	.setPrimaryButtonAccessory(button);
+		   * ```
+		   */
+		  constructor({ components, accessory, ...data } = {}) {
+		    super({ type: import_v1017.ComponentType.Section, ...data });
+		    this.components = components?.map((component) => createComponentBuilder(component)) ?? [];
+		    this.accessory = accessory ? createComponentBuilder(accessory) : void 0;
+		  }
+		  /**
+		   * Sets the accessory of this section to a button.
+		   *
+		   * @param accessory - The accessory to use
+		   */
+		  setButtonAccessory(accessory) {
+		    Reflect.set(this, "accessory", accessoryPredicate.parse(resolveBuilder(accessory, ButtonBuilder)));
+		    return this;
+		  }
+		  /**
+		   * Sets the accessory of this section to a thumbnail.
+		   *
+		   * @param accessory - The accessory to use
+		   */
+		  setThumbnailAccessory(accessory) {
+		    Reflect.set(this, "accessory", accessoryPredicate.parse(resolveBuilder(accessory, ThumbnailBuilder)));
+		    return this;
+		  }
+		  /**
+		   * Adds text display components to this section.
+		   *
+		   * @param components - The text display components to add
+		   */
+		  addTextDisplayComponents(...components) {
+		    this.components.push(
+		      ...normalizeArray(components).map((input) => {
+		        const result = resolveBuilder(input, TextDisplayBuilder);
+		        assertReturnOfBuilder(result, TextDisplayBuilder);
+		        return result;
+		      })
+		    );
+		    return this;
+		  }
+		  /**
+		   * Removes, replaces, or inserts text display components for this section.
+		   *
+		   * @param index - The index to start removing, replacing or inserting text display components
+		   * @param deleteCount - The amount of text display components to remove
+		   * @param components - The text display components to insert
+		   */
+		  spliceTextDisplayComponents(index, deleteCount, ...components) {
+		    this.components.splice(
+		      index,
+		      deleteCount,
+		      ...normalizeArray(components).map((input) => {
+		        const result = resolveBuilder(input, TextDisplayBuilder);
+		        assertReturnOfBuilder(result, TextDisplayBuilder);
+		        return result;
+		      })
+		    );
+		    return this;
+		  }
+		  /**
+		   * {@inheritDoc ComponentBuilder.toJSON}
+		   */
+		  toJSON() {
+		    validateComponentArray(this.components, 1, 3, TextDisplayBuilder);
+		    return {
+		      ...this.data,
+		      components: this.components.map((component) => component.toJSON()),
+		      accessory: accessoryPredicate.parse(this.accessory).toJSON()
+		    };
+		  }
+		};
+
 		// src/components/Components.ts
 		function createComponentBuilder(data) {
 		  if (data instanceof ComponentBuilder) {
 		    return data;
 		  }
 		  switch (data.type) {
-		    case import_v1010.ComponentType.ActionRow:
+		    case import_v1018.ComponentType.ActionRow:
 		      return new ActionRowBuilder(data);
-		    case import_v1010.ComponentType.Button:
+		    case import_v1018.ComponentType.Button:
 		      return new ButtonBuilder(data);
-		    case import_v1010.ComponentType.StringSelect:
+		    case import_v1018.ComponentType.StringSelect:
 		      return new StringSelectMenuBuilder(data);
-		    case import_v1010.ComponentType.TextInput:
+		    case import_v1018.ComponentType.TextInput:
 		      return new TextInputBuilder(data);
-		    case import_v1010.ComponentType.UserSelect:
+		    case import_v1018.ComponentType.UserSelect:
 		      return new UserSelectMenuBuilder(data);
-		    case import_v1010.ComponentType.RoleSelect:
+		    case import_v1018.ComponentType.RoleSelect:
 		      return new RoleSelectMenuBuilder(data);
-		    case import_v1010.ComponentType.MentionableSelect:
+		    case import_v1018.ComponentType.MentionableSelect:
 		      return new MentionableSelectMenuBuilder(data);
-		    case import_v1010.ComponentType.ChannelSelect:
+		    case import_v1018.ComponentType.ChannelSelect:
 		      return new ChannelSelectMenuBuilder(data);
+		    case import_v1018.ComponentType.File:
+		      return new FileBuilder(data);
+		    case import_v1018.ComponentType.Container:
+		      return new ContainerBuilder(data);
+		    case import_v1018.ComponentType.Section:
+		      return new SectionBuilder(data);
+		    case import_v1018.ComponentType.Separator:
+		      return new SeparatorBuilder(data);
+		    case import_v1018.ComponentType.TextDisplay:
+		      return new TextDisplayBuilder(data);
+		    case import_v1018.ComponentType.Thumbnail:
+		      return new ThumbnailBuilder(data);
+		    case import_v1018.ComponentType.MediaGallery:
+		      return new MediaGalleryBuilder(data);
 		    default:
 		      throw new Error(`Cannot properly serialize component type: ${data.type}`);
 		  }
 		}
 		__name(createComponentBuilder, "createComponentBuilder");
+		function isBuilder(builder, Constructor) {
+		  return builder instanceof Constructor;
+		}
+		__name(isBuilder, "isBuilder");
+		function resolveBuilder(builder, Constructor) {
+		  if (isBuilder(builder, Constructor)) {
+		    return builder;
+		  }
+		  if (typeof builder === "function") {
+		    return builder(new Constructor());
+		  }
+		  return new Constructor(builder);
+		}
+		__name(resolveBuilder, "resolveBuilder");
 
 		// src/components/ActionRow.ts
 		var ActionRowBuilder = class extends ComponentBuilder {
@@ -80027,7 +86919,7 @@ function requireDist$5 () {
 		   * ```
 		   */
 		  constructor({ components, ...data } = {}) {
-		    super({ type: import_v1011.ComponentType.ActionRow, ...data });
+		    super({ type: import_v1019.ComponentType.ActionRow, ...data });
 		    this.components = components?.map((component) => createComponentBuilder(component)) ?? [];
 		  }
 		  /**
@@ -80060,15 +86952,15 @@ function requireDist$5 () {
 		};
 
 		// src/interactions/modals/Assertions.ts
-		var Assertions_exports4 = {};
-		__export(Assertions_exports4, {
+		var Assertions_exports5 = {};
+		__export(Assertions_exports5, {
 		  componentsValidator: () => componentsValidator,
 		  titleValidator: () => titleValidator,
 		  validateRequiredParameters: () => validateRequiredParameters2
 		});
-		var import_shapeshift4 = /*@__PURE__*/ requireCjs();
-		var titleValidator = import_shapeshift4.s.string().lengthGreaterThanOrEqual(1).lengthLessThanOrEqual(45).setValidationEnabled(isValidationEnabled);
-		var componentsValidator = import_shapeshift4.s.instance(ActionRowBuilder).array().lengthGreaterThanOrEqual(1).setValidationEnabled(isValidationEnabled);
+		var import_shapeshift5 = /*@__PURE__*/ requireCjs();
+		var titleValidator = import_shapeshift5.s.string().lengthGreaterThanOrEqual(1).lengthLessThanOrEqual(45).setValidationEnabled(isValidationEnabled);
+		var componentsValidator = import_shapeshift5.s.instance(ActionRowBuilder).array().lengthGreaterThanOrEqual(1).setValidationEnabled(isValidationEnabled);
 		function validateRequiredParameters2(customId, title, components) {
 		  customIdValidator.parse(customId);
 		  titleValidator.parse(title);
@@ -80151,9 +87043,9 @@ function requireDist$5 () {
 		};
 
 		// src/interactions/slashCommands/Assertions.ts
-		var Assertions_exports5 = {};
-		__export(Assertions_exports5, {
-		  assertReturnOfBuilder: () => assertReturnOfBuilder,
+		var Assertions_exports6 = {};
+		__export(Assertions_exports6, {
+		  assertReturnOfBuilder: () => assertReturnOfBuilder2,
 		  contextsPredicate: () => contextsPredicate,
 		  integrationTypesPredicate: () => integrationTypesPredicate,
 		  localizationMapPredicate: () => localizationMapPredicate,
@@ -80170,20 +87062,20 @@ function requireDist$5 () {
 		  validateRequired: () => validateRequired,
 		  validateRequiredParameters: () => validateRequiredParameters3
 		});
-		var import_shapeshift5 = /*@__PURE__*/ requireCjs();
-		var import_v1012 = requireV10();
-		var namePredicate = import_shapeshift5.s.string().lengthGreaterThanOrEqual(1).lengthLessThanOrEqual(32).regex(/^[\p{Ll}\p{Lm}\p{Lo}\p{N}\p{sc=Devanagari}\p{sc=Thai}_-]+$/u).setValidationEnabled(isValidationEnabled);
+		var import_shapeshift6 = /*@__PURE__*/ requireCjs();
+		var import_v1020 = requireV10();
+		var namePredicate = import_shapeshift6.s.string().lengthGreaterThanOrEqual(1).lengthLessThanOrEqual(32).regex(/^[\p{Ll}\p{Lm}\p{Lo}\p{N}\p{sc=Devanagari}\p{sc=Thai}_-]+$/u).setValidationEnabled(isValidationEnabled);
 		function validateName(name) {
 		  namePredicate.parse(name);
 		}
 		__name(validateName, "validateName");
-		var descriptionPredicate2 = import_shapeshift5.s.string().lengthGreaterThanOrEqual(1).lengthLessThanOrEqual(100).setValidationEnabled(isValidationEnabled);
-		var localePredicate = import_shapeshift5.s.nativeEnum(import_v1012.Locale);
+		var descriptionPredicate3 = import_shapeshift6.s.string().lengthGreaterThanOrEqual(1).lengthLessThanOrEqual(100).setValidationEnabled(isValidationEnabled);
+		var localePredicate = import_shapeshift6.s.nativeEnum(import_v1020.Locale);
 		function validateDescription(description) {
-		  descriptionPredicate2.parse(description);
+		  descriptionPredicate3.parse(description);
 		}
 		__name(validateDescription, "validateDescription");
-		var maxArrayLengthPredicate = import_shapeshift5.s.unknown().array().lengthLessThanOrEqual(25).setValidationEnabled(isValidationEnabled);
+		var maxArrayLengthPredicate = import_shapeshift6.s.unknown().array().lengthLessThanOrEqual(25).setValidationEnabled(isValidationEnabled);
 		function validateLocale(locale) {
 		  return localePredicate.parse(locale);
 		}
@@ -80198,7 +87090,7 @@ function requireDist$5 () {
 		  validateMaxOptionsLength(options);
 		}
 		__name(validateRequiredParameters3, "validateRequiredParameters");
-		var booleanPredicate = import_shapeshift5.s.boolean();
+		var booleanPredicate = import_shapeshift6.s.boolean();
 		function validateDefaultPermission(value) {
 		  booleanPredicate.parse(value);
 		}
@@ -80207,29 +87099,29 @@ function requireDist$5 () {
 		  booleanPredicate.parse(required);
 		}
 		__name(validateRequired, "validateRequired");
-		var choicesLengthPredicate = import_shapeshift5.s.number().lessThanOrEqual(25).setValidationEnabled(isValidationEnabled);
+		var choicesLengthPredicate = import_shapeshift6.s.number().lessThanOrEqual(25).setValidationEnabled(isValidationEnabled);
 		function validateChoicesLength(amountAdding, choices) {
 		  choicesLengthPredicate.parse((choices?.length ?? 0) + amountAdding);
 		}
 		__name(validateChoicesLength, "validateChoicesLength");
-		function assertReturnOfBuilder(input, ExpectedInstanceOf) {
-		  import_shapeshift5.s.instance(ExpectedInstanceOf).parse(input);
+		function assertReturnOfBuilder2(input, ExpectedInstanceOf) {
+		  import_shapeshift6.s.instance(ExpectedInstanceOf).parse(input);
 		}
-		__name(assertReturnOfBuilder, "assertReturnOfBuilder");
-		var localizationMapPredicate = import_shapeshift5.s.object(Object.fromEntries(Object.values(import_v1012.Locale).map((locale) => [locale, import_shapeshift5.s.string().nullish()]))).strict().nullish().setValidationEnabled(isValidationEnabled);
+		__name(assertReturnOfBuilder2, "assertReturnOfBuilder");
+		var localizationMapPredicate = import_shapeshift6.s.object(Object.fromEntries(Object.values(import_v1020.Locale).map((locale) => [locale, import_shapeshift6.s.string().nullish()]))).strict().nullish().setValidationEnabled(isValidationEnabled);
 		function validateLocalizationMap(value) {
 		  localizationMapPredicate.parse(value);
 		}
 		__name(validateLocalizationMap, "validateLocalizationMap");
-		var dmPermissionPredicate = import_shapeshift5.s.boolean().nullish();
+		var dmPermissionPredicate = import_shapeshift6.s.boolean().nullish();
 		function validateDMPermission(value) {
 		  dmPermissionPredicate.parse(value);
 		}
 		__name(validateDMPermission, "validateDMPermission");
-		var memberPermissionPredicate = import_shapeshift5.s.union([
-		  import_shapeshift5.s.bigint().transform((value) => value.toString()),
-		  import_shapeshift5.s.number().safeInt().transform((value) => value.toString()),
-		  import_shapeshift5.s.string().regex(/^\d+$/)
+		var memberPermissionPredicate = import_shapeshift6.s.union([
+		  import_shapeshift6.s.bigint().transform((value) => value.toString()),
+		  import_shapeshift6.s.number().safeInt().transform((value) => value.toString()),
+		  import_shapeshift6.s.string().regex(/^\d+$/)
 		]).nullish();
 		function validateDefaultMemberPermissions(permissions) {
 		  return memberPermissionPredicate.parse(permissions);
@@ -80239,11 +87131,11 @@ function requireDist$5 () {
 		  booleanPredicate.parse(value);
 		}
 		__name(validateNSFW, "validateNSFW");
-		var contextsPredicate = import_shapeshift5.s.array(
-		  import_shapeshift5.s.nativeEnum(import_v1012.InteractionContextType).setValidationEnabled(isValidationEnabled)
+		var contextsPredicate = import_shapeshift6.s.array(
+		  import_shapeshift6.s.nativeEnum(import_v1020.InteractionContextType).setValidationEnabled(isValidationEnabled)
 		);
-		var integrationTypesPredicate = import_shapeshift5.s.array(
-		  import_shapeshift5.s.nativeEnum(import_v1012.ApplicationIntegrationType).setValidationEnabled(isValidationEnabled)
+		var integrationTypesPredicate = import_shapeshift6.s.array(
+		  import_shapeshift6.s.nativeEnum(import_v1020.ApplicationIntegrationType).setValidationEnabled(isValidationEnabled)
 		);
 
 		// src/interactions/slashCommands/SlashCommandBuilder.ts
@@ -80363,7 +87255,7 @@ function requireDist$5 () {
 		};
 
 		// src/interactions/slashCommands/mixins/SharedSlashCommand.ts
-		var import_v1013 = requireV10();
+		var import_v1021 = requireV10();
 		var SharedSlashCommand = class {
 		  static {
 		    __name(this, "SharedSlashCommand");
@@ -80468,14 +87360,14 @@ function requireDist$5 () {
 		    validateLocalizationMap(this.description_localizations);
 		    return {
 		      ...this,
-		      type: import_v1013.ApplicationCommandType.ChatInput,
+		      type: import_v1021.ApplicationCommandType.ChatInput,
 		      options: this.options.map((option) => option.toJSON())
 		    };
 		  }
 		};
 
 		// src/interactions/slashCommands/options/attachment.ts
-		var import_v1014 = requireV10();
+		var import_v1022 = requireV10();
 
 		// src/interactions/slashCommands/mixins/ApplicationCommandOptionBase.ts
 		var ApplicationCommandOptionBase = class extends SharedNameAndDescription {
@@ -80517,7 +87409,7 @@ function requireDist$5 () {
 		  /**
 		   * The type of this option.
 		   */
-		  type = import_v1014.ApplicationCommandOptionType.Attachment;
+		  type = import_v1022.ApplicationCommandOptionType.Attachment;
 		  /**
 		   * {@inheritDoc ApplicationCommandOptionBase.toJSON}
 		   */
@@ -80528,7 +87420,7 @@ function requireDist$5 () {
 		};
 
 		// src/interactions/slashCommands/options/boolean.ts
-		var import_v1015 = requireV10();
+		var import_v1023 = requireV10();
 		var SlashCommandBooleanOption = class extends ApplicationCommandOptionBase {
 		  static {
 		    __name(this, "SlashCommandBooleanOption");
@@ -80536,7 +87428,7 @@ function requireDist$5 () {
 		  /**
 		   * The type of this option.
 		   */
-		  type = import_v1015.ApplicationCommandOptionType.Boolean;
+		  type = import_v1023.ApplicationCommandOptionType.Boolean;
 		  /**
 		   * {@inheritDoc ApplicationCommandOptionBase.toJSON}
 		   */
@@ -80547,25 +87439,25 @@ function requireDist$5 () {
 		};
 
 		// src/interactions/slashCommands/options/channel.ts
-		var import_v1017 = requireV10();
+		var import_v1025 = requireV10();
 		var import_ts_mixer = require$$5;
 
 		// src/interactions/slashCommands/mixins/ApplicationCommandOptionChannelTypesMixin.ts
-		var import_shapeshift6 = /*@__PURE__*/ requireCjs();
-		var import_v1016 = requireV10();
+		var import_shapeshift7 = /*@__PURE__*/ requireCjs();
+		var import_v1024 = requireV10();
 		var allowedChannelTypes = [
-		  import_v1016.ChannelType.GuildText,
-		  import_v1016.ChannelType.GuildVoice,
-		  import_v1016.ChannelType.GuildCategory,
-		  import_v1016.ChannelType.GuildAnnouncement,
-		  import_v1016.ChannelType.AnnouncementThread,
-		  import_v1016.ChannelType.PublicThread,
-		  import_v1016.ChannelType.PrivateThread,
-		  import_v1016.ChannelType.GuildStageVoice,
-		  import_v1016.ChannelType.GuildForum,
-		  import_v1016.ChannelType.GuildMedia
+		  import_v1024.ChannelType.GuildText,
+		  import_v1024.ChannelType.GuildVoice,
+		  import_v1024.ChannelType.GuildCategory,
+		  import_v1024.ChannelType.GuildAnnouncement,
+		  import_v1024.ChannelType.AnnouncementThread,
+		  import_v1024.ChannelType.PublicThread,
+		  import_v1024.ChannelType.PrivateThread,
+		  import_v1024.ChannelType.GuildStageVoice,
+		  import_v1024.ChannelType.GuildForum,
+		  import_v1024.ChannelType.GuildMedia
 		];
-		var channelTypesPredicate = import_shapeshift6.s.array(import_shapeshift6.s.union(allowedChannelTypes.map((type) => import_shapeshift6.s.literal(type))));
+		var channelTypesPredicate = import_shapeshift7.s.array(import_shapeshift7.s.union(allowedChannelTypes.map((type) => import_shapeshift7.s.literal(type))));
 		var ApplicationCommandOptionChannelTypesMixin = class {
 		  static {
 		    __name(this, "ApplicationCommandOptionChannelTypesMixin");
@@ -80593,7 +87485,7 @@ function requireDist$5 () {
 		  /**
 		   * The type of this option.
 		   */
-		  type = import_v1017.ApplicationCommandOptionType.Channel;
+		  type = import_v1025.ApplicationCommandOptionType.Channel;
 		  /**
 		   * {@inheritDoc ApplicationCommandOptionBase.toJSON}
 		   */
@@ -80608,8 +87500,8 @@ function requireDist$5 () {
 		], SlashCommandChannelOption);
 
 		// src/interactions/slashCommands/options/integer.ts
-		var import_shapeshift9 = /*@__PURE__*/ requireCjs();
-		var import_v1019 = requireV10();
+		var import_shapeshift10 = /*@__PURE__*/ requireCjs();
+		var import_v1027 = requireV10();
 		var import_ts_mixer2 = require$$5;
 
 		// src/interactions/slashCommands/mixins/ApplicationCommandNumericOptionMinMaxValueMixin.ts
@@ -80628,8 +87520,8 @@ function requireDist$5 () {
 		};
 
 		// src/interactions/slashCommands/mixins/ApplicationCommandOptionWithAutocompleteMixin.ts
-		var import_shapeshift7 = /*@__PURE__*/ requireCjs();
-		var booleanPredicate2 = import_shapeshift7.s.boolean();
+		var import_shapeshift8 = /*@__PURE__*/ requireCjs();
+		var booleanPredicate2 = import_shapeshift8.s.boolean();
 		var ApplicationCommandOptionWithAutocompleteMixin = class {
 		  static {
 		    __name(this, "ApplicationCommandOptionWithAutocompleteMixin");
@@ -80660,14 +87552,14 @@ function requireDist$5 () {
 		};
 
 		// src/interactions/slashCommands/mixins/ApplicationCommandOptionWithChoicesMixin.ts
-		var import_shapeshift8 = /*@__PURE__*/ requireCjs();
-		var import_v1018 = requireV10();
-		var stringPredicate = import_shapeshift8.s.string().lengthGreaterThanOrEqual(1).lengthLessThanOrEqual(100);
-		var numberPredicate = import_shapeshift8.s.number().greaterThan(Number.NEGATIVE_INFINITY).lessThan(Number.POSITIVE_INFINITY);
-		var choicesPredicate = import_shapeshift8.s.object({
+		var import_shapeshift9 = /*@__PURE__*/ requireCjs();
+		var import_v1026 = requireV10();
+		var stringPredicate = import_shapeshift9.s.string().lengthGreaterThanOrEqual(1).lengthLessThanOrEqual(100);
+		var numberPredicate = import_shapeshift9.s.number().greaterThan(Number.NEGATIVE_INFINITY).lessThan(Number.POSITIVE_INFINITY);
+		var choicesPredicate = import_shapeshift9.s.object({
 		  name: stringPredicate,
 		  name_localizations: localizationMapPredicate,
-		  value: import_shapeshift8.s.union([stringPredicate, numberPredicate])
+		  value: import_shapeshift9.s.union([stringPredicate, numberPredicate])
 		}).array();
 		var ApplicationCommandOptionWithChoicesMixin = class {
 		  static {
@@ -80699,7 +87591,7 @@ function requireDist$5 () {
 		    }
 		    validateChoicesLength(normalizedChoices.length, this.choices);
 		    for (const { name, name_localizations, value } of normalizedChoices) {
-		      if (this.type === import_v1018.ApplicationCommandOptionType.String) {
+		      if (this.type === import_v1026.ApplicationCommandOptionType.String) {
 		        stringPredicate.parse(value);
 		      } else {
 		        numberPredicate.parse(value);
@@ -80726,12 +87618,12 @@ function requireDist$5 () {
 		};
 
 		// src/interactions/slashCommands/options/integer.ts
-		var numberValidator = import_shapeshift9.s.number().int();
+		var numberValidator = import_shapeshift10.s.number().int();
 		var SlashCommandIntegerOption = class extends ApplicationCommandOptionBase {
 		  /**
 		   * The type of this option.
 		   */
-		  type = import_v1019.ApplicationCommandOptionType.Integer;
+		  type = import_v1027.ApplicationCommandOptionType.Integer;
 		  /**
 		   * {@inheritDoc ApplicationCommandNumericOptionMinMaxValueMixin.setMaxValue}
 		   */
@@ -80769,7 +87661,7 @@ function requireDist$5 () {
 		], SlashCommandIntegerOption);
 
 		// src/interactions/slashCommands/options/mentionable.ts
-		var import_v1020 = requireV10();
+		var import_v1028 = requireV10();
 		var SlashCommandMentionableOption = class extends ApplicationCommandOptionBase {
 		  static {
 		    __name(this, "SlashCommandMentionableOption");
@@ -80777,7 +87669,7 @@ function requireDist$5 () {
 		  /**
 		   * The type of this option.
 		   */
-		  type = import_v1020.ApplicationCommandOptionType.Mentionable;
+		  type = import_v1028.ApplicationCommandOptionType.Mentionable;
 		  /**
 		   * {@inheritDoc ApplicationCommandOptionBase.toJSON}
 		   */
@@ -80788,15 +87680,15 @@ function requireDist$5 () {
 		};
 
 		// src/interactions/slashCommands/options/number.ts
-		var import_shapeshift10 = /*@__PURE__*/ requireCjs();
-		var import_v1021 = requireV10();
+		var import_shapeshift11 = /*@__PURE__*/ requireCjs();
+		var import_v1029 = requireV10();
 		var import_ts_mixer3 = require$$5;
-		var numberValidator2 = import_shapeshift10.s.number();
+		var numberValidator2 = import_shapeshift11.s.number();
 		var SlashCommandNumberOption = class extends ApplicationCommandOptionBase {
 		  /**
 		   * The type of this option.
 		   */
-		  type = import_v1021.ApplicationCommandOptionType.Number;
+		  type = import_v1029.ApplicationCommandOptionType.Number;
 		  /**
 		   * {@inheritDoc ApplicationCommandNumericOptionMinMaxValueMixin.setMaxValue}
 		   */
@@ -80834,7 +87726,7 @@ function requireDist$5 () {
 		], SlashCommandNumberOption);
 
 		// src/interactions/slashCommands/options/role.ts
-		var import_v1022 = requireV10();
+		var import_v1030 = requireV10();
 		var SlashCommandRoleOption = class extends ApplicationCommandOptionBase {
 		  static {
 		    __name(this, "SlashCommandRoleOption");
@@ -80842,7 +87734,7 @@ function requireDist$5 () {
 		  /**
 		   * The type of this option.
 		   */
-		  type = import_v1022.ApplicationCommandOptionType.Role;
+		  type = import_v1030.ApplicationCommandOptionType.Role;
 		  /**
 		   * {@inheritDoc ApplicationCommandOptionBase.toJSON}
 		   */
@@ -80853,16 +87745,16 @@ function requireDist$5 () {
 		};
 
 		// src/interactions/slashCommands/options/string.ts
-		var import_shapeshift11 = /*@__PURE__*/ requireCjs();
-		var import_v1023 = requireV10();
+		var import_shapeshift12 = /*@__PURE__*/ requireCjs();
+		var import_v1031 = requireV10();
 		var import_ts_mixer4 = require$$5;
-		var minLengthValidator2 = import_shapeshift11.s.number().greaterThanOrEqual(0).lessThanOrEqual(6e3);
-		var maxLengthValidator2 = import_shapeshift11.s.number().greaterThanOrEqual(1).lessThanOrEqual(6e3);
+		var minLengthValidator2 = import_shapeshift12.s.number().greaterThanOrEqual(0).lessThanOrEqual(6e3);
+		var maxLengthValidator2 = import_shapeshift12.s.number().greaterThanOrEqual(1).lessThanOrEqual(6e3);
 		var SlashCommandStringOption = class extends ApplicationCommandOptionBase {
 		  /**
 		   * The type of this option.
 		   */
-		  type = import_v1023.ApplicationCommandOptionType.String;
+		  type = import_v1031.ApplicationCommandOptionType.String;
 		  /**
 		   * The maximum length of this option.
 		   */
@@ -80908,7 +87800,7 @@ function requireDist$5 () {
 		], SlashCommandStringOption);
 
 		// src/interactions/slashCommands/options/user.ts
-		var import_v1024 = requireV10();
+		var import_v1032 = requireV10();
 		var SlashCommandUserOption = class extends ApplicationCommandOptionBase {
 		  static {
 		    __name(this, "SlashCommandUserOption");
@@ -80916,7 +87808,7 @@ function requireDist$5 () {
 		  /**
 		   * The type of this option.
 		   */
-		  type = import_v1024.ApplicationCommandOptionType.User;
+		  type = import_v1032.ApplicationCommandOptionType.User;
 		  /**
 		   * {@inheritDoc ApplicationCommandOptionBase.toJSON}
 		   */
@@ -81015,14 +87907,14 @@ function requireDist$5 () {
 		    const { options } = this;
 		    validateMaxOptionsLength(options);
 		    const result = typeof input === "function" ? input(new Instance()) : input;
-		    assertReturnOfBuilder(result, Instance);
+		    assertReturnOfBuilder2(result, Instance);
 		    options.push(result);
 		    return this;
 		  }
 		};
 
 		// src/interactions/slashCommands/SlashCommandSubcommands.ts
-		var import_v1025 = requireV10();
+		var import_v1033 = requireV10();
 		var import_ts_mixer5 = require$$5;
 		var SlashCommandSubcommandGroupBuilder = class {
 		  /**
@@ -81046,7 +87938,7 @@ function requireDist$5 () {
 		    const { options } = this;
 		    validateMaxOptionsLength(options);
 		    const result = typeof input === "function" ? input(new SlashCommandSubcommandBuilder()) : input;
-		    assertReturnOfBuilder(result, SlashCommandSubcommandBuilder);
+		    assertReturnOfBuilder2(result, SlashCommandSubcommandBuilder);
 		    options.push(result);
 		    return this;
 		  }
@@ -81060,7 +87952,7 @@ function requireDist$5 () {
 		  toJSON() {
 		    validateRequiredParameters3(this.name, this.description, this.options);
 		    return {
-		      type: import_v1025.ApplicationCommandOptionType.SubcommandGroup,
+		      type: import_v1033.ApplicationCommandOptionType.SubcommandGroup,
 		      name: this.name,
 		      name_localizations: this.name_localizations,
 		      description: this.description,
@@ -81096,7 +87988,7 @@ function requireDist$5 () {
 		  toJSON() {
 		    validateRequiredParameters3(this.name, this.description, this.options);
 		    return {
-		      type: import_v1025.ApplicationCommandOptionType.Subcommand,
+		      type: import_v1033.ApplicationCommandOptionType.Subcommand,
 		      name: this.name,
 		      name_localizations: this.name_localizations,
 		      description: this.description,
@@ -81125,7 +88017,7 @@ function requireDist$5 () {
 		    const { options } = this;
 		    validateMaxOptionsLength(options);
 		    const result = typeof input === "function" ? input(new SlashCommandSubcommandGroupBuilder()) : input;
-		    assertReturnOfBuilder(result, SlashCommandSubcommandGroupBuilder);
+		    assertReturnOfBuilder2(result, SlashCommandSubcommandGroupBuilder);
 		    options.push(result);
 		    return this;
 		  }
@@ -81138,7 +88030,7 @@ function requireDist$5 () {
 		    const { options } = this;
 		    validateMaxOptionsLength(options);
 		    const result = typeof input === "function" ? input(new SlashCommandSubcommandBuilder()) : input;
-		    assertReturnOfBuilder(result, SlashCommandSubcommandBuilder);
+		    assertReturnOfBuilder2(result, SlashCommandSubcommandBuilder);
 		    options.push(result);
 		    return this;
 		  }
@@ -81204,8 +88096,8 @@ function requireDist$5 () {
 		], SlashCommandBuilder);
 
 		// src/interactions/contextMenuCommands/Assertions.ts
-		var Assertions_exports6 = {};
-		__export(Assertions_exports6, {
+		var Assertions_exports7 = {};
+		__export(Assertions_exports7, {
 		  contextsPredicate: () => contextsPredicate2,
 		  integrationTypesPredicate: () => integrationTypesPredicate2,
 		  validateDMPermission: () => validateDMPermission2,
@@ -81215,11 +88107,11 @@ function requireDist$5 () {
 		  validateRequiredParameters: () => validateRequiredParameters4,
 		  validateType: () => validateType
 		});
-		var import_shapeshift12 = /*@__PURE__*/ requireCjs();
-		var import_v1026 = requireV10();
-		var namePredicate2 = import_shapeshift12.s.string().lengthGreaterThanOrEqual(1).lengthLessThanOrEqual(32).regex(/^( *[\p{P}\p{L}\p{N}\p{sc=Devanagari}\p{sc=Thai}]+ *)+$/u).setValidationEnabled(isValidationEnabled);
-		var typePredicate = import_shapeshift12.s.union([import_shapeshift12.s.literal(import_v1026.ApplicationCommandType.User), import_shapeshift12.s.literal(import_v1026.ApplicationCommandType.Message)]).setValidationEnabled(isValidationEnabled);
-		var booleanPredicate3 = import_shapeshift12.s.boolean();
+		var import_shapeshift13 = /*@__PURE__*/ requireCjs();
+		var import_v1034 = requireV10();
+		var namePredicate2 = import_shapeshift13.s.string().lengthGreaterThanOrEqual(1).lengthLessThanOrEqual(32).regex(/^( *[\p{P}\p{L}\p{N}\p{sc=Devanagari}\p{sc=Thai}]+ *)+$/u).setValidationEnabled(isValidationEnabled);
+		var typePredicate = import_shapeshift13.s.union([import_shapeshift13.s.literal(import_v1034.ApplicationCommandType.User), import_shapeshift13.s.literal(import_v1034.ApplicationCommandType.Message)]).setValidationEnabled(isValidationEnabled);
+		var booleanPredicate3 = import_shapeshift13.s.boolean();
 		function validateDefaultPermission2(value) {
 		  booleanPredicate3.parse(value);
 		}
@@ -81237,25 +88129,25 @@ function requireDist$5 () {
 		  validateType(type);
 		}
 		__name(validateRequiredParameters4, "validateRequiredParameters");
-		var dmPermissionPredicate2 = import_shapeshift12.s.boolean().nullish();
+		var dmPermissionPredicate2 = import_shapeshift13.s.boolean().nullish();
 		function validateDMPermission2(value) {
 		  dmPermissionPredicate2.parse(value);
 		}
 		__name(validateDMPermission2, "validateDMPermission");
-		var memberPermissionPredicate2 = import_shapeshift12.s.union([
-		  import_shapeshift12.s.bigint().transform((value) => value.toString()),
-		  import_shapeshift12.s.number().safeInt().transform((value) => value.toString()),
-		  import_shapeshift12.s.string().regex(/^\d+$/)
+		var memberPermissionPredicate2 = import_shapeshift13.s.union([
+		  import_shapeshift13.s.bigint().transform((value) => value.toString()),
+		  import_shapeshift13.s.number().safeInt().transform((value) => value.toString()),
+		  import_shapeshift13.s.string().regex(/^\d+$/)
 		]).nullish();
 		function validateDefaultMemberPermissions2(permissions) {
 		  return memberPermissionPredicate2.parse(permissions);
 		}
 		__name(validateDefaultMemberPermissions2, "validateDefaultMemberPermissions");
-		var contextsPredicate2 = import_shapeshift12.s.array(
-		  import_shapeshift12.s.nativeEnum(import_v1026.InteractionContextType).setValidationEnabled(isValidationEnabled)
+		var contextsPredicate2 = import_shapeshift13.s.array(
+		  import_shapeshift13.s.nativeEnum(import_v1034.InteractionContextType).setValidationEnabled(isValidationEnabled)
 		);
-		var integrationTypesPredicate2 = import_shapeshift12.s.array(
-		  import_shapeshift12.s.nativeEnum(import_v1026.ApplicationIntegrationType).setValidationEnabled(isValidationEnabled)
+		var integrationTypesPredicate2 = import_shapeshift13.s.array(
+		  import_shapeshift13.s.nativeEnum(import_v1034.ApplicationIntegrationType).setValidationEnabled(isValidationEnabled)
 		);
 
 		// src/interactions/contextMenuCommands/ContextMenuCommandBuilder.ts
@@ -81436,6413 +88328,10 @@ function requireDist$5 () {
 		__name(embedLength, "embedLength");
 
 		// src/index.ts
-		var version = "1.10.1";
+		var version = "1.11.1";
 		
 	} (dist$4));
 	return dist$4.exports;
-}
-
-var Component_1;
-var hasRequiredComponent;
-
-function requireComponent () {
-	if (hasRequiredComponent) return Component_1;
-	hasRequiredComponent = 1;
-
-	const isEqual = requireFastDeepEqual();
-
-	/**
-	 * Represents a component
-	 */
-	class Component {
-	  constructor(data) {
-	    /**
-	     * The API data associated with this component
-	     * @type {APIMessageComponent}
-	     */
-	    this.data = data;
-	  }
-
-	  /**
-	   * The type of the component
-	   * @type {ComponentType}
-	   * @readonly
-	   */
-	  get type() {
-	    return this.data.type;
-	  }
-
-	  /**
-	   * Whether or not the given components are equal
-	   * @param {Component|APIMessageComponent} other The component to compare against
-	   * @returns {boolean}
-	   */
-	  equals(other) {
-	    if (other instanceof Component) {
-	      return isEqual(other.data, this.data);
-	    }
-	    return isEqual(other, this.data);
-	  }
-
-	  /**
-	   * Returns the API-compatible JSON for this component
-	   * @returns {APIMessageComponent}
-	   */
-	  toJSON() {
-	    return { ...this.data };
-	  }
-	}
-
-	Component_1 = Component;
-	return Component_1;
-}
-
-var ActionRow_1;
-var hasRequiredActionRow;
-
-function requireActionRow () {
-	if (hasRequiredActionRow) return ActionRow_1;
-	hasRequiredActionRow = 1;
-
-	const { deprecate } = require$$1$3;
-	const { isJSONEncodable } = requireDist$b();
-	const Component = requireComponent();
-	const { createComponent } = requireComponents$1();
-
-	/**
-	 * Represents an action row
-	 * @extends {Component}
-	 */
-	class ActionRow extends Component {
-	  constructor({ components, ...data }) {
-	    super(data);
-
-	    /**
-	     * The components in this action row
-	     * @type {Component[]}
-	     * @readonly
-	     */
-	    this.components = components.map(component => createComponent(component));
-	  }
-
-	  /**
-	   * Creates a new action row builder from JSON data
-	   * @method from
-	   * @memberof ActionRow
-	   * @param {ActionRowBuilder|ActionRow|APIActionRowComponent} other The other data
-	   * @returns {ActionRowBuilder}
-	   * @deprecated Use {@link ActionRowBuilder.from | ActionRowBuilder#from} instead.
-	   */
-	  static from = deprecate(
-	    other => new this(isJSONEncodable(other) ? other.toJSON() : other),
-	    'ActionRow.from() is deprecated. Use ActionRowBuilder.from() instead.',
-	  );
-
-	  /**
-	   * Returns the API-compatible JSON for this component
-	   * @returns {APIActionRowComponent}
-	   */
-	  toJSON() {
-	    return { ...this.data, components: this.components.map(component => component.toJSON()) };
-	  }
-	}
-
-	ActionRow_1 = ActionRow;
-	return ActionRow_1;
-}
-
-var ButtonBuilder_1;
-var hasRequiredButtonBuilder;
-
-function requireButtonBuilder () {
-	if (hasRequiredButtonBuilder) return ButtonBuilder_1;
-	hasRequiredButtonBuilder = 1;
-
-	const { ButtonBuilder: BuildersButton } = requireDist$5();
-	const { isJSONEncodable } = requireDist$b();
-	const { toSnakeCase } = requireTransformers();
-	const { resolvePartialEmoji } = requireUtil();
-
-	/**
-	 * Represents a button builder.
-	 * @extends {BuildersButton}
-	 */
-	class ButtonBuilder extends BuildersButton {
-	  constructor({ emoji, ...data } = {}) {
-	    super(toSnakeCase({ ...data, emoji: emoji && typeof emoji === 'string' ? resolvePartialEmoji(emoji) : emoji }));
-	  }
-
-	  /**
-	   * Sets the emoji to display on this button
-	   * @param {string|APIMessageComponentEmoji} emoji The emoji to display on this button
-	   * @returns {ButtonBuilder}
-	   */
-	  setEmoji(emoji) {
-	    if (typeof emoji === 'string') {
-	      return super.setEmoji(resolvePartialEmoji(emoji));
-	    }
-	    return super.setEmoji(emoji);
-	  }
-
-	  /**
-	   * Creates a new button builder from JSON data
-	   * @param {ButtonBuilder|ButtonComponent|APIButtonComponent} other The other data
-	   * @returns {ButtonBuilder}
-	   */
-	  static from(other) {
-	    return new this(isJSONEncodable(other) ? other.toJSON() : other);
-	  }
-	}
-
-	ButtonBuilder_1 = ButtonBuilder;
-
-	/**
-	 * @external BuildersButton
-	 * @see {@link https://discord.js.org/docs/packages/builders/stable/ButtonBuilder:Class}
-	 */
-	return ButtonBuilder_1;
-}
-
-var ButtonComponent_1;
-var hasRequiredButtonComponent;
-
-function requireButtonComponent () {
-	if (hasRequiredButtonComponent) return ButtonComponent_1;
-	hasRequiredButtonComponent = 1;
-
-	const Component = requireComponent();
-
-	/**
-	 * Represents a button component
-	 * @extends {Component}
-	 */
-	class ButtonComponent extends Component {
-	  /**
-	   * The style of this button
-	   * @type {ButtonStyle}
-	   * @readonly
-	   */
-	  get style() {
-	    return this.data.style;
-	  }
-
-	  /**
-	   * The label of this button
-	   * @type {?string}
-	   * @readonly
-	   */
-	  get label() {
-	    return this.data.label ?? null;
-	  }
-
-	  /**
-	   * The emoji used in this button
-	   * @type {?APIMessageComponentEmoji}
-	   * @readonly
-	   */
-	  get emoji() {
-	    return this.data.emoji ?? null;
-	  }
-
-	  /**
-	   * Whether this button is disabled
-	   * @type {boolean}
-	   * @readonly
-	   */
-	  get disabled() {
-	    return this.data.disabled ?? false;
-	  }
-
-	  /**
-	   * The custom id of this button (only defined on non-link buttons)
-	   * @type {?string}
-	   * @readonly
-	   */
-	  get customId() {
-	    return this.data.custom_id ?? null;
-	  }
-
-	  /**
-	   * The URL of this button (only defined on link buttons)
-	   * @type {?string}
-	   * @readonly
-	   */
-	  get url() {
-	    return this.data.url ?? null;
-	  }
-	}
-
-	ButtonComponent_1 = ButtonComponent;
-	return ButtonComponent_1;
-}
-
-var ChannelSelectMenuBuilder_1;
-var hasRequiredChannelSelectMenuBuilder;
-
-function requireChannelSelectMenuBuilder () {
-	if (hasRequiredChannelSelectMenuBuilder) return ChannelSelectMenuBuilder_1;
-	hasRequiredChannelSelectMenuBuilder = 1;
-
-	const { ChannelSelectMenuBuilder: BuildersChannelSelectMenu } = requireDist$5();
-	const { isJSONEncodable } = requireDist$b();
-	const { toSnakeCase } = requireTransformers();
-
-	/**
-	 * Class used to build select menu components to be sent through the API
-	 * @extends {BuildersChannelSelectMenu}
-	 */
-	class ChannelSelectMenuBuilder extends BuildersChannelSelectMenu {
-	  constructor(data = {}) {
-	    super(toSnakeCase(data));
-	  }
-
-	  /**
-	   * Creates a new select menu builder from JSON data
-	   * @param {ChannelSelectMenuBuilder|ChannelSelectMenuComponent|APIChannelSelectComponent} other The other data
-	   * @returns {ChannelSelectMenuBuilder}
-	   */
-	  static from(other) {
-	    return new this(isJSONEncodable(other) ? other.toJSON() : other);
-	  }
-	}
-
-	ChannelSelectMenuBuilder_1 = ChannelSelectMenuBuilder;
-
-	/**
-	 * @external BuildersChannelSelectMenu
-	 * @see {@link https://discord.js.org/docs/packages/builders/stable/ChannelSelectMenuBuilder:Class}
-	 */
-	return ChannelSelectMenuBuilder_1;
-}
-
-var BaseSelectMenuComponent_1;
-var hasRequiredBaseSelectMenuComponent;
-
-function requireBaseSelectMenuComponent () {
-	if (hasRequiredBaseSelectMenuComponent) return BaseSelectMenuComponent_1;
-	hasRequiredBaseSelectMenuComponent = 1;
-
-	const Component = requireComponent();
-
-	/**
-	 * Represents a select menu component
-	 * @extends {Component}
-	 */
-	class BaseSelectMenuComponent extends Component {
-	  /**
-	   * The placeholder for this select menu
-	   * @type {?string}
-	   * @readonly
-	   */
-	  get placeholder() {
-	    return this.data.placeholder ?? null;
-	  }
-
-	  /**
-	   * The maximum amount of options that can be selected
-	   * @type {?number}
-	   * @readonly
-	   */
-	  get maxValues() {
-	    return this.data.max_values ?? null;
-	  }
-
-	  /**
-	   * The minimum amount of options that must be selected
-	   * @type {?number}
-	   * @readonly
-	   */
-	  get minValues() {
-	    return this.data.min_values ?? null;
-	  }
-
-	  /**
-	   * The custom id of this select menu
-	   * @type {string}
-	   * @readonly
-	   */
-	  get customId() {
-	    return this.data.custom_id;
-	  }
-
-	  /**
-	   * Whether this select menu is disabled
-	   * @type {boolean}
-	   * @readonly
-	   */
-	  get disabled() {
-	    return this.data.disabled ?? false;
-	  }
-	}
-
-	BaseSelectMenuComponent_1 = BaseSelectMenuComponent;
-	return BaseSelectMenuComponent_1;
-}
-
-var ChannelSelectMenuComponent_1;
-var hasRequiredChannelSelectMenuComponent;
-
-function requireChannelSelectMenuComponent () {
-	if (hasRequiredChannelSelectMenuComponent) return ChannelSelectMenuComponent_1;
-	hasRequiredChannelSelectMenuComponent = 1;
-
-	const BaseSelectMenuComponent = requireBaseSelectMenuComponent();
-
-	/**
-	 * Represents a channel select menu component
-	 * @extends {BaseSelectMenuComponent}
-	 */
-	class ChannelSelectMenuComponent extends BaseSelectMenuComponent {
-	  /**
-	   * The options in this select menu
-	   * @type {?(ChannelType[])}
-	   * @readonly
-	   */
-	  get channelTypes() {
-	    return this.data.channel_types ?? null;
-	  }
-	}
-
-	ChannelSelectMenuComponent_1 = ChannelSelectMenuComponent;
-	return ChannelSelectMenuComponent_1;
-}
-
-var MentionableSelectMenuBuilder_1;
-var hasRequiredMentionableSelectMenuBuilder;
-
-function requireMentionableSelectMenuBuilder () {
-	if (hasRequiredMentionableSelectMenuBuilder) return MentionableSelectMenuBuilder_1;
-	hasRequiredMentionableSelectMenuBuilder = 1;
-
-	const { MentionableSelectMenuBuilder: BuildersMentionableSelectMenu } = requireDist$5();
-	const { isJSONEncodable } = requireDist$b();
-	const { toSnakeCase } = requireTransformers();
-
-	/**
-	 * Class used to build select menu components to be sent through the API
-	 * @extends {BuildersMentionableSelectMenu}
-	 */
-	class MentionableSelectMenuBuilder extends BuildersMentionableSelectMenu {
-	  constructor(data = {}) {
-	    super(toSnakeCase(data));
-	  }
-
-	  /**
-	   * Creates a new select menu builder from JSON data
-	   * @param {MentionableSelectMenuBuilder|MentionableSelectMenuComponent|APIMentionableSelectComponent} other
-	   * The other data
-	   * @returns {MentionableSelectMenuBuilder}
-	   */
-	  static from(other) {
-	    return new this(isJSONEncodable(other) ? other.toJSON() : other);
-	  }
-	}
-
-	MentionableSelectMenuBuilder_1 = MentionableSelectMenuBuilder;
-
-	/**
-	 * @external BuildersMentionableSelectMenu
-	 * @see {@link https://discord.js.org/docs/packages/builders/stable/MentionableSelectMenuBuilder:Class}
-	 */
-	return MentionableSelectMenuBuilder_1;
-}
-
-var MentionableSelectMenuComponent_1;
-var hasRequiredMentionableSelectMenuComponent;
-
-function requireMentionableSelectMenuComponent () {
-	if (hasRequiredMentionableSelectMenuComponent) return MentionableSelectMenuComponent_1;
-	hasRequiredMentionableSelectMenuComponent = 1;
-
-	const BaseSelectMenuComponent = requireBaseSelectMenuComponent();
-
-	/**
-	 * Represents a mentionable select menu component
-	 * @extends {BaseSelectMenuComponent}
-	 */
-	class MentionableSelectMenuComponent extends BaseSelectMenuComponent {}
-
-	MentionableSelectMenuComponent_1 = MentionableSelectMenuComponent;
-	return MentionableSelectMenuComponent_1;
-}
-
-var RoleSelectMenuBuilder_1;
-var hasRequiredRoleSelectMenuBuilder;
-
-function requireRoleSelectMenuBuilder () {
-	if (hasRequiredRoleSelectMenuBuilder) return RoleSelectMenuBuilder_1;
-	hasRequiredRoleSelectMenuBuilder = 1;
-
-	const { RoleSelectMenuBuilder: BuildersRoleSelectMenu } = requireDist$5();
-	const { isJSONEncodable } = requireDist$b();
-	const { toSnakeCase } = requireTransformers();
-
-	/**
-	 * Class used to build select menu components to be sent through the API
-	 * @extends {BuildersRoleSelectMenu}
-	 */
-	class RoleSelectMenuBuilder extends BuildersRoleSelectMenu {
-	  constructor(data = {}) {
-	    super(toSnakeCase(data));
-	  }
-
-	  /**
-	   * Creates a new select menu builder from JSON data
-	   * @param {RoleSelectMenuBuilder|RoleSelectMenuComponent|APIRoleSelectComponent} other The other data
-	   * @returns {RoleSelectMenuBuilder}
-	   */
-	  static from(other) {
-	    return new this(isJSONEncodable(other) ? other.toJSON() : other);
-	  }
-	}
-
-	RoleSelectMenuBuilder_1 = RoleSelectMenuBuilder;
-
-	/**
-	 * @external BuildersRoleSelectMenu
-	 * @see {@link https://discord.js.org/docs/packages/builders/stable/RoleSelectMenuBuilder:Class}
-	 */
-	return RoleSelectMenuBuilder_1;
-}
-
-var RoleSelectMenuComponent_1;
-var hasRequiredRoleSelectMenuComponent;
-
-function requireRoleSelectMenuComponent () {
-	if (hasRequiredRoleSelectMenuComponent) return RoleSelectMenuComponent_1;
-	hasRequiredRoleSelectMenuComponent = 1;
-
-	const BaseSelectMenuComponent = requireBaseSelectMenuComponent();
-
-	/**
-	 * Represents a role select menu component
-	 * @extends {BaseSelectMenuComponent}
-	 */
-	class RoleSelectMenuComponent extends BaseSelectMenuComponent {}
-
-	RoleSelectMenuComponent_1 = RoleSelectMenuComponent;
-	return RoleSelectMenuComponent_1;
-}
-
-var StringSelectMenuBuilder_1;
-var hasRequiredStringSelectMenuBuilder;
-
-function requireStringSelectMenuBuilder () {
-	if (hasRequiredStringSelectMenuBuilder) return StringSelectMenuBuilder_1;
-	hasRequiredStringSelectMenuBuilder = 1;
-
-	const { SelectMenuBuilder: BuildersSelectMenu, normalizeArray } = requireDist$5();
-	const { isJSONEncodable } = requireDist$b();
-	const { toSnakeCase } = requireTransformers();
-	const { resolvePartialEmoji } = requireUtil();
-
-	/**
-	 * Class used to build select menu components to be sent through the API
-	 * @extends {BuildersSelectMenu}
-	 */
-	class StringSelectMenuBuilder extends BuildersSelectMenu {
-	  constructor({ options, ...data } = {}) {
-	    super(
-	      toSnakeCase({
-	        ...data,
-	        options: options?.map(({ emoji, ...option }) => ({
-	          ...option,
-	          emoji: emoji && typeof emoji === 'string' ? resolvePartialEmoji(emoji) : emoji,
-	        })),
-	      }),
-	    );
-	  }
-
-	  /**
-	   * Normalizes a select menu option emoji
-	   * @param {SelectMenuOptionData|APISelectMenuOption} selectMenuOption The option to normalize
-	   * @returns {SelectMenuOptionBuilder|APISelectMenuOption}
-	   * @private
-	   */
-	  static normalizeEmoji(selectMenuOption) {
-	    if (isJSONEncodable(selectMenuOption)) {
-	      return selectMenuOption;
-	    }
-
-	    const { emoji, ...option } = selectMenuOption;
-	    return {
-	      ...option,
-	      emoji: typeof emoji === 'string' ? resolvePartialEmoji(emoji) : emoji,
-	    };
-	  }
-
-	  /**
-	   * Adds options to this select menu
-	   * @param {RestOrArray<APISelectMenuOption>} options The options to add to this select menu
-	   * @returns {StringSelectMenuBuilder}
-	   */
-	  addOptions(...options) {
-	    return super.addOptions(normalizeArray(options).map(option => StringSelectMenuBuilder.normalizeEmoji(option)));
-	  }
-
-	  /**
-	   * Sets the options on this select menu
-	   * @param {RestOrArray<APISelectMenuOption>} options The options to set on this select menu
-	   * @returns {StringSelectMenuBuilder}
-	   */
-	  setOptions(...options) {
-	    return super.setOptions(normalizeArray(options).map(option => StringSelectMenuBuilder.normalizeEmoji(option)));
-	  }
-
-	  /**
-	   * Creates a new select menu builder from json data
-	   * @param {StringSelectMenuBuilder|StringSelectMenuComponent|APIStringSelectComponent} other The other data
-	   * @returns {StringSelectMenuBuilder}
-	   */
-	  static from(other) {
-	    if (isJSONEncodable(other)) {
-	      return new this(other.toJSON());
-	    }
-	    return new this(other);
-	  }
-	}
-
-	StringSelectMenuBuilder_1 = StringSelectMenuBuilder;
-
-	/**
-	 * @external BuildersSelectMenu
-	 * @see {@link https://discord.js.org/docs/packages/builders/stable/StringSelectMenuBuilder:Class}
-	 */
-	return StringSelectMenuBuilder_1;
-}
-
-var StringSelectMenuComponent_1;
-var hasRequiredStringSelectMenuComponent;
-
-function requireStringSelectMenuComponent () {
-	if (hasRequiredStringSelectMenuComponent) return StringSelectMenuComponent_1;
-	hasRequiredStringSelectMenuComponent = 1;
-
-	const BaseSelectMenuComponent = requireBaseSelectMenuComponent();
-
-	/**
-	 * Represents a string select menu component
-	 * @extends {BaseSelectMenuComponent}
-	 */
-	class StringSelectMenuComponent extends BaseSelectMenuComponent {
-	  /**
-	   * The options in this select menu
-	   * @type {APISelectMenuOption[]}
-	   * @readonly
-	   */
-	  get options() {
-	    return this.data.options;
-	  }
-	}
-
-	StringSelectMenuComponent_1 = StringSelectMenuComponent;
-	return StringSelectMenuComponent_1;
-}
-
-var TextInputBuilder_1;
-var hasRequiredTextInputBuilder;
-
-function requireTextInputBuilder () {
-	if (hasRequiredTextInputBuilder) return TextInputBuilder_1;
-	hasRequiredTextInputBuilder = 1;
-
-	const { TextInputBuilder: BuildersTextInput } = requireDist$5();
-	const { isJSONEncodable } = requireDist$b();
-	const { toSnakeCase } = requireTransformers();
-
-	/**
-	 * Represents a text input builder.
-	 * @extends {BuildersTextInput}
-	 */
-	class TextInputBuilder extends BuildersTextInput {
-	  constructor(data) {
-	    super(toSnakeCase(data));
-	  }
-
-	  /**
-	   * Creates a new text input builder from JSON data
-	   * @param {TextInputBuilder|TextInputComponent|APITextInputComponent} other The other data
-	   * @returns {TextInputBuilder}
-	   */
-	  static from(other) {
-	    return new this(isJSONEncodable(other) ? other.toJSON() : other);
-	  }
-	}
-
-	TextInputBuilder_1 = TextInputBuilder;
-
-	/**
-	 * @external BuildersTextInput
-	 * @see {@link https://discord.js.org/docs/packages/builders/stable/TextInputBuilder:Class}
-	 */
-	return TextInputBuilder_1;
-}
-
-var TextInputComponent_1;
-var hasRequiredTextInputComponent;
-
-function requireTextInputComponent () {
-	if (hasRequiredTextInputComponent) return TextInputComponent_1;
-	hasRequiredTextInputComponent = 1;
-
-	const Component = requireComponent();
-
-	/**
-	 * Represents a text input component.
-	 * @extends {Component}
-	 */
-	class TextInputComponent extends Component {
-	  /**
-	   * The custom id of this text input
-	   * @type {string}
-	   * @readonly
-	   */
-	  get customId() {
-	    return this.data.custom_id;
-	  }
-
-	  /**
-	   * The value for this text input
-	   * @type {string}
-	   * @readonly
-	   */
-	  get value() {
-	    return this.data.value;
-	  }
-	}
-
-	TextInputComponent_1 = TextInputComponent;
-	return TextInputComponent_1;
-}
-
-var UserSelectMenuBuilder_1;
-var hasRequiredUserSelectMenuBuilder;
-
-function requireUserSelectMenuBuilder () {
-	if (hasRequiredUserSelectMenuBuilder) return UserSelectMenuBuilder_1;
-	hasRequiredUserSelectMenuBuilder = 1;
-
-	const { UserSelectMenuBuilder: BuildersUserSelectMenu } = requireDist$5();
-	const { isJSONEncodable } = requireDist$b();
-	const { toSnakeCase } = requireTransformers();
-
-	/**
-	 * Class used to build select menu components to be sent through the API
-	 * @extends {BuildersUserSelectMenu}
-	 */
-	class UserSelectMenuBuilder extends BuildersUserSelectMenu {
-	  constructor(data = {}) {
-	    super(toSnakeCase(data));
-	  }
-
-	  /**
-	   * Creates a new select menu builder from JSON data
-	   * @param {UserSelectMenuBuilder|UserSelectMenuComponent|APIUserSelectComponent} other The other data
-	   * @returns {UserSelectMenuBuilder}
-	   */
-	  static from(other) {
-	    return new this(isJSONEncodable(other) ? other.toJSON() : other);
-	  }
-	}
-
-	UserSelectMenuBuilder_1 = UserSelectMenuBuilder;
-
-	/**
-	 * @external BuildersUserSelectMenu
-	 * @see {@link https://discord.js.org/docs/packages/builders/stable/UserSelectMenuBuilder:Class}
-	 */
-	return UserSelectMenuBuilder_1;
-}
-
-var UserSelectMenuComponent_1;
-var hasRequiredUserSelectMenuComponent;
-
-function requireUserSelectMenuComponent () {
-	if (hasRequiredUserSelectMenuComponent) return UserSelectMenuComponent_1;
-	hasRequiredUserSelectMenuComponent = 1;
-
-	const BaseSelectMenuComponent = requireBaseSelectMenuComponent();
-
-	/**
-	 * Represents a user select menu component
-	 * @extends {BaseSelectMenuComponent}
-	 */
-	class UserSelectMenuComponent extends BaseSelectMenuComponent {}
-
-	UserSelectMenuComponent_1 = UserSelectMenuComponent;
-	return UserSelectMenuComponent_1;
-}
-
-var Components;
-var hasRequiredComponents$1;
-
-function requireComponents$1 () {
-	if (hasRequiredComponents$1) return Components;
-	hasRequiredComponents$1 = 1;
-
-	const { ComponentBuilder } = requireDist$5();
-	const { ComponentType } = requireV10();
-
-	/**
-	 * @typedef {Object} BaseComponentData
-	 * @property {ComponentType} type The type of component
-	 */
-
-	/**
-	 * @typedef {BaseComponentData} ActionRowData
-	 * @property {ComponentData[]} components The components in this action row
-	 */
-
-	/**
-	 * @typedef {BaseComponentData} ButtonComponentData
-	 * @property {ButtonStyle} style The style of the button
-	 * @property {?boolean} disabled Whether this button is disabled
-	 * @property {string} label The label of this button
-	 * @property {?APIMessageComponentEmoji} emoji The emoji on this button
-	 * @property {?string} customId The custom id of the button
-	 * @property {?string} url The URL of the button
-	 */
-
-	/**
-	 * @typedef {object} SelectMenuComponentOptionData
-	 * @property {string} label The label of the option
-	 * @property {string} value The value of the option
-	 * @property {?string} description The description of the option
-	 * @property {?APIMessageComponentEmoji} emoji The emoji on the option
-	 * @property {?boolean} default Whether this option is selected by default
-	 */
-
-	/**
-	 * @typedef {BaseComponentData} SelectMenuComponentData
-	 * @property {string} customId The custom id of the select menu
-	 * @property {?boolean} disabled Whether the select menu is disabled or not
-	 * @property {?number} maxValues The maximum amount of options that can be selected
-	 * @property {?number} minValues The minimum amount of options that can be selected
-	 * @property {?SelectMenuComponentOptionData[]} options The options in this select menu
-	 * @property {?string} placeholder The placeholder of the select menu
-	 */
-
-	/**
-	 * @typedef {ActionRowData|ButtonComponentData|SelectMenuComponentData} MessageComponentData
-	 */
-
-	/**
-	 * @typedef {BaseComponentData} TextInputComponentData
-	 * @property {string} customId The custom id of the text input
-	 * @property {TextInputStyle} style The style of the text input
-	 * @property {string} label The text that appears on top of the text input field
-	 * @property {?number} minLength The minimum number of characters that can be entered in the text input
-	 * @property {?number} maxLength The maximum number of characters that can be entered in the text input
-	 * @property {?boolean} required Whether or not the text input is required or not
-	 * @property {?string} value The pre-filled text in the text input
-	 * @property {?string} placeholder Placeholder for the text input
-	 */
-
-	/**
-	 * @typedef {ActionRowData|ButtonComponentData|SelectMenuComponentData|TextInputComponentData} ComponentData
-	 */
-
-	/**
-	 * Any emoji data that can be used within a button
-	 * @typedef {APIMessageComponentEmoji|string} ComponentEmojiResolvable
-	 */
-
-	/**
-	 * Transforms API data into a component
-	 * @param {APIMessageComponent|Component} data The data to create the component from
-	 * @returns {Component}
-	 * @ignore
-	 */
-	function createComponent(data) {
-	  if (data instanceof Component) {
-	    return data;
-	  }
-
-	  switch (data.type) {
-	    case ComponentType.ActionRow:
-	      return new ActionRow(data);
-	    case ComponentType.Button:
-	      return new ButtonComponent(data);
-	    case ComponentType.StringSelect:
-	      return new StringSelectMenuComponent(data);
-	    case ComponentType.TextInput:
-	      return new TextInputComponent(data);
-	    case ComponentType.UserSelect:
-	      return new UserSelectMenuComponent(data);
-	    case ComponentType.RoleSelect:
-	      return new RoleSelectMenuComponent(data);
-	    case ComponentType.MentionableSelect:
-	      return new MentionableSelectMenuComponent(data);
-	    case ComponentType.ChannelSelect:
-	      return new ChannelSelectMenuComponent(data);
-	    default:
-	      return new Component(data);
-	  }
-	}
-
-	/**
-	 * Transforms API data into a component builder
-	 * @param {APIMessageComponent|ComponentBuilder} data The data to create the component from
-	 * @returns {ComponentBuilder}
-	 * @ignore
-	 */
-	function createComponentBuilder(data) {
-	  if (data instanceof ComponentBuilder) {
-	    return data;
-	  }
-
-	  switch (data.type) {
-	    case ComponentType.ActionRow:
-	      return new ActionRowBuilder(data);
-	    case ComponentType.Button:
-	      return new ButtonBuilder(data);
-	    case ComponentType.StringSelect:
-	      return new StringSelectMenuBuilder(data);
-	    case ComponentType.TextInput:
-	      return new TextInputBuilder(data);
-	    case ComponentType.UserSelect:
-	      return new UserSelectMenuBuilder(data);
-	    case ComponentType.RoleSelect:
-	      return new RoleSelectMenuBuilder(data);
-	    case ComponentType.MentionableSelect:
-	      return new MentionableSelectMenuBuilder(data);
-	    case ComponentType.ChannelSelect:
-	      return new ChannelSelectMenuBuilder(data);
-	    default:
-	      return new ComponentBuilder(data);
-	  }
-	}
-
-	Components = { createComponent, createComponentBuilder };
-
-	const ActionRow = requireActionRow();
-	const ActionRowBuilder = requireActionRowBuilder();
-	const ButtonBuilder = requireButtonBuilder();
-	const ButtonComponent = requireButtonComponent();
-	const ChannelSelectMenuBuilder = requireChannelSelectMenuBuilder();
-	const ChannelSelectMenuComponent = requireChannelSelectMenuComponent();
-	const Component = requireComponent();
-	const MentionableSelectMenuBuilder = requireMentionableSelectMenuBuilder();
-	const MentionableSelectMenuComponent = requireMentionableSelectMenuComponent();
-	const RoleSelectMenuBuilder = requireRoleSelectMenuBuilder();
-	const RoleSelectMenuComponent = requireRoleSelectMenuComponent();
-	const StringSelectMenuBuilder = requireStringSelectMenuBuilder();
-	const StringSelectMenuComponent = requireStringSelectMenuComponent();
-	const TextInputBuilder = requireTextInputBuilder();
-	const TextInputComponent = requireTextInputComponent();
-	const UserSelectMenuBuilder = requireUserSelectMenuBuilder();
-	const UserSelectMenuComponent = requireUserSelectMenuComponent();
-	return Components;
-}
-
-var ActionRowBuilder_1;
-var hasRequiredActionRowBuilder;
-
-function requireActionRowBuilder () {
-	if (hasRequiredActionRowBuilder) return ActionRowBuilder_1;
-	hasRequiredActionRowBuilder = 1;
-
-	const { ActionRowBuilder: BuildersActionRow } = requireDist$5();
-	const { isJSONEncodable } = requireDist$b();
-	const { createComponentBuilder } = requireComponents$1();
-	const { toSnakeCase } = requireTransformers();
-
-	/**
-	 * Represents an action row builder.
-	 * @extends {BuildersActionRow}
-	 */
-	class ActionRowBuilder extends BuildersActionRow {
-	  constructor({ components, ...data } = {}) {
-	    super({
-	      ...toSnakeCase(data),
-	      components: components?.map(component => createComponentBuilder(component)),
-	    });
-	  }
-
-	  /**
-	   * Creates a new action row builder from JSON data
-	   * @param {ActionRow|ActionRowBuilder|APIActionRowComponent} other The other data
-	   * @returns {ActionRowBuilder}
-	   */
-	  static from(other) {
-	    return new this(isJSONEncodable(other) ? other.toJSON() : other);
-	  }
-	}
-
-	ActionRowBuilder_1 = ActionRowBuilder;
-
-	/**
-	 * @external BuildersActionRow
-	 * @see {@link https://discord.js.org/docs/packages/builders/stable/ActionRowBuilder:Class}
-	 */
-	return ActionRowBuilder_1;
-}
-
-var GuildScheduledEvent = {};
-
-var hasRequiredGuildScheduledEvent;
-
-function requireGuildScheduledEvent () {
-	if (hasRequiredGuildScheduledEvent) return GuildScheduledEvent;
-	hasRequiredGuildScheduledEvent = 1;
-
-	const { DiscordSnowflake } = /*@__PURE__*/ requireCjs$2();
-	const { GuildScheduledEventStatus, GuildScheduledEventEntityType, RouteBases } = requireV10();
-	const Base = requireBase();
-	const { DiscordjsError, ErrorCodes } = requireErrors$1();
-
-	/**
-	 * Represents a scheduled event in a {@link Guild}.
-	 * @extends {Base}
-	 */
-	let GuildScheduledEvent$1 = class GuildScheduledEvent extends Base {
-	  constructor(client, data) {
-	    super(client);
-
-	    /**
-	     * The id of the guild scheduled event
-	     * @type {Snowflake}
-	     */
-	    this.id = data.id;
-
-	    /**
-	     * The id of the guild this guild scheduled event belongs to
-	     * @type {Snowflake}
-	     */
-	    this.guildId = data.guild_id;
-
-	    this._patch(data);
-	  }
-
-	  _patch(data) {
-	    if ('channel_id' in data) {
-	      /**
-	       * The channel id in which the scheduled event will be hosted,
-	       * or `null` if entity type is {@link GuildScheduledEventEntityType.External}
-	       * @type {?Snowflake}
-	       */
-	      this.channelId = data.channel_id;
-	    } else {
-	      this.channelId ??= null;
-	    }
-
-	    if ('creator_id' in data) {
-	      /**
-	       * The id of the user that created this guild scheduled event
-	       * @type {?Snowflake}
-	       */
-	      this.creatorId = data.creator_id;
-	    } else {
-	      this.creatorId ??= null;
-	    }
-
-	    if ('name' in data) {
-	      /**
-	       * The name of the guild scheduled event
-	       * @type {?string}
-	       */
-	      this.name = data.name;
-	    } else {
-	      // Only if partial.
-	      this.name ??= null;
-	    }
-
-	    if ('description' in data) {
-	      /**
-	       * The description of the guild scheduled event
-	       * @type {?string}
-	       */
-	      this.description = data.description;
-	    } else {
-	      this.description ??= null;
-	    }
-
-	    if ('scheduled_start_time' in data) {
-	      /**
-	       * The timestamp the guild scheduled event will start at
-	       * @type {?number}
-	       */
-	      this.scheduledStartTimestamp = Date.parse(data.scheduled_start_time);
-	    } else {
-	      this.scheduledStartTimestamp ??= null;
-	    }
-
-	    if ('scheduled_end_time' in data) {
-	      /**
-	       * The timestamp the guild scheduled event will end at
-	       * or `null` if the event does not have a scheduled time to end
-	       * @type {?number}
-	       */
-	      this.scheduledEndTimestamp = data.scheduled_end_time ? Date.parse(data.scheduled_end_time) : null;
-	    } else {
-	      this.scheduledEndTimestamp ??= null;
-	    }
-
-	    if ('privacy_level' in data) {
-	      /**
-	       * The privacy level of the guild scheduled event
-	       * @type {?GuildScheduledEventPrivacyLevel}
-	       */
-	      this.privacyLevel = data.privacy_level;
-	    } else {
-	      // Only if partial.
-	      this.privacyLevel ??= null;
-	    }
-
-	    if ('status' in data) {
-	      /**
-	       * The status of the guild scheduled event
-	       * @type {?GuildScheduledEventStatus}
-	       */
-	      this.status = data.status;
-	    } else {
-	      // Only if partial.
-	      this.status ??= null;
-	    }
-
-	    if ('entity_type' in data) {
-	      /**
-	       * The type of hosting entity associated with the scheduled event
-	       * @type {?GuildScheduledEventEntityType}
-	       */
-	      this.entityType = data.entity_type;
-	    } else {
-	      // Only if partial.
-	      this.entityType ??= null;
-	    }
-
-	    if ('entity_id' in data) {
-	      /**
-	       * The id of the hosting entity associated with the scheduled event
-	       * @type {?Snowflake}
-	       */
-	      this.entityId = data.entity_id;
-	    } else {
-	      this.entityId ??= null;
-	    }
-
-	    if ('user_count' in data) {
-	      /**
-	       * The number of users who are subscribed to this guild scheduled event
-	       * @type {?number}
-	       */
-	      this.userCount = data.user_count;
-	    } else {
-	      this.userCount ??= null;
-	    }
-
-	    if ('creator' in data) {
-	      /**
-	       * The user that created this guild scheduled event
-	       * @type {?User}
-	       */
-	      this.creator = this.client.users._add(data.creator);
-	    } else {
-	      this.creator ??= this.client.users.resolve(this.creatorId);
-	    }
-
-	    /* eslint-disable max-len */
-	    /**
-	     * Represents the additional metadata for a {@link GuildScheduledEvent}
-	     * @see {@link https://discord.com/developers/docs/resources/guild-scheduled-event#guild-scheduled-event-object-guild-scheduled-event-entity-metadata}
-	     * @typedef {Object} GuildScheduledEventEntityMetadata
-	     * @property {?string} location The location of the guild scheduled event
-	     */
-	    /* eslint-enable max-len */
-
-	    if ('entity_metadata' in data) {
-	      if (data.entity_metadata) {
-	        /**
-	         * Additional metadata
-	         * @type {?GuildScheduledEventEntityMetadata}
-	         */
-	        this.entityMetadata = {
-	          location: data.entity_metadata.location ?? this.entityMetadata?.location ?? null,
-	        };
-	      } else {
-	        this.entityMetadata = null;
-	      }
-	    } else {
-	      this.entityMetadata ??= null;
-	    }
-
-	    if ('image' in data) {
-	      /**
-	       * The cover image hash for this scheduled event
-	       * @type {?string}
-	       */
-	      this.image = data.image;
-	    } else {
-	      this.image ??= null;
-	    }
-
-	    /**
-	     * Represents the recurrence rule for a {@link GuildScheduledEvent}.
-	     * @typedef {Object} GuildScheduledEventRecurrenceRule
-	     * @property {number} startTimestamp The timestamp the recurrence rule interval starts at
-	     * @property {Date} startAt The time the recurrence rule interval starts at
-	     * @property {?number} endTimestamp The timestamp the recurrence rule interval ends at
-	     * @property {?Date} endAt The time the recurrence rule interval ends at
-	     * @property {GuildScheduledEventRecurrenceRuleFrequency} frequency How often the event occurs
-	     * @property {number} interval The spacing between the events
-	     * @property {?GuildScheduledEventRecurrenceRuleWeekday[]} byWeekday The days within a week to recur on
-	     * @property {?GuildScheduledEventRecurrenceRuleNWeekday[]} byNWeekday The days within a week to recur on
-	     * @property {?GuildScheduledEventRecurrenceRuleMonth[]} byMonth The months to recur on
-	     * @property {?number[]} byMonthDay The days within a month to recur on
-	     * @property {?number[]} byYearDay The days within a year to recur on
-	     * @property {?number} count The total amount of times the event is allowed to recur before stopping
-	     */
-
-	    /**
-	     * @typedef {Object} GuildScheduledEventRecurrenceRuleNWeekday
-	     * @property {number} n The week to recur on
-	     * @property {GuildScheduledEventRecurrenceRuleWeekday} day The day within the week to recur on
-	     */
-
-	    if ('recurrence_rule' in data) {
-	      /**
-	       * The recurrence rule for this scheduled event
-	       * @type {?GuildScheduledEventRecurrenceRule}
-	       */
-	      this.recurrenceRule = data.recurrence_rule && {
-	        startTimestamp: Date.parse(data.recurrence_rule.start),
-	        get startAt() {
-	          return new Date(this.startTimestamp);
-	        },
-	        endTimestamp: data.recurrence_rule.end && Date.parse(data.recurrence_rule.end),
-	        get endAt() {
-	          return this.endTimestamp && new Date(this.endTimestamp);
-	        },
-	        frequency: data.recurrence_rule.frequency,
-	        interval: data.recurrence_rule.interval,
-	        byWeekday: data.recurrence_rule.by_weekday,
-	        byNWeekday: data.recurrence_rule.by_n_weekday,
-	        byMonth: data.recurrence_rule.by_month,
-	        byMonthDay: data.recurrence_rule.by_month_day,
-	        byYearDay: data.recurrence_rule.by_year_day,
-	        count: data.recurrence_rule.count,
-	      };
-	    } else {
-	      this.recurrenceRule ??= null;
-	    }
-	  }
-
-	  /**
-	   * Whether this guild scheduled event is partial.
-	   * @type {boolean}
-	   * @readonly
-	   */
-	  get partial() {
-	    return this.name === null;
-	  }
-
-	  /**
-	   * The URL of this scheduled event's cover image
-	   * @param {BaseImageURLOptions} [options={}] Options for image URL
-	   * @returns {?string}
-	   */
-	  coverImageURL(options = {}) {
-	    return this.image && this.client.rest.cdn.guildScheduledEventCover(this.id, this.image, options);
-	  }
-
-	  /**
-	   * The timestamp the guild scheduled event was created at
-	   * @type {number}
-	   * @readonly
-	   */
-	  get createdTimestamp() {
-	    return DiscordSnowflake.timestampFrom(this.id);
-	  }
-
-	  /**
-	   * The time the guild scheduled event was created at
-	   * @type {Date}
-	   * @readonly
-	   */
-	  get createdAt() {
-	    return new Date(this.createdTimestamp);
-	  }
-
-	  /**
-	   * The time the guild scheduled event will start at
-	   * <info>This can be potentially `null` only when it's an {@link GuildAuditLogsEntry#target}</info>
-	   * @type {?Date}
-	   * @readonly
-	   */
-	  get scheduledStartAt() {
-	    return this.scheduledStartTimestamp && new Date(this.scheduledStartTimestamp);
-	  }
-
-	  /**
-	   * The time the guild scheduled event will end at,
-	   * or `null` if the event does not have a scheduled time to end
-	   * @type {?Date}
-	   * @readonly
-	   */
-	  get scheduledEndAt() {
-	    return this.scheduledEndTimestamp && new Date(this.scheduledEndTimestamp);
-	  }
-
-	  /**
-	   * The channel associated with this scheduled event
-	   * @type {?(VoiceChannel|StageChannel)}
-	   * @readonly
-	   */
-	  get channel() {
-	    return this.client.channels.resolve(this.channelId);
-	  }
-
-	  /**
-	   * The guild this scheduled event belongs to
-	   * @type {?Guild}
-	   * @readonly
-	   */
-	  get guild() {
-	    return this.client.guilds.resolve(this.guildId);
-	  }
-
-	  /**
-	   * The URL to the guild scheduled event
-	   * @type {string}
-	   * @readonly
-	   */
-	  get url() {
-	    return `${RouteBases.scheduledEvent}/${this.guildId}/${this.id}`;
-	  }
-
-	  /**
-	   * Options used to create an invite URL to a {@link GuildScheduledEvent}
-	   * @typedef {InviteCreateOptions} GuildScheduledEventInviteURLCreateOptions
-	   * @property {GuildInvitableChannelResolvable} [channel] The channel to create the invite in.
-	   * <warn>This is required when the `entityType` of `GuildScheduledEvent` is
-	   * {@link GuildScheduledEventEntityType.External}, gets ignored otherwise</warn>
-	   */
-
-	  /**
-	   * Creates an invite URL to this guild scheduled event.
-	   * @param {GuildScheduledEventInviteURLCreateOptions} [options] The options to create the invite
-	   * @returns {Promise<string>}
-	   */
-	  async createInviteURL(options) {
-	    let channelId = this.channelId;
-	    if (this.entityType === GuildScheduledEventEntityType.External) {
-	      if (!options?.channel) throw new DiscordjsError(ErrorCodes.InviteOptionsMissingChannel);
-	      channelId = this.guild.channels.resolveId(options.channel);
-	      if (!channelId) throw new DiscordjsError(ErrorCodes.GuildChannelResolve);
-	    }
-	    const invite = await this.guild.invites.create(channelId, options);
-	    return `${RouteBases.invite}/${invite.code}?event=${this.id}`;
-	  }
-
-	  /**
-	   * Edits this guild scheduled event.
-	   * @param {GuildScheduledEventEditOptions} options The options to edit the guild scheduled event
-	   * @returns {Promise<GuildScheduledEvent>}
-	   * @example
-	   * // Edit a guild scheduled event
-	   * guildScheduledEvent.edit({ name: 'Party' })
-	   *  .then(guildScheduledEvent => console.log(guildScheduledEvent))
-	   *  .catch(console.error);
-	   */
-	  edit(options) {
-	    return this.guild.scheduledEvents.edit(this.id, options);
-	  }
-
-	  /**
-	   * Fetches this guild scheduled event.
-	   * @param {boolean} [force=true] Whether to skip the cache check and request the API
-	   * @returns {Promise<GuildScheduledEvent>}
-	   */
-	  fetch(force = true) {
-	    return this.guild.scheduledEvents.fetch({ guildScheduledEvent: this.id, force });
-	  }
-
-	  /**
-	   * Deletes this guild scheduled event.
-	   * @returns {Promise<GuildScheduledEvent>}
-	   * @example
-	   * // Delete a guild scheduled event
-	   * guildScheduledEvent.delete()
-	   *  .then(guildScheduledEvent => console.log(guildScheduledEvent))
-	   *  .catch(console.error);
-	   */
-	  async delete() {
-	    await this.guild.scheduledEvents.delete(this.id);
-	    return this;
-	  }
-
-	  /**
-	   * Sets a new name for the guild scheduled event.
-	   * @param {string} name The new name of the guild scheduled event
-	   * @param {string} [reason] The reason for changing the name
-	   * @returns {Promise<GuildScheduledEvent>}
-	   * @example
-	   * // Set name of a guild scheduled event
-	   * guildScheduledEvent.setName('Birthday Party')
-	   *  .then(guildScheduledEvent => console.log(`Set the name to: ${guildScheduledEvent.name}`))
-	   *  .catch(console.error);
-	   */
-	  setName(name, reason) {
-	    return this.edit({ name, reason });
-	  }
-
-	  /**
-	   * Sets a new time to schedule the event at.
-	   * @param {DateResolvable} scheduledStartTime The time to schedule the event at
-	   * @param {string} [reason] The reason for changing the scheduled start time
-	   * @returns {Promise<GuildScheduledEvent>}
-	   * @example
-	   * // Set start time of a guild scheduled event
-	   * guildScheduledEvent.setScheduledStartTime('2022-09-24T00:00:00+05:30')
-	   *  .then(guildScheduledEvent => console.log(`Set the start time to: ${guildScheduledEvent.scheduledStartTime}`))
-	   *  .catch(console.error);
-	   */
-	  setScheduledStartTime(scheduledStartTime, reason) {
-	    return this.edit({ scheduledStartTime, reason });
-	  }
-
-	  // TODO: scheduledEndTime gets reset on passing null but it hasn't been documented
-	  /**
-	   * Sets a new time to end the event at.
-	   * @param {DateResolvable} scheduledEndTime The time to end the event at
-	   * @param {string} [reason] The reason for changing the scheduled end time
-	   * @returns {Promise<GuildScheduledEvent>}
-	   * @example
-	   * // Set end time of a guild scheduled event
-	   * guildScheduledEvent.setScheduledEndTime('2022-09-25T00:00:00+05:30')
-	   *  .then(guildScheduledEvent => console.log(`Set the end time to: ${guildScheduledEvent.scheduledEndTime}`))
-	   *  .catch(console.error);
-	   */
-	  setScheduledEndTime(scheduledEndTime, reason) {
-	    return this.edit({ scheduledEndTime, reason });
-	  }
-
-	  /**
-	   * Sets the new description of the guild scheduled event.
-	   * @param {string} description The description of the guild scheduled event
-	   * @param {string} [reason] The reason for changing the description
-	   * @returns {Promise<GuildScheduledEvent>}
-	   * @example
-	   * // Set description of a guild scheduled event
-	   * guildScheduledEvent.setDescription('A virtual birthday party')
-	   *  .then(guildScheduledEvent => console.log(`Set the description to: ${guildScheduledEvent.description}`))
-	   *  .catch(console.error);
-	   */
-	  setDescription(description, reason) {
-	    return this.edit({ description, reason });
-	  }
-
-	  /**
-	   * Sets the new status of the guild scheduled event.
-	   * <info>If you're working with TypeScript, use this method in conjunction with status type-guards
-	   * like {@link GuildScheduledEvent#isScheduled} to get only valid status as suggestion</info>
-	   * @param {GuildScheduledEventStatus} status The status of the guild scheduled event
-	   * @param {string} [reason] The reason for changing the status
-	   * @returns {Promise<GuildScheduledEvent>}
-	   * @example
-	   * // Set status of a guild scheduled event
-	   * guildScheduledEvent.setStatus(GuildScheduledEventStatus.Active)
-	   *  .then(guildScheduledEvent => console.log(`Set the status to: ${guildScheduledEvent.status}`))
-	   *  .catch(console.error);
-	   */
-	  setStatus(status, reason) {
-	    return this.edit({ status, reason });
-	  }
-
-	  /**
-	   * Sets the new location of the guild scheduled event.
-	   * @param {string} location The location of the guild scheduled event
-	   * @param {string} [reason] The reason for changing the location
-	   * @returns {Promise<GuildScheduledEvent>}
-	   * @example
-	   * // Set location of a guild scheduled event
-	   * guildScheduledEvent.setLocation('Earth')
-	   *  .then(guildScheduledEvent => console.log(`Set the location to: ${guildScheduledEvent.entityMetadata.location}`))
-	   *  .catch(console.error);
-	   */
-	  setLocation(location, reason) {
-	    return this.edit({ entityMetadata: { location }, reason });
-	  }
-
-	  /**
-	   * Fetches subscribers of this guild scheduled event.
-	   * @param {FetchGuildScheduledEventSubscribersOptions} [options] Options for fetching the subscribers
-	   * @returns {Promise<Collection<Snowflake, GuildScheduledEventUser>>}
-	   */
-	  fetchSubscribers(options) {
-	    return this.guild.scheduledEvents.fetchSubscribers(this.id, options);
-	  }
-
-	  /**
-	   * When concatenated with a string, this automatically concatenates the event's URL instead of the object.
-	   * @returns {string}
-	   * @example
-	   * // Logs: Event: https://discord.com/events/412345678901234567/499876543211234567
-	   * console.log(`Event: ${guildScheduledEvent}`);
-	   */
-	  toString() {
-	    return this.url;
-	  }
-
-	  /**
-	   * Indicates whether this guild scheduled event has an {@link GuildScheduledEventStatus.Active} status.
-	   * @returns {boolean}
-	   */
-	  isActive() {
-	    return this.status === GuildScheduledEventStatus.Active;
-	  }
-
-	  /**
-	   * Indicates whether this guild scheduled event has a {@link GuildScheduledEventStatus.Canceled} status.
-	   * @returns {boolean}
-	   */
-	  isCanceled() {
-	    return this.status === GuildScheduledEventStatus.Canceled;
-	  }
-
-	  /**
-	   * Indicates whether this guild scheduled event has a {@link GuildScheduledEventStatus.Completed} status.
-	   * @returns {boolean}
-	   */
-	  isCompleted() {
-	    return this.status === GuildScheduledEventStatus.Completed;
-	  }
-
-	  /**
-	   * Indicates whether this guild scheduled event has a {@link GuildScheduledEventStatus.Scheduled} status.
-	   * @returns {boolean}
-	   */
-	  isScheduled() {
-	    return this.status === GuildScheduledEventStatus.Scheduled;
-	  }
-	};
-
-	GuildScheduledEvent.GuildScheduledEvent = GuildScheduledEvent$1;
-	return GuildScheduledEvent;
-}
-
-var Application_1;
-var hasRequiredApplication;
-
-function requireApplication () {
-	if (hasRequiredApplication) return Application_1;
-	hasRequiredApplication = 1;
-
-	const { DiscordSnowflake } = /*@__PURE__*/ requireCjs$2();
-	const Base = requireBase();
-
-	/**
-	 * Represents an OAuth2 Application.
-	 * @extends {Base}
-	 * @abstract
-	 */
-	class Application extends Base {
-	  constructor(client, data) {
-	    super(client);
-	    this._patch(data);
-	  }
-
-	  _patch(data) {
-	    /**
-	     * The application's id
-	     * @type {Snowflake}
-	     */
-	    this.id = data.id;
-
-	    if ('name' in data) {
-	      /**
-	       * The name of the application
-	       * @type {?string}
-	       */
-	      this.name = data.name;
-	    } else {
-	      this.name ??= null;
-	    }
-
-	    if ('description' in data) {
-	      /**
-	       * The application's description
-	       * @type {?string}
-	       */
-	      this.description = data.description;
-	    } else {
-	      this.description ??= null;
-	    }
-
-	    if ('icon' in data) {
-	      /**
-	       * The application's icon hash
-	       * @type {?string}
-	       */
-	      this.icon = data.icon;
-	    } else {
-	      this.icon ??= null;
-	    }
-
-	    if ('terms_of_service_url' in data) {
-	      /**
-	       * The URL of the application's terms of service
-	       * @type {?string}
-	       */
-	      this.termsOfServiceURL = data.terms_of_service_url;
-	    } else {
-	      this.termsOfServiceURL ??= null;
-	    }
-
-	    if ('privacy_policy_url' in data) {
-	      /**
-	       * The URL of the application's privacy policy
-	       * @type {?string}
-	       */
-	      this.privacyPolicyURL = data.privacy_policy_url;
-	    } else {
-	      this.privacyPolicyURL ??= null;
-	    }
-
-	    if ('rpc_origins' in data) {
-	      /**
-	       * The application's RPC origins, if enabled
-	       * @type {string[]}
-	       */
-	      this.rpcOrigins = data.rpc_origins;
-	    } else {
-	      this.rpcOrigins ??= [];
-	    }
-
-	    if ('cover_image' in data) {
-	      /**
-	       * The hash of the application's cover image
-	       * @type {?string}
-	       */
-	      this.cover = data.cover_image;
-	    } else {
-	      this.cover ??= null;
-	    }
-
-	    if ('verify_key' in data) {
-	      /**
-	       * The hex-encoded key for verification in interactions and the GameSDK's GetTicket
-	       * @type {?string}
-	       */
-	      this.verifyKey = data.verify_key;
-	    } else {
-	      this.verifyKey ??= null;
-	    }
-	  }
-
-	  /**
-	   * The timestamp the application was created at
-	   * @type {number}
-	   * @readonly
-	   */
-	  get createdTimestamp() {
-	    return DiscordSnowflake.timestampFrom(this.id);
-	  }
-
-	  /**
-	   * The time the application was created at
-	   * @type {Date}
-	   * @readonly
-	   */
-	  get createdAt() {
-	    return new Date(this.createdTimestamp);
-	  }
-
-	  /**
-	   * A link to the application's icon.
-	   * @param {ImageURLOptions} [options={}] Options for the image URL
-	   * @returns {?string}
-	   */
-	  iconURL(options = {}) {
-	    return this.icon && this.client.rest.cdn.appIcon(this.id, this.icon, options);
-	  }
-
-	  /**
-	   * A link to this application's cover image.
-	   * @param {ImageURLOptions} [options={}] Options for the image URL
-	   * @returns {?string}
-	   */
-	  coverURL(options = {}) {
-	    return this.cover && this.client.rest.cdn.appIcon(this.id, this.cover, options);
-	  }
-
-	  /**
-	   * When concatenated with a string, this automatically returns the application's name instead of the
-	   * Application object.
-	   * @returns {?string}
-	   * @example
-	   * // Logs: Application name: My App
-	   * console.log(`Application name: ${application}`);
-	   */
-	  toString() {
-	    return this.name;
-	  }
-
-	  toJSON() {
-	    return super.toJSON({ createdTimestamp: true });
-	  }
-	}
-
-	Application_1 = Application;
-	return Application_1;
-}
-
-var IntegrationApplication_1;
-var hasRequiredIntegrationApplication;
-
-function requireIntegrationApplication () {
-	if (hasRequiredIntegrationApplication) return IntegrationApplication_1;
-	hasRequiredIntegrationApplication = 1;
-
-	const Application = requireApplication();
-
-	/**
-	 * Represents an Integration's OAuth2 Application.
-	 * @extends {Application}
-	 */
-	class IntegrationApplication extends Application {
-	  _patch(data) {
-	    super._patch(data);
-
-	    if ('bot' in data) {
-	      /**
-	       * The bot user for this application
-	       * @type {?User}
-	       */
-	      this.bot = this.client.users._add(data.bot);
-	    } else {
-	      this.bot ??= null;
-	    }
-
-	    if ('terms_of_service_url' in data) {
-	      /**
-	       * The URL of the application's terms of service
-	       * @type {?string}
-	       */
-	      this.termsOfServiceURL = data.terms_of_service_url;
-	    } else {
-	      this.termsOfServiceURL ??= null;
-	    }
-
-	    if ('privacy_policy_url' in data) {
-	      /**
-	       * The URL of the application's privacy policy
-	       * @type {?string}
-	       */
-	      this.privacyPolicyURL = data.privacy_policy_url;
-	    } else {
-	      this.privacyPolicyURL ??= null;
-	    }
-
-	    if ('rpc_origins' in data) {
-	      /**
-	       * The Array of RPC origin URLs
-	       * @type {string[]}
-	       */
-	      this.rpcOrigins = data.rpc_origins;
-	    } else {
-	      this.rpcOrigins ??= [];
-	    }
-
-	    if ('hook' in data) {
-	      /**
-	       * Whether the application can be default hooked by the client
-	       * @type {?boolean}
-	       */
-	      this.hook = data.hook;
-	    } else {
-	      this.hook ??= null;
-	    }
-
-	    if ('cover_image' in data) {
-	      /**
-	       * The hash of the application's cover image
-	       * @type {?string}
-	       */
-	      this.cover = data.cover_image;
-	    } else {
-	      this.cover ??= null;
-	    }
-
-	    if ('verify_key' in data) {
-	      /**
-	       * The hex-encoded key for verification in interactions and the GameSDK's GetTicket
-	       * @type {?string}
-	       */
-	      this.verifyKey = data.verify_key;
-	    } else {
-	      this.verifyKey ??= null;
-	    }
-	  }
-	}
-
-	IntegrationApplication_1 = IntegrationApplication;
-	return IntegrationApplication_1;
-}
-
-var InviteStageInstance_1;
-var hasRequiredInviteStageInstance;
-
-function requireInviteStageInstance () {
-	if (hasRequiredInviteStageInstance) return InviteStageInstance_1;
-	hasRequiredInviteStageInstance = 1;
-
-	const { Collection } = requireDist$7();
-	const Base = requireBase();
-
-	/**
-	 * Represents the data about a public {@link StageInstance} in an {@link Invite}.
-	 * @extends {Base}
-	 * @deprecated
-	 */
-	class InviteStageInstance extends Base {
-	  constructor(client, data, channelId, guildId) {
-	    super(client);
-
-	    /**
-	     * The id of the stage channel this invite is for
-	     * @type {Snowflake}
-	     */
-	    this.channelId = channelId;
-
-	    /**
-	     * The stage channel's guild id
-	     * @type {Snowflake}
-	     */
-	    this.guildId = guildId;
-
-	    /**
-	     * The members speaking in the stage channel
-	     * @type {Collection<Snowflake, GuildMember>}
-	     */
-	    this.members = new Collection();
-
-	    this._patch(data);
-	  }
-
-	  _patch(data) {
-	    if ('topic' in data) {
-	      /**
-	       * The topic of the stage instance
-	       * @type {string}
-	       */
-	      this.topic = data.topic;
-	    }
-
-	    if ('participant_count' in data) {
-	      /**
-	       * The number of users in the stage channel
-	       * @type {number}
-	       */
-	      this.participantCount = data.participant_count;
-	    }
-
-	    if ('speaker_count' in data) {
-	      /**
-	       * The number of users speaking in the stage channel
-	       * @type {number}
-	       */
-	      this.speakerCount = data.speaker_count;
-	    }
-
-	    this.members.clear();
-	    for (const rawMember of data.members) {
-	      const member = this.guild.members._add(rawMember);
-	      this.members.set(member.id, member);
-	    }
-	  }
-
-	  /**
-	   * The stage channel this invite is for
-	   * @type {?StageChannel}
-	   * @readonly
-	   */
-	  get channel() {
-	    return this.client.channels.resolve(this.channelId);
-	  }
-
-	  /**
-	   * The guild of the stage channel this invite is for
-	   * @type {?Guild}
-	   * @readonly
-	   */
-	  get guild() {
-	    return this.client.guilds.resolve(this.guildId);
-	  }
-	}
-
-	InviteStageInstance_1 = InviteStageInstance;
-	return InviteStageInstance_1;
-}
-
-var BaseGuild_1;
-var hasRequiredBaseGuild;
-
-function requireBaseGuild () {
-	if (hasRequiredBaseGuild) return BaseGuild_1;
-	hasRequiredBaseGuild = 1;
-
-	const { makeURLSearchParams } = requireWeb();
-	const { DiscordSnowflake } = /*@__PURE__*/ requireCjs$2();
-	const { Routes, GuildFeature } = requireV10();
-	const Base = requireBase();
-
-	/**
-	 * The base class for {@link Guild}, {@link OAuth2Guild} and {@link InviteGuild}.
-	 * @extends {Base}
-	 * @abstract
-	 */
-	class BaseGuild extends Base {
-	  constructor(client, data) {
-	    super(client);
-
-	    /**
-	     * The guild's id
-	     * @type {Snowflake}
-	     */
-	    this.id = data.id;
-
-	    /**
-	     * The name of this guild
-	     * @type {string}
-	     */
-	    this.name = data.name;
-
-	    /**
-	     * The icon hash of this guild
-	     * @type {?string}
-	     */
-	    this.icon = data.icon;
-
-	    /**
-	     * An array of features available to this guild
-	     * @type {GuildFeature[]}
-	     */
-	    this.features = data.features;
-	  }
-
-	  /**
-	   * The timestamp this guild was created at
-	   * @type {number}
-	   * @readonly
-	   */
-	  get createdTimestamp() {
-	    return DiscordSnowflake.timestampFrom(this.id);
-	  }
-
-	  /**
-	   * The time this guild was created at
-	   * @type {Date}
-	   * @readonly
-	   */
-	  get createdAt() {
-	    return new Date(this.createdTimestamp);
-	  }
-
-	  /**
-	   * The acronym that shows up in place of a guild icon
-	   * @type {string}
-	   * @readonly
-	   */
-	  get nameAcronym() {
-	    return this.name
-	      .replace(/'s /g, ' ')
-	      .replace(/\w+/g, e => e[0])
-	      .replace(/\s/g, '');
-	  }
-
-	  /**
-	   * Whether this guild is partnered
-	   * @type {boolean}
-	   * @readonly
-	   */
-	  get partnered() {
-	    return this.features.includes(GuildFeature.Partnered);
-	  }
-
-	  /**
-	   * Whether this guild is verified
-	   * @type {boolean}
-	   * @readonly
-	   */
-	  get verified() {
-	    return this.features.includes(GuildFeature.Verified);
-	  }
-
-	  /**
-	   * The URL to this guild's icon.
-	   * @param {ImageURLOptions} [options={}] Options for the image URL
-	   * @returns {?string}
-	   */
-	  iconURL(options = {}) {
-	    return this.icon && this.client.rest.cdn.icon(this.id, this.icon, options);
-	  }
-
-	  /**
-	   * Fetches this guild.
-	   * @returns {Promise<Guild>}
-	   */
-	  async fetch() {
-	    const data = await this.client.rest.get(Routes.guild(this.id), {
-	      query: makeURLSearchParams({ with_counts: true }),
-	    });
-	    return this.client.guilds._add(data);
-	  }
-
-	  /**
-	   * When concatenated with a string, this automatically returns the guild's name instead of the Guild object.
-	   * @returns {string}
-	   */
-	  toString() {
-	    return this.name;
-	  }
-	}
-
-	BaseGuild_1 = BaseGuild;
-	return BaseGuild_1;
-}
-
-var AnonymousGuild_1;
-var hasRequiredAnonymousGuild;
-
-function requireAnonymousGuild () {
-	if (hasRequiredAnonymousGuild) return AnonymousGuild_1;
-	hasRequiredAnonymousGuild = 1;
-
-	const BaseGuild = requireBaseGuild();
-
-	/**
-	 * Bundles common attributes and methods between {@link Guild} and {@link InviteGuild}
-	 * @extends {BaseGuild}
-	 * @abstract
-	 */
-	class AnonymousGuild extends BaseGuild {
-	  constructor(client, data, immediatePatch = true) {
-	    super(client, data);
-	    if (immediatePatch) this._patch(data);
-	  }
-
-	  _patch(data) {
-	    if ('features' in data) this.features = data.features;
-
-	    if ('splash' in data) {
-	      /**
-	       * The hash of the guild invite splash image
-	       * @type {?string}
-	       */
-	      this.splash = data.splash;
-	    }
-
-	    if ('banner' in data) {
-	      /**
-	       * The hash of the guild banner
-	       * @type {?string}
-	       */
-	      this.banner = data.banner;
-	    }
-
-	    if ('description' in data) {
-	      /**
-	       * The description of the guild, if any
-	       * @type {?string}
-	       */
-	      this.description = data.description;
-	    }
-
-	    if ('verification_level' in data) {
-	      /**
-	       * The verification level of the guild
-	       * @type {GuildVerificationLevel}
-	       */
-	      this.verificationLevel = data.verification_level;
-	    }
-
-	    if ('vanity_url_code' in data) {
-	      /**
-	       * The vanity invite code of the guild, if any
-	       * @type {?string}
-	       */
-	      this.vanityURLCode = data.vanity_url_code;
-	    }
-
-	    if ('nsfw_level' in data) {
-	      /**
-	       * The NSFW level of this guild
-	       * @type {GuildNSFWLevel}
-	       */
-	      this.nsfwLevel = data.nsfw_level;
-	    }
-
-	    if ('premium_subscription_count' in data) {
-	      /**
-	       * The total number of boosts for this server
-	       * @type {?number}
-	       */
-	      this.premiumSubscriptionCount = data.premium_subscription_count;
-	    } else {
-	      this.premiumSubscriptionCount ??= null;
-	    }
-	  }
-
-	  /**
-	   * The URL to this guild's banner.
-	   * @param {ImageURLOptions} [options={}] Options for the image URL
-	   * @returns {?string}
-	   */
-	  bannerURL(options = {}) {
-	    return this.banner && this.client.rest.cdn.banner(this.id, this.banner, options);
-	  }
-
-	  /**
-	   * The URL to this guild's invite splash image.
-	   * @param {ImageURLOptions} [options={}] Options for the image URL
-	   * @returns {?string}
-	   */
-	  splashURL(options = {}) {
-	    return this.splash && this.client.rest.cdn.splash(this.id, this.splash, options);
-	  }
-	}
-
-	AnonymousGuild_1 = AnonymousGuild;
-	return AnonymousGuild_1;
-}
-
-var Emoji = {};
-
-var hasRequiredEmoji$1;
-
-function requireEmoji$1 () {
-	if (hasRequiredEmoji$1) return Emoji;
-	hasRequiredEmoji$1 = 1;
-
-	const process = require$$0$h;
-	const { formatEmoji } = requireDist$6();
-	const { DiscordSnowflake } = /*@__PURE__*/ requireCjs$2();
-	const Base = requireBase();
-
-	let deprecationEmittedForURL = false;
-
-	/**
-	 * Represents an emoji, see {@link ApplicationEmoji}, {@link GuildEmoji} and {@link ReactionEmoji}.
-	 * @extends {Base}
-	 */
-	let Emoji$1 = class Emoji extends Base {
-	  constructor(client, emoji) {
-	    super(client);
-	    /**
-	     * Whether or not the emoji is animated
-	     * @type {?boolean}
-	     */
-	    this.animated = emoji.animated ?? null;
-
-	    /**
-	     * The emoji's name
-	     * @type {?string}
-	     */
-	    this.name = emoji.name ?? null;
-
-	    /**
-	     * The emoji's id
-	     * @type {?Snowflake}
-	     */
-	    this.id = emoji.id ?? null;
-	  }
-
-	  /**
-	   * The identifier of this emoji, used for message reactions
-	   * @type {string}
-	   * @readonly
-	   */
-	  get identifier() {
-	    if (this.id) return `${this.animated ? 'a:' : ''}${this.name}:${this.id}`;
-	    return encodeURIComponent(this.name);
-	  }
-
-	  /**
-	   * Returns a URL for the emoji or `null` if this is not a custom emoji.
-	   * @param {BaseImageURLOptions} [options] Options for the image URL
-	   * @returns {?string}
-	   */
-	  imageURL(options) {
-	    return this.id && this.client.rest.cdn.emoji(this.id, options);
-	  }
-
-	  /**
-	   * Returns a URL for the emoji or `null` if this is not a custom emoji.
-	   * @type {?string}
-	   * @readonly
-	   * @deprecated Use {@link Emoji#imageURL} instead.
-	   */
-	  get url() {
-	    if (!deprecationEmittedForURL) {
-	      process.emitWarning('The Emoji#url getter is deprecated. Use Emoji#imageURL() instead.', 'DeprecationWarning');
-	      deprecationEmittedForURL = true;
-	    }
-
-	    return this.imageURL({ extension: this.animated ? 'gif' : 'png' });
-	  }
-
-	  /**
-	   * The timestamp the emoji was created at, or null if unicode
-	   * @type {?number}
-	   * @readonly
-	   */
-	  get createdTimestamp() {
-	    return this.id && DiscordSnowflake.timestampFrom(this.id);
-	  }
-
-	  /**
-	   * The time the emoji was created at, or null if unicode
-	   * @type {?Date}
-	   * @readonly
-	   */
-	  get createdAt() {
-	    return this.id && new Date(this.createdTimestamp);
-	  }
-
-	  /**
-	   * When concatenated with a string, this automatically returns the text required to form a graphical emoji on Discord
-	   * instead of the Emoji object.
-	   * @returns {string}
-	   * @example
-	   * // Send a custom emoji from a guild:
-	   * const emoji = guild.emojis.cache.first();
-	   * msg.channel.send(`Hello! ${emoji}`);
-	   * @example
-	   * // Send the emoji used in a reaction to the channel the reaction is part of
-	   * reaction.message.channel.send(`The emoji used was: ${reaction.emoji}`);
-	   */
-	  toString() {
-	    return this.id ? formatEmoji({ animated: this.animated, id: this.id, name: this.name }) : this.name;
-	  }
-
-	  toJSON() {
-	    const json = super.toJSON({
-	      guild: 'guildId',
-	      createdTimestamp: true,
-	      identifier: true,
-	    });
-	    json.imageURL = this.imageURL();
-	    return json;
-	  }
-	};
-
-	Emoji.Emoji = Emoji$1;
-	return Emoji;
-}
-
-var WelcomeChannel_1;
-var hasRequiredWelcomeChannel;
-
-function requireWelcomeChannel () {
-	if (hasRequiredWelcomeChannel) return WelcomeChannel_1;
-	hasRequiredWelcomeChannel = 1;
-
-	const Base = requireBase();
-	const { Emoji } = requireEmoji$1();
-
-	/**
-	 * Represents a channel link in a guild's welcome screen.
-	 * @extends {Base}
-	 */
-	class WelcomeChannel extends Base {
-	  constructor(guild, data) {
-	    super(guild.client);
-
-	    /**
-	     * The guild for this welcome channel
-	     * @type {Guild|InviteGuild}
-	     */
-	    this.guild = guild;
-
-	    /**
-	     * The description of this welcome channel
-	     * @type {string}
-	     */
-	    this.description = data.description;
-
-	    /**
-	     * The raw emoji data
-	     * @type {Object}
-	     * @private
-	     */
-	    this._emoji = {
-	      name: data.emoji_name,
-	      id: data.emoji_id,
-	    };
-
-	    /**
-	     * The id of this welcome channel
-	     * @type {Snowflake}
-	     */
-	    this.channelId = data.channel_id;
-	  }
-
-	  /**
-	   * The channel of this welcome channel
-	   * @type {?(TextChannel|NewsChannel|ForumChannel|MediaChannel)}
-	   */
-	  get channel() {
-	    return this.client.channels.resolve(this.channelId);
-	  }
-
-	  /**
-	   * The emoji of this welcome channel
-	   * @type {GuildEmoji|Emoji}
-	   */
-	  get emoji() {
-	    return this.client.emojis.cache.get(this._emoji.id) ?? new Emoji(this.client, this._emoji);
-	  }
-	}
-
-	WelcomeChannel_1 = WelcomeChannel;
-	return WelcomeChannel_1;
-}
-
-var WelcomeScreen_1;
-var hasRequiredWelcomeScreen;
-
-function requireWelcomeScreen () {
-	if (hasRequiredWelcomeScreen) return WelcomeScreen_1;
-	hasRequiredWelcomeScreen = 1;
-
-	const { Collection } = requireDist$7();
-	const { GuildFeature } = requireV10();
-	const Base = requireBase();
-	const WelcomeChannel = requireWelcomeChannel();
-
-	/**
-	 * Represents a welcome screen.
-	 * @extends {Base}
-	 */
-	class WelcomeScreen extends Base {
-	  constructor(guild, data) {
-	    super(guild.client);
-
-	    /**
-	     * The guild for this welcome screen
-	     * @type {Guild}
-	     */
-	    this.guild = guild;
-
-	    /**
-	     * The description of this welcome screen
-	     * @type {?string}
-	     */
-	    this.description = data.description ?? null;
-
-	    /**
-	     * Collection of welcome channels belonging to this welcome screen
-	     * @type {Collection<Snowflake, WelcomeChannel>}
-	     */
-	    this.welcomeChannels = new Collection();
-
-	    for (const channel of data.welcome_channels) {
-	      const welcomeChannel = new WelcomeChannel(this.guild, channel);
-	      this.welcomeChannels.set(welcomeChannel.channelId, welcomeChannel);
-	    }
-	  }
-
-	  /**
-	   * Whether the welcome screen is enabled on the guild
-	   * @type {boolean}
-	   */
-	  get enabled() {
-	    return this.guild.features.includes(GuildFeature.WelcomeScreenEnabled);
-	  }
-	}
-
-	WelcomeScreen_1 = WelcomeScreen;
-	return WelcomeScreen_1;
-}
-
-var InviteGuild_1;
-var hasRequiredInviteGuild;
-
-function requireInviteGuild () {
-	if (hasRequiredInviteGuild) return InviteGuild_1;
-	hasRequiredInviteGuild = 1;
-
-	const AnonymousGuild = requireAnonymousGuild();
-	const WelcomeScreen = requireWelcomeScreen();
-
-	/**
-	 * Represents a guild received from an invite, includes welcome screen data if available.
-	 * @extends {AnonymousGuild}
-	 */
-	class InviteGuild extends AnonymousGuild {
-	  constructor(client, data) {
-	    super(client, data);
-
-	    /**
-	     * The welcome screen for this invite guild
-	     * @type {?WelcomeScreen}
-	     */
-	    this.welcomeScreen = data.welcome_screen !== undefined ? new WelcomeScreen(this, data.welcome_screen) : null;
-	  }
-	}
-
-	InviteGuild_1 = InviteGuild;
-	return InviteGuild_1;
-}
-
-var Invite_1;
-var hasRequiredInvite;
-
-function requireInvite () {
-	if (hasRequiredInvite) return Invite_1;
-	hasRequiredInvite = 1;
-
-	const { RouteBases, Routes, PermissionFlagsBits } = requireV10();
-	const Base = requireBase();
-	const { GuildScheduledEvent } = requireGuildScheduledEvent();
-	const IntegrationApplication = requireIntegrationApplication();
-	const InviteStageInstance = requireInviteStageInstance();
-	const { DiscordjsError, ErrorCodes } = requireErrors$1();
-
-	/**
-	 * Represents an invitation to a guild channel.
-	 * @extends {Base}
-	 */
-	class Invite extends Base {
-	  /**
-	   * A regular expression that matches Discord invite links.
-	   * The `code` group property is present on the `exec()` result of this expression.
-	   * @type {RegExp}
-	   * @memberof Invite
-	   */
-	  static InvitesPattern = /discord(?:(?:app)?\.com\/invite|\.gg(?:\/invite)?)\/(?<code>[\w-]{2,255})/i;
-
-	  constructor(client, data) {
-	    super(client);
-
-	    /**
-	     * The type of this invite
-	     * @type {InviteType}
-	     */
-	    this.type = data.type;
-
-	    this._patch(data);
-	  }
-
-	  _patch(data) {
-	    const InviteGuild = requireInviteGuild();
-	    /**
-	     * The guild the invite is for including welcome screen data if present
-	     * @type {?(Guild|InviteGuild)}
-	     */
-	    this.guild ??= null;
-	    if (data.guild) {
-	      this.guild = this.client.guilds.cache.get(data.guild.id) ?? new InviteGuild(this.client, data.guild);
-	    }
-
-	    if ('code' in data) {
-	      /**
-	       * The code for this invite
-	       * @type {string}
-	       */
-	      this.code = data.code;
-	    }
-
-	    if ('approximate_presence_count' in data) {
-	      /**
-	       * The approximate number of online members of the guild this invite is for
-	       * <info>This is only available when the invite was fetched through {@link Client#fetchInvite}.</info>
-	       * @type {?number}
-	       */
-	      this.presenceCount = data.approximate_presence_count;
-	    } else {
-	      this.presenceCount ??= null;
-	    }
-
-	    if ('approximate_member_count' in data) {
-	      /**
-	       * The approximate total number of members of the guild this invite is for
-	       * <info>This is only available when the invite was fetched through {@link Client#fetchInvite}.</info>
-	       * @type {?number}
-	       */
-	      this.memberCount = data.approximate_member_count;
-	    } else {
-	      this.memberCount ??= null;
-	    }
-
-	    if ('temporary' in data) {
-	      /**
-	       * Whether or not this invite only grants temporary membership
-	       * <info>This is only available when the invite was fetched through {@link GuildInviteManager#fetch}
-	       * or created through {@link GuildInviteManager#create}.</info>
-	       * @type {?boolean}
-	       */
-	      this.temporary = data.temporary ?? null;
-	    } else {
-	      this.temporary ??= null;
-	    }
-
-	    if ('max_age' in data) {
-	      /**
-	       * The maximum age of the invite, in seconds, 0 if never expires
-	       * <info>This is only available when the invite was fetched through {@link GuildInviteManager#fetch}
-	       * or created through {@link GuildInviteManager#create}.</info>
-	       * @type {?number}
-	       */
-	      this.maxAge = data.max_age;
-	    } else {
-	      this.maxAge ??= null;
-	    }
-
-	    if ('uses' in data) {
-	      /**
-	       * How many times this invite has been used
-	       * <info>This is only available when the invite was fetched through {@link GuildInviteManager#fetch}
-	       * or created through {@link GuildInviteManager#create}.</info>
-	       * @type {?number}
-	       */
-	      this.uses = data.uses;
-	    } else {
-	      this.uses ??= null;
-	    }
-
-	    if ('max_uses' in data) {
-	      /**
-	       * The maximum uses of this invite
-	       * <info>This is only available when the invite was fetched through {@link GuildInviteManager#fetch}
-	       * or created through {@link GuildInviteManager#create}.</info>
-	       * @type {?number}
-	       */
-	      this.maxUses = data.max_uses;
-	    } else {
-	      this.maxUses ??= null;
-	    }
-
-	    if ('inviter_id' in data) {
-	      /**
-	       * The user's id who created this invite
-	       * @type {?Snowflake}
-	       */
-	      this.inviterId = data.inviter_id;
-	    } else {
-	      this.inviterId ??= null;
-	    }
-
-	    if ('inviter' in data) {
-	      this.client.users._add(data.inviter);
-	      this.inviterId = data.inviter.id;
-	    }
-
-	    if ('target_user' in data) {
-	      /**
-	       * The user whose stream to display for this voice channel stream invite
-	       * @type {?User}
-	       */
-	      this.targetUser = this.client.users._add(data.target_user);
-	    } else {
-	      this.targetUser ??= null;
-	    }
-
-	    if ('target_application' in data) {
-	      /**
-	       * The embedded application to open for this voice channel embedded application invite
-	       * @type {?IntegrationApplication}
-	       */
-	      this.targetApplication = new IntegrationApplication(this.client, data.target_application);
-	    } else {
-	      this.targetApplication ??= null;
-	    }
-
-	    if ('target_type' in data) {
-	      /**
-	       * The target type
-	       * @type {?InviteTargetType}
-	       */
-	      this.targetType = data.target_type;
-	    } else {
-	      this.targetType ??= null;
-	    }
-
-	    if ('channel_id' in data) {
-	      /**
-	       * The id of the channel this invite is for
-	       * @type {?Snowflake}
-	       */
-	      this.channelId = data.channel_id;
-	    }
-
-	    if ('channel' in data) {
-	      /**
-	       * The channel this invite is for
-	       * @type {?BaseChannel}
-	       */
-	      this.channel =
-	        this.client.channels._add(data.channel, this.guild, { cache: false }) ??
-	        this.client.channels.resolve(this.channelId);
-
-	      this.channelId ??= data.channel.id;
-	    }
-
-	    if ('created_at' in data) {
-	      /**
-	       * The timestamp this invite was created at
-	       * @type {?number}
-	       */
-	      this.createdTimestamp = Date.parse(data.created_at);
-	    } else {
-	      this.createdTimestamp ??= null;
-	    }
-
-	    if ('expires_at' in data) {
-	      this._expiresTimestamp = data.expires_at && Date.parse(data.expires_at);
-	    } else {
-	      this._expiresTimestamp ??= null;
-	    }
-
-	    if ('stage_instance' in data) {
-	      /**
-	       * The stage instance data if there is a public {@link StageInstance} in the stage channel this invite is for
-	       * @type {?InviteStageInstance}
-	       * @deprecated
-	       */
-	      this.stageInstance = new InviteStageInstance(this.client, data.stage_instance, this.channel.id, this.guild.id);
-	    } else {
-	      this.stageInstance ??= null;
-	    }
-
-	    if ('guild_scheduled_event' in data) {
-	      /**
-	       * The guild scheduled event data if there is a {@link GuildScheduledEvent} in the channel this invite is for
-	       * @type {?GuildScheduledEvent}
-	       */
-	      this.guildScheduledEvent = new GuildScheduledEvent(this.client, data.guild_scheduled_event);
-	    } else {
-	      this.guildScheduledEvent ??= null;
-	    }
-	  }
-
-	  /**
-	   * The time the invite was created at
-	   * @type {?Date}
-	   * @readonly
-	   */
-	  get createdAt() {
-	    return this.createdTimestamp && new Date(this.createdTimestamp);
-	  }
-
-	  /**
-	   * Whether the invite is deletable by the client user
-	   * @type {boolean}
-	   * @readonly
-	   */
-	  get deletable() {
-	    const guild = this.guild;
-	    if (!guild || !this.client.guilds.cache.has(guild.id)) return false;
-	    if (!guild.members.me) throw new DiscordjsError(ErrorCodes.GuildUncachedMe);
-	    return Boolean(
-	      this.channel?.permissionsFor(this.client.user).has(PermissionFlagsBits.ManageChannels, false) ||
-	        guild.members.me.permissions.has(PermissionFlagsBits.ManageGuild),
-	    );
-	  }
-
-	  /**
-	   * The timestamp the invite will expire at
-	   * @type {?number}
-	   * @readonly
-	   */
-	  get expiresTimestamp() {
-	    return (
-	      this._expiresTimestamp ??
-	      (this.createdTimestamp && this.maxAge ? this.createdTimestamp + this.maxAge * 1_000 : null)
-	    );
-	  }
-
-	  /**
-	   * The time the invite will expire at
-	   * @type {?Date}
-	   * @readonly
-	   */
-	  get expiresAt() {
-	    return this.expiresTimestamp && new Date(this.expiresTimestamp);
-	  }
-
-	  /**
-	   * The user who created this invite
-	   * @type {?User}
-	   * @readonly
-	   */
-	  get inviter() {
-	    return this.inviterId && this.client.users.resolve(this.inviterId);
-	  }
-
-	  /**
-	   * The URL to the invite
-	   * @type {string}
-	   * @readonly
-	   */
-	  get url() {
-	    return `${RouteBases.invite}/${this.code}`;
-	  }
-
-	  /**
-	   * Deletes this invite.
-	   * @param {string} [reason] Reason for deleting this invite
-	   * @returns {Promise<Invite>}
-	   */
-	  async delete(reason) {
-	    await this.client.rest.delete(Routes.invite(this.code), { reason });
-	    return this;
-	  }
-
-	  /**
-	   * When concatenated with a string, this automatically concatenates the invite's URL instead of the object.
-	   * @returns {string}
-	   * @example
-	   * // Logs: Invite: https://discord.gg/A1b2C3
-	   * console.log(`Invite: ${invite}`);
-	   */
-	  toString() {
-	    return this.url;
-	  }
-
-	  toJSON() {
-	    return super.toJSON({
-	      url: true,
-	      expiresTimestamp: true,
-	      presenceCount: false,
-	      memberCount: false,
-	      uses: false,
-	      channel: 'channelId',
-	      inviter: 'inviterId',
-	      guild: 'guildId',
-	    });
-	  }
-
-	  valueOf() {
-	    return this.code;
-	  }
-	}
-
-	Invite_1 = Invite;
-	return Invite_1;
-}
-
-var GuildTemplate_1;
-var hasRequiredGuildTemplate;
-
-function requireGuildTemplate () {
-	if (hasRequiredGuildTemplate) return GuildTemplate_1;
-	hasRequiredGuildTemplate = 1;
-
-	const { setTimeout, clearTimeout } = require$$0$i;
-	const { RouteBases, Routes } = requireV10();
-	const Base = requireBase();
-	const { resolveImage } = requireDataResolver();
-	const Events = requireEvents();
-
-	/**
-	 * Represents the template for a guild.
-	 * @extends {Base}
-	 */
-	class GuildTemplate extends Base {
-	  /**
-	   * A regular expression that matches guild template links.
-	   * The `code` group property is present on the `exec()` result of this expression.
-	   * @type {RegExp}
-	   * @memberof GuildTemplate
-	   */
-	  static GuildTemplatesPattern = /discord(?:app)?\.(?:com\/template|new)\/(?<code>[\w-]{2,255})/i;
-
-	  constructor(client, data) {
-	    super(client);
-	    this._patch(data);
-	  }
-
-	  _patch(data) {
-	    if ('code' in data) {
-	      /**
-	       * The unique code of this template
-	       * @type {string}
-	       */
-	      this.code = data.code;
-	    }
-
-	    if ('name' in data) {
-	      /**
-	       * The name of this template
-	       * @type {string}
-	       */
-	      this.name = data.name;
-	    }
-
-	    if ('description' in data) {
-	      /**
-	       * The description of this template
-	       * @type {?string}
-	       */
-	      this.description = data.description;
-	    }
-
-	    if ('usage_count' in data) {
-	      /**
-	       * The amount of times this template has been used
-	       * @type {number}
-	       */
-	      this.usageCount = data.usage_count;
-	    }
-
-	    if ('creator_id' in data) {
-	      /**
-	       * The id of the user that created this template
-	       * @type {Snowflake}
-	       */
-	      this.creatorId = data.creator_id;
-	    }
-
-	    if ('creator' in data) {
-	      /**
-	       * The user that created this template
-	       * @type {User}
-	       */
-	      this.creator = this.client.users._add(data.creator);
-	    }
-
-	    if ('created_at' in data) {
-	      /**
-	       * The timestamp of when this template was created at
-	       * @type {number}
-	       */
-	      this.createdTimestamp = Date.parse(data.created_at);
-	    }
-
-	    if ('updated_at' in data) {
-	      /**
-	       * The timestamp of when this template was last synced to the guild
-	       * @type {number}
-	       */
-	      this.updatedTimestamp = Date.parse(data.updated_at);
-	    }
-
-	    if ('source_guild_id' in data) {
-	      /**
-	       * The id of the guild that this template belongs to
-	       * @type {Snowflake}
-	       */
-	      this.guildId = data.source_guild_id;
-	    }
-
-	    if ('serialized_source_guild' in data) {
-	      /**
-	       * The data of the guild that this template would create
-	       * @type {APIGuild}
-	       */
-	      this.serializedGuild = data.serialized_source_guild;
-	    }
-
-	    /**
-	     * Whether this template has unsynced changes
-	     * @type {?boolean}
-	     */
-	    this.unSynced = 'is_dirty' in data ? Boolean(data.is_dirty) : null;
-
-	    return this;
-	  }
-
-	  /**
-	   * Creates a guild based on this template.
-	   * <warn>This is only available to bots in fewer than 10 guilds.</warn>
-	   * @param {string} name The name of the guild
-	   * @param {BufferResolvable|Base64Resolvable} [icon] The icon for the guild
-	   * @returns {Promise<Guild>}
-	   */
-	  async createGuild(name, icon) {
-	    const { client } = this;
-	    const data = await client.rest.post(Routes.template(this.code), {
-	      body: {
-	        name,
-	        icon: await resolveImage(icon),
-	      },
-	    });
-
-	    if (client.guilds.cache.has(data.id)) return client.guilds.cache.get(data.id);
-
-	    return new Promise(resolve => {
-	      const resolveGuild = guild => {
-	        client.off(Events.GuildCreate, handleGuild);
-	        client.decrementMaxListeners();
-	        resolve(guild);
-	      };
-
-	      const handleGuild = guild => {
-	        if (guild.id === data.id) {
-	          clearTimeout(timeout);
-	          resolveGuild(guild);
-	        }
-	      };
-
-	      client.incrementMaxListeners();
-	      client.on(Events.GuildCreate, handleGuild);
-
-	      const timeout = setTimeout(() => resolveGuild(client.guilds._add(data)), 10_000).unref();
-	    });
-	  }
-
-	  /**
-	   * Options used to edit a guild template.
-	   * @typedef {Object} GuildTemplateEditOptions
-	   * @property {string} [name] The name of this template
-	   * @property {string} [description] The description of this template
-	   */
-
-	  /**
-	   * Updates the metadata of this template.
-	   * @param {GuildTemplateEditOptions} [options] Options for editing the template
-	   * @returns {Promise<GuildTemplate>}
-	   */
-	  async edit({ name, description } = {}) {
-	    const data = await this.client.rest.patch(Routes.guildTemplate(this.guildId, this.code), {
-	      body: { name, description },
-	    });
-	    return this._patch(data);
-	  }
-
-	  /**
-	   * Deletes this template.
-	   * @returns {Promise<GuildTemplate>}
-	   */
-	  async delete() {
-	    await this.client.rest.delete(Routes.guildTemplate(this.guildId, this.code));
-	    return this;
-	  }
-
-	  /**
-	   * Syncs this template to the current state of the guild.
-	   * @returns {Promise<GuildTemplate>}
-	   */
-	  async sync() {
-	    const data = await this.client.rest.put(Routes.guildTemplate(this.guildId, this.code));
-	    return this._patch(data);
-	  }
-
-	  /**
-	   * The time when this template was created at
-	   * @type {Date}
-	   * @readonly
-	   */
-	  get createdAt() {
-	    return new Date(this.createdTimestamp);
-	  }
-
-	  /**
-	   * The time when this template was last synced to the guild
-	   * @type {Date}
-	   * @readonly
-	   */
-	  get updatedAt() {
-	    return new Date(this.updatedTimestamp);
-	  }
-
-	  /**
-	   * The guild that this template belongs to
-	   * @type {?Guild}
-	   * @readonly
-	   */
-	  get guild() {
-	    return this.client.guilds.resolve(this.guildId);
-	  }
-
-	  /**
-	   * The URL of this template
-	   * @type {string}
-	   * @readonly
-	   */
-	  get url() {
-	    return `${RouteBases.template}/${this.code}`;
-	  }
-
-	  /**
-	   * When concatenated with a string, this automatically returns the template's code instead of the template object.
-	   * @returns {string}
-	   * @example
-	   * // Logs: Template: FKvmczH2HyUf
-	   * console.log(`Template: ${guildTemplate}!`);
-	   */
-	  toString() {
-	    return this.code;
-	  }
-	}
-
-	GuildTemplate_1 = GuildTemplate;
-	return GuildTemplate_1;
-}
-
-var DataResolver;
-var hasRequiredDataResolver;
-
-function requireDataResolver () {
-	if (hasRequiredDataResolver) return DataResolver;
-	hasRequiredDataResolver = 1;
-
-	const { Buffer } = require$$0$d;
-	const fs = require$$1$9;
-	const path = require$$2$5;
-	const { fetch } = requireUndici();
-	const { DiscordjsError, DiscordjsTypeError, ErrorCodes } = requireErrors$1();
-	const Invite = requireInvite();
-
-	/**
-	 * Data that can be resolved to give an invite code. This can be:
-	 * * An invite code
-	 * * An invite URL
-	 * @typedef {string} InviteResolvable
-	 */
-
-	/**
-	 * Data that can be resolved to give a template code. This can be:
-	 * * A template code
-	 * * A template URL
-	 * @typedef {string} GuildTemplateResolvable
-	 */
-
-	/**
-	 * Resolves the string to a code based on the passed regex.
-	 * @param {string} data The string to resolve
-	 * @param {RegExp} regex The RegExp used to extract the code
-	 * @returns {string}
-	 * @private
-	 */
-	function resolveCode(data, regex) {
-	  return regex.exec(data)?.[1] ?? data;
-	}
-
-	/**
-	 * Resolves InviteResolvable to an invite code.
-	 * @param {InviteResolvable} data The invite resolvable to resolve
-	 * @returns {string}
-	 * @private
-	 */
-	function resolveInviteCode(data) {
-	  return resolveCode(data, Invite.InvitesPattern);
-	}
-
-	/**
-	 * Resolves GuildTemplateResolvable to a template code.
-	 * @param {GuildTemplateResolvable} data The template resolvable to resolve
-	 * @returns {string}
-	 * @private
-	 */
-	function resolveGuildTemplateCode(data) {
-	  const GuildTemplate = requireGuildTemplate();
-	  return resolveCode(data, GuildTemplate.GuildTemplatesPattern);
-	}
-
-	/**
-	 * Data that can be resolved to give a Buffer. This can be:
-	 * * A Buffer
-	 * * The path to a local file
-	 * * A URL <warn>When provided a URL, discord.js will fetch the URL internally in order to create a Buffer.
-	 * This can pose a security risk when the URL has not been sanitized</warn>
-	 * @typedef {string|Buffer} BufferResolvable
-	 */
-
-	/**
-	 * @external Stream
-	 * @see {@link https://nodejs.org/api/stream.html}
-	 */
-
-	/**
-	 * @typedef {Object} ResolvedFile
-	 * @property {Buffer} data Buffer containing the file data
-	 * @property {string} [contentType] Content-Type of the file
-	 * @private
-	 */
-
-	/**
-	 * Resolves a BufferResolvable to a Buffer.
-	 * @param {BufferResolvable|Stream} resource The buffer or stream resolvable to resolve
-	 * @returns {Promise<ResolvedFile>}
-	 * @private
-	 */
-	async function resolveFile(resource) {
-	  if (Buffer.isBuffer(resource)) return { data: resource };
-
-	  if (typeof resource[Symbol.asyncIterator] === 'function') {
-	    const buffers = [];
-	    for await (const data of resource) buffers.push(Buffer.from(data));
-	    return { data: Buffer.concat(buffers) };
-	  }
-
-	  if (typeof resource === 'string') {
-	    if (/^https?:\/\//.test(resource)) {
-	      const res = await fetch(resource);
-	      return { data: Buffer.from(await res.arrayBuffer()), contentType: res.headers.get('content-type') };
-	    }
-
-	    const file = path.resolve(resource);
-
-	    const stats = await fs.stat(file);
-	    if (!stats.isFile()) throw new DiscordjsError(ErrorCodes.FileNotFound, file);
-	    return { data: await fs.readFile(file) };
-	  }
-
-	  throw new DiscordjsTypeError(ErrorCodes.ReqResourceType);
-	}
-
-	/**
-	 * Data that resolves to give a Base64 string, typically for image uploading. This can be:
-	 * * A Buffer
-	 * * A base64 string
-	 * @typedef {Buffer|string} Base64Resolvable
-	 */
-
-	/**
-	 * Resolves a Base64Resolvable to a Base 64 image.
-	 * @param {Base64Resolvable} data The base 64 resolvable you want to resolve
-	 * @returns {?string}
-	 * @private
-	 */
-	function resolveBase64(data) {
-	  if (Buffer.isBuffer(data)) return `data:image/jpg;base64,${data.toString('base64')}`;
-	  return data;
-	}
-
-	/**
-	 * Resolves a Base64Resolvable, a string, or a BufferResolvable to a Base 64 image.
-	 * @param {BufferResolvable|Base64Resolvable} image The image to be resolved
-	 * @returns {Promise<?string>}
-	 * @private
-	 */
-	async function resolveImage(image) {
-	  if (!image) return null;
-	  if (typeof image === 'string' && image.startsWith('data:')) {
-	    return image;
-	  }
-	  const file = await resolveFile(image);
-	  return resolveBase64(file.data);
-	}
-
-	DataResolver = { resolveCode, resolveInviteCode, resolveGuildTemplateCode, resolveImage, resolveBase64, resolveFile };
-	return DataResolver;
-}
-
-var MessageFlagsBitField_1;
-var hasRequiredMessageFlagsBitField;
-
-function requireMessageFlagsBitField () {
-	if (hasRequiredMessageFlagsBitField) return MessageFlagsBitField_1;
-	hasRequiredMessageFlagsBitField = 1;
-
-	const { MessageFlags } = requireV10();
-	const BitField = requireBitField();
-
-	/**
-	 * Data structure that makes it easy to interact with a {@link Message#flags} bitfield.
-	 * @extends {BitField}
-	 */
-	class MessageFlagsBitField extends BitField {
-	  /**
-	   * Numeric message flags.
-	   * @type {MessageFlags}
-	   * @memberof MessageFlagsBitField
-	   */
-	  static Flags = MessageFlags;
-	}
-
-	/**
-	 * @name MessageFlagsBitField
-	 * @kind constructor
-	 * @memberof MessageFlagsBitField
-	 * @param {BitFieldResolvable} [bits=0] Bit(s) to read from
-	 */
-
-	/**
-	 * Data that can be resolved to give a message flags bit field. This can be:
-	 * * A string (see {@link MessageFlagsBitField.Flags})
-	 * * A message flag
-	 * * An instance of {@link MessageFlagsBitField}
-	 * * An array of `MessageFlagsResolvable`
-	 * @typedef {string|number|MessageFlagsBitField|MessageFlagsResolvable[]} MessageFlagsResolvable
-	 */
-
-	/**
-	 * Bitfield of the packed bits
-	 * @type {number}
-	 * @name MessageFlagsBitField#bitfield
-	 */
-
-	MessageFlagsBitField_1 = MessageFlagsBitField;
-	return MessageFlagsBitField_1;
-}
-
-var BaseInteraction_1;
-var hasRequiredBaseInteraction;
-
-function requireBaseInteraction () {
-	if (hasRequiredBaseInteraction) return BaseInteraction_1;
-	hasRequiredBaseInteraction = 1;
-
-	const { deprecate } = require$$1$3;
-	const { Collection } = requireDist$7();
-	const { DiscordSnowflake } = /*@__PURE__*/ requireCjs$2();
-	const { InteractionType, ApplicationCommandType, ComponentType } = requireV10();
-	const Base = requireBase();
-	const { SelectMenuTypes } = requireConstants$1();
-	const PermissionsBitField = requirePermissionsBitField();
-
-	/**
-	 * Represents an interaction.
-	 * @extends {Base}
-	 * @abstract
-	 */
-	class BaseInteraction extends Base {
-	  constructor(client, data) {
-	    super(client);
-
-	    /**
-	     * The interaction's type
-	     * @type {InteractionType}
-	     */
-	    this.type = data.type;
-
-	    /**
-	     * The interaction's id
-	     * @type {Snowflake}
-	     */
-	    this.id = data.id;
-
-	    /**
-	     * The interaction's token
-	     * @type {string}
-	     * @name BaseInteraction#token
-	     * @readonly
-	     */
-	    Object.defineProperty(this, 'token', { value: data.token });
-
-	    /**
-	     * The application's id
-	     * @type {Snowflake}
-	     */
-	    this.applicationId = data.application_id;
-
-	    /**
-	     * The id of the channel this interaction was sent in
-	     * @type {?Snowflake}
-	     */
-	    this.channelId = data.channel?.id ?? null;
-
-	    /**
-	     * The id of the guild this interaction was sent in
-	     * @type {?Snowflake}
-	     */
-	    this.guildId = data.guild_id ?? null;
-
-	    /**
-	     * The user who created this interaction
-	     * @type {User}
-	     */
-	    this.user = this.client.users._add(data.user ?? data.member.user);
-
-	    /**
-	     * If this interaction was sent in a guild, the member which sent it
-	     * @type {?(GuildMember|APIInteractionGuildMember)}
-	     */
-	    this.member = data.member ? (this.guild?.members._add(data.member) ?? data.member) : null;
-
-	    /**
-	     * The version
-	     * @type {number}
-	     */
-	    this.version = data.version;
-
-	    /**
-	     * Set of permissions the application or bot has within the channel the interaction was sent from
-	     * @type {Readonly<PermissionsBitField>}
-	     */
-	    this.appPermissions = new PermissionsBitField(data.app_permissions).freeze();
-
-	    /**
-	     * The permissions of the member, if one exists, in the channel this interaction was executed in
-	     * @type {?Readonly<PermissionsBitField>}
-	     */
-	    this.memberPermissions = data.member?.permissions
-	      ? new PermissionsBitField(data.member.permissions).freeze()
-	      : null;
-
-	    /**
-	     * The locale of the user who invoked this interaction
-	     * @type {Locale}
-	     */
-	    this.locale = data.locale;
-
-	    /**
-	     * The preferred locale from the guild this interaction was sent in
-	     * @type {?Locale}
-	     */
-	    this.guildLocale = data.guild_locale ?? null;
-
-	    /**
-	     * The entitlements for the invoking user, representing access to premium SKUs
-	     * @type {Collection<Snowflake, Entitlement>}
-	     */
-	    this.entitlements = data.entitlements.reduce(
-	      (coll, entitlement) => coll.set(entitlement.id, this.client.application.entitlements._add(entitlement)),
-	      new Collection(),
-	    );
-
-	    /* eslint-disable max-len */
-	    /**
-	     * Mapping of installation contexts that the interaction was authorized for the related user or guild ids
-	     * @type {APIAuthorizingIntegrationOwnersMap}
-	     * @see {@link https://discord.com/developers/docs/interactions/receiving-and-responding#interaction-object-authorizing-integration-owners-object}
-	     */
-	    this.authorizingIntegrationOwners = data.authorizing_integration_owners;
-	    /* eslint-enable max-len */
-
-	    /**
-	     * Context where the interaction was triggered from
-	     * @type {?InteractionContextType}
-	     */
-	    this.context = data.context ?? null;
-	  }
-
-	  /**
-	   * The timestamp the interaction was created at
-	   * @type {number}
-	   * @readonly
-	   */
-	  get createdTimestamp() {
-	    return DiscordSnowflake.timestampFrom(this.id);
-	  }
-
-	  /**
-	   * The time the interaction was created at
-	   * @type {Date}
-	   * @readonly
-	   */
-	  get createdAt() {
-	    return new Date(this.createdTimestamp);
-	  }
-
-	  /**
-	   * The channel this interaction was sent in
-	   * @type {?TextBasedChannels}
-	   * @readonly
-	   */
-	  get channel() {
-	    return this.client.channels.cache.get(this.channelId) ?? null;
-	  }
-
-	  /**
-	   * The guild this interaction was sent in
-	   * @type {?Guild}
-	   * @readonly
-	   */
-	  get guild() {
-	    return this.client.guilds.cache.get(this.guildId) ?? null;
-	  }
-
-	  /**
-	   * Indicates whether this interaction is received from a guild.
-	   * @returns {boolean}
-	   */
-	  inGuild() {
-	    return Boolean(this.guildId && this.member);
-	  }
-
-	  /**
-	   * Indicates whether this interaction is received from a cached guild.
-	   * @returns {boolean}
-	   */
-	  inCachedGuild() {
-	    return Boolean(this.guild && this.member);
-	  }
-
-	  /**
-	   * Indicates whether or not this interaction is received from an uncached guild.
-	   * @returns {boolean}
-	   */
-	  inRawGuild() {
-	    return Boolean(this.guildId && !this.guild && this.member);
-	  }
-
-	  /**
-	   * Indicates whether this interaction is an {@link AutocompleteInteraction}
-	   * @returns {boolean}
-	   */
-	  isAutocomplete() {
-	    return this.type === InteractionType.ApplicationCommandAutocomplete;
-	  }
-
-	  /**
-	   * Indicates whether this interaction is a {@link CommandInteraction}
-	   * @returns {boolean}
-	   */
-	  isCommand() {
-	    return this.type === InteractionType.ApplicationCommand;
-	  }
-
-	  /**
-	   * Indicates whether this interaction is a {@link ChatInputCommandInteraction}.
-	   * @returns {boolean}
-	   */
-	  isChatInputCommand() {
-	    return this.type === InteractionType.ApplicationCommand && this.commandType === ApplicationCommandType.ChatInput;
-	  }
-
-	  /**
-	   * Indicates whether this interaction is a {@link ContextMenuCommandInteraction}
-	   * @returns {boolean}
-	   */
-	  isContextMenuCommand() {
-	    return (
-	      this.type === InteractionType.ApplicationCommand &&
-	      [ApplicationCommandType.User, ApplicationCommandType.Message].includes(this.commandType)
-	    );
-	  }
-
-	  /**
-	   * Indicates whether this interaction is a {@link MessageComponentInteraction}
-	   * @returns {boolean}
-	   */
-	  isMessageComponent() {
-	    return this.type === InteractionType.MessageComponent;
-	  }
-
-	  /**
-	   * Indicates whether this interaction is a {@link ModalSubmitInteraction}
-	   * @returns {boolean}
-	   */
-	  isModalSubmit() {
-	    return this.type === InteractionType.ModalSubmit;
-	  }
-
-	  /**
-	   * Indicates whether this interaction is a {@link UserContextMenuCommandInteraction}
-	   * @returns {boolean}
-	   */
-	  isUserContextMenuCommand() {
-	    return this.isContextMenuCommand() && this.commandType === ApplicationCommandType.User;
-	  }
-
-	  /**
-	   * Indicates whether this interaction is a {@link MessageContextMenuCommandInteraction}
-	   * @returns {boolean}
-	   */
-	  isMessageContextMenuCommand() {
-	    return this.isContextMenuCommand() && this.commandType === ApplicationCommandType.Message;
-	  }
-
-	  /**
-	   * Indicates whether this interaction is a {@link ButtonInteraction}.
-	   * @returns {boolean}
-	   */
-	  isButton() {
-	    return this.type === InteractionType.MessageComponent && this.componentType === ComponentType.Button;
-	  }
-
-	  /**
-	   * Indicates whether this interaction is a {@link StringSelectMenuInteraction}.
-	   * @returns {boolean}
-	   * @deprecated Use {@link BaseInteraction#isStringSelectMenu} instead.
-	   */
-	  isSelectMenu() {
-	    return this.isStringSelectMenu();
-	  }
-
-	  /**
-	   * Indicates whether this interaction is a select menu of any known type.
-	   * @returns {boolean}
-	   */
-	  isAnySelectMenu() {
-	    return this.type === InteractionType.MessageComponent && SelectMenuTypes.includes(this.componentType);
-	  }
-
-	  /**
-	   * Indicates whether this interaction is a {@link StringSelectMenuInteraction}.
-	   * @returns {boolean}
-	   */
-	  isStringSelectMenu() {
-	    return this.type === InteractionType.MessageComponent && this.componentType === ComponentType.StringSelect;
-	  }
-
-	  /**
-	   * Indicates whether this interaction is a {@link UserSelectMenuInteraction}
-	   * @returns {boolean}
-	   */
-	  isUserSelectMenu() {
-	    return this.type === InteractionType.MessageComponent && this.componentType === ComponentType.UserSelect;
-	  }
-
-	  /**
-	   * Indicates whether this interaction is a {@link RoleSelectMenuInteraction}
-	   * @returns {boolean}
-	   */
-	  isRoleSelectMenu() {
-	    return this.type === InteractionType.MessageComponent && this.componentType === ComponentType.RoleSelect;
-	  }
-
-	  /**
-	   * Indicates whether this interaction is a {@link ChannelSelectMenuInteraction}
-	   * @returns {boolean}
-	   */
-	  isChannelSelectMenu() {
-	    return this.type === InteractionType.MessageComponent && this.componentType === ComponentType.ChannelSelect;
-	  }
-
-	  /**
-	   * Indicates whether this interaction is a {@link MentionableSelectMenuInteraction}
-	   * @returns {boolean}
-	   */
-	  isMentionableSelectMenu() {
-	    return this.type === InteractionType.MessageComponent && this.componentType === ComponentType.MentionableSelect;
-	  }
-
-	  /**
-	   * Indicates whether this interaction can be replied to.
-	   * @returns {boolean}
-	   */
-	  isRepliable() {
-	    return ![InteractionType.Ping, InteractionType.ApplicationCommandAutocomplete].includes(this.type);
-	  }
-	}
-
-	BaseInteraction.prototype.isSelectMenu = deprecate(
-	  BaseInteraction.prototype.isSelectMenu,
-	  'BaseInteraction#isSelectMenu() is deprecated. Use BaseInteraction#isStringSelectMenu() instead.',
-	);
-
-	BaseInteraction_1 = BaseInteraction;
-	return BaseInteraction_1;
-}
-
-var Message = {};
-
-var ApplicationRoleConnectionMetadata = {};
-
-var hasRequiredApplicationRoleConnectionMetadata;
-
-function requireApplicationRoleConnectionMetadata () {
-	if (hasRequiredApplicationRoleConnectionMetadata) return ApplicationRoleConnectionMetadata;
-	hasRequiredApplicationRoleConnectionMetadata = 1;
-
-	/**
-	 * Role connection metadata object for an application.
-	 */
-	let ApplicationRoleConnectionMetadata$1 = class ApplicationRoleConnectionMetadata {
-	  constructor(data) {
-	    /**
-	     * The name of this metadata field
-	     * @type {string}
-	     */
-	    this.name = data.name;
-
-	    /**
-	     * The name localizations for this metadata field
-	     * @type {?Object<Locale, string>}
-	     */
-	    this.nameLocalizations = data.name_localizations ?? null;
-
-	    /**
-	     * The description of this metadata field
-	     * @type {string}
-	     */
-	    this.description = data.description;
-
-	    /**
-	     * The description localizations for this metadata field
-	     * @type {?Object<Locale, string>}
-	     */
-	    this.descriptionLocalizations = data.description_localizations ?? null;
-
-	    /**
-	     * The dictionary key for this metadata field
-	     * @type {string}
-	     */
-	    this.key = data.key;
-
-	    /**
-	     * The type of this metadata field
-	     * @type {ApplicationRoleConnectionMetadataType}
-	     */
-	    this.type = data.type;
-	  }
-	};
-
-	ApplicationRoleConnectionMetadata.ApplicationRoleConnectionMetadata = ApplicationRoleConnectionMetadata$1;
-	return ApplicationRoleConnectionMetadata;
-}
-
-var TeamMember_1;
-var hasRequiredTeamMember;
-
-function requireTeamMember () {
-	if (hasRequiredTeamMember) return TeamMember_1;
-	hasRequiredTeamMember = 1;
-
-	const Base = requireBase();
-
-	/**
-	 * Represents a Client OAuth2 Application Team Member.
-	 * @extends {Base}
-	 */
-	class TeamMember extends Base {
-	  constructor(team, data) {
-	    super(team.client);
-
-	    /**
-	     * The Team this member is part of
-	     * @type {Team}
-	     */
-	    this.team = team;
-
-	    this._patch(data);
-	  }
-
-	  _patch(data) {
-	    if ('permissions' in data) {
-	      /**
-	       * The permissions this Team Member has with regard to the team
-	       * @type {string[]}
-	       * @deprecated Use {@link TeamMember#role} instead.
-	       */
-	      this.permissions = data.permissions;
-	    }
-
-	    if ('membership_state' in data) {
-	      /**
-	       * The permissions this Team Member has with regard to the team
-	       * @type {TeamMemberMembershipState}
-	       */
-	      this.membershipState = data.membership_state;
-	    }
-
-	    if ('user' in data) {
-	      /**
-	       * The user for this Team Member
-	       * @type {User}
-	       */
-	      this.user = this.client.users._add(data.user);
-	    }
-
-	    if ('role' in data) {
-	      /**
-	       * The role of this Team Member
-	       * @type {TeamMemberRole}
-	       */
-	      this.role = data.role;
-	    }
-	  }
-
-	  /**
-	   * The Team Member's id
-	   * @type {Snowflake}
-	   * @readonly
-	   */
-	  get id() {
-	    return this.user.id;
-	  }
-
-	  /**
-	   * When concatenated with a string, this automatically returns the team member's mention instead of the
-	   * TeamMember object.
-	   * @returns {string}
-	   * @example
-	   * // Logs: Team Member's mention: <@123456789012345678>
-	   * console.log(`Team Member's mention: ${teamMember}`);
-	   */
-	  toString() {
-	    return this.user.toString();
-	  }
-	}
-
-	TeamMember_1 = TeamMember;
-	return TeamMember_1;
-}
-
-var Team_1;
-var hasRequiredTeam;
-
-function requireTeam () {
-	if (hasRequiredTeam) return Team_1;
-	hasRequiredTeam = 1;
-
-	const { Collection } = requireDist$7();
-	const { DiscordSnowflake } = /*@__PURE__*/ requireCjs$2();
-	const Base = requireBase();
-	const TeamMember = requireTeamMember();
-
-	/**
-	 * Represents a Client OAuth2 Application Team.
-	 * @extends {Base}
-	 */
-	class Team extends Base {
-	  constructor(client, data) {
-	    super(client);
-	    this._patch(data);
-	  }
-
-	  _patch(data) {
-	    /**
-	     * The Team's id
-	     * @type {Snowflake}
-	     */
-	    this.id = data.id;
-
-	    if ('name' in data) {
-	      /**
-	       * The name of the Team
-	       * @type {string}
-	       */
-	      this.name = data.name;
-	    }
-
-	    if ('icon' in data) {
-	      /**
-	       * The Team's icon hash
-	       * @type {?string}
-	       */
-	      this.icon = data.icon;
-	    } else {
-	      this.icon ??= null;
-	    }
-
-	    if ('owner_user_id' in data) {
-	      /**
-	       * The Team's owner id
-	       * @type {?Snowflake}
-	       */
-	      this.ownerId = data.owner_user_id;
-	    } else {
-	      this.ownerId ??= null;
-	    }
-	    /**
-	     * The Team's members
-	     * @type {Collection<Snowflake, TeamMember>}
-	     */
-	    this.members = new Collection();
-
-	    for (const memberData of data.members) {
-	      const member = new TeamMember(this, memberData);
-	      this.members.set(member.id, member);
-	    }
-	  }
-
-	  /**
-	   * The owner of this team
-	   * @type {?TeamMember}
-	   * @readonly
-	   */
-	  get owner() {
-	    return this.members.get(this.ownerId) ?? null;
-	  }
-
-	  /**
-	   * The timestamp the team was created at
-	   * @type {number}
-	   * @readonly
-	   */
-	  get createdTimestamp() {
-	    return DiscordSnowflake.timestampFrom(this.id);
-	  }
-
-	  /**
-	   * The time the team was created at
-	   * @type {Date}
-	   * @readonly
-	   */
-	  get createdAt() {
-	    return new Date(this.createdTimestamp);
-	  }
-
-	  /**
-	   * A link to the team's icon.
-	   * @param {ImageURLOptions} [options={}] Options for the image URL
-	   * @returns {?string}
-	   */
-	  iconURL(options = {}) {
-	    return this.icon && this.client.rest.cdn.teamIcon(this.id, this.icon, options);
-	  }
-
-	  /**
-	   * When concatenated with a string, this automatically returns the Team's name instead of the
-	   * Team object.
-	   * @returns {string}
-	   * @example
-	   * // Logs: Team name: My Team
-	   * console.log(`Team name: ${team}`);
-	   */
-	  toString() {
-	    return this.name;
-	  }
-
-	  toJSON() {
-	    return super.toJSON({ createdTimestamp: true });
-	  }
-	}
-
-	Team_1 = Team;
-	return Team_1;
-}
-
-var ApplicationCommandPermissionsManager_1;
-var hasRequiredApplicationCommandPermissionsManager;
-
-function requireApplicationCommandPermissionsManager () {
-	if (hasRequiredApplicationCommandPermissionsManager) return ApplicationCommandPermissionsManager_1;
-	hasRequiredApplicationCommandPermissionsManager = 1;
-
-	const { Collection } = requireDist$7();
-	const { ApplicationCommandPermissionType, RESTJSONErrorCodes, Routes } = requireV10();
-	const BaseManager = requireBaseManager();
-	const { DiscordjsError, DiscordjsTypeError, ErrorCodes } = requireErrors$1();
-
-	/**
-	 * Manages API methods for permissions of Application Commands.
-	 * @extends {BaseManager}
-	 */
-	class ApplicationCommandPermissionsManager extends BaseManager {
-	  constructor(manager) {
-	    super(manager.client);
-
-	    /**
-	     * The manager or command that this manager belongs to
-	     * @type {ApplicationCommandManager|ApplicationCommand}
-	     * @private
-	     */
-	    this.manager = manager;
-
-	    /**
-	     * The guild that this manager acts on
-	     * @type {?Guild}
-	     */
-	    this.guild = manager.guild ?? null;
-
-	    /**
-	     * The id of the guild that this manager acts on
-	     * @type {?Snowflake}
-	     */
-	    this.guildId = manager.guildId ?? manager.guild?.id ?? null;
-
-	    /**
-	     * The id of the command this manager acts on
-	     * @type {?Snowflake}
-	     */
-	    this.commandId = manager.id ?? null;
-	  }
-
-	  /**
-	   * The APIRouter path to the commands
-	   * @param {Snowflake} guildId The guild's id to use in the path,
-	   * @param {Snowflake} [commandId] The application command's id
-	   * @returns {string}
-	   * @private
-	   */
-	  permissionsPath(guildId, commandId) {
-	    if (commandId) {
-	      return Routes.applicationCommandPermissions(this.client.application.id, guildId, commandId);
-	    }
-
-	    return Routes.guildApplicationCommandsPermissions(this.client.application.id, guildId);
-	  }
-
-	  /* eslint-disable max-len */
-	  /**
-	   * The object returned when fetching permissions for an application command.
-	   * @typedef {Object} ApplicationCommandPermissions
-	   * @property {Snowflake} id The role, user, or channel's id. Can also be a
-	   * {@link https://discord.com/developers/docs/interactions/application-commands#application-command-permissions-object-application-command-permissions-constants permission constant}.
-	   * @property {ApplicationCommandPermissionType} type Whether this permission is for a role or a user
-	   * @property {boolean} permission Whether the role or user has the permission to use this command
-	   */
-	  /* eslint-enable max-len */
-
-	  /**
-	   * Options for managing permissions for one or more Application Commands
-	   * <warn>When passing these options to a manager where `guildId` is `null`,
-	   * `guild` is a required parameter</warn>
-	   * @typedef {Object} BaseApplicationCommandPermissionsOptions
-	   * @property {GuildResolvable} [guild] The guild to modify / check permissions for
-	   * <warn>Ignored when the manager has a non-null `guildId` property</warn>
-	   * @property {ApplicationCommandResolvable} [command] The command to modify / check permissions for
-	   * <warn>Ignored when the manager has a non-null `commandId` property</warn>
-	   */
-
-	  /**
-	   * Fetches the permissions for one or multiple commands. Providing the client's id as the "command id" will fetch
-	   * *only* the guild level permissions
-	   * @param {BaseApplicationCommandPermissionsOptions} [options] Options used to fetch permissions
-	   * @returns {Promise<ApplicationCommandPermissions[]|Collection<Snowflake, ApplicationCommandPermissions[]>>}
-	   * @example
-	   * // Fetch permissions for one command
-	   * guild.commands.permissions.fetch({ command: '123456789012345678' })
-	   *   .then(perms => console.log(`Fetched ${perms.length} overwrites`))
-	   *   .catch(console.error);
-	   * @example
-	   * // Fetch permissions for all commands in a guild
-	   * client.application.commands.permissions.fetch({ guild: '123456789012345678' })
-	   *   .then(perms => console.log(`Fetched permissions for ${perms.size} commands`))
-	   *   .catch(console.error);
-	   * @example
-	   * // Fetch guild level permissions
-	   * guild.commands.permissions.fetch({ command: client.user.id })
-	   *   .then(perms => console.log(`Fetched ${perms.length} guild level permissions`))
-	   *   .catch(console.error);
-	   */
-	  async fetch({ guild, command } = {}) {
-	    const { guildId, commandId } = this._validateOptions(guild, command);
-	    if (commandId) {
-	      const data = await this.client.rest.get(this.permissionsPath(guildId, commandId));
-	      return data.permissions;
-	    }
-
-	    const data = await this.client.rest.get(this.permissionsPath(guildId));
-	    return data.reduce((coll, perm) => coll.set(perm.id, perm.permissions), new Collection());
-	  }
-
-	  /**
-	   * Options used to set permissions for one or more Application Commands in a guild
-	   * <warn>Omitting the `command` parameter edits the guild wide permissions
-	   * when the manager's `commandId` is `null`</warn>
-	   * @typedef {BaseApplicationCommandPermissionsOptions} ApplicationCommandPermissionsEditOptions
-	   * @property {ApplicationCommandPermissions[]} permissions The new permissions for the guild or overwrite
-	   * @property {string} token The bearer token to use that authorizes the permission edit
-	   */
-
-	  /**
-	   * Sets the permissions for the guild or a command overwrite.
-	   * @param {ApplicationCommandPermissionsEditOptions} options Options used to set permissions
-	   * @returns {Promise<ApplicationCommandPermissions[]|Collection<Snowflake, ApplicationCommandPermissions[]>>}
-	   * @example
-	   * // Set a permission overwrite for a command
-	   * client.application.commands.permissions.set({
-	   *  guild: '892455839386304532',
-	   *  command: '123456789012345678',
-	   *  token: 'TotallyRealToken',
-	   *  permissions: [
-	   *    {
-	   *      id: '876543210987654321',
-	   *      type: ApplicationCommandPermissionType.User,
-	   *      permission: false,
-	   *    },
-	   * ]})
-	   *   .then(console.log)
-	   *   .catch(console.error);
-	   * @example
-	   * // Set the permissions used for the guild (commands without overwrites)
-	   * guild.commands.permissions.set({ token: 'TotallyRealToken', permissions: [
-	   *   {
-	   *     id: '123456789012345678',
-	   *     permissions: [{
-	   *       id: '876543210987654321',
-	   *       type: ApplicationCommandPermissionType.User,
-	   *       permission: false,
-	   *     }],
-	   *   },
-	   * ]})
-	   *   .then(console.log)
-	   *   .catch(console.error);
-	   */
-	  async set({ guild, command, permissions, token } = {}) {
-	    if (!token) {
-	      throw new DiscordjsError(ErrorCodes.ApplicationCommandPermissionsTokenMissing);
-	    }
-	    let { guildId, commandId } = this._validateOptions(guild, command);
-
-	    if (!Array.isArray(permissions)) {
-	      throw new DiscordjsTypeError(
-	        ErrorCodes.InvalidType,
-	        'permissions',
-	        'Array of ApplicationCommandPermissions',
-	        true,
-	      );
-	    }
-
-	    if (!commandId) {
-	      commandId = this.client.user.id;
-	    }
-	    const data = await this.client.rest.put(this.permissionsPath(guildId, commandId), {
-	      body: { permissions },
-	      auth: false,
-	      headers: { Authorization: `Bearer ${token}` },
-	    });
-	    return data.permissions;
-	  }
-
-	  /**
-	   * Add permissions to a command.
-	   * @param {ApplicationCommandPermissionsEditOptions} options Options used to add permissions
-	   * @returns {Promise<ApplicationCommandPermissions[]>}
-	   * @example
-	   * // Add a rule to block a role from using a command
-	   * guild.commands.permissions.add({ command: '123456789012345678', token: 'TotallyRealToken', permissions: [
-	   *   {
-	   *     id: '876543211234567890',
-	   *     type: ApplicationCommandPermissionType.Role,
-	   *     permission: false
-	   *   },
-	   * ]})
-	   *   .then(console.log)
-	   *   .catch(console.error);
-	   */
-	  async add({ guild, command, permissions, token } = {}) {
-	    if (!token) {
-	      throw new DiscordjsError(ErrorCodes.ApplicationCommandPermissionsTokenMissing);
-	    }
-	    let { guildId, commandId } = this._validateOptions(guild, command);
-	    if (!commandId) {
-	      commandId = this.client.user.id;
-	    }
-	    if (!Array.isArray(permissions)) {
-	      throw new DiscordjsTypeError(
-	        ErrorCodes.InvalidType,
-	        'permissions',
-	        'Array of ApplicationCommandPermissions',
-	        true,
-	      );
-	    }
-
-	    let existingPermissions = [];
-	    try {
-	      existingPermissions = await this.fetch({ guild: guildId, command: commandId });
-	    } catch (error) {
-	      if (error.code !== RESTJSONErrorCodes.UnknownApplicationCommandPermissions) throw error;
-	    }
-
-	    const newPermissions = permissions.slice();
-	    for (const existingPermission of existingPermissions) {
-	      if (!newPermissions.some(newPermission => newPermission.id === existingPermission.id)) {
-	        newPermissions.push(existingPermission);
-	      }
-	    }
-
-	    return this.set({ guild: guildId, command: commandId, permissions: newPermissions, token });
-	  }
-
-	  /**
-	   * A static snowflake that identifies the everyone role for application command permissions.
-	   * It is the same as the guild id
-	   * @typedef {Snowflake} RolePermissionConstant
-	   */
-
-	  /**
-	   * A static snowflake that identifies the "all channels" entity for application command permissions.
-	   * It will be the result of the calculation `guildId - 1`
-	   * @typedef {Snowflake} ChannelPermissionConstant
-	   */
-
-	  /**
-	   * Options used to remove permissions from a command
-	   * <warn>Omitting the `command` parameter removes from the guild wide permissions
-	   * when the managers `commandId` is `null`</warn>
-	   * <warn>At least one of `users`, `roles`, and `channels` is required</warn>
-	   * @typedef {BaseApplicationCommandPermissionsOptions} RemoveApplicationCommandPermissionsOptions
-	   * @property {string} token The bearer token to use that authorizes the permission removal
-	   * @property {UserResolvable[]} [users] The user(s) to remove
-	   * @property {Array<RoleResolvable|RolePermissionConstant>} [roles] The role(s) to remove
-	   * @property {Array<GuildChannelResolvable|ChannelPermissionConstant>} [channels] The channel(s) to remove
-	   */
-
-	  /**
-	   * Remove permissions from a command.
-	   * @param {RemoveApplicationCommandPermissionsOptions} options Options used to remove permissions
-	   * @returns {Promise<ApplicationCommandPermissions[]>}
-	   * @example
-	   * // Remove a user permission from this command
-	   * guild.commands.permissions.remove({
-	   *  command: '123456789012345678', users: '876543210123456789', token: 'TotallyRealToken',
-	   * })
-	   *   .then(console.log)
-	   *   .catch(console.error);
-	   * @example
-	   * // Remove multiple roles from this command
-	   * guild.commands.permissions.remove({
-	   *   command: '123456789012345678', roles: ['876543210123456789', '765432101234567890'], token: 'TotallyRealToken',
-	   * })
-	   *    .then(console.log)
-	   *    .catch(console.error);
-	   */
-	  async remove({ guild, command, users, roles, channels, token } = {}) {
-	    if (!token) {
-	      throw new DiscordjsError(ErrorCodes.ApplicationCommandPermissionsTokenMissing);
-	    }
-	    let { guildId, commandId } = this._validateOptions(guild, command);
-	    if (!commandId) {
-	      commandId = this.client.user.id;
-	    }
-
-	    if (!users && !roles && !channels) {
-	      throw new DiscordjsTypeError(ErrorCodes.InvalidType, 'users OR roles OR channels', 'Array or Resolvable', true);
-	    }
-
-	    let resolvedUserIds = [];
-	    if (Array.isArray(users)) {
-	      for (const user of users) {
-	        const userId = this.client.users.resolveId(user);
-	        if (!userId) throw new DiscordjsTypeError(ErrorCodes.InvalidElement, 'Array', 'users', user);
-	        resolvedUserIds.push(userId);
-	      }
-	    }
-
-	    let resolvedRoleIds = [];
-	    if (Array.isArray(roles)) {
-	      for (const role of roles) {
-	        if (typeof role === 'string') {
-	          resolvedRoleIds.push(role);
-	          continue;
-	        }
-	        if (!this.guild) throw new DiscordjsError(ErrorCodes.GuildUncachedEntityResolve, 'roles');
-	        const roleId = this.guild.roles.resolveId(role);
-	        if (!roleId) throw new DiscordjsTypeError(ErrorCodes.InvalidElement, 'Array', 'users', role);
-	        resolvedRoleIds.push(roleId);
-	      }
-	    }
-
-	    let resolvedChannelIds = [];
-	    if (Array.isArray(channels)) {
-	      for (const channel of channels) {
-	        if (typeof channel === 'string') {
-	          resolvedChannelIds.push(channel);
-	          continue;
-	        }
-	        if (!this.guild) throw new DiscordjsError(ErrorCodes.GuildUncachedEntityResolve, 'channels');
-	        const channelId = this.guild.channels.resolveId(channel);
-	        if (!channelId) throw new DiscordjsTypeError(ErrorCodes.InvalidElement, 'Array', 'channels', channel);
-	        resolvedChannelIds.push(channelId);
-	      }
-	    }
-
-	    let existing = [];
-	    try {
-	      existing = await this.fetch({ guild: guildId, command: commandId });
-	    } catch (error) {
-	      if (error.code !== RESTJSONErrorCodes.UnknownApplicationCommandPermissions) throw error;
-	    }
-
-	    const permissions = existing.filter(perm => {
-	      switch (perm.type) {
-	        case ApplicationCommandPermissionType.Role:
-	          return !resolvedRoleIds.includes(perm.id);
-	        case ApplicationCommandPermissionType.User:
-	          return !resolvedUserIds.includes(perm.id);
-	        case ApplicationCommandPermissionType.Channel:
-	          return !resolvedChannelIds.includes(perm.id);
-	      }
-	      return true;
-	    });
-
-	    return this.set({ guild: guildId, command: commandId, permissions, token });
-	  }
-
-	  /**
-	   * Options used to check the existence of permissions on a command
-	   * <warn>The `command` parameter is not optional when the managers `commandId` is `null`</warn>
-	   * @typedef {BaseApplicationCommandPermissionsOptions} HasApplicationCommandPermissionsOptions
-	   * @property {ApplicationCommandPermissionIdResolvable} permissionId The entity to check if a permission exists for
-	   * on this command.
-	   * @property {ApplicationCommandPermissionType} [permissionType] Check for a specific type of permission
-	   */
-
-	  /**
-	   * Check whether a permission exists for a user, role, or channel
-	   * @param {HasApplicationCommandPermissionsOptions} options Options used to check permissions
-	   * @returns {Promise<boolean>}
-	   * @example
-	   * guild.commands.permissions.has({ command: '123456789012345678', permissionId: '876543210123456789' })
-	   *  .then(console.log)
-	   *  .catch(console.error);
-	   */
-	  async has({ guild, command, permissionId, permissionType }) {
-	    const { guildId, commandId } = this._validateOptions(guild, command);
-	    if (!commandId) throw new DiscordjsTypeError(ErrorCodes.InvalidType, 'command', 'ApplicationCommandResolvable');
-
-	    if (!permissionId) {
-	      throw new DiscordjsTypeError(
-	        ErrorCodes.InvalidType,
-	        'permissionId',
-	        'UserResolvable, RoleResolvable, ChannelResolvable, or Permission Constant',
-	      );
-	    }
-	    let resolvedId = permissionId;
-	    if (typeof permissionId !== 'string') {
-	      resolvedId = this.client.users.resolveId(permissionId);
-	      if (!resolvedId) {
-	        if (!this.guild) throw new DiscordjsError(ErrorCodes.GuildUncachedEntityResolve, 'roles');
-	        resolvedId = this.guild.roles.resolveId(permissionId);
-	      }
-	      if (!resolvedId) {
-	        resolvedId = this.guild.channels.resolveId(permissionId);
-	      }
-	      if (!resolvedId) {
-	        throw new DiscordjsTypeError(
-	          ErrorCodes.InvalidType,
-	          'permissionId',
-	          'UserResolvable, RoleResolvable, ChannelResolvable, or Permission Constant',
-	        );
-	      }
-	    }
-
-	    let existing = [];
-	    try {
-	      existing = await this.fetch({ guild: guildId, command: commandId });
-	    } catch (error) {
-	      if (error.code !== RESTJSONErrorCodes.UnknownApplicationCommandPermissions) throw error;
-	    }
-
-	    // Check permission type if provided for the single edge case where a channel id is the same as the everyone role id
-	    return existing.some(perm => perm.id === resolvedId && (permissionType ?? perm.type) === perm.type);
-	  }
-
-	  _validateOptions(guild, command) {
-	    const guildId = this.guildId ?? this.client.guilds.resolveId(guild);
-	    if (!guildId) throw new DiscordjsError(ErrorCodes.GlobalCommandPermissions);
-	    let commandId = this.commandId;
-	    if (command && !commandId) {
-	      commandId = this.manager.resolveId?.(command);
-	      if (!commandId && this.guild) {
-	        commandId = this.guild.commands.resolveId(command);
-	      }
-	      commandId ??= this.client.application?.commands.resolveId(command);
-	      if (!commandId) {
-	        throw new DiscordjsTypeError(ErrorCodes.InvalidType, 'command', 'ApplicationCommandResolvable', true);
-	      }
-	    }
-	    return { guildId, commandId };
-	  }
-	}
-
-	ApplicationCommandPermissionsManager_1 = ApplicationCommandPermissionsManager;
-
-	/* eslint-disable max-len */
-	/**
-	 * Data that resolves to an id used for an application command permission
-	 * @typedef {UserResolvable|RoleResolvable|GuildChannelResolvable|RolePermissionConstant|ChannelPermissionConstant} ApplicationCommandPermissionIdResolvable
-	 */
-	return ApplicationCommandPermissionsManager_1;
-}
-
-var ApplicationCommand_1;
-var hasRequiredApplicationCommand;
-
-function requireApplicationCommand () {
-	if (hasRequiredApplicationCommand) return ApplicationCommand_1;
-	hasRequiredApplicationCommand = 1;
-
-	const { DiscordSnowflake } = /*@__PURE__*/ requireCjs$2();
-	const { ApplicationCommandOptionType } = requireV10();
-	const isEqual = requireFastDeepEqual();
-	const Base = requireBase();
-	const ApplicationCommandPermissionsManager = requireApplicationCommandPermissionsManager();
-	const PermissionsBitField = requirePermissionsBitField();
-
-	/**
-	 * Represents an application command.
-	 * @extends {Base}
-	 */
-	class ApplicationCommand extends Base {
-	  constructor(client, data, guild, guildId) {
-	    super(client);
-
-	    /**
-	     * The command's id
-	     * @type {Snowflake}
-	     */
-	    this.id = data.id;
-
-	    /**
-	     * The parent application's id
-	     * @type {Snowflake}
-	     */
-	    this.applicationId = data.application_id;
-
-	    /**
-	     * The guild this command is part of
-	     * @type {?Guild}
-	     */
-	    this.guild = guild ?? null;
-
-	    /**
-	     * The guild's id this command is part of, this may be non-null when `guild` is `null` if the command
-	     * was fetched from the `ApplicationCommandManager`
-	     * @type {?Snowflake}
-	     */
-	    this.guildId = guild?.id ?? guildId ?? null;
-
-	    /**
-	     * The manager for permissions of this command on its guild or arbitrary guilds when the command is global
-	     * @type {ApplicationCommandPermissionsManager}
-	     */
-	    this.permissions = new ApplicationCommandPermissionsManager(this);
-
-	    /**
-	     * The type of this application command
-	     * @type {ApplicationCommandType}
-	     */
-	    this.type = data.type;
-
-	    /**
-	     * Whether this command is age-restricted (18+)
-	     * @type {boolean}
-	     */
-	    this.nsfw = data.nsfw ?? false;
-
-	    this._patch(data);
-	  }
-
-	  _patch(data) {
-	    if ('name' in data) {
-	      /**
-	       * The name of this command
-	       * @type {string}
-	       */
-	      this.name = data.name;
-	    }
-
-	    if ('name_localizations' in data) {
-	      /**
-	       * The name localizations for this command
-	       * @type {?Object<Locale, string>}
-	       */
-	      this.nameLocalizations = data.name_localizations;
-	    } else {
-	      this.nameLocalizations ??= null;
-	    }
-
-	    if ('name_localized' in data) {
-	      /**
-	       * The localized name for this command
-	       * @type {?string}
-	       */
-	      this.nameLocalized = data.name_localized;
-	    } else {
-	      this.nameLocalized ??= null;
-	    }
-
-	    if ('description' in data) {
-	      /**
-	       * The description of this command
-	       * @type {string}
-	       */
-	      this.description = data.description;
-	    }
-
-	    if ('description_localizations' in data) {
-	      /**
-	       * The description localizations for this command
-	       * @type {?Object<Locale, string>}
-	       */
-	      this.descriptionLocalizations = data.description_localizations;
-	    } else {
-	      this.descriptionLocalizations ??= null;
-	    }
-
-	    if ('description_localized' in data) {
-	      /**
-	       * The localized description for this command
-	       * @type {?string}
-	       */
-	      this.descriptionLocalized = data.description_localized;
-	    } else {
-	      this.descriptionLocalized ??= null;
-	    }
-
-	    if ('options' in data) {
-	      /**
-	       * The options of this command
-	       * @type {ApplicationCommandOption[]}
-	       */
-	      this.options = data.options.map(option => this.constructor.transformOption(option, true));
-	    } else {
-	      this.options ??= [];
-	    }
-
-	    if ('default_member_permissions' in data) {
-	      /**
-	       * The default bitfield used to determine whether this command be used in a guild
-	       * @type {?Readonly<PermissionsBitField>}
-	       */
-	      this.defaultMemberPermissions = data.default_member_permissions
-	        ? new PermissionsBitField(BigInt(data.default_member_permissions)).freeze()
-	        : null;
-	    } else {
-	      this.defaultMemberPermissions ??= null;
-	    }
-
-	    if ('dm_permission' in data) {
-	      /**
-	       * Whether the command can be used in DMs
-	       * <info>This property is always `null` on guild commands</info>
-	       * @type {?boolean}
-	       * @deprecated Use {@link ApplicationCommand#contexts} instead.
-	       */
-	      this.dmPermission = data.dm_permission;
-	    } else {
-	      this.dmPermission ??= null;
-	    }
-
-	    if ('integration_types' in data) {
-	      /**
-	       * Installation context(s) where the command is available
-	       * <info>Only for globally-scoped commands</info>
-	       * @type {?ApplicationIntegrationType[]}
-	       */
-	      this.integrationTypes = data.integration_types;
-	    } else {
-	      this.integrationTypes ??= null;
-	    }
-
-	    if ('contexts' in data) {
-	      /**
-	       * Interaction context(s) where the command can be used
-	       * <info>Only for globally-scoped commands</info>
-	       * @type {?InteractionContextType[]}
-	       */
-	      this.contexts = data.contexts;
-	    } else {
-	      this.contexts ??= null;
-	    }
-
-	    if ('version' in data) {
-	      /**
-	       * Autoincrementing version identifier updated during substantial record changes
-	       * @type {Snowflake}
-	       */
-	      this.version = data.version;
-	    }
-	  }
-
-	  /**
-	   * The timestamp the command was created at
-	   * @type {number}
-	   * @readonly
-	   */
-	  get createdTimestamp() {
-	    return DiscordSnowflake.timestampFrom(this.id);
-	  }
-
-	  /**
-	   * The time the command was created at
-	   * @type {Date}
-	   * @readonly
-	   */
-	  get createdAt() {
-	    return new Date(this.createdTimestamp);
-	  }
-
-	  /**
-	   * The manager that this command belongs to
-	   * @type {ApplicationCommandManager}
-	   * @readonly
-	   */
-	  get manager() {
-	    return (this.guild ?? this.client.application).commands;
-	  }
-
-	  /**
-	   * Data for creating or editing an application command.
-	   * @typedef {Object} ApplicationCommandData
-	   * @property {string} name The name of the command, must be in all lowercase if type is
-	   * {@link ApplicationCommandType.ChatInput}
-	   * @property {Object<Locale, string>} [nameLocalizations] The localizations for the command name
-	   * @property {string} description The description of the command, if type is {@link ApplicationCommandType.ChatInput}
-	   * @property {boolean} [nsfw] Whether the command is age-restricted
-	   * @property {Object<Locale, string>} [descriptionLocalizations] The localizations for the command description,
-	   * if type is {@link ApplicationCommandType.ChatInput}
-	   * @property {ApplicationCommandType} [type=ApplicationCommandType.ChatInput] The type of the command
-	   * @property {ApplicationCommandOptionData[]} [options] Options for the command
-	   * @property {?PermissionResolvable} [defaultMemberPermissions] The bitfield used to determine the default permissions
-	   * a member needs in order to run the command
-	   * @property {boolean} [dmPermission] Whether the command is enabled in DMs
-	   */
-
-	  /**
-	   * An option for an application command or subcommand.
-	   * <info>In addition to the listed properties, when used as a parameter,
-	   * API style `snake_case` properties can be used for compatibility with generators like `@discordjs/builders`.</info>
-	   * <warn>Note that providing a value for the `camelCase` counterpart for any `snake_case` property
-	   * will discard the provided `snake_case` property.</warn>
-	   * @typedef {Object} ApplicationCommandOptionData
-	   * @property {ApplicationCommandOptionType} type The type of the option
-	   * @property {string} name The name of the option
-	   * @property {Object<Locale, string>} [nameLocalizations] The name localizations for the option
-	   * @property {string} description The description of the option
-	   * @property {Object<Locale, string>} [descriptionLocalizations] The description localizations for the option
-	   * @property {boolean} [autocomplete] Whether the autocomplete interaction is enabled for a
-	   * {@link ApplicationCommandOptionType.String}, {@link ApplicationCommandOptionType.Integer} or
-	   * {@link ApplicationCommandOptionType.Number} option
-	   * @property {boolean} [required] Whether the option is required
-	   * @property {ApplicationCommandOptionChoiceData[]} [choices] The choices of the option for the user to pick from
-	   * @property {ApplicationCommandOptionData[]} [options] Additional options if this option is a subcommand (group)
-	   * @property {ChannelType[]} [channelTypes] When the option type is channel,
-	   * the allowed types of channels that can be selected
-	   * @property {number} [minValue] The minimum value for an {@link ApplicationCommandOptionType.Integer} or
-	   * {@link ApplicationCommandOptionType.Number} option
-	   * @property {number} [maxValue] The maximum value for an {@link ApplicationCommandOptionType.Integer} or
-	   * {@link ApplicationCommandOptionType.Number} option
-	   * @property {number} [minLength] The minimum length for an {@link ApplicationCommandOptionType.String} option
-	   * (maximum of `6000`)
-	   * @property {number} [maxLength] The maximum length for an {@link ApplicationCommandOptionType.String} option
-	   * (maximum of `6000`)
-	   */
-
-	  /**
-	   * @typedef {Object} ApplicationCommandOptionChoiceData
-	   * @property {string} name The name of the choice
-	   * @property {Object<Locale, string>} [nameLocalizations] The localized names for this choice
-	   * @property {string|number} value The value of the choice
-	   */
-
-	  /**
-	   * Edits this application command.
-	   * @param {Partial<ApplicationCommandData>} data The data to update the command with
-	   * @returns {Promise<ApplicationCommand>}
-	   * @example
-	   * // Edit the description of this command
-	   * command.edit({
-	   *   description: 'New description',
-	   * })
-	   *   .then(console.log)
-	   *   .catch(console.error);
-	   */
-	  edit(data) {
-	    return this.manager.edit(this, data, this.guildId);
-	  }
-
-	  /**
-	   * Edits the name of this ApplicationCommand
-	   * @param {string} name The new name of the command
-	   * @returns {Promise<ApplicationCommand>}
-	   */
-	  setName(name) {
-	    return this.edit({ name });
-	  }
-
-	  /**
-	   * Edits the localized names of this ApplicationCommand
-	   * @param {Object<Locale, string>} nameLocalizations The new localized names for the command
-	   * @returns {Promise<ApplicationCommand>}
-	   * @example
-	   * // Edit the name localizations of this command
-	   * command.setLocalizedNames({
-	   *   'en-GB': 'test',
-	   *   'pt-BR': 'teste',
-	   * })
-	   *   .then(console.log)
-	   *   .catch(console.error)
-	   */
-	  setNameLocalizations(nameLocalizations) {
-	    return this.edit({ nameLocalizations });
-	  }
-
-	  /**
-	   * Edits the description of this ApplicationCommand
-	   * @param {string} description The new description of the command
-	   * @returns {Promise<ApplicationCommand>}
-	   */
-	  setDescription(description) {
-	    return this.edit({ description });
-	  }
-
-	  /**
-	   * Edits the localized descriptions of this ApplicationCommand
-	   * @param {Object<Locale, string>} descriptionLocalizations The new localized descriptions for the command
-	   * @returns {Promise<ApplicationCommand>}
-	   * @example
-	   * // Edit the description localizations of this command
-	   * command.setDescriptionLocalizations({
-	   *   'en-GB': 'A test command',
-	   *   'pt-BR': 'Um comando de teste',
-	   * })
-	   *   .then(console.log)
-	   *   .catch(console.error)
-	   */
-	  setDescriptionLocalizations(descriptionLocalizations) {
-	    return this.edit({ descriptionLocalizations });
-	  }
-
-	  /**
-	   * Edits the default member permissions of this ApplicationCommand
-	   * @param {?PermissionResolvable} defaultMemberPermissions The default member permissions required to run this command
-	   * @returns {Promise<ApplicationCommand>}
-	   */
-	  setDefaultMemberPermissions(defaultMemberPermissions) {
-	    return this.edit({ defaultMemberPermissions });
-	  }
-
-	  /**
-	   * Edits the DM permission of this ApplicationCommand
-	   * @param {boolean} [dmPermission=true] Whether the command can be used in DMs
-	   * @returns {Promise<ApplicationCommand>}
-	   */
-	  setDMPermission(dmPermission = true) {
-	    return this.edit({ dmPermission });
-	  }
-
-	  /**
-	   * Edits the options of this ApplicationCommand
-	   * @param {ApplicationCommandOptionData[]} options The options to set for this command
-	   * @returns {Promise<ApplicationCommand>}
-	   */
-	  setOptions(options) {
-	    return this.edit({ options });
-	  }
-
-	  /**
-	   * Deletes this command.
-	   * @returns {Promise<ApplicationCommand>}
-	   * @example
-	   * // Delete this command
-	   * command.delete()
-	   *   .then(console.log)
-	   *   .catch(console.error);
-	   */
-	  delete() {
-	    return this.manager.delete(this, this.guildId);
-	  }
-
-	  /**
-	   * Whether this command equals another command. It compares all properties, so for most operations
-	   * it is advisable to just compare `command.id === command2.id` as it is much faster and is often
-	   * what most users need.
-	   * @param {ApplicationCommand|ApplicationCommandData|APIApplicationCommand} command The command to compare with
-	   * @param {boolean} [enforceOptionOrder=false] Whether to strictly check that options and choices are in the same
-	   * order in the array <info>The client may not always respect this ordering!</info>
-	   * @returns {boolean}
-	   */
-	  equals(command, enforceOptionOrder = false) {
-	    // If given an id, check if the id matches
-	    if (command.id && this.id !== command.id) return false;
-
-	    let defaultMemberPermissions = null;
-	    let dmPermission = command.dmPermission ?? command.dm_permission;
-
-	    if ('default_member_permissions' in command) {
-	      defaultMemberPermissions = command.default_member_permissions
-	        ? new PermissionsBitField(BigInt(command.default_member_permissions)).bitfield
-	        : null;
-	    }
-
-	    if ('defaultMemberPermissions' in command) {
-	      defaultMemberPermissions =
-	        command.defaultMemberPermissions !== null
-	          ? new PermissionsBitField(command.defaultMemberPermissions).bitfield
-	          : null;
-	    }
-
-	    // Check top level parameters
-	    if (
-	      command.name !== this.name ||
-	      ('description' in command && command.description !== this.description) ||
-	      ('version' in command && command.version !== this.version) ||
-	      (command.type && command.type !== this.type) ||
-	      ('nsfw' in command && command.nsfw !== this.nsfw) ||
-	      // Future proof for options being nullable
-	      // TODO: remove ?? 0 on each when nullable
-	      (command.options?.length ?? 0) !== (this.options?.length ?? 0) ||
-	      defaultMemberPermissions !== (this.defaultMemberPermissions?.bitfield ?? null) ||
-	      (dmPermission !== undefined && dmPermission !== this.dmPermission) ||
-	      !isEqual(command.nameLocalizations ?? command.name_localizations ?? {}, this.nameLocalizations ?? {}) ||
-	      !isEqual(
-	        command.descriptionLocalizations ?? command.description_localizations ?? {},
-	        this.descriptionLocalizations ?? {},
-	      ) ||
-	      !isEqual(command.integrationTypes ?? command.integration_types ?? [], this.integrationTypes ?? []) ||
-	      !isEqual(command.contexts ?? [], this.contexts ?? [])
-	    ) {
-	      return false;
-	    }
-
-	    if (command.options) {
-	      return this.constructor.optionsEqual(this.options, command.options, enforceOptionOrder);
-	    }
-	    return true;
-	  }
-
-	  /**
-	   * Recursively checks that all options for an {@link ApplicationCommand} are equal to the provided options.
-	   * In most cases it is better to compare using {@link ApplicationCommand#equals}
-	   * @param {ApplicationCommandOptionData[]} existing The options on the existing command,
-	   * should be {@link ApplicationCommand#options}
-	   * @param {ApplicationCommandOptionData[]|APIApplicationCommandOption[]} options The options to compare against
-	   * @param {boolean} [enforceOptionOrder=false] Whether to strictly check that options and choices are in the same
-	   * order in the array <info>The client may not always respect this ordering!</info>
-	   * @returns {boolean}
-	   */
-	  static optionsEqual(existing, options, enforceOptionOrder = false) {
-	    if (existing.length !== options.length) return false;
-	    if (enforceOptionOrder) {
-	      return existing.every((option, index) => this._optionEquals(option, options[index], enforceOptionOrder));
-	    }
-	    const newOptions = new Map(options.map(option => [option.name, option]));
-	    for (const option of existing) {
-	      const foundOption = newOptions.get(option.name);
-	      if (!foundOption || !this._optionEquals(option, foundOption)) return false;
-	    }
-	    return true;
-	  }
-
-	  /**
-	   * Checks that an option for an {@link ApplicationCommand} is equal to the provided option
-	   * In most cases it is better to compare using {@link ApplicationCommand#equals}
-	   * @param {ApplicationCommandOptionData} existing The option on the existing command,
-	   * should be from {@link ApplicationCommand#options}
-	   * @param {ApplicationCommandOptionData|APIApplicationCommandOption} option The option to compare against
-	   * @param {boolean} [enforceOptionOrder=false] Whether to strictly check that options or choices are in the same
-	   * order in their array <info>The client may not always respect this ordering!</info>
-	   * @returns {boolean}
-	   * @private
-	   */
-	  static _optionEquals(existing, option, enforceOptionOrder = false) {
-	    if (
-	      option.name !== existing.name ||
-	      option.type !== existing.type ||
-	      option.description !== existing.description ||
-	      option.autocomplete !== existing.autocomplete ||
-	      (option.required ??
-	        ([ApplicationCommandOptionType.Subcommand, ApplicationCommandOptionType.SubcommandGroup].includes(option.type)
-	          ? undefined
-	          : false)) !== existing.required ||
-	      option.choices?.length !== existing.choices?.length ||
-	      option.options?.length !== existing.options?.length ||
-	      (option.channelTypes ?? option.channel_types)?.length !== existing.channelTypes?.length ||
-	      (option.minValue ?? option.min_value) !== existing.minValue ||
-	      (option.maxValue ?? option.max_value) !== existing.maxValue ||
-	      (option.minLength ?? option.min_length) !== existing.minLength ||
-	      (option.maxLength ?? option.max_length) !== existing.maxLength ||
-	      !isEqual(option.nameLocalizations ?? option.name_localizations ?? {}, existing.nameLocalizations ?? {}) ||
-	      !isEqual(
-	        option.descriptionLocalizations ?? option.description_localizations ?? {},
-	        existing.descriptionLocalizations ?? {},
-	      )
-	    ) {
-	      return false;
-	    }
-
-	    if (existing.choices) {
-	      if (
-	        enforceOptionOrder &&
-	        !existing.choices.every(
-	          (choice, index) =>
-	            choice.name === option.choices[index].name &&
-	            choice.value === option.choices[index].value &&
-	            isEqual(
-	              choice.nameLocalizations ?? {},
-	              option.choices[index].nameLocalizations ?? option.choices[index].name_localizations ?? {},
-	            ),
-	        )
-	      ) {
-	        return false;
-	      }
-	      if (!enforceOptionOrder) {
-	        const newChoices = new Map(option.choices.map(choice => [choice.name, choice]));
-	        for (const choice of existing.choices) {
-	          const foundChoice = newChoices.get(choice.name);
-	          if (!foundChoice || foundChoice.value !== choice.value) return false;
-	        }
-	      }
-	    }
-
-	    if (existing.channelTypes) {
-	      const newTypes = option.channelTypes ?? option.channel_types;
-	      for (const type of existing.channelTypes) {
-	        if (!newTypes.includes(type)) return false;
-	      }
-	    }
-
-	    if (existing.options) {
-	      return this.optionsEqual(existing.options, option.options, enforceOptionOrder);
-	    }
-	    return true;
-	  }
-
-	  /**
-	   * An option for an application command or subcommand.
-	   * @typedef {Object} ApplicationCommandOption
-	   * @property {ApplicationCommandOptionType} type The type of the option
-	   * @property {string} name The name of the option
-	   * @property {Object<Locale, string>} [nameLocalizations] The localizations for the option name
-	   * @property {string} [nameLocalized] The localized name for this option
-	   * @property {string} description The description of the option
-	   * @property {Object<Locale, string>} [descriptionLocalizations] The localizations for the option description
-	   * @property {string} [descriptionLocalized] The localized description for this option
-	   * @property {boolean} [required] Whether the option is required
-	   * @property {boolean} [autocomplete] Whether the autocomplete interaction is enabled for a
-	   * {@link ApplicationCommandOptionType.String}, {@link ApplicationCommandOptionType.Integer} or
-	   * {@link ApplicationCommandOptionType.Number} option
-	   * @property {ApplicationCommandOptionChoice[]} [choices] The choices of the option for the user to pick from
-	   * @property {ApplicationCommandOption[]} [options] Additional options if this option is a subcommand (group)
-	   * @property {ApplicationCommandOptionAllowedChannelTypes[]} [channelTypes] When the option type is channel,
-	   * the allowed types of channels that can be selected
-	   * @property {number} [minValue] The minimum value for an {@link ApplicationCommandOptionType.Integer} or
-	   * {@link ApplicationCommandOptionType.Number} option
-	   * @property {number} [maxValue] The maximum value for an {@link ApplicationCommandOptionType.Integer} or
-	   * {@link ApplicationCommandOptionType.Number} option
-	   * @property {number} [minLength] The minimum length for an {@link ApplicationCommandOptionType.String} option
-	   * (maximum of `6000`)
-	   * @property {number} [maxLength] The maximum length for an {@link ApplicationCommandOptionType.String} option
-	   * (maximum of `6000`)
-	   */
-
-	  /**
-	   * A choice for an application command option.
-	   * @typedef {Object} ApplicationCommandOptionChoice
-	   * @property {string} name The name of the choice
-	   * @property {?string} nameLocalized The localized name of the choice in the provided locale, if any
-	   * @property {?Object<string, string>} [nameLocalizations] The localized names for this choice
-	   * @property {string|number} value The value of the choice
-	   */
-
-	  /**
-	   * Transforms an {@link ApplicationCommandOptionData} object into something that can be used with the API.
-	   * @param {ApplicationCommandOptionData|ApplicationCommandOption} option The option to transform
-	   * @param {boolean} [received] Whether this option has been received from Discord
-	   * @returns {APIApplicationCommandOption}
-	   * @private
-	   */
-	  static transformOption(option, received) {
-	    const channelTypesKey = received ? 'channelTypes' : 'channel_types';
-	    const minValueKey = received ? 'minValue' : 'min_value';
-	    const maxValueKey = received ? 'maxValue' : 'max_value';
-	    const minLengthKey = received ? 'minLength' : 'min_length';
-	    const maxLengthKey = received ? 'maxLength' : 'max_length';
-	    const nameLocalizationsKey = received ? 'nameLocalizations' : 'name_localizations';
-	    const nameLocalizedKey = received ? 'nameLocalized' : 'name_localized';
-	    const descriptionLocalizationsKey = received ? 'descriptionLocalizations' : 'description_localizations';
-	    const descriptionLocalizedKey = received ? 'descriptionLocalized' : 'description_localized';
-	    return {
-	      type: option.type,
-	      name: option.name,
-	      [nameLocalizationsKey]: option.nameLocalizations ?? option.name_localizations,
-	      [nameLocalizedKey]: option.nameLocalized ?? option.name_localized,
-	      description: option.description,
-	      [descriptionLocalizationsKey]: option.descriptionLocalizations ?? option.description_localizations,
-	      [descriptionLocalizedKey]: option.descriptionLocalized ?? option.description_localized,
-	      required:
-	        option.required ??
-	        (option.type === ApplicationCommandOptionType.Subcommand ||
-	        option.type === ApplicationCommandOptionType.SubcommandGroup
-	          ? undefined
-	          : false),
-	      autocomplete: option.autocomplete,
-	      choices: option.choices?.map(choice => ({
-	        name: choice.name,
-	        [nameLocalizedKey]: choice.nameLocalized ?? choice.name_localized,
-	        [nameLocalizationsKey]: choice.nameLocalizations ?? choice.name_localizations,
-	        value: choice.value,
-	      })),
-	      options: option.options?.map(opt => this.transformOption(opt, received)),
-	      [channelTypesKey]: option.channelTypes ?? option.channel_types,
-	      [minValueKey]: option.minValue ?? option.min_value,
-	      [maxValueKey]: option.maxValue ?? option.max_value,
-	      [minLengthKey]: option.minLength ?? option.min_length,
-	      [maxLengthKey]: option.maxLength ?? option.max_length,
-	    };
-	  }
-	}
-
-	ApplicationCommand_1 = ApplicationCommand;
-
-	/* eslint-disable max-len */
-	/**
-	 * @external ApplicationCommandOptionAllowedChannelTypes
-	 * @see {@link https://discord.js.org/docs/packages/builders/stable/ApplicationCommandOptionAllowedChannelTypes:TypeAlias}
-	 */
-	return ApplicationCommand_1;
-}
-
-var ApplicationCommandManager_1;
-var hasRequiredApplicationCommandManager;
-
-function requireApplicationCommandManager () {
-	if (hasRequiredApplicationCommandManager) return ApplicationCommandManager_1;
-	hasRequiredApplicationCommandManager = 1;
-
-	const { Collection } = requireDist$7();
-	const { makeURLSearchParams } = requireWeb();
-	const { isJSONEncodable } = requireDist$b();
-	const { Routes } = requireV10();
-	const ApplicationCommandPermissionsManager = requireApplicationCommandPermissionsManager();
-	const CachedManager = requireCachedManager();
-	const { DiscordjsTypeError, ErrorCodes } = requireErrors$1();
-	const ApplicationCommand = requireApplicationCommand();
-	const PermissionsBitField = requirePermissionsBitField();
-
-	/**
-	 * Manages API methods for application commands and stores their cache.
-	 * @extends {CachedManager}
-	 */
-	class ApplicationCommandManager extends CachedManager {
-	  constructor(client, iterable) {
-	    super(client, ApplicationCommand, iterable);
-
-	    /**
-	     * The manager for permissions of arbitrary commands on arbitrary guilds
-	     * @type {ApplicationCommandPermissionsManager}
-	     */
-	    this.permissions = new ApplicationCommandPermissionsManager(this);
-	  }
-
-	  /**
-	   * The cache of this manager
-	   * @type {Collection<Snowflake, ApplicationCommand>}
-	   * @name ApplicationCommandManager#cache
-	   */
-
-	  _add(data, cache, guildId) {
-	    return super._add(data, cache, { extras: [this.guild, guildId] });
-	  }
-
-	  /**
-	   * The APIRouter path to the commands
-	   * @param {Snowflake} [options.id] The application command's id
-	   * @param {Snowflake} [options.guildId] The guild's id to use in the path,
-	   * ignored when using a {@link GuildApplicationCommandManager}
-	   * @returns {string}
-	   * @private
-	   */
-	  commandPath({ id, guildId } = {}) {
-	    if (this.guild ?? guildId) {
-	      if (id) {
-	        return Routes.applicationGuildCommand(this.client.application.id, this.guild?.id ?? guildId, id);
-	      }
-
-	      return Routes.applicationGuildCommands(this.client.application.id, this.guild?.id ?? guildId);
-	    }
-
-	    if (id) {
-	      return Routes.applicationCommand(this.client.application.id, id);
-	    }
-
-	    return Routes.applicationCommands(this.client.application.id);
-	  }
-
-	  /**
-	   * Data that resolves to give an ApplicationCommand object. This can be:
-	   * * An ApplicationCommand object
-	   * * A Snowflake
-	   * @typedef {ApplicationCommand|Snowflake} ApplicationCommandResolvable
-	   */
-
-	  /**
-	   * Data that resolves to the data of an ApplicationCommand
-	   * @typedef {ApplicationCommandData|APIApplicationCommand} ApplicationCommandDataResolvable
-	   */
-
-	  /**
-	   * Options used to fetch data from Discord
-	   * @typedef {Object} BaseFetchOptions
-	   * @property {boolean} [cache=true] Whether to cache the fetched data if it wasn't already
-	   * @property {boolean} [force=false] Whether to skip the cache check and request the API
-	   */
-
-	  /**
-	   * Options used to fetch Application Commands from Discord
-	   * @typedef {BaseFetchOptions} FetchApplicationCommandOptions
-	   * @property {Snowflake} [guildId] The guild's id to fetch commands for, for when the guild is not cached
-	   * @property {Locale} [locale] The locale to use when fetching this command
-	   * @property {boolean} [withLocalizations] Whether to fetch all localization data
-	   */
-
-	  /**
-	   * Obtains one or multiple application commands from Discord, or the cache if it's already available.
-	   * @param {Snowflake|FetchApplicationCommandOptions} [id] Options for fetching application command(s)
-	   * @param {FetchApplicationCommandOptions} [options] Additional options for this fetch
-	   * @returns {Promise<ApplicationCommand|Collection<Snowflake, ApplicationCommand>>}
-	   * @example
-	   * // Fetch a single command
-	   * client.application.commands.fetch('123456789012345678')
-	   *   .then(command => console.log(`Fetched command ${command.name}`))
-	   *   .catch(console.error);
-	   * @example
-	   * // Fetch all commands
-	   * guild.commands.fetch()
-	   *   .then(commands => console.log(`Fetched ${commands.size} commands`))
-	   *   .catch(console.error);
-	   */
-	  async fetch(id, { guildId, cache = true, force = false, locale, withLocalizations } = {}) {
-	    if (typeof id === 'object') {
-	      ({ guildId, cache = true, locale, withLocalizations } = id);
-	    } else if (id) {
-	      if (!force) {
-	        const existing = this.cache.get(id);
-	        if (existing) return existing;
-	      }
-	      const command = await this.client.rest.get(this.commandPath({ id, guildId }));
-	      return this._add(command, cache);
-	    }
-
-	    const data = await this.client.rest.get(this.commandPath({ guildId }), {
-	      headers: {
-	        'X-Discord-Locale': locale,
-	      },
-	      query: makeURLSearchParams({ with_localizations: withLocalizations }),
-	    });
-	    return data.reduce((coll, command) => coll.set(command.id, this._add(command, cache, guildId)), new Collection());
-	  }
-
-	  /**
-	   * Creates an application command.
-	   * @param {ApplicationCommandDataResolvable} command The command
-	   * @param {Snowflake} [guildId] The guild's id to create this command in,
-	   * ignored when using a {@link GuildApplicationCommandManager}
-	   * @returns {Promise<ApplicationCommand>}
-	   * @example
-	   * // Create a new command
-	   * client.application.commands.create({
-	   *   name: 'test',
-	   *   description: 'A test command',
-	   * })
-	   *   .then(console.log)
-	   *   .catch(console.error);
-	   */
-	  async create(command, guildId) {
-	    const data = await this.client.rest.post(this.commandPath({ guildId }), {
-	      body: this.constructor.transformCommand(command),
-	    });
-	    return this._add(data, true, guildId);
-	  }
-
-	  /**
-	   * Sets all the commands for this application or guild.
-	   * @param {ApplicationCommandDataResolvable[]} commands The commands
-	   * @param {Snowflake} [guildId] The guild's id to create the commands in,
-	   * ignored when using a {@link GuildApplicationCommandManager}
-	   * @returns {Promise<Collection<Snowflake, ApplicationCommand>>}
-	   * @example
-	   * // Set all commands to just this one
-	   * client.application.commands.set([
-	   *   {
-	   *     name: 'test',
-	   *     description: 'A test command',
-	   *   },
-	   * ])
-	   *   .then(console.log)
-	   *   .catch(console.error);
-	   * @example
-	   * // Remove all commands
-	   * guild.commands.set([])
-	   *   .then(console.log)
-	   *   .catch(console.error);
-	   */
-	  async set(commands, guildId) {
-	    const data = await this.client.rest.put(this.commandPath({ guildId }), {
-	      body: commands.map(command => this.constructor.transformCommand(command)),
-	    });
-	    return data.reduce(
-	      (collection, command) => collection.set(command.id, this._add(command, true, guildId)),
-	      new Collection(),
-	    );
-	  }
-
-	  /**
-	   * Edits an application command.
-	   * @param {ApplicationCommandResolvable} command The command to edit
-	   * @param {Partial<ApplicationCommandDataResolvable>} data The data to update the command with
-	   * @param {Snowflake} [guildId] The guild's id where the command registered,
-	   * ignored when using a {@link GuildApplicationCommandManager}
-	   * @returns {Promise<ApplicationCommand>}
-	   * @example
-	   * // Edit an existing command
-	   * client.application.commands.edit('123456789012345678', {
-	   *   description: 'New description',
-	   * })
-	   *   .then(console.log)
-	   *   .catch(console.error);
-	   */
-	  async edit(command, data, guildId) {
-	    const id = this.resolveId(command);
-	    if (!id) throw new DiscordjsTypeError(ErrorCodes.InvalidType, 'command', 'ApplicationCommandResolvable');
-
-	    const patched = await this.client.rest.patch(this.commandPath({ id, guildId }), {
-	      body: this.constructor.transformCommand(data),
-	    });
-	    return this._add(patched, true, guildId);
-	  }
-
-	  /**
-	   * Deletes an application command.
-	   * @param {ApplicationCommandResolvable} command The command to delete
-	   * @param {Snowflake} [guildId] The guild's id where the command is registered,
-	   * ignored when using a {@link GuildApplicationCommandManager}
-	   * @returns {Promise<?ApplicationCommand>}
-	   * @example
-	   * // Delete a command
-	   * guild.commands.delete('123456789012345678')
-	   *   .then(console.log)
-	   *   .catch(console.error);
-	   */
-	  async delete(command, guildId) {
-	    const id = this.resolveId(command);
-	    if (!id) throw new DiscordjsTypeError(ErrorCodes.InvalidType, 'command', 'ApplicationCommandResolvable');
-
-	    await this.client.rest.delete(this.commandPath({ id, guildId }));
-
-	    const cached = this.cache.get(id);
-	    this.cache.delete(id);
-	    return cached ?? null;
-	  }
-
-	  /**
-	   * Transforms an {@link ApplicationCommandData} object into something that can be used with the API.
-	   * @param {ApplicationCommandDataResolvable} command The command to transform
-	   * @returns {APIApplicationCommand}
-	   * @private
-	   */
-	  static transformCommand(command) {
-	    if (isJSONEncodable(command)) return command.toJSON();
-
-	    let default_member_permissions;
-
-	    if ('default_member_permissions' in command) {
-	      default_member_permissions = command.default_member_permissions
-	        ? new PermissionsBitField(BigInt(command.default_member_permissions)).bitfield.toString()
-	        : command.default_member_permissions;
-	    }
-
-	    if ('defaultMemberPermissions' in command) {
-	      default_member_permissions =
-	        command.defaultMemberPermissions !== null
-	          ? new PermissionsBitField(command.defaultMemberPermissions).bitfield.toString()
-	          : command.defaultMemberPermissions;
-	    }
-
-	    return {
-	      name: command.name,
-	      name_localizations: command.nameLocalizations ?? command.name_localizations,
-	      description: command.description,
-	      nsfw: command.nsfw,
-	      description_localizations: command.descriptionLocalizations ?? command.description_localizations,
-	      type: command.type,
-	      options: command.options?.map(option => ApplicationCommand.transformOption(option)),
-	      default_member_permissions,
-	      dm_permission: command.dmPermission ?? command.dm_permission,
-	      integration_types: command.integrationTypes ?? command.integration_types,
-	      contexts: command.contexts,
-	    };
-	  }
-	}
-
-	ApplicationCommandManager_1 = ApplicationCommandManager;
-	return ApplicationCommandManager_1;
-}
-
-var ApplicationEmoji_1;
-var hasRequiredApplicationEmoji;
-
-function requireApplicationEmoji () {
-	if (hasRequiredApplicationEmoji) return ApplicationEmoji_1;
-	hasRequiredApplicationEmoji = 1;
-
-	const { Emoji } = requireEmoji$1();
-
-	/**
-	 * Represents a custom emoji.
-	 * @extends {Emoji}
-	 */
-	class ApplicationEmoji extends Emoji {
-	  constructor(client, data, application) {
-	    super(client, data);
-
-	    /**
-	     * The application this emoji originates from
-	     * @type {ClientApplication}
-	     */
-	    this.application = application;
-
-	    /**
-	     * The user who created this emoji
-	     * @type {?User}
-	     */
-	    this.author = null;
-
-	    this.managed = null;
-	    this.requiresColons = null;
-
-	    this._patch(data);
-	  }
-
-	  _patch(data) {
-	    if ('name' in data) this.name = data.name;
-	    if (data.user) this.author = this.client.users._add(data.user);
-
-	    if ('managed' in data) {
-	      /**
-	       * Whether this emoji is managed by an external service
-	       * @type {?boolean}
-	       */
-	      this.managed = data.managed;
-	    }
-
-	    if ('require_colons' in data) {
-	      /**
-	       * Whether or not this emoji requires colons surrounding it
-	       * @type {?boolean}
-	       */
-	      this.requiresColons = data.require_colons;
-	    }
-	  }
-
-	  /**
-	   * Fetches the author for this emoji
-	   * @returns {Promise<User>}
-	   */
-	  fetchAuthor() {
-	    return this.application.emojis.fetchAuthor(this);
-	  }
-
-	  /**
-	   * Data for editing an emoji.
-	   * @typedef {Object} ApplicationEmojiEditOptions
-	   * @property {string} [name] The name of the emoji
-	   */
-
-	  /**
-	   * Edits the emoji.
-	   * @param {ApplicationEmojiEditOptions} options The options to provide
-	   * @returns {Promise<ApplicationEmoji>}
-	   * @example
-	   * // Edit an emoji
-	   * emoji.edit({ name: 'newemoji' })
-	   *   .then(emoji => console.log(`Edited emoji ${emoji}`))
-	   *   .catch(console.error);
-	   */
-	  edit(options) {
-	    return this.application.emojis.edit(this.id, options);
-	  }
-
-	  /**
-	   * Sets the name of the emoji.
-	   * @param {string} name The new name for the emoji
-	   * @returns {Promise<ApplicationEmoji>}
-	   */
-	  setName(name) {
-	    return this.edit({ name });
-	  }
-
-	  /**
-	   * Deletes the emoji.
-	   * @returns {Promise<ApplicationEmoji>}
-	   */
-	  async delete() {
-	    await this.application.emojis.delete(this.id);
-	    return this;
-	  }
-
-	  /**
-	   * Whether this emoji is the same as another one.
-	   * @param {ApplicationEmoji|APIEmoji} other The emoji to compare it to
-	   * @returns {boolean}
-	   */
-	  equals(other) {
-	    if (other instanceof ApplicationEmoji) {
-	      return (
-	        other.animated === this.animated &&
-	        other.id === this.id &&
-	        other.name === this.name &&
-	        other.managed === this.managed &&
-	        other.requiresColons === this.requiresColons
-	      );
-	    }
-
-	    return other.id === this.id && other.name === this.name;
-	  }
-	}
-
-	ApplicationEmoji_1 = ApplicationEmoji;
-	return ApplicationEmoji_1;
-}
-
-var ApplicationEmojiManager_1;
-var hasRequiredApplicationEmojiManager;
-
-function requireApplicationEmojiManager () {
-	if (hasRequiredApplicationEmojiManager) return ApplicationEmojiManager_1;
-	hasRequiredApplicationEmojiManager = 1;
-
-	const { Collection } = requireDist$7();
-	const { Routes } = requireV10();
-	const CachedManager = requireCachedManager();
-	const { DiscordjsTypeError, ErrorCodes } = requireErrors$1();
-	const ApplicationEmoji = requireApplicationEmoji();
-	const { resolveImage } = requireDataResolver();
-
-	/**
-	 * Manages API methods for ApplicationEmojis and stores their cache.
-	 * @extends {CachedManager}
-	 */
-	class ApplicationEmojiManager extends CachedManager {
-	  constructor(application, iterable) {
-	    super(application.client, ApplicationEmoji, iterable);
-
-	    /**
-	     * The application this manager belongs to
-	     * @type {ClientApplication}
-	     */
-	    this.application = application;
-	  }
-
-	  _add(data, cache) {
-	    return super._add(data, cache, { extras: [this.application] });
-	  }
-
-	  /**
-	   * Options used for creating an emoji of the application
-	   * @typedef {Object} ApplicationEmojiCreateOptions
-	   * @property {BufferResolvable|Base64Resolvable} attachment The image for the emoji
-	   * @property {string} name The name for the emoji
-	   */
-
-	  /**
-	   * Creates a new custom emoji of the application.
-	   * @param {ApplicationEmojiCreateOptions} options Options for creating the emoji
-	   * @returns {Promise<Emoji>} The created emoji
-	   * @example
-	   * // Create a new emoji from a URL
-	   * application.emojis.create({ attachment: 'https://i.imgur.com/w3duR07.png', name: 'rip' })
-	   *   .then(emoji => console.log(`Created new emoji with name ${emoji.name}!`))
-	   *   .catch(console.error);
-	   * @example
-	   * // Create a new emoji from a file on your computer
-	   * application.emojis.create({ attachment: './memes/banana.png', name: 'banana' })
-	   *   .then(emoji => console.log(`Created new emoji with name ${emoji.name}!`))
-	   *   .catch(console.error);
-	   */
-	  async create({ attachment, name }) {
-	    attachment = await resolveImage(attachment);
-	    if (!attachment) throw new DiscordjsTypeError(ErrorCodes.ReqResourceType);
-
-	    const body = { image: attachment, name };
-
-	    const emoji = await this.client.rest.post(Routes.applicationEmojis(this.application.id), { body });
-	    return this._add(emoji);
-	  }
-
-	  /**
-	   * Obtains one or more emojis from Discord, or the emoji cache if they're already available.
-	   * @param {Snowflake} [id] The emoji's id
-	   * @param {BaseFetchOptions} [options] Additional options for this fetch
-	   * @returns {Promise<ApplicationEmoji|Collection<Snowflake, ApplicationEmoji>>}
-	   * @example
-	   * // Fetch all emojis from the application
-	   * application.emojis.fetch()
-	   *   .then(emojis => console.log(`There are ${emojis.size} emojis.`))
-	   *   .catch(console.error);
-	   * @example
-	   * // Fetch a single emoji
-	   * application.emojis.fetch('222078108977594368')
-	   *   .then(emoji => console.log(`The emoji name is: ${emoji.name}`))
-	   *   .catch(console.error);
-	   */
-	  async fetch(id, { cache = true, force = false } = {}) {
-	    if (id) {
-	      if (!force) {
-	        const existing = this.cache.get(id);
-	        if (existing) return existing;
-	      }
-	      const emoji = await this.client.rest.get(Routes.applicationEmoji(this.application.id, id));
-	      return this._add(emoji, cache);
-	    }
-
-	    const { items: data } = await this.client.rest.get(Routes.applicationEmojis(this.application.id));
-	    const emojis = new Collection();
-	    for (const emoji of data) emojis.set(emoji.id, this._add(emoji, cache));
-	    return emojis;
-	  }
-
-	  /**
-	   * Deletes an emoji.
-	   * @param {EmojiResolvable} emoji The Emoji resolvable to delete
-	   * @returns {Promise<void>}
-	   */
-	  async delete(emoji) {
-	    const id = this.resolveId(emoji);
-	    if (!id) throw new DiscordjsTypeError(ErrorCodes.InvalidType, 'emoji', 'EmojiResolvable', true);
-	    await this.client.rest.delete(Routes.applicationEmoji(this.application.id, id));
-	  }
-
-	  /**
-	   * Edits an emoji.
-	   * @param {EmojiResolvable} emoji The Emoji resolvable to edit
-	   * @param {ApplicationEmojiEditOptions} options The options to provide
-	   * @returns {Promise<ApplicationEmoji>}
-	   */
-	  async edit(emoji, options) {
-	    const id = this.resolveId(emoji);
-	    if (!id) throw new DiscordjsTypeError(ErrorCodes.InvalidType, 'emoji', 'EmojiResolvable', true);
-
-	    const newData = await this.client.rest.patch(Routes.applicationEmoji(this.application.id, id), {
-	      body: {
-	        name: options.name,
-	      },
-	    });
-	    const existing = this.cache.get(id);
-	    if (existing) {
-	      existing._patch(newData);
-	      return existing;
-	    }
-	    return this._add(newData);
-	  }
-
-	  /**
-	   * Fetches the author for this emoji
-	   * @param {EmojiResolvable} emoji The emoji to fetch the author of
-	   * @returns {Promise<User>}
-	   */
-	  async fetchAuthor(emoji) {
-	    const id = this.resolveId(emoji);
-	    if (!id) throw new DiscordjsTypeError(ErrorCodes.InvalidType, 'emoji', 'EmojiResolvable', true);
-
-	    const data = await this.client.rest.get(Routes.applicationEmoji(this.application.id, id));
-
-	    return this._add(data).author;
-	  }
-	}
-
-	ApplicationEmojiManager_1 = ApplicationEmojiManager;
-	return ApplicationEmojiManager_1;
-}
-
-var EntitlementManager = {};
-
-var Entitlement = {};
-
-var hasRequiredEntitlement;
-
-function requireEntitlement () {
-	if (hasRequiredEntitlement) return Entitlement;
-	hasRequiredEntitlement = 1;
-
-	const Base = requireBase();
-
-	/**
-	 * Represents an Entitlement
-	 * @extends {Base}
-	 */
-	let Entitlement$1 = class Entitlement extends Base {
-	  constructor(client, data) {
-	    super(client);
-
-	    /**
-	     * The id of the entitlement
-	     * @type {Snowflake}
-	     */
-	    this.id = data.id;
-
-	    this._patch(data);
-	  }
-
-	  _patch(data) {
-	    if ('sku_id' in data) {
-	      /**
-	       * The id of the associated SKU
-	       * @type {Snowflake}
-	       */
-	      this.skuId = data.sku_id;
-	    }
-
-	    if ('user_id' in data) {
-	      /**
-	       * The id of the user that is granted access to this entitlement's SKU
-	       * @type {Snowflake}
-	       */
-	      this.userId = data.user_id;
-	    }
-
-	    if ('guild_id' in data) {
-	      /**
-	       * The id of the guild that is granted access to this entitlement's SKU
-	       * @type {?Snowflake}
-	       */
-	      this.guildId = data.guild_id;
-	    } else {
-	      this.guildId ??= null;
-	    }
-
-	    if ('application_id' in data) {
-	      /**
-	       * The id of the parent application
-	       * @type {Snowflake}
-	       */
-	      this.applicationId = data.application_id;
-	    }
-
-	    if ('type' in data) {
-	      /**
-	       * The type of this entitlement
-	       * @type {EntitlementType}
-	       */
-	      this.type = data.type;
-	    }
-
-	    if ('deleted' in data) {
-	      /**
-	       * Whether this entitlement was deleted
-	       * @type {boolean}
-	       */
-	      this.deleted = data.deleted;
-	    }
-
-	    if ('starts_at' in data) {
-	      /**
-	       * The timestamp at which this entitlement is valid
-	       * @type {?number}
-	       */
-	      this.startsTimestamp = data.starts_at ? Date.parse(data.starts_at) : null;
-	    } else {
-	      this.startsTimestamp ??= null;
-	    }
-
-	    if ('ends_at' in data) {
-	      /**
-	       * The timestamp at which this entitlement is no longer valid
-	       * @type {?number}
-	       */
-	      this.endsTimestamp = data.ends_at ? Date.parse(data.ends_at) : null;
-	    } else {
-	      this.endsTimestamp ??= null;
-	    }
-
-	    if ('consumed' in data) {
-	      /**
-	       * Whether this entitlement has been consumed
-	       * @type {boolean}
-	       */
-	      this.consumed = data.consumed;
-	    } else {
-	      this.consumed ??= false;
-	    }
-	  }
-
-	  /**
-	   * The guild that is granted access to this entitlement's SKU
-	   * @type {?Guild}
-	   */
-	  get guild() {
-	    if (!this.guildId) return null;
-	    return this.client.guilds.cache.get(this.guildId) ?? null;
-	  }
-
-	  /**
-	   * The start date at which this entitlement is valid
-	   * @type {?Date}
-	   */
-	  get startsAt() {
-	    return this.startsTimestamp && new Date(this.startsTimestamp);
-	  }
-
-	  /**
-	   * The end date at which this entitlement is no longer valid
-	   * @type {?Date}
-	   */
-	  get endsAt() {
-	    return this.endsTimestamp && new Date(this.endsTimestamp);
-	  }
-
-	  /**
-	   * Indicates whether this entitlement is active
-	   * @returns {boolean}
-	   */
-	  isActive() {
-	    return !this.deleted && (!this.endsTimestamp || this.endsTimestamp > Date.now());
-	  }
-
-	  /**
-	   * Indicates whether this entitlement is a test entitlement
-	   * @returns {boolean}
-	   */
-	  isTest() {
-	    return this.startsTimestamp === null;
-	  }
-
-	  /**
-	   * Indicates whether this entitlement is a user subscription
-	   * @returns {boolean}
-	   */
-	  isUserSubscription() {
-	    return this.guildId === null;
-	  }
-
-	  /**
-	   * Indicates whether this entitlement is a guild subscription
-	   * @returns {boolean}
-	   */
-	  isGuildSubscription() {
-	    return this.guildId !== null;
-	  }
-
-	  /**
-	   * Fetches the user that is granted access to this entitlement's SKU
-	   * @returns {Promise<User>}
-	   */
-	  fetchUser() {
-	    return this.client.users.fetch(this.userId);
-	  }
-
-	  /**
-	   * Marks this entitlement as consumed
-	   * <info>Only available for One-Time Purchase consumable SKUs.</info>
-	   * @returns {Promise<void>}
-	   */
-	  async consume() {
-	    await this.client.application.entitlements.consume(this.id);
-	  }
-	};
-
-	Entitlement.Entitlement = Entitlement$1;
-	return Entitlement;
-}
-
-var hasRequiredEntitlementManager;
-
-function requireEntitlementManager () {
-	if (hasRequiredEntitlementManager) return EntitlementManager;
-	hasRequiredEntitlementManager = 1;
-
-	const { Collection } = requireDist$7();
-	const { makeURLSearchParams } = requireWeb();
-	const { Routes, EntitlementOwnerType } = requireV10();
-	const CachedManager = requireCachedManager();
-	const { ErrorCodes, DiscordjsTypeError } = requireErrors$1();
-	const { Entitlement } = requireEntitlement();
-	const { resolveSKUId } = requireUtil();
-
-	/**
-	 * Manages API methods for entitlements and stores their cache.
-	 * @extends {CachedManager}
-	 */
-	let EntitlementManager$1 = class EntitlementManager extends CachedManager {
-	  constructor(client, iterable) {
-	    super(client, Entitlement, iterable);
-	  }
-
-	  /**
-	   * The cache of this manager
-	   * @type {Collection<Snowflake, Entitlement>}
-	   * @name EntitlementManager#cache
-	   */
-
-	  /**
-	   * Data that resolves to give an Entitlement object. This can be:
-	   * * An Entitlement object
-	   * * A Snowflake
-	   * @typedef {Entitlement|Snowflake} EntitlementResolvable
-	   */
-
-	  /**
-	   * Data that resolves to give a SKU object. This can be:
-	   * * A SKU object
-	   * * A Snowflake
-	   * @typedef {SKU|Snowflake} SKUResolvable
-	   */
-
-	  /**
-	   * Options used to fetch an entitlement
-	   * @typedef {BaseFetchOptions} FetchEntitlementOptions
-	   * @property {EntitlementResolvable} entitlement The entitlement to fetch
-	   */
-
-	  /**
-	   * Options used to fetch entitlements
-	   * @typedef {Object} FetchEntitlementsOptions
-	   * @property {number} [limit] The maximum number of entitlements to fetch
-	   * @property {GuildResolvable} [guild] The guild to fetch entitlements for
-	   * @property {UserResolvable} [user] The user to fetch entitlements for
-	   * @property {SKUResolvable[]} [skus] The SKUs to fetch entitlements for
-	   * @property {boolean} [excludeEnded] Whether to exclude ended entitlements
-	   * @property {boolean} [excludeDeleted] Whether to exclude deleted entitlements
-	   * @property {boolean} [cache=true] Whether to cache the fetched entitlements
-	   * @property {Snowflake} [before] Consider only entitlements before this entitlement id
-	   * @property {Snowflake} [after] Consider only entitlements after this entitlement id
-	   * <warn>If both `before` and `after` are provided, only `before` is respected</warn>
-	   */
-
-	  /**
-	   * Fetches entitlements for this application
-	   * @param {EntitlementResolvable|FetchEntitlementOptions|FetchEntitlementsOptions} [options]
-	   * Options for fetching the entitlements
-	   * @returns {Promise<Entitlement|Collection<Snowflake, Entitlement>>}
-	   */
-	  async fetch(options) {
-	    if (!options) return this._fetchMany(options);
-	    const { entitlement, cache, force } = options;
-	    const resolvedEntitlement = this.resolveId(entitlement ?? options);
-
-	    if (resolvedEntitlement) {
-	      return this._fetchSingle({ entitlement: resolvedEntitlement, cache, force });
-	    }
-
-	    return this._fetchMany(options);
-	  }
-
-	  async _fetchSingle({ entitlement, cache, force = false }) {
-	    if (!force) {
-	      const existing = this.cache.get(entitlement);
-
-	      if (existing) {
-	        return existing;
-	      }
-	    }
-
-	    const data = await this.client.rest.get(Routes.entitlement(this.client.application.id, entitlement));
-	    return this._add(data, cache);
-	  }
-
-	  async _fetchMany({ limit, guild, user, skus, excludeEnded, excludeDeleted, cache, before, after } = {}) {
-	    const query = makeURLSearchParams({
-	      limit,
-	      guild_id: guild && this.client.guilds.resolveId(guild),
-	      user_id: user && this.client.users.resolveId(user),
-	      sku_ids: skus?.map(sku => resolveSKUId(sku)).join(','),
-	      exclude_ended: excludeEnded,
-	      exclude_deleted: excludeDeleted,
-	      before,
-	      after,
-	    });
-
-	    const entitlements = await this.client.rest.get(Routes.entitlements(this.client.application.id), { query });
-
-	    return entitlements.reduce(
-	      (coll, entitlement) => coll.set(entitlement.id, this._add(entitlement, cache)),
-	      new Collection(),
-	    );
-	  }
-
-	  /**
-	   * Options used to create a test entitlement
-	   * <info>Either `guild` or `user` must be provided, but not both</info>
-	   * @typedef {Object} EntitlementCreateOptions
-	   * @property {SKUResolvable} sku The id of the SKU to create the entitlement for
-	   * @property {GuildResolvable} [guild] The guild to create the entitlement for
-	   * @property {UserResolvable} [user] The user to create the entitlement for
-	   */
-
-	  /**
-	   * Creates a test entitlement
-	   * @param {EntitlementCreateOptions} options Options for creating the test entitlement
-	   * @returns {Promise<Entitlement>}
-	   */
-	  async createTest({ sku, guild, user }) {
-	    const skuId = resolveSKUId(sku);
-	    if (!skuId) throw new DiscordjsTypeError(ErrorCodes.InvalidType, 'sku', 'SKUResolvable');
-
-	    if ((guild && user) || (!guild && !user)) {
-	      throw new DiscordjsTypeError(ErrorCodes.EntitlementCreateInvalidOwner);
-	    }
-
-	    const resolved = guild ? this.client.guilds.resolveId(guild) : this.client.users.resolveId(user);
-	    if (!resolved) {
-	      const name = guild ? 'guild' : 'user';
-	      const type = guild ? 'GuildResolvable' : 'UserResolvable';
-	      throw new DiscordjsTypeError(ErrorCodes.InvalidType, name, type);
-	    }
-
-	    const entitlement = await this.client.rest.post(Routes.entitlements(this.client.application.id), {
-	      body: {
-	        sku_id: skuId,
-	        owner_id: resolved,
-	        owner_type: guild ? EntitlementOwnerType.Guild : EntitlementOwnerType.User,
-	      },
-	    });
-	    return new Entitlement(this.client, entitlement);
-	  }
-
-	  /**
-	   * Deletes a test entitlement
-	   * @param {EntitlementResolvable} entitlement The entitlement to delete
-	   * @returns {Promise<void>}
-	   */
-	  async deleteTest(entitlement) {
-	    const resolved = this.resolveId(entitlement);
-	    if (!resolved) throw new DiscordjsTypeError(ErrorCodes.InvalidType, 'entitlement', 'EntitlementResolvable');
-
-	    await this.client.rest.delete(Routes.entitlement(this.client.application.id, resolved));
-	  }
-
-	  /**
-	   * Marks an entitlement as consumed
-	   * <info>Only available for One-Time Purchase consumable SKUs.</info>
-	   * @param {Snowflake} entitlementId The id of the entitlement to consume
-	   * @returns {Promise<void>}
-	   */
-	  async consume(entitlementId) {
-	    await this.client.rest.post(Routes.consumeEntitlement(this.client.application.id, entitlementId));
-	  }
-	};
-
-	EntitlementManager.EntitlementManager = EntitlementManager$1;
-	return EntitlementManager;
-}
-
-var SubscriptionManager = {};
-
-var Subscription = {};
-
-var hasRequiredSubscription;
-
-function requireSubscription () {
-	if (hasRequiredSubscription) return Subscription;
-	hasRequiredSubscription = 1;
-
-	const Base = requireBase();
-
-	/**
-	 * Represents a Subscription
-	 * @extends {Base}
-	 */
-	let Subscription$1 = class Subscription extends Base {
-	  constructor(client, data) {
-	    super(client);
-
-	    /**
-	     * The id of the subscription
-	     * @type {Snowflake}
-	     */
-	    this.id = data.id;
-
-	    /**
-	     * The id of the user who subscribed
-	     * @type {Snowflake}
-	     */
-	    this.userId = data.user_id;
-
-	    this._patch(data);
-	  }
-
-	  _patch(data) {
-	    /**
-	     * The SKU ids subscribed to
-	     * @type {Snowflake[]}
-	     */
-	    this.skuIds = data.sku_ids;
-
-	    /**
-	     * The entitlement ids granted for this subscription
-	     * @type {Snowflake[]}
-	     */
-	    this.entitlementIds = data.entitlement_ids;
-
-	    /**
-	     * The timestamp the current subscription period will start at
-	     * @type {number}
-	     */
-	    this.currentPeriodStartTimestamp = Date.parse(data.current_period_start);
-
-	    /**
-	     * The timestamp the current subscription period will end at
-	     * @type {number}
-	     */
-	    this.currentPeriodEndTimestamp = Date.parse(data.current_period_end);
-
-	    /**
-	     * The current status of the subscription
-	     * @type {SubscriptionStatus}
-	     */
-	    this.status = data.status;
-
-	    if ('renewal_sku_ids' in data) {
-	      /**
-	       * The SKU ids that this user will be subscribed to at renewal
-	       * @type {?Snowflake[]}
-	       */
-	      this.renewalSkuIds = data.renewal_sku_ids;
-	    }
-
-	    if ('canceled_at' in data) {
-	      /**
-	       * The timestamp of when the subscription was canceled
-	       * @type {?number}
-	       */
-	      this.canceledTimestamp = data.canceled_at ? Date.parse(data.canceled_at) : null;
-	    } else {
-	      this.canceledTimestamp ??= null;
-	    }
-
-	    if ('country' in data) {
-	      /**
-	       * ISO 3166-1 alpha-2 country code of the payment source used to purchase the subscription.
-	       * Missing unless queried with a private OAuth scope.
-	       * @type {?string}
-	       */
-	      this.country = data.country;
-	    } else {
-	      this.country ??= null;
-	    }
-	  }
-
-	  /**
-	   * The time the subscription was canceled
-	   * @type {?Date}
-	   * @readonly
-	   */
-	  get canceledAt() {
-	    return this.canceledTimestamp && new Date(this.canceledTimestamp);
-	  }
-
-	  /**
-	   * The time the current subscription period will start at
-	   * @type {Date}
-	   * @readonly
-	   */
-	  get currentPeriodStartAt() {
-	    return new Date(this.currentPeriodStartTimestamp);
-	  }
-
-	  /**
-	   * The time the current subscription period will end at
-	   * @type {Date}
-	   * @readonly
-	   */
-	  get currentPeriodEndAt() {
-	    return new Date(this.currentPeriodEndTimestamp);
-	  }
-	};
-
-	Subscription.Subscription = Subscription$1;
-	return Subscription;
-}
-
-var hasRequiredSubscriptionManager;
-
-function requireSubscriptionManager () {
-	if (hasRequiredSubscriptionManager) return SubscriptionManager;
-	hasRequiredSubscriptionManager = 1;
-
-	const { Collection } = requireDist$7();
-	const { makeURLSearchParams } = requireWeb();
-	const { Routes } = requireV10();
-	const CachedManager = requireCachedManager();
-	const { DiscordjsTypeError, ErrorCodes } = requireErrors$1();
-	const { Subscription } = requireSubscription();
-	const { resolveSKUId } = requireUtil();
-
-	/**
-	 * Manages API methods for subscriptions and stores their cache.
-	 * @extends {CachedManager}
-	 */
-	let SubscriptionManager$1 = class SubscriptionManager extends CachedManager {
-	  constructor(client, iterable) {
-	    super(client, Subscription, iterable);
-	  }
-
-	  /**
-	   * The cache of this manager
-	   * @type {Collection<Snowflake, Subscription>}
-	   * @name SubscriptionManager#cache
-	   */
-
-	  /**
-	   * Options used to fetch a subscription
-	   * @typedef {BaseFetchOptions} FetchSubscriptionOptions
-	   * @property {SKUResolvable} sku The SKU to fetch the subscription for
-	   * @property {Snowflake} subscriptionId The id of the subscription to fetch
-	   */
-
-	  /**
-	   * Options used to fetch subscriptions
-	   * @typedef {Object} FetchSubscriptionsOptions
-	   * @property {Snowflake} [after] Consider only subscriptions after this subscription id
-	   * @property {Snowflake} [before] Consider only subscriptions before this subscription id
-	   * @property {number} [limit] The maximum number of subscriptions to fetch
-	   * @property {SKUResolvable} sku The SKU to fetch subscriptions for
-	   * @property {UserResolvable} user The user to fetch entitlements for
-	   * <warn>If both `before` and `after` are provided, only `before` is respected</warn>
-	   */
-
-	  /**
-	   * Fetches subscriptions for this application
-	   * @param {FetchSubscriptionOptions|FetchSubscriptionsOptions} [options={}] Options for fetching the subscriptions
-	   * @returns {Promise<Subscription|Collection<Snowflake, Subscription>>}
-	   */
-	  async fetch(options = {}) {
-	    if (typeof options !== 'object') throw new DiscordjsTypeError(ErrorCodes.InvalidType, 'options', 'object', true);
-
-	    const { after, before, cache, limit, sku, subscriptionId, user } = options;
-
-	    const skuId = resolveSKUId(sku);
-
-	    if (!skuId) throw new DiscordjsTypeError(ErrorCodes.InvalidType, 'sku', 'SKUResolvable');
-
-	    if (subscriptionId) {
-	      const subscription = await this.client.rest.get(Routes.skuSubscription(skuId, subscriptionId));
-
-	      return this._add(subscription, cache);
-	    }
-
-	    const query = makeURLSearchParams({
-	      limit,
-	      user_id: this.client.users.resolveId(user) ?? undefined,
-	      sku_id: skuId,
-	      before,
-	      after,
-	    });
-
-	    const subscriptions = await this.client.rest.get(Routes.skuSubscriptions(skuId), { query });
-
-	    return subscriptions.reduce(
-	      (coll, subscription) => coll.set(subscription.id, this._add(subscription, cache)),
-	      new Collection(),
-	    );
-	  }
-	};
-
-	SubscriptionManager.SubscriptionManager = SubscriptionManager$1;
-	return SubscriptionManager;
-}
-
-var ApplicationFlagsBitField_1;
-var hasRequiredApplicationFlagsBitField;
-
-function requireApplicationFlagsBitField () {
-	if (hasRequiredApplicationFlagsBitField) return ApplicationFlagsBitField_1;
-	hasRequiredApplicationFlagsBitField = 1;
-
-	const { ApplicationFlags } = requireV10();
-	const BitField = requireBitField();
-
-	/**
-	 * Data structure that makes it easy to interact with a {@link ClientApplication#flags} bitfield.
-	 * @extends {BitField}
-	 */
-	class ApplicationFlagsBitField extends BitField {
-	  /**
-	   * Numeric application flags. All available properties:
-	   * @type {ApplicationFlags}
-	   * @memberof ApplicationFlagsBitField
-	   */
-	  static Flags = ApplicationFlags;
-	}
-
-	/**
-	 * @name ApplicationFlagsBitField
-	 * @kind constructor
-	 * @memberof ApplicationFlagsBitField
-	 * @param {BitFieldResolvable} [bits=0] Bit(s) to read from
-	 */
-
-	/**
-	 * Bitfield of the packed bits
-	 * @type {number}
-	 * @name ApplicationFlagsBitField#bitfield
-	 */
-
-	/**
-	 * Data that can be resolved to give an application flag bit field. This can be:
-	 * * A string (see {@link ApplicationFlagsBitField.Flags})
-	 * * An application flag
-	 * * An instance of ApplicationFlagsBitField
-	 * * An Array of ApplicationFlagsResolvable
-	 * @typedef {string|number|ApplicationFlagsBitField|ApplicationFlagsResolvable[]} ApplicationFlagsResolvable
-	 */
-
-	ApplicationFlagsBitField_1 = ApplicationFlagsBitField;
-	return ApplicationFlagsBitField_1;
-}
-
-var ClientApplication_1;
-var hasRequiredClientApplication;
-
-function requireClientApplication () {
-	if (hasRequiredClientApplication) return ClientApplication_1;
-	hasRequiredClientApplication = 1;
-
-	const { Collection } = requireDist$7();
-	const { Routes } = requireV10();
-	const { ApplicationRoleConnectionMetadata } = requireApplicationRoleConnectionMetadata();
-	const { SKU } = requireSKU();
-	const Team = requireTeam();
-	const Application = requireApplication();
-	const ApplicationCommandManager = requireApplicationCommandManager();
-	const ApplicationEmojiManager = requireApplicationEmojiManager();
-	const { EntitlementManager } = requireEntitlementManager();
-	const { SubscriptionManager } = requireSubscriptionManager();
-	const ApplicationFlagsBitField = requireApplicationFlagsBitField();
-	const { resolveImage } = requireDataResolver();
-	const PermissionsBitField = requirePermissionsBitField();
-
-	/**
-	 * @typedef {Object} ClientApplicationInstallParams
-	 * @property {OAuth2Scopes[]} scopes Scopes that will be set upon adding this application
-	 * @property {Readonly<PermissionsBitField>} permissions Permissions that will be requested for the integrated role
-	 */
-
-	/**
-	 * Represents a client application.
-	 * @extends {Application}
-	 */
-	class ClientApplication extends Application {
-	  constructor(client, data) {
-	    super(client, data);
-
-	    /**
-	     * The application command manager for this application
-	     * @type {ApplicationCommandManager}
-	     */
-	    this.commands = new ApplicationCommandManager(this.client);
-
-	    /**
-	     * The application emoji manager for this application
-	     * @type {ApplicationEmojiManager}
-	     */
-	    this.emojis = new ApplicationEmojiManager(this);
-
-	    /**
-	     * The entitlement manager for this application
-	     * @type {EntitlementManager}
-	     */
-	    this.entitlements = new EntitlementManager(this.client);
-
-	    /**
-	     * The subscription manager for this application
-	     * @type {SubscriptionManager}
-	     */
-	    this.subscriptions = new SubscriptionManager(this.client);
-	  }
-
-	  _patch(data) {
-	    super._patch(data);
-
-	    /**
-	     * The tags this application has (max of 5)
-	     * @type {string[]}
-	     */
-	    this.tags = data.tags ?? [];
-
-	    if ('install_params' in data) {
-	      /**
-	       * Settings for this application's default in-app authorization
-	       * @type {?ClientApplicationInstallParams}
-	       */
-	      this.installParams = {
-	        scopes: data.install_params.scopes,
-	        permissions: new PermissionsBitField(data.install_params.permissions).freeze(),
-	      };
-	    } else {
-	      this.installParams ??= null;
-	    }
-
-	    /**
-	     * OAuth2 installation parameters.
-	     * @typedef {Object} IntegrationTypesConfigurationParameters
-	     * @property {OAuth2Scopes[]} scopes Scopes that will be set upon adding this application
-	     * @property {Readonly<PermissionsBitField>} permissions Permissions that will be requested for the integrated role
-	     */
-
-	    /**
-	     * The application's supported installation context data.
-	     * @typedef {Object} IntegrationTypesConfigurationContext
-	     * @property {?IntegrationTypesConfigurationParameters} oauth2InstallParams
-	     * Scopes and permissions regarding the installation context
-	     */
-
-	    /**
-	     * The application's supported installation context data.
-	     * @typedef {Object} IntegrationTypesConfiguration
-	     * @property {IntegrationTypesConfigurationContext} [0] Scopes and permissions
-	     * regarding the guild-installation context
-	     * @property {IntegrationTypesConfigurationContext} [1] Scopes and permissions
-	     * regarding the user-installation context
-	     */
-
-	    if ('integration_types_config' in data) {
-	      /**
-	       * Default scopes and permissions for each supported installation context.
-	       * The keys are stringified variants of {@link ApplicationIntegrationType}.
-	       * @type {?IntegrationTypesConfiguration}
-	       */
-	      this.integrationTypesConfig = Object.fromEntries(
-	        Object.entries(data.integration_types_config).map(([key, config]) => {
-	          let oauth2InstallParams = null;
-	          if (config.oauth2_install_params) {
-	            oauth2InstallParams = {
-	              scopes: config.oauth2_install_params.scopes,
-	              permissions: new PermissionsBitField(config.oauth2_install_params.permissions).freeze(),
-	            };
-	          }
-
-	          const context = {
-	            oauth2InstallParams,
-	          };
-
-	          return [key, context];
-	        }),
-	      );
-	    } else {
-	      this.integrationTypesConfig ??= null;
-	    }
-
-	    if ('custom_install_url' in data) {
-	      /**
-	       * This application's custom installation URL
-	       * @type {?string}
-	       */
-	      this.customInstallURL = data.custom_install_url;
-	    } else {
-	      this.customInstallURL = null;
-	    }
-
-	    if ('flags' in data) {
-	      /**
-	       * The flags this application has
-	       * @type {ApplicationFlagsBitField}
-	       */
-	      this.flags = new ApplicationFlagsBitField(data.flags).freeze();
-	    }
-
-	    if ('approximate_guild_count' in data) {
-	      /**
-	       * An approximate amount of guilds this application is in.
-	       * @type {?number}
-	       */
-	      this.approximateGuildCount = data.approximate_guild_count;
-	    } else {
-	      this.approximateGuildCount ??= null;
-	    }
-
-	    if ('approximate_user_install_count' in data) {
-	      /**
-	       * An approximate amount of users that have installed this application.
-	       * @type {?number}
-	       */
-	      this.approximateUserInstallCount = data.approximate_user_install_count;
-	    } else {
-	      this.approximateUserInstallCount ??= null;
-	    }
-
-	    if ('guild_id' in data) {
-	      /**
-	       * The id of the guild associated with this application.
-	       * @type {?Snowflake}
-	       */
-	      this.guildId = data.guild_id;
-	    } else {
-	      this.guildId ??= null;
-	    }
-
-	    if ('bot_require_code_grant' in data) {
-	      /**
-	       * If this application's bot requires a code grant when using the OAuth2 flow
-	       * @type {?boolean}
-	       */
-	      this.botRequireCodeGrant = data.bot_require_code_grant;
-	    } else {
-	      this.botRequireCodeGrant ??= null;
-	    }
-
-	    if ('bot' in data) {
-	      /**
-	       * The bot associated with this application.
-	       * @type {?User}
-	       */
-	      this.bot = this.client.users._add(data.bot);
-	    } else {
-	      this.bot ??= null;
-	    }
-
-	    if ('bot_public' in data) {
-	      /**
-	       * If this application's bot is public
-	       * @type {?boolean}
-	       */
-	      this.botPublic = data.bot_public;
-	    } else {
-	      this.botPublic ??= null;
-	    }
-
-	    if ('interactions_endpoint_url' in data) {
-	      /**
-	       * This application's interaction endpoint URL.
-	       * @type {?string}
-	       */
-	      this.interactionsEndpointURL = data.interactions_endpoint_url;
-	    } else {
-	      this.interactionsEndpointURL ??= null;
-	    }
-
-	    if ('role_connections_verification_url' in data) {
-	      /**
-	       * This application's role connection verification entry point URL
-	       * @type {?string}
-	       */
-	      this.roleConnectionsVerificationURL = data.role_connections_verification_url;
-	    } else {
-	      this.roleConnectionsVerificationURL ??= null;
-	    }
-
-	    if ('event_webhooks_url' in data) {
-	      /**
-	       * This application's URL to receive event webhooks
-	       * @type {?string}
-	       */
-	      this.eventWebhooksURL = data.event_webhooks_url;
-	    } else {
-	      this.eventWebhooksURL ??= null;
-	    }
-
-	    if ('event_webhooks_status' in data) {
-	      /**
-	       * This application's event webhooks status
-	       * @type {?ApplicationWebhookEventStatus}
-	       */
-	      this.eventWebhooksStatus = data.event_webhooks_status;
-	    } else {
-	      this.eventWebhooksStatus ??= null;
-	    }
-
-	    if ('event_webhooks_types' in data) {
-	      /**
-	       * List of event webhooks types this application subscribes to
-	       * @type {?ApplicationWebhookEventType[]}
-	       */
-	      this.eventWebhooksTypes = data.event_webhooks_types;
-	    } else {
-	      this.eventWebhooksTypes ??= null;
-	    }
-
-	    /**
-	     * The owner of this OAuth application
-	     * @type {?(User|Team)}
-	     */
-	    this.owner = data.team
-	      ? new Team(this.client, data.team)
-	      : data.owner
-	        ? this.client.users._add(data.owner)
-	        : (this.owner ?? null);
-	  }
-
-	  /**
-	   * The guild associated with this application.
-	   * @type {?Guild}
-	   * @readonly
-	   */
-	  get guild() {
-	    return this.client.guilds.cache.get(this.guildId) ?? null;
-	  }
-
-	  /**
-	   * Whether this application is partial
-	   * @type {boolean}
-	   * @readonly
-	   */
-	  get partial() {
-	    return !this.name;
-	  }
-
-	  /**
-	   * Options used for editing an application.
-	   * @typedef {Object} ClientApplicationEditOptions
-	   * @property {string} [customInstallURL] The application's custom installation URL
-	   * @property {string} [description] The application's description
-	   * @property {string} [roleConnectionsVerificationURL] The application's role connection verification URL
-	   * @property {ClientApplicationInstallParams} [installParams]
-	   * Settings for the application's default in-app authorization
-	   * @property {ApplicationFlagsResolvable} [flags] The flags for the application
-	   * @property {?(BufferResolvable|Base64Resolvable)} [icon] The application's icon
-	   * @property {?(BufferResolvable|Base64Resolvable)} [coverImage] The application's cover image
-	   * @property {string} [interactionsEndpointURL] The application's interaction endpoint URL
-	   * @property {string} [eventWebhooksURL] The application's event webhooks URL
-	   * @property {ApplicationWebhookEventStatus.Enabled|ApplicationWebhookEventStatus.Disabled} [eventWebhooksStatus]
-	   * The application's event webhooks status.
-	   * @property {ApplicationWebhookEventType[]} [eventWebhooksTypes] The application's event webhooks types
-	   * @property {string[]} [tags] The application's tags
-	   */
-
-	  /**
-	   * Edits this application.
-	   * @param {ClientApplicationEditOptions} [options] The options for editing this application
-	   * @returns {Promise<ClientApplication>}
-	   */
-	  async edit({
-	    customInstallURL,
-	    description,
-	    roleConnectionsVerificationURL,
-	    installParams,
-	    flags,
-	    icon,
-	    coverImage,
-	    interactionsEndpointURL,
-	    eventWebhooksURL,
-	    eventWebhooksStatus,
-	    eventWebhooksTypes,
-	    tags,
-	  } = {}) {
-	    const data = await this.client.rest.patch(Routes.currentApplication(), {
-	      body: {
-	        custom_install_url: customInstallURL,
-	        description,
-	        role_connections_verification_url: roleConnectionsVerificationURL,
-	        install_params: installParams,
-	        flags: flags === undefined ? undefined : ApplicationFlagsBitField.resolve(flags),
-	        icon: icon && (await resolveImage(icon)),
-	        cover_image: coverImage && (await resolveImage(coverImage)),
-	        interactions_endpoint_url: interactionsEndpointURL,
-	        event_webhooks_url: eventWebhooksURL,
-	        event_webhooks_status: eventWebhooksStatus,
-	        event_webhooks_types: eventWebhooksTypes,
-	        tags,
-	      },
-	    });
-
-	    this._patch(data);
-	    return this;
-	  }
-
-	  /**
-	   * Obtains this application from Discord.
-	   * @returns {Promise<ClientApplication>}
-	   */
-	  async fetch() {
-	    const data = await this.client.rest.get(Routes.currentApplication());
-	    this._patch(data);
-	    return this;
-	  }
-
-	  /**
-	   * Gets this application's role connection metadata records
-	   * @returns {Promise<ApplicationRoleConnectionMetadata[]>}
-	   */
-	  async fetchRoleConnectionMetadataRecords() {
-	    const metadata = await this.client.rest.get(Routes.applicationRoleConnectionMetadata(this.client.user.id));
-	    return metadata.map(data => new ApplicationRoleConnectionMetadata(data));
-	  }
-
-	  /**
-	   * Data for creating or editing an application role connection metadata.
-	   * @typedef {Object} ApplicationRoleConnectionMetadataEditOptions
-	   * @property {string} name The name of the metadata field
-	   * @property {?Object<Locale, string>} [nameLocalizations] The name localizations for the metadata field
-	   * @property {string} description The description of the metadata field
-	   * @property {?Object<Locale, string>} [descriptionLocalizations] The description localizations for the metadata field
-	   * @property {string} key The dictionary key of the metadata field
-	   * @property {ApplicationRoleConnectionMetadataType} type The type of the metadata field
-	   */
-
-	  /**
-	   * Updates this application's role connection metadata records
-	   * @param {ApplicationRoleConnectionMetadataEditOptions[]} records The new role connection metadata records
-	   * @returns {Promise<ApplicationRoleConnectionMetadata[]>}
-	   */
-	  async editRoleConnectionMetadataRecords(records) {
-	    const newRecords = await this.client.rest.put(Routes.applicationRoleConnectionMetadata(this.client.user.id), {
-	      body: records.map(record => ({
-	        type: record.type,
-	        key: record.key,
-	        name: record.name,
-	        name_localizations: record.nameLocalizations,
-	        description: record.description,
-	        description_localizations: record.descriptionLocalizations,
-	      })),
-	    });
-
-	    return newRecords.map(data => new ApplicationRoleConnectionMetadata(data));
-	  }
-
-	  /**
-	   * Gets this application's SKUs
-	   * @returns {Promise<Collection<Snowflake, SKU>>}
-	   */
-	  async fetchSKUs() {
-	    const skus = await this.client.rest.get(Routes.skus(this.id));
-	    return skus.reduce((coll, sku) => coll.set(sku.id, new SKU(this.client, sku)), new Collection());
-	  }
-	}
-
-	ClientApplication_1 = ClientApplication;
-	return ClientApplication_1;
 }
 
 var Embed_1;
@@ -89081,7 +89570,7 @@ function requireSticker () {
 	   * @returns {Promise<Sticker>}
 	   * @param {string} [reason] Reason for deleting this sticker
 	   * @example
-	   * // Delete a message
+	   * // Delete a sticker
 	   * sticker.delete()
 	   *   .then(sticker => console.log(`Deleted sticker ${sticker.name}`))
 	   *   .catch(console.error);
@@ -90358,6 +90847,1482 @@ function requireReactionManager () {
 	return ReactionManager_1;
 }
 
+var Component_1;
+var hasRequiredComponent;
+
+function requireComponent () {
+	if (hasRequiredComponent) return Component_1;
+	hasRequiredComponent = 1;
+
+	const isEqual = requireFastDeepEqual();
+
+	/**
+	 * Represents a component
+	 */
+	class Component {
+	  constructor(data) {
+	    /**
+	     * The API data associated with this component
+	     * @type {APIMessageComponent}
+	     */
+	    this.data = data;
+	  }
+
+	  /**
+	   * The id of this component
+	   * @type {number}
+	   * @readonly
+	   */
+	  get id() {
+	    return this.data.id;
+	  }
+
+	  /**
+	   * The type of the component
+	   * @type {ComponentType}
+	   * @readonly
+	   */
+	  get type() {
+	    return this.data.type;
+	  }
+
+	  /**
+	   * Whether or not the given components are equal
+	   * @param {Component|APIMessageComponent} other The component to compare against
+	   * @returns {boolean}
+	   */
+	  equals(other) {
+	    if (other instanceof Component) {
+	      return isEqual(other.data, this.data);
+	    }
+	    return isEqual(other, this.data);
+	  }
+
+	  /**
+	   * Returns the API-compatible JSON for this component
+	   * @returns {APIMessageComponent}
+	   */
+	  toJSON() {
+	    return { ...this.data };
+	  }
+	}
+
+	Component_1 = Component;
+	return Component_1;
+}
+
+var ActionRow_1;
+var hasRequiredActionRow;
+
+function requireActionRow () {
+	if (hasRequiredActionRow) return ActionRow_1;
+	hasRequiredActionRow = 1;
+
+	const { deprecate } = require$$1$3;
+	const { isJSONEncodable } = requireDist$b();
+	const Component = requireComponent();
+	const { createComponent } = requireComponents$1();
+
+	/**
+	 * Represents an action row
+	 * @extends {Component}
+	 */
+	class ActionRow extends Component {
+	  constructor({ components, ...data }) {
+	    super(data);
+
+	    /**
+	     * The components in this action row
+	     * @type {Component[]}
+	     * @readonly
+	     */
+	    this.components = components.map(component => createComponent(component));
+	  }
+
+	  /**
+	   * Creates a new action row builder from JSON data
+	   * @method from
+	   * @memberof ActionRow
+	   * @param {ActionRowBuilder|ActionRow|APIActionRowComponent} other The other data
+	   * @returns {ActionRowBuilder}
+	   * @deprecated Use {@link ActionRowBuilder.from | ActionRowBuilder#from} instead.
+	   */
+	  static from = deprecate(
+	    other => new this(isJSONEncodable(other) ? other.toJSON() : other),
+	    'ActionRow.from() is deprecated. Use ActionRowBuilder.from() instead.',
+	  );
+
+	  /**
+	   * Returns the API-compatible JSON for this component
+	   * @returns {APIActionRowComponent}
+	   */
+	  toJSON() {
+	    return { ...this.data, components: this.components.map(component => component.toJSON()) };
+	  }
+	}
+
+	ActionRow_1 = ActionRow;
+	return ActionRow_1;
+}
+
+var ActionRowBuilder_1;
+var hasRequiredActionRowBuilder;
+
+function requireActionRowBuilder () {
+	if (hasRequiredActionRowBuilder) return ActionRowBuilder_1;
+	hasRequiredActionRowBuilder = 1;
+
+	const { ActionRowBuilder: BuildersActionRow } = requireDist$5();
+	const { isJSONEncodable } = requireDist$b();
+	const { createComponentBuilder } = requireComponents$1();
+	const { toSnakeCase } = requireTransformers();
+
+	/**
+	 * Represents an action row builder.
+	 * @extends {BuildersActionRow}
+	 */
+	class ActionRowBuilder extends BuildersActionRow {
+	  constructor({ components, ...data } = {}) {
+	    super({
+	      ...toSnakeCase(data),
+	      components: components?.map(component => createComponentBuilder(component)),
+	    });
+	  }
+
+	  /**
+	   * Creates a new action row builder from JSON data
+	   * @param {ActionRow|ActionRowBuilder|APIActionRowComponent} other The other data
+	   * @returns {ActionRowBuilder}
+	   */
+	  static from(other) {
+	    return new this(isJSONEncodable(other) ? other.toJSON() : other);
+	  }
+	}
+
+	ActionRowBuilder_1 = ActionRowBuilder;
+
+	/**
+	 * @external BuildersActionRow
+	 * @see {@link https://discord.js.org/docs/packages/builders/stable/ActionRowBuilder:Class}
+	 */
+	return ActionRowBuilder_1;
+}
+
+var ButtonBuilder_1;
+var hasRequiredButtonBuilder;
+
+function requireButtonBuilder () {
+	if (hasRequiredButtonBuilder) return ButtonBuilder_1;
+	hasRequiredButtonBuilder = 1;
+
+	const { ButtonBuilder: BuildersButton } = requireDist$5();
+	const { isJSONEncodable } = requireDist$b();
+	const { toSnakeCase } = requireTransformers();
+	const { resolvePartialEmoji } = requireUtil();
+
+	/**
+	 * Represents a button builder.
+	 * @extends {BuildersButton}
+	 */
+	class ButtonBuilder extends BuildersButton {
+	  constructor({ emoji, ...data } = {}) {
+	    super(toSnakeCase({ ...data, emoji: emoji && typeof emoji === 'string' ? resolvePartialEmoji(emoji) : emoji }));
+	  }
+
+	  /**
+	   * Sets the emoji to display on this button
+	   * @param {string|APIMessageComponentEmoji} emoji The emoji to display on this button
+	   * @returns {ButtonBuilder}
+	   */
+	  setEmoji(emoji) {
+	    if (typeof emoji === 'string') {
+	      return super.setEmoji(resolvePartialEmoji(emoji));
+	    }
+	    return super.setEmoji(emoji);
+	  }
+
+	  /**
+	   * Creates a new button builder from JSON data
+	   * @param {ButtonBuilder|ButtonComponent|APIButtonComponent} other The other data
+	   * @returns {ButtonBuilder}
+	   */
+	  static from(other) {
+	    return new this(isJSONEncodable(other) ? other.toJSON() : other);
+	  }
+	}
+
+	ButtonBuilder_1 = ButtonBuilder;
+
+	/**
+	 * @external BuildersButton
+	 * @see {@link https://discord.js.org/docs/packages/builders/stable/ButtonBuilder:Class}
+	 */
+	return ButtonBuilder_1;
+}
+
+var ButtonComponent_1;
+var hasRequiredButtonComponent;
+
+function requireButtonComponent () {
+	if (hasRequiredButtonComponent) return ButtonComponent_1;
+	hasRequiredButtonComponent = 1;
+
+	const Component = requireComponent();
+
+	/**
+	 * Represents a button component
+	 * @extends {Component}
+	 */
+	class ButtonComponent extends Component {
+	  /**
+	   * The style of this button
+	   * @type {ButtonStyle}
+	   * @readonly
+	   */
+	  get style() {
+	    return this.data.style;
+	  }
+
+	  /**
+	   * The label of this button
+	   * @type {?string}
+	   * @readonly
+	   */
+	  get label() {
+	    return this.data.label ?? null;
+	  }
+
+	  /**
+	   * The emoji used in this button
+	   * @type {?APIMessageComponentEmoji}
+	   * @readonly
+	   */
+	  get emoji() {
+	    return this.data.emoji ?? null;
+	  }
+
+	  /**
+	   * Whether this button is disabled
+	   * @type {boolean}
+	   * @readonly
+	   */
+	  get disabled() {
+	    return this.data.disabled ?? false;
+	  }
+
+	  /**
+	   * The custom id of this button (only defined on non-link buttons)
+	   * @type {?string}
+	   * @readonly
+	   */
+	  get customId() {
+	    return this.data.custom_id ?? null;
+	  }
+
+	  /**
+	   * The URL of this button (only defined on link buttons)
+	   * @type {?string}
+	   * @readonly
+	   */
+	  get url() {
+	    return this.data.url ?? null;
+	  }
+	}
+
+	ButtonComponent_1 = ButtonComponent;
+	return ButtonComponent_1;
+}
+
+var ChannelSelectMenuBuilder_1;
+var hasRequiredChannelSelectMenuBuilder;
+
+function requireChannelSelectMenuBuilder () {
+	if (hasRequiredChannelSelectMenuBuilder) return ChannelSelectMenuBuilder_1;
+	hasRequiredChannelSelectMenuBuilder = 1;
+
+	const { ChannelSelectMenuBuilder: BuildersChannelSelectMenu } = requireDist$5();
+	const { isJSONEncodable } = requireDist$b();
+	const { toSnakeCase } = requireTransformers();
+
+	/**
+	 * Class used to build select menu components to be sent through the API
+	 * @extends {BuildersChannelSelectMenu}
+	 */
+	class ChannelSelectMenuBuilder extends BuildersChannelSelectMenu {
+	  constructor(data = {}) {
+	    super(toSnakeCase(data));
+	  }
+
+	  /**
+	   * Creates a new select menu builder from JSON data
+	   * @param {ChannelSelectMenuBuilder|ChannelSelectMenuComponent|APIChannelSelectComponent} other The other data
+	   * @returns {ChannelSelectMenuBuilder}
+	   */
+	  static from(other) {
+	    return new this(isJSONEncodable(other) ? other.toJSON() : other);
+	  }
+	}
+
+	ChannelSelectMenuBuilder_1 = ChannelSelectMenuBuilder;
+
+	/**
+	 * @external BuildersChannelSelectMenu
+	 * @see {@link https://discord.js.org/docs/packages/builders/stable/ChannelSelectMenuBuilder:Class}
+	 */
+	return ChannelSelectMenuBuilder_1;
+}
+
+var BaseSelectMenuComponent_1;
+var hasRequiredBaseSelectMenuComponent;
+
+function requireBaseSelectMenuComponent () {
+	if (hasRequiredBaseSelectMenuComponent) return BaseSelectMenuComponent_1;
+	hasRequiredBaseSelectMenuComponent = 1;
+
+	const Component = requireComponent();
+
+	/**
+	 * Represents a select menu component
+	 * @extends {Component}
+	 */
+	class BaseSelectMenuComponent extends Component {
+	  /**
+	   * The placeholder for this select menu
+	   * @type {?string}
+	   * @readonly
+	   */
+	  get placeholder() {
+	    return this.data.placeholder ?? null;
+	  }
+
+	  /**
+	   * The maximum amount of options that can be selected
+	   * @type {?number}
+	   * @readonly
+	   */
+	  get maxValues() {
+	    return this.data.max_values ?? null;
+	  }
+
+	  /**
+	   * The minimum amount of options that must be selected
+	   * @type {?number}
+	   * @readonly
+	   */
+	  get minValues() {
+	    return this.data.min_values ?? null;
+	  }
+
+	  /**
+	   * The custom id of this select menu
+	   * @type {string}
+	   * @readonly
+	   */
+	  get customId() {
+	    return this.data.custom_id;
+	  }
+
+	  /**
+	   * Whether this select menu is disabled
+	   * @type {boolean}
+	   * @readonly
+	   */
+	  get disabled() {
+	    return this.data.disabled ?? false;
+	  }
+	}
+
+	BaseSelectMenuComponent_1 = BaseSelectMenuComponent;
+	return BaseSelectMenuComponent_1;
+}
+
+var ChannelSelectMenuComponent_1;
+var hasRequiredChannelSelectMenuComponent;
+
+function requireChannelSelectMenuComponent () {
+	if (hasRequiredChannelSelectMenuComponent) return ChannelSelectMenuComponent_1;
+	hasRequiredChannelSelectMenuComponent = 1;
+
+	const BaseSelectMenuComponent = requireBaseSelectMenuComponent();
+
+	/**
+	 * Represents a channel select menu component
+	 * @extends {BaseSelectMenuComponent}
+	 */
+	class ChannelSelectMenuComponent extends BaseSelectMenuComponent {
+	  /**
+	   * The options in this select menu
+	   * @type {?(ChannelType[])}
+	   * @readonly
+	   */
+	  get channelTypes() {
+	    return this.data.channel_types ?? null;
+	  }
+	}
+
+	ChannelSelectMenuComponent_1 = ChannelSelectMenuComponent;
+	return ChannelSelectMenuComponent_1;
+}
+
+var ContainerComponent_1;
+var hasRequiredContainerComponent;
+
+function requireContainerComponent () {
+	if (hasRequiredContainerComponent) return ContainerComponent_1;
+	hasRequiredContainerComponent = 1;
+
+	const Component = requireComponent();
+	const { createComponent } = requireComponents$1();
+
+	/**
+	 * Represents a container component
+	 * @extends {Component}
+	 */
+	class ContainerComponent extends Component {
+	  constructor({ components, ...data }) {
+	    super(data);
+
+	    /**
+	     * The components in this container
+	     * @type {Component[]}
+	     * @readonly
+	     */
+	    this.components = components.map(component => createComponent(component));
+	  }
+
+	  /**
+	   * The accent color of this container
+	   * @type {?number}
+	   * @readonly
+	   */
+	  get accentColor() {
+	    return this.data.accent_color ?? null;
+	  }
+
+	  /**
+	   * The hex accent color of this container
+	   * @type {?string}
+	   * @readonly
+	   */
+	  get hexAccentColor() {
+	    return typeof this.data.accent_color === 'number'
+	      ? `#${this.data.accent_color.toString(16).padStart(6, '0')}`
+	      : (this.data.accent_color ?? null);
+	  }
+
+	  /**
+	   * Whether this container is spoilered
+	   * @type {boolean}
+	   * @readonly
+	   */
+	  get spoiler() {
+	    return this.data.spoiler ?? false;
+	  }
+
+	  /**
+	   * Returns the API-compatible JSON for this component
+	   * @returns {APIContainerComponent}
+	   */
+	  toJSON() {
+	    return { ...this.data, components: this.components.map(component => component.toJSON()) };
+	  }
+	}
+
+	ContainerComponent_1 = ContainerComponent;
+	return ContainerComponent_1;
+}
+
+var UnfurledMediaItem_1;
+var hasRequiredUnfurledMediaItem;
+
+function requireUnfurledMediaItem () {
+	if (hasRequiredUnfurledMediaItem) return UnfurledMediaItem_1;
+	hasRequiredUnfurledMediaItem = 1;
+
+	/**
+	 * Represents a media item in a component
+	 */
+	class UnfurledMediaItem {
+	  constructor(data) {
+	    /**
+	     * The API data associated with this media item
+	     * @type {APIUnfurledMediaItem}
+	     */
+	    this.data = data;
+	  }
+
+	  /**
+	   * The URL of this media gallery item
+	   * @type {string}
+	   * @readonly
+	   */
+	  get url() {
+	    return this.data.url;
+	  }
+	}
+
+	UnfurledMediaItem_1 = UnfurledMediaItem;
+	return UnfurledMediaItem_1;
+}
+
+var FileComponent_1;
+var hasRequiredFileComponent;
+
+function requireFileComponent () {
+	if (hasRequiredFileComponent) return FileComponent_1;
+	hasRequiredFileComponent = 1;
+
+	const Component = requireComponent();
+	const UnfurledMediaItem = requireUnfurledMediaItem();
+
+	/**
+	 * Represents a file component
+	 * @extends {Component}
+	 */
+	class FileComponent extends Component {
+	  constructor({ file, ...data }) {
+	    super(data);
+
+	    /**
+	     * The media associated with this file
+	     * @type {UnfurledMediaItem}
+	     * @readonly
+	     */
+	    this.file = new UnfurledMediaItem(file);
+	  }
+
+	  /**
+	   * Whether this thumbnail is spoilered
+	   * @type {boolean}
+	   * @readonly
+	   */
+	  get spoiler() {
+	    return this.data.spoiler ?? false;
+	  }
+
+	  /**
+	   * Returns the API-compatible JSON for this component
+	   * @returns {APIFileComponent}
+	   */
+	  toJSON() {
+	    return { ...this.data, file: this.file.toJSON() };
+	  }
+	}
+
+	FileComponent_1 = FileComponent;
+	return FileComponent_1;
+}
+
+var MediaGalleryItem_1;
+var hasRequiredMediaGalleryItem;
+
+function requireMediaGalleryItem () {
+	if (hasRequiredMediaGalleryItem) return MediaGalleryItem_1;
+	hasRequiredMediaGalleryItem = 1;
+
+	const UnfurledMediaItem = requireUnfurledMediaItem();
+
+	/**
+	 * Represents an item in a media gallery
+	 */
+	class MediaGalleryItem {
+	  constructor({ media, ...data }) {
+	    /**
+	     * The API data associated with this component
+	     * @type {APIMediaGalleryItem}
+	     */
+	    this.data = data;
+
+	    /**
+	     * The media associated with this media gallery item
+	     * @type {UnfurledMediaItem}
+	     * @readonly
+	     */
+	    this.media = new UnfurledMediaItem(media);
+	  }
+
+	  /**
+	   * The description of this media gallery item
+	   * @type {?string}
+	   * @readonly
+	   */
+	  get description() {
+	    return this.data.description ?? null;
+	  }
+
+	  /**
+	   * Whether this media gallery item is spoilered
+	   * @type {boolean}
+	   * @readonly
+	   */
+	  get spoiler() {
+	    return this.data.spoiler ?? false;
+	  }
+
+	  /**
+	   * Returns the API-compatible JSON for this component
+	   * @returns {APIMediaGalleryItem}
+	   */
+	  toJSON() {
+	    return { ...this.data, media: this.media.toJSON() };
+	  }
+	}
+
+	MediaGalleryItem_1 = MediaGalleryItem;
+	return MediaGalleryItem_1;
+}
+
+var MediaGalleryComponent_1;
+var hasRequiredMediaGalleryComponent;
+
+function requireMediaGalleryComponent () {
+	if (hasRequiredMediaGalleryComponent) return MediaGalleryComponent_1;
+	hasRequiredMediaGalleryComponent = 1;
+
+	const Component = requireComponent();
+	const MediaGalleryItem = requireMediaGalleryItem();
+
+	/**
+	 * Represents a media gallery component
+	 * @extends {Component}
+	 */
+	class MediaGalleryComponent extends Component {
+	  constructor({ items, ...data }) {
+	    super(data);
+
+	    /**
+	     * The items in this media gallery
+	     * @type {MediaGalleryItem[]}
+	     * @readonly
+	     */
+	    this.items = items.map(item => new MediaGalleryItem(item));
+	  }
+
+	  /**
+	   * Returns the API-compatible JSON for this component
+	   * @returns {APIMediaGalleryComponent}
+	   */
+	  toJSON() {
+	    return { ...this.data, items: this.items.map(item => item.toJSON()) };
+	  }
+	}
+
+	MediaGalleryComponent_1 = MediaGalleryComponent;
+	return MediaGalleryComponent_1;
+}
+
+var MentionableSelectMenuBuilder_1;
+var hasRequiredMentionableSelectMenuBuilder;
+
+function requireMentionableSelectMenuBuilder () {
+	if (hasRequiredMentionableSelectMenuBuilder) return MentionableSelectMenuBuilder_1;
+	hasRequiredMentionableSelectMenuBuilder = 1;
+
+	const { MentionableSelectMenuBuilder: BuildersMentionableSelectMenu } = requireDist$5();
+	const { isJSONEncodable } = requireDist$b();
+	const { toSnakeCase } = requireTransformers();
+
+	/**
+	 * Class used to build select menu components to be sent through the API
+	 * @extends {BuildersMentionableSelectMenu}
+	 */
+	class MentionableSelectMenuBuilder extends BuildersMentionableSelectMenu {
+	  constructor(data = {}) {
+	    super(toSnakeCase(data));
+	  }
+
+	  /**
+	   * Creates a new select menu builder from JSON data
+	   * @param {MentionableSelectMenuBuilder|MentionableSelectMenuComponent|APIMentionableSelectComponent} other
+	   * The other data
+	   * @returns {MentionableSelectMenuBuilder}
+	   */
+	  static from(other) {
+	    return new this(isJSONEncodable(other) ? other.toJSON() : other);
+	  }
+	}
+
+	MentionableSelectMenuBuilder_1 = MentionableSelectMenuBuilder;
+
+	/**
+	 * @external BuildersMentionableSelectMenu
+	 * @see {@link https://discord.js.org/docs/packages/builders/stable/MentionableSelectMenuBuilder:Class}
+	 */
+	return MentionableSelectMenuBuilder_1;
+}
+
+var MentionableSelectMenuComponent_1;
+var hasRequiredMentionableSelectMenuComponent;
+
+function requireMentionableSelectMenuComponent () {
+	if (hasRequiredMentionableSelectMenuComponent) return MentionableSelectMenuComponent_1;
+	hasRequiredMentionableSelectMenuComponent = 1;
+
+	const BaseSelectMenuComponent = requireBaseSelectMenuComponent();
+
+	/**
+	 * Represents a mentionable select menu component
+	 * @extends {BaseSelectMenuComponent}
+	 */
+	class MentionableSelectMenuComponent extends BaseSelectMenuComponent {}
+
+	MentionableSelectMenuComponent_1 = MentionableSelectMenuComponent;
+	return MentionableSelectMenuComponent_1;
+}
+
+var RoleSelectMenuBuilder_1;
+var hasRequiredRoleSelectMenuBuilder;
+
+function requireRoleSelectMenuBuilder () {
+	if (hasRequiredRoleSelectMenuBuilder) return RoleSelectMenuBuilder_1;
+	hasRequiredRoleSelectMenuBuilder = 1;
+
+	const { RoleSelectMenuBuilder: BuildersRoleSelectMenu } = requireDist$5();
+	const { isJSONEncodable } = requireDist$b();
+	const { toSnakeCase } = requireTransformers();
+
+	/**
+	 * Class used to build select menu components to be sent through the API
+	 * @extends {BuildersRoleSelectMenu}
+	 */
+	class RoleSelectMenuBuilder extends BuildersRoleSelectMenu {
+	  constructor(data = {}) {
+	    super(toSnakeCase(data));
+	  }
+
+	  /**
+	   * Creates a new select menu builder from JSON data
+	   * @param {RoleSelectMenuBuilder|RoleSelectMenuComponent|APIRoleSelectComponent} other The other data
+	   * @returns {RoleSelectMenuBuilder}
+	   */
+	  static from(other) {
+	    return new this(isJSONEncodable(other) ? other.toJSON() : other);
+	  }
+	}
+
+	RoleSelectMenuBuilder_1 = RoleSelectMenuBuilder;
+
+	/**
+	 * @external BuildersRoleSelectMenu
+	 * @see {@link https://discord.js.org/docs/packages/builders/stable/RoleSelectMenuBuilder:Class}
+	 */
+	return RoleSelectMenuBuilder_1;
+}
+
+var RoleSelectMenuComponent_1;
+var hasRequiredRoleSelectMenuComponent;
+
+function requireRoleSelectMenuComponent () {
+	if (hasRequiredRoleSelectMenuComponent) return RoleSelectMenuComponent_1;
+	hasRequiredRoleSelectMenuComponent = 1;
+
+	const BaseSelectMenuComponent = requireBaseSelectMenuComponent();
+
+	/**
+	 * Represents a role select menu component
+	 * @extends {BaseSelectMenuComponent}
+	 */
+	class RoleSelectMenuComponent extends BaseSelectMenuComponent {}
+
+	RoleSelectMenuComponent_1 = RoleSelectMenuComponent;
+	return RoleSelectMenuComponent_1;
+}
+
+var SectionComponent_1;
+var hasRequiredSectionComponent;
+
+function requireSectionComponent () {
+	if (hasRequiredSectionComponent) return SectionComponent_1;
+	hasRequiredSectionComponent = 1;
+
+	const Component = requireComponent();
+	const { createComponent } = requireComponents$1();
+
+	/**
+	 * Represents a section component
+	 * @extends {Component}
+	 */
+	class SectionComponent extends Component {
+	  constructor({ accessory, components, ...data }) {
+	    super(data);
+
+	    /**
+	     * The components in this section
+	     * @type {Component[]}
+	     * @readonly
+	     */
+	    this.components = components.map(component => createComponent(component));
+
+	    /**
+	     * The accessory component of this section
+	     * @type {Component}
+	     * @readonly
+	     */
+	    this.accessory = createComponent(accessory);
+	  }
+
+	  /**
+	   * Returns the API-compatible JSON for this component
+	   * @returns {APISectionComponent}
+	   */
+	  toJSON() {
+	    return {
+	      ...this.data,
+	      accessory: this.accessory.toJSON(),
+	      components: this.components.map(component => component.toJSON()),
+	    };
+	  }
+	}
+
+	SectionComponent_1 = SectionComponent;
+	return SectionComponent_1;
+}
+
+var SeparatorComponent_1;
+var hasRequiredSeparatorComponent;
+
+function requireSeparatorComponent () {
+	if (hasRequiredSeparatorComponent) return SeparatorComponent_1;
+	hasRequiredSeparatorComponent = 1;
+
+	const { SeparatorSpacingSize } = requireV10();
+	const Component = requireComponent();
+
+	/**
+	 * Represents a separator component
+	 * @extends {Component}
+	 */
+	class SeparatorComponent extends Component {
+	  /**
+	   * The spacing of this separator
+	   * @type {SeparatorSpacingSize}
+	   * @readonly
+	   */
+	  get spacing() {
+	    return this.data.spacing ?? SeparatorSpacingSize.Small;
+	  }
+
+	  /**
+	   * Whether this separator is a divider
+	   * @type {boolean}
+	   * @readonly
+	   */
+	  get divider() {
+	    return this.data.divider ?? true;
+	  }
+	}
+
+	SeparatorComponent_1 = SeparatorComponent;
+	return SeparatorComponent_1;
+}
+
+var StringSelectMenuBuilder_1;
+var hasRequiredStringSelectMenuBuilder;
+
+function requireStringSelectMenuBuilder () {
+	if (hasRequiredStringSelectMenuBuilder) return StringSelectMenuBuilder_1;
+	hasRequiredStringSelectMenuBuilder = 1;
+
+	const { SelectMenuBuilder: BuildersSelectMenu, normalizeArray } = requireDist$5();
+	const { isJSONEncodable } = requireDist$b();
+	const { toSnakeCase } = requireTransformers();
+	const { resolvePartialEmoji } = requireUtil();
+
+	/**
+	 * Class used to build select menu components to be sent through the API
+	 * @extends {BuildersSelectMenu}
+	 */
+	class StringSelectMenuBuilder extends BuildersSelectMenu {
+	  constructor({ options, ...data } = {}) {
+	    super(
+	      toSnakeCase({
+	        ...data,
+	        options: options?.map(({ emoji, ...option }) => ({
+	          ...option,
+	          emoji: emoji && typeof emoji === 'string' ? resolvePartialEmoji(emoji) : emoji,
+	        })),
+	      }),
+	    );
+	  }
+
+	  /**
+	   * Normalizes a select menu option emoji
+	   * @param {SelectMenuOptionData|APISelectMenuOption} selectMenuOption The option to normalize
+	   * @returns {SelectMenuOptionBuilder|APISelectMenuOption}
+	   * @private
+	   */
+	  static normalizeEmoji(selectMenuOption) {
+	    if (isJSONEncodable(selectMenuOption)) {
+	      return selectMenuOption;
+	    }
+
+	    const { emoji, ...option } = selectMenuOption;
+	    return {
+	      ...option,
+	      emoji: typeof emoji === 'string' ? resolvePartialEmoji(emoji) : emoji,
+	    };
+	  }
+
+	  /**
+	   * Adds options to this select menu
+	   * @param {RestOrArray<APISelectMenuOption>} options The options to add to this select menu
+	   * @returns {StringSelectMenuBuilder}
+	   */
+	  addOptions(...options) {
+	    return super.addOptions(normalizeArray(options).map(option => StringSelectMenuBuilder.normalizeEmoji(option)));
+	  }
+
+	  /**
+	   * Sets the options on this select menu
+	   * @param {RestOrArray<APISelectMenuOption>} options The options to set on this select menu
+	   * @returns {StringSelectMenuBuilder}
+	   */
+	  setOptions(...options) {
+	    return super.setOptions(normalizeArray(options).map(option => StringSelectMenuBuilder.normalizeEmoji(option)));
+	  }
+
+	  /**
+	   * Creates a new select menu builder from json data
+	   * @param {StringSelectMenuBuilder|StringSelectMenuComponent|APIStringSelectComponent} other The other data
+	   * @returns {StringSelectMenuBuilder}
+	   */
+	  static from(other) {
+	    if (isJSONEncodable(other)) {
+	      return new this(other.toJSON());
+	    }
+	    return new this(other);
+	  }
+	}
+
+	StringSelectMenuBuilder_1 = StringSelectMenuBuilder;
+
+	/**
+	 * @external BuildersSelectMenu
+	 * @see {@link https://discord.js.org/docs/packages/builders/stable/StringSelectMenuBuilder:Class}
+	 */
+	return StringSelectMenuBuilder_1;
+}
+
+var StringSelectMenuComponent_1;
+var hasRequiredStringSelectMenuComponent;
+
+function requireStringSelectMenuComponent () {
+	if (hasRequiredStringSelectMenuComponent) return StringSelectMenuComponent_1;
+	hasRequiredStringSelectMenuComponent = 1;
+
+	const BaseSelectMenuComponent = requireBaseSelectMenuComponent();
+
+	/**
+	 * Represents a string select menu component
+	 * @extends {BaseSelectMenuComponent}
+	 */
+	class StringSelectMenuComponent extends BaseSelectMenuComponent {
+	  /**
+	   * The options in this select menu
+	   * @type {APISelectMenuOption[]}
+	   * @readonly
+	   */
+	  get options() {
+	    return this.data.options;
+	  }
+	}
+
+	StringSelectMenuComponent_1 = StringSelectMenuComponent;
+	return StringSelectMenuComponent_1;
+}
+
+var TextDisplayComponent_1;
+var hasRequiredTextDisplayComponent;
+
+function requireTextDisplayComponent () {
+	if (hasRequiredTextDisplayComponent) return TextDisplayComponent_1;
+	hasRequiredTextDisplayComponent = 1;
+
+	const Component = requireComponent();
+
+	/**
+	 * Represents a text display component
+	 * @extends {Component}
+	 */
+	class TextDisplayComponent extends Component {
+	  /**
+	   * The content of this text display
+	   * @type {string}
+	   * @readonly
+	   */
+	  get content() {
+	    return this.data.content;
+	  }
+	}
+
+	TextDisplayComponent_1 = TextDisplayComponent;
+	return TextDisplayComponent_1;
+}
+
+var TextInputBuilder_1;
+var hasRequiredTextInputBuilder;
+
+function requireTextInputBuilder () {
+	if (hasRequiredTextInputBuilder) return TextInputBuilder_1;
+	hasRequiredTextInputBuilder = 1;
+
+	const { TextInputBuilder: BuildersTextInput } = requireDist$5();
+	const { isJSONEncodable } = requireDist$b();
+	const { toSnakeCase } = requireTransformers();
+
+	/**
+	 * Represents a text input builder.
+	 * @extends {BuildersTextInput}
+	 */
+	class TextInputBuilder extends BuildersTextInput {
+	  constructor(data) {
+	    super(toSnakeCase(data));
+	  }
+
+	  /**
+	   * Creates a new text input builder from JSON data
+	   * @param {TextInputBuilder|TextInputComponent|APITextInputComponent} other The other data
+	   * @returns {TextInputBuilder}
+	   */
+	  static from(other) {
+	    return new this(isJSONEncodable(other) ? other.toJSON() : other);
+	  }
+	}
+
+	TextInputBuilder_1 = TextInputBuilder;
+
+	/**
+	 * @external BuildersTextInput
+	 * @see {@link https://discord.js.org/docs/packages/builders/stable/TextInputBuilder:Class}
+	 */
+	return TextInputBuilder_1;
+}
+
+var TextInputComponent_1;
+var hasRequiredTextInputComponent;
+
+function requireTextInputComponent () {
+	if (hasRequiredTextInputComponent) return TextInputComponent_1;
+	hasRequiredTextInputComponent = 1;
+
+	const Component = requireComponent();
+
+	/**
+	 * Represents a text input component.
+	 * @extends {Component}
+	 */
+	class TextInputComponent extends Component {
+	  /**
+	   * The custom id of this text input
+	   * @type {string}
+	   * @readonly
+	   */
+	  get customId() {
+	    return this.data.custom_id;
+	  }
+
+	  /**
+	   * The value for this text input
+	   * @type {string}
+	   * @readonly
+	   */
+	  get value() {
+	    return this.data.value;
+	  }
+	}
+
+	TextInputComponent_1 = TextInputComponent;
+	return TextInputComponent_1;
+}
+
+var ThumbnailComponent_1;
+var hasRequiredThumbnailComponent;
+
+function requireThumbnailComponent () {
+	if (hasRequiredThumbnailComponent) return ThumbnailComponent_1;
+	hasRequiredThumbnailComponent = 1;
+
+	const Component = requireComponent();
+	const UnfurledMediaItem = requireUnfurledMediaItem();
+
+	/**
+	 * Represents a thumbnail component
+	 * @extends {Component}
+	 */
+	class ThumbnailComponent extends Component {
+	  constructor({ media, ...data }) {
+	    super(data);
+
+	    /**
+	     * The media associated with this thumbnail
+	     * @type {UnfurledMediaItem}
+	     * @readonly
+	     */
+	    this.media = new UnfurledMediaItem(media);
+	  }
+
+	  /**
+	   * The description of this thumbnail
+	   * @type {?string}
+	   * @readonly
+	   */
+	  get description() {
+	    return this.data.description ?? null;
+	  }
+
+	  /**
+	   * Whether this thumbnail is spoilered
+	   * @type {boolean}
+	   * @readonly
+	   */
+	  get spoiler() {
+	    return this.data.spoiler ?? false;
+	  }
+
+	  /**
+	   * Returns the API-compatible JSON for this component
+	   * @returns {APIThumbnailComponent}
+	   */
+	  toJSON() {
+	    return { ...this.data, media: this.media.toJSON() };
+	  }
+	}
+
+	ThumbnailComponent_1 = ThumbnailComponent;
+	return ThumbnailComponent_1;
+}
+
+var UserSelectMenuBuilder_1;
+var hasRequiredUserSelectMenuBuilder;
+
+function requireUserSelectMenuBuilder () {
+	if (hasRequiredUserSelectMenuBuilder) return UserSelectMenuBuilder_1;
+	hasRequiredUserSelectMenuBuilder = 1;
+
+	const { UserSelectMenuBuilder: BuildersUserSelectMenu } = requireDist$5();
+	const { isJSONEncodable } = requireDist$b();
+	const { toSnakeCase } = requireTransformers();
+
+	/**
+	 * Class used to build select menu components to be sent through the API
+	 * @extends {BuildersUserSelectMenu}
+	 */
+	class UserSelectMenuBuilder extends BuildersUserSelectMenu {
+	  constructor(data = {}) {
+	    super(toSnakeCase(data));
+	  }
+
+	  /**
+	   * Creates a new select menu builder from JSON data
+	   * @param {UserSelectMenuBuilder|UserSelectMenuComponent|APIUserSelectComponent} other The other data
+	   * @returns {UserSelectMenuBuilder}
+	   */
+	  static from(other) {
+	    return new this(isJSONEncodable(other) ? other.toJSON() : other);
+	  }
+	}
+
+	UserSelectMenuBuilder_1 = UserSelectMenuBuilder;
+
+	/**
+	 * @external BuildersUserSelectMenu
+	 * @see {@link https://discord.js.org/docs/packages/builders/stable/UserSelectMenuBuilder:Class}
+	 */
+	return UserSelectMenuBuilder_1;
+}
+
+var UserSelectMenuComponent_1;
+var hasRequiredUserSelectMenuComponent;
+
+function requireUserSelectMenuComponent () {
+	if (hasRequiredUserSelectMenuComponent) return UserSelectMenuComponent_1;
+	hasRequiredUserSelectMenuComponent = 1;
+
+	const BaseSelectMenuComponent = requireBaseSelectMenuComponent();
+
+	/**
+	 * Represents a user select menu component
+	 * @extends {BaseSelectMenuComponent}
+	 */
+	class UserSelectMenuComponent extends BaseSelectMenuComponent {}
+
+	UserSelectMenuComponent_1 = UserSelectMenuComponent;
+	return UserSelectMenuComponent_1;
+}
+
+var Components;
+var hasRequiredComponents$1;
+
+function requireComponents$1 () {
+	if (hasRequiredComponents$1) return Components;
+	hasRequiredComponents$1 = 1;
+
+	const { ComponentBuilder } = requireDist$5();
+	const { ComponentType } = requireV10();
+
+	/**
+	 * @typedef {Object} BaseComponentData
+	 * @property {number} [id] the id of this component
+	 * @property {ComponentType} type The type of component
+	 */
+
+	/**
+	 * @typedef {BaseComponentData} ActionRowData
+	 * @property {ComponentData[]} components The components in this action row
+	 */
+
+	/**
+	 * @typedef {BaseComponentData} ButtonComponentData
+	 * @property {ButtonStyle} style The style of the button
+	 * @property {boolean} [disabled] Whether this button is disabled
+	 * @property {string} label The label of this button
+	 * @property {APIMessageComponentEmoji} [emoji] The emoji on this button
+	 * @property {string} [customId] The custom id of the button
+	 * @property {string} [url] The URL of the button
+	 */
+
+	/**
+	 * @typedef {object} SelectMenuComponentOptionData
+	 * @property {string} label The label of the option
+	 * @property {string} value The value of the option
+	 * @property {string} [description] The description of the option
+	 * @property {APIMessageComponentEmoji} [emoji] The emoji on the option
+	 * @property {boolean} [default] Whether this option is selected by default
+	 */
+
+	/**
+	 * @typedef {BaseComponentData} SelectMenuComponentData
+	 * @property {string} customId The custom id of the select menu
+	 * @property {boolean} [disabled] Whether the select menu is disabled or not
+	 * @property {number} [maxValues] The maximum amount of options that can be selected
+	 * @property {number} [minValues] The minimum amount of options that can be selected
+	 * @property {SelectMenuComponentOptionData[]} [options] The options in this select menu
+	 * @property {string} [placeholder] The placeholder of the select menu
+	 */
+
+	/**
+	 * @typedef {ActionRowData|ButtonComponentData|SelectMenuComponentData} MessageComponentData
+	 */
+
+	/**
+	 * @typedef {BaseComponentData} TextInputComponentData
+	 * @property {string} customId The custom id of the text input
+	 * @property {TextInputStyle} style The style of the text input
+	 * @property {string} label The text that appears on top of the text input field
+	 * @property {number} [minLength] The minimum number of characters that can be entered in the text input
+	 * @property {number} [maxLength] The maximum number of characters that can be entered in the text input
+	 * @property {boolean} [required] Whether or not the text input is required or not
+	 * @property {string} [value] The pre-filled text in the text input
+	 * @property {string} [placeholder] Placeholder for the text input
+	 */
+
+	/**
+	 * @typedef {Object} UnfurledMediaItemData
+	 * @property {string} url The url of this media item. Accepts either http:, https: or attachment: protocol
+	 */
+
+	/**
+	 * @typedef {BaseComponentData} ThumbnailComponentData
+	 * @property {UnfurledMediaItemData} media The media for the thumbnail
+	 * @property {string} [description] The description of the thumbnail
+	 * @property {boolean} [spoiler] Whether the thumbnail should be spoilered
+	 */
+
+	/**
+	 * @typedef {BaseComponentData} FileComponentData
+	 * @property {UnfurledMediaItemData} file The file media in this component
+	 * @property {boolean} [spoiler] Whether the file should be spoilered
+	 */
+
+	/**
+	 * @typedef {Object} MediaGalleryItemData
+	 * @property {UnfurledMediaItemData} media The media for the media gallery item
+	 * @property {string} [description] The description of the media gallery item
+	 * @property {boolean} [spoiler] Whether the media gallery item should be spoilered
+	 */
+
+	/**
+	 * @typedef {BaseComponentData} MediaGalleryComponentData
+	 * @property {MediaGalleryItemData[]} items The media gallery items in this media gallery component
+	 */
+
+	/**
+	 * @typedef {BaseComponentData} SeparatorComponentData
+	 * @property {SeparatorSpacingSize} [spacing] The spacing size of this component
+	 * @property {boolean} [divider] Whether the separator shows as a divider
+	 */
+
+	/**
+	 * @typedef {BaseComponentData} SectionComponentData
+	 * @property {Components[]} components The components in this section
+	 * @property {ButtonComponentData|ThumbnailComponentData} accessory The accessory shown next to this section
+	 */
+
+	/**
+	 * @typedef {BaseComponentData} TextDisplayComponentData
+	 * @property {string} content The content displayed in this component
+	 */
+
+	/**
+	 * @typedef {ActionRowData|FileComponentData|MediaGalleryComponentData|SectionComponentData|
+	 * SeparatorComponentData|TextDisplayComponentData} ComponentInContainerData
+	 */
+
+	/**
+	 * @typedef {BaseComponentData} ContainerComponentData
+	 * @property {ComponentInContainerData} components The components in this container
+	 * @property {?number} [accentColor] The accent color of this container
+	 * @property {boolean} [spoiler] Whether the container should be spoilered
+	 */
+
+	/**
+	 * @typedef {ActionRowData|ButtonComponentData|SelectMenuComponentData|TextInputComponentData|
+	 * ThumbnailComponentData|FileComponentData|MediaGalleryComponentData|SeparatorComponentData|
+	 * SectionComponentData|TextDisplayComponentData|ContainerComponentData} ComponentData
+	 */
+
+	/**
+	 * Any emoji data that can be used within a button
+	 * @typedef {APIMessageComponentEmoji|string} ComponentEmojiResolvable
+	 */
+
+	/**
+	 * @typedef {ActionRow|ContainerComponent|FileComponent|MediaGalleryComponent|
+	 * SectionComponent|SeparatorComponent|TextDisplayComponent} MessageTopLevelComponent
+	 */
+
+	/**
+	 * Transforms API data into a component
+	 * @param {APIMessageComponent|Component} data The data to create the component from
+	 * @returns {Component}
+	 * @ignore
+	 */
+	function createComponent(data) {
+	  if (data instanceof Component) {
+	    return data;
+	  }
+
+	  switch (data.type) {
+	    case ComponentType.ActionRow:
+	      return new ActionRow(data);
+	    case ComponentType.Button:
+	      return new ButtonComponent(data);
+	    case ComponentType.StringSelect:
+	      return new StringSelectMenuComponent(data);
+	    case ComponentType.TextInput:
+	      return new TextInputComponent(data);
+	    case ComponentType.UserSelect:
+	      return new UserSelectMenuComponent(data);
+	    case ComponentType.RoleSelect:
+	      return new RoleSelectMenuComponent(data);
+	    case ComponentType.MentionableSelect:
+	      return new MentionableSelectMenuComponent(data);
+	    case ComponentType.ChannelSelect:
+	      return new ChannelSelectMenuComponent(data);
+	    case ComponentType.Container:
+	      return new ContainerComponent(data);
+	    case ComponentType.TextDisplay:
+	      return new TextDisplayComponent(data);
+	    case ComponentType.File:
+	      return new FileComponent(data);
+	    case ComponentType.MediaGallery:
+	      return new MediaGalleryComponent(data);
+	    case ComponentType.Section:
+	      return new SectionComponent(data);
+	    case ComponentType.Separator:
+	      return new SeparatorComponent(data);
+	    case ComponentType.Thumbnail:
+	      return new ThumbnailComponent(data);
+	    default:
+	      return new Component(data);
+	  }
+	}
+
+	/**
+	 * Transforms API data into a component builder
+	 * @param {APIMessageComponent|ComponentBuilder} data The data to create the component from
+	 * @returns {ComponentBuilder}
+	 * @ignore
+	 */
+	function createComponentBuilder(data) {
+	  if (data instanceof ComponentBuilder) {
+	    return data;
+	  }
+
+	  switch (data.type) {
+	    case ComponentType.ActionRow:
+	      return new ActionRowBuilder(data);
+	    case ComponentType.Button:
+	      return new ButtonBuilder(data);
+	    case ComponentType.StringSelect:
+	      return new StringSelectMenuBuilder(data);
+	    case ComponentType.TextInput:
+	      return new TextInputBuilder(data);
+	    case ComponentType.UserSelect:
+	      return new UserSelectMenuBuilder(data);
+	    case ComponentType.RoleSelect:
+	      return new RoleSelectMenuBuilder(data);
+	    case ComponentType.MentionableSelect:
+	      return new MentionableSelectMenuBuilder(data);
+	    case ComponentType.ChannelSelect:
+	      return new ChannelSelectMenuBuilder(data);
+	    default:
+	      return new ComponentBuilder(data);
+	  }
+	}
+
+	/**
+	 * Finds a component by customId in nested components
+	 * @param {Array<Component|APIMessageComponent>} components The components to search in
+	 * @param {string} customId The customId to search for
+	 * @returns {Component|APIMessageComponent}
+	 */
+	function findComponentByCustomId(components, customId) {
+	  return (
+	    components
+	      .flatMap(component => {
+	        switch (component.type) {
+	          case ComponentType.ActionRow:
+	            return component.components;
+	          case ComponentType.Section:
+	            return [...component.components, component.accessory];
+	          default:
+	            return [component];
+	        }
+	      })
+	      .find(component => (component.customId ?? component.custom_id) === customId) ?? null
+	  );
+	}
+
+	Components = { createComponent, createComponentBuilder, findComponentByCustomId };
+
+	const ActionRow = requireActionRow();
+	const ActionRowBuilder = requireActionRowBuilder();
+	const ButtonBuilder = requireButtonBuilder();
+	const ButtonComponent = requireButtonComponent();
+	const ChannelSelectMenuBuilder = requireChannelSelectMenuBuilder();
+	const ChannelSelectMenuComponent = requireChannelSelectMenuComponent();
+	const Component = requireComponent();
+	const ContainerComponent = requireContainerComponent();
+	const FileComponent = requireFileComponent();
+	const MediaGalleryComponent = requireMediaGalleryComponent();
+	const MentionableSelectMenuBuilder = requireMentionableSelectMenuBuilder();
+	const MentionableSelectMenuComponent = requireMentionableSelectMenuComponent();
+	const RoleSelectMenuBuilder = requireRoleSelectMenuBuilder();
+	const RoleSelectMenuComponent = requireRoleSelectMenuComponent();
+	const SectionComponent = requireSectionComponent();
+	const SeparatorComponent = requireSeparatorComponent();
+	const StringSelectMenuBuilder = requireStringSelectMenuBuilder();
+	const StringSelectMenuComponent = requireStringSelectMenuComponent();
+	const TextDisplayComponent = requireTextDisplayComponent();
+	const TextInputBuilder = requireTextInputBuilder();
+	const TextInputComponent = requireTextInputComponent();
+	const ThumbnailComponent = requireThumbnailComponent();
+	const UserSelectMenuBuilder = requireUserSelectMenuBuilder();
+	const UserSelectMenuComponent = requireUserSelectMenuComponent();
+	return Components;
+}
+
 var hasRequiredMessage$1;
 
 function requireMessage$1 () {
@@ -90387,7 +92352,7 @@ function requireMessage$1 () {
 	const { Sticker } = requireSticker();
 	const { DiscordjsError, ErrorCodes } = requireErrors$1();
 	const ReactionManager = requireReactionManager();
-	const { createComponent } = requireComponents$1();
+	const { createComponent, findComponentByCustomId } = requireComponents$1();
 	const { NonSystemMessageTypes, MaxBulkDeletableMessageAge, UndeletableMessageTypes } = requireConstants$1();
 	const MessageFlagsBitField = requireMessageFlagsBitField();
 	const PermissionsBitField = requirePermissionsBitField();
@@ -90515,10 +92480,10 @@ function requireMessage$1 () {
 
 	    if ('components' in data) {
 	      /**
-	       * An array of action rows in the message.
+	       * An array of components in the message.
 	       * <info>This property requires the {@link GatewayIntentBits.MessageContent} privileged intent
 	       * in a guild for messages that do not mention the client.</info>
-	       * @type {ActionRow[]}
+	       * @type {Component[]}
 	       */
 	      this.components = data.components.map(component => createComponent(component));
 	    } else {
@@ -91419,7 +93384,7 @@ function requireMessage$1 () {
 	   * @returns {?MessageActionRowComponent}
 	   */
 	  resolveComponent(customId) {
-	    return this.components.flatMap(row => row.components).find(component => component.customId === customId) ?? null;
+	    return findComponentByCustomId(this.components, customId);
 	  }
 
 	  /**
@@ -91636,6 +93601,8 @@ function requireWebhook () {
 	   * @property {string} [threadName] Name of the thread to create (only available if the webhook is in a forum channel)
 	   * @property {Snowflake[]} [appliedTags]
 	   * The tags to apply to the created thread (only available if the webhook is in a forum channel)
+	   * @property {boolean} [withComponents] Whether to allow sending non-interactive components in the message.
+	   * <info>For application-owned webhooks, this property is ignored</info>
 	   */
 
 	  /**
@@ -91713,12 +93680,14 @@ function requireWebhook () {
 	      messagePayload = MessagePayload.create(this, options).resolveBody();
 	    }
 
+	    const { body, files } = await messagePayload.resolveFiles();
+
 	    const query = makeURLSearchParams({
 	      wait: true,
 	      thread_id: messagePayload.options.threadId,
+	      with_components: messagePayload.options.withComponents,
 	    });
 
-	    const { body, files } = await messagePayload.resolveFiles();
 	    const d = await this.client.rest.post(Routes.webhook(this.id, this.token), {
 	      body,
 	      files,
@@ -91797,6 +93766,8 @@ function requireWebhook () {
 	   * @property {boolean} [cache=true] Whether to cache the message.
 	   * @property {Snowflake} [threadId] The id of the thread this message belongs to.
 	   * <info>For interaction webhooks, this property is ignored</info>
+	   * @property {boolean} [withComponents] Whether to allow sending non-interactive components in the message.
+	   * <info>For application-owned webhooks, this property is ignored</info>
 	   */
 
 	  /**
@@ -91836,14 +93807,17 @@ function requireWebhook () {
 
 	    const { body, files } = await messagePayload.resolveBody().resolveFiles();
 
+	    const query = makeURLSearchParams({
+	      thread_id: messagePayload.options.threadId,
+	      with_components: messagePayload.options.withComponents,
+	    });
+
 	    const d = await this.client.rest.patch(
 	      Routes.webhookMessage(this.id, this.token, typeof message === 'string' ? message : message.id),
 	      {
 	        body,
 	        files,
-	        query: messagePayload.options.threadId
-	          ? makeURLSearchParams({ thread_id: messagePayload.options.threadId })
-	          : undefined,
+	        query,
 	        auth: false,
 	      },
 	    );
@@ -93621,7 +95595,6 @@ function requireMessagePayload () {
 	const { lazy, isJSONEncodable } = requireDist$b();
 	const { DiscordSnowflake } = /*@__PURE__*/ requireCjs$2();
 	const { MessageFlags, MessageReferenceType } = requireV10();
-	const ActionRowBuilder = requireActionRowBuilder();
 	const { DiscordjsError, DiscordjsRangeError, ErrorCodes } = requireErrors$1();
 	const { resolveFile } = requireDataResolver();
 	const MessageFlagsBitField = requireMessageFlagsBitField();
@@ -93766,7 +95739,7 @@ function requireMessagePayload () {
 	    }
 
 	    const components = this.options.components?.map(component =>
-	      (isJSONEncodable(component) ? component : new ActionRowBuilder(component)).toJSON(),
+	      isJSONEncodable(component) ? component.toJSON() : this.target.client.options.jsonTransformer(component),
 	    );
 
 	    let username;
@@ -93783,9 +95756,7 @@ function requireMessagePayload () {
 	    let flags;
 	    if (
 	      // eslint-disable-next-line eqeqeq
-	      this.options.flags != null ||
-	      (this.isMessage && this.options.reply === undefined) ||
-	      this.isMessageManager
+	      this.options.flags != null
 	    ) {
 	      flags = new MessageFlagsBitField(this.options.flags).bitfield;
 	    }
@@ -94072,8 +96043,11 @@ function requireTextBasedChannel () {
 	   * (see {@link https://discord.com/developers/docs/resources/message#allowed-mentions-object here} for more details)
 	   * @property {Array<(AttachmentBuilder|Attachment|AttachmentPayload|BufferResolvable)>} [files]
 	   * The files to send with the message.
-	   * @property {Array<(ActionRowBuilder|ActionRow|APIActionRowComponent)>} [components]
-	   * Action rows containing interactive components for the message (buttons, select menus)
+	   * @property {Array<(ActionRowBuilder|MessageTopLevelComponent|APIMessageTopLevelComponent)>} [components]
+	   * Action rows containing interactive components for the message (buttons, select menus) and other
+	   * top-level components.
+	   * <info>When using components v2, the flag {@link MessageFlags.IsComponentsV2} needs to be set
+	   * and `content`, `embeds`, `stickers`, and `poll` cannot be used.</info>
 	   */
 
 	  /**
@@ -94101,7 +96075,9 @@ function requireTextBasedChannel () {
 	   * that message will be returned and no new message will be created
 	   * @property {StickerResolvable[]} [stickers=[]] The stickers to send in the message
 	   * @property {MessageFlags} [flags] Which flags to set for the message.
-	   * <info>Only `MessageFlags.SuppressEmbeds` and `MessageFlags.SuppressNotifications` can be set.</info>
+	   * <info>Only {@link MessageFlags.SuppressEmbeds}, {@link MessageFlags.SuppressNotifications} and
+	   * {@link MessageFlags.IsComponentsV2} can be set.</info>
+	   * <info>{@link MessageFlags.IsComponentsV2} is required if passing components that aren't action rows</info>
 	   */
 
 	  /**
@@ -96899,7 +98875,7 @@ function requireVoiceChannel () {
 	if (hasRequiredVoiceChannel) return VoiceChannel_1;
 	hasRequiredVoiceChannel = 1;
 
-	const { PermissionFlagsBits } = requireV10();
+	const { PermissionFlagsBits, Routes } = requireV10();
 	const BaseGuildVoiceChannel = requireBaseGuildVoiceChannel();
 
 	/**
@@ -96933,6 +98909,26 @@ function requireVoiceChannel () {
 	      this.guild.members.me.communicationDisabledUntilTimestamp < Date.now() &&
 	      permissions.has(PermissionFlagsBits.Speak, false)
 	    );
+	  }
+
+	  /**
+	   * @typedef {Object} SendSoundboardSoundOptions
+	   * @property {string} soundId The id of the soundboard sound to send
+	   * @property {string} [guildId] The id of the guild the soundboard sound is a part of
+	   */
+
+	  /**
+	   * Send a soundboard sound to a voice channel the user is connected to.
+	   * @param {SoundboardSound|SendSoundboardSoundOptions} sound The sound to send
+	   * @returns {Promise<void>}
+	   */
+	  async sendSoundboardSound(sound) {
+	    await this.client.rest.post(Routes.sendSoundboardSound(this.id), {
+	      body: {
+	        sound_id: sound.soundId,
+	        source_guild_id: sound.guildId ?? undefined,
+	      },
+	    });
 	  }
 	}
 
@@ -98501,6 +100497,7 @@ function requireGuildAuditLogsEntry () {
 	  AutoModeration: 'AutoModeration',
 	  GuildOnboarding: 'GuildOnboarding',
 	  GuildOnboardingPrompt: 'GuildOnboardingPrompt',
+	  SoundboardSound: 'SoundboardSound',
 	  Unknown: 'Unknown',
 	};
 
@@ -98522,10 +100519,11 @@ function requireGuildAuditLogsEntry () {
 	 * * An application command
 	 * * An auto moderation rule
 	 * * A guild onboarding prompt
+	 * * A soundboard sound
 	 * * An object with an id key if target was deleted or fake entity
 	 * * An object where the keys represent either the new value or the old value
 	 * @typedef {?(Object|Guild|BaseChannel|User|Role|Invite|Webhook|GuildEmoji|Message|Integration|StageInstance|Sticker|
-	 * GuildScheduledEvent|ApplicationCommand|AutoModerationRule|GuildOnboardingPrompt)} AuditLogEntryTarget
+	 * GuildScheduledEvent|ApplicationCommand|AutoModerationRule|GuildOnboardingPrompt|SoundboardSound)} AuditLogEntryTarget
 	 */
 
 	/**
@@ -98555,6 +100553,8 @@ function requireGuildAuditLogsEntry () {
 	 * * ApplicationCommandPermission
 	 * * GuildOnboarding
 	 * * GuildOnboardingPrompt
+	 * * SoundboardSound
+	 * * AutoModeration
 	 * * Unknown
 	 * @typedef {string} AuditLogTargetType
 	 */
@@ -98668,7 +100668,6 @@ function requireGuildAuditLogsEntry () {
 
 	      case AuditLogEvent.MemberMove:
 	      case AuditLogEvent.MessageDelete:
-	      case AuditLogEvent.MessageBulkDelete:
 	        this.extra = {
 	          channel: guild.channels.cache.get(data.options.channel_id) ?? { id: data.options.channel_id },
 	          count: Number(data.options.count),
@@ -98683,6 +100682,7 @@ function requireGuildAuditLogsEntry () {
 	        };
 	        break;
 
+	      case AuditLogEvent.MessageBulkDelete:
 	      case AuditLogEvent.MemberDisconnect:
 	        this.extra = {
 	          count: Number(data.options.count),
@@ -98828,10 +100828,14 @@ function requireGuildAuditLogsEntry () {
 	        data.action_type === AuditLogEvent.OnboardingPromptCreate
 	          ? new GuildOnboardingPrompt(guild.client, changesReduce(this.changes, { id: data.target_id }), guild.id)
 	          : changesReduce(this.changes, { id: data.target_id });
-	    } else if (targetType === Targets.GuildOnboarding) {
-	      this.target = changesReduce(this.changes, { id: data.target_id });
+	    } else if (targetType === Targets.Role) {
+	      this.target = guild.roles.cache.get(data.target_id) ?? { id: data.target_id };
+	    } else if (targetType === Targets.Emoji) {
+	      this.target = guild.emojis.cache.get(data.target_id) ?? { id: data.target_id };
+	    } else if (targetType === Targets.SoundboardSound) {
+	      this.target = guild.soundboardSounds.cache.get(data.target_id) ?? { id: data.target_id };
 	    } else if (data.target_id) {
-	      this.target = guild[`${targetType.toLowerCase()}s`]?.cache.get(data.target_id) ?? { id: data.target_id };
+	      this.target = { id: data.target_id };
 	    }
 	  }
 
@@ -98855,7 +100859,9 @@ function requireGuildAuditLogsEntry () {
 	    if (target < 110) return Targets.GuildScheduledEvent;
 	    if (target < 120) return Targets.Thread;
 	    if (target < 130) return Targets.ApplicationCommand;
-	    if (target >= 140 && target < 150) return Targets.AutoModeration;
+	    if (target < 140) return Targets.SoundboardSound;
+	    if (target < 143) return Targets.AutoModeration;
+	    if (target < 146) return Targets.User;
 	    if (target >= 163 && target <= 165) return Targets.GuildOnboardingPrompt;
 	    if (target >= 160 && target < 170) return Targets.GuildOnboarding;
 	    return Targets.Unknown;
@@ -98883,6 +100889,7 @@ function requireGuildAuditLogsEntry () {
 	        AuditLogEvent.StickerCreate,
 	        AuditLogEvent.GuildScheduledEventCreate,
 	        AuditLogEvent.ThreadCreate,
+	        AuditLogEvent.SoundboardSoundCreate,
 	        AuditLogEvent.AutoModerationRuleCreate,
 	        AuditLogEvent.AutoModerationBlockMessage,
 	        AuditLogEvent.OnboardingPromptCreate,
@@ -98912,6 +100919,7 @@ function requireGuildAuditLogsEntry () {
 	        AuditLogEvent.StickerDelete,
 	        AuditLogEvent.GuildScheduledEventDelete,
 	        AuditLogEvent.ThreadDelete,
+	        AuditLogEvent.SoundboardSoundDelete,
 	        AuditLogEvent.AutoModerationRuleDelete,
 	        AuditLogEvent.OnboardingPromptDelete,
 	      ].includes(action)
@@ -98936,8 +100944,13 @@ function requireGuildAuditLogsEntry () {
 	        AuditLogEvent.StickerUpdate,
 	        AuditLogEvent.GuildScheduledEventUpdate,
 	        AuditLogEvent.ThreadUpdate,
+	        AuditLogEvent.SoundboardSoundUpdate,
 	        AuditLogEvent.ApplicationCommandPermissionUpdate,
+	        AuditLogEvent.SoundboardSoundUpdate,
 	        AuditLogEvent.AutoModerationRuleUpdate,
+	        AuditLogEvent.AutoModerationBlockMessage,
+	        AuditLogEvent.AutoModerationFlagToChannel,
+	        AuditLogEvent.AutoModerationUserCommunicationDisabled,
 	        AuditLogEvent.OnboardingPromptUpdate,
 	        AuditLogEvent.OnboardingUpdate,
 	      ].includes(action)
@@ -99841,6 +101854,43 @@ function requireGuildScheduledEventUserRemove () {
 
 	GuildScheduledEventUserRemove = GuildScheduledEventUserRemoveAction;
 	return GuildScheduledEventUserRemove;
+}
+
+var GuildSoundboardSoundDelete;
+var hasRequiredGuildSoundboardSoundDelete;
+
+function requireGuildSoundboardSoundDelete () {
+	if (hasRequiredGuildSoundboardSoundDelete) return GuildSoundboardSoundDelete;
+	hasRequiredGuildSoundboardSoundDelete = 1;
+
+	const Action = requireAction();
+	const Events = requireEvents();
+
+	class GuildSoundboardSoundDeleteAction extends Action {
+	  handle(data) {
+	    const guild = this.client.guilds.cache.get(data.guild_id);
+
+	    if (!guild) return {};
+
+	    const soundboardSound = this.getSoundboardSound(data, guild);
+
+	    if (soundboardSound) {
+	      guild.soundboardSounds.cache.delete(soundboardSound.soundId);
+
+	      /**
+	       * Emitted whenever a soundboard sound is deleted in a guild.
+	       * @event Client#guildSoundboardSoundDelete
+	       * @param {SoundboardSound} soundboardSound The soundboard sound that was deleted
+	       */
+	      this.client.emit(Events.GuildSoundboardSoundDelete, soundboardSound);
+	    }
+
+	    return { soundboardSound };
+	  }
+	}
+
+	GuildSoundboardSoundDelete = GuildSoundboardSoundDeleteAction;
+	return GuildSoundboardSoundDelete;
 }
 
 var GuildStickerCreate;
@@ -101222,6 +103272,7 @@ function requireMessageComponentInteraction () {
 	const BaseInteraction = requireBaseInteraction();
 	const InteractionWebhook = requireInteractionWebhook();
 	const InteractionResponses = requireInteractionResponses();
+	const { findComponentByCustomId } = requireComponents$1();
 
 	const getMessage = lazy(() => requireMessage$1().Message);
 
@@ -101297,13 +103348,11 @@ function requireMessageComponentInteraction () {
 
 	  /**
 	   * The component which was interacted with
-	   * @type {MessageActionRowComponent|APIMessageActionRowComponent}
+	   * @type {MessageActionRowComponent|APIComponentInMessageActionRow}
 	   * @readonly
 	   */
 	  get component() {
-	    return this.message.components
-	      .flatMap(row => row.components)
-	      .find(component => (component.customId ?? component.custom_id) === this.customId);
+	    return findComponentByCustomId(this.message.components, this.customId);
 	  }
 
 	  // These are here only for documentation purposes - they are implemented by InteractionResponses
@@ -103506,6 +105555,7 @@ function requireActionsManager () {
 	    this.register(requireGuildScheduledEventUpdate());
 	    this.register(requireGuildScheduledEventUserAdd());
 	    this.register(requireGuildScheduledEventUserRemove());
+	    this.register(requireGuildSoundboardSoundDelete());
 	    this.register(requireGuildStickerCreate());
 	    this.register(requireGuildStickerDelete());
 	    this.register(requireGuildStickerUpdate());
@@ -109584,8 +111634,8 @@ function requireDist$3 () {
 	// src/ws/WebSocketShard.ts
 	var import_node_buffer = require$$7;
 	var import_node_events2 = require$$0$5;
-	var import_node_timers = require$$6$1;
-	var import_promises2 = require$$6$2;
+	var import_node_timers = require$$6$2;
+	var import_promises2 = require$$6$3;
 	var import_node_url = require$$7$1;
 	var import_node_util = require$$0$4;
 	var import_node_zlib = require$$3$1;
@@ -109603,7 +111653,7 @@ function requireDist$3 () {
 	var import_v10 = requireV10();
 
 	// src/throttling/SimpleIdentifyThrottler.ts
-	var import_promises = require$$6$2;
+	var import_promises = require$$6$3;
 	var import_collection3 = requireDist$4();
 	var import_async_queue = /*@__PURE__*/ requireCjs$1();
 	var SimpleIdentifyThrottler = class {
@@ -109648,7 +111698,7 @@ function requireDist$3 () {
 	  CompressionMethod2["ZlibStream"] = "zlib-stream";
 	  return CompressionMethod2;
 	})(CompressionMethod || {});
-	var DefaultDeviceProperty = `@discordjs/ws 1.2.1`;
+	var DefaultDeviceProperty = `@discordjs/ws 1.2.2`;
 	var getDefaultSessionStore = (0, import_util.lazy)(() => new import_collection4.Collection());
 	var DefaultWebSocketManagerOptions = {
 	  async buildIdentifyThrottler(manager) {
@@ -110602,7 +112652,7 @@ function requireDist$3 () {
 	};
 
 	// src/index.ts
-	var version = "1.2.1";
+	var version = "1.2.2";
 	
 	return dist$2;
 }
@@ -111390,6 +113440,105 @@ function requireGUILD_SCHEDULED_EVENT_USER_REMOVE () {
 	return GUILD_SCHEDULED_EVENT_USER_REMOVE;
 }
 
+var GUILD_SOUNDBOARD_SOUNDS_UPDATE;
+var hasRequiredGUILD_SOUNDBOARD_SOUNDS_UPDATE;
+
+function requireGUILD_SOUNDBOARD_SOUNDS_UPDATE () {
+	if (hasRequiredGUILD_SOUNDBOARD_SOUNDS_UPDATE) return GUILD_SOUNDBOARD_SOUNDS_UPDATE;
+	hasRequiredGUILD_SOUNDBOARD_SOUNDS_UPDATE = 1;
+
+	const { Collection } = requireDist$7();
+	const Events = requireEvents();
+
+	GUILD_SOUNDBOARD_SOUNDS_UPDATE = (client, { d: data }) => {
+	  const guild = client.guilds.cache.get(data.guild_id);
+
+	  if (!guild) return;
+
+	  const soundboardSounds = new Collection();
+
+	  for (const soundboardSound of data.soundboard_sounds) {
+	    soundboardSounds.set(soundboardSound.sound_id, guild.soundboardSounds._add(soundboardSound));
+	  }
+
+	  /**
+	   * Emitted whenever multiple guild soundboard sounds are updated.
+	   * @event Client#guildSoundboardSoundsUpdate
+	   * @param {Collection<Snowflake, SoundboardSound>} soundboardSounds The updated soundboard sounds
+	   * @param {Guild} guild The guild that the soundboard sounds are from
+	   */
+	  client.emit(Events.GuildSoundboardSoundsUpdate, soundboardSounds, guild);
+	};
+	return GUILD_SOUNDBOARD_SOUNDS_UPDATE;
+}
+
+var GUILD_SOUNDBOARD_SOUND_CREATE;
+var hasRequiredGUILD_SOUNDBOARD_SOUND_CREATE;
+
+function requireGUILD_SOUNDBOARD_SOUND_CREATE () {
+	if (hasRequiredGUILD_SOUNDBOARD_SOUND_CREATE) return GUILD_SOUNDBOARD_SOUND_CREATE;
+	hasRequiredGUILD_SOUNDBOARD_SOUND_CREATE = 1;
+
+	const Events = requireEvents();
+
+	GUILD_SOUNDBOARD_SOUND_CREATE = (client, { d: data }) => {
+	  const guild = client.guilds.cache.get(data.guild_id);
+
+	  if (!guild) return;
+
+	  const soundboardSound = guild.soundboardSounds._add(data);
+
+	  /**
+	   * Emitted whenever a guild soundboard sound is created.
+	   * @event Client#guildSoundboardSoundCreate
+	   * @param {SoundboardSound} soundboardSound The created guild soundboard sound
+	   */
+	  client.emit(Events.GuildSoundboardSoundCreate, soundboardSound);
+	};
+	return GUILD_SOUNDBOARD_SOUND_CREATE;
+}
+
+var GUILD_SOUNDBOARD_SOUND_DELETE;
+var hasRequiredGUILD_SOUNDBOARD_SOUND_DELETE;
+
+function requireGUILD_SOUNDBOARD_SOUND_DELETE () {
+	if (hasRequiredGUILD_SOUNDBOARD_SOUND_DELETE) return GUILD_SOUNDBOARD_SOUND_DELETE;
+	hasRequiredGUILD_SOUNDBOARD_SOUND_DELETE = 1;
+
+	GUILD_SOUNDBOARD_SOUND_DELETE = (client, { d: data }) => {
+	  client.actions.GuildSoundboardSoundDelete.handle(data);
+	};
+	return GUILD_SOUNDBOARD_SOUND_DELETE;
+}
+
+var GUILD_SOUNDBOARD_SOUND_UPDATE;
+var hasRequiredGUILD_SOUNDBOARD_SOUND_UPDATE;
+
+function requireGUILD_SOUNDBOARD_SOUND_UPDATE () {
+	if (hasRequiredGUILD_SOUNDBOARD_SOUND_UPDATE) return GUILD_SOUNDBOARD_SOUND_UPDATE;
+	hasRequiredGUILD_SOUNDBOARD_SOUND_UPDATE = 1;
+
+	const Events = requireEvents();
+
+	GUILD_SOUNDBOARD_SOUND_UPDATE = (client, { d: data }) => {
+	  const guild = client.guilds.cache.get(data.guild_id);
+
+	  if (!guild) return;
+
+	  const oldGuildSoundboardSound = guild.soundboardSounds.cache.get(data.sound_id)?._clone() ?? null;
+	  const newGuildSoundboardSound = guild.soundboardSounds._add(data);
+
+	  /**
+	   * Emitted whenever a guild soundboard sound is updated.
+	   * @event Client#guildSoundboardSoundUpdate
+	   * @param {?SoundboardSound} oldGuildSoundboardSound The guild soundboard sound before the update
+	   * @param {SoundboardSound} newGuildSoundboardSound The guild soundboard sound after the update
+	   */
+	  client.emit(Events.GuildSoundboardSoundUpdate, oldGuildSoundboardSound, newGuildSoundboardSound);
+	};
+	return GUILD_SOUNDBOARD_SOUND_UPDATE;
+}
+
 var GUILD_STICKERS_UPDATE;
 var hasRequiredGUILD_STICKERS_UPDATE;
 
@@ -111880,6 +114029,38 @@ function requireRESUMED () {
 	return RESUMED;
 }
 
+var SOUNDBOARD_SOUNDS;
+var hasRequiredSOUNDBOARD_SOUNDS;
+
+function requireSOUNDBOARD_SOUNDS () {
+	if (hasRequiredSOUNDBOARD_SOUNDS) return SOUNDBOARD_SOUNDS;
+	hasRequiredSOUNDBOARD_SOUNDS = 1;
+
+	const { Collection } = requireDist$7();
+	const Events = requireEvents();
+
+	SOUNDBOARD_SOUNDS = (client, { d: data }) => {
+	  const guild = client.guilds.cache.get(data.guild_id);
+
+	  if (!guild) return;
+
+	  const soundboardSounds = new Collection();
+
+	  for (const soundboardSound of data.soundboard_sounds) {
+	    soundboardSounds.set(soundboardSound.sound_id, guild.soundboardSounds._add(soundboardSound));
+	  }
+
+	  /**
+	   * Emitted whenever soundboard sounds are received (all soundboard sounds come from the same guild).
+	   * @event Client#soundboardSounds
+	   * @param {Collection<Snowflake, SoundboardSound>} soundboardSounds The sounds received
+	   * @param {Guild} guild The guild that the soundboard sounds are from
+	   */
+	  client.emit(Events.SoundboardSounds, soundboardSounds, guild);
+	};
+	return SOUNDBOARD_SOUNDS;
+}
+
 var STAGE_INSTANCE_CREATE;
 var hasRequiredSTAGE_INSTANCE_CREATE;
 
@@ -112175,6 +114356,15 @@ function requireVoiceChannelEffect () {
 	  get channel() {
 	    return this.guild.channels.cache.get(this.channelId) ?? null;
 	  }
+
+	  /**
+	   * The soundboard sound for soundboard effects.
+	   * @type {?SoundboardSound}
+	   * @readonly
+	   */
+	  get soundboardSound() {
+	    return this.guild.soundboardSounds.cache.get(this.soundId) ?? null;
+	  }
 	}
 
 	VoiceChannelEffect_1 = VoiceChannelEffect;
@@ -112284,6 +114474,10 @@ function requireHandlers () {
 	  ['GUILD_SCHEDULED_EVENT_UPDATE', requireGUILD_SCHEDULED_EVENT_UPDATE()],
 	  ['GUILD_SCHEDULED_EVENT_USER_ADD', requireGUILD_SCHEDULED_EVENT_USER_ADD()],
 	  ['GUILD_SCHEDULED_EVENT_USER_REMOVE', requireGUILD_SCHEDULED_EVENT_USER_REMOVE()],
+	  ['GUILD_SOUNDBOARD_SOUNDS_UPDATE', requireGUILD_SOUNDBOARD_SOUNDS_UPDATE()],
+	  ['GUILD_SOUNDBOARD_SOUND_CREATE', requireGUILD_SOUNDBOARD_SOUND_CREATE()],
+	  ['GUILD_SOUNDBOARD_SOUND_DELETE', requireGUILD_SOUNDBOARD_SOUND_DELETE()],
+	  ['GUILD_SOUNDBOARD_SOUND_UPDATE', requireGUILD_SOUNDBOARD_SOUND_UPDATE()],
 	  ['GUILD_STICKERS_UPDATE', requireGUILD_STICKERS_UPDATE()],
 	  ['GUILD_UPDATE', requireGUILD_UPDATE()],
 	  ['INTERACTION_CREATE', requireINTERACTION_CREATE()],
@@ -112302,6 +114496,7 @@ function requireHandlers () {
 	  ['PRESENCE_UPDATE', requirePRESENCE_UPDATE()],
 	  ['READY', requireREADY()],
 	  ['RESUMED', requireRESUMED()],
+	  ['SOUNDBOARD_SOUNDS', requireSOUNDBOARD_SOUNDS()],
 	  ['STAGE_INSTANCE_CREATE', requireSTAGE_INSTANCE_CREATE()],
 	  ['STAGE_INSTANCE_DELETE', requireSTAGE_INSTANCE_DELETE()],
 	  ['STAGE_INSTANCE_UPDATE', requireSTAGE_INSTANCE_UPDATE()],
@@ -113004,7 +115199,7 @@ function requireShardClientUtil () {
 	        });
 	        break;
 	      case 'worker':
-	        this.parentPort = require$$5$4.parentPort;
+	        this.parentPort = require$$5$3.parentPort;
 	        this.parentPort.on('message', this._handleMessage.bind(this));
 	        client.on(Events.ShardReady, () => {
 	          this.parentPort.postMessage({ _ready: true });
@@ -116076,6 +118271,442 @@ function requireGuildScheduledEventManager () {
 	return GuildScheduledEventManager_1;
 }
 
+var GuildSoundboardSoundManager = {};
+
+var SoundboardSound = {};
+
+var hasRequiredSoundboardSound;
+
+function requireSoundboardSound () {
+	if (hasRequiredSoundboardSound) return SoundboardSound;
+	hasRequiredSoundboardSound = 1;
+
+	const { DiscordSnowflake } = /*@__PURE__*/ requireCjs$2();
+	const Base = requireBase();
+	const { Emoji } = requireEmoji$1();
+	const { DiscordjsError, ErrorCodes } = requireErrors$1();
+
+	/**
+	 * Represents a soundboard sound.
+	 * @extends {Base}
+	 */
+	let SoundboardSound$1 = class SoundboardSound extends Base {
+	  constructor(client, data) {
+	    super(client);
+
+	    /**
+	     * The id of this soundboard sound
+	     * @type {Snowflake|string}
+	     */
+	    this.soundId = data.sound_id;
+
+	    this._patch(data);
+	  }
+
+	  _patch(data) {
+	    if ('available' in data) {
+	      /**
+	       * Whether this soundboard sound is available
+	       * @type {?boolean}
+	       */
+	      this.available = data.available;
+	    } else {
+	      this.available ??= null;
+	    }
+
+	    if ('name' in data) {
+	      /**
+	       * The name of this soundboard sound
+	       * @type {?string}
+	       */
+	      this.name = data.name;
+	    } else {
+	      this.name ??= null;
+	    }
+
+	    if ('volume' in data) {
+	      /**
+	       * The volume (a double) of this soundboard sound, from 0 to 1
+	       * @type {?number}
+	       */
+	      this.volume = data.volume;
+	    } else {
+	      this.volume ??= null;
+	    }
+
+	    if ('emoji_id' in data) {
+	      /**
+	       * The raw emoji data of this soundboard sound
+	       * @type {?Object}
+	       * @private
+	       */
+	      this._emoji = {
+	        id: data.emoji_id,
+	        name: data.emoji_name,
+	      };
+	    } else {
+	      this._emoji ??= null;
+	    }
+
+	    if ('guild_id' in data) {
+	      /**
+	       * The guild id of this soundboard sound
+	       * @type {?Snowflake}
+	       */
+	      this.guildId = data.guild_id;
+	    } else {
+	      this.guildId ??= null;
+	    }
+
+	    if ('user' in data) {
+	      /**
+	       * The user who created this soundboard sound
+	       * @type {?User}
+	       */
+	      this.user = this.client.users._add(data.user);
+	    } else {
+	      this.user ??= null;
+	    }
+	  }
+
+	  /**
+	   * The timestamp this soundboard sound was created at
+	   * @type {number}
+	   * @readonly
+	   */
+	  get createdTimestamp() {
+	    return DiscordSnowflake.timestampFrom(this.soundId);
+	  }
+
+	  /**
+	   * The time this soundboard sound was created at
+	   * @type {Date}
+	   * @readonly
+	   */
+	  get createdAt() {
+	    return new Date(this.createdTimestamp);
+	  }
+
+	  /**
+	   * The emoji of this soundboard sound
+	   * @type {?Emoji}
+	   * @readonly
+	   */
+	  get emoji() {
+	    if (!this._emoji) return null;
+
+	    return this.guild?.emojis.cache.get(this._emoji.id) ?? new Emoji(this.client, this._emoji);
+	  }
+
+	  /**
+	   * The guild this soundboard sound is part of
+	   * @type {?Guild}
+	   * @readonly
+	   */
+	  get guild() {
+	    return this.client.guilds.resolve(this.guildId);
+	  }
+
+	  /**
+	   * A link to this soundboard sound
+	   * @type {string}
+	   * @readonly
+	   */
+	  get url() {
+	    return this.client.rest.cdn.soundboardSound(this.soundId);
+	  }
+
+	  /**
+	   * Edits this soundboard sound.
+	   * @param {GuildSoundboardSoundEditOptions} options The options to provide
+	   * @returns {Promise<SoundboardSound>}
+	   * @example
+	   * // Update the name of a soundboard sound
+	   * soundboardSound.edit({ name: 'new name' })
+	   *   .then(sound => console.log(`Updated the name of the soundboard sound to ${sound.name}`))
+	   *   .catch(console.error);
+	   */
+	  async edit(options) {
+	    if (!this.guildId) throw new DiscordjsError(ErrorCodes.NotGuildSoundboardSound, 'edited');
+
+	    return this.guild.soundboardSounds.edit(this, options);
+	  }
+
+	  /**
+	   * Deletes this soundboard sound.
+	   * @param {string} [reason] Reason for deleting this soundboard sound
+	   * @returns {Promise<SoundboardSound>}
+	   * @example
+	   * // Delete a soundboard sound
+	   * soundboardSound.delete()
+	   *   .then(sound => console.log(`Deleted soundboard sound ${sound.name}`))
+	   *   .catch(console.error);
+	   */
+	  async delete(reason) {
+	    if (!this.guildId) throw new DiscordjsError(ErrorCodes.NotGuildSoundboardSound, 'deleted');
+
+	    await this.guild.soundboardSounds.delete(this, reason);
+
+	    return this;
+	  }
+
+	  /**
+	   * Whether this soundboard sound is the same as another one.
+	   * @param {SoundboardSound|APISoundboardSound} other The soundboard sound to compare it to
+	   * @returns {boolean}
+	   */
+	  equals(other) {
+	    if (other instanceof SoundboardSound) {
+	      return (
+	        this.soundId === other.soundId &&
+	        this.available === other.available &&
+	        this.name === other.name &&
+	        this.volume === other.volume &&
+	        this.emojiId === other.emojiId &&
+	        this.emojiName === other.emojiName &&
+	        this.guildId === other.guildId &&
+	        this.user?.id === other.user?.id
+	      );
+	    }
+
+	    return (
+	      this.soundId === other.sound_id &&
+	      this.available === other.available &&
+	      this.name === other.name &&
+	      this.volume === other.volume &&
+	      this.emojiId === other.emoji_id &&
+	      this.emojiName === other.emoji_name &&
+	      this.guildId === other.guild_id &&
+	      this.user?.id === other.user?.id
+	    );
+	  }
+	};
+
+	SoundboardSound.SoundboardSound = SoundboardSound$1;
+	return SoundboardSound;
+}
+
+var hasRequiredGuildSoundboardSoundManager;
+
+function requireGuildSoundboardSoundManager () {
+	if (hasRequiredGuildSoundboardSoundManager) return GuildSoundboardSoundManager;
+	hasRequiredGuildSoundboardSoundManager = 1;
+
+	const { Collection } = requireDist$7();
+	const { lazy } = requireDist$b();
+	const { Routes } = requireV10();
+	const CachedManager = requireCachedManager();
+	const { DiscordjsTypeError, ErrorCodes } = requireErrors$1();
+	const { SoundboardSound } = requireSoundboardSound();
+	const { resolveBase64, resolveFile } = requireDataResolver();
+
+	const fileTypeMime = lazy(() => requireDist$8().filetypemime);
+
+	/**
+	 * Manages API methods for Soundboard Sounds and stores their cache.
+	 * @extends {CachedManager}
+	 */
+	let GuildSoundboardSoundManager$1 = class GuildSoundboardSoundManager extends CachedManager {
+	  constructor(guild, iterable) {
+	    super(guild.client, SoundboardSound, iterable);
+
+	    /**
+	     * The guild this manager belongs to
+	     * @type {Guild}
+	     */
+	    this.guild = guild;
+	  }
+
+	  /**
+	   * The cache of Soundboard Sounds
+	   * @type {Collection<Snowflake, SoundboardSound>}
+	   * @name GuildSoundboardSoundManager#cache
+	   */
+
+	  _add(data, cache) {
+	    return super._add(data, cache, { extras: [this.guild], id: data.sound_id });
+	  }
+
+	  /**
+	   * Data that resolves to give a SoundboardSound object. This can be:
+	   * * A SoundboardSound object
+	   * * A Snowflake
+	   * @typedef {SoundboardSound|Snowflake} SoundboardSoundResolvable
+	   */
+
+	  /**
+	   * Resolves a SoundboardSoundResolvable to a SoundboardSound object.
+	   * @method resolve
+	   * @memberof GuildSoundboardSoundManager
+	   * @instance
+	   * @param {SoundboardSoundResolvable} soundboardSound The SoundboardSound resolvable to identify
+	   * @returns {?SoundboardSound}
+	   */
+
+	  /**
+	   * Resolves a {@link SoundboardSoundResolvable} to a {@link SoundboardSound} id.
+	   * @param {SoundboardSoundResolvable} soundboardSound The soundboard sound resolvable to resolve
+	   * @returns {?Snowflake}
+	   */
+	  resolveId(soundboardSound) {
+	    if (soundboardSound instanceof this.holds) return soundboardSound.soundId;
+	    if (typeof soundboardSound === 'string') return soundboardSound;
+	    return null;
+	  }
+
+	  /**
+	   * Options used to create a soundboard sound in a guild.
+	   * @typedef {Object} GuildSoundboardSoundCreateOptions
+	   * @property {BufferResolvable|Stream} file The file for the soundboard sound
+	   * @property {string} name The name for the soundboard sound
+	   * @property {string} [contentType] The content type for the soundboard sound file
+	   * @property {number} [volume] The volume (a double) for the soundboard sound, from 0 (inclusive) to 1. Defaults to 1
+	   * @property {Snowflake} [emojiId] The emoji id for the soundboard sound
+	   * @property {string} [emojiName] The emoji name for the soundboard sound
+	   * @property {string} [reason] The reason for creating the soundboard sound
+	   */
+
+	  /**
+	   * Creates a new guild soundboard sound.
+	   * @param {GuildSoundboardSoundCreateOptions} options Options for creating a guild soundboard sound
+	   * @returns {Promise<SoundboardSound>} The created soundboard sound
+	   * @example
+	   * // Create a new soundboard sound from a file on your computer
+	   * guild.soundboardSounds.create({ file: './sound.mp3', name: 'sound' })
+	   *   .then(sound => console.log(`Created new soundboard sound with name ${sound.name}!`))
+	   *   .catch(console.error);
+	   */
+	  async create({ contentType, emojiId, emojiName, file, name, reason, volume }) {
+	    const resolvedFile = await resolveFile(file);
+
+	    const resolvedContentType = contentType ?? resolvedFile.contentType ?? fileTypeMime()(resolvedFile.data)[0];
+
+	    const sound = resolveBase64(resolvedFile.data, resolvedContentType);
+
+	    const body = { emoji_id: emojiId, emoji_name: emojiName, name, sound, volume };
+
+	    const soundboardSound = await this.client.rest.post(Routes.guildSoundboardSounds(this.guild.id), {
+	      body,
+	      reason,
+	    });
+
+	    return this._add(soundboardSound);
+	  }
+
+	  /**
+	   * Data for editing a soundboard sound.
+	   * @typedef {Object} GuildSoundboardSoundEditOptions
+	   * @property {string} [name] The name of the soundboard sound
+	   * @property {?number} [volume] The volume of the soundboard sound, from 0 to 1
+	   * @property {?Snowflake} [emojiId] The emoji id of the soundboard sound
+	   * @property {?string} [emojiName] The emoji name of the soundboard sound
+	   * @property {string} [reason] The reason for editing the soundboard sound
+	   */
+
+	  /**
+	   * Edits a soundboard sound.
+	   * @param {SoundboardSoundResolvable} soundboardSound The soundboard sound to edit
+	   * @param {GuildSoundboardSoundEditOptions} [options={}] The new data for the soundboard sound
+	   * @returns {Promise<SoundboardSound>}
+	   */
+	  async edit(soundboardSound, options = {}) {
+	    const soundId = this.resolveId(soundboardSound);
+
+	    if (!soundId) throw new DiscordjsTypeError(ErrorCodes.InvalidType, 'soundboardSound', 'SoundboardSoundResolvable');
+
+	    const { emojiId, emojiName, name, reason, volume } = options;
+
+	    const body = { emoji_id: emojiId, emoji_name: emojiName, name, volume };
+
+	    const data = await this.client.rest.patch(Routes.guildSoundboardSound(this.guild.id, soundId), {
+	      body,
+	      reason,
+	    });
+
+	    const existing = this.cache.get(soundId);
+
+	    if (existing) {
+	      const clone = existing._clone();
+
+	      clone._patch(data);
+	      return clone;
+	    }
+
+	    return this._add(data);
+	  }
+
+	  /**
+	   * Deletes a soundboard sound.
+	   * @param {SoundboardSoundResolvable} soundboardSound The soundboard sound to delete
+	   * @param {string} [reason] Reason for deleting this soundboard sound
+	   * @returns {Promise<void>}
+	   */
+	  async delete(soundboardSound, reason) {
+	    const soundId = this.resolveId(soundboardSound);
+
+	    if (!soundId) throw new DiscordjsTypeError(ErrorCodes.InvalidType, 'soundboardSound', 'SoundboardSoundResolvable');
+
+	    await this.client.rest.delete(Routes.guildSoundboardSound(this.guild.id, soundId), { reason });
+	  }
+
+	  /**
+	   * Options used to fetch a soundboard sound.
+	   * @typedef {BaseFetchOptions} FetchSoundboardSoundOptions
+	   * @property {SoundboardSoundResolvable} soundboardSound The soundboard sound to fetch
+	   */
+
+	  /**
+	   * Options used to fetch soundboard sounds from Discord
+	   * @typedef {Object} FetchGuildSoundboardSoundsOptions
+	   * @property {boolean} [cache] Whether to cache the fetched soundboard sounds
+	   */
+
+	  /* eslint-disable max-len */
+	  /**
+	   * Obtains one or more soundboard sounds from Discord, or the soundboard sound cache if they're already available.
+	   * @param {SoundboardSoundResolvable|FetchSoundboardSoundOptions|FetchGuildSoundboardSoundsOptions} [options] Options for fetching soundboard sound(s)
+	   * @returns {Promise<SoundboardSound|Collection<Snowflake, SoundboardSound>>}
+	   * @example
+	   * // Fetch a single soundboard sound
+	   * guild.soundboardSounds.fetch('222078108977594368')
+	   *   .then(sound => console.log(`The soundboard sound name is: ${sound.name}`))
+	   *   .catch(console.error);
+	   * @example
+	   * // Fetch all soundboard sounds from the guild
+	   * guild.soundboardSounds.fetch()
+	   *   .then(sounds => console.log(`There are ${sounds.size} soundboard sounds.`))
+	   *   .catch(console.error);
+	   */
+	  /* eslint-enable max-len */
+	  async fetch(options) {
+	    if (!options) return this._fetchMany();
+	    const { cache, force, soundboardSound } = options;
+	    const resolvedSoundboardSound = this.resolveId(soundboardSound ?? options);
+	    if (resolvedSoundboardSound) return this._fetchSingle({ cache, force, soundboardSound });
+	    return this._fetchMany({ cache });
+	  }
+
+	  async _fetchSingle({ cache, force, soundboardSound } = {}) {
+	    if (!force) {
+	      const existing = this.cache.get(soundboardSound);
+	      if (existing) return existing;
+	    }
+
+	    const data = await this.client.rest.get(Routes.guildSoundboardSound(this.guild.id, soundboardSound));
+	    return this._add(data, cache);
+	  }
+
+	  async _fetchMany({ cache } = {}) {
+	    const data = await this.client.rest.get(Routes.guildSoundboardSounds(this.guild.id));
+
+	    return data.items.reduce((coll, sound) => coll.set(sound.sound_id, this._add(sound, cache)), new Collection());
+	  }
+	};
+
+	GuildSoundboardSoundManager.GuildSoundboardSoundManager = GuildSoundboardSoundManager$1;
+	return GuildSoundboardSoundManager;
+}
+
 var GuildStickerManager_1;
 var hasRequiredGuildStickerManager;
 
@@ -117454,6 +120085,7 @@ function requireGuild () {
 	const GuildInviteManager = requireGuildInviteManager();
 	const GuildMemberManager = requireGuildMemberManager();
 	const GuildScheduledEventManager = requireGuildScheduledEventManager();
+	const { GuildSoundboardSoundManager } = requireGuildSoundboardSoundManager();
 	const GuildStickerManager = requireGuildStickerManager();
 	const PresenceManager = requirePresenceManager();
 	const RoleManager = requireRoleManager();
@@ -117540,6 +120172,12 @@ function requireGuild () {
 	     * @type {AutoModerationRuleManager}
 	     */
 	    this.autoModerationRules = new AutoModerationRuleManager(this);
+
+	    /**
+	     * A manager of the soundboard sounds of this guild.
+	     * @type {GuildSoundboardSoundManager}
+	     */
+	    this.soundboardSounds = new GuildSoundboardSoundManager(this);
 
 	    if (!data) return;
 	    if (data.unavailable) {
@@ -118970,8 +121608,9 @@ function requireGuildManager () {
 	const { setTimeout, clearTimeout } = require$$0$i;
 	const { Collection } = requireDist$7();
 	const { makeURLSearchParams } = requireWeb();
-	const { Routes, RouteBases } = requireV10();
+	const { GatewayOpcodes, Routes, RouteBases } = requireV10();
 	const CachedManager = requireCachedManager();
+	const { ErrorCodes, DiscordjsError } = requireErrors$1();
 	const ShardClientUtil = requireShardClientUtil();
 	const { Guild } = requireGuild();
 	const GuildChannel = requireGuildChannel();
@@ -119246,6 +121885,79 @@ function requireGuildManager () {
 
 	    const data = await this.client.rest.get(Routes.userGuilds(), { query: makeURLSearchParams(options) });
 	    return data.reduce((coll, guild) => coll.set(guild.id, new OAuth2Guild(this.client, guild)), new Collection());
+	  }
+
+	  /**
+	   * @typedef {Object} FetchSoundboardSoundsOptions
+	   * @param {Snowflake[]} guildIds The ids of the guilds to fetch soundboard sounds for
+	   * @param {number} [time=10_000] The timeout for receipt of the soundboard sounds
+	   */
+
+	  /**
+	   * Fetches soundboard sounds for the specified guilds.
+	   * @param {FetchSoundboardSoundsOptions} options The options for fetching soundboard sounds
+	   * @returns {Promise<Collection<Snowflake, Collection<Snowflake, SoundboardSound>>>}
+	   * @example
+	   * // Fetch soundboard sounds for multiple guilds
+	   * const soundboardSounds = await client.guilds.fetchSoundboardSounds({
+	   *  guildIds: ['123456789012345678', '987654321098765432'],
+	   * })
+	   *
+	   * console.log(soundboardSounds.get('123456789012345678'));
+	   */
+	  async fetchSoundboardSounds({ guildIds, time = 10_000 }) {
+	    const shardCount = this.client.options.shardCount;
+	    const shardIds = new Map();
+
+	    for (const guildId of guildIds) {
+	      const shardId = ShardClientUtil.shardIdForGuildId(guildId, shardCount);
+	      const group = shardIds.get(shardId);
+
+	      if (group) group.push(guildId);
+	      else shardIds.set(shardId, [guildId]);
+	    }
+
+	    for (const [shardId, shardGuildIds] of shardIds) {
+	      this.client.ws.shards.get(shardId).send({
+	        op: GatewayOpcodes.RequestSoundboardSounds,
+	        d: {
+	          guild_ids: shardGuildIds,
+	        },
+	      });
+	    }
+
+	    return new Promise((resolve, reject) => {
+	      const remainingGuildIds = new Set(guildIds);
+
+	      const fetchedSoundboardSounds = new Collection();
+
+	      const handler = (soundboardSounds, guild) => {
+	        timeout.refresh();
+
+	        if (!remainingGuildIds.has(guild.id)) return;
+
+	        fetchedSoundboardSounds.set(guild.id, soundboardSounds);
+
+	        remainingGuildIds.delete(guild.id);
+
+	        if (remainingGuildIds.size === 0) {
+	          clearTimeout(timeout);
+	          this.client.removeListener(Events.SoundboardSounds, handler);
+	          this.client.decrementMaxListeners();
+
+	          resolve(fetchedSoundboardSounds);
+	        }
+	      };
+
+	      const timeout = setTimeout(() => {
+	        this.client.removeListener(Events.SoundboardSounds, handler);
+	        this.client.decrementMaxListeners();
+	        reject(new DiscordjsError(ErrorCodes.GuildSoundboardSoundsTimeout));
+	      }, time).unref();
+
+	      this.client.incrementMaxListeners();
+	      this.client.on(Events.SoundboardSounds, handler);
+	    });
 	  }
 
 	  /**
@@ -120477,6 +123189,7 @@ function requireClient$1 () {
 	const GuildPreview = requireGuildPreview();
 	const GuildTemplate = requireGuildTemplate();
 	const Invite = requireInvite();
+	const { SoundboardSound } = requireSoundboardSound();
 	const { Sticker } = requireSticker();
 	const StickerPack = requireStickerPack();
 	const VoiceRegion = requireVoiceRegion();
@@ -120503,7 +123216,7 @@ function requireClient$1 () {
 	  constructor(options) {
 	    super(options);
 
-	    const data = require$$5$4.workerData ?? process.env;
+	    const data = require$$5$3.workerData ?? process.env;
 	    const defaults = Options.createDefault();
 
 	    if (this.options.shards === defaults.shards) {
@@ -120850,6 +123563,19 @@ function requireClient$1 () {
 	  }
 
 	  /**
+	   * Obtains the list of default soundboard sounds.
+	   * @returns {Promise<Collection<string, SoundboardSound>>}
+	   * @example
+	   * client.fetchDefaultSoundboardSounds()
+	   *  .then(sounds => console.log(`Available soundboard sounds are: ${sounds.map(sound => sound.name).join(', ')}`))
+	   *  .catch(console.error);
+	   */
+	  async fetchDefaultSoundboardSounds() {
+	    const data = await this.rest.get(Routes.soundboardDefaultSounds());
+	    return new Collection(data.map(sound => [sound.sound_id, new SoundboardSound(this, sound)]));
+	  }
+
+	  /**
 	   * Obtains a guild preview from Discord, available for all guilds the bot is in and all Discoverable guilds.
 	   * @param {GuildResolvable} guild The guild to fetch the preview for
 	   * @returns {Promise<GuildPreview>}
@@ -121140,7 +123866,7 @@ function requireShard () {
 	const process = require$$0$h;
 	const { setTimeout, clearTimeout } = require$$0$i;
 	const { setTimeout: sleep } = require$$4$3;
-	const { SHARE_ENV } = require$$5$4;
+	const { SHARE_ENV } = require$$5$3;
 	const { DiscordjsError, ErrorCodes } = requireErrors$1();
 	const ShardEvents = requireShardEvents();
 	const { makeError, makePlainError } = requireUtil();
@@ -121163,7 +123889,7 @@ function requireShard () {
 	        childProcess = require$$9;
 	        break;
 	      case 'worker':
-	        Worker = require$$5$4.Worker;
+	        Worker = require$$5$3.Worker;
 	        break;
 	    }
 
@@ -122874,6 +125600,7 @@ function requireSrc () {
 		exports.GuildMemberRoleManager = requireGuildMemberRoleManager();
 		exports.GuildMessageManager = requireGuildMessageManager();
 		exports.GuildScheduledEventManager = requireGuildScheduledEventManager();
+		exports.GuildSoundboardSoundManager = requireGuildSoundboardSoundManager().GuildSoundboardSoundManager;
 		exports.GuildStickerManager = requireGuildStickerManager();
 		exports.GuildTextThreadManager = requireGuildTextThreadManager();
 		exports.MessageManager = requireMessageManager();
@@ -122922,12 +125649,14 @@ function requireSrc () {
 		exports.Collector = requireCollector();
 		exports.CommandInteractionOptionResolver = requireCommandInteractionOptionResolver();
 		exports.Component = requireComponent();
+		exports.ContainerComponent = requireContainerComponent();
 		exports.ContextMenuCommandInteraction = requireContextMenuCommandInteraction();
 		exports.DMChannel = requireDMChannel();
 		exports.Embed = requireEmbed$1();
 		exports.EmbedBuilder = requireEmbedBuilder();
 		exports.Emoji = requireEmoji$1().Emoji;
 		exports.Entitlement = requireEntitlement().Entitlement;
+		exports.FileComponent = requireFileComponent();
 		exports.ForumChannel = requireForumChannel();
 		exports.Guild = requireGuild().Guild;
 		exports.GuildAuditLogs = requireGuildAuditLogs();
@@ -122960,6 +125689,8 @@ function requireSrc () {
 		exports.AttachmentBuilder = requireAttachmentBuilder();
 		exports.ModalBuilder = requireModalBuilder();
 		exports.MediaChannel = requireMediaChannel();
+		exports.MediaGalleryComponent = requireMediaGalleryComponent();
+		exports.MediaGalleryItem = requireMediaGalleryItem();
 		exports.MessageCollector = requireMessageCollector();
 		exports.MessageComponentInteraction = requireMessageComponentInteraction();
 		exports.MessageContextMenuCommandInteraction = requireMessageContextMenuCommandInteraction();
@@ -122979,6 +125710,7 @@ function requireSrc () {
 		exports.ReactionEmoji = requireReactionEmoji();
 		exports.RichPresenceAssets = requirePresence().RichPresenceAssets;
 		exports.Role = requireRole$1().Role;
+		exports.SectionComponent = requireSectionComponent();
 		exports.SelectMenuBuilder = requireSelectMenuBuilder();
 		exports.ChannelSelectMenuBuilder = requireChannelSelectMenuBuilder();
 		exports.MentionableSelectMenuBuilder = requireMentionableSelectMenuBuilder();
@@ -123000,7 +125732,9 @@ function requireSrc () {
 		exports.StringSelectMenuInteraction = requireStringSelectMenuInteraction();
 		exports.UserSelectMenuInteraction = requireUserSelectMenuInteraction();
 		exports.SelectMenuOptionBuilder = requireSelectMenuOptionBuilder();
+		exports.SeparatorComponent = requireSeparatorComponent();
 		exports.SKU = requireSKU().SKU;
+		exports.SoundboardSound = requireSoundboardSound().SoundboardSound;
 		exports.StringSelectMenuOptionBuilder = requireStringSelectMenuOptionBuilder();
 		exports.StageChannel = requireStageChannel();
 		exports.StageInstance = requireStageInstance().StageInstance;
@@ -123010,12 +125744,15 @@ function requireSrc () {
 		exports.Team = requireTeam();
 		exports.TeamMember = requireTeamMember();
 		exports.TextChannel = requireTextChannel();
+		exports.TextDisplayComponent = requireTextDisplayComponent();
 		exports.TextInputBuilder = requireTextInputBuilder();
 		exports.TextInputComponent = requireTextInputComponent();
 		exports.ThreadChannel = requireThreadChannel();
 		exports.ThreadMember = requireThreadMember();
 		exports.ThreadOnlyChannel = requireThreadOnlyChannel();
+		exports.ThumbnailComponent = requireThumbnailComponent();
 		exports.Typing = requireTyping();
+		exports.UnfurledMediaItem = requireUnfurledMediaItem();
 		exports.User = requireUser$1();
 		exports.UserContextMenuCommandInteraction = requireUserContextMenuCommandInteraction();
 		exports.VoiceChannelEffect = requireVoiceChannelEffect();
