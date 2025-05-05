@@ -39729,7 +39729,7 @@ function requireTransformers () {
 	return Transformers;
 }
 
-var version = "14.19.1";
+var version = "14.19.3";
 var require$$39 = {
 	version: version};
 
@@ -86086,7 +86086,7 @@ function requireDist$5 () {
 		   * @example
 		   * Creating a thumbnail from an API data object:
 		   * ```ts
-		   * const thumbnaik = new ThumbnailBuilder({
+		   * const thumbnail = new ThumbnailBuilder({
 		   * 	description: 'some text',
 		   *  media: {
 		   *      url: 'https://cdn.discordapp.com/embed/avatars/4.png',
@@ -86172,11 +86172,11 @@ function requireDist$5 () {
 		var accessoryPredicate = import_shapeshift4.s.instance(ButtonBuilder).or(import_shapeshift4.s.instance(ThumbnailBuilder)).setValidationEnabled(isValidationEnabled);
 		var containerColorPredicate = colorPredicate.nullish();
 		function assertReturnOfBuilder(input, ExpectedInstanceOf) {
-		  import_shapeshift4.s.instance(ExpectedInstanceOf).parse(input);
+		  import_shapeshift4.s.instance(ExpectedInstanceOf).setValidationEnabled(isValidationEnabled).parse(input);
 		}
 		__name(assertReturnOfBuilder, "assertReturnOfBuilder");
 		function validateComponentArray(input, min, max, ExpectedInstanceOf) {
-		  (ExpectedInstanceOf ? import_shapeshift4.s.instance(ExpectedInstanceOf) : import_shapeshift4.s.instance(ComponentBuilder)).array().lengthGreaterThanOrEqual(min).lengthLessThanOrEqual(max).parse(input);
+		  (ExpectedInstanceOf ? import_shapeshift4.s.instance(ExpectedInstanceOf) : import_shapeshift4.s.instance(ComponentBuilder)).array().lengthGreaterThanOrEqual(min).lengthLessThanOrEqual(max).setValidationEnabled(isValidationEnabled).parse(input);
 		}
 		__name(validateComponentArray, "validateComponentArray");
 
@@ -86512,7 +86512,6 @@ function requireDist$5 () {
 		   * {@inheritDoc ComponentBuilder.toJSON}
 		   */
 		  toJSON() {
-		    validateComponentArray(this.components, 1, 10);
 		    return {
 		      ...this.data,
 		      components: this.components.map((component) => component.toJSON())
@@ -88328,7 +88327,7 @@ function requireDist$5 () {
 		__name(embedLength, "embedLength");
 
 		// src/index.ts
-		var version = "1.11.1";
+		var version = "1.11.2";
 		
 	} (dist$4));
 	return dist$4.exports;
@@ -91359,6 +91358,14 @@ function requireUnfurledMediaItem () {
 	  get url() {
 	    return this.data.url;
 	  }
+
+	  /**
+	   * Returns the API-compatible JSON for this media item
+	   * @returns {APIUnfurledMediaItem}
+	   */
+	  toJSON() {
+	    return { ...this.data };
+	  }
 	}
 
 	UnfurledMediaItem_1 = UnfurledMediaItem;
@@ -92272,24 +92279,35 @@ function requireComponents$1 () {
 	}
 
 	/**
+	 * Extracts all interactive components from the component tree
+	 * @param {Component|APIMessageComponent} component The component to find all interactive components in
+	 * @returns {Array<Component|APIMessageComponent>}
+	 * @ignore
+	 */
+	function extractInteractiveComponents(component) {
+	  switch (component.type) {
+	    case ComponentType.ActionRow:
+	      return component.components;
+	    case ComponentType.Section:
+	      return [...component.components, component.accessory];
+	    case ComponentType.Container:
+	      return component.components.flatMap(extractInteractiveComponents);
+	    default:
+	      return [component];
+	  }
+	}
+
+	/**
 	 * Finds a component by customId in nested components
 	 * @param {Array<Component|APIMessageComponent>} components The components to search in
 	 * @param {string} customId The customId to search for
 	 * @returns {Component|APIMessageComponent}
+	 * @ignore
 	 */
 	function findComponentByCustomId(components, customId) {
 	  return (
 	    components
-	      .flatMap(component => {
-	        switch (component.type) {
-	          case ComponentType.ActionRow:
-	            return component.components;
-	          case ComponentType.Section:
-	            return [...component.components, component.accessory];
-	          default:
-	            return [component];
-	        }
-	      })
+	      .flatMap(extractInteractiveComponents)
 	      .find(component => (component.customId ?? component.custom_id) === customId) ?? null
 	  );
 	}
@@ -95839,7 +95857,10 @@ function requireMessagePayload () {
 	      components,
 	      username,
 	      avatar_url: avatarURL,
-	      allowed_mentions: content === undefined && message_reference === undefined ? undefined : allowedMentions,
+	      allowed_mentions:
+	        this.isMessage && message_reference === undefined && this.target.author.id !== this.target.client.user.id
+	          ? undefined
+	          : allowedMentions,
 	      flags,
 	      message_reference,
 	      attachments: this.options.attachments,
@@ -100946,7 +100967,6 @@ function requireGuildAuditLogsEntry () {
 	        AuditLogEvent.ThreadUpdate,
 	        AuditLogEvent.SoundboardSoundUpdate,
 	        AuditLogEvent.ApplicationCommandPermissionUpdate,
-	        AuditLogEvent.SoundboardSoundUpdate,
 	        AuditLogEvent.AutoModerationRuleUpdate,
 	        AuditLogEvent.AutoModerationBlockMessage,
 	        AuditLogEvent.AutoModerationFlagToChannel,
@@ -114564,10 +114584,13 @@ function requireWebSocketManager () {
 
 	const WaitingForGuildEvents = [GatewayDispatchEvents.GuildCreate, GatewayDispatchEvents.GuildDelete];
 
-	const UNRESUMABLE_CLOSE_CODES = [
-	  CloseCodes.Normal,
-	  GatewayCloseCodes.AlreadyAuthenticated,
-	  GatewayCloseCodes.InvalidSeq,
+	const UNRECOVERABLE_CLOSE_CODES = [
+	  GatewayCloseCodes.AuthenticationFailed,
+	  GatewayCloseCodes.InvalidShard,
+	  GatewayCloseCodes.ShardingRequired,
+	  GatewayCloseCodes.InvalidAPIVersion,
+	  GatewayCloseCodes.InvalidIntents,
+	  GatewayCloseCodes.DisallowedIntents,
 	];
 
 	const reasonIsDeprecated = 'the reason property is deprecated, use the code property to determine the reason';
@@ -114770,7 +114793,7 @@ function requireWebSocketManager () {
 	    this._ws.on(WSWebSocketShardEvents.Closed, ({ code, shardId }) => {
 	      const shard = this.shards.get(shardId);
 	      shard.emit(WebSocketShardEvents.Close, { code, reason: reasonIsDeprecated, wasClean: true });
-	      if (UNRESUMABLE_CLOSE_CODES.includes(code) && this.destroyed) {
+	      if (UNRECOVERABLE_CLOSE_CODES.includes(code)) {
 	        shard.status = Status.Disconnected;
 	        /**
 	         * Emitted when a shard's WebSocket disconnects and will no longer reconnect.
@@ -114779,7 +114802,7 @@ function requireWebSocketManager () {
 	         * @param {number} id The shard id that disconnected
 	         */
 	        this.client.emit(Events.ShardDisconnect, { code, reason: reasonIsDeprecated, wasClean: true }, shardId);
-	        this.debug([`Shard not resumable: ${code} (${GatewayCloseCodes[code] ?? CloseCodes[code]})`], shardId);
+	        this.debug([`Shard not recoverable: ${code} (${GatewayCloseCodes[code] ?? CloseCodes[code]})`], shardId);
 	        return;
 	      }
 
@@ -118462,8 +118485,8 @@ function requireSoundboardSound () {
 	        this.available === other.available &&
 	        this.name === other.name &&
 	        this.volume === other.volume &&
-	        this.emojiId === other.emojiId &&
-	        this.emojiName === other.emojiName &&
+	        this._emoji?.id === other._emoji?.id &&
+	        this._emoji?.name === other._emoji?.name &&
 	        this.guildId === other.guildId &&
 	        this.user?.id === other.user?.id
 	      );
@@ -118474,8 +118497,8 @@ function requireSoundboardSound () {
 	      this.available === other.available &&
 	      this.name === other.name &&
 	      this.volume === other.volume &&
-	      this.emojiId === other.emoji_id &&
-	      this.emojiName === other.emoji_name &&
+	      (this._emoji?.id ?? null) === other.emoji_id &&
+	      (this._emoji?.name ?? null) === other.emoji_name &&
 	      this.guildId === other.guild_id &&
 	      this.user?.id === other.user?.id
 	    );
@@ -118597,7 +118620,7 @@ function requireGuildSoundboardSoundManager () {
 	   * Data for editing a soundboard sound.
 	   * @typedef {Object} GuildSoundboardSoundEditOptions
 	   * @property {string} [name] The name of the soundboard sound
-	   * @property {?number} [volume] The volume of the soundboard sound, from 0 to 1
+	   * @property {?number} [volume] The volume (a double) of the soundboard sound, from 0 (inclusive) to 1
 	   * @property {?Snowflake} [emojiId] The emoji id of the soundboard sound
 	   * @property {?string} [emojiName] The emoji name of the soundboard sound
 	   * @property {string} [reason] The reason for editing the soundboard sound
@@ -118682,7 +118705,7 @@ function requireGuildSoundboardSoundManager () {
 	    if (!options) return this._fetchMany();
 	    const { cache, force, soundboardSound } = options;
 	    const resolvedSoundboardSound = this.resolveId(soundboardSound ?? options);
-	    if (resolvedSoundboardSound) return this._fetchSingle({ cache, force, soundboardSound });
+	    if (resolvedSoundboardSound) return this._fetchSingle({ cache, force, soundboardSound: resolvedSoundboardSound });
 	    return this._fetchMany({ cache });
 	  }
 
@@ -120562,6 +120585,13 @@ function requireGuild () {
 	      this.incidentsData = data.incidents_data && _transformAPIIncidentsData(data.incidents_data);
 	    } else {
 	      this.incidentsData ??= null;
+	    }
+
+	    if (data.soundboard_sounds) {
+	      this.soundboardSounds.cache.clear();
+	      for (const soundboardSound of data.soundboard_sounds) {
+	        this.soundboardSounds._add(soundboardSound);
+	      }
 	    }
 	  }
 
