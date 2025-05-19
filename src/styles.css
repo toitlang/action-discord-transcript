@@ -47,8 +47,8 @@ body {
   background-color: var(--background-tertiary);
   padding: 16px;
   box-shadow:
-    0 1px 0 rgba(4 4 5 / 20%),
-    0 1.5px 0 rgba(6 6 7 / 50%);
+    0 1px 0 rgb(4 4 5 / 20%),
+    0 1.5px 0 rgb(6 6 7 / 50%);
   z-index: 1;
 }
 
