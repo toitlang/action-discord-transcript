@@ -149914,7 +149914,7 @@ function requireReactDom_development () {
 	  return getHighestPriorityLanes(root.pendingLanes);
 	}
 	function getLanesToRetrySynchronouslyOnError(root) {
-	  var everythingButOffscreen = root.pendingLanes & -1073741825;
+	  var everythingButOffscreen = root.pendingLanes & ~OffscreenLane;
 
 	  if (everythingButOffscreen !== NoLanes) {
 	    return everythingButOffscreen;
@@ -154636,7 +154636,7 @@ function requireReactDom_development () {
 	            warnForPropDifference(propKey, serverValue, expectedStyle);
 	          }
 	        }
-	      } else if (isCustomComponentTag && true) {
+	      } else if (isCustomComponentTag && !enableCustomElementPropertySupport) {
 	        // $FlowFixMe - Should be inferred as not undefined.
 	        extraAttributeNames.delete(propKey.toLowerCase());
 	        serverValue = getValueForAttribute(domElement, propKey, nextProp);
@@ -156702,7 +156702,7 @@ function requireReactDom_development () {
 	}
 
 	function insertNonHydratedInstance(returnFiber, fiber) {
-	  fiber.flags = fiber.flags & -4097 | Placement;
+	  fiber.flags = fiber.flags & ~Hydrating | Placement;
 	  warnNonhydratedInstance(returnFiber, fiber);
 	}
 
@@ -159058,7 +159058,7 @@ function requireReactDom_development () {
 
 	    case CaptureUpdate:
 	      {
-	        workInProgress.flags = workInProgress.flags & -65537 | DidCapture;
+	        workInProgress.flags = workInProgress.flags & ~ShouldCapture | DidCapture;
 	      }
 	    // Intentional fallthrough
 
@@ -162820,7 +162820,7 @@ function requireReactDom_development () {
 	  processUpdateQueue(workInProgress, newProps, instance, renderLanes);
 	  newState = workInProgress.memoizedState;
 
-	  if (unresolvedOldProps === unresolvedNewProps && oldState === newState && !hasContextChanged() && !checkHasForceUpdateAfterProcessing() && true) {
+	  if (unresolvedOldProps === unresolvedNewProps && oldState === newState && !hasContextChanged() && !checkHasForceUpdateAfterProcessing() && !(enableLazyContextPropagation   )) {
 	    // If an update was already in progress, we should schedule an Update
 	    // effect even though we're bailing out, so that cWU/cDU are called.
 	    if (typeof instance.componentDidUpdate === 'function') {
@@ -163309,7 +163309,7 @@ function requireReactDom_development () {
 	    var suspenseBoundary = getNearestSuspenseBoundaryToCapture(returnFiber);
 
 	    if (suspenseBoundary !== null) {
-	      suspenseBoundary.flags &= -257;
+	      suspenseBoundary.flags &= ~ForceClientRender;
 	      markSuspenseBoundaryShouldCapture(suspenseBoundary, returnFiber, sourceFiber, root, rootRenderLanes); // We only attach ping listeners in concurrent mode. Legacy Suspense always
 	      // commits fallbacks synchronously, so there are no pings.
 
@@ -164165,7 +164165,7 @@ function requireReactDom_development () {
 	        // Conceptually this is similar to Placement in that a new subtree is
 	        // inserted into the React tree here. It just happens to not need DOM
 	        // mutations because it already exists.
-	        node.flags = node.flags & -3 | Hydrating;
+	        node.flags = node.flags & ~Placement | Hydrating;
 	        node = node.sibling;
 	      }
 	    }
@@ -164591,7 +164591,7 @@ function requireReactDom_development () {
 	    // Something in this boundary's subtree already suspended. Switch to
 	    // rendering the fallback children.
 	    showFallback = true;
-	    workInProgress.flags &= -129;
+	    workInProgress.flags &= ~DidCapture;
 	  } else {
 	    // Attempting the main content
 	    if (current === null || current.memoizedState !== null) {
@@ -165046,7 +165046,7 @@ function requireReactDom_development () {
 	    // something either suspended or errored.
 	    if (workInProgress.flags & ForceClientRender) {
 	      // Something errored during hydration. Try again without hydrating.
-	      workInProgress.flags &= -257;
+	      workInProgress.flags &= ~ForceClientRender;
 
 	      var _capturedValue2 = createCapturedValue(new Error('There was an error while hydrating this Suspense boundary. ' + 'Switched to client rendering.'));
 
@@ -166904,7 +166904,7 @@ function requireReactDom_development () {
 	          var prevIsHidden = _prevState !== null;
 
 	          if (prevIsHidden !== nextIsHidden && ( // LegacyHidden doesn't do any hiding — it only pre-renders.
-	          true )) {
+	          !enableLegacyHidden )) {
 	            workInProgress.flags |= Visibility;
 	          }
 	        }
@@ -166965,7 +166965,7 @@ function requireReactDom_development () {
 	        var flags = workInProgress.flags;
 
 	        if (flags & ShouldCapture) {
-	          workInProgress.flags = flags & -65537 | DidCapture;
+	          workInProgress.flags = flags & ~ShouldCapture | DidCapture;
 
 	          if ( (workInProgress.mode & ProfileMode) !== NoMode) {
 	            transferActualDuration(workInProgress);
@@ -166988,7 +166988,7 @@ function requireReactDom_development () {
 	        if ((_flags & ShouldCapture) !== NoFlags && (_flags & DidCapture) === NoFlags) {
 	          // There was an error during render that wasn't captured by a suspense
 	          // boundary. Do a second pass on the root to unmount the children.
-	          workInProgress.flags = _flags & -65537 | DidCapture;
+	          workInProgress.flags = _flags & ~ShouldCapture | DidCapture;
 	          return workInProgress;
 	        } // We unwound to the root without completing it. Exit.
 
@@ -167019,7 +167019,7 @@ function requireReactDom_development () {
 	        var _flags2 = workInProgress.flags;
 
 	        if (_flags2 & ShouldCapture) {
-	          workInProgress.flags = _flags2 & -65537 | DidCapture; // Captured a suspense effect. Re-render the boundary.
+	          workInProgress.flags = _flags2 & ~ShouldCapture | DidCapture; // Captured a suspense effect. Re-render the boundary.
 
 	          if ( (workInProgress.mode & ProfileMode) !== NoMode) {
 	            transferActualDuration(workInProgress);
@@ -168140,7 +168140,7 @@ function requireReactDom_development () {
 	          // Reset the text content of the parent before doing any insertions
 	          resetTextContent(parent); // Clear ContentReset from the effect tag
 
-	          parentFiber.flags &= -33;
+	          parentFiber.flags &= ~ContentReset;
 	        }
 
 	        var before = getHostSibling(finishedWork); // We only have the top Fiber that was inserted but we need to recurse down its
@@ -168902,11 +168902,11 @@ function requireReactDom_development () {
 	    // and isMounted is deprecated anyway so we should be able to kill this.
 
 
-	    finishedWork.flags &= -3;
+	    finishedWork.flags &= ~Placement;
 	  }
 
 	  if (flags & Hydrating) {
-	    finishedWork.flags &= -4097;
+	    finishedWork.flags &= ~Hydrating;
 	  }
 	}
 
