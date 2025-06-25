@@ -8,11 +8,10 @@ import require$$2$1 from 'http';
 import require$$1$2 from 'https';
 import require$$0$7 from 'net';
 import require$$4$1 from 'tls';
-import require$$0$5 from 'events';
 import require$$0$6 from 'assert';
 import require$$0$4 from 'util';
 import require$$0$8 from 'stream';
-import require$$7 from 'buffer';
+import require$$0$5 from 'buffer';
 import require$$8 from 'querystring';
 import require$$14 from 'stream/web';
 import require$$0$a from 'node:stream';
@@ -23,19 +22,18 @@ import require$$2$2 from 'perf_hooks';
 import require$$5$1 from 'util/types';
 import require$$4$2 from 'async_hooks';
 import require$$1$4 from 'console';
-import require$$7$1, { fileURLToPath } from 'url';
+import require$$7, { fileURLToPath } from 'url';
 import require$$3$1 from 'zlib';
-import require$$6$1 from 'string_decoder';
 import require$$0$c from 'diagnostics_channel';
 import require$$2$3 from 'child_process';
-import require$$6$2 from 'timers';
+import require$$6$1 from 'timers';
 import require$$2$5 from 'node:path';
 import require$$0$h from 'node:process';
 import require$$0$e from 'node:assert';
 import require$$0$f from 'node:net';
 import require$$2$4 from 'node:http';
 import require$$0$d from 'node:buffer';
-import require$$7$2 from 'node:querystring';
+import require$$7$1 from 'node:querystring';
 import require$$0$g from 'node:diagnostics_channel';
 import require$$5$2 from 'node:tls';
 import require$$1$5 from 'node:zlib';
@@ -48,8 +46,7 @@ import require$$1$7 from 'node:console';
 import require$$1$8 from 'node:dns';
 import require$$0$i from 'node:timers';
 import require$$1$9 from 'node:fs/promises';
-import require$$6$3 from 'timers/promises';
-import require$$15 from 'process';
+import require$$6$2 from 'timers/promises';
 import require$$4$3 from 'node:timers/promises';
 import require$$9 from 'node:child_process';
 import require$$1$a from 'node:fs';
@@ -426,6 +423,490 @@ function requireProxy () {
 
 var tunnel$1 = {};
 
+var events$2 = {exports: {}};
+
+var hasRequiredEvents$3;
+
+function requireEvents$3 () {
+	if (hasRequiredEvents$3) return events$2.exports;
+	hasRequiredEvents$3 = 1;
+
+	var R = typeof Reflect === 'object' ? Reflect : null;
+	var ReflectApply = R && typeof R.apply === 'function'
+	  ? R.apply
+	  : function ReflectApply(target, receiver, args) {
+	    return Function.prototype.apply.call(target, receiver, args);
+	  };
+
+	var ReflectOwnKeys;
+	if (R && typeof R.ownKeys === 'function') {
+	  ReflectOwnKeys = R.ownKeys;
+	} else if (Object.getOwnPropertySymbols) {
+	  ReflectOwnKeys = function ReflectOwnKeys(target) {
+	    return Object.getOwnPropertyNames(target)
+	      .concat(Object.getOwnPropertySymbols(target));
+	  };
+	} else {
+	  ReflectOwnKeys = function ReflectOwnKeys(target) {
+	    return Object.getOwnPropertyNames(target);
+	  };
+	}
+
+	function ProcessEmitWarning(warning) {
+	  if (console && console.warn) console.warn(warning);
+	}
+
+	var NumberIsNaN = Number.isNaN || function NumberIsNaN(value) {
+	  return value !== value;
+	};
+
+	function EventEmitter() {
+	  EventEmitter.init.call(this);
+	}
+	events$2.exports = EventEmitter;
+	events$2.exports.once = once;
+
+	// Backwards-compat with node 0.10.x
+	EventEmitter.EventEmitter = EventEmitter;
+
+	EventEmitter.prototype._events = undefined;
+	EventEmitter.prototype._eventsCount = 0;
+	EventEmitter.prototype._maxListeners = undefined;
+
+	// By default EventEmitters will print a warning if more than 10 listeners are
+	// added to it. This is a useful default which helps finding memory leaks.
+	var defaultMaxListeners = 10;
+
+	function checkListener(listener) {
+	  if (typeof listener !== 'function') {
+	    throw new TypeError('The "listener" argument must be of type Function. Received type ' + typeof listener);
+	  }
+	}
+
+	Object.defineProperty(EventEmitter, 'defaultMaxListeners', {
+	  enumerable: true,
+	  get: function() {
+	    return defaultMaxListeners;
+	  },
+	  set: function(arg) {
+	    if (typeof arg !== 'number' || arg < 0 || NumberIsNaN(arg)) {
+	      throw new RangeError('The value of "defaultMaxListeners" is out of range. It must be a non-negative number. Received ' + arg + '.');
+	    }
+	    defaultMaxListeners = arg;
+	  }
+	});
+
+	EventEmitter.init = function() {
+
+	  if (this._events === undefined ||
+	      this._events === Object.getPrototypeOf(this)._events) {
+	    this._events = Object.create(null);
+	    this._eventsCount = 0;
+	  }
+
+	  this._maxListeners = this._maxListeners || undefined;
+	};
+
+	// Obviously not all Emitters should be limited to 10. This function allows
+	// that to be increased. Set to zero for unlimited.
+	EventEmitter.prototype.setMaxListeners = function setMaxListeners(n) {
+	  if (typeof n !== 'number' || n < 0 || NumberIsNaN(n)) {
+	    throw new RangeError('The value of "n" is out of range. It must be a non-negative number. Received ' + n + '.');
+	  }
+	  this._maxListeners = n;
+	  return this;
+	};
+
+	function _getMaxListeners(that) {
+	  if (that._maxListeners === undefined)
+	    return EventEmitter.defaultMaxListeners;
+	  return that._maxListeners;
+	}
+
+	EventEmitter.prototype.getMaxListeners = function getMaxListeners() {
+	  return _getMaxListeners(this);
+	};
+
+	EventEmitter.prototype.emit = function emit(type) {
+	  var args = [];
+	  for (var i = 1; i < arguments.length; i++) args.push(arguments[i]);
+	  var doError = (type === 'error');
+
+	  var events = this._events;
+	  if (events !== undefined)
+	    doError = (doError && events.error === undefined);
+	  else if (!doError)
+	    return false;
+
+	  // If there is no 'error' event listener then throw.
+	  if (doError) {
+	    var er;
+	    if (args.length > 0)
+	      er = args[0];
+	    if (er instanceof Error) {
+	      // Note: The comments on the `throw` lines are intentional, they show
+	      // up in Node's output if this results in an unhandled exception.
+	      throw er; // Unhandled 'error' event
+	    }
+	    // At least give some kind of context to the user
+	    var err = new Error('Unhandled error.' + (er ? ' (' + er.message + ')' : ''));
+	    err.context = er;
+	    throw err; // Unhandled 'error' event
+	  }
+
+	  var handler = events[type];
+
+	  if (handler === undefined)
+	    return false;
+
+	  if (typeof handler === 'function') {
+	    ReflectApply(handler, this, args);
+	  } else {
+	    var len = handler.length;
+	    var listeners = arrayClone(handler, len);
+	    for (var i = 0; i < len; ++i)
+	      ReflectApply(listeners[i], this, args);
+	  }
+
+	  return true;
+	};
+
+	function _addListener(target, type, listener, prepend) {
+	  var m;
+	  var events;
+	  var existing;
+
+	  checkListener(listener);
+
+	  events = target._events;
+	  if (events === undefined) {
+	    events = target._events = Object.create(null);
+	    target._eventsCount = 0;
+	  } else {
+	    // To avoid recursion in the case that type === "newListener"! Before
+	    // adding it to the listeners, first emit "newListener".
+	    if (events.newListener !== undefined) {
+	      target.emit('newListener', type,
+	                  listener.listener ? listener.listener : listener);
+
+	      // Re-assign `events` because a newListener handler could have caused the
+	      // this._events to be assigned to a new object
+	      events = target._events;
+	    }
+	    existing = events[type];
+	  }
+
+	  if (existing === undefined) {
+	    // Optimize the case of one listener. Don't need the extra array object.
+	    existing = events[type] = listener;
+	    ++target._eventsCount;
+	  } else {
+	    if (typeof existing === 'function') {
+	      // Adding the second element, need to change to array.
+	      existing = events[type] =
+	        prepend ? [listener, existing] : [existing, listener];
+	      // If we've already got an array, just append.
+	    } else if (prepend) {
+	      existing.unshift(listener);
+	    } else {
+	      existing.push(listener);
+	    }
+
+	    // Check for listener leak
+	    m = _getMaxListeners(target);
+	    if (m > 0 && existing.length > m && !existing.warned) {
+	      existing.warned = true;
+	      // No error code for this since it is a Warning
+	      // eslint-disable-next-line no-restricted-syntax
+	      var w = new Error('Possible EventEmitter memory leak detected. ' +
+	                          existing.length + ' ' + String(type) + ' listeners ' +
+	                          'added. Use emitter.setMaxListeners() to ' +
+	                          'increase limit');
+	      w.name = 'MaxListenersExceededWarning';
+	      w.emitter = target;
+	      w.type = type;
+	      w.count = existing.length;
+	      ProcessEmitWarning(w);
+	    }
+	  }
+
+	  return target;
+	}
+
+	EventEmitter.prototype.addListener = function addListener(type, listener) {
+	  return _addListener(this, type, listener, false);
+	};
+
+	EventEmitter.prototype.on = EventEmitter.prototype.addListener;
+
+	EventEmitter.prototype.prependListener =
+	    function prependListener(type, listener) {
+	      return _addListener(this, type, listener, true);
+	    };
+
+	function onceWrapper() {
+	  if (!this.fired) {
+	    this.target.removeListener(this.type, this.wrapFn);
+	    this.fired = true;
+	    if (arguments.length === 0)
+	      return this.listener.call(this.target);
+	    return this.listener.apply(this.target, arguments);
+	  }
+	}
+
+	function _onceWrap(target, type, listener) {
+	  var state = { fired: false, wrapFn: undefined, target: target, type: type, listener: listener };
+	  var wrapped = onceWrapper.bind(state);
+	  wrapped.listener = listener;
+	  state.wrapFn = wrapped;
+	  return wrapped;
+	}
+
+	EventEmitter.prototype.once = function once(type, listener) {
+	  checkListener(listener);
+	  this.on(type, _onceWrap(this, type, listener));
+	  return this;
+	};
+
+	EventEmitter.prototype.prependOnceListener =
+	    function prependOnceListener(type, listener) {
+	      checkListener(listener);
+	      this.prependListener(type, _onceWrap(this, type, listener));
+	      return this;
+	    };
+
+	// Emits a 'removeListener' event if and only if the listener was removed.
+	EventEmitter.prototype.removeListener =
+	    function removeListener(type, listener) {
+	      var list, events, position, i, originalListener;
+
+	      checkListener(listener);
+
+	      events = this._events;
+	      if (events === undefined)
+	        return this;
+
+	      list = events[type];
+	      if (list === undefined)
+	        return this;
+
+	      if (list === listener || list.listener === listener) {
+	        if (--this._eventsCount === 0)
+	          this._events = Object.create(null);
+	        else {
+	          delete events[type];
+	          if (events.removeListener)
+	            this.emit('removeListener', type, list.listener || listener);
+	        }
+	      } else if (typeof list !== 'function') {
+	        position = -1;
+
+	        for (i = list.length - 1; i >= 0; i--) {
+	          if (list[i] === listener || list[i].listener === listener) {
+	            originalListener = list[i].listener;
+	            position = i;
+	            break;
+	          }
+	        }
+
+	        if (position < 0)
+	          return this;
+
+	        if (position === 0)
+	          list.shift();
+	        else {
+	          spliceOne(list, position);
+	        }
+
+	        if (list.length === 1)
+	          events[type] = list[0];
+
+	        if (events.removeListener !== undefined)
+	          this.emit('removeListener', type, originalListener || listener);
+	      }
+
+	      return this;
+	    };
+
+	EventEmitter.prototype.off = EventEmitter.prototype.removeListener;
+
+	EventEmitter.prototype.removeAllListeners =
+	    function removeAllListeners(type) {
+	      var listeners, events, i;
+
+	      events = this._events;
+	      if (events === undefined)
+	        return this;
+
+	      // not listening for removeListener, no need to emit
+	      if (events.removeListener === undefined) {
+	        if (arguments.length === 0) {
+	          this._events = Object.create(null);
+	          this._eventsCount = 0;
+	        } else if (events[type] !== undefined) {
+	          if (--this._eventsCount === 0)
+	            this._events = Object.create(null);
+	          else
+	            delete events[type];
+	        }
+	        return this;
+	      }
+
+	      // emit removeListener for all listeners on all events
+	      if (arguments.length === 0) {
+	        var keys = Object.keys(events);
+	        var key;
+	        for (i = 0; i < keys.length; ++i) {
+	          key = keys[i];
+	          if (key === 'removeListener') continue;
+	          this.removeAllListeners(key);
+	        }
+	        this.removeAllListeners('removeListener');
+	        this._events = Object.create(null);
+	        this._eventsCount = 0;
+	        return this;
+	      }
+
+	      listeners = events[type];
+
+	      if (typeof listeners === 'function') {
+	        this.removeListener(type, listeners);
+	      } else if (listeners !== undefined) {
+	        // LIFO order
+	        for (i = listeners.length - 1; i >= 0; i--) {
+	          this.removeListener(type, listeners[i]);
+	        }
+	      }
+
+	      return this;
+	    };
+
+	function _listeners(target, type, unwrap) {
+	  var events = target._events;
+
+	  if (events === undefined)
+	    return [];
+
+	  var evlistener = events[type];
+	  if (evlistener === undefined)
+	    return [];
+
+	  if (typeof evlistener === 'function')
+	    return unwrap ? [evlistener.listener || evlistener] : [evlistener];
+
+	  return unwrap ?
+	    unwrapListeners(evlistener) : arrayClone(evlistener, evlistener.length);
+	}
+
+	EventEmitter.prototype.listeners = function listeners(type) {
+	  return _listeners(this, type, true);
+	};
+
+	EventEmitter.prototype.rawListeners = function rawListeners(type) {
+	  return _listeners(this, type, false);
+	};
+
+	EventEmitter.listenerCount = function(emitter, type) {
+	  if (typeof emitter.listenerCount === 'function') {
+	    return emitter.listenerCount(type);
+	  } else {
+	    return listenerCount.call(emitter, type);
+	  }
+	};
+
+	EventEmitter.prototype.listenerCount = listenerCount;
+	function listenerCount(type) {
+	  var events = this._events;
+
+	  if (events !== undefined) {
+	    var evlistener = events[type];
+
+	    if (typeof evlistener === 'function') {
+	      return 1;
+	    } else if (evlistener !== undefined) {
+	      return evlistener.length;
+	    }
+	  }
+
+	  return 0;
+	}
+
+	EventEmitter.prototype.eventNames = function eventNames() {
+	  return this._eventsCount > 0 ? ReflectOwnKeys(this._events) : [];
+	};
+
+	function arrayClone(arr, n) {
+	  var copy = new Array(n);
+	  for (var i = 0; i < n; ++i)
+	    copy[i] = arr[i];
+	  return copy;
+	}
+
+	function spliceOne(list, index) {
+	  for (; index + 1 < list.length; index++)
+	    list[index] = list[index + 1];
+	  list.pop();
+	}
+
+	function unwrapListeners(arr) {
+	  var ret = new Array(arr.length);
+	  for (var i = 0; i < ret.length; ++i) {
+	    ret[i] = arr[i].listener || arr[i];
+	  }
+	  return ret;
+	}
+
+	function once(emitter, name) {
+	  return new Promise(function (resolve, reject) {
+	    function errorListener(err) {
+	      emitter.removeListener(name, resolver);
+	      reject(err);
+	    }
+
+	    function resolver() {
+	      if (typeof emitter.removeListener === 'function') {
+	        emitter.removeListener('error', errorListener);
+	      }
+	      resolve([].slice.call(arguments));
+	    }
+	    eventTargetAgnosticAddListener(emitter, name, resolver, { once: true });
+	    if (name !== 'error') {
+	      addErrorHandlerIfEventEmitter(emitter, errorListener, { once: true });
+	    }
+	  });
+	}
+
+	function addErrorHandlerIfEventEmitter(emitter, handler, flags) {
+	  if (typeof emitter.on === 'function') {
+	    eventTargetAgnosticAddListener(emitter, 'error', handler, flags);
+	  }
+	}
+
+	function eventTargetAgnosticAddListener(emitter, name, listener, flags) {
+	  if (typeof emitter.on === 'function') {
+	    if (flags.once) {
+	      emitter.once(name, listener);
+	    } else {
+	      emitter.on(name, listener);
+	    }
+	  } else if (typeof emitter.addEventListener === 'function') {
+	    // EventTarget does not have `error` event semantics like Node
+	    // EventEmitters, we do not listen for `error` events here.
+	    emitter.addEventListener(name, function wrapListener(arg) {
+	      // IE does not have builtin `{ once: true }` support so we
+	      // have to do it manually.
+	      if (flags.once) {
+	        emitter.removeEventListener(name, wrapListener);
+	      }
+	      listener(arg);
+	    });
+	  } else {
+	    throw new TypeError('The "emitter" argument must be of type EventEmitter. Received type ' + typeof emitter);
+	  }
+	}
+	return events$2.exports;
+}
+
 var hasRequiredTunnel$1;
 
 function requireTunnel$1 () {
@@ -434,7 +915,7 @@ function requireTunnel$1 () {
 	var tls = require$$4$1;
 	var http = require$$2$1;
 	var https = require$$1$2;
-	var events = require$$0$5;
+	var events = requireEvents$3();
 	var util = require$$0$4;
 
 
@@ -1155,7 +1636,7 @@ function requireUtil$f () {
 	const stream = require$$0$8;
 	const net = require$$0$7;
 	const { InvalidArgumentError } = requireErrors$2();
-	const { Blob } = require$$7;
+	const { Blob } = require$$0$5;
 	const nodeUtil = require$$0$4;
 	const { stringify } = require$$8;
 	const { headerNameLowerCasedRecord } = requireConstants$b();
@@ -5441,7 +5922,7 @@ function requireDataURL () {
 	if (hasRequiredDataURL) return dataURL;
 	hasRequiredDataURL = 1;
 	const assert = require$$0$6;
-	const { atob } = require$$7;
+	const { atob } = require$$0$5;
 	const { isomorphicDecode } = requireUtil$e();
 
 	const encoder = new TextEncoder();
@@ -6077,7 +6558,7 @@ function requireFile$1 () {
 	if (hasRequiredFile$1) return file$1;
 	hasRequiredFile$1 = 1;
 
-	const { Blob, File: NativeFile } = require$$7;
+	const { Blob, File: NativeFile } = require$$0$5;
 	const { types } = require$$0$4;
 	const { kState } = requireSymbols$9();
 	const { isBlobLike } = requireUtil$e();
@@ -6433,7 +6914,7 @@ function requireFormdata$1 () {
 	const { kState } = requireSymbols$9();
 	const { File: UndiciFile, FileLike, isFileLike } = requireFile$1();
 	const { webidl } = requireWebidl$1();
-	const { Blob, File: NativeFile } = require$$7;
+	const { Blob, File: NativeFile } = require$$0$5;
 
 	/** @type {globalThis['File']} */
 	const File = NativeFile ?? UndiciFile;
@@ -6716,7 +7197,7 @@ function requireBody$1 () {
 	const { kState } = requireSymbols$9();
 	const { webidl } = requireWebidl$1();
 	const { DOMException, structuredClone } = requireConstants$a();
-	const { Blob, File: NativeFile } = require$$7;
+	const { Blob, File: NativeFile } = require$$0$5;
 	const { kBodyUsed } = requireSymbols$a();
 	const assert = require$$0$6;
 	const { isErrored } = requireUtil$f();
@@ -7830,7 +8311,7 @@ function requireDispatcher$1 () {
 	if (hasRequiredDispatcher$1) return dispatcher$1;
 	hasRequiredDispatcher$1 = 1;
 
-	const EventEmitter = require$$0$5;
+	const EventEmitter = requireEvents$3();
 
 	class Dispatcher extends EventEmitter {
 	  dispatch () {
@@ -8565,7 +9046,7 @@ function requireRedirectHandler$1 () {
 	const { kBodyUsed } = requireSymbols$a();
 	const assert = require$$0$6;
 	const { InvalidArgumentError } = requireErrors$2();
-	const EE = require$$0$5;
+	const EE = requireEvents$3();
 
 	const redirectableStatusCodes = [300, 301, 302, 303, 307, 308];
 
@@ -14380,7 +14861,7 @@ function requireProxyAgent$1 () {
 	hasRequiredProxyAgent$1 = 1;
 
 	const { kProxy, kClose, kDestroy, kInterceptors } = requireSymbols$a();
-	const { URL } = require$$7$1;
+	const { URL } = require$$7;
 	const Agent = requireAgent$1();
 	const Pool = requirePool$1();
 	const DispatcherBase = requireDispatcherBase$1();
@@ -16201,7 +16682,7 @@ function requireRequest$2 () {
 	const { URLSerializer } = requireDataURL();
 	const { kHeadersList, kConstruct } = requireSymbols$a();
 	const assert = require$$0$6;
-	const { getMaxListeners, setMaxListeners, getEventListeners, defaultMaxListeners } = require$$0$5;
+	const { getMaxListeners, setMaxListeners, getEventListeners, defaultMaxListeners } = requireEvents$3();
 
 	let TransformStream = globalThis.TransformStream;
 
@@ -17177,7 +17658,7 @@ function requireFetch$1 () {
 	  DOMException
 	} = requireConstants$a();
 	const { kHeadersList } = requireSymbols$a();
-	const EE = require$$0$5;
+	const EE = requireEvents$3();
 	const { Readable, pipeline } = require$$0$8;
 	const { addAbortListener, isErrored, isReadable, nodeMajor, nodeMinor } = requireUtil$f();
 	const { dataURLProcessor, serializeAMimeType } = requireDataURL();
@@ -17911,7 +18392,7 @@ function requireFetch$1 () {
 	    }
 	    case 'blob:': {
 	      if (!resolveObjectURL) {
-	        resolveObjectURL = require$$7.resolveObjectURL;
+	        resolveObjectURL = require$$0$5.resolveObjectURL;
 	      }
 
 	      // 1. Let blobURLEntry be request’s current URL’s blob URL entry.
@@ -19600,6 +20081,367 @@ function requireEncoding$1 () {
 	return encoding$1;
 }
 
+var string_decoder = {};
+
+var safeBuffer = {exports: {}};
+
+/*! safe-buffer. MIT License. Feross Aboukhadijeh <https://feross.org/opensource> */
+
+var hasRequiredSafeBuffer;
+
+function requireSafeBuffer () {
+	if (hasRequiredSafeBuffer) return safeBuffer.exports;
+	hasRequiredSafeBuffer = 1;
+	(function (module, exports) {
+		/* eslint-disable node/no-deprecated-api */
+		var buffer = require$$0$5;
+		var Buffer = buffer.Buffer;
+
+		// alternative to using Object.keys for old browsers
+		function copyProps (src, dst) {
+		  for (var key in src) {
+		    dst[key] = src[key];
+		  }
+		}
+		if (Buffer.from && Buffer.alloc && Buffer.allocUnsafe && Buffer.allocUnsafeSlow) {
+		  module.exports = buffer;
+		} else {
+		  // Copy properties from require('buffer')
+		  copyProps(buffer, exports);
+		  exports.Buffer = SafeBuffer;
+		}
+
+		function SafeBuffer (arg, encodingOrOffset, length) {
+		  return Buffer(arg, encodingOrOffset, length)
+		}
+
+		SafeBuffer.prototype = Object.create(Buffer.prototype);
+
+		// Copy static methods from Buffer
+		copyProps(Buffer, SafeBuffer);
+
+		SafeBuffer.from = function (arg, encodingOrOffset, length) {
+		  if (typeof arg === 'number') {
+		    throw new TypeError('Argument must not be a number')
+		  }
+		  return Buffer(arg, encodingOrOffset, length)
+		};
+
+		SafeBuffer.alloc = function (size, fill, encoding) {
+		  if (typeof size !== 'number') {
+		    throw new TypeError('Argument must be a number')
+		  }
+		  var buf = Buffer(size);
+		  if (fill !== undefined) {
+		    if (typeof encoding === 'string') {
+		      buf.fill(fill, encoding);
+		    } else {
+		      buf.fill(fill);
+		    }
+		  } else {
+		    buf.fill(0);
+		  }
+		  return buf
+		};
+
+		SafeBuffer.allocUnsafe = function (size) {
+		  if (typeof size !== 'number') {
+		    throw new TypeError('Argument must be a number')
+		  }
+		  return Buffer(size)
+		};
+
+		SafeBuffer.allocUnsafeSlow = function (size) {
+		  if (typeof size !== 'number') {
+		    throw new TypeError('Argument must be a number')
+		  }
+		  return buffer.SlowBuffer(size)
+		}; 
+	} (safeBuffer, safeBuffer.exports));
+	return safeBuffer.exports;
+}
+
+var hasRequiredString_decoder;
+
+function requireString_decoder () {
+	if (hasRequiredString_decoder) return string_decoder;
+	hasRequiredString_decoder = 1;
+
+	/*<replacement>*/
+
+	var Buffer = requireSafeBuffer().Buffer;
+	/*</replacement>*/
+
+	var isEncoding = Buffer.isEncoding || function (encoding) {
+	  encoding = '' + encoding;
+	  switch (encoding && encoding.toLowerCase()) {
+	    case 'hex':case 'utf8':case 'utf-8':case 'ascii':case 'binary':case 'base64':case 'ucs2':case 'ucs-2':case 'utf16le':case 'utf-16le':case 'raw':
+	      return true;
+	    default:
+	      return false;
+	  }
+	};
+
+	function _normalizeEncoding(enc) {
+	  if (!enc) return 'utf8';
+	  var retried;
+	  while (true) {
+	    switch (enc) {
+	      case 'utf8':
+	      case 'utf-8':
+	        return 'utf8';
+	      case 'ucs2':
+	      case 'ucs-2':
+	      case 'utf16le':
+	      case 'utf-16le':
+	        return 'utf16le';
+	      case 'latin1':
+	      case 'binary':
+	        return 'latin1';
+	      case 'base64':
+	      case 'ascii':
+	      case 'hex':
+	        return enc;
+	      default:
+	        if (retried) return; // undefined
+	        enc = ('' + enc).toLowerCase();
+	        retried = true;
+	    }
+	  }
+	}
+	// Do not cache `Buffer.isEncoding` when checking encoding names as some
+	// modules monkey-patch it to support additional encodings
+	function normalizeEncoding(enc) {
+	  var nenc = _normalizeEncoding(enc);
+	  if (typeof nenc !== 'string' && (Buffer.isEncoding === isEncoding || !isEncoding(enc))) throw new Error('Unknown encoding: ' + enc);
+	  return nenc || enc;
+	}
+
+	// StringDecoder provides an interface for efficiently splitting a series of
+	// buffers into a series of JS strings without breaking apart multi-byte
+	// characters.
+	string_decoder.StringDecoder = StringDecoder;
+	function StringDecoder(encoding) {
+	  this.encoding = normalizeEncoding(encoding);
+	  var nb;
+	  switch (this.encoding) {
+	    case 'utf16le':
+	      this.text = utf16Text;
+	      this.end = utf16End;
+	      nb = 4;
+	      break;
+	    case 'utf8':
+	      this.fillLast = utf8FillLast;
+	      nb = 4;
+	      break;
+	    case 'base64':
+	      this.text = base64Text;
+	      this.end = base64End;
+	      nb = 3;
+	      break;
+	    default:
+	      this.write = simpleWrite;
+	      this.end = simpleEnd;
+	      return;
+	  }
+	  this.lastNeed = 0;
+	  this.lastTotal = 0;
+	  this.lastChar = Buffer.allocUnsafe(nb);
+	}
+
+	StringDecoder.prototype.write = function (buf) {
+	  if (buf.length === 0) return '';
+	  var r;
+	  var i;
+	  if (this.lastNeed) {
+	    r = this.fillLast(buf);
+	    if (r === undefined) return '';
+	    i = this.lastNeed;
+	    this.lastNeed = 0;
+	  } else {
+	    i = 0;
+	  }
+	  if (i < buf.length) return r ? r + this.text(buf, i) : this.text(buf, i);
+	  return r || '';
+	};
+
+	StringDecoder.prototype.end = utf8End;
+
+	// Returns only complete characters in a Buffer
+	StringDecoder.prototype.text = utf8Text;
+
+	// Attempts to complete a partial non-UTF-8 character using bytes from a Buffer
+	StringDecoder.prototype.fillLast = function (buf) {
+	  if (this.lastNeed <= buf.length) {
+	    buf.copy(this.lastChar, this.lastTotal - this.lastNeed, 0, this.lastNeed);
+	    return this.lastChar.toString(this.encoding, 0, this.lastTotal);
+	  }
+	  buf.copy(this.lastChar, this.lastTotal - this.lastNeed, 0, buf.length);
+	  this.lastNeed -= buf.length;
+	};
+
+	// Checks the type of a UTF-8 byte, whether it's ASCII, a leading byte, or a
+	// continuation byte. If an invalid byte is detected, -2 is returned.
+	function utf8CheckByte(byte) {
+	  if (byte <= 0x7F) return 0;else if (byte >> 5 === 0x06) return 2;else if (byte >> 4 === 0x0E) return 3;else if (byte >> 3 === 0x1E) return 4;
+	  return byte >> 6 === 0x02 ? -1 : -2;
+	}
+
+	// Checks at most 3 bytes at the end of a Buffer in order to detect an
+	// incomplete multi-byte UTF-8 character. The total number of bytes (2, 3, or 4)
+	// needed to complete the UTF-8 character (if applicable) are returned.
+	function utf8CheckIncomplete(self, buf, i) {
+	  var j = buf.length - 1;
+	  if (j < i) return 0;
+	  var nb = utf8CheckByte(buf[j]);
+	  if (nb >= 0) {
+	    if (nb > 0) self.lastNeed = nb - 1;
+	    return nb;
+	  }
+	  if (--j < i || nb === -2) return 0;
+	  nb = utf8CheckByte(buf[j]);
+	  if (nb >= 0) {
+	    if (nb > 0) self.lastNeed = nb - 2;
+	    return nb;
+	  }
+	  if (--j < i || nb === -2) return 0;
+	  nb = utf8CheckByte(buf[j]);
+	  if (nb >= 0) {
+	    if (nb > 0) {
+	      if (nb === 2) nb = 0;else self.lastNeed = nb - 3;
+	    }
+	    return nb;
+	  }
+	  return 0;
+	}
+
+	// Validates as many continuation bytes for a multi-byte UTF-8 character as
+	// needed or are available. If we see a non-continuation byte where we expect
+	// one, we "replace" the validated continuation bytes we've seen so far with
+	// a single UTF-8 replacement character ('\ufffd'), to match v8's UTF-8 decoding
+	// behavior. The continuation byte check is included three times in the case
+	// where all of the continuation bytes for a character exist in the same buffer.
+	// It is also done this way as a slight performance increase instead of using a
+	// loop.
+	function utf8CheckExtraBytes(self, buf, p) {
+	  if ((buf[0] & 0xC0) !== 0x80) {
+	    self.lastNeed = 0;
+	    return '\ufffd';
+	  }
+	  if (self.lastNeed > 1 && buf.length > 1) {
+	    if ((buf[1] & 0xC0) !== 0x80) {
+	      self.lastNeed = 1;
+	      return '\ufffd';
+	    }
+	    if (self.lastNeed > 2 && buf.length > 2) {
+	      if ((buf[2] & 0xC0) !== 0x80) {
+	        self.lastNeed = 2;
+	        return '\ufffd';
+	      }
+	    }
+	  }
+	}
+
+	// Attempts to complete a multi-byte UTF-8 character using bytes from a Buffer.
+	function utf8FillLast(buf) {
+	  var p = this.lastTotal - this.lastNeed;
+	  var r = utf8CheckExtraBytes(this, buf);
+	  if (r !== undefined) return r;
+	  if (this.lastNeed <= buf.length) {
+	    buf.copy(this.lastChar, p, 0, this.lastNeed);
+	    return this.lastChar.toString(this.encoding, 0, this.lastTotal);
+	  }
+	  buf.copy(this.lastChar, p, 0, buf.length);
+	  this.lastNeed -= buf.length;
+	}
+
+	// Returns all complete UTF-8 characters in a Buffer. If the Buffer ended on a
+	// partial character, the character's bytes are buffered until the required
+	// number of bytes are available.
+	function utf8Text(buf, i) {
+	  var total = utf8CheckIncomplete(this, buf, i);
+	  if (!this.lastNeed) return buf.toString('utf8', i);
+	  this.lastTotal = total;
+	  var end = buf.length - (total - this.lastNeed);
+	  buf.copy(this.lastChar, 0, end);
+	  return buf.toString('utf8', i, end);
+	}
+
+	// For UTF-8, a replacement character is added when ending on a partial
+	// character.
+	function utf8End(buf) {
+	  var r = buf && buf.length ? this.write(buf) : '';
+	  if (this.lastNeed) return r + '\ufffd';
+	  return r;
+	}
+
+	// UTF-16LE typically needs two bytes per character, but even if we have an even
+	// number of bytes available, we need to check if we end on a leading/high
+	// surrogate. In that case, we need to wait for the next two bytes in order to
+	// decode the last character properly.
+	function utf16Text(buf, i) {
+	  if ((buf.length - i) % 2 === 0) {
+	    var r = buf.toString('utf16le', i);
+	    if (r) {
+	      var c = r.charCodeAt(r.length - 1);
+	      if (c >= 0xD800 && c <= 0xDBFF) {
+	        this.lastNeed = 2;
+	        this.lastTotal = 4;
+	        this.lastChar[0] = buf[buf.length - 2];
+	        this.lastChar[1] = buf[buf.length - 1];
+	        return r.slice(0, -1);
+	      }
+	    }
+	    return r;
+	  }
+	  this.lastNeed = 1;
+	  this.lastTotal = 2;
+	  this.lastChar[0] = buf[buf.length - 1];
+	  return buf.toString('utf16le', i, buf.length - 1);
+	}
+
+	// For UTF-16LE we do not explicitly append special replacement characters if we
+	// end on a partial character, we simply let v8 handle that.
+	function utf16End(buf) {
+	  var r = buf && buf.length ? this.write(buf) : '';
+	  if (this.lastNeed) {
+	    var end = this.lastTotal - this.lastNeed;
+	    return r + this.lastChar.toString('utf16le', 0, end);
+	  }
+	  return r;
+	}
+
+	function base64Text(buf, i) {
+	  var n = (buf.length - i) % 3;
+	  if (n === 0) return buf.toString('base64', i);
+	  this.lastNeed = 3 - n;
+	  this.lastTotal = 3;
+	  if (n === 1) {
+	    this.lastChar[0] = buf[buf.length - 1];
+	  } else {
+	    this.lastChar[0] = buf[buf.length - 2];
+	    this.lastChar[1] = buf[buf.length - 1];
+	  }
+	  return buf.toString('base64', i, buf.length - n);
+	}
+
+	function base64End(buf) {
+	  var r = buf && buf.length ? this.write(buf) : '';
+	  if (this.lastNeed) return r + this.lastChar.toString('base64', 0, 3 - this.lastNeed);
+	  return r;
+	}
+
+	// Pass bytes on through for single-byte encodings (e.g. ascii, latin1, hex)
+	function simpleWrite(buf) {
+	  return buf.toString(this.encoding);
+	}
+
+	function simpleEnd(buf) {
+	  return buf && buf.length ? this.write(buf) : '';
+	}
+	return string_decoder;
+}
+
 var util$b;
 var hasRequiredUtil$c;
 
@@ -19619,8 +20461,8 @@ function requireUtil$c () {
 	const { DOMException } = requireConstants$a();
 	const { serializeAMimeType, parseMIMEType } = requireDataURL();
 	const { types } = require$$0$4;
-	const { StringDecoder } = require$$6$1;
-	const { btoa } = require$$7;
+	const { StringDecoder } = requireString_decoder();
+	const { btoa } = require$$0$5;
 
 	/** @type {PropertyDescriptor} */
 	const staticPropertyDescriptors = {
@@ -26148,12 +26990,12 @@ function requireToolrunner () {
 	Object.defineProperty(toolrunner, "__esModule", { value: true });
 	toolrunner.argStringToArray = toolrunner.ToolRunner = void 0;
 	const os = __importStar(require$$0$2);
-	const events = __importStar(require$$0$5);
+	const events = __importStar(requireEvents$3());
 	const child = __importStar(require$$2$3);
 	const path = __importStar(path__default);
 	const io = __importStar(requireIo());
 	const ioUtil = __importStar(requireIoUtil());
-	const timers_1 = require$$6$2;
+	const timers_1 = require$$6$1;
 	/* eslint-disable @typescript-eslint/unbound-method */
 	const IS_WINDOWS = process.platform === 'win32';
 	/*
@@ -26772,7 +27614,7 @@ function requireExec () {
 	};
 	Object.defineProperty(exec, "__esModule", { value: true });
 	exec.getExecOutput = exec.exec = void 0;
-	const string_decoder_1 = require$$6$1;
+	const string_decoder_1 = requireString_decoder();
 	const tr = __importStar(requireToolrunner());
 	/**
 	 * Exec a command.
@@ -40805,7 +41647,7 @@ function requireUtil$8 () {
 	const net = require$$0$f;
 	const { Blob } = require$$0$d;
 	const nodeUtil = require$$1$3;
-	const { stringify } = require$$7$2;
+	const { stringify } = require$$7$1;
 	const { EventEmitter: EE } = require$$0$9;
 	const { InvalidArgumentError } = requireErrors();
 	const { headerNameLowerCasedRecord } = requireConstants$6();
@@ -61001,7 +61843,7 @@ function requireUtil$5 () {
 	const { getEncoding } = requireEncoding();
 	const { serializeAMimeType, parseMIMEType } = requireDataUrl();
 	const { types } = require$$1$3;
-	const { StringDecoder } = require$$6$1;
+	const { StringDecoder } = requireString_decoder();
 	const { btoa } = require$$0$d;
 
 	/** @type {PropertyDescriptor} */
@@ -107098,7 +107940,7 @@ function requireValidation () {
 	if (hasRequiredValidation) return validation.exports;
 	hasRequiredValidation = 1;
 
-	const { isUtf8 } = require$$7;
+	const { isUtf8 } = require$$0$5;
 
 	const { hasBlob } = requireConstants();
 
@@ -109095,14 +109937,14 @@ function requireWebsocket () {
 	if (hasRequiredWebsocket) return websocket;
 	hasRequiredWebsocket = 1;
 
-	const EventEmitter = require$$0$5;
+	const EventEmitter = requireEvents$3();
 	const https = require$$1$2;
 	const http = require$$2$1;
 	const net = require$$0$7;
 	const tls = require$$4$1;
 	const { randomBytes, createHash } = require$$0$3;
 	const { Duplex, Readable } = require$$0$8;
-	const { URL } = require$$7$1;
+	const { URL } = require$$7;
 
 	const PerMessageDeflate = requirePermessageDeflate();
 	const Receiver = requireReceiver();
@@ -110731,7 +111573,7 @@ function requireWebsocketServer () {
 	if (hasRequiredWebsocketServer) return websocketServer;
 	hasRequiredWebsocketServer = 1;
 
-	const EventEmitter = require$$0$5;
+	const EventEmitter = requireEvents$3();
 	const http = require$$2$1;
 	const { Duplex } = require$$0$8;
 	const { createHash } = require$$0$3;
@@ -111291,6 +112133,17 @@ function requireWs () {
 	return ws;
 }
 
+var process$1;
+var hasRequiredProcess;
+
+function requireProcess () {
+	if (hasRequiredProcess) return process$1;
+	hasRequiredProcess = 1;
+	// for now just expose the builtin process global from node.js
+	process$1 = commonjsGlobal.process;
+	return process$1;
+}
+
 var dist$2;
 var hasRequiredDist$3;
 
@@ -111413,7 +112266,7 @@ function requireDist$3 () {
 	var import_collection2 = requireDist$4();
 
 	// src/strategies/sharding/WorkerShardingStrategy.ts
-	var import_node_events = require$$0$5;
+	var import_node_events = requireEvents$3();
 	var import_node_path = path__default;
 	var import_node_worker_threads = require$$0$b;
 	var import_collection = requireDist$4();
@@ -111751,11 +112604,11 @@ function requireDist$3 () {
 	var import_collection6 = requireDist$4();
 
 	// src/ws/WebSocketShard.ts
-	var import_node_buffer = require$$7;
-	var import_node_events2 = require$$0$5;
-	var import_node_timers = require$$6$2;
-	var import_promises2 = require$$6$3;
-	var import_node_url = require$$7$1;
+	var import_node_buffer = require$$0$5;
+	var import_node_events2 = requireEvents$3();
+	var import_node_timers = require$$6$1;
+	var import_promises2 = require$$6$2;
+	var import_node_url = require$$7;
 	var import_node_util = require$$0$4;
 	var import_node_zlib = require$$3$1;
 	var import_collection5 = requireDist$4();
@@ -111766,13 +112619,13 @@ function requireDist$3 () {
 	var import_ws = requireWs();
 
 	// src/utils/constants.ts
-	var import_node_process = __toESM(require$$15);
+	var import_node_process = __toESM(requireProcess());
 	var import_collection4 = requireDist$4();
 	var import_util = requireDist$b();
 	var import_v10 = requireV10();
 
 	// src/throttling/SimpleIdentifyThrottler.ts
-	var import_promises = require$$6$3;
+	var import_promises = require$$6$2;
 	var import_collection3 = requireDist$4();
 	var import_async_queue = /*@__PURE__*/ requireCjs$1();
 	var SimpleIdentifyThrottler = class {
@@ -174499,8 +175352,8 @@ function requireDiscordActionRow_31_cjs_entry () {
 
 	Object.defineProperty(discordActionRow_31_cjs_entry, '__esModule', { value: true });
 
-	const index = /*@__PURE__*/ requireIndex6b29c768();
-	const options = /*@__PURE__*/ requireOptions2e2e9e25();
+	const index = requireIndex6b29c768();
+	const options = requireOptions2e2e9e25();
 
 	const discordActionRowCss = ".discord-action-row{display:flex;flex-wrap:nowrap}";
 
@@ -236134,7 +236987,7 @@ function requireIndex6b29c768 () {
 	      switch(bundleId) {
 	        
 	        case 'discord-action-row_31.cjs':
-	          return Promise.resolve().then(function () { return /*#__PURE__*/_interopNamespace(/*@__PURE__*/ requireDiscordActionRow_31_cjs_entry()); }).then(processMod, consoleError);
+	          return Promise.resolve().then(function () { return /*#__PURE__*/_interopNamespace(requireDiscordActionRow_31_cjs_entry()); }).then(processMod, consoleError);
 	      }
 	    }
 	    return Promise.resolve().then(function () { return /*#__PURE__*/_interopNamespace(commonjsRequire(
@@ -236237,7 +237090,7 @@ function requireLoader_cjs () {
 
 	Object.defineProperty(loader_cjs, '__esModule', { value: true });
 
-	const index = /*@__PURE__*/ requireIndex6b29c768();
+	const index = requireIndex6b29c768();
 
 	/*
 	 Stencil Client Patch Esm v3.4.2 | MIT Licensed | https://stenciljs.com
@@ -236265,7 +237118,7 @@ var hasRequiredIndex_cjs;
 function requireIndex_cjs () {
 	if (hasRequiredIndex_cjs) return index_cjs.exports;
 	hasRequiredIndex_cjs = 1;
-	index_cjs.exports = /*@__PURE__*/ requireLoader_cjs();
+	index_cjs.exports = requireLoader_cjs();
 	index_cjs.exports.applyPolyfills = function() { return Promise.resolve() };
 	return index_cjs.exports;
 }
