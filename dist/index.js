@@ -37223,7 +37223,7 @@ function requireWeb () {
 	// src/lib/utils/constants.ts
 	var import_util = requireDist$b();
 	var import_v10 = requireV10();
-	var DefaultUserAgent = `DiscordBot (https://discord.js.org, 2.5.0)`;
+	var DefaultUserAgent = `DiscordBot (https://discord.js.org, 2.5.1)`;
 	var DefaultUserAgentAppendix = (0, import_util.getUserAgentAppendix)();
 	var DefaultRestOptions = {
 	  agent: null,
@@ -38563,7 +38563,7 @@ ${flattened}` : error.message || flattened || "Unknown Error";
 	};
 
 	// src/shared.ts
-	var version = "2.5.0";
+	var version = "2.5.1";
 
 	// src/web.ts
 	setDefaultStrategy(fetch);
@@ -39629,114 +39629,6 @@ function requireLodash_snakecase () {
 	return lodash_snakecase;
 }
 
-var Transformers;
-var hasRequiredTransformers;
-
-function requireTransformers () {
-	if (hasRequiredTransformers) return Transformers;
-	hasRequiredTransformers = 1;
-
-	const { isJSONEncodable } = requireDist$b();
-	const snakeCase = requireLodash_snakecase();
-
-	/**
-	 * Transforms camel-cased keys into snake cased keys
-	 * @param {*} obj The object to transform
-	 * @returns {*}
-	 */
-	function toSnakeCase(obj) {
-	  if (typeof obj !== 'object' || !obj) return obj;
-	  if (obj instanceof Date) return obj;
-	  if (isJSONEncodable(obj)) return toSnakeCase(obj.toJSON());
-	  if (Array.isArray(obj)) return obj.map(toSnakeCase);
-	  return Object.fromEntries(Object.entries(obj).map(([key, value]) => [snakeCase(key), toSnakeCase(value)]));
-	}
-
-	/**
-	 * Transforms an API auto moderation action object to a camel-cased variant.
-	 * @param {APIAutoModerationAction} autoModerationAction The action to transform
-	 * @returns {AutoModerationAction}
-	 * @ignore
-	 */
-	function _transformAPIAutoModerationAction(autoModerationAction) {
-	  return {
-	    type: autoModerationAction.type,
-	    metadata: {
-	      durationSeconds: autoModerationAction.metadata.duration_seconds ?? null,
-	      channelId: autoModerationAction.metadata.channel_id ?? null,
-	      customMessage: autoModerationAction.metadata.custom_message ?? null,
-	    },
-	  };
-	}
-
-	/**
-	 * Transforms an API message interaction metadata object to a camel-cased variant.
-	 * @param {Client} client The client
-	 * @param {APIMessageInteractionMetadata} messageInteractionMetadata The metadata to transform
-	 * @returns {MessageInteractionMetadata}
-	 * @ignore
-	 */
-	function _transformAPIMessageInteractionMetadata(client, messageInteractionMetadata) {
-	  return {
-	    id: messageInteractionMetadata.id,
-	    type: messageInteractionMetadata.type,
-	    user: client.users._add(messageInteractionMetadata.user),
-	    authorizingIntegrationOwners: messageInteractionMetadata.authorizing_integration_owners,
-	    originalResponseMessageId: messageInteractionMetadata.original_response_message_id ?? null,
-	    interactedMessageId: messageInteractionMetadata.interacted_message_id ?? null,
-	    triggeringInteractionMetadata: messageInteractionMetadata.triggering_interaction_metadata
-	      ? _transformAPIMessageInteractionMetadata(client, messageInteractionMetadata.triggering_interaction_metadata)
-	      : null,
-	  };
-	}
-
-	/**
-	 * Transforms a guild scheduled event recurrence rule object to a snake-cased variant.
-	 * @param {GuildScheduledEventRecurrenceRuleOptions} recurrenceRule The recurrence rule to transform
-	 * @returns {APIGuildScheduledEventRecurrenceRule}
-	 * @ignore
-	 */
-	function _transformGuildScheduledEventRecurrenceRule(recurrenceRule) {
-	  return {
-	    start: new Date(recurrenceRule.startAt).toISOString(),
-	    frequency: recurrenceRule.frequency,
-	    interval: recurrenceRule.interval,
-	    by_weekday: recurrenceRule.byWeekday,
-	    by_n_weekday: recurrenceRule.byNWeekday,
-	    by_month: recurrenceRule.byMonth,
-	    by_month_day: recurrenceRule.byMonthDay,
-	  };
-	}
-
-	/**
-	 * Transforms API incidents data to a camel-cased variant.
-	 * @param {APIIncidentsData} data The incidents data to transform
-	 * @returns {IncidentActions}
-	 * @ignore
-	 */
-	function _transformAPIIncidentsData(data) {
-	  return {
-	    invitesDisabledUntil: data.invites_disabled_until ? new Date(data.invites_disabled_until) : null,
-	    dmsDisabledUntil: data.dms_disabled_until ? new Date(data.dms_disabled_until) : null,
-	    dmSpamDetectedAt: data.dm_spam_detected_at ? new Date(data.dm_spam_detected_at) : null,
-	    raidDetectedAt: data.raid_detected_at ? new Date(data.raid_detected_at) : null,
-	  };
-	}
-
-	Transformers = {
-	  toSnakeCase,
-	  _transformAPIAutoModerationAction,
-	  _transformAPIMessageInteractionMetadata,
-	  _transformGuildScheduledEventRecurrenceRule,
-	  _transformAPIIncidentsData,
-	};
-	return Transformers;
-}
-
-var version = "14.19.3";
-var require$$39 = {
-	version: version};
-
 var dist$6;
 var hasRequiredDist$7;
 
@@ -40281,329 +40173,6 @@ function requireDist$7 () {
 	var version = "1.5.3";
 	
 	return dist$6;
-}
-
-var LimitedCollection_1;
-var hasRequiredLimitedCollection;
-
-function requireLimitedCollection () {
-	if (hasRequiredLimitedCollection) return LimitedCollection_1;
-	hasRequiredLimitedCollection = 1;
-
-	const { Collection } = requireDist$7();
-	const { DiscordjsTypeError, ErrorCodes } = requireErrors$1();
-
-	/**
-	 * Options for defining the behavior of a LimitedCollection
-	 * @typedef {Object} LimitedCollectionOptions
-	 * @property {?number} [maxSize=Infinity] The maximum size of the Collection
-	 * @property {?Function} [keepOverLimit=null] A function, which is passed the value and key of an entry, ran to decide
-	 * to keep an entry past the maximum size
-	 */
-
-	/**
-	 * A Collection which holds a max amount of entries.
-	 * @extends {Collection}
-	 * @param {LimitedCollectionOptions} [options={}] Options for constructing the Collection.
-	 * @param {Iterable} [iterable=null] Optional entries passed to the Map constructor.
-	 */
-	class LimitedCollection extends Collection {
-	  constructor(options = {}, iterable) {
-	    if (typeof options !== 'object' || options === null) {
-	      throw new DiscordjsTypeError(ErrorCodes.InvalidType, 'options', 'object', true);
-	    }
-	    const { maxSize = Infinity, keepOverLimit = null } = options;
-
-	    if (typeof maxSize !== 'number') {
-	      throw new DiscordjsTypeError(ErrorCodes.InvalidType, 'maxSize', 'number');
-	    }
-	    if (keepOverLimit !== null && typeof keepOverLimit !== 'function') {
-	      throw new DiscordjsTypeError(ErrorCodes.InvalidType, 'keepOverLimit', 'function');
-	    }
-
-	    super(iterable);
-
-	    /**
-	     * The max size of the Collection.
-	     * @type {number}
-	     */
-	    this.maxSize = maxSize;
-
-	    /**
-	     * A function called to check if an entry should be kept when the Collection is at max size.
-	     * @type {?Function}
-	     */
-	    this.keepOverLimit = keepOverLimit;
-	  }
-
-	  set(key, value) {
-	    if (this.maxSize === 0 && !this.keepOverLimit?.(value, key, this)) return this;
-	    if (this.size >= this.maxSize && !this.has(key)) {
-	      for (const [k, v] of this.entries()) {
-	        const keep = this.keepOverLimit?.(v, k, this) ?? false;
-	        if (!keep) {
-	          this.delete(k);
-	          break;
-	        }
-	      }
-	    }
-	    return super.set(key, value);
-	  }
-
-	  static get [Symbol.species]() {
-	    return Collection;
-	  }
-	}
-
-	LimitedCollection_1 = LimitedCollection;
-	return LimitedCollection_1;
-}
-
-var Options_1;
-var hasRequiredOptions;
-
-function requireOptions () {
-	if (hasRequiredOptions) return Options_1;
-	hasRequiredOptions = 1;
-
-	const { DefaultRestOptions, DefaultUserAgentAppendix } = requireWeb();
-	const { toSnakeCase } = requireTransformers();
-	const { version } = require$$39;
-
-	// TODO(ckohen): switch order of params so full manager is first and "type" is optional
-	/**
-	 * @typedef {Function} CacheFactory
-	 * @param {Function} managerType The base manager class the cache is being requested from.
-	 * @param {Function} holds The class that the cache will hold.
-	 * @param {Function} manager The fully extended manager class the cache is being requested from.
-	 * @returns {Collection} A Collection used to store the cache of the manager.
-	 */
-
-	/**
-	 * Options for a client.
-	 * @typedef {Object} ClientOptions
-	 * @property {number|number[]|string} [shards] The shard's id to run, or an array of shard ids. If not specified,
-	 * the client will spawn {@link ClientOptions#shardCount} shards. If set to `auto`, it will fetch the
-	 * recommended amount of shards from Discord and spawn that amount
-	 * @property {number} [closeTimeout=5_000] The amount of time in milliseconds to wait for the close frame to be received
-	 * from the WebSocket. Don't have this too high/low. It's best to have it between 2_000-6_000 ms.
-	 * @property {number} [shardCount=1] The total amount of shards used by all processes of this bot
-	 * (e.g. recommended shard count, shard count of the ShardingManager)
-	 * @property {CacheFactory} [makeCache] Function to create a cache.
-	 * You can use your own function, or the {@link Options} class to customize the Collection used for the cache.
-	 * <warn>Overriding the cache used in `GuildManager`, `ChannelManager`, `GuildChannelManager`, `RoleManager`,
-	 * and `PermissionOverwriteManager` is unsupported and **will** break functionality</warn>
-	 * @property {MessageMentionOptions} [allowedMentions] The default value for {@link BaseMessageOptions#allowedMentions}
-	 * @property {Partials[]} [partials] Structures allowed to be partial. This means events can be emitted even when
-	 * they're missing all the data for a particular structure. See the "Partial Structures" topic on the
-	 * {@link https://discordjs.guide/popular-topics/partials.html guide} for some
-	 * important usage information, as partials require you to put checks in place when handling data.
-	 * @property {boolean} [failIfNotExists=true] The default value for {@link MessageReplyOptions#failIfNotExists}
-	 * @property {PresenceData} [presence={}] Presence data to use upon login
-	 * @property {IntentsResolvable} intents Intents to enable for this connection
-	 * @property {number} [waitGuildTimeout=15_000] Time in milliseconds that clients with the
-	 * {@link GatewayIntentBits.Guilds} gateway intent should wait for missing guilds to be received before being ready.
-	 * @property {SweeperOptions} [sweepers=this.DefaultSweeperSettings] Options for cache sweeping
-	 * @property {WebsocketOptions} [ws] Options for the WebSocket
-	 * @property {RESTOptions} [rest] Options for the REST manager
-	 * @property {Function} [jsonTransformer] A function used to transform outgoing json data
-	 * @property {boolean} [enforceNonce=false] The default value for {@link MessageCreateOptions#enforceNonce}
-	 */
-
-	/**
-	 * Options for {@link Sweepers} defining the behavior of cache sweeping
-	 * @typedef {Object<SweeperKey, SweepOptions>} SweeperOptions
-	 */
-
-	/**
-	 * Options for sweeping a single type of item from cache
-	 * @typedef {Object} SweepOptions
-	 * @property {number} interval The interval (in seconds) at which to perform sweeping of the item
-	 * @property {number} [lifetime] How long an item should stay in cache until it is considered sweepable.
-	 * <warn>This property is only valid for the `invites`, `messages`, and `threads` keys. The `filter` property
-	 * is mutually exclusive to this property and takes priority</warn>
-	 * @property {GlobalSweepFilter} filter The function used to determine the function passed to the sweep method
-	 * <info>This property is optional when the key is `invites`, `messages`, or `threads` and `lifetime` is set</info>
-	 */
-
-	/**
-	 * A function to determine what strategy to use for sharding internally.
-	 * ```js
-	 * (manager) => new WorkerShardingStrategy(manager, { shardsPerWorker: 2 })
-	 * ```
-	 * @typedef {Function} BuildStrategyFunction
-	 * @param {WSWebSocketManager} manager The WebSocketManager that is going to initiate the sharding
-	 * @returns {IShardingStrategy} The strategy to use for sharding
-	 */
-
-	/**
-	 * A function to change the concurrency handling for shard identifies of this manager
-	 * ```js
-	 * async (manager) => {
-	 *   const gateway = await manager.fetchGatewayInformation();
-	 *   return new SimpleIdentifyThrottler(gateway.session_start_limit.max_concurrency);
-	 * }
-	 * ```
-	 * @typedef {Function} IdentifyThrottlerFunction
-	 * @param {WSWebSocketManager} manager The WebSocketManager that is going to initiate the sharding
-	 * @returns {Awaitable<IIdentifyThrottler>} The identify throttler that this ws manager will use
-	 */
-
-	/**
-	 * WebSocket options (these are left as snake_case to match the API)
-	 * @typedef {Object} WebsocketOptions
-	 * @property {number} [large_threshold=50] Number of members in a guild after which offline users will no longer be
-	 * sent in the initial guild member list, must be between 50 and 250
-	 * @property {number} [version=10] The Discord gateway version to use <warn>Changing this can break the library;
-	 * only set this if you know what you are doing</warn>
-	 * @property {BuildStrategyFunction} [buildStrategy] Builds the strategy to use for sharding
-	 * @property {IdentifyThrottlerFunction} [buildIdentifyThrottler] Builds the identify throttler to use for sharding
-	 */
-
-	/**
-	 * Contains various utilities for client options.
-	 */
-	class Options extends null {
-	  /**
-	   * The default user agent appendix.
-	   * @type {string}
-	   * @memberof Options
-	   * @private
-	   */
-	  static userAgentAppendix = `discord.js/${version} ${DefaultUserAgentAppendix}`.trimEnd();
-
-	  /**
-	   * The default client options.
-	   * @returns {ClientOptions}
-	   */
-	  static createDefault() {
-	    return {
-	      closeTimeout: 5_000,
-	      waitGuildTimeout: 15_000,
-	      shardCount: 1,
-	      makeCache: this.cacheWithLimits(this.DefaultMakeCacheSettings),
-	      partials: [],
-	      failIfNotExists: true,
-	      enforceNonce: false,
-	      presence: {},
-	      sweepers: this.DefaultSweeperSettings,
-	      ws: {
-	        large_threshold: 50,
-	        version: 10,
-	      },
-	      rest: {
-	        ...DefaultRestOptions,
-	        userAgentAppendix: this.userAgentAppendix,
-	      },
-	      jsonTransformer: toSnakeCase,
-	    };
-	  }
-
-	  /**
-	   * Create a cache factory using predefined settings to sweep or limit.
-	   * @param {Object<string, LimitedCollectionOptions|number>} [settings={}] Settings passed to the relevant constructor.
-	   * If no setting is provided for a manager, it uses Collection.
-	   * If a number is provided for a manager, it uses that number as the max size for a LimitedCollection.
-	   * If LimitedCollectionOptions are provided for a manager, it uses those settings to form a LimitedCollection.
-	   * @returns {CacheFactory}
-	   * @example
-	   * // Store up to 200 messages per channel and 200 members per guild, always keeping the client member.
-	   * Options.cacheWithLimits({
-	   *    MessageManager: 200,
-	   *    GuildMemberManager: {
-	   *      maxSize: 200,
-	   *      keepOverLimit: (member) => member.id === client.user.id,
-	   *    },
-	   *  });
-	   */
-	  static cacheWithLimits(settings = {}) {
-	    const { Collection } = requireDist$7();
-	    const LimitedCollection = requireLimitedCollection();
-
-	    return (managerType, _, manager) => {
-	      const setting = settings[manager.name] ?? settings[managerType.name];
-	      /* eslint-disable-next-line eqeqeq */
-	      if (setting == null) {
-	        return new Collection();
-	      }
-	      if (typeof setting === 'number') {
-	        if (setting === Infinity) {
-	          return new Collection();
-	        }
-	        return new LimitedCollection({ maxSize: setting });
-	      }
-	      /* eslint-disable-next-line eqeqeq */
-	      const noLimit = setting.maxSize == null || setting.maxSize === Infinity;
-	      if (noLimit) {
-	        return new Collection();
-	      }
-	      return new LimitedCollection(setting);
-	    };
-	  }
-
-	  /**
-	   * Create a cache factory that always caches everything.
-	   * @returns {CacheFactory}
-	   */
-	  static cacheEverything() {
-	    const { Collection } = requireDist$7();
-	    return () => new Collection();
-	  }
-
-	  /**
-	   * The default settings passed to {@link ClientOptions.makeCache}.
-	   * The caches that this changes are:
-	   * * `MessageManager` - Limit to 200 messages
-	   * <info>If you want to keep default behavior and add on top of it you can use this object and add on to it, e.g.
-	   * `makeCache: Options.cacheWithLimits({ ...Options.DefaultMakeCacheSettings, ReactionManager: 0 })`</info>
-	   * @type {Object<string, LimitedCollectionOptions|number>}
-	   */
-	  static get DefaultMakeCacheSettings() {
-	    return {
-	      MessageManager: 200,
-	    };
-	  }
-
-	  /**
-	   * The default settings passed to {@link ClientOptions.sweepers}.
-	   * The sweepers that this changes are:
-	   * * `threads` - Sweep archived threads every hour, removing those archived more than 4 hours ago
-	   * <info>If you want to keep default behavior and add on top of it you can use this object and add on to it, e.g.
-	   * `sweepers: { ...Options.DefaultSweeperSettings, messages: { interval: 300, lifetime: 600 } }`</info>
-	   * @type {SweeperOptions}
-	   */
-	  static get DefaultSweeperSettings() {
-	    return {
-	      threads: {
-	        interval: 3600,
-	        lifetime: 14400,
-	      },
-	    };
-	  }
-	}
-
-	Options_1 = Options;
-
-	/**
-	 * @external RESTOptions
-	 * @see {@link https://discord.js.org/docs/packages/rest/stable/RESTOptions:Interface}
-	 */
-
-	/**
-	 * @external WSWebSocketManager
-	 * @see {@link https://discord.js.org/docs/packages/ws/stable/WebSocketManager:Class}
-	 */
-
-	/**
-	 * @external IShardingStrategy
-	 * @see {@link https://discord.js.org/docs/packages/ws/stable/IShardingStrategy:Interface}
-	 */
-
-	/**
-	 * @external IIdentifyThrottler
-	 * @see {@link https://discord.js.org/docs/packages/ws/stable/IIdentifyThrottler:Interface}
-	 */
-	return Options_1;
 }
 
 var undici = {};
@@ -48179,7 +47748,10 @@ function requireBody () {
 	      }
 	    }
 
-	    const chunk = textEncoder.encode(`--${boundary}--`);
+	    // CRLF is appended to the body to function with legacy servers and match other implementations.
+	    // https://github.com/curl/curl/blob/3434c6b46e682452973972e8313613dfa58cd690/lib/mime.c#L1029-L1030
+	    // https://github.com/form-data/form-data/issues/63
+	    const chunk = textEncoder.encode(`--${boundary}--\r\n`);
 	    blobParts.push(chunk);
 	    length += chunk.byteLength;
 	    if (hasUnknownSizeValue) {
@@ -52005,6 +51577,20 @@ function requirePool () {
 	      ? { ...options.interceptors }
 	      : undefined;
 	    this[kFactory] = factory;
+
+	    this.on('connectionError', (origin, targets, error) => {
+	      // If a connection error occurs, we remove the client from the pool,
+	      // and emit a connectionError event. They will not be re-used.
+	      // Fixes https://github.com/nodejs/undici/issues/3895
+	      for (const target of targets) {
+	        // Do not use kRemoveClient here, as it will close the client,
+	        // but the client cannot be closed in this state.
+	        const idx = this[kClients].indexOf(target);
+	        if (idx !== -1) {
+	          this[kClients].splice(idx, 1);
+	        }
+	      }
+	    });
 	  }
 
 	  [kGetDispatcher] () {
@@ -71406,6 +70992,445 @@ function requireUtil () {
 	return Util;
 }
 
+var Transformers;
+var hasRequiredTransformers;
+
+function requireTransformers () {
+	if (hasRequiredTransformers) return Transformers;
+	hasRequiredTransformers = 1;
+
+	const { isJSONEncodable } = requireDist$b();
+	const snakeCase = requireLodash_snakecase();
+	const { resolvePartialEmoji } = requireUtil();
+
+	/**
+	 * Transforms camel-cased keys into snake cased keys
+	 * @param {*} obj The object to transform
+	 * @returns {*}
+	 */
+	function toSnakeCase(obj) {
+	  if (typeof obj !== 'object' || !obj) return obj;
+	  if (obj instanceof Date) return obj;
+	  if (isJSONEncodable(obj)) return toSnakeCase(obj.toJSON());
+	  if (Array.isArray(obj)) return obj.map(toSnakeCase);
+	  return Object.fromEntries(
+	    Object.entries(obj).map(([key, value]) => [
+	      snakeCase(key),
+	      // TODO: The special handling of 'emoji' is just a temporary fix for v14, will be dropped in v15.
+	      // See https://github.com/discordjs/discord.js/issues/10909
+	      key === 'emoji' && typeof value === 'string' ? resolvePartialEmoji(value) : toSnakeCase(value),
+	    ]),
+	  );
+	}
+
+	/**
+	 * Transforms an API auto moderation action object to a camel-cased variant.
+	 * @param {APIAutoModerationAction} autoModerationAction The action to transform
+	 * @returns {AutoModerationAction}
+	 * @ignore
+	 */
+	function _transformAPIAutoModerationAction(autoModerationAction) {
+	  return {
+	    type: autoModerationAction.type,
+	    metadata: {
+	      durationSeconds: autoModerationAction.metadata.duration_seconds ?? null,
+	      channelId: autoModerationAction.metadata.channel_id ?? null,
+	      customMessage: autoModerationAction.metadata.custom_message ?? null,
+	    },
+	  };
+	}
+
+	/**
+	 * Transforms an API message interaction metadata object to a camel-cased variant.
+	 * @param {Client} client The client
+	 * @param {APIMessageInteractionMetadata} messageInteractionMetadata The metadata to transform
+	 * @returns {MessageInteractionMetadata}
+	 * @ignore
+	 */
+	function _transformAPIMessageInteractionMetadata(client, messageInteractionMetadata) {
+	  return {
+	    id: messageInteractionMetadata.id,
+	    type: messageInteractionMetadata.type,
+	    user: client.users._add(messageInteractionMetadata.user),
+	    authorizingIntegrationOwners: messageInteractionMetadata.authorizing_integration_owners,
+	    originalResponseMessageId: messageInteractionMetadata.original_response_message_id ?? null,
+	    interactedMessageId: messageInteractionMetadata.interacted_message_id ?? null,
+	    triggeringInteractionMetadata: messageInteractionMetadata.triggering_interaction_metadata
+	      ? _transformAPIMessageInteractionMetadata(client, messageInteractionMetadata.triggering_interaction_metadata)
+	      : null,
+	  };
+	}
+
+	/**
+	 * Transforms a guild scheduled event recurrence rule object to a snake-cased variant.
+	 * @param {GuildScheduledEventRecurrenceRuleOptions} recurrenceRule The recurrence rule to transform
+	 * @returns {APIGuildScheduledEventRecurrenceRule}
+	 * @ignore
+	 */
+	function _transformGuildScheduledEventRecurrenceRule(recurrenceRule) {
+	  return {
+	    start: new Date(recurrenceRule.startAt).toISOString(),
+	    frequency: recurrenceRule.frequency,
+	    interval: recurrenceRule.interval,
+	    by_weekday: recurrenceRule.byWeekday,
+	    by_n_weekday: recurrenceRule.byNWeekday,
+	    by_month: recurrenceRule.byMonth,
+	    by_month_day: recurrenceRule.byMonthDay,
+	  };
+	}
+
+	/**
+	 * Transforms API incidents data to a camel-cased variant.
+	 * @param {APIIncidentsData} data The incidents data to transform
+	 * @returns {IncidentActions}
+	 * @ignore
+	 */
+	function _transformAPIIncidentsData(data) {
+	  return {
+	    invitesDisabledUntil: data.invites_disabled_until ? new Date(data.invites_disabled_until) : null,
+	    dmsDisabledUntil: data.dms_disabled_until ? new Date(data.dms_disabled_until) : null,
+	    dmSpamDetectedAt: data.dm_spam_detected_at ? new Date(data.dm_spam_detected_at) : null,
+	    raidDetectedAt: data.raid_detected_at ? new Date(data.raid_detected_at) : null,
+	  };
+	}
+
+	Transformers = {
+	  toSnakeCase,
+	  _transformAPIAutoModerationAction,
+	  _transformAPIMessageInteractionMetadata,
+	  _transformGuildScheduledEventRecurrenceRule,
+	  _transformAPIIncidentsData,
+	};
+	return Transformers;
+}
+
+var version = "14.20.0";
+var require$$39 = {
+	version: version};
+
+var LimitedCollection_1;
+var hasRequiredLimitedCollection;
+
+function requireLimitedCollection () {
+	if (hasRequiredLimitedCollection) return LimitedCollection_1;
+	hasRequiredLimitedCollection = 1;
+
+	const { Collection } = requireDist$7();
+	const { DiscordjsTypeError, ErrorCodes } = requireErrors$1();
+
+	/**
+	 * Options for defining the behavior of a LimitedCollection
+	 * @typedef {Object} LimitedCollectionOptions
+	 * @property {?number} [maxSize=Infinity] The maximum size of the Collection
+	 * @property {?Function} [keepOverLimit=null] A function, which is passed the value and key of an entry, ran to decide
+	 * to keep an entry past the maximum size
+	 */
+
+	/**
+	 * A Collection which holds a max amount of entries.
+	 * @extends {Collection}
+	 * @param {LimitedCollectionOptions} [options={}] Options for constructing the Collection.
+	 * @param {Iterable} [iterable=null] Optional entries passed to the Map constructor.
+	 */
+	class LimitedCollection extends Collection {
+	  constructor(options = {}, iterable) {
+	    if (typeof options !== 'object' || options === null) {
+	      throw new DiscordjsTypeError(ErrorCodes.InvalidType, 'options', 'object', true);
+	    }
+	    const { maxSize = Infinity, keepOverLimit = null } = options;
+
+	    if (typeof maxSize !== 'number') {
+	      throw new DiscordjsTypeError(ErrorCodes.InvalidType, 'maxSize', 'number');
+	    }
+	    if (keepOverLimit !== null && typeof keepOverLimit !== 'function') {
+	      throw new DiscordjsTypeError(ErrorCodes.InvalidType, 'keepOverLimit', 'function');
+	    }
+
+	    super(iterable);
+
+	    /**
+	     * The max size of the Collection.
+	     * @type {number}
+	     */
+	    this.maxSize = maxSize;
+
+	    /**
+	     * A function called to check if an entry should be kept when the Collection is at max size.
+	     * @type {?Function}
+	     */
+	    this.keepOverLimit = keepOverLimit;
+	  }
+
+	  set(key, value) {
+	    if (this.maxSize === 0 && !this.keepOverLimit?.(value, key, this)) return this;
+	    if (this.size >= this.maxSize && !this.has(key)) {
+	      for (const [k, v] of this.entries()) {
+	        const keep = this.keepOverLimit?.(v, k, this) ?? false;
+	        if (!keep) {
+	          this.delete(k);
+	          break;
+	        }
+	      }
+	    }
+	    return super.set(key, value);
+	  }
+
+	  static get [Symbol.species]() {
+	    return Collection;
+	  }
+	}
+
+	LimitedCollection_1 = LimitedCollection;
+	return LimitedCollection_1;
+}
+
+var Options_1;
+var hasRequiredOptions;
+
+function requireOptions () {
+	if (hasRequiredOptions) return Options_1;
+	hasRequiredOptions = 1;
+
+	const { DefaultRestOptions, DefaultUserAgentAppendix } = requireWeb();
+	const { toSnakeCase } = requireTransformers();
+	const { version } = require$$39;
+
+	// TODO(ckohen): switch order of params so full manager is first and "type" is optional
+	/**
+	 * @typedef {Function} CacheFactory
+	 * @param {Function} managerType The base manager class the cache is being requested from.
+	 * @param {Function} holds The class that the cache will hold.
+	 * @param {Function} manager The fully extended manager class the cache is being requested from.
+	 * @returns {Collection} A Collection used to store the cache of the manager.
+	 */
+
+	/**
+	 * Options for a client.
+	 * @typedef {Object} ClientOptions
+	 * @property {number|number[]|string} [shards] The shard's id to run, or an array of shard ids. If not specified,
+	 * the client will spawn {@link ClientOptions#shardCount} shards. If set to `auto`, it will fetch the
+	 * recommended amount of shards from Discord and spawn that amount
+	 * @property {number} [closeTimeout=5_000] The amount of time in milliseconds to wait for the close frame to be received
+	 * from the WebSocket. Don't have this too high/low. It's best to have it between 2_000-6_000 ms.
+	 * @property {number} [shardCount=1] The total amount of shards used by all processes of this bot
+	 * (e.g. recommended shard count, shard count of the ShardingManager)
+	 * @property {CacheFactory} [makeCache] Function to create a cache.
+	 * You can use your own function, or the {@link Options} class to customize the Collection used for the cache.
+	 * <warn>Overriding the cache used in `GuildManager`, `ChannelManager`, `GuildChannelManager`, `RoleManager`,
+	 * and `PermissionOverwriteManager` is unsupported and **will** break functionality</warn>
+	 * @property {MessageMentionOptions} [allowedMentions] The default value for {@link BaseMessageOptions#allowedMentions}
+	 * @property {Partials[]} [partials] Structures allowed to be partial. This means events can be emitted even when
+	 * they're missing all the data for a particular structure. See the "Partial Structures" topic on the
+	 * {@link https://discordjs.guide/popular-topics/partials.html guide} for some
+	 * important usage information, as partials require you to put checks in place when handling data.
+	 * @property {boolean} [failIfNotExists=true] The default value for {@link MessageReplyOptions#failIfNotExists}
+	 * @property {PresenceData} [presence={}] Presence data to use upon login
+	 * @property {IntentsResolvable} intents Intents to enable for this connection
+	 * @property {number} [waitGuildTimeout=15_000] Time in milliseconds that clients with the
+	 * {@link GatewayIntentBits.Guilds} gateway intent should wait for missing guilds to be received before being ready.
+	 * @property {SweeperOptions} [sweepers=this.DefaultSweeperSettings] Options for cache sweeping
+	 * @property {WebsocketOptions} [ws] Options for the WebSocket
+	 * @property {RESTOptions} [rest] Options for the REST manager
+	 * @property {Function} [jsonTransformer] A function used to transform outgoing json data
+	 * @property {boolean} [enforceNonce=false] The default value for {@link MessageCreateOptions#enforceNonce}
+	 */
+
+	/**
+	 * Options for {@link Sweepers} defining the behavior of cache sweeping
+	 * @typedef {Object<SweeperKey, SweepOptions>} SweeperOptions
+	 */
+
+	/**
+	 * Options for sweeping a single type of item from cache
+	 * @typedef {Object} SweepOptions
+	 * @property {number} interval The interval (in seconds) at which to perform sweeping of the item
+	 * @property {number} [lifetime] How long an item should stay in cache until it is considered sweepable.
+	 * <warn>This property is only valid for the `invites`, `messages`, and `threads` keys. The `filter` property
+	 * is mutually exclusive to this property and takes priority</warn>
+	 * @property {GlobalSweepFilter} filter The function used to determine the function passed to the sweep method
+	 * <info>This property is optional when the key is `invites`, `messages`, or `threads` and `lifetime` is set</info>
+	 */
+
+	/**
+	 * A function to determine what strategy to use for sharding internally.
+	 * ```js
+	 * (manager) => new WorkerShardingStrategy(manager, { shardsPerWorker: 2 })
+	 * ```
+	 * @typedef {Function} BuildStrategyFunction
+	 * @param {WSWebSocketManager} manager The WebSocketManager that is going to initiate the sharding
+	 * @returns {IShardingStrategy} The strategy to use for sharding
+	 */
+
+	/**
+	 * A function to change the concurrency handling for shard identifies of this manager
+	 * ```js
+	 * async (manager) => {
+	 *   const gateway = await manager.fetchGatewayInformation();
+	 *   return new SimpleIdentifyThrottler(gateway.session_start_limit.max_concurrency);
+	 * }
+	 * ```
+	 * @typedef {Function} IdentifyThrottlerFunction
+	 * @param {WSWebSocketManager} manager The WebSocketManager that is going to initiate the sharding
+	 * @returns {Awaitable<IIdentifyThrottler>} The identify throttler that this ws manager will use
+	 */
+
+	/**
+	 * WebSocket options (these are left as snake_case to match the API)
+	 * @typedef {Object} WebsocketOptions
+	 * @property {number} [large_threshold=50] Number of members in a guild after which offline users will no longer be
+	 * sent in the initial guild member list, must be between 50 and 250
+	 * @property {number} [version=10] The Discord gateway version to use <warn>Changing this can break the library;
+	 * only set this if you know what you are doing</warn>
+	 * @property {BuildStrategyFunction} [buildStrategy] Builds the strategy to use for sharding
+	 * @property {IdentifyThrottlerFunction} [buildIdentifyThrottler] Builds the identify throttler to use for sharding
+	 */
+
+	/**
+	 * Contains various utilities for client options.
+	 */
+	class Options extends null {
+	  /**
+	   * The default user agent appendix.
+	   * @type {string}
+	   * @memberof Options
+	   * @private
+	   */
+	  static userAgentAppendix = `discord.js/${version} ${DefaultUserAgentAppendix}`.trimEnd();
+
+	  /**
+	   * The default client options.
+	   * @returns {ClientOptions}
+	   */
+	  static createDefault() {
+	    return {
+	      closeTimeout: 5_000,
+	      waitGuildTimeout: 15_000,
+	      shardCount: 1,
+	      makeCache: this.cacheWithLimits(this.DefaultMakeCacheSettings),
+	      partials: [],
+	      failIfNotExists: true,
+	      enforceNonce: false,
+	      presence: {},
+	      sweepers: this.DefaultSweeperSettings,
+	      ws: {
+	        large_threshold: 50,
+	        version: 10,
+	      },
+	      rest: {
+	        ...DefaultRestOptions,
+	        userAgentAppendix: this.userAgentAppendix,
+	      },
+	      jsonTransformer: toSnakeCase,
+	    };
+	  }
+
+	  /**
+	   * Create a cache factory using predefined settings to sweep or limit.
+	   * @param {Object<string, LimitedCollectionOptions|number>} [settings={}] Settings passed to the relevant constructor.
+	   * If no setting is provided for a manager, it uses Collection.
+	   * If a number is provided for a manager, it uses that number as the max size for a LimitedCollection.
+	   * If LimitedCollectionOptions are provided for a manager, it uses those settings to form a LimitedCollection.
+	   * @returns {CacheFactory}
+	   * @example
+	   * // Store up to 200 messages per channel and 200 members per guild, always keeping the client member.
+	   * Options.cacheWithLimits({
+	   *    MessageManager: 200,
+	   *    GuildMemberManager: {
+	   *      maxSize: 200,
+	   *      keepOverLimit: (member) => member.id === client.user.id,
+	   *    },
+	   *  });
+	   */
+	  static cacheWithLimits(settings = {}) {
+	    const { Collection } = requireDist$7();
+	    const LimitedCollection = requireLimitedCollection();
+
+	    return (managerType, _, manager) => {
+	      const setting = settings[manager.name] ?? settings[managerType.name];
+	      /* eslint-disable-next-line eqeqeq */
+	      if (setting == null) {
+	        return new Collection();
+	      }
+	      if (typeof setting === 'number') {
+	        if (setting === Infinity) {
+	          return new Collection();
+	        }
+	        return new LimitedCollection({ maxSize: setting });
+	      }
+	      /* eslint-disable-next-line eqeqeq */
+	      const noLimit = setting.maxSize == null || setting.maxSize === Infinity;
+	      if (noLimit) {
+	        return new Collection();
+	      }
+	      return new LimitedCollection(setting);
+	    };
+	  }
+
+	  /**
+	   * Create a cache factory that always caches everything.
+	   * @returns {CacheFactory}
+	   */
+	  static cacheEverything() {
+	    const { Collection } = requireDist$7();
+	    return () => new Collection();
+	  }
+
+	  /**
+	   * The default settings passed to {@link ClientOptions.makeCache}.
+	   * The caches that this changes are:
+	   * * `MessageManager` - Limit to 200 messages
+	   * <info>If you want to keep default behavior and add on top of it you can use this object and add on to it, e.g.
+	   * `makeCache: Options.cacheWithLimits({ ...Options.DefaultMakeCacheSettings, ReactionManager: 0 })`</info>
+	   * @type {Object<string, LimitedCollectionOptions|number>}
+	   */
+	  static get DefaultMakeCacheSettings() {
+	    return {
+	      MessageManager: 200,
+	    };
+	  }
+
+	  /**
+	   * The default settings passed to {@link ClientOptions.sweepers}.
+	   * The sweepers that this changes are:
+	   * * `threads` - Sweep archived threads every hour, removing those archived more than 4 hours ago
+	   * <info>If you want to keep default behavior and add on top of it you can use this object and add on to it, e.g.
+	   * `sweepers: { ...Options.DefaultSweeperSettings, messages: { interval: 300, lifetime: 600 } }`</info>
+	   * @type {SweeperOptions}
+	   */
+	  static get DefaultSweeperSettings() {
+	    return {
+	      threads: {
+	        interval: 3600,
+	        lifetime: 14400,
+	      },
+	    };
+	  }
+	}
+
+	Options_1 = Options;
+
+	/**
+	 * @external RESTOptions
+	 * @see {@link https://discord.js.org/docs/packages/rest/stable/RESTOptions:Interface}
+	 */
+
+	/**
+	 * @external WSWebSocketManager
+	 * @see {@link https://discord.js.org/docs/packages/ws/stable/WebSocketManager:Class}
+	 */
+
+	/**
+	 * @external IShardingStrategy
+	 * @see {@link https://discord.js.org/docs/packages/ws/stable/IShardingStrategy:Interface}
+	 */
+
+	/**
+	 * @external IIdentifyThrottler
+	 * @see {@link https://discord.js.org/docs/packages/ws/stable/IIdentifyThrottler:Interface}
+	 */
+	return Options_1;
+}
+
 var BaseClient_1;
 var hasRequiredBaseClient;
 
@@ -75548,6 +75573,12 @@ function requireBaseInteraction () {
 	     * @type {?InteractionContextType}
 	     */
 	    this.context = data.context ?? null;
+
+	    /**
+	     * Attachment size limit in bytes
+	     * @type {number}
+	     */
+	    this.attachmentSizeLimit = data.attachment_size_limit;
 	  }
 
 	  /**
@@ -75642,6 +75673,16 @@ function requireBaseInteraction () {
 	    return (
 	      this.type === InteractionType.ApplicationCommand &&
 	      [ApplicationCommandType.User, ApplicationCommandType.Message].includes(this.commandType)
+	    );
+	  }
+
+	  /**
+	   * Indicates whether this interaction is a {@link PrimaryEntryPointCommandInteraction}
+	   * @returns {boolean}
+	   */
+	  isPrimaryEntryPointCommand() {
+	    return (
+	      this.type === InteractionType.ApplicationCommand && this.commandType === ApplicationCommandType.PrimaryEntryPoint
 	    );
 	  }
 
@@ -76700,6 +76741,18 @@ function requireApplicationCommand () {
 	      this.contexts ??= null;
 	    }
 
+	    if ('handler' in data) {
+	      /**
+	       * Determines whether the interaction is handled by the app's interactions handler or by Discord.
+	       * <info>Only available for {@link ApplicationCommandType.PrimaryEntryPoint} commands on
+	       * applications with the {@link ApplicationFlags.Embedded} flag (i.e, those that have an Activity)</info>
+	       * @type {?EntryPointCommandHandlerType}
+	       */
+	      this.handler = data.handler;
+	    } else {
+	      this.handler ??= null;
+	    }
+
 	    if ('version' in data) {
 	      /**
 	       * Autoincrementing version identifier updated during substantial record changes
@@ -76742,15 +76795,20 @@ function requireApplicationCommand () {
 	   * @property {string} name The name of the command, must be in all lowercase if type is
 	   * {@link ApplicationCommandType.ChatInput}
 	   * @property {Object<Locale, string>} [nameLocalizations] The localizations for the command name
-	   * @property {string} description The description of the command, if type is {@link ApplicationCommandType.ChatInput}
+	   * @property {string} description The description of the command,
+	   * if type is {@link ApplicationCommandType.ChatInput} or {@link ApplicationCommandType.PrimaryEntryPoint}
 	   * @property {boolean} [nsfw] Whether the command is age-restricted
 	   * @property {Object<Locale, string>} [descriptionLocalizations] The localizations for the command description,
-	   * if type is {@link ApplicationCommandType.ChatInput}
+	   * if type is {@link ApplicationCommandType.ChatInput} or {@link ApplicationCommandType.PrimaryEntryPoint}
 	   * @property {ApplicationCommandType} [type=ApplicationCommandType.ChatInput] The type of the command
 	   * @property {ApplicationCommandOptionData[]} [options] Options for the command
 	   * @property {?PermissionResolvable} [defaultMemberPermissions] The bitfield used to determine the default permissions
 	   * a member needs in order to run the command
 	   * @property {boolean} [dmPermission] Whether the command is enabled in DMs
+	   * @property {ApplicationIntegrationType[]} [integrationTypes] Installation contexts where the command is available
+	   * @property {InteractionContextType[]} [contexts] Interaction contexts where the command can be used
+	   * @property {EntryPointCommandHandlerType} [handler] Whether the interaction is handled by the app's
+	   * interactions handler or by Discord.
 	   */
 
 	  /**
@@ -76945,7 +77003,8 @@ function requireApplicationCommand () {
 	        this.descriptionLocalizations ?? {},
 	      ) ||
 	      !isEqual(command.integrationTypes ?? command.integration_types ?? [], this.integrationTypes ?? []) ||
-	      !isEqual(command.contexts ?? [], this.contexts ?? [])
+	      !isEqual(command.contexts ?? [], this.contexts ?? []) ||
+	      ('handler' in command && command.handler !== this.handler)
 	    ) {
 	      return false;
 	    }
@@ -77416,6 +77475,7 @@ function requireApplicationCommandManager () {
 	      dm_permission: command.dmPermission ?? command.dm_permission,
 	      integration_types: command.integrationTypes ?? command.integration_types,
 	      contexts: command.contexts,
+	      handler: command.handler,
 	    };
 	  }
 	}
@@ -92209,44 +92269,7 @@ function requireComponents$1 () {
 	 * @ignore
 	 */
 	function createComponent(data) {
-	  if (data instanceof Component) {
-	    return data;
-	  }
-
-	  switch (data.type) {
-	    case ComponentType.ActionRow:
-	      return new ActionRow(data);
-	    case ComponentType.Button:
-	      return new ButtonComponent(data);
-	    case ComponentType.StringSelect:
-	      return new StringSelectMenuComponent(data);
-	    case ComponentType.TextInput:
-	      return new TextInputComponent(data);
-	    case ComponentType.UserSelect:
-	      return new UserSelectMenuComponent(data);
-	    case ComponentType.RoleSelect:
-	      return new RoleSelectMenuComponent(data);
-	    case ComponentType.MentionableSelect:
-	      return new MentionableSelectMenuComponent(data);
-	    case ComponentType.ChannelSelect:
-	      return new ChannelSelectMenuComponent(data);
-	    case ComponentType.Container:
-	      return new ContainerComponent(data);
-	    case ComponentType.TextDisplay:
-	      return new TextDisplayComponent(data);
-	    case ComponentType.File:
-	      return new FileComponent(data);
-	    case ComponentType.MediaGallery:
-	      return new MediaGalleryComponent(data);
-	    case ComponentType.Section:
-	      return new SectionComponent(data);
-	    case ComponentType.Separator:
-	      return new SeparatorComponent(data);
-	    case ComponentType.Thumbnail:
-	      return new ThumbnailComponent(data);
-	    default:
-	      return new Component(data);
-	  }
+	  return data instanceof Component ? data : new (ComponentTypeToComponent[data.type] ?? Component)(data);
 	}
 
 	/**
@@ -92256,30 +92279,7 @@ function requireComponents$1 () {
 	 * @ignore
 	 */
 	function createComponentBuilder(data) {
-	  if (data instanceof ComponentBuilder) {
-	    return data;
-	  }
-
-	  switch (data.type) {
-	    case ComponentType.ActionRow:
-	      return new ActionRowBuilder(data);
-	    case ComponentType.Button:
-	      return new ButtonBuilder(data);
-	    case ComponentType.StringSelect:
-	      return new StringSelectMenuBuilder(data);
-	    case ComponentType.TextInput:
-	      return new TextInputBuilder(data);
-	    case ComponentType.UserSelect:
-	      return new UserSelectMenuBuilder(data);
-	    case ComponentType.RoleSelect:
-	      return new RoleSelectMenuBuilder(data);
-	    case ComponentType.MentionableSelect:
-	      return new MentionableSelectMenuBuilder(data);
-	    case ComponentType.ChannelSelect:
-	      return new ChannelSelectMenuBuilder(data);
-	    default:
-	      return new ComponentBuilder(data);
-	  }
+	  return data instanceof ComponentBuilder ? data : new (ComponentTypeToBuilder[data.type] ?? ComponentBuilder)(data);
 	}
 
 	/**
@@ -92342,6 +92342,35 @@ function requireComponents$1 () {
 	const ThumbnailComponent = requireThumbnailComponent();
 	const UserSelectMenuBuilder = requireUserSelectMenuBuilder();
 	const UserSelectMenuComponent = requireUserSelectMenuComponent();
+
+	const ComponentTypeToComponent = {
+	  [ComponentType.ActionRow]: ActionRow,
+	  [ComponentType.Button]: ButtonComponent,
+	  [ComponentType.StringSelect]: StringSelectMenuComponent,
+	  [ComponentType.TextInput]: TextInputComponent,
+	  [ComponentType.UserSelect]: UserSelectMenuComponent,
+	  [ComponentType.RoleSelect]: RoleSelectMenuComponent,
+	  [ComponentType.MentionableSelect]: MentionableSelectMenuComponent,
+	  [ComponentType.ChannelSelect]: ChannelSelectMenuComponent,
+	  [ComponentType.Container]: ContainerComponent,
+	  [ComponentType.TextDisplay]: TextDisplayComponent,
+	  [ComponentType.File]: FileComponent,
+	  [ComponentType.MediaGallery]: MediaGalleryComponent,
+	  [ComponentType.Section]: SectionComponent,
+	  [ComponentType.Separator]: SeparatorComponent,
+	  [ComponentType.Thumbnail]: ThumbnailComponent,
+	};
+
+	const ComponentTypeToBuilder = {
+	  [ComponentType.ActionRow]: ActionRowBuilder,
+	  [ComponentType.Button]: ButtonBuilder,
+	  [ComponentType.StringSelect]: StringSelectMenuBuilder,
+	  [ComponentType.TextInput]: TextInputBuilder,
+	  [ComponentType.UserSelect]: UserSelectMenuBuilder,
+	  [ComponentType.RoleSelect]: RoleSelectMenuBuilder,
+	  [ComponentType.MentionableSelect]: MentionableSelectMenuBuilder,
+	  [ComponentType.ChannelSelect]: ChannelSelectMenuBuilder,
+	};
 	return Components;
 }
 
@@ -99120,7 +99149,7 @@ function requirePartialGroupDMChannel () {
 	     * The hash of the channel icon
 	     * @type {?string}
 	     */
-	    this.icon = data.icon;
+	    this.icon = data.icon ?? null;
 
 	    /**
 	     * Recipient data received in a {@link PartialGroupDMChannel}.
@@ -99132,7 +99161,7 @@ function requirePartialGroupDMChannel () {
 	     * The recipients of this Group DM Channel.
 	     * @type {PartialRecipient[]}
 	     */
-	    this.recipients = data.recipients;
+	    this.recipients = data.recipients ?? [];
 
 	    /**
 	     * A manager of the messages belonging to this channel
@@ -102879,6 +102908,12 @@ function requireInteractionResponses () {
 	   */
 
 	  /**
+	   * Options for launching activity in response to a {@link BaseInteraction}
+	   * @typedef {Object} LaunchActivityOptions
+	   * @property {boolean} [withResponse] Whether to return an {@link InteractionCallbackResponse} as the response
+	   */
+
+	  /**
 	   * Options for showing a modal in response to a {@link BaseInteraction}
 	   * @typedef {Object} ShowModalOptions
 	   * @property {boolean} [withResponse] Whether to return an {@link InteractionCallbackResponse} as the response
@@ -103180,6 +103215,25 @@ function requireInteractionResponses () {
 	  }
 
 	  /**
+	   * Launches this application's activity, if enabled
+	   * @param {LaunchActivityOptions} [options={}] Options for launching the activity
+	   * @returns {Promise<InteractionCallbackResponse|undefined>}
+	   */
+	  async launchActivity({ withResponse } = {}) {
+	    if (this.deferred || this.replied) throw new DiscordjsError(ErrorCodes.InteractionAlreadyReplied);
+	    const response = await this.client.rest.post(Routes.interactionCallback(this.id, this.token), {
+	      query: makeURLSearchParams({ with_response: withResponse ?? false }),
+	      body: {
+	        type: InteractionResponseType.LaunchActivity,
+	      },
+	      auth: false,
+	    });
+	    this.replied = true;
+
+	    return withResponse ? new InteractionCallbackResponse(this.client, response) : undefined;
+	  }
+
+	  /**
 	   * Shows a modal component
 	   * @param {ModalBuilder|ModalComponentData|APIModalInteractionResponseCallbackData} modal The modal to show
 	   * @param {ShowModalOptions} [options={}] The options for sending this interaction response
@@ -103259,6 +103313,7 @@ function requireInteractionResponses () {
 	      'followUp',
 	      'deferUpdate',
 	      'update',
+	      'launchActivity',
 	      'showModal',
 	      'sendPremiumRequired',
 	      'awaitModalSubmit',
@@ -103389,6 +103444,7 @@ function requireMessageComponentInteraction () {
 	  followUp() {}
 	  deferUpdate() {}
 	  update() {}
+	  launchActivity() {}
 	  showModal() {}
 	  sendPremiumRequired() {}
 	  awaitModalSubmit() {}
@@ -103619,6 +103675,7 @@ function requireCommandInteraction () {
 	  editReply() {}
 	  deleteReply() {}
 	  followUp() {}
+	  launchActivity() {}
 	  showModal() {}
 	  sendPremiumRequired() {}
 	  awaitModalSubmit() {}
@@ -104049,12 +104106,32 @@ function requireModalSubmitInteraction () {
 	  deferUpdate() {}
 	  update() {}
 	  sendPremiumRequired() {}
+	  launchActivity() {}
 	}
 
 	InteractionResponses.applyToClass(ModalSubmitInteraction, 'showModal');
 
 	ModalSubmitInteraction_1 = ModalSubmitInteraction;
 	return ModalSubmitInteraction_1;
+}
+
+var PrimaryEntryPointCommandInteraction_1;
+var hasRequiredPrimaryEntryPointCommandInteraction;
+
+function requirePrimaryEntryPointCommandInteraction () {
+	if (hasRequiredPrimaryEntryPointCommandInteraction) return PrimaryEntryPointCommandInteraction_1;
+	hasRequiredPrimaryEntryPointCommandInteraction = 1;
+
+	const CommandInteraction = requireCommandInteraction();
+
+	/**
+	 * Represents a primary entry point command interaction.
+	 * @extends {CommandInteraction}
+	 */
+	class PrimaryEntryPointCommandInteraction extends CommandInteraction {}
+
+	PrimaryEntryPointCommandInteraction_1 = PrimaryEntryPointCommandInteraction;
+	return PrimaryEntryPointCommandInteraction_1;
 }
 
 var RoleSelectMenuInteraction_1;
@@ -104239,6 +104316,7 @@ function requireInteractionCreate () {
 	const MentionableSelectMenuInteraction = requireMentionableSelectMenuInteraction();
 	const MessageContextMenuCommandInteraction = requireMessageContextMenuCommandInteraction();
 	const ModalSubmitInteraction = requireModalSubmitInteraction();
+	const PrimaryEntryPointCommandInteraction = requirePrimaryEntryPointCommandInteraction();
 	const RoleSelectMenuInteraction = requireRoleSelectMenuInteraction();
 	const StringSelectMenuInteraction = requireStringSelectMenuInteraction();
 	const UserContextMenuCommandInteraction = requireUserContextMenuCommandInteraction();
@@ -104267,6 +104345,9 @@ function requireInteractionCreate () {
 	          case ApplicationCommandType.Message:
 	            if (channel && !channel.isTextBased()) return;
 	            InteractionClass = MessageContextMenuCommandInteraction;
+	            break;
+	          case ApplicationCommandType.PrimaryEntryPoint:
+	            InteractionClass = PrimaryEntryPointCommandInteraction;
 	            break;
 	          default:
 	            client.emit(
@@ -106974,6 +107055,14 @@ function requirePermessageDeflate () {
 	  this[kError].code = 'WS_ERR_UNSUPPORTED_MESSAGE_LENGTH';
 	  this[kError][kStatusCode] = 1009;
 	  this.removeListener('data', inflateOnData);
+
+	  //
+	  // The choice to employ `zlib.reset()` over `zlib.close()` is dictated by the
+	  // fact that in Node.js versions prior to 13.10.0, the callback for
+	  // `zlib.flush()` is not called if `zlib.close()` is used. Utilizing
+	  // `zlib.reset()` ensures that either the callback is invoked or an error is
+	  // emitted.
+	  //
 	  this.reset();
 	}
 
@@ -106989,6 +107078,12 @@ function requirePermessageDeflate () {
 	  // closed when an error is emitted.
 	  //
 	  this[kPerMessageDeflate]._inflate = null;
+
+	  if (this[kError]) {
+	    this[kCallback](this[kError]);
+	    return;
+	  }
+
 	  err[kStatusCode] = 1007;
 	  this[kCallback](err);
 	}
@@ -109706,7 +109801,7 @@ function requireWebsocket () {
 	  if (parsedUrl.protocol !== 'ws:' && !isSecure && !isIpcUrl) {
 	    invalidUrlMessage =
 	      'The URL\'s protocol must be one of "ws:", "wss:", ' +
-	      '"http:", "https", or "ws+unix:"';
+	      '"http:", "https:", or "ws+unix:"';
 	  } else if (isIpcUrl && !parsedUrl.pathname) {
 	    invalidUrlMessage = "The URL's pathname is empty";
 	  } else if (parsedUrl.hash) {
@@ -111722,7 +111817,7 @@ function requireDist$3 () {
 	  CompressionMethod2["ZlibStream"] = "zlib-stream";
 	  return CompressionMethod2;
 	})(CompressionMethod || {});
-	var DefaultDeviceProperty = `@discordjs/ws 1.2.2`;
+	var DefaultDeviceProperty = `@discordjs/ws 1.2.3`;
 	var getDefaultSessionStore = (0, import_util.lazy)(() => new import_collection4.Collection());
 	var DefaultWebSocketManagerOptions = {
 	  async buildIdentifyThrottler(manager) {
@@ -112676,7 +112771,7 @@ function requireDist$3 () {
 	};
 
 	// src/index.ts
-	var version = "1.2.2";
+	var version = "1.2.3";
 	
 	return dist$2;
 }
@@ -115112,6 +115207,13 @@ function requireChannelManager () {
 
 	    channel?.parent?.threads?.cache.delete(id);
 	    this.cache.delete(id);
+
+	    if (channel?.threads) {
+	      for (const threadId of channel.threads.cache.keys()) {
+	        this.cache.delete(threadId);
+	        channel.guild?.channels.cache.delete(threadId);
+	      }
+	    }
 	  }
 
 	  /**
@@ -123482,7 +123584,6 @@ function requireClient$1 () {
 	    const code = resolveInviteCode(invite);
 	    const query = makeURLSearchParams({
 	      with_counts: true,
-	      with_expiration: true,
 	      guild_scheduled_event_id: options?.guildScheduledEventId,
 	    });
 	    const data = await this.rest.get(Routes.invite(code), { query });
@@ -125739,6 +125840,7 @@ function requireSrc () {
 		exports.PermissionOverwrites = requirePermissionOverwrites();
 		exports.Poll = requirePoll().Poll;
 		exports.PollAnswer = requirePollAnswer().PollAnswer;
+		exports.PrimaryEntryPointCommandInteraction = requirePrimaryEntryPointCommandInteraction();
 		exports.Presence = requirePresence().Presence;
 		exports.ReactionCollector = requireReactionCollector();
 		exports.ReactionEmoji = requireReactionEmoji();
