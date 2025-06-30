@@ -71946,7 +71946,7 @@ function requireTransformers () {
 	return Transformers;
 }
 
-var version = "14.20.0";
+var version = "14.21.0";
 var require$$39 = {
 	version: version};
 
@@ -79406,6 +79406,17 @@ function requireClientApplication () {
 	      this.approximateUserInstallCount = data.approximate_user_install_count;
 	    } else {
 	      this.approximateUserInstallCount ??= null;
+	    }
+
+	    if ('approximate_user_authorization_count' in data) {
+	      /**
+	       * An approximate amount of users that have OAuth2 authorizations for this application.
+	       *
+	       * @type {?number}
+	       */
+	      this.approximateUserAuthorizationCount = data.approximate_user_authorization_count;
+	    } else {
+	      this.approximateUserAuthorizationCount ??= null;
 	    }
 
 	    if ('guild_id' in data) {
@@ -95674,6 +95685,20 @@ function requireGuildMember () {
 	    } else {
 	      this.flags ??= new GuildMemberFlagsBitField().freeze();
 	    }
+
+	    if (data.avatar_decoration_data) {
+	      /**
+	       * The member avatar decoration's data
+	       *
+	       * @type {?AvatarDecorationData}
+	       */
+	      this.avatarDecorationData = {
+	        asset: data.avatar_decoration_data.asset,
+	        skuId: data.avatar_decoration_data.sku_id,
+	      };
+	    } else {
+	      this.avatarDecorationData = null;
+	    }
 	  }
 
 	  _clone() {
@@ -95719,6 +95744,15 @@ function requireGuildMember () {
 	  }
 
 	  /**
+	   * A link to the member's avatar decoration.
+	   *
+	   * @returns {?string}
+	   */
+	  avatarDecorationURL() {
+	    return this.avatarDecorationData ? this.client.rest.cdn.avatarDecoration(this.avatarDecorationData.asset) : null;
+	  }
+
+	  /**
 	   * A link to the member's banner.
 	   * @param {ImageURLOptions} [options={}] Options for the banner URL
 	   * @returns {?string}
@@ -95745,6 +95779,16 @@ function requireGuildMember () {
 	   */
 	  displayBannerURL(options) {
 	    return this.bannerURL(options) ?? this.user.bannerURL(options);
+	  }
+
+	  /**
+	   * A link to the member's guild avatar decoration if they have one.
+	   * Otherwise, a link to their {@link User#avatarDecorationURL} will be returned.
+	   *
+	   * @returns {?string}
+	   */
+	  displayAvatarDecorationURL() {
+	    return this.avatarDecorationURL() ?? this.user.avatarDecorationURL();
 	  }
 
 	  /**
@@ -96051,7 +96095,10 @@ function requireGuildMember () {
 	      this.communicationDisabledUntilTimestamp === member.communicationDisabledUntilTimestamp &&
 	      this.flags.bitfield === member.flags.bitfield &&
 	      (this._roles === member._roles ||
-	        (this._roles.length === member._roles.length && this._roles.every((role, i) => role === member._roles[i])))
+	        (this._roles.length === member._roles.length &&
+	          this._roles.every((role, index) => role === member._roles[index]))) &&
+	      this.avatarDecorationData?.asset === member.avatarDecorationData?.asset &&
+	      this.avatarDecorationData?.skuId === member.avatarDecorationData?.skuId
 	    );
 	  }
 
@@ -96077,6 +96124,7 @@ function requireGuildMember () {
 	    json.bannerURL = this.bannerURL();
 	    json.displayAvatarURL = this.displayAvatarURL();
 	    json.displayBannerURL = this.displayBannerURL();
+	    json.avatarDecorationURL = this.avatarDecorationURL();
 	    return json;
 	  }
 	};
@@ -114801,8 +114849,6 @@ function requireClientUser () {
 	      },
 	    });
 
-	    this.client.token = data.token;
-	    this.client.rest.setToken(data.token);
 	    const { updated } = this.client.actions.UserUpdate.handle(data);
 	    return updated ?? this;
 	  }
