@@ -27890,315 +27890,286 @@ var v10$a = {};
 
 var v10$9 = {};
 
-var common$3 = {};
-
-var hasRequiredCommon$3;
-
-function requireCommon$3 () {
-	if (hasRequiredCommon$3) return common$3;
-	hasRequiredCommon$3 = 1;
-	Object.defineProperty(common$3, "__esModule", { value: true });
-	
-	return common$3;
-}
-
 var hasRequiredV10$5;
 
 function requireV10$5 () {
 	if (hasRequiredV10$5) return v10$9;
 	hasRequiredV10$5 = 1;
-	(function (exports) {
-		/**
-		 * Types extracted from https://discord.com/developers/docs/topics/gateway
-		 */
-		var __createBinding = (v10$9 && v10$9.__createBinding) || (Object.create ? (function(o, m, k, k2) {
-		    if (k2 === undefined) k2 = k;
-		    var desc = Object.getOwnPropertyDescriptor(m, k);
-		    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
-		      desc = { enumerable: true, get: function() { return m[k]; } };
-		    }
-		    Object.defineProperty(o, k2, desc);
-		}) : (function(o, m, k, k2) {
-		    if (k2 === undefined) k2 = k;
-		    o[k2] = m[k];
-		}));
-		var __exportStar = (v10$9 && v10$9.__exportStar) || function(m, exports) {
-		    for (var p in m) if (p !== "default" && !Object.prototype.hasOwnProperty.call(exports, p)) __createBinding(exports, m, p);
-		};
-		Object.defineProperty(exports, "__esModule", { value: true });
-		exports.VoiceChannelEffectSendAnimationType = exports.GatewayDispatchEvents = exports.GatewayIntentBits = exports.GatewayCloseCodes = exports.GatewayOpcodes = exports.GatewayVersion = void 0;
-		__exportStar(requireCommon$3(), exports);
-		exports.GatewayVersion = '10';
-		/**
-		 * @see {@link https://discord.com/developers/docs/topics/opcodes-and-status-codes#gateway-gateway-opcodes}
-		 */
-		var GatewayOpcodes;
-		(function (GatewayOpcodes) {
-		    /**
-		     * An event was dispatched
-		     */
-		    GatewayOpcodes[GatewayOpcodes["Dispatch"] = 0] = "Dispatch";
-		    /**
-		     * A bidirectional opcode to maintain an active gateway connection.
-		     * Fired periodically by the client, or fired by the gateway to request an immediate heartbeat from the client.
-		     */
-		    GatewayOpcodes[GatewayOpcodes["Heartbeat"] = 1] = "Heartbeat";
-		    /**
-		     * Starts a new session during the initial handshake
-		     */
-		    GatewayOpcodes[GatewayOpcodes["Identify"] = 2] = "Identify";
-		    /**
-		     * Update the client's presence
-		     */
-		    GatewayOpcodes[GatewayOpcodes["PresenceUpdate"] = 3] = "PresenceUpdate";
-		    /**
-		     * Used to join/leave or move between voice channels
-		     */
-		    GatewayOpcodes[GatewayOpcodes["VoiceStateUpdate"] = 4] = "VoiceStateUpdate";
-		    /**
-		     * Resume a previous session that was disconnected
-		     */
-		    GatewayOpcodes[GatewayOpcodes["Resume"] = 6] = "Resume";
-		    /**
-		     * You should attempt to reconnect and resume immediately
-		     */
-		    GatewayOpcodes[GatewayOpcodes["Reconnect"] = 7] = "Reconnect";
-		    /**
-		     * Request information about offline guild members in a large guild
-		     */
-		    GatewayOpcodes[GatewayOpcodes["RequestGuildMembers"] = 8] = "RequestGuildMembers";
-		    /**
-		     * The session has been invalidated. You should reconnect and identify/resume accordingly
-		     */
-		    GatewayOpcodes[GatewayOpcodes["InvalidSession"] = 9] = "InvalidSession";
-		    /**
-		     * Sent immediately after connecting, contains the `heartbeat_interval` to use
-		     */
-		    GatewayOpcodes[GatewayOpcodes["Hello"] = 10] = "Hello";
-		    /**
-		     * Sent in response to receiving a heartbeat to acknowledge that it has been received
-		     */
-		    GatewayOpcodes[GatewayOpcodes["HeartbeatAck"] = 11] = "HeartbeatAck";
-		    /**
-		     * Request information about soundboard sounds in a set of guilds
-		     */
-		    GatewayOpcodes[GatewayOpcodes["RequestSoundboardSounds"] = 31] = "RequestSoundboardSounds";
-		})(GatewayOpcodes || (exports.GatewayOpcodes = GatewayOpcodes = {}));
-		/**
-		 * @see {@link https://discord.com/developers/docs/topics/opcodes-and-status-codes#gateway-gateway-close-event-codes}
-		 */
-		var GatewayCloseCodes;
-		(function (GatewayCloseCodes) {
-		    /**
-		     * We're not sure what went wrong. Try reconnecting?
-		     */
-		    GatewayCloseCodes[GatewayCloseCodes["UnknownError"] = 4000] = "UnknownError";
-		    /**
-		     * You sent an invalid Gateway opcode or an invalid payload for an opcode. Don't do that!
-		     *
-		     * @see {@link https://discord.com/developers/docs/topics/gateway-events#payload-structure}
-		     */
-		    GatewayCloseCodes[GatewayCloseCodes["UnknownOpcode"] = 4001] = "UnknownOpcode";
-		    /**
-		     * You sent an invalid payload to us. Don't do that!
-		     *
-		     * @see {@link https://discord.com/developers/docs/topics/gateway#sending-events}
-		     */
-		    GatewayCloseCodes[GatewayCloseCodes["DecodeError"] = 4002] = "DecodeError";
-		    /**
-		     * You sent us a payload prior to identifying
-		     *
-		     * @see {@link https://discord.com/developers/docs/topics/gateway-events#identify}
-		     */
-		    GatewayCloseCodes[GatewayCloseCodes["NotAuthenticated"] = 4003] = "NotAuthenticated";
-		    /**
-		     * The account token sent with your identify payload is incorrect
-		     *
-		     * @see {@link https://discord.com/developers/docs/topics/gateway-events#identify}
-		     */
-		    GatewayCloseCodes[GatewayCloseCodes["AuthenticationFailed"] = 4004] = "AuthenticationFailed";
-		    /**
-		     * You sent more than one identify payload. Don't do that!
-		     */
-		    GatewayCloseCodes[GatewayCloseCodes["AlreadyAuthenticated"] = 4005] = "AlreadyAuthenticated";
-		    /**
-		     * The sequence sent when resuming the session was invalid. Reconnect and start a new session
-		     *
-		     * @see {@link https://discord.com/developers/docs/topics/gateway-events#resume}
-		     */
-		    GatewayCloseCodes[GatewayCloseCodes["InvalidSeq"] = 4007] = "InvalidSeq";
-		    /**
-		     * Woah nelly! You're sending payloads to us too quickly. Slow it down! You will be disconnected on receiving this
-		     */
-		    GatewayCloseCodes[GatewayCloseCodes["RateLimited"] = 4008] = "RateLimited";
-		    /**
-		     * Your session timed out. Reconnect and start a new one
-		     */
-		    GatewayCloseCodes[GatewayCloseCodes["SessionTimedOut"] = 4009] = "SessionTimedOut";
-		    /**
-		     * You sent us an invalid shard when identifying
-		     *
-		     * @see {@link https://discord.com/developers/docs/topics/gateway#sharding}
-		     */
-		    GatewayCloseCodes[GatewayCloseCodes["InvalidShard"] = 4010] = "InvalidShard";
-		    /**
-		     * The session would have handled too many guilds - you are required to shard your connection in order to connect
-		     *
-		     * @see {@link https://discord.com/developers/docs/topics/gateway#sharding}
-		     */
-		    GatewayCloseCodes[GatewayCloseCodes["ShardingRequired"] = 4011] = "ShardingRequired";
-		    /**
-		     * You sent an invalid version for the gateway
-		     */
-		    GatewayCloseCodes[GatewayCloseCodes["InvalidAPIVersion"] = 4012] = "InvalidAPIVersion";
-		    /**
-		     * You sent an invalid intent for a Gateway Intent. You may have incorrectly calculated the bitwise value
-		     *
-		     * @see {@link https://discord.com/developers/docs/topics/gateway#gateway-intents}
-		     */
-		    GatewayCloseCodes[GatewayCloseCodes["InvalidIntents"] = 4013] = "InvalidIntents";
-		    /**
-		     * You sent a disallowed intent for a Gateway Intent. You may have tried to specify an intent that you have not
-		     * enabled or are not whitelisted for
-		     *
-		     * @see {@link https://discord.com/developers/docs/topics/gateway#gateway-intents}
-		     * @see {@link https://discord.com/developers/docs/topics/gateway#privileged-intents}
-		     */
-		    GatewayCloseCodes[GatewayCloseCodes["DisallowedIntents"] = 4014] = "DisallowedIntents";
-		})(GatewayCloseCodes || (exports.GatewayCloseCodes = GatewayCloseCodes = {}));
-		/**
-		 * @see {@link https://discord.com/developers/docs/topics/gateway#list-of-intents}
-		 */
-		var GatewayIntentBits;
-		(function (GatewayIntentBits) {
-		    GatewayIntentBits[GatewayIntentBits["Guilds"] = 1] = "Guilds";
-		    GatewayIntentBits[GatewayIntentBits["GuildMembers"] = 2] = "GuildMembers";
-		    GatewayIntentBits[GatewayIntentBits["GuildModeration"] = 4] = "GuildModeration";
-		    /**
-		     * @deprecated This is the old name for {@link GatewayIntentBits.GuildModeration}
-		     */
-		    GatewayIntentBits[GatewayIntentBits["GuildBans"] = 4] = "GuildBans";
-		    GatewayIntentBits[GatewayIntentBits["GuildExpressions"] = 8] = "GuildExpressions";
-		    /**
-		     * @deprecated This is the old name for {@link GatewayIntentBits.GuildExpressions}
-		     */
-		    GatewayIntentBits[GatewayIntentBits["GuildEmojisAndStickers"] = 8] = "GuildEmojisAndStickers";
-		    GatewayIntentBits[GatewayIntentBits["GuildIntegrations"] = 16] = "GuildIntegrations";
-		    GatewayIntentBits[GatewayIntentBits["GuildWebhooks"] = 32] = "GuildWebhooks";
-		    GatewayIntentBits[GatewayIntentBits["GuildInvites"] = 64] = "GuildInvites";
-		    GatewayIntentBits[GatewayIntentBits["GuildVoiceStates"] = 128] = "GuildVoiceStates";
-		    GatewayIntentBits[GatewayIntentBits["GuildPresences"] = 256] = "GuildPresences";
-		    GatewayIntentBits[GatewayIntentBits["GuildMessages"] = 512] = "GuildMessages";
-		    GatewayIntentBits[GatewayIntentBits["GuildMessageReactions"] = 1024] = "GuildMessageReactions";
-		    GatewayIntentBits[GatewayIntentBits["GuildMessageTyping"] = 2048] = "GuildMessageTyping";
-		    GatewayIntentBits[GatewayIntentBits["DirectMessages"] = 4096] = "DirectMessages";
-		    GatewayIntentBits[GatewayIntentBits["DirectMessageReactions"] = 8192] = "DirectMessageReactions";
-		    GatewayIntentBits[GatewayIntentBits["DirectMessageTyping"] = 16384] = "DirectMessageTyping";
-		    GatewayIntentBits[GatewayIntentBits["MessageContent"] = 32768] = "MessageContent";
-		    GatewayIntentBits[GatewayIntentBits["GuildScheduledEvents"] = 65536] = "GuildScheduledEvents";
-		    GatewayIntentBits[GatewayIntentBits["AutoModerationConfiguration"] = 1048576] = "AutoModerationConfiguration";
-		    GatewayIntentBits[GatewayIntentBits["AutoModerationExecution"] = 2097152] = "AutoModerationExecution";
-		    GatewayIntentBits[GatewayIntentBits["GuildMessagePolls"] = 16777216] = "GuildMessagePolls";
-		    GatewayIntentBits[GatewayIntentBits["DirectMessagePolls"] = 33554432] = "DirectMessagePolls";
-		})(GatewayIntentBits || (exports.GatewayIntentBits = GatewayIntentBits = {}));
-		/**
-		 * @see {@link https://discord.com/developers/docs/topics/gateway-events#receive-events}
-		 */
-		var GatewayDispatchEvents;
-		(function (GatewayDispatchEvents) {
-		    GatewayDispatchEvents["ApplicationCommandPermissionsUpdate"] = "APPLICATION_COMMAND_PERMISSIONS_UPDATE";
-		    GatewayDispatchEvents["AutoModerationActionExecution"] = "AUTO_MODERATION_ACTION_EXECUTION";
-		    GatewayDispatchEvents["AutoModerationRuleCreate"] = "AUTO_MODERATION_RULE_CREATE";
-		    GatewayDispatchEvents["AutoModerationRuleDelete"] = "AUTO_MODERATION_RULE_DELETE";
-		    GatewayDispatchEvents["AutoModerationRuleUpdate"] = "AUTO_MODERATION_RULE_UPDATE";
-		    GatewayDispatchEvents["ChannelCreate"] = "CHANNEL_CREATE";
-		    GatewayDispatchEvents["ChannelDelete"] = "CHANNEL_DELETE";
-		    GatewayDispatchEvents["ChannelPinsUpdate"] = "CHANNEL_PINS_UPDATE";
-		    GatewayDispatchEvents["ChannelUpdate"] = "CHANNEL_UPDATE";
-		    GatewayDispatchEvents["EntitlementCreate"] = "ENTITLEMENT_CREATE";
-		    GatewayDispatchEvents["EntitlementDelete"] = "ENTITLEMENT_DELETE";
-		    GatewayDispatchEvents["EntitlementUpdate"] = "ENTITLEMENT_UPDATE";
-		    GatewayDispatchEvents["GuildAuditLogEntryCreate"] = "GUILD_AUDIT_LOG_ENTRY_CREATE";
-		    GatewayDispatchEvents["GuildBanAdd"] = "GUILD_BAN_ADD";
-		    GatewayDispatchEvents["GuildBanRemove"] = "GUILD_BAN_REMOVE";
-		    GatewayDispatchEvents["GuildCreate"] = "GUILD_CREATE";
-		    GatewayDispatchEvents["GuildDelete"] = "GUILD_DELETE";
-		    GatewayDispatchEvents["GuildEmojisUpdate"] = "GUILD_EMOJIS_UPDATE";
-		    GatewayDispatchEvents["GuildIntegrationsUpdate"] = "GUILD_INTEGRATIONS_UPDATE";
-		    GatewayDispatchEvents["GuildMemberAdd"] = "GUILD_MEMBER_ADD";
-		    GatewayDispatchEvents["GuildMemberRemove"] = "GUILD_MEMBER_REMOVE";
-		    GatewayDispatchEvents["GuildMembersChunk"] = "GUILD_MEMBERS_CHUNK";
-		    GatewayDispatchEvents["GuildMemberUpdate"] = "GUILD_MEMBER_UPDATE";
-		    GatewayDispatchEvents["GuildRoleCreate"] = "GUILD_ROLE_CREATE";
-		    GatewayDispatchEvents["GuildRoleDelete"] = "GUILD_ROLE_DELETE";
-		    GatewayDispatchEvents["GuildRoleUpdate"] = "GUILD_ROLE_UPDATE";
-		    GatewayDispatchEvents["GuildScheduledEventCreate"] = "GUILD_SCHEDULED_EVENT_CREATE";
-		    GatewayDispatchEvents["GuildScheduledEventDelete"] = "GUILD_SCHEDULED_EVENT_DELETE";
-		    GatewayDispatchEvents["GuildScheduledEventUpdate"] = "GUILD_SCHEDULED_EVENT_UPDATE";
-		    GatewayDispatchEvents["GuildScheduledEventUserAdd"] = "GUILD_SCHEDULED_EVENT_USER_ADD";
-		    GatewayDispatchEvents["GuildScheduledEventUserRemove"] = "GUILD_SCHEDULED_EVENT_USER_REMOVE";
-		    GatewayDispatchEvents["GuildSoundboardSoundCreate"] = "GUILD_SOUNDBOARD_SOUND_CREATE";
-		    GatewayDispatchEvents["GuildSoundboardSoundDelete"] = "GUILD_SOUNDBOARD_SOUND_DELETE";
-		    GatewayDispatchEvents["GuildSoundboardSoundsUpdate"] = "GUILD_SOUNDBOARD_SOUNDS_UPDATE";
-		    GatewayDispatchEvents["GuildSoundboardSoundUpdate"] = "GUILD_SOUNDBOARD_SOUND_UPDATE";
-		    GatewayDispatchEvents["SoundboardSounds"] = "SOUNDBOARD_SOUNDS";
-		    GatewayDispatchEvents["GuildStickersUpdate"] = "GUILD_STICKERS_UPDATE";
-		    GatewayDispatchEvents["GuildUpdate"] = "GUILD_UPDATE";
-		    GatewayDispatchEvents["IntegrationCreate"] = "INTEGRATION_CREATE";
-		    GatewayDispatchEvents["IntegrationDelete"] = "INTEGRATION_DELETE";
-		    GatewayDispatchEvents["IntegrationUpdate"] = "INTEGRATION_UPDATE";
-		    GatewayDispatchEvents["InteractionCreate"] = "INTERACTION_CREATE";
-		    GatewayDispatchEvents["InviteCreate"] = "INVITE_CREATE";
-		    GatewayDispatchEvents["InviteDelete"] = "INVITE_DELETE";
-		    GatewayDispatchEvents["MessageCreate"] = "MESSAGE_CREATE";
-		    GatewayDispatchEvents["MessageDelete"] = "MESSAGE_DELETE";
-		    GatewayDispatchEvents["MessageDeleteBulk"] = "MESSAGE_DELETE_BULK";
-		    GatewayDispatchEvents["MessagePollVoteAdd"] = "MESSAGE_POLL_VOTE_ADD";
-		    GatewayDispatchEvents["MessagePollVoteRemove"] = "MESSAGE_POLL_VOTE_REMOVE";
-		    GatewayDispatchEvents["MessageReactionAdd"] = "MESSAGE_REACTION_ADD";
-		    GatewayDispatchEvents["MessageReactionRemove"] = "MESSAGE_REACTION_REMOVE";
-		    GatewayDispatchEvents["MessageReactionRemoveAll"] = "MESSAGE_REACTION_REMOVE_ALL";
-		    GatewayDispatchEvents["MessageReactionRemoveEmoji"] = "MESSAGE_REACTION_REMOVE_EMOJI";
-		    GatewayDispatchEvents["MessageUpdate"] = "MESSAGE_UPDATE";
-		    GatewayDispatchEvents["PresenceUpdate"] = "PRESENCE_UPDATE";
-		    GatewayDispatchEvents["Ready"] = "READY";
-		    GatewayDispatchEvents["Resumed"] = "RESUMED";
-		    GatewayDispatchEvents["StageInstanceCreate"] = "STAGE_INSTANCE_CREATE";
-		    GatewayDispatchEvents["StageInstanceDelete"] = "STAGE_INSTANCE_DELETE";
-		    GatewayDispatchEvents["StageInstanceUpdate"] = "STAGE_INSTANCE_UPDATE";
-		    GatewayDispatchEvents["SubscriptionCreate"] = "SUBSCRIPTION_CREATE";
-		    GatewayDispatchEvents["SubscriptionDelete"] = "SUBSCRIPTION_DELETE";
-		    GatewayDispatchEvents["SubscriptionUpdate"] = "SUBSCRIPTION_UPDATE";
-		    GatewayDispatchEvents["ThreadCreate"] = "THREAD_CREATE";
-		    GatewayDispatchEvents["ThreadDelete"] = "THREAD_DELETE";
-		    GatewayDispatchEvents["ThreadListSync"] = "THREAD_LIST_SYNC";
-		    GatewayDispatchEvents["ThreadMembersUpdate"] = "THREAD_MEMBERS_UPDATE";
-		    GatewayDispatchEvents["ThreadMemberUpdate"] = "THREAD_MEMBER_UPDATE";
-		    GatewayDispatchEvents["ThreadUpdate"] = "THREAD_UPDATE";
-		    GatewayDispatchEvents["TypingStart"] = "TYPING_START";
-		    GatewayDispatchEvents["UserUpdate"] = "USER_UPDATE";
-		    GatewayDispatchEvents["VoiceChannelEffectSend"] = "VOICE_CHANNEL_EFFECT_SEND";
-		    GatewayDispatchEvents["VoiceServerUpdate"] = "VOICE_SERVER_UPDATE";
-		    GatewayDispatchEvents["VoiceStateUpdate"] = "VOICE_STATE_UPDATE";
-		    GatewayDispatchEvents["WebhooksUpdate"] = "WEBHOOKS_UPDATE";
-		})(GatewayDispatchEvents || (exports.GatewayDispatchEvents = GatewayDispatchEvents = {}));
-		/**
-		 * @see {@link https://discord.com/developers/docs/topics/gateway-events#voice-channel-effect-send-animation-types}
-		 */
-		var VoiceChannelEffectSendAnimationType;
-		(function (VoiceChannelEffectSendAnimationType) {
-		    /**
-		     * A fun animation, sent by a Nitro subscriber
-		     */
-		    VoiceChannelEffectSendAnimationType[VoiceChannelEffectSendAnimationType["Premium"] = 0] = "Premium";
-		    /**
-		     * The standard animation
-		     */
-		    VoiceChannelEffectSendAnimationType[VoiceChannelEffectSendAnimationType["Basic"] = 1] = "Basic";
-		})(VoiceChannelEffectSendAnimationType || (exports.VoiceChannelEffectSendAnimationType = VoiceChannelEffectSendAnimationType = {}));
-		// #endregion Shared
-		
-	} (v10$9));
+	/**
+	 * Types extracted from https://discord.com/developers/docs/topics/gateway
+	 */
+	Object.defineProperty(v10$9, "__esModule", { value: true });
+	v10$9.VoiceChannelEffectSendAnimationType = v10$9.GatewayDispatchEvents = v10$9.GatewayIntentBits = v10$9.GatewayCloseCodes = v10$9.GatewayOpcodes = v10$9.GatewayVersion = void 0;
+	v10$9.GatewayVersion = '10';
+	/**
+	 * @see {@link https://discord.com/developers/docs/topics/opcodes-and-status-codes#gateway-gateway-opcodes}
+	 */
+	var GatewayOpcodes;
+	(function (GatewayOpcodes) {
+	    /**
+	     * An event was dispatched
+	     */
+	    GatewayOpcodes[GatewayOpcodes["Dispatch"] = 0] = "Dispatch";
+	    /**
+	     * A bidirectional opcode to maintain an active gateway connection.
+	     * Fired periodically by the client, or fired by the gateway to request an immediate heartbeat from the client.
+	     */
+	    GatewayOpcodes[GatewayOpcodes["Heartbeat"] = 1] = "Heartbeat";
+	    /**
+	     * Starts a new session during the initial handshake
+	     */
+	    GatewayOpcodes[GatewayOpcodes["Identify"] = 2] = "Identify";
+	    /**
+	     * Update the client's presence
+	     */
+	    GatewayOpcodes[GatewayOpcodes["PresenceUpdate"] = 3] = "PresenceUpdate";
+	    /**
+	     * Used to join/leave or move between voice channels
+	     */
+	    GatewayOpcodes[GatewayOpcodes["VoiceStateUpdate"] = 4] = "VoiceStateUpdate";
+	    /**
+	     * Resume a previous session that was disconnected
+	     */
+	    GatewayOpcodes[GatewayOpcodes["Resume"] = 6] = "Resume";
+	    /**
+	     * You should attempt to reconnect and resume immediately
+	     */
+	    GatewayOpcodes[GatewayOpcodes["Reconnect"] = 7] = "Reconnect";
+	    /**
+	     * Request information about offline guild members in a large guild
+	     */
+	    GatewayOpcodes[GatewayOpcodes["RequestGuildMembers"] = 8] = "RequestGuildMembers";
+	    /**
+	     * The session has been invalidated. You should reconnect and identify/resume accordingly
+	     */
+	    GatewayOpcodes[GatewayOpcodes["InvalidSession"] = 9] = "InvalidSession";
+	    /**
+	     * Sent immediately after connecting, contains the `heartbeat_interval` to use
+	     */
+	    GatewayOpcodes[GatewayOpcodes["Hello"] = 10] = "Hello";
+	    /**
+	     * Sent in response to receiving a heartbeat to acknowledge that it has been received
+	     */
+	    GatewayOpcodes[GatewayOpcodes["HeartbeatAck"] = 11] = "HeartbeatAck";
+	    /**
+	     * Request information about soundboard sounds in a set of guilds
+	     */
+	    GatewayOpcodes[GatewayOpcodes["RequestSoundboardSounds"] = 31] = "RequestSoundboardSounds";
+	})(GatewayOpcodes || (v10$9.GatewayOpcodes = GatewayOpcodes = {}));
+	/**
+	 * @see {@link https://discord.com/developers/docs/topics/opcodes-and-status-codes#gateway-gateway-close-event-codes}
+	 */
+	var GatewayCloseCodes;
+	(function (GatewayCloseCodes) {
+	    /**
+	     * We're not sure what went wrong. Try reconnecting?
+	     */
+	    GatewayCloseCodes[GatewayCloseCodes["UnknownError"] = 4000] = "UnknownError";
+	    /**
+	     * You sent an invalid Gateway opcode or an invalid payload for an opcode. Don't do that!
+	     *
+	     * @see {@link https://discord.com/developers/docs/topics/gateway-events#payload-structure}
+	     */
+	    GatewayCloseCodes[GatewayCloseCodes["UnknownOpcode"] = 4001] = "UnknownOpcode";
+	    /**
+	     * You sent an invalid payload to us. Don't do that!
+	     *
+	     * @see {@link https://discord.com/developers/docs/topics/gateway#sending-events}
+	     */
+	    GatewayCloseCodes[GatewayCloseCodes["DecodeError"] = 4002] = "DecodeError";
+	    /**
+	     * You sent us a payload prior to identifying
+	     *
+	     * @see {@link https://discord.com/developers/docs/topics/gateway-events#identify}
+	     */
+	    GatewayCloseCodes[GatewayCloseCodes["NotAuthenticated"] = 4003] = "NotAuthenticated";
+	    /**
+	     * The account token sent with your identify payload is incorrect
+	     *
+	     * @see {@link https://discord.com/developers/docs/topics/gateway-events#identify}
+	     */
+	    GatewayCloseCodes[GatewayCloseCodes["AuthenticationFailed"] = 4004] = "AuthenticationFailed";
+	    /**
+	     * You sent more than one identify payload. Don't do that!
+	     */
+	    GatewayCloseCodes[GatewayCloseCodes["AlreadyAuthenticated"] = 4005] = "AlreadyAuthenticated";
+	    /**
+	     * The sequence sent when resuming the session was invalid. Reconnect and start a new session
+	     *
+	     * @see {@link https://discord.com/developers/docs/topics/gateway-events#resume}
+	     */
+	    GatewayCloseCodes[GatewayCloseCodes["InvalidSeq"] = 4007] = "InvalidSeq";
+	    /**
+	     * Woah nelly! You're sending payloads to us too quickly. Slow it down! You will be disconnected on receiving this
+	     */
+	    GatewayCloseCodes[GatewayCloseCodes["RateLimited"] = 4008] = "RateLimited";
+	    /**
+	     * Your session timed out. Reconnect and start a new one
+	     */
+	    GatewayCloseCodes[GatewayCloseCodes["SessionTimedOut"] = 4009] = "SessionTimedOut";
+	    /**
+	     * You sent us an invalid shard when identifying
+	     *
+	     * @see {@link https://discord.com/developers/docs/topics/gateway#sharding}
+	     */
+	    GatewayCloseCodes[GatewayCloseCodes["InvalidShard"] = 4010] = "InvalidShard";
+	    /**
+	     * The session would have handled too many guilds - you are required to shard your connection in order to connect
+	     *
+	     * @see {@link https://discord.com/developers/docs/topics/gateway#sharding}
+	     */
+	    GatewayCloseCodes[GatewayCloseCodes["ShardingRequired"] = 4011] = "ShardingRequired";
+	    /**
+	     * You sent an invalid version for the gateway
+	     */
+	    GatewayCloseCodes[GatewayCloseCodes["InvalidAPIVersion"] = 4012] = "InvalidAPIVersion";
+	    /**
+	     * You sent an invalid intent for a Gateway Intent. You may have incorrectly calculated the bitwise value
+	     *
+	     * @see {@link https://discord.com/developers/docs/topics/gateway#gateway-intents}
+	     */
+	    GatewayCloseCodes[GatewayCloseCodes["InvalidIntents"] = 4013] = "InvalidIntents";
+	    /**
+	     * You sent a disallowed intent for a Gateway Intent. You may have tried to specify an intent that you have not
+	     * enabled or are not whitelisted for
+	     *
+	     * @see {@link https://discord.com/developers/docs/topics/gateway#gateway-intents}
+	     * @see {@link https://discord.com/developers/docs/topics/gateway#privileged-intents}
+	     */
+	    GatewayCloseCodes[GatewayCloseCodes["DisallowedIntents"] = 4014] = "DisallowedIntents";
+	})(GatewayCloseCodes || (v10$9.GatewayCloseCodes = GatewayCloseCodes = {}));
+	/**
+	 * @see {@link https://discord.com/developers/docs/topics/gateway#list-of-intents}
+	 */
+	var GatewayIntentBits;
+	(function (GatewayIntentBits) {
+	    GatewayIntentBits[GatewayIntentBits["Guilds"] = 1] = "Guilds";
+	    GatewayIntentBits[GatewayIntentBits["GuildMembers"] = 2] = "GuildMembers";
+	    GatewayIntentBits[GatewayIntentBits["GuildModeration"] = 4] = "GuildModeration";
+	    /**
+	     * @deprecated This is the old name for {@link GatewayIntentBits.GuildModeration}
+	     */
+	    GatewayIntentBits[GatewayIntentBits["GuildBans"] = 4] = "GuildBans";
+	    GatewayIntentBits[GatewayIntentBits["GuildExpressions"] = 8] = "GuildExpressions";
+	    /**
+	     * @deprecated This is the old name for {@link GatewayIntentBits.GuildExpressions}
+	     */
+	    GatewayIntentBits[GatewayIntentBits["GuildEmojisAndStickers"] = 8] = "GuildEmojisAndStickers";
+	    GatewayIntentBits[GatewayIntentBits["GuildIntegrations"] = 16] = "GuildIntegrations";
+	    GatewayIntentBits[GatewayIntentBits["GuildWebhooks"] = 32] = "GuildWebhooks";
+	    GatewayIntentBits[GatewayIntentBits["GuildInvites"] = 64] = "GuildInvites";
+	    GatewayIntentBits[GatewayIntentBits["GuildVoiceStates"] = 128] = "GuildVoiceStates";
+	    GatewayIntentBits[GatewayIntentBits["GuildPresences"] = 256] = "GuildPresences";
+	    GatewayIntentBits[GatewayIntentBits["GuildMessages"] = 512] = "GuildMessages";
+	    GatewayIntentBits[GatewayIntentBits["GuildMessageReactions"] = 1024] = "GuildMessageReactions";
+	    GatewayIntentBits[GatewayIntentBits["GuildMessageTyping"] = 2048] = "GuildMessageTyping";
+	    GatewayIntentBits[GatewayIntentBits["DirectMessages"] = 4096] = "DirectMessages";
+	    GatewayIntentBits[GatewayIntentBits["DirectMessageReactions"] = 8192] = "DirectMessageReactions";
+	    GatewayIntentBits[GatewayIntentBits["DirectMessageTyping"] = 16384] = "DirectMessageTyping";
+	    GatewayIntentBits[GatewayIntentBits["MessageContent"] = 32768] = "MessageContent";
+	    GatewayIntentBits[GatewayIntentBits["GuildScheduledEvents"] = 65536] = "GuildScheduledEvents";
+	    GatewayIntentBits[GatewayIntentBits["AutoModerationConfiguration"] = 1048576] = "AutoModerationConfiguration";
+	    GatewayIntentBits[GatewayIntentBits["AutoModerationExecution"] = 2097152] = "AutoModerationExecution";
+	    GatewayIntentBits[GatewayIntentBits["GuildMessagePolls"] = 16777216] = "GuildMessagePolls";
+	    GatewayIntentBits[GatewayIntentBits["DirectMessagePolls"] = 33554432] = "DirectMessagePolls";
+	})(GatewayIntentBits || (v10$9.GatewayIntentBits = GatewayIntentBits = {}));
+	/**
+	 * @see {@link https://discord.com/developers/docs/topics/gateway-events#receive-events}
+	 */
+	var GatewayDispatchEvents;
+	(function (GatewayDispatchEvents) {
+	    GatewayDispatchEvents["ApplicationCommandPermissionsUpdate"] = "APPLICATION_COMMAND_PERMISSIONS_UPDATE";
+	    GatewayDispatchEvents["AutoModerationActionExecution"] = "AUTO_MODERATION_ACTION_EXECUTION";
+	    GatewayDispatchEvents["AutoModerationRuleCreate"] = "AUTO_MODERATION_RULE_CREATE";
+	    GatewayDispatchEvents["AutoModerationRuleDelete"] = "AUTO_MODERATION_RULE_DELETE";
+	    GatewayDispatchEvents["AutoModerationRuleUpdate"] = "AUTO_MODERATION_RULE_UPDATE";
+	    GatewayDispatchEvents["ChannelCreate"] = "CHANNEL_CREATE";
+	    GatewayDispatchEvents["ChannelDelete"] = "CHANNEL_DELETE";
+	    GatewayDispatchEvents["ChannelPinsUpdate"] = "CHANNEL_PINS_UPDATE";
+	    GatewayDispatchEvents["ChannelUpdate"] = "CHANNEL_UPDATE";
+	    GatewayDispatchEvents["EntitlementCreate"] = "ENTITLEMENT_CREATE";
+	    GatewayDispatchEvents["EntitlementDelete"] = "ENTITLEMENT_DELETE";
+	    GatewayDispatchEvents["EntitlementUpdate"] = "ENTITLEMENT_UPDATE";
+	    GatewayDispatchEvents["GuildAuditLogEntryCreate"] = "GUILD_AUDIT_LOG_ENTRY_CREATE";
+	    GatewayDispatchEvents["GuildBanAdd"] = "GUILD_BAN_ADD";
+	    GatewayDispatchEvents["GuildBanRemove"] = "GUILD_BAN_REMOVE";
+	    GatewayDispatchEvents["GuildCreate"] = "GUILD_CREATE";
+	    GatewayDispatchEvents["GuildDelete"] = "GUILD_DELETE";
+	    GatewayDispatchEvents["GuildEmojisUpdate"] = "GUILD_EMOJIS_UPDATE";
+	    GatewayDispatchEvents["GuildIntegrationsUpdate"] = "GUILD_INTEGRATIONS_UPDATE";
+	    GatewayDispatchEvents["GuildMemberAdd"] = "GUILD_MEMBER_ADD";
+	    GatewayDispatchEvents["GuildMemberRemove"] = "GUILD_MEMBER_REMOVE";
+	    GatewayDispatchEvents["GuildMembersChunk"] = "GUILD_MEMBERS_CHUNK";
+	    GatewayDispatchEvents["GuildMemberUpdate"] = "GUILD_MEMBER_UPDATE";
+	    GatewayDispatchEvents["GuildRoleCreate"] = "GUILD_ROLE_CREATE";
+	    GatewayDispatchEvents["GuildRoleDelete"] = "GUILD_ROLE_DELETE";
+	    GatewayDispatchEvents["GuildRoleUpdate"] = "GUILD_ROLE_UPDATE";
+	    GatewayDispatchEvents["GuildScheduledEventCreate"] = "GUILD_SCHEDULED_EVENT_CREATE";
+	    GatewayDispatchEvents["GuildScheduledEventDelete"] = "GUILD_SCHEDULED_EVENT_DELETE";
+	    GatewayDispatchEvents["GuildScheduledEventUpdate"] = "GUILD_SCHEDULED_EVENT_UPDATE";
+	    GatewayDispatchEvents["GuildScheduledEventUserAdd"] = "GUILD_SCHEDULED_EVENT_USER_ADD";
+	    GatewayDispatchEvents["GuildScheduledEventUserRemove"] = "GUILD_SCHEDULED_EVENT_USER_REMOVE";
+	    GatewayDispatchEvents["GuildSoundboardSoundCreate"] = "GUILD_SOUNDBOARD_SOUND_CREATE";
+	    GatewayDispatchEvents["GuildSoundboardSoundDelete"] = "GUILD_SOUNDBOARD_SOUND_DELETE";
+	    GatewayDispatchEvents["GuildSoundboardSoundsUpdate"] = "GUILD_SOUNDBOARD_SOUNDS_UPDATE";
+	    GatewayDispatchEvents["GuildSoundboardSoundUpdate"] = "GUILD_SOUNDBOARD_SOUND_UPDATE";
+	    GatewayDispatchEvents["SoundboardSounds"] = "SOUNDBOARD_SOUNDS";
+	    GatewayDispatchEvents["GuildStickersUpdate"] = "GUILD_STICKERS_UPDATE";
+	    GatewayDispatchEvents["GuildUpdate"] = "GUILD_UPDATE";
+	    GatewayDispatchEvents["IntegrationCreate"] = "INTEGRATION_CREATE";
+	    GatewayDispatchEvents["IntegrationDelete"] = "INTEGRATION_DELETE";
+	    GatewayDispatchEvents["IntegrationUpdate"] = "INTEGRATION_UPDATE";
+	    GatewayDispatchEvents["InteractionCreate"] = "INTERACTION_CREATE";
+	    GatewayDispatchEvents["InviteCreate"] = "INVITE_CREATE";
+	    GatewayDispatchEvents["InviteDelete"] = "INVITE_DELETE";
+	    GatewayDispatchEvents["MessageCreate"] = "MESSAGE_CREATE";
+	    GatewayDispatchEvents["MessageDelete"] = "MESSAGE_DELETE";
+	    GatewayDispatchEvents["MessageDeleteBulk"] = "MESSAGE_DELETE_BULK";
+	    GatewayDispatchEvents["MessagePollVoteAdd"] = "MESSAGE_POLL_VOTE_ADD";
+	    GatewayDispatchEvents["MessagePollVoteRemove"] = "MESSAGE_POLL_VOTE_REMOVE";
+	    GatewayDispatchEvents["MessageReactionAdd"] = "MESSAGE_REACTION_ADD";
+	    GatewayDispatchEvents["MessageReactionRemove"] = "MESSAGE_REACTION_REMOVE";
+	    GatewayDispatchEvents["MessageReactionRemoveAll"] = "MESSAGE_REACTION_REMOVE_ALL";
+	    GatewayDispatchEvents["MessageReactionRemoveEmoji"] = "MESSAGE_REACTION_REMOVE_EMOJI";
+	    GatewayDispatchEvents["MessageUpdate"] = "MESSAGE_UPDATE";
+	    GatewayDispatchEvents["PresenceUpdate"] = "PRESENCE_UPDATE";
+	    GatewayDispatchEvents["Ready"] = "READY";
+	    GatewayDispatchEvents["Resumed"] = "RESUMED";
+	    GatewayDispatchEvents["StageInstanceCreate"] = "STAGE_INSTANCE_CREATE";
+	    GatewayDispatchEvents["StageInstanceDelete"] = "STAGE_INSTANCE_DELETE";
+	    GatewayDispatchEvents["StageInstanceUpdate"] = "STAGE_INSTANCE_UPDATE";
+	    GatewayDispatchEvents["SubscriptionCreate"] = "SUBSCRIPTION_CREATE";
+	    GatewayDispatchEvents["SubscriptionDelete"] = "SUBSCRIPTION_DELETE";
+	    GatewayDispatchEvents["SubscriptionUpdate"] = "SUBSCRIPTION_UPDATE";
+	    GatewayDispatchEvents["ThreadCreate"] = "THREAD_CREATE";
+	    GatewayDispatchEvents["ThreadDelete"] = "THREAD_DELETE";
+	    GatewayDispatchEvents["ThreadListSync"] = "THREAD_LIST_SYNC";
+	    GatewayDispatchEvents["ThreadMembersUpdate"] = "THREAD_MEMBERS_UPDATE";
+	    GatewayDispatchEvents["ThreadMemberUpdate"] = "THREAD_MEMBER_UPDATE";
+	    GatewayDispatchEvents["ThreadUpdate"] = "THREAD_UPDATE";
+	    GatewayDispatchEvents["TypingStart"] = "TYPING_START";
+	    GatewayDispatchEvents["UserUpdate"] = "USER_UPDATE";
+	    GatewayDispatchEvents["VoiceChannelEffectSend"] = "VOICE_CHANNEL_EFFECT_SEND";
+	    GatewayDispatchEvents["VoiceServerUpdate"] = "VOICE_SERVER_UPDATE";
+	    GatewayDispatchEvents["VoiceStateUpdate"] = "VOICE_STATE_UPDATE";
+	    GatewayDispatchEvents["WebhooksUpdate"] = "WEBHOOKS_UPDATE";
+	})(GatewayDispatchEvents || (v10$9.GatewayDispatchEvents = GatewayDispatchEvents = {}));
+	/**
+	 * @see {@link https://discord.com/developers/docs/topics/gateway-events#voice-channel-effect-send-animation-types}
+	 */
+	var VoiceChannelEffectSendAnimationType;
+	(function (VoiceChannelEffectSendAnimationType) {
+	    /**
+	     * A fun animation, sent by a Nitro subscriber
+	     */
+	    VoiceChannelEffectSendAnimationType[VoiceChannelEffectSendAnimationType["Premium"] = 0] = "Premium";
+	    /**
+	     * The standard animation
+	     */
+	    VoiceChannelEffectSendAnimationType[VoiceChannelEffectSendAnimationType["Basic"] = 1] = "Basic";
+	})(VoiceChannelEffectSendAnimationType || (v10$9.VoiceChannelEffectSendAnimationType = VoiceChannelEffectSendAnimationType = {}));
+	// #endregion Shared
+	
 	return v10$9;
 }
 
@@ -28278,9 +28249,7 @@ function requireGlobals () {
 		     *
 		     * The `fullName` (possibly including `name`, `subcommandOrGroup` and `subcommand`) and `id` group properties are present on the `exec` result of this expression
 		     */
-		    SlashCommand: 
-		    // eslint-disable-next-line unicorn/no-unsafe-regex
-		    /<\/(?<fullName>(?<name>[-_\p{Letter}\p{Number}\p{sc=Deva}\p{sc=Thai}]{1,32})(?: (?<subcommandOrGroup>[-_\p{Letter}\p{Number}\p{sc=Deva}\p{sc=Thai}]{1,32}))?(?: (?<subcommand>[-_\p{Letter}\p{Number}\p{sc=Deva}\p{sc=Thai}]{1,32}))?):(?<id>\d{17,20})>/u,
+		    SlashCommand: /<\/(?<fullName>(?<name>[-_\p{Letter}\p{Number}\p{sc=Deva}\p{sc=Thai}]{1,32})(?: (?<subcommandOrGroup>[-_\p{Letter}\p{Number}\p{sc=Deva}\p{sc=Thai}]{1,32}))?(?: (?<subcommand>[-_\p{Letter}\p{Number}\p{sc=Deva}\p{sc=Thai}]{1,32}))?):(?<id>\d{17,20})>/u,
 		    /**
 		     * Regular expression for matching a custom emoji, either static or animated
 		     *
@@ -28384,7 +28353,6 @@ function requireCommon$2 () {
 		    /**
 		     * Allows kicking members
 		     */
-		    // eslint-disable-next-line sonarjs/no-identical-expressions
 		    KickMembers: 1n << 1n,
 		    /**
 		     * Allows banning members
@@ -28655,6 +28623,12 @@ function requireCommon$2 () {
 		     * Applies to channel types: Text, Voice, Stage
 		     */
 		    UseExternalApps: 1n << 50n,
+		    /**
+		     * Allows pinning and unpinning messages
+		     *
+		     * Applies to channel types: Text
+		     */
+		    PinMessages: 1n << 51n,
 		};
 		/**
 		 * Freeze the object of bits, preventing any modifications to it
@@ -28667,18 +28641,18 @@ function requireCommon$2 () {
 	return common$2;
 }
 
-var application$1 = {};
+var application = {};
 
-var hasRequiredApplication$2;
+var hasRequiredApplication$1;
 
-function requireApplication$2 () {
-	if (hasRequiredApplication$2) return application$1;
-	hasRequiredApplication$2 = 1;
+function requireApplication$1 () {
+	if (hasRequiredApplication$1) return application;
+	hasRequiredApplication$1 = 1;
 	/**
 	 * Types extracted from https://discord.com/developers/docs/resources/application
 	 */
-	Object.defineProperty(application$1, "__esModule", { value: true });
-	application$1.ApplicationWebhookEventStatus = application$1.ApplicationRoleConnectionMetadataType = application$1.ApplicationFlags = void 0;
+	Object.defineProperty(application, "__esModule", { value: true });
+	application.ApplicationWebhookEventStatus = application.ApplicationRoleConnectionMetadataType = application.ApplicationFlags = void 0;
 	/**
 	 * @see {@link https://discord.com/developers/docs/resources/application#application-object-application-flags}
 	 */
@@ -28737,11 +28711,11 @@ function requireApplication$2 () {
 	     */
 	    ApplicationFlags[ApplicationFlags["Embedded"] = 131072] = "Embedded";
 	    /**
-	     * Intent required for bots in 100 or more servers to receive {@link https://support-dev.discord.com/hc/en-us/articles/4404772028055 | message content}
+	     * Intent required for bots in 100 or more servers to receive {@link https://support-dev.discord.com/hc/articles/6207308062871 | message content}
 	     */
 	    ApplicationFlags[ApplicationFlags["GatewayMessageContent"] = 262144] = "GatewayMessageContent";
 	    /**
-	     * Intent required for bots in under 100 servers to receive {@link https://support-dev.discord.com/hc/en-us/articles/4404772028055 | message content},
+	     * Intent required for bots in under 100 servers to receive {@link https://support-dev.discord.com/hc/articles/6207308062871 | message content},
 	     * found in Bot Settings
 	     */
 	    ApplicationFlags[ApplicationFlags["GatewayMessageContentLimited"] = 524288] = "GatewayMessageContentLimited";
@@ -28753,7 +28727,7 @@ function requireApplication$2 () {
 	     * Indicates if an app has registered global {@link https://discord.com/developers/docs/interactions/application-commands | application commands}
 	     */
 	    ApplicationFlags[ApplicationFlags["ApplicationCommandBadge"] = 8388608] = "ApplicationCommandBadge";
-	})(ApplicationFlags || (application$1.ApplicationFlags = ApplicationFlags = {}));
+	})(ApplicationFlags || (application.ApplicationFlags = ApplicationFlags = {}));
 	/**
 	 * @see {@link https://discord.com/developers/docs/resources/application-role-connection-metadata#application-role-connection-metadata-object-application-role-connection-metadata-type}
 	 */
@@ -28791,7 +28765,7 @@ function requireApplication$2 () {
 	     * The metadata value (`integer`) is not equal to the guild's configured value (`integer`; `1`)
 	     */
 	    ApplicationRoleConnectionMetadataType[ApplicationRoleConnectionMetadataType["BooleanNotEqual"] = 8] = "BooleanNotEqual";
-	})(ApplicationRoleConnectionMetadataType || (application$1.ApplicationRoleConnectionMetadataType = ApplicationRoleConnectionMetadataType = {}));
+	})(ApplicationRoleConnectionMetadataType || (application.ApplicationRoleConnectionMetadataType = ApplicationRoleConnectionMetadataType = {}));
 	/**
 	 * @see {@link https://discord.com/developers/docs/resources/application#application-object-application-event-webhook-status}
 	 */
@@ -28809,23 +28783,23 @@ function requireApplication$2 () {
 	     * Webhook events are disabled by Discord, usually due to inactivity
 	     */
 	    ApplicationWebhookEventStatus[ApplicationWebhookEventStatus["DisabledByDiscord"] = 3] = "DisabledByDiscord";
-	})(ApplicationWebhookEventStatus || (application$1.ApplicationWebhookEventStatus = ApplicationWebhookEventStatus = {}));
+	})(ApplicationWebhookEventStatus || (application.ApplicationWebhookEventStatus = ApplicationWebhookEventStatus = {}));
 	
-	return application$1;
+	return application;
 }
 
-var auditLog$1 = {};
+var auditLog = {};
 
-var hasRequiredAuditLog$1;
+var hasRequiredAuditLog;
 
-function requireAuditLog$1 () {
-	if (hasRequiredAuditLog$1) return auditLog$1;
-	hasRequiredAuditLog$1 = 1;
+function requireAuditLog () {
+	if (hasRequiredAuditLog) return auditLog;
+	hasRequiredAuditLog = 1;
 	/**
 	 * Types extracted from https://discord.com/developers/docs/resources/audit-log
 	 */
-	Object.defineProperty(auditLog$1, "__esModule", { value: true });
-	auditLog$1.AuditLogOptionsType = auditLog$1.AuditLogEvent = void 0;
+	Object.defineProperty(auditLog, "__esModule", { value: true });
+	auditLog.AuditLogOptionsType = auditLog.AuditLogEvent = void 0;
 	/**
 	 * @see {@link https://discord.com/developers/docs/resources/audit-log#audit-log-entry-object-audit-log-events}
 	 */
@@ -28888,6 +28862,7 @@ function requireAuditLog$1 () {
 	    AuditLogEvent[AuditLogEvent["AutoModerationBlockMessage"] = 143] = "AutoModerationBlockMessage";
 	    AuditLogEvent[AuditLogEvent["AutoModerationFlagToChannel"] = 144] = "AutoModerationFlagToChannel";
 	    AuditLogEvent[AuditLogEvent["AutoModerationUserCommunicationDisabled"] = 145] = "AutoModerationUserCommunicationDisabled";
+	    AuditLogEvent[AuditLogEvent["AutoModerationQuarantineUser"] = 146] = "AutoModerationQuarantineUser";
 	    AuditLogEvent[AuditLogEvent["CreatorMonetizationRequestCreated"] = 150] = "CreatorMonetizationRequestCreated";
 	    AuditLogEvent[AuditLogEvent["CreatorMonetizationTermsAccepted"] = 151] = "CreatorMonetizationTermsAccepted";
 	    AuditLogEvent[AuditLogEvent["OnboardingPromptCreate"] = 163] = "OnboardingPromptCreate";
@@ -28897,28 +28872,28 @@ function requireAuditLog$1 () {
 	    AuditLogEvent[AuditLogEvent["OnboardingUpdate"] = 167] = "OnboardingUpdate";
 	    AuditLogEvent[AuditLogEvent["HomeSettingsCreate"] = 190] = "HomeSettingsCreate";
 	    AuditLogEvent[AuditLogEvent["HomeSettingsUpdate"] = 191] = "HomeSettingsUpdate";
-	})(AuditLogEvent || (auditLog$1.AuditLogEvent = AuditLogEvent = {}));
+	})(AuditLogEvent || (auditLog.AuditLogEvent = AuditLogEvent = {}));
 	var AuditLogOptionsType;
 	(function (AuditLogOptionsType) {
 	    AuditLogOptionsType["Role"] = "0";
 	    AuditLogOptionsType["Member"] = "1";
-	})(AuditLogOptionsType || (auditLog$1.AuditLogOptionsType = AuditLogOptionsType = {}));
+	})(AuditLogOptionsType || (auditLog.AuditLogOptionsType = AuditLogOptionsType = {}));
 	
-	return auditLog$1;
+	return auditLog;
 }
 
-var autoModeration$1 = {};
+var autoModeration = {};
 
-var hasRequiredAutoModeration$1;
+var hasRequiredAutoModeration;
 
-function requireAutoModeration$1 () {
-	if (hasRequiredAutoModeration$1) return autoModeration$1;
-	hasRequiredAutoModeration$1 = 1;
+function requireAutoModeration () {
+	if (hasRequiredAutoModeration) return autoModeration;
+	hasRequiredAutoModeration = 1;
 	/**
 	 * Types extracted from https://discord.com/developers/docs/resources/auto-moderation
 	 */
-	Object.defineProperty(autoModeration$1, "__esModule", { value: true });
-	autoModeration$1.AutoModerationActionType = autoModeration$1.AutoModerationRuleEventType = autoModeration$1.AutoModerationRuleKeywordPresetType = autoModeration$1.AutoModerationRuleTriggerType = void 0;
+	Object.defineProperty(autoModeration, "__esModule", { value: true });
+	autoModeration.AutoModerationActionType = autoModeration.AutoModerationRuleEventType = autoModeration.AutoModerationRuleKeywordPresetType = autoModeration.AutoModerationRuleTriggerType = void 0;
 	/**
 	 * @see {@link https://discord.com/developers/docs/resources/auto-moderation#auto-moderation-rule-object-trigger-types}
 	 */
@@ -28944,7 +28919,7 @@ function requireAutoModeration$1 () {
 	     * Check if member profile contains words from a user defined list of keywords (Maximum of 1 per guild)
 	     */
 	    AutoModerationRuleTriggerType[AutoModerationRuleTriggerType["MemberProfile"] = 6] = "MemberProfile";
-	})(AutoModerationRuleTriggerType || (autoModeration$1.AutoModerationRuleTriggerType = AutoModerationRuleTriggerType = {}));
+	})(AutoModerationRuleTriggerType || (autoModeration.AutoModerationRuleTriggerType = AutoModerationRuleTriggerType = {}));
 	/**
 	 * @see {@link https://discord.com/developers/docs/resources/auto-moderation#auto-moderation-rule-object-keyword-preset-types}
 	 */
@@ -28962,7 +28937,7 @@ function requireAutoModeration$1 () {
 	     * Personal insults or words that may be considered hate speech
 	     */
 	    AutoModerationRuleKeywordPresetType[AutoModerationRuleKeywordPresetType["Slurs"] = 3] = "Slurs";
-	})(AutoModerationRuleKeywordPresetType || (autoModeration$1.AutoModerationRuleKeywordPresetType = AutoModerationRuleKeywordPresetType = {}));
+	})(AutoModerationRuleKeywordPresetType || (autoModeration.AutoModerationRuleKeywordPresetType = AutoModerationRuleKeywordPresetType = {}));
 	/**
 	 * @see {@link https://discord.com/developers/docs/resources/auto-moderation#auto-moderation-rule-object-event-types}
 	 */
@@ -28976,7 +28951,7 @@ function requireAutoModeration$1 () {
 	     * When a member edits their profile
 	     */
 	    AutoModerationRuleEventType[AutoModerationRuleEventType["MemberUpdate"] = 2] = "MemberUpdate";
-	})(AutoModerationRuleEventType || (autoModeration$1.AutoModerationRuleEventType = AutoModerationRuleEventType = {}));
+	})(AutoModerationRuleEventType || (autoModeration.AutoModerationRuleEventType = AutoModerationRuleEventType = {}));
 	/**
 	 * @see {@link https://discord.com/developers/docs/resources/auto-moderation#auto-moderation-action-object-action-types}
 	 */
@@ -28999,23 +28974,23 @@ function requireAutoModeration$1 () {
 	     * Prevents a member from using text, voice, or other interactions
 	     */
 	    AutoModerationActionType[AutoModerationActionType["BlockMemberInteraction"] = 4] = "BlockMemberInteraction";
-	})(AutoModerationActionType || (autoModeration$1.AutoModerationActionType = AutoModerationActionType = {}));
+	})(AutoModerationActionType || (autoModeration.AutoModerationActionType = AutoModerationActionType = {}));
 	
-	return autoModeration$1;
+	return autoModeration;
 }
 
-var channel$3 = {};
+var channel$2 = {};
 
-var hasRequiredChannel$3;
+var hasRequiredChannel$2;
 
-function requireChannel$3 () {
-	if (hasRequiredChannel$3) return channel$3;
-	hasRequiredChannel$3 = 1;
+function requireChannel$2 () {
+	if (hasRequiredChannel$2) return channel$2;
+	hasRequiredChannel$2 = 1;
 	/**
 	 * Types extracted from https://discord.com/developers/docs/resources/channel
 	 */
-	Object.defineProperty(channel$3, "__esModule", { value: true });
-	channel$3.ChannelFlags = channel$3.SeparatorSpacingSize = channel$3.UnfurledMediaItemLoadingState = channel$3.SelectMenuDefaultValueType = channel$3.TextInputStyle = channel$3.ButtonStyle = channel$3.ComponentType = channel$3.AllowedMentionsTypes = channel$3.AttachmentFlags = channel$3.EmbedType = channel$3.ThreadMemberFlags = channel$3.ThreadAutoArchiveDuration = channel$3.OverwriteType = channel$3.MessageFlags = channel$3.MessageReferenceType = channel$3.MessageActivityType = channel$3.MessageType = channel$3.VideoQualityMode = channel$3.ChannelType = channel$3.ForumLayoutType = channel$3.SortOrderType = void 0;
+	Object.defineProperty(channel$2, "__esModule", { value: true });
+	channel$2.ChannelFlags = channel$2.ThreadMemberFlags = channel$2.ThreadAutoArchiveDuration = channel$2.OverwriteType = channel$2.VideoQualityMode = channel$2.ChannelType = channel$2.ForumLayoutType = channel$2.SortOrderType = void 0;
 	/**
 	 * @see {@link https://discord.com/developers/docs/resources/channel/#channel-object-sort-order-types}
 	 */
@@ -29029,7 +29004,7 @@ function requireChannel$3 () {
 	     * Sort forum posts by creation time (from most recent to oldest)
 	     */
 	    SortOrderType[SortOrderType["CreationDate"] = 1] = "CreationDate";
-	})(SortOrderType || (channel$3.SortOrderType = SortOrderType = {}));
+	})(SortOrderType || (channel$2.SortOrderType = SortOrderType = {}));
 	/**
 	 * @see {@link https://discord.com/developers/docs/resources/channel/#channel-object-forum-layout-types}
 	 */
@@ -29047,7 +29022,7 @@ function requireChannel$3 () {
 	     * Display posts as a collection of tiles
 	     */
 	    ForumLayoutType[ForumLayoutType["GalleryView"] = 2] = "GalleryView";
-	})(ForumLayoutType || (channel$3.ForumLayoutType = ForumLayoutType = {}));
+	})(ForumLayoutType || (channel$2.ForumLayoutType = ForumLayoutType = {}));
 	/**
 	 * @see {@link https://discord.com/developers/docs/resources/channel#channel-object-channel-types}
 	 */
@@ -29142,7 +29117,7 @@ function requireChannel$3 () {
 	     * @deprecated This is the old name for {@link ChannelType.PrivateThread}
 	     */
 	    ChannelType[ChannelType["GuildPrivateThread"] = 12] = "GuildPrivateThread";
-	})(ChannelType || (channel$3.ChannelType = ChannelType = {}));
+	})(ChannelType || (channel$2.ChannelType = ChannelType = {}));
 	var VideoQualityMode;
 	(function (VideoQualityMode) {
 	    /**
@@ -29153,152 +29128,19 @@ function requireChannel$3 () {
 	     * 720p
 	     */
 	    VideoQualityMode[VideoQualityMode["Full"] = 2] = "Full";
-	})(VideoQualityMode || (channel$3.VideoQualityMode = VideoQualityMode = {}));
-	/**
-	 * @see {@link https://discord.com/developers/docs/resources/channel#message-object-message-types}
-	 */
-	var MessageType;
-	(function (MessageType) {
-	    MessageType[MessageType["Default"] = 0] = "Default";
-	    MessageType[MessageType["RecipientAdd"] = 1] = "RecipientAdd";
-	    MessageType[MessageType["RecipientRemove"] = 2] = "RecipientRemove";
-	    MessageType[MessageType["Call"] = 3] = "Call";
-	    MessageType[MessageType["ChannelNameChange"] = 4] = "ChannelNameChange";
-	    MessageType[MessageType["ChannelIconChange"] = 5] = "ChannelIconChange";
-	    MessageType[MessageType["ChannelPinnedMessage"] = 6] = "ChannelPinnedMessage";
-	    MessageType[MessageType["UserJoin"] = 7] = "UserJoin";
-	    MessageType[MessageType["GuildBoost"] = 8] = "GuildBoost";
-	    MessageType[MessageType["GuildBoostTier1"] = 9] = "GuildBoostTier1";
-	    MessageType[MessageType["GuildBoostTier2"] = 10] = "GuildBoostTier2";
-	    MessageType[MessageType["GuildBoostTier3"] = 11] = "GuildBoostTier3";
-	    MessageType[MessageType["ChannelFollowAdd"] = 12] = "ChannelFollowAdd";
-	    MessageType[MessageType["GuildDiscoveryDisqualified"] = 14] = "GuildDiscoveryDisqualified";
-	    MessageType[MessageType["GuildDiscoveryRequalified"] = 15] = "GuildDiscoveryRequalified";
-	    MessageType[MessageType["GuildDiscoveryGracePeriodInitialWarning"] = 16] = "GuildDiscoveryGracePeriodInitialWarning";
-	    MessageType[MessageType["GuildDiscoveryGracePeriodFinalWarning"] = 17] = "GuildDiscoveryGracePeriodFinalWarning";
-	    MessageType[MessageType["ThreadCreated"] = 18] = "ThreadCreated";
-	    MessageType[MessageType["Reply"] = 19] = "Reply";
-	    MessageType[MessageType["ChatInputCommand"] = 20] = "ChatInputCommand";
-	    MessageType[MessageType["ThreadStarterMessage"] = 21] = "ThreadStarterMessage";
-	    MessageType[MessageType["GuildInviteReminder"] = 22] = "GuildInviteReminder";
-	    MessageType[MessageType["ContextMenuCommand"] = 23] = "ContextMenuCommand";
-	    MessageType[MessageType["AutoModerationAction"] = 24] = "AutoModerationAction";
-	    MessageType[MessageType["RoleSubscriptionPurchase"] = 25] = "RoleSubscriptionPurchase";
-	    MessageType[MessageType["InteractionPremiumUpsell"] = 26] = "InteractionPremiumUpsell";
-	    MessageType[MessageType["StageStart"] = 27] = "StageStart";
-	    MessageType[MessageType["StageEnd"] = 28] = "StageEnd";
-	    MessageType[MessageType["StageSpeaker"] = 29] = "StageSpeaker";
-	    /**
-	     * @unstable https://github.com/discord/discord-api-docs/pull/5927#discussion_r1107678548
-	     */
-	    MessageType[MessageType["StageRaiseHand"] = 30] = "StageRaiseHand";
-	    MessageType[MessageType["StageTopic"] = 31] = "StageTopic";
-	    MessageType[MessageType["GuildApplicationPremiumSubscription"] = 32] = "GuildApplicationPremiumSubscription";
-	    MessageType[MessageType["GuildIncidentAlertModeEnabled"] = 36] = "GuildIncidentAlertModeEnabled";
-	    MessageType[MessageType["GuildIncidentAlertModeDisabled"] = 37] = "GuildIncidentAlertModeDisabled";
-	    MessageType[MessageType["GuildIncidentReportRaid"] = 38] = "GuildIncidentReportRaid";
-	    MessageType[MessageType["GuildIncidentReportFalseAlarm"] = 39] = "GuildIncidentReportFalseAlarm";
-	    MessageType[MessageType["PurchaseNotification"] = 44] = "PurchaseNotification";
-	    MessageType[MessageType["PollResult"] = 46] = "PollResult";
-	})(MessageType || (channel$3.MessageType = MessageType = {}));
-	/**
-	 * @see {@link https://discord.com/developers/docs/resources/channel#message-object-message-activity-types}
-	 */
-	var MessageActivityType;
-	(function (MessageActivityType) {
-	    MessageActivityType[MessageActivityType["Join"] = 1] = "Join";
-	    MessageActivityType[MessageActivityType["Spectate"] = 2] = "Spectate";
-	    MessageActivityType[MessageActivityType["Listen"] = 3] = "Listen";
-	    MessageActivityType[MessageActivityType["JoinRequest"] = 5] = "JoinRequest";
-	})(MessageActivityType || (channel$3.MessageActivityType = MessageActivityType = {}));
-	/**
-	 * @see {@link https://discord.com/developers/docs/resources/channel#message-reference-types}
-	 */
-	var MessageReferenceType;
-	(function (MessageReferenceType) {
-	    /**
-	     * A standard reference used by replies
-	     */
-	    MessageReferenceType[MessageReferenceType["Default"] = 0] = "Default";
-	    /**
-	     * Reference used to point to a message at a point in time
-	     */
-	    MessageReferenceType[MessageReferenceType["Forward"] = 1] = "Forward";
-	})(MessageReferenceType || (channel$3.MessageReferenceType = MessageReferenceType = {}));
-	/**
-	 * @see {@link https://discord.com/developers/docs/resources/channel#message-object-message-flags}
-	 */
-	var MessageFlags;
-	(function (MessageFlags) {
-	    /**
-	     * This message has been published to subscribed channels (via Channel Following)
-	     */
-	    MessageFlags[MessageFlags["Crossposted"] = 1] = "Crossposted";
-	    /**
-	     * This message originated from a message in another channel (via Channel Following)
-	     */
-	    MessageFlags[MessageFlags["IsCrosspost"] = 2] = "IsCrosspost";
-	    /**
-	     * Do not include any embeds when serializing this message
-	     */
-	    MessageFlags[MessageFlags["SuppressEmbeds"] = 4] = "SuppressEmbeds";
-	    /**
-	     * The source message for this crosspost has been deleted (via Channel Following)
-	     */
-	    MessageFlags[MessageFlags["SourceMessageDeleted"] = 8] = "SourceMessageDeleted";
-	    /**
-	     * This message came from the urgent message system
-	     */
-	    MessageFlags[MessageFlags["Urgent"] = 16] = "Urgent";
-	    /**
-	     * This message has an associated thread, which shares its id
-	     */
-	    MessageFlags[MessageFlags["HasThread"] = 32] = "HasThread";
-	    /**
-	     * This message is only visible to the user who invoked the Interaction
-	     */
-	    MessageFlags[MessageFlags["Ephemeral"] = 64] = "Ephemeral";
-	    /**
-	     * This message is an Interaction Response and the bot is "thinking"
-	     */
-	    MessageFlags[MessageFlags["Loading"] = 128] = "Loading";
-	    /**
-	     * This message failed to mention some roles and add their members to the thread
-	     */
-	    MessageFlags[MessageFlags["FailedToMentionSomeRolesInThread"] = 256] = "FailedToMentionSomeRolesInThread";
-	    /**
-	     * @unstable This message flag is currently not documented by Discord but has a known value which we will try to keep up to date.
-	     */
-	    MessageFlags[MessageFlags["ShouldShowLinkNotDiscordWarning"] = 1024] = "ShouldShowLinkNotDiscordWarning";
-	    /**
-	     * This message will not trigger push and desktop notifications
-	     */
-	    MessageFlags[MessageFlags["SuppressNotifications"] = 4096] = "SuppressNotifications";
-	    /**
-	     * This message is a voice message
-	     */
-	    MessageFlags[MessageFlags["IsVoiceMessage"] = 8192] = "IsVoiceMessage";
-	    /**
-	     * This message has a snapshot (via Message Forwarding)
-	     */
-	    MessageFlags[MessageFlags["HasSnapshot"] = 16384] = "HasSnapshot";
-	    /**
-	     * This flag is required to use new components
-	     */
-	    MessageFlags[MessageFlags["IsComponentsV2"] = 32768] = "IsComponentsV2";
-	})(MessageFlags || (channel$3.MessageFlags = MessageFlags = {}));
+	})(VideoQualityMode || (channel$2.VideoQualityMode = VideoQualityMode = {}));
 	var OverwriteType;
 	(function (OverwriteType) {
 	    OverwriteType[OverwriteType["Role"] = 0] = "Role";
 	    OverwriteType[OverwriteType["Member"] = 1] = "Member";
-	})(OverwriteType || (channel$3.OverwriteType = OverwriteType = {}));
+	})(OverwriteType || (channel$2.OverwriteType = OverwriteType = {}));
 	var ThreadAutoArchiveDuration;
 	(function (ThreadAutoArchiveDuration) {
 	    ThreadAutoArchiveDuration[ThreadAutoArchiveDuration["OneHour"] = 60] = "OneHour";
 	    ThreadAutoArchiveDuration[ThreadAutoArchiveDuration["OneDay"] = 1440] = "OneDay";
 	    ThreadAutoArchiveDuration[ThreadAutoArchiveDuration["ThreeDays"] = 4320] = "ThreeDays";
 	    ThreadAutoArchiveDuration[ThreadAutoArchiveDuration["OneWeek"] = 10080] = "OneWeek";
-	})(ThreadAutoArchiveDuration || (channel$3.ThreadAutoArchiveDuration = ThreadAutoArchiveDuration = {}));
+	})(ThreadAutoArchiveDuration || (channel$2.ThreadAutoArchiveDuration = ThreadAutoArchiveDuration = {}));
 	var ThreadMemberFlags;
 	(function (ThreadMemberFlags) {
 	    /**
@@ -29317,169 +29159,7 @@ function requireChannel$3 () {
 	     * @unstable This thread member flag is currently not documented by Discord but has a known value which we will try to keep up to date.
 	     */
 	    ThreadMemberFlags[ThreadMemberFlags["NoMessages"] = 8] = "NoMessages";
-	})(ThreadMemberFlags || (channel$3.ThreadMemberFlags = ThreadMemberFlags = {}));
-	/**
-	 * @see {@link https://discord.com/developers/docs/resources/channel#embed-object-embed-types}
-	 */
-	var EmbedType;
-	(function (EmbedType) {
-	    /**
-	     * Generic embed rendered from embed attributes
-	     */
-	    EmbedType["Rich"] = "rich";
-	    /**
-	     * Image embed
-	     */
-	    EmbedType["Image"] = "image";
-	    /**
-	     * Video embed
-	     */
-	    EmbedType["Video"] = "video";
-	    /**
-	     * Animated gif image embed rendered as a video embed
-	     */
-	    EmbedType["GIFV"] = "gifv";
-	    /**
-	     * Article embed
-	     */
-	    EmbedType["Article"] = "article";
-	    /**
-	     * Link embed
-	     */
-	    EmbedType["Link"] = "link";
-	    /**
-	     * Auto moderation alert embed
-	     *
-	     * @unstable This embed type is currently not documented by Discord, but it is returned in the auto moderation system messages.
-	     */
-	    EmbedType["AutoModerationMessage"] = "auto_moderation_message";
-	    /**
-	     * Poll result embed
-	     */
-	    EmbedType["PollResult"] = "poll_result";
-	})(EmbedType || (channel$3.EmbedType = EmbedType = {}));
-	/**
-	 * @see {@link https://discord.com/developers/docs/resources/channel#attachment-object-attachment-structure-attachment-flags}
-	 */
-	var AttachmentFlags;
-	(function (AttachmentFlags) {
-	    /**
-	     * This attachment has been edited using the remix feature on mobile
-	     */
-	    AttachmentFlags[AttachmentFlags["IsRemix"] = 4] = "IsRemix";
-	})(AttachmentFlags || (channel$3.AttachmentFlags = AttachmentFlags = {}));
-	/**
-	 * @see {@link https://discord.com/developers/docs/resources/channel#allowed-mentions-object-allowed-mention-types}
-	 */
-	var AllowedMentionsTypes;
-	(function (AllowedMentionsTypes) {
-	    /**
-	     * Controls `@everyone` and `@here` mentions
-	     */
-	    AllowedMentionsTypes["Everyone"] = "everyone";
-	    /**
-	     * Controls role mentions
-	     */
-	    AllowedMentionsTypes["Role"] = "roles";
-	    /**
-	     * Controls user mentions
-	     */
-	    AllowedMentionsTypes["User"] = "users";
-	})(AllowedMentionsTypes || (channel$3.AllowedMentionsTypes = AllowedMentionsTypes = {}));
-	/**
-	 * @see {@link https://discord.com/developers/docs/interactions/message-components#component-object-component-types}
-	 */
-	var ComponentType;
-	(function (ComponentType) {
-	    /**
-	     * Action Row component
-	     */
-	    ComponentType[ComponentType["ActionRow"] = 1] = "ActionRow";
-	    /**
-	     * Button component
-	     */
-	    ComponentType[ComponentType["Button"] = 2] = "Button";
-	    /**
-	     * Select menu for picking from defined text options
-	     */
-	    ComponentType[ComponentType["StringSelect"] = 3] = "StringSelect";
-	    /**
-	     * Text Input component
-	     */
-	    ComponentType[ComponentType["TextInput"] = 4] = "TextInput";
-	    /**
-	     * Select menu for users
-	     */
-	    ComponentType[ComponentType["UserSelect"] = 5] = "UserSelect";
-	    /**
-	     * Select menu for roles
-	     */
-	    ComponentType[ComponentType["RoleSelect"] = 6] = "RoleSelect";
-	    /**
-	     * Select menu for users and roles
-	     */
-	    ComponentType[ComponentType["MentionableSelect"] = 7] = "MentionableSelect";
-	    /**
-	     * Select menu for channels
-	     */
-	    ComponentType[ComponentType["ChannelSelect"] = 8] = "ChannelSelect";
-	    ComponentType[ComponentType["Section"] = 9] = "Section";
-	    ComponentType[ComponentType["TextDisplay"] = 10] = "TextDisplay";
-	    ComponentType[ComponentType["Thumbnail"] = 11] = "Thumbnail";
-	    ComponentType[ComponentType["MediaGallery"] = 12] = "MediaGallery";
-	    ComponentType[ComponentType["File"] = 13] = "File";
-	    ComponentType[ComponentType["Separator"] = 14] = "Separator";
-	    ComponentType[ComponentType["ContentInventoryEntry"] = 16] = "ContentInventoryEntry";
-	    ComponentType[ComponentType["Container"] = 17] = "Container";
-	    // EVERYTHING BELOW THIS LINE SHOULD BE OLD NAMES FOR RENAMED ENUM MEMBERS //
-	    /**
-	     * Select menu for picking from defined text options
-	     *
-	     * @deprecated This is the old name for {@link ComponentType.StringSelect}
-	     */
-	    ComponentType[ComponentType["SelectMenu"] = 3] = "SelectMenu";
-	})(ComponentType || (channel$3.ComponentType = ComponentType = {}));
-	/**
-	 * @see {@link https://discord.com/developers/docs/interactions/message-components#button-object-button-styles}
-	 */
-	var ButtonStyle;
-	(function (ButtonStyle) {
-	    ButtonStyle[ButtonStyle["Primary"] = 1] = "Primary";
-	    ButtonStyle[ButtonStyle["Secondary"] = 2] = "Secondary";
-	    ButtonStyle[ButtonStyle["Success"] = 3] = "Success";
-	    ButtonStyle[ButtonStyle["Danger"] = 4] = "Danger";
-	    ButtonStyle[ButtonStyle["Link"] = 5] = "Link";
-	    ButtonStyle[ButtonStyle["Premium"] = 6] = "Premium";
-	})(ButtonStyle || (channel$3.ButtonStyle = ButtonStyle = {}));
-	/**
-	 * @see {@link https://discord.com/developers/docs/interactions/message-components#text-inputs-text-input-styles}
-	 */
-	var TextInputStyle;
-	(function (TextInputStyle) {
-	    TextInputStyle[TextInputStyle["Short"] = 1] = "Short";
-	    TextInputStyle[TextInputStyle["Paragraph"] = 2] = "Paragraph";
-	})(TextInputStyle || (channel$3.TextInputStyle = TextInputStyle = {}));
-	/**
-	 * @see {@link https://discord.com/developers/docs/interactions/message-components#select-menu-object-select-default-value-structure}
-	 */
-	var SelectMenuDefaultValueType;
-	(function (SelectMenuDefaultValueType) {
-	    SelectMenuDefaultValueType["Channel"] = "channel";
-	    SelectMenuDefaultValueType["Role"] = "role";
-	    SelectMenuDefaultValueType["User"] = "user";
-	})(SelectMenuDefaultValueType || (channel$3.SelectMenuDefaultValueType = SelectMenuDefaultValueType = {}));
-	var UnfurledMediaItemLoadingState;
-	(function (UnfurledMediaItemLoadingState) {
-	    UnfurledMediaItemLoadingState[UnfurledMediaItemLoadingState["Unknown"] = 0] = "Unknown";
-	    UnfurledMediaItemLoadingState[UnfurledMediaItemLoadingState["Loading"] = 1] = "Loading";
-	    UnfurledMediaItemLoadingState[UnfurledMediaItemLoadingState["LoadedSuccess"] = 2] = "LoadedSuccess";
-	    UnfurledMediaItemLoadingState[UnfurledMediaItemLoadingState["LoadedNotFound"] = 3] = "LoadedNotFound";
-	})(UnfurledMediaItemLoadingState || (channel$3.UnfurledMediaItemLoadingState = UnfurledMediaItemLoadingState = {}));
-	var SeparatorSpacingSize;
-	(function (SeparatorSpacingSize) {
-	    SeparatorSpacingSize[SeparatorSpacingSize["Small"] = 1] = "Small";
-	    SeparatorSpacingSize[SeparatorSpacingSize["Large"] = 2] = "Large";
-	})(SeparatorSpacingSize || (channel$3.SeparatorSpacingSize = SeparatorSpacingSize = {}));
+	})(ThreadMemberFlags || (channel$2.ThreadMemberFlags = ThreadMemberFlags = {}));
 	/**
 	 * @see {@link https://discord.com/developers/docs/resources/channel#channel-object-channel-flags}
 	 */
@@ -29522,40 +29202,25 @@ function requireChannel$3 () {
 	     * Whether media download options are hidden.
 	     */
 	    ChannelFlags[ChannelFlags["HideMediaDownloadOptions"] = 32768] = "HideMediaDownloadOptions";
-	})(ChannelFlags || (channel$3.ChannelFlags = ChannelFlags = {}));
+	})(ChannelFlags || (channel$2.ChannelFlags = ChannelFlags = {}));
 	
-	return channel$3;
+	return channel$2;
 }
 
-var emoji$2 = {};
+var gateway = {};
 
-var hasRequiredEmoji$3;
+var hasRequiredGateway;
 
-function requireEmoji$3 () {
-	if (hasRequiredEmoji$3) return emoji$2;
-	hasRequiredEmoji$3 = 1;
-	/**
-	 * Types extracted from https://discord.com/developers/docs/resources/emoji
-	 */
-	Object.defineProperty(emoji$2, "__esModule", { value: true });
-	
-	return emoji$2;
-}
-
-var gateway$1 = {};
-
-var hasRequiredGateway$1;
-
-function requireGateway$1 () {
-	if (hasRequiredGateway$1) return gateway$1;
-	hasRequiredGateway$1 = 1;
+function requireGateway () {
+	if (hasRequiredGateway) return gateway;
+	hasRequiredGateway = 1;
 	/**
 	 * Types extracted from
 	 *  - https://discord.com/developers/docs/topics/gateway
 	 *  - https://discord.com/developers/docs/topics/gateway-events
 	 */
-	Object.defineProperty(gateway$1, "__esModule", { value: true });
-	gateway$1.ActivityFlags = gateway$1.ActivityType = gateway$1.ActivityPlatform = gateway$1.PresenceUpdateStatus = void 0;
+	Object.defineProperty(gateway, "__esModule", { value: true });
+	gateway.ActivityFlags = gateway.StatusDisplayType = gateway.ActivityType = gateway.ActivityPlatform = gateway.PresenceUpdateStatus = void 0;
 	/**
 	 * @see {@link https://discord.com/developers/docs/topics/gateway-events#update-presence-status-types}
 	 */
@@ -29569,7 +29234,7 @@ function requireGateway$1 () {
 	     */
 	    PresenceUpdateStatus["Invisible"] = "invisible";
 	    PresenceUpdateStatus["Offline"] = "offline";
-	})(PresenceUpdateStatus || (gateway$1.PresenceUpdateStatus = PresenceUpdateStatus = {}));
+	})(PresenceUpdateStatus || (gateway.PresenceUpdateStatus = PresenceUpdateStatus = {}));
 	/**
 	 * @unstable This enum is currently not documented by Discord but has known values which we will try to keep up to date.
 	 * Values might be added or removed without a major version bump.
@@ -29584,7 +29249,7 @@ function requireGateway$1 () {
 	    ActivityPlatform["Embedded"] = "embedded";
 	    ActivityPlatform["PS4"] = "ps4";
 	    ActivityPlatform["PS5"] = "ps5";
-	})(ActivityPlatform || (gateway$1.ActivityPlatform = ActivityPlatform = {}));
+	})(ActivityPlatform || (gateway.ActivityPlatform = ActivityPlatform = {}));
 	/**
 	 * @see {@link https://discord.com/developers/docs/topics/gateway-events#activity-object-activity-types}
 	 */
@@ -29614,7 +29279,27 @@ function requireGateway$1 () {
 	     * Competing in \{name\}
 	     */
 	    ActivityType[ActivityType["Competing"] = 5] = "Competing";
-	})(ActivityType || (gateway$1.ActivityType = ActivityType = {}));
+	})(ActivityType || (gateway.ActivityType = ActivityType = {}));
+	/**
+	 * Controls which field is used in the user's status message
+	 *
+	 * @see {@link https://discord.com/developers/docs/events/gateway-events#activity-object-status-display-types}
+	 */
+	var StatusDisplayType;
+	(function (StatusDisplayType) {
+	    /**
+	     * Playing \{name\}
+	     */
+	    StatusDisplayType[StatusDisplayType["Name"] = 0] = "Name";
+	    /**
+	     * Playing \{state\}
+	     */
+	    StatusDisplayType[StatusDisplayType["State"] = 1] = "State";
+	    /**
+	     * Playing \{details\}
+	     */
+	    StatusDisplayType[StatusDisplayType["Details"] = 2] = "Details";
+	})(StatusDisplayType || (gateway.StatusDisplayType = StatusDisplayType = {}));
 	/**
 	 * @see {@link https://discord.com/developers/docs/topics/gateway-events#activity-object-activity-flags}
 	 */
@@ -29629,23 +29314,23 @@ function requireGateway$1 () {
 	    ActivityFlags[ActivityFlags["PartyPrivacyFriends"] = 64] = "PartyPrivacyFriends";
 	    ActivityFlags[ActivityFlags["PartyPrivacyVoiceChannel"] = 128] = "PartyPrivacyVoiceChannel";
 	    ActivityFlags[ActivityFlags["Embedded"] = 256] = "Embedded";
-	})(ActivityFlags || (gateway$1.ActivityFlags = ActivityFlags = {}));
+	})(ActivityFlags || (gateway.ActivityFlags = ActivityFlags = {}));
 	
-	return gateway$1;
+	return gateway;
 }
 
-var guild$1 = {};
+var guild = {};
 
-var hasRequiredGuild$2;
+var hasRequiredGuild$1;
 
-function requireGuild$2 () {
-	if (hasRequiredGuild$2) return guild$1;
-	hasRequiredGuild$2 = 1;
+function requireGuild$1 () {
+	if (hasRequiredGuild$1) return guild;
+	hasRequiredGuild$1 = 1;
 	/**
 	 * Types extracted from https://discord.com/developers/docs/resources/guild
 	 */
-	Object.defineProperty(guild$1, "__esModule", { value: true });
-	guild$1.GuildOnboardingPromptType = guild$1.GuildOnboardingMode = guild$1.MembershipScreeningFieldType = guild$1.GuildWidgetStyle = guild$1.IntegrationExpireBehavior = guild$1.GuildMemberFlags = guild$1.GuildFeature = guild$1.GuildSystemChannelFlags = guild$1.GuildHubType = guild$1.GuildPremiumTier = guild$1.GuildVerificationLevel = guild$1.GuildNSFWLevel = guild$1.GuildMFALevel = guild$1.GuildExplicitContentFilter = guild$1.GuildDefaultMessageNotifications = void 0;
+	Object.defineProperty(guild, "__esModule", { value: true });
+	guild.GuildOnboardingPromptType = guild.GuildOnboardingMode = guild.MembershipScreeningFieldType = guild.GuildWidgetStyle = guild.IntegrationExpireBehavior = guild.GuildMemberFlags = guild.GuildFeature = guild.GuildSystemChannelFlags = guild.GuildHubType = guild.GuildPremiumTier = guild.GuildVerificationLevel = guild.GuildNSFWLevel = guild.GuildMFALevel = guild.GuildExplicitContentFilter = guild.GuildDefaultMessageNotifications = void 0;
 	/**
 	 * @see {@link https://discord.com/developers/docs/resources/guild#guild-object-default-message-notification-level}
 	 */
@@ -29653,7 +29338,7 @@ function requireGuild$2 () {
 	(function (GuildDefaultMessageNotifications) {
 	    GuildDefaultMessageNotifications[GuildDefaultMessageNotifications["AllMessages"] = 0] = "AllMessages";
 	    GuildDefaultMessageNotifications[GuildDefaultMessageNotifications["OnlyMentions"] = 1] = "OnlyMentions";
-	})(GuildDefaultMessageNotifications || (guild$1.GuildDefaultMessageNotifications = GuildDefaultMessageNotifications = {}));
+	})(GuildDefaultMessageNotifications || (guild.GuildDefaultMessageNotifications = GuildDefaultMessageNotifications = {}));
 	/**
 	 * @see {@link https://discord.com/developers/docs/resources/guild#guild-object-explicit-content-filter-level}
 	 */
@@ -29662,7 +29347,7 @@ function requireGuild$2 () {
 	    GuildExplicitContentFilter[GuildExplicitContentFilter["Disabled"] = 0] = "Disabled";
 	    GuildExplicitContentFilter[GuildExplicitContentFilter["MembersWithoutRoles"] = 1] = "MembersWithoutRoles";
 	    GuildExplicitContentFilter[GuildExplicitContentFilter["AllMembers"] = 2] = "AllMembers";
-	})(GuildExplicitContentFilter || (guild$1.GuildExplicitContentFilter = GuildExplicitContentFilter = {}));
+	})(GuildExplicitContentFilter || (guild.GuildExplicitContentFilter = GuildExplicitContentFilter = {}));
 	/**
 	 * @see {@link https://discord.com/developers/docs/resources/guild#guild-object-mfa-level}
 	 */
@@ -29670,7 +29355,7 @@ function requireGuild$2 () {
 	(function (GuildMFALevel) {
 	    GuildMFALevel[GuildMFALevel["None"] = 0] = "None";
 	    GuildMFALevel[GuildMFALevel["Elevated"] = 1] = "Elevated";
-	})(GuildMFALevel || (guild$1.GuildMFALevel = GuildMFALevel = {}));
+	})(GuildMFALevel || (guild.GuildMFALevel = GuildMFALevel = {}));
 	/**
 	 * @see {@link https://discord.com/developers/docs/resources/guild#guild-object-guild-nsfw-level}
 	 */
@@ -29680,7 +29365,7 @@ function requireGuild$2 () {
 	    GuildNSFWLevel[GuildNSFWLevel["Explicit"] = 1] = "Explicit";
 	    GuildNSFWLevel[GuildNSFWLevel["Safe"] = 2] = "Safe";
 	    GuildNSFWLevel[GuildNSFWLevel["AgeRestricted"] = 3] = "AgeRestricted";
-	})(GuildNSFWLevel || (guild$1.GuildNSFWLevel = GuildNSFWLevel = {}));
+	})(GuildNSFWLevel || (guild.GuildNSFWLevel = GuildNSFWLevel = {}));
 	/**
 	 * @see {@link https://discord.com/developers/docs/resources/guild#guild-object-verification-level}
 	 */
@@ -29706,7 +29391,7 @@ function requireGuild$2 () {
 	     * Must have a verified phone number
 	     */
 	    GuildVerificationLevel[GuildVerificationLevel["VeryHigh"] = 4] = "VeryHigh";
-	})(GuildVerificationLevel || (guild$1.GuildVerificationLevel = GuildVerificationLevel = {}));
+	})(GuildVerificationLevel || (guild.GuildVerificationLevel = GuildVerificationLevel = {}));
 	/**
 	 * @see {@link https://discord.com/developers/docs/resources/guild#guild-object-premium-tier}
 	 */
@@ -29716,13 +29401,13 @@ function requireGuild$2 () {
 	    GuildPremiumTier[GuildPremiumTier["Tier1"] = 1] = "Tier1";
 	    GuildPremiumTier[GuildPremiumTier["Tier2"] = 2] = "Tier2";
 	    GuildPremiumTier[GuildPremiumTier["Tier3"] = 3] = "Tier3";
-	})(GuildPremiumTier || (guild$1.GuildPremiumTier = GuildPremiumTier = {}));
+	})(GuildPremiumTier || (guild.GuildPremiumTier = GuildPremiumTier = {}));
 	var GuildHubType;
 	(function (GuildHubType) {
 	    GuildHubType[GuildHubType["Default"] = 0] = "Default";
 	    GuildHubType[GuildHubType["HighSchool"] = 1] = "HighSchool";
 	    GuildHubType[GuildHubType["College"] = 2] = "College";
-	})(GuildHubType || (guild$1.GuildHubType = GuildHubType = {}));
+	})(GuildHubType || (guild.GuildHubType = GuildHubType = {}));
 	/**
 	 * @see {@link https://discord.com/developers/docs/resources/guild#guild-object-system-channel-flags}
 	 */
@@ -29752,7 +29437,7 @@ function requireGuild$2 () {
 	     * Hide role subscription sticker reply buttons
 	     */
 	    GuildSystemChannelFlags[GuildSystemChannelFlags["SuppressRoleSubscriptionPurchaseNotificationReplies"] = 32] = "SuppressRoleSubscriptionPurchaseNotificationReplies";
-	})(GuildSystemChannelFlags || (guild$1.GuildSystemChannelFlags = GuildSystemChannelFlags = {}));
+	})(GuildSystemChannelFlags || (guild.GuildSystemChannelFlags = GuildSystemChannelFlags = {}));
 	/**
 	 * @see {@link https://discord.com/developers/docs/resources/guild#guild-object-guild-features}
 	 */
@@ -29905,7 +29590,19 @@ function requireGuild$2 () {
 	     * Guild has enabled the welcome screen
 	     */
 	    GuildFeature["WelcomeScreenEnabled"] = "WELCOME_SCREEN_ENABLED";
-	})(GuildFeature || (guild$1.GuildFeature = GuildFeature = {}));
+	    /**
+	     * Guild has access to set guild tags
+	     */
+	    GuildFeature["GuildTags"] = "GUILD_TAGS";
+	    /**
+	     * Guild is able to set gradient colors to roles
+	     */
+	    GuildFeature["EnhancedRoleColors"] = "ENHANCED_ROLE_COLORS";
+	    /**
+	     * Guild has access to guest invites
+	     */
+	    GuildFeature["GuestsEnabled"] = "GUESTS_ENABLED";
+	})(GuildFeature || (guild.GuildFeature = GuildFeature = {}));
 	/**
 	 * @see {@link https://discord.com/developers/docs/resources/guild#guild-member-object-guild-member-flags}
 	 */
@@ -29952,7 +29649,11 @@ function requireGuild$2 () {
 	     * Member has dismissed the DM settings upsell
 	     */
 	    GuildMemberFlags[GuildMemberFlags["DmSettingsUpsellAcknowledged"] = 512] = "DmSettingsUpsellAcknowledged";
-	})(GuildMemberFlags || (guild$1.GuildMemberFlags = GuildMemberFlags = {}));
+	    /**
+	     * Member's guild tag is blocked by AutoMod
+	     */
+	    GuildMemberFlags[GuildMemberFlags["AutoModQuarantinedGuildTag"] = 1024] = "AutoModQuarantinedGuildTag";
+	})(GuildMemberFlags || (guild.GuildMemberFlags = GuildMemberFlags = {}));
 	/**
 	 * @see {@link https://discord.com/developers/docs/resources/guild#integration-object-integration-expire-behaviors}
 	 */
@@ -29960,7 +29661,7 @@ function requireGuild$2 () {
 	(function (IntegrationExpireBehavior) {
 	    IntegrationExpireBehavior[IntegrationExpireBehavior["RemoveRole"] = 0] = "RemoveRole";
 	    IntegrationExpireBehavior[IntegrationExpireBehavior["Kick"] = 1] = "Kick";
-	})(IntegrationExpireBehavior || (guild$1.IntegrationExpireBehavior = IntegrationExpireBehavior = {}));
+	})(IntegrationExpireBehavior || (guild.IntegrationExpireBehavior = IntegrationExpireBehavior = {}));
 	/**
 	 * @see {@link https://discord.com/developers/docs/resources/guild#get-guild-widget-image-widget-style-options}
 	 */
@@ -29987,14 +29688,14 @@ function requireGuild$2 () {
 	     * and a "JOIN MY SERVER" button at the bottom
 	     */
 	    GuildWidgetStyle["Banner4"] = "banner4";
-	})(GuildWidgetStyle || (guild$1.GuildWidgetStyle = GuildWidgetStyle = {}));
+	})(GuildWidgetStyle || (guild.GuildWidgetStyle = GuildWidgetStyle = {}));
 	var MembershipScreeningFieldType;
 	(function (MembershipScreeningFieldType) {
 	    /**
 	     * Server Rules
 	     */
 	    MembershipScreeningFieldType["Terms"] = "TERMS";
-	})(MembershipScreeningFieldType || (guild$1.MembershipScreeningFieldType = MembershipScreeningFieldType = {}));
+	})(MembershipScreeningFieldType || (guild.MembershipScreeningFieldType = MembershipScreeningFieldType = {}));
 	/**
 	 * @see {@link https://discord.com/developers/docs/resources/guild#guild-onboarding-object-onboarding-mode}
 	 */
@@ -30008,7 +29709,7 @@ function requireGuild$2 () {
 	     * Counts Default Channels and Questions towards constraints
 	     */
 	    GuildOnboardingMode[GuildOnboardingMode["OnboardingAdvanced"] = 1] = "OnboardingAdvanced";
-	})(GuildOnboardingMode || (guild$1.GuildOnboardingMode = GuildOnboardingMode = {}));
+	})(GuildOnboardingMode || (guild.GuildOnboardingMode = GuildOnboardingMode = {}));
 	/**
 	 * @see {@link https://discord.com/developers/docs/resources/guild#guild-onboarding-object-prompt-types}
 	 */
@@ -30016,20 +29717,20 @@ function requireGuild$2 () {
 	(function (GuildOnboardingPromptType) {
 	    GuildOnboardingPromptType[GuildOnboardingPromptType["MultipleChoice"] = 0] = "MultipleChoice";
 	    GuildOnboardingPromptType[GuildOnboardingPromptType["Dropdown"] = 1] = "Dropdown";
-	})(GuildOnboardingPromptType || (guild$1.GuildOnboardingPromptType = GuildOnboardingPromptType = {}));
+	})(GuildOnboardingPromptType || (guild.GuildOnboardingPromptType = GuildOnboardingPromptType = {}));
 	
-	return guild$1;
+	return guild;
 }
 
-var guildScheduledEvent$1 = {};
+var guildScheduledEvent = {};
 
-var hasRequiredGuildScheduledEvent$2;
+var hasRequiredGuildScheduledEvent$1;
 
-function requireGuildScheduledEvent$2 () {
-	if (hasRequiredGuildScheduledEvent$2) return guildScheduledEvent$1;
-	hasRequiredGuildScheduledEvent$2 = 1;
-	Object.defineProperty(guildScheduledEvent$1, "__esModule", { value: true });
-	guildScheduledEvent$1.GuildScheduledEventPrivacyLevel = guildScheduledEvent$1.GuildScheduledEventStatus = guildScheduledEvent$1.GuildScheduledEventEntityType = guildScheduledEvent$1.GuildScheduledEventRecurrenceRuleMonth = guildScheduledEvent$1.GuildScheduledEventRecurrenceRuleWeekday = guildScheduledEvent$1.GuildScheduledEventRecurrenceRuleFrequency = void 0;
+function requireGuildScheduledEvent$1 () {
+	if (hasRequiredGuildScheduledEvent$1) return guildScheduledEvent;
+	hasRequiredGuildScheduledEvent$1 = 1;
+	Object.defineProperty(guildScheduledEvent, "__esModule", { value: true });
+	guildScheduledEvent.GuildScheduledEventPrivacyLevel = guildScheduledEvent.GuildScheduledEventStatus = guildScheduledEvent.GuildScheduledEventEntityType = guildScheduledEvent.GuildScheduledEventRecurrenceRuleMonth = guildScheduledEvent.GuildScheduledEventRecurrenceRuleWeekday = guildScheduledEvent.GuildScheduledEventRecurrenceRuleFrequency = void 0;
 	/**
 	 * @see {@link https://discord.com/developers/docs/resources/guild-scheduled-event#guild-scheduled-event-recurrence-rule-object-guild-scheduled-event-recurrence-rule-frequency}
 	 */
@@ -30039,7 +29740,7 @@ function requireGuildScheduledEvent$2 () {
 	    GuildScheduledEventRecurrenceRuleFrequency[GuildScheduledEventRecurrenceRuleFrequency["Monthly"] = 1] = "Monthly";
 	    GuildScheduledEventRecurrenceRuleFrequency[GuildScheduledEventRecurrenceRuleFrequency["Weekly"] = 2] = "Weekly";
 	    GuildScheduledEventRecurrenceRuleFrequency[GuildScheduledEventRecurrenceRuleFrequency["Daily"] = 3] = "Daily";
-	})(GuildScheduledEventRecurrenceRuleFrequency || (guildScheduledEvent$1.GuildScheduledEventRecurrenceRuleFrequency = GuildScheduledEventRecurrenceRuleFrequency = {}));
+	})(GuildScheduledEventRecurrenceRuleFrequency || (guildScheduledEvent.GuildScheduledEventRecurrenceRuleFrequency = GuildScheduledEventRecurrenceRuleFrequency = {}));
 	/**
 	 * @see {@link https://discord.com/developers/docs/resources/guild-scheduled-event#guild-scheduled-event-recurrence-rule-object-guild-scheduled-event-recurrence-rule-weekday}
 	 */
@@ -30052,7 +29753,7 @@ function requireGuildScheduledEvent$2 () {
 	    GuildScheduledEventRecurrenceRuleWeekday[GuildScheduledEventRecurrenceRuleWeekday["Friday"] = 4] = "Friday";
 	    GuildScheduledEventRecurrenceRuleWeekday[GuildScheduledEventRecurrenceRuleWeekday["Saturday"] = 5] = "Saturday";
 	    GuildScheduledEventRecurrenceRuleWeekday[GuildScheduledEventRecurrenceRuleWeekday["Sunday"] = 6] = "Sunday";
-	})(GuildScheduledEventRecurrenceRuleWeekday || (guildScheduledEvent$1.GuildScheduledEventRecurrenceRuleWeekday = GuildScheduledEventRecurrenceRuleWeekday = {}));
+	})(GuildScheduledEventRecurrenceRuleWeekday || (guildScheduledEvent.GuildScheduledEventRecurrenceRuleWeekday = GuildScheduledEventRecurrenceRuleWeekday = {}));
 	/**
 	 * @see {@link https://discord.com/developers/docs/resources/guild-scheduled-event#guild-scheduled-event-recurrence-rule-object-guild-scheduled-event-recurrence-rule-month}
 	 */
@@ -30070,7 +29771,7 @@ function requireGuildScheduledEvent$2 () {
 	    GuildScheduledEventRecurrenceRuleMonth[GuildScheduledEventRecurrenceRuleMonth["October"] = 10] = "October";
 	    GuildScheduledEventRecurrenceRuleMonth[GuildScheduledEventRecurrenceRuleMonth["November"] = 11] = "November";
 	    GuildScheduledEventRecurrenceRuleMonth[GuildScheduledEventRecurrenceRuleMonth["December"] = 12] = "December";
-	})(GuildScheduledEventRecurrenceRuleMonth || (guildScheduledEvent$1.GuildScheduledEventRecurrenceRuleMonth = GuildScheduledEventRecurrenceRuleMonth = {}));
+	})(GuildScheduledEventRecurrenceRuleMonth || (guildScheduledEvent.GuildScheduledEventRecurrenceRuleMonth = GuildScheduledEventRecurrenceRuleMonth = {}));
 	/**
 	 * @see {@link https://discord.com/developers/docs/resources/guild-scheduled-event#guild-scheduled-event-object-guild-scheduled-event-entity-types}
 	 */
@@ -30079,7 +29780,7 @@ function requireGuildScheduledEvent$2 () {
 	    GuildScheduledEventEntityType[GuildScheduledEventEntityType["StageInstance"] = 1] = "StageInstance";
 	    GuildScheduledEventEntityType[GuildScheduledEventEntityType["Voice"] = 2] = "Voice";
 	    GuildScheduledEventEntityType[GuildScheduledEventEntityType["External"] = 3] = "External";
-	})(GuildScheduledEventEntityType || (guildScheduledEvent$1.GuildScheduledEventEntityType = GuildScheduledEventEntityType = {}));
+	})(GuildScheduledEventEntityType || (guildScheduledEvent.GuildScheduledEventEntityType = GuildScheduledEventEntityType = {}));
 	/**
 	 * @see {@link https://discord.com/developers/docs/resources/guild-scheduled-event#guild-scheduled-event-object-guild-scheduled-event-status}
 	 */
@@ -30089,7 +29790,7 @@ function requireGuildScheduledEvent$2 () {
 	    GuildScheduledEventStatus[GuildScheduledEventStatus["Active"] = 2] = "Active";
 	    GuildScheduledEventStatus[GuildScheduledEventStatus["Completed"] = 3] = "Completed";
 	    GuildScheduledEventStatus[GuildScheduledEventStatus["Canceled"] = 4] = "Canceled";
-	})(GuildScheduledEventStatus || (guildScheduledEvent$1.GuildScheduledEventStatus = GuildScheduledEventStatus = {}));
+	})(GuildScheduledEventStatus || (guildScheduledEvent.GuildScheduledEventStatus = GuildScheduledEventStatus = {}));
 	/**
 	 * @see {@link https://discord.com/developers/docs/resources/guild-scheduled-event#guild-scheduled-event-object-guild-scheduled-event-privacy-level}
 	 */
@@ -30099,112 +29800,16 @@ function requireGuildScheduledEvent$2 () {
 	     * The scheduled event is only accessible to guild members
 	     */
 	    GuildScheduledEventPrivacyLevel[GuildScheduledEventPrivacyLevel["GuildOnly"] = 2] = "GuildOnly";
-	})(GuildScheduledEventPrivacyLevel || (guildScheduledEvent$1.GuildScheduledEventPrivacyLevel = GuildScheduledEventPrivacyLevel = {}));
+	})(GuildScheduledEventPrivacyLevel || (guildScheduledEvent.GuildScheduledEventPrivacyLevel = GuildScheduledEventPrivacyLevel = {}));
 	
-	return guildScheduledEvent$1;
+	return guildScheduledEvent;
 }
 
-var interactions$1 = {};
+var interactions = {};
 
 var applicationCommands = {};
 
 var chatInput = {};
-
-var attachment$1 = {};
-
-var hasRequiredAttachment$2;
-
-function requireAttachment$2 () {
-	if (hasRequiredAttachment$2) return attachment$1;
-	hasRequiredAttachment$2 = 1;
-	Object.defineProperty(attachment$1, "__esModule", { value: true });
-	
-	return attachment$1;
-}
-
-var base$1 = {};
-
-var hasRequiredBase$2;
-
-function requireBase$2 () {
-	if (hasRequiredBase$2) return base$1;
-	hasRequiredBase$2 = 1;
-	Object.defineProperty(base$1, "__esModule", { value: true });
-	
-	return base$1;
-}
-
-var boolean = {};
-
-var hasRequiredBoolean;
-
-function requireBoolean () {
-	if (hasRequiredBoolean) return boolean;
-	hasRequiredBoolean = 1;
-	Object.defineProperty(boolean, "__esModule", { value: true });
-	
-	return boolean;
-}
-
-var channel$2 = {};
-
-var hasRequiredChannel$2;
-
-function requireChannel$2 () {
-	if (hasRequiredChannel$2) return channel$2;
-	hasRequiredChannel$2 = 1;
-	Object.defineProperty(channel$2, "__esModule", { value: true });
-	
-	return channel$2;
-}
-
-var integer = {};
-
-var hasRequiredInteger;
-
-function requireInteger () {
-	if (hasRequiredInteger) return integer;
-	hasRequiredInteger = 1;
-	Object.defineProperty(integer, "__esModule", { value: true });
-	
-	return integer;
-}
-
-var mentionable = {};
-
-var hasRequiredMentionable;
-
-function requireMentionable () {
-	if (hasRequiredMentionable) return mentionable;
-	hasRequiredMentionable = 1;
-	Object.defineProperty(mentionable, "__esModule", { value: true });
-	
-	return mentionable;
-}
-
-var number = {};
-
-var hasRequiredNumber;
-
-function requireNumber () {
-	if (hasRequiredNumber) return number;
-	hasRequiredNumber = 1;
-	Object.defineProperty(number, "__esModule", { value: true });
-	
-	return number;
-}
-
-var role$1 = {};
-
-var hasRequiredRole$2;
-
-function requireRole$2 () {
-	if (hasRequiredRole$2) return role$1;
-	hasRequiredRole$2 = 1;
-	Object.defineProperty(role$1, "__esModule", { value: true });
-	
-	return role$1;
-}
 
 var shared = {};
 
@@ -30236,54 +29841,6 @@ function requireShared () {
 	return shared;
 }
 
-var string = {};
-
-var hasRequiredString;
-
-function requireString () {
-	if (hasRequiredString) return string;
-	hasRequiredString = 1;
-	Object.defineProperty(string, "__esModule", { value: true });
-	
-	return string;
-}
-
-var subcommand = {};
-
-var hasRequiredSubcommand;
-
-function requireSubcommand () {
-	if (hasRequiredSubcommand) return subcommand;
-	hasRequiredSubcommand = 1;
-	Object.defineProperty(subcommand, "__esModule", { value: true });
-	
-	return subcommand;
-}
-
-var subcommandGroup = {};
-
-var hasRequiredSubcommandGroup;
-
-function requireSubcommandGroup () {
-	if (hasRequiredSubcommandGroup) return subcommandGroup;
-	hasRequiredSubcommandGroup = 1;
-	Object.defineProperty(subcommandGroup, "__esModule", { value: true });
-	
-	return subcommandGroup;
-}
-
-var user$3 = {};
-
-var hasRequiredUser$4;
-
-function requireUser$4 () {
-	if (hasRequiredUser$4) return user$3;
-	hasRequiredUser$4 = 1;
-	Object.defineProperty(user$3, "__esModule", { value: true });
-	
-	return user$3;
-}
-
 var hasRequiredChatInput;
 
 function requireChatInput () {
@@ -30305,34 +29862,10 @@ function requireChatInput () {
 		    for (var p in m) if (p !== "default" && !Object.prototype.hasOwnProperty.call(exports, p)) __createBinding(exports, m, p);
 		};
 		Object.defineProperty(exports, "__esModule", { value: true });
-		__exportStar(requireAttachment$2(), exports);
-		__exportStar(requireBase$2(), exports);
-		__exportStar(requireBoolean(), exports);
-		__exportStar(requireChannel$2(), exports);
-		__exportStar(requireInteger(), exports);
-		__exportStar(requireMentionable(), exports);
-		__exportStar(requireNumber(), exports);
-		__exportStar(requireRole$2(), exports);
 		__exportStar(requireShared(), exports);
-		__exportStar(requireString(), exports);
-		__exportStar(requireSubcommand(), exports);
-		__exportStar(requireSubcommandGroup(), exports);
-		__exportStar(requireUser$4(), exports);
 		
 	} (chatInput));
 	return chatInput;
-}
-
-var contextMenu = {};
-
-var hasRequiredContextMenu;
-
-function requireContextMenu () {
-	if (hasRequiredContextMenu) return contextMenu;
-	hasRequiredContextMenu = 1;
-	Object.defineProperty(contextMenu, "__esModule", { value: true });
-	
-	return contextMenu;
 }
 
 var permissions$1 = {};
@@ -30365,30 +29898,6 @@ function requirePermissions$1 () {
 	return permissions$1;
 }
 
-var entryPoint = {};
-
-var hasRequiredEntryPoint;
-
-function requireEntryPoint () {
-	if (hasRequiredEntryPoint) return entryPoint;
-	hasRequiredEntryPoint = 1;
-	Object.defineProperty(entryPoint, "__esModule", { value: true });
-	
-	return entryPoint;
-}
-
-var internals$1 = {};
-
-var hasRequiredInternals$1;
-
-function requireInternals$1 () {
-	if (hasRequiredInternals$1) return internals$1;
-	hasRequiredInternals$1 = 1;
-	Object.defineProperty(internals$1, "__esModule", { value: true });
-	
-	return internals$1;
-}
-
 var hasRequiredApplicationCommands;
 
 function requireApplicationCommands () {
@@ -30412,10 +29921,7 @@ function requireApplicationCommands () {
 		Object.defineProperty(exports, "__esModule", { value: true });
 		exports.EntryPointCommandHandlerType = exports.InteractionContextType = exports.ApplicationIntegrationType = exports.ApplicationCommandType = void 0;
 		__exportStar(requireChatInput(), exports);
-		__exportStar(requireContextMenu(), exports);
 		__exportStar(requirePermissions$1(), exports);
-		__exportStar(requireEntryPoint(), exports);
-		__exportStar(requireInternals$1(), exports);
 		/**
 		 * @see {@link https://discord.com/developers/docs/interactions/application-commands#application-command-object-application-command-types}
 		 */
@@ -30490,66 +29996,6 @@ function requireApplicationCommands () {
 	return applicationCommands;
 }
 
-var autocomplete = {};
-
-var hasRequiredAutocomplete;
-
-function requireAutocomplete () {
-	if (hasRequiredAutocomplete) return autocomplete;
-	hasRequiredAutocomplete = 1;
-	Object.defineProperty(autocomplete, "__esModule", { value: true });
-	
-	return autocomplete;
-}
-
-var base = {};
-
-var hasRequiredBase$1;
-
-function requireBase$1 () {
-	if (hasRequiredBase$1) return base;
-	hasRequiredBase$1 = 1;
-	Object.defineProperty(base, "__esModule", { value: true });
-	
-	return base;
-}
-
-var messageComponents = {};
-
-var hasRequiredMessageComponents;
-
-function requireMessageComponents () {
-	if (hasRequiredMessageComponents) return messageComponents;
-	hasRequiredMessageComponents = 1;
-	Object.defineProperty(messageComponents, "__esModule", { value: true });
-	
-	return messageComponents;
-}
-
-var modalSubmit = {};
-
-var hasRequiredModalSubmit;
-
-function requireModalSubmit () {
-	if (hasRequiredModalSubmit) return modalSubmit;
-	hasRequiredModalSubmit = 1;
-	Object.defineProperty(modalSubmit, "__esModule", { value: true });
-	
-	return modalSubmit;
-}
-
-var ping = {};
-
-var hasRequiredPing;
-
-function requirePing () {
-	if (hasRequiredPing) return ping;
-	hasRequiredPing = 1;
-	Object.defineProperty(ping, "__esModule", { value: true });
-	
-	return ping;
-}
-
 var responses = {};
 
 var hasRequiredResponses;
@@ -30622,13 +30068,13 @@ function requireResponses () {
 	return responses;
 }
 
-var hasRequiredInteractions$1;
+var hasRequiredInteractions;
 
-function requireInteractions$1 () {
-	if (hasRequiredInteractions$1) return interactions$1;
-	hasRequiredInteractions$1 = 1;
+function requireInteractions () {
+	if (hasRequiredInteractions) return interactions;
+	hasRequiredInteractions = 1;
 	(function (exports) {
-		var __createBinding = (interactions$1 && interactions$1.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+		var __createBinding = (interactions && interactions.__createBinding) || (Object.create ? (function(o, m, k, k2) {
 		    if (k2 === undefined) k2 = k;
 		    var desc = Object.getOwnPropertyDescriptor(m, k);
 		    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
@@ -30639,34 +30085,36 @@ function requireInteractions$1 () {
 		    if (k2 === undefined) k2 = k;
 		    o[k2] = m[k];
 		}));
-		var __exportStar = (interactions$1 && interactions$1.__exportStar) || function(m, exports) {
+		var __exportStar = (interactions && interactions.__exportStar) || function(m, exports) {
 		    for (var p in m) if (p !== "default" && !Object.prototype.hasOwnProperty.call(exports, p)) __createBinding(exports, m, p);
 		};
 		Object.defineProperty(exports, "__esModule", { value: true });
 		__exportStar(requireApplicationCommands(), exports);
-		__exportStar(requireAutocomplete(), exports);
-		__exportStar(requireBase$1(), exports);
-		__exportStar(requireMessageComponents(), exports);
-		__exportStar(requireModalSubmit(), exports);
-		__exportStar(requirePing(), exports);
 		__exportStar(requireResponses(), exports);
 		
-	} (interactions$1));
-	return interactions$1;
+	} (interactions));
+	return interactions;
 }
 
-var invite$1 = {};
+var invite = {};
 
-var hasRequiredInvite$2;
+var hasRequiredInvite$1;
 
-function requireInvite$2 () {
-	if (hasRequiredInvite$2) return invite$1;
-	hasRequiredInvite$2 = 1;
+function requireInvite$1 () {
+	if (hasRequiredInvite$1) return invite;
+	hasRequiredInvite$1 = 1;
 	/**
 	 * Types extracted from https://discord.com/developers/docs/resources/invite
 	 */
-	Object.defineProperty(invite$1, "__esModule", { value: true });
-	invite$1.InviteTargetType = invite$1.InviteType = void 0;
+	Object.defineProperty(invite, "__esModule", { value: true });
+	invite.InviteTargetType = invite.InviteType = invite.InviteFlags = void 0;
+	/**
+	 * @see {@link https://discord.com/developers/docs/resources/invite#invite-object-guild-invite-flags}
+	 */
+	var InviteFlags;
+	(function (InviteFlags) {
+	    InviteFlags[InviteFlags["IsGuestInvite"] = 1] = "IsGuestInvite";
+	})(InviteFlags || (invite.InviteFlags = InviteFlags = {}));
 	/**
 	 * @see {@link https://discord.com/developers/docs/resources/invite#invite-object-invite-types}
 	 */
@@ -30675,7 +30123,7 @@ function requireInvite$2 () {
 	    InviteType[InviteType["Guild"] = 0] = "Guild";
 	    InviteType[InviteType["GroupDM"] = 1] = "GroupDM";
 	    InviteType[InviteType["Friend"] = 2] = "Friend";
-	})(InviteType || (invite$1.InviteType = InviteType = {}));
+	})(InviteType || (invite.InviteType = InviteType = {}));
 	/**
 	 * @see {@link https://discord.com/developers/docs/resources/invite#invite-object-invite-target-types}
 	 */
@@ -30683,9 +30131,375 @@ function requireInvite$2 () {
 	(function (InviteTargetType) {
 	    InviteTargetType[InviteTargetType["Stream"] = 1] = "Stream";
 	    InviteTargetType[InviteTargetType["EmbeddedApplication"] = 2] = "EmbeddedApplication";
-	})(InviteTargetType || (invite$1.InviteTargetType = InviteTargetType = {}));
+	})(InviteTargetType || (invite.InviteTargetType = InviteTargetType = {}));
 	
-	return invite$1;
+	return invite;
+}
+
+var message$1 = {};
+
+var hasRequiredMessage$2;
+
+function requireMessage$2 () {
+	if (hasRequiredMessage$2) return message$1;
+	hasRequiredMessage$2 = 1;
+	// Types extracted from https://discord.com/developers/docs/resources/message.
+	Object.defineProperty(message$1, "__esModule", { value: true });
+	message$1.SeparatorSpacingSize = message$1.UnfurledMediaItemLoadingState = message$1.SelectMenuDefaultValueType = message$1.TextInputStyle = message$1.ButtonStyle = message$1.ComponentType = message$1.AllowedMentionsTypes = message$1.AttachmentFlags = message$1.EmbedType = message$1.MessageFlags = message$1.MessageReferenceType = message$1.MessageActivityType = message$1.MessageType = void 0;
+	/**
+	 * @see {@link https://discord.com/developers/docs/resources/message#message-object-message-types}
+	 */
+	var MessageType;
+	(function (MessageType) {
+	    MessageType[MessageType["Default"] = 0] = "Default";
+	    MessageType[MessageType["RecipientAdd"] = 1] = "RecipientAdd";
+	    MessageType[MessageType["RecipientRemove"] = 2] = "RecipientRemove";
+	    MessageType[MessageType["Call"] = 3] = "Call";
+	    MessageType[MessageType["ChannelNameChange"] = 4] = "ChannelNameChange";
+	    MessageType[MessageType["ChannelIconChange"] = 5] = "ChannelIconChange";
+	    MessageType[MessageType["ChannelPinnedMessage"] = 6] = "ChannelPinnedMessage";
+	    MessageType[MessageType["UserJoin"] = 7] = "UserJoin";
+	    MessageType[MessageType["GuildBoost"] = 8] = "GuildBoost";
+	    MessageType[MessageType["GuildBoostTier1"] = 9] = "GuildBoostTier1";
+	    MessageType[MessageType["GuildBoostTier2"] = 10] = "GuildBoostTier2";
+	    MessageType[MessageType["GuildBoostTier3"] = 11] = "GuildBoostTier3";
+	    MessageType[MessageType["ChannelFollowAdd"] = 12] = "ChannelFollowAdd";
+	    MessageType[MessageType["GuildDiscoveryDisqualified"] = 14] = "GuildDiscoveryDisqualified";
+	    MessageType[MessageType["GuildDiscoveryRequalified"] = 15] = "GuildDiscoveryRequalified";
+	    MessageType[MessageType["GuildDiscoveryGracePeriodInitialWarning"] = 16] = "GuildDiscoveryGracePeriodInitialWarning";
+	    MessageType[MessageType["GuildDiscoveryGracePeriodFinalWarning"] = 17] = "GuildDiscoveryGracePeriodFinalWarning";
+	    MessageType[MessageType["ThreadCreated"] = 18] = "ThreadCreated";
+	    MessageType[MessageType["Reply"] = 19] = "Reply";
+	    MessageType[MessageType["ChatInputCommand"] = 20] = "ChatInputCommand";
+	    MessageType[MessageType["ThreadStarterMessage"] = 21] = "ThreadStarterMessage";
+	    MessageType[MessageType["GuildInviteReminder"] = 22] = "GuildInviteReminder";
+	    MessageType[MessageType["ContextMenuCommand"] = 23] = "ContextMenuCommand";
+	    MessageType[MessageType["AutoModerationAction"] = 24] = "AutoModerationAction";
+	    MessageType[MessageType["RoleSubscriptionPurchase"] = 25] = "RoleSubscriptionPurchase";
+	    MessageType[MessageType["InteractionPremiumUpsell"] = 26] = "InteractionPremiumUpsell";
+	    MessageType[MessageType["StageStart"] = 27] = "StageStart";
+	    MessageType[MessageType["StageEnd"] = 28] = "StageEnd";
+	    MessageType[MessageType["StageSpeaker"] = 29] = "StageSpeaker";
+	    /**
+	     * @unstable https://github.com/discord/discord-api-docs/pull/5927#discussion_r1107678548
+	     */
+	    MessageType[MessageType["StageRaiseHand"] = 30] = "StageRaiseHand";
+	    MessageType[MessageType["StageTopic"] = 31] = "StageTopic";
+	    MessageType[MessageType["GuildApplicationPremiumSubscription"] = 32] = "GuildApplicationPremiumSubscription";
+	    MessageType[MessageType["GuildIncidentAlertModeEnabled"] = 36] = "GuildIncidentAlertModeEnabled";
+	    MessageType[MessageType["GuildIncidentAlertModeDisabled"] = 37] = "GuildIncidentAlertModeDisabled";
+	    MessageType[MessageType["GuildIncidentReportRaid"] = 38] = "GuildIncidentReportRaid";
+	    MessageType[MessageType["GuildIncidentReportFalseAlarm"] = 39] = "GuildIncidentReportFalseAlarm";
+	    MessageType[MessageType["PurchaseNotification"] = 44] = "PurchaseNotification";
+	    MessageType[MessageType["PollResult"] = 46] = "PollResult";
+	})(MessageType || (message$1.MessageType = MessageType = {}));
+	/**
+	 * @see {@link https://discord.com/developers/docs/resources/message#message-object-message-activity-types}
+	 */
+	var MessageActivityType;
+	(function (MessageActivityType) {
+	    MessageActivityType[MessageActivityType["Join"] = 1] = "Join";
+	    MessageActivityType[MessageActivityType["Spectate"] = 2] = "Spectate";
+	    MessageActivityType[MessageActivityType["Listen"] = 3] = "Listen";
+	    MessageActivityType[MessageActivityType["JoinRequest"] = 5] = "JoinRequest";
+	})(MessageActivityType || (message$1.MessageActivityType = MessageActivityType = {}));
+	/**
+	 * @see {@link https://discord.com/developers/docs/resources/message#message-reference-types}
+	 */
+	var MessageReferenceType;
+	(function (MessageReferenceType) {
+	    /**
+	     * A standard reference used by replies
+	     */
+	    MessageReferenceType[MessageReferenceType["Default"] = 0] = "Default";
+	    /**
+	     * Reference used to point to a message at a point in time
+	     */
+	    MessageReferenceType[MessageReferenceType["Forward"] = 1] = "Forward";
+	})(MessageReferenceType || (message$1.MessageReferenceType = MessageReferenceType = {}));
+	/**
+	 * @see {@link https://discord.com/developers/docs/resources/message#message-object-message-flags}
+	 */
+	var MessageFlags;
+	(function (MessageFlags) {
+	    /**
+	     * This message has been published to subscribed channels (via Channel Following)
+	     */
+	    MessageFlags[MessageFlags["Crossposted"] = 1] = "Crossposted";
+	    /**
+	     * This message originated from a message in another channel (via Channel Following)
+	     */
+	    MessageFlags[MessageFlags["IsCrosspost"] = 2] = "IsCrosspost";
+	    /**
+	     * Do not include any embeds when serializing this message
+	     */
+	    MessageFlags[MessageFlags["SuppressEmbeds"] = 4] = "SuppressEmbeds";
+	    /**
+	     * The source message for this crosspost has been deleted (via Channel Following)
+	     */
+	    MessageFlags[MessageFlags["SourceMessageDeleted"] = 8] = "SourceMessageDeleted";
+	    /**
+	     * This message came from the urgent message system
+	     */
+	    MessageFlags[MessageFlags["Urgent"] = 16] = "Urgent";
+	    /**
+	     * This message has an associated thread, which shares its id
+	     */
+	    MessageFlags[MessageFlags["HasThread"] = 32] = "HasThread";
+	    /**
+	     * This message is only visible to the user who invoked the Interaction
+	     */
+	    MessageFlags[MessageFlags["Ephemeral"] = 64] = "Ephemeral";
+	    /**
+	     * This message is an Interaction Response and the bot is "thinking"
+	     */
+	    MessageFlags[MessageFlags["Loading"] = 128] = "Loading";
+	    /**
+	     * This message failed to mention some roles and add their members to the thread
+	     */
+	    MessageFlags[MessageFlags["FailedToMentionSomeRolesInThread"] = 256] = "FailedToMentionSomeRolesInThread";
+	    /**
+	     * @unstable This message flag is currently not documented by Discord but has a known value which we will try to keep up to date.
+	     */
+	    MessageFlags[MessageFlags["ShouldShowLinkNotDiscordWarning"] = 1024] = "ShouldShowLinkNotDiscordWarning";
+	    /**
+	     * This message will not trigger push and desktop notifications
+	     */
+	    MessageFlags[MessageFlags["SuppressNotifications"] = 4096] = "SuppressNotifications";
+	    /**
+	     * This message is a voice message
+	     */
+	    MessageFlags[MessageFlags["IsVoiceMessage"] = 8192] = "IsVoiceMessage";
+	    /**
+	     * This message has a snapshot (via Message Forwarding)
+	     */
+	    MessageFlags[MessageFlags["HasSnapshot"] = 16384] = "HasSnapshot";
+	    /**
+	     * Allows you to create fully component-driven messages
+	     *
+	     * @see {@link https://discord.com/developers/docs/components/overview}
+	     */
+	    MessageFlags[MessageFlags["IsComponentsV2"] = 32768] = "IsComponentsV2";
+	})(MessageFlags || (message$1.MessageFlags = MessageFlags = {}));
+	/**
+	 * @see {@link https://discord.com/developers/docs/resources/message#embed-object-embed-types}
+	 */
+	var EmbedType;
+	(function (EmbedType) {
+	    /**
+	     * Generic embed rendered from embed attributes
+	     */
+	    EmbedType["Rich"] = "rich";
+	    /**
+	     * Image embed
+	     */
+	    EmbedType["Image"] = "image";
+	    /**
+	     * Video embed
+	     */
+	    EmbedType["Video"] = "video";
+	    /**
+	     * Animated gif image embed rendered as a video embed
+	     */
+	    EmbedType["GIFV"] = "gifv";
+	    /**
+	     * Article embed
+	     */
+	    EmbedType["Article"] = "article";
+	    /**
+	     * Link embed
+	     */
+	    EmbedType["Link"] = "link";
+	    /**
+	     * Auto moderation alert embed
+	     *
+	     * @unstable This embed type is currently not documented by Discord, but it is returned in the auto moderation system messages.
+	     */
+	    EmbedType["AutoModerationMessage"] = "auto_moderation_message";
+	    /**
+	     * Poll result embed
+	     */
+	    EmbedType["PollResult"] = "poll_result";
+	})(EmbedType || (message$1.EmbedType = EmbedType = {}));
+	/**
+	 * @see {@link https://discord.com/developers/docs/resources/message#attachment-object-attachment-structure-attachment-flags}
+	 */
+	var AttachmentFlags;
+	(function (AttachmentFlags) {
+	    /**
+	     * This attachment has been edited using the remix feature on mobile
+	     */
+	    AttachmentFlags[AttachmentFlags["IsRemix"] = 4] = "IsRemix";
+	})(AttachmentFlags || (message$1.AttachmentFlags = AttachmentFlags = {}));
+	/**
+	 * @see {@link https://discord.com/developers/docs/resources/message#allowed-mentions-object-allowed-mention-types}
+	 */
+	var AllowedMentionsTypes;
+	(function (AllowedMentionsTypes) {
+	    /**
+	     * Controls `@everyone` and `@here` mentions
+	     */
+	    AllowedMentionsTypes["Everyone"] = "everyone";
+	    /**
+	     * Controls role mentions
+	     */
+	    AllowedMentionsTypes["Role"] = "roles";
+	    /**
+	     * Controls user mentions
+	     */
+	    AllowedMentionsTypes["User"] = "users";
+	})(AllowedMentionsTypes || (message$1.AllowedMentionsTypes = AllowedMentionsTypes = {}));
+	/**
+	 * @see {@link https://discord.com/developers/docs/components/reference#component-object-component-types}
+	 */
+	var ComponentType;
+	(function (ComponentType) {
+	    /**
+	     * Container to display a row of interactive components
+	     */
+	    ComponentType[ComponentType["ActionRow"] = 1] = "ActionRow";
+	    /**
+	     * Button component
+	     */
+	    ComponentType[ComponentType["Button"] = 2] = "Button";
+	    /**
+	     * Select menu for picking from defined text options
+	     */
+	    ComponentType[ComponentType["StringSelect"] = 3] = "StringSelect";
+	    /**
+	     * Text Input component
+	     */
+	    ComponentType[ComponentType["TextInput"] = 4] = "TextInput";
+	    /**
+	     * Select menu for users
+	     */
+	    ComponentType[ComponentType["UserSelect"] = 5] = "UserSelect";
+	    /**
+	     * Select menu for roles
+	     */
+	    ComponentType[ComponentType["RoleSelect"] = 6] = "RoleSelect";
+	    /**
+	     * Select menu for users and roles
+	     */
+	    ComponentType[ComponentType["MentionableSelect"] = 7] = "MentionableSelect";
+	    /**
+	     * Select menu for channels
+	     */
+	    ComponentType[ComponentType["ChannelSelect"] = 8] = "ChannelSelect";
+	    /**
+	     * Container to display text alongside an accessory component
+	     */
+	    ComponentType[ComponentType["Section"] = 9] = "Section";
+	    /**
+	     * Markdown text
+	     */
+	    ComponentType[ComponentType["TextDisplay"] = 10] = "TextDisplay";
+	    /**
+	     * Small image that can be used as an accessory
+	     */
+	    ComponentType[ComponentType["Thumbnail"] = 11] = "Thumbnail";
+	    /**
+	     * Display images and other media
+	     */
+	    ComponentType[ComponentType["MediaGallery"] = 12] = "MediaGallery";
+	    /**
+	     * Displays an attached file
+	     */
+	    ComponentType[ComponentType["File"] = 13] = "File";
+	    /**
+	     * Component to add vertical padding between other components
+	     */
+	    ComponentType[ComponentType["Separator"] = 14] = "Separator";
+	    /**
+	     * @unstable This component type is currently not documented by Discord but has a known value which we will try to keep up to date.
+	     */
+	    ComponentType[ComponentType["ContentInventoryEntry"] = 16] = "ContentInventoryEntry";
+	    /**
+	     * Container that visually groups a set of components
+	     */
+	    ComponentType[ComponentType["Container"] = 17] = "Container";
+	    /**
+	     * Container associating a label and description with a component
+	     */
+	    ComponentType[ComponentType["Label"] = 18] = "Label";
+	    // EVERYTHING BELOW THIS LINE SHOULD BE OLD NAMES FOR RENAMED ENUM MEMBERS //
+	    /**
+	     * Select menu for picking from defined text options
+	     *
+	     * @deprecated This is the old name for {@link ComponentType.StringSelect}
+	     */
+	    ComponentType[ComponentType["SelectMenu"] = 3] = "SelectMenu";
+	})(ComponentType || (message$1.ComponentType = ComponentType = {}));
+	/**
+	 * @see {@link https://discord.com/developers/docs/components/reference#button-button-styles}
+	 */
+	var ButtonStyle;
+	(function (ButtonStyle) {
+	    /**
+	     * The most important or recommended action in a group of options
+	     */
+	    ButtonStyle[ButtonStyle["Primary"] = 1] = "Primary";
+	    /**
+	     * Alternative or supporting actions
+	     */
+	    ButtonStyle[ButtonStyle["Secondary"] = 2] = "Secondary";
+	    /**
+	     * Positive confirmation or completion actions
+	     */
+	    ButtonStyle[ButtonStyle["Success"] = 3] = "Success";
+	    /**
+	     * An action with irreversible consequences
+	     */
+	    ButtonStyle[ButtonStyle["Danger"] = 4] = "Danger";
+	    /**
+	     * Navigates to a URL
+	     */
+	    ButtonStyle[ButtonStyle["Link"] = 5] = "Link";
+	    /**
+	     * Purchase
+	     */
+	    ButtonStyle[ButtonStyle["Premium"] = 6] = "Premium";
+	})(ButtonStyle || (message$1.ButtonStyle = ButtonStyle = {}));
+	/**
+	 * @see {@link https://discord.com/developers/docs/components/reference#text-input-text-input-styles}
+	 */
+	var TextInputStyle;
+	(function (TextInputStyle) {
+	    /**
+	     * Single-line input
+	     */
+	    TextInputStyle[TextInputStyle["Short"] = 1] = "Short";
+	    /**
+	     * Multi-line input
+	     */
+	    TextInputStyle[TextInputStyle["Paragraph"] = 2] = "Paragraph";
+	})(TextInputStyle || (message$1.TextInputStyle = TextInputStyle = {}));
+	/**
+	 * @see {@link https://discord.com/developers/docs/components/reference#user-select-select-default-value-structure}
+	 */
+	var SelectMenuDefaultValueType;
+	(function (SelectMenuDefaultValueType) {
+	    SelectMenuDefaultValueType["Channel"] = "channel";
+	    SelectMenuDefaultValueType["Role"] = "role";
+	    SelectMenuDefaultValueType["User"] = "user";
+	})(SelectMenuDefaultValueType || (message$1.SelectMenuDefaultValueType = SelectMenuDefaultValueType = {}));
+	var UnfurledMediaItemLoadingState;
+	(function (UnfurledMediaItemLoadingState) {
+	    UnfurledMediaItemLoadingState[UnfurledMediaItemLoadingState["Unknown"] = 0] = "Unknown";
+	    UnfurledMediaItemLoadingState[UnfurledMediaItemLoadingState["Loading"] = 1] = "Loading";
+	    UnfurledMediaItemLoadingState[UnfurledMediaItemLoadingState["LoadedSuccess"] = 2] = "LoadedSuccess";
+	    UnfurledMediaItemLoadingState[UnfurledMediaItemLoadingState["LoadedNotFound"] = 3] = "LoadedNotFound";
+	})(UnfurledMediaItemLoadingState || (message$1.UnfurledMediaItemLoadingState = UnfurledMediaItemLoadingState = {}));
+	/**
+	 * @see {@link https://discord.com/developers/docs/components/reference#separator}
+	 */
+	var SeparatorSpacingSize;
+	(function (SeparatorSpacingSize) {
+	    SeparatorSpacingSize[SeparatorSpacingSize["Small"] = 1] = "Small";
+	    SeparatorSpacingSize[SeparatorSpacingSize["Large"] = 2] = "Large";
+	})(SeparatorSpacingSize || (message$1.SeparatorSpacingSize = SeparatorSpacingSize = {}));
+	
+	return message$1;
 }
 
 var monetization$1 = {};
@@ -30798,18 +30612,18 @@ function requireMonetization$1 () {
 	return monetization$1;
 }
 
-var oauth2$1 = {};
+var oauth2 = {};
 
-var hasRequiredOauth2$1;
+var hasRequiredOauth2;
 
-function requireOauth2$1 () {
-	if (hasRequiredOauth2$1) return oauth2$1;
-	hasRequiredOauth2$1 = 1;
+function requireOauth2 () {
+	if (hasRequiredOauth2) return oauth2;
+	hasRequiredOauth2 = 1;
 	/**
 	 * Types extracted from https://discord.com/developers/docs/topics/oauth2
 	 */
-	Object.defineProperty(oauth2$1, "__esModule", { value: true });
-	oauth2$1.OAuth2Scopes = void 0;
+	Object.defineProperty(oauth2, "__esModule", { value: true });
+	oauth2.OAuth2Scopes = void 0;
 	var OAuth2Scopes;
 	(function (OAuth2Scopes) {
 	    /**
@@ -30950,9 +30764,9 @@ function requireOauth2$1 () {
 	     * @see {@link https://discord.com/developers/docs/interactions/application-commands}
 	     */
 	    OAuth2Scopes["ApplicationCommandsPermissionsUpdate"] = "applications.commands.permissions.update";
-	})(OAuth2Scopes || (oauth2$1.OAuth2Scopes = OAuth2Scopes = {}));
+	})(OAuth2Scopes || (oauth2.OAuth2Scopes = OAuth2Scopes = {}));
 	
-	return oauth2$1;
+	return oauth2;
 }
 
 var permissions = {};
@@ -30981,18 +30795,18 @@ function requirePermissions () {
 	return permissions;
 }
 
-var poll$1 = {};
+var poll = {};
 
-var hasRequiredPoll$2;
+var hasRequiredPoll$1;
 
-function requirePoll$2 () {
-	if (hasRequiredPoll$2) return poll$1;
-	hasRequiredPoll$2 = 1;
+function requirePoll$1 () {
+	if (hasRequiredPoll$1) return poll;
+	hasRequiredPoll$1 = 1;
 	/**
 	 * Types extracted from https://discord.com/developers/docs/resources/poll
 	 */
-	Object.defineProperty(poll$1, "__esModule", { value: true });
-	poll$1.PollLayoutType = void 0;
+	Object.defineProperty(poll, "__esModule", { value: true });
+	poll.PollLayoutType = void 0;
 	/**
 	 * @see {@link https://discord.com/developers/docs/resources/poll#layout-type}
 	 */
@@ -31002,35 +30816,20 @@ function requirePoll$2 () {
 	     * The, uhm, default layout type
 	     */
 	    PollLayoutType[PollLayoutType["Default"] = 1] = "Default";
-	})(PollLayoutType || (poll$1.PollLayoutType = PollLayoutType = {}));
+	})(PollLayoutType || (poll.PollLayoutType = PollLayoutType = {}));
 	
-	return poll$1;
+	return poll;
 }
 
-var soundboard$1 = {};
+var stageInstance = {};
 
-var hasRequiredSoundboard$1;
+var hasRequiredStageInstance$1;
 
-function requireSoundboard$1 () {
-	if (hasRequiredSoundboard$1) return soundboard$1;
-	hasRequiredSoundboard$1 = 1;
-	/**
-	 * Types extracted from https://discord.com/developers/docs/resources/soundboard
-	 */
-	Object.defineProperty(soundboard$1, "__esModule", { value: true });
-	
-	return soundboard$1;
-}
-
-var stageInstance$1 = {};
-
-var hasRequiredStageInstance$2;
-
-function requireStageInstance$2 () {
-	if (hasRequiredStageInstance$2) return stageInstance$1;
-	hasRequiredStageInstance$2 = 1;
-	Object.defineProperty(stageInstance$1, "__esModule", { value: true });
-	stageInstance$1.StageInstancePrivacyLevel = void 0;
+function requireStageInstance$1 () {
+	if (hasRequiredStageInstance$1) return stageInstance;
+	hasRequiredStageInstance$1 = 1;
+	Object.defineProperty(stageInstance, "__esModule", { value: true });
+	stageInstance.StageInstancePrivacyLevel = void 0;
 	/**
 	 * @see {@link https://discord.com/developers/docs/resources/stage-instance#stage-instance-object-privacy-level}
 	 */
@@ -31047,23 +30846,23 @@ function requireStageInstance$2 () {
 	     * The stage instance is visible to only guild members
 	     */
 	    StageInstancePrivacyLevel[StageInstancePrivacyLevel["GuildOnly"] = 2] = "GuildOnly";
-	})(StageInstancePrivacyLevel || (stageInstance$1.StageInstancePrivacyLevel = StageInstancePrivacyLevel = {}));
+	})(StageInstancePrivacyLevel || (stageInstance.StageInstancePrivacyLevel = StageInstancePrivacyLevel = {}));
 	
-	return stageInstance$1;
+	return stageInstance;
 }
 
-var sticker$1 = {};
+var sticker = {};
 
-var hasRequiredSticker$2;
+var hasRequiredSticker$1;
 
-function requireSticker$2 () {
-	if (hasRequiredSticker$2) return sticker$1;
-	hasRequiredSticker$2 = 1;
+function requireSticker$1 () {
+	if (hasRequiredSticker$1) return sticker;
+	hasRequiredSticker$1 = 1;
 	/**
 	 * Types extracted from https://discord.com/developers/docs/resources/sticker
 	 */
-	Object.defineProperty(sticker$1, "__esModule", { value: true });
-	sticker$1.StickerFormatType = sticker$1.StickerType = void 0;
+	Object.defineProperty(sticker, "__esModule", { value: true });
+	sticker.StickerFormatType = sticker.StickerType = void 0;
 	/**
 	 * @see {@link https://discord.com/developers/docs/resources/sticker#sticker-object-sticker-types}
 	 */
@@ -31077,7 +30876,7 @@ function requireSticker$2 () {
 	     * A sticker uploaded to a guild for the guild's members
 	     */
 	    StickerType[StickerType["Guild"] = 2] = "Guild";
-	})(StickerType || (sticker$1.StickerType = StickerType = {}));
+	})(StickerType || (sticker.StickerType = StickerType = {}));
 	/**
 	 * @see {@link https://discord.com/developers/docs/resources/sticker#sticker-object-sticker-format-types}
 	 */
@@ -31087,9 +30886,9 @@ function requireSticker$2 () {
 	    StickerFormatType[StickerFormatType["APNG"] = 2] = "APNG";
 	    StickerFormatType[StickerFormatType["Lottie"] = 3] = "Lottie";
 	    StickerFormatType[StickerFormatType["GIF"] = 4] = "GIF";
-	})(StickerFormatType || (sticker$1.StickerFormatType = StickerFormatType = {}));
+	})(StickerFormatType || (sticker.StickerFormatType = StickerFormatType = {}));
 	
-	return sticker$1;
+	return sticker;
 }
 
 var teams = {};
@@ -31125,33 +30924,18 @@ function requireTeams () {
 	return teams;
 }
 
-var template$1 = {};
+var user$1 = {};
 
-var hasRequiredTemplate$1;
+var hasRequiredUser$2;
 
-function requireTemplate$1 () {
-	if (hasRequiredTemplate$1) return template$1;
-	hasRequiredTemplate$1 = 1;
-	/**
-	 * Types extracted from https://discord.com/developers/docs/resources/guild-template
-	 */
-	Object.defineProperty(template$1, "__esModule", { value: true });
-	
-	return template$1;
-}
-
-var user$2 = {};
-
-var hasRequiredUser$3;
-
-function requireUser$3 () {
-	if (hasRequiredUser$3) return user$2;
-	hasRequiredUser$3 = 1;
+function requireUser$2 () {
+	if (hasRequiredUser$2) return user$1;
+	hasRequiredUser$2 = 1;
 	/**
 	 * Types extracted from https://discord.com/developers/docs/resources/user
 	 */
-	Object.defineProperty(user$2, "__esModule", { value: true });
-	user$2.ConnectionVisibility = user$2.ConnectionService = user$2.UserPremiumType = user$2.UserFlags = void 0;
+	Object.defineProperty(user$1, "__esModule", { value: true });
+	user$1.NameplatePalette = user$1.ConnectionVisibility = user$1.ConnectionService = user$1.UserPremiumType = user$1.UserFlags = void 0;
 	/**
 	 * @see {@link https://discord.com/developers/docs/resources/user#user-object-user-flags}
 	 */
@@ -31262,7 +31046,7 @@ function requireUser$3 () {
 	     * This value would be `1 << 51`, but bit shifting above `1 << 30` requires bigints
 	     */
 	    UserFlags[UserFlags["RestrictedCollaborator"] = 2251799813685248] = "RestrictedCollaborator";
-	})(UserFlags || (user$2.UserFlags = UserFlags = {}));
+	})(UserFlags || (user$1.UserFlags = UserFlags = {}));
 	/**
 	 * @see {@link https://discord.com/developers/docs/resources/user#user-object-premium-types}
 	 */
@@ -31272,7 +31056,7 @@ function requireUser$3 () {
 	    UserPremiumType[UserPremiumType["NitroClassic"] = 1] = "NitroClassic";
 	    UserPremiumType[UserPremiumType["Nitro"] = 2] = "Nitro";
 	    UserPremiumType[UserPremiumType["NitroBasic"] = 3] = "NitroBasic";
-	})(UserPremiumType || (user$2.UserPremiumType = UserPremiumType = {}));
+	})(UserPremiumType || (user$1.UserPremiumType = UserPremiumType = {}));
 	var ConnectionService;
 	(function (ConnectionService) {
 	    ConnectionService["AmazonMusic"] = "amazon-music";
@@ -31305,7 +31089,7 @@ function requireUser$3 () {
 	    ConnectionService["Twitter"] = "twitter";
 	    ConnectionService["Xbox"] = "xbox";
 	    ConnectionService["YouTube"] = "youtube";
-	})(ConnectionService || (user$2.ConnectionService = ConnectionService = {}));
+	})(ConnectionService || (user$1.ConnectionService = ConnectionService = {}));
 	var ConnectionVisibility;
 	(function (ConnectionVisibility) {
 	    /**
@@ -31316,38 +31100,40 @@ function requireUser$3 () {
 	     * Visible to everyone
 	     */
 	    ConnectionVisibility[ConnectionVisibility["Everyone"] = 1] = "Everyone";
-	})(ConnectionVisibility || (user$2.ConnectionVisibility = ConnectionVisibility = {}));
-	
-	return user$2;
-}
-
-var voice$1 = {};
-
-var hasRequiredVoice$1;
-
-function requireVoice$1 () {
-	if (hasRequiredVoice$1) return voice$1;
-	hasRequiredVoice$1 = 1;
+	})(ConnectionVisibility || (user$1.ConnectionVisibility = ConnectionVisibility = {}));
 	/**
-	 * Types extracted from https://discord.com/developers/docs/resources/voice
+	 * Background color of a nameplate.
 	 */
-	Object.defineProperty(voice$1, "__esModule", { value: true });
+	var NameplatePalette;
+	(function (NameplatePalette) {
+	    NameplatePalette["Berry"] = "berry";
+	    NameplatePalette["BubbleGum"] = "bubble_gum";
+	    NameplatePalette["Clover"] = "clover";
+	    NameplatePalette["Cobalt"] = "cobalt";
+	    NameplatePalette["Crimson"] = "crimson";
+	    NameplatePalette["Forest"] = "forest";
+	    NameplatePalette["Lemon"] = "lemon";
+	    NameplatePalette["Sky"] = "sky";
+	    NameplatePalette["Teal"] = "teal";
+	    NameplatePalette["Violet"] = "violet";
+	    NameplatePalette["White"] = "white";
+	})(NameplatePalette || (user$1.NameplatePalette = NameplatePalette = {}));
 	
-	return voice$1;
+	return user$1;
 }
 
-var webhook$1 = {};
+var webhook = {};
 
-var hasRequiredWebhook$2;
+var hasRequiredWebhook$1;
 
-function requireWebhook$2 () {
-	if (hasRequiredWebhook$2) return webhook$1;
-	hasRequiredWebhook$2 = 1;
+function requireWebhook$1 () {
+	if (hasRequiredWebhook$1) return webhook;
+	hasRequiredWebhook$1 = 1;
 	/**
 	 * Types extracted from https://discord.com/developers/docs/resources/webhook
 	 */
-	Object.defineProperty(webhook$1, "__esModule", { value: true });
-	webhook$1.WebhookType = webhook$1.ApplicationWebhookEventType = webhook$1.ApplicationWebhookType = void 0;
+	Object.defineProperty(webhook, "__esModule", { value: true });
+	webhook.WebhookType = webhook.ApplicationWebhookEventType = webhook.ApplicationWebhookType = void 0;
 	/**
 	 * @see {@link https://discord.com/developers/docs/events/webhook-events#webhook-types}
 	 */
@@ -31361,7 +31147,7 @@ function requireWebhook$2 () {
 	     * Webhook event (details for event in event body object)
 	     */
 	    ApplicationWebhookType[ApplicationWebhookType["Event"] = 1] = "Event";
-	})(ApplicationWebhookType || (webhook$1.ApplicationWebhookType = ApplicationWebhookType = {}));
+	})(ApplicationWebhookType || (webhook.ApplicationWebhookType = ApplicationWebhookType = {}));
 	/**
 	 * @see {@link https://discord.com/developers/docs/events/webhook-events#event-types}
 	 */
@@ -31372,6 +31158,10 @@ function requireWebhook$2 () {
 	     */
 	    ApplicationWebhookEventType["ApplicationAuthorized"] = "APPLICATION_AUTHORIZED";
 	    /**
+	     * Sent when an app was deauthorized by a user
+	     */
+	    ApplicationWebhookEventType["ApplicationDeauthorized"] = "APPLICATION_DEAUTHORIZED";
+	    /**
 	     * Entitlement was created
 	     */
 	    ApplicationWebhookEventType["EntitlementCreate"] = "ENTITLEMENT_CREATE";
@@ -31379,7 +31169,7 @@ function requireWebhook$2 () {
 	     * User was added to a Quest (currently unavailable)
 	     */
 	    ApplicationWebhookEventType["QuestUserEnrollment"] = "QUEST_USER_ENROLLMENT";
-	})(ApplicationWebhookEventType || (webhook$1.ApplicationWebhookEventType = ApplicationWebhookEventType = {}));
+	})(ApplicationWebhookEventType || (webhook.ApplicationWebhookEventType = ApplicationWebhookEventType = {}));
 	/**
 	 * @see {@link https://discord.com/developers/docs/resources/webhook#webhook-object-webhook-types}
 	 */
@@ -31397,9 +31187,9 @@ function requireWebhook$2 () {
 	     * Application webhooks are webhooks used with Interactions
 	     */
 	    WebhookType[WebhookType["Application"] = 3] = "Application";
-	})(WebhookType || (webhook$1.WebhookType = WebhookType = {}));
+	})(WebhookType || (webhook.WebhookType = WebhookType = {}));
 	
-	return webhook$1;
+	return webhook;
 }
 
 var hasRequiredV10$4;
@@ -31424,28 +31214,25 @@ function requireV10$4 () {
 		};
 		Object.defineProperty(exports, "__esModule", { value: true });
 		__exportStar(requireCommon$2(), exports);
-		__exportStar(requireApplication$2(), exports);
-		__exportStar(requireAuditLog$1(), exports);
-		__exportStar(requireAutoModeration$1(), exports);
-		__exportStar(requireChannel$3(), exports);
-		__exportStar(requireEmoji$3(), exports);
-		__exportStar(requireGateway$1(), exports);
-		__exportStar(requireGuild$2(), exports);
-		__exportStar(requireGuildScheduledEvent$2(), exports);
-		__exportStar(requireInteractions$1(), exports);
-		__exportStar(requireInvite$2(), exports);
+		__exportStar(requireApplication$1(), exports);
+		__exportStar(requireAuditLog(), exports);
+		__exportStar(requireAutoModeration(), exports);
+		__exportStar(requireChannel$2(), exports);
+		__exportStar(requireGateway(), exports);
+		__exportStar(requireGuild$1(), exports);
+		__exportStar(requireGuildScheduledEvent$1(), exports);
+		__exportStar(requireInteractions(), exports);
+		__exportStar(requireInvite$1(), exports);
+		__exportStar(requireMessage$2(), exports);
 		__exportStar(requireMonetization$1(), exports);
-		__exportStar(requireOauth2$1(), exports);
+		__exportStar(requireOauth2(), exports);
 		__exportStar(requirePermissions(), exports);
-		__exportStar(requirePoll$2(), exports);
-		__exportStar(requireSoundboard$1(), exports);
-		__exportStar(requireStageInstance$2(), exports);
-		__exportStar(requireSticker$2(), exports);
+		__exportStar(requirePoll$1(), exports);
+		__exportStar(requireStageInstance$1(), exports);
+		__exportStar(requireSticker$1(), exports);
 		__exportStar(requireTeams(), exports);
-		__exportStar(requireTemplate$1(), exports);
-		__exportStar(requireUser$3(), exports);
-		__exportStar(requireVoice$1(), exports);
-		__exportStar(requireWebhook$2(), exports);
+		__exportStar(requireUser$2(), exports);
+		__exportStar(requireWebhook$1(), exports);
 		
 	} (v10$7));
 	return v10$7;
@@ -31508,6 +31295,7 @@ const IntegrationExpireBehavior = mod$3.IntegrationExpireBehavior;
 const InteractionContextType = mod$3.InteractionContextType;
 const InteractionResponseType = mod$3.InteractionResponseType;
 const InteractionType = mod$3.InteractionType;
+const InviteFlags = mod$3.InviteFlags;
 const InviteTargetType = mod$3.InviteTargetType;
 const InviteType = mod$3.InviteType;
 const MembershipScreeningFieldType = mod$3.MembershipScreeningFieldType;
@@ -31515,6 +31303,7 @@ const MessageActivityType = mod$3.MessageActivityType;
 const MessageFlags = mod$3.MessageFlags;
 const MessageReferenceType = mod$3.MessageReferenceType;
 const MessageType = mod$3.MessageType;
+const NameplatePalette = mod$3.NameplatePalette;
 const OAuth2Scopes = mod$3.OAuth2Scopes;
 const OverwriteType = mod$3.OverwriteType;
 const PermissionFlagsBits = mod$3.PermissionFlagsBits;
@@ -31527,6 +31316,7 @@ const SelectMenuDefaultValueType = mod$3.SelectMenuDefaultValueType;
 const SeparatorSpacingSize = mod$3.SeparatorSpacingSize;
 const SortOrderType = mod$3.SortOrderType;
 const StageInstancePrivacyLevel = mod$3.StageInstancePrivacyLevel;
+const StatusDisplayType = mod$3.StatusDisplayType;
 const StickerFormatType = mod$3.StickerFormatType;
 const StickerType = mod$3.StickerType;
 const SubscriptionStatus = mod$3.SubscriptionStatus;
@@ -31597,6 +31387,7 @@ var v10$6 = /*#__PURE__*/Object.freeze({
 	InteractionContextType: InteractionContextType,
 	InteractionResponseType: InteractionResponseType,
 	InteractionType: InteractionType,
+	InviteFlags: InviteFlags,
 	InviteTargetType: InviteTargetType,
 	InviteType: InviteType,
 	MembershipScreeningFieldType: MembershipScreeningFieldType,
@@ -31604,6 +31395,7 @@ var v10$6 = /*#__PURE__*/Object.freeze({
 	MessageFlags: MessageFlags,
 	MessageReferenceType: MessageReferenceType,
 	MessageType: MessageType,
+	NameplatePalette: NameplatePalette,
 	OAuth2Scopes: OAuth2Scopes,
 	OverwriteType: OverwriteType,
 	PermissionFlagsBits: PermissionFlagsBits,
@@ -31616,6 +31408,7 @@ var v10$6 = /*#__PURE__*/Object.freeze({
 	SeparatorSpacingSize: SeparatorSpacingSize,
 	SortOrderType: SortOrderType,
 	StageInstancePrivacyLevel: StageInstancePrivacyLevel,
+	StatusDisplayType: StatusDisplayType,
 	StickerFormatType: StickerFormatType,
 	StickerType: StickerType,
 	SubscriptionStatus: SubscriptionStatus,
@@ -31889,6 +31682,7 @@ function requireCommon$1 () {
 	    RESTJSONErrorCodes[RESTJSONErrorCodes["MessageBlockedByHarmfulLinksFilter"] = 240000] = "MessageBlockedByHarmfulLinksFilter";
 	    RESTJSONErrorCodes[RESTJSONErrorCodes["CannotEnableOnboardingRequirementsAreNotMet"] = 350000] = "CannotEnableOnboardingRequirementsAreNotMet";
 	    RESTJSONErrorCodes[RESTJSONErrorCodes["CannotUpdateOnboardingWhileBelowRequirements"] = 350001] = "CannotUpdateOnboardingWhileBelowRequirements";
+	    RESTJSONErrorCodes[RESTJSONErrorCodes["AccessToFileUploadsHasBeenLimitedForThisGuild"] = 400001] = "AccessToFileUploadsHasBeenLimitedForThisGuild";
 	    RESTJSONErrorCodes[RESTJSONErrorCodes["FailedToBanUsers"] = 500000] = "FailedToBanUsers";
 	    RESTJSONErrorCodes[RESTJSONErrorCodes["PollVotingBlocked"] = 520000] = "PollVotingBlocked";
 	    RESTJSONErrorCodes[RESTJSONErrorCodes["PollExpired"] = 520001] = "PollExpired";
@@ -31939,42 +31733,6 @@ function requireCommon$1 () {
 	return common$1;
 }
 
-var application = {};
-
-var hasRequiredApplication$1;
-
-function requireApplication$1 () {
-	if (hasRequiredApplication$1) return application;
-	hasRequiredApplication$1 = 1;
-	Object.defineProperty(application, "__esModule", { value: true });
-	
-	return application;
-}
-
-var auditLog = {};
-
-var hasRequiredAuditLog;
-
-function requireAuditLog () {
-	if (hasRequiredAuditLog) return auditLog;
-	hasRequiredAuditLog = 1;
-	Object.defineProperty(auditLog, "__esModule", { value: true });
-	
-	return auditLog;
-}
-
-var autoModeration = {};
-
-var hasRequiredAutoModeration;
-
-function requireAutoModeration () {
-	if (hasRequiredAutoModeration) return autoModeration;
-	hasRequiredAutoModeration = 1;
-	Object.defineProperty(autoModeration, "__esModule", { value: true });
-	
-	return autoModeration;
-}
-
 var channel$1 = {};
 
 var hasRequiredChannel$1;
@@ -31996,78 +31754,6 @@ function requireChannel$1 () {
 	return channel$1;
 }
 
-var emoji$1 = {};
-
-var hasRequiredEmoji$2;
-
-function requireEmoji$2 () {
-	if (hasRequiredEmoji$2) return emoji$1;
-	hasRequiredEmoji$2 = 1;
-	Object.defineProperty(emoji$1, "__esModule", { value: true });
-	
-	return emoji$1;
-}
-
-var gateway = {};
-
-var hasRequiredGateway;
-
-function requireGateway () {
-	if (hasRequiredGateway) return gateway;
-	hasRequiredGateway = 1;
-	Object.defineProperty(gateway, "__esModule", { value: true });
-	
-	return gateway;
-}
-
-var guild = {};
-
-var hasRequiredGuild$1;
-
-function requireGuild$1 () {
-	if (hasRequiredGuild$1) return guild;
-	hasRequiredGuild$1 = 1;
-	Object.defineProperty(guild, "__esModule", { value: true });
-	
-	return guild;
-}
-
-var guildScheduledEvent = {};
-
-var hasRequiredGuildScheduledEvent$1;
-
-function requireGuildScheduledEvent$1 () {
-	if (hasRequiredGuildScheduledEvent$1) return guildScheduledEvent;
-	hasRequiredGuildScheduledEvent$1 = 1;
-	Object.defineProperty(guildScheduledEvent, "__esModule", { value: true });
-	
-	return guildScheduledEvent;
-}
-
-var interactions = {};
-
-var hasRequiredInteractions;
-
-function requireInteractions () {
-	if (hasRequiredInteractions) return interactions;
-	hasRequiredInteractions = 1;
-	Object.defineProperty(interactions, "__esModule", { value: true });
-	
-	return interactions;
-}
-
-var invite = {};
-
-var hasRequiredInvite$1;
-
-function requireInvite$1 () {
-	if (hasRequiredInvite$1) return invite;
-	hasRequiredInvite$1 = 1;
-	Object.defineProperty(invite, "__esModule", { value: true });
-	
-	return invite;
-}
-
 var monetization = {};
 
 var hasRequiredMonetization;
@@ -32087,114 +31773,6 @@ function requireMonetization () {
 	})(EntitlementOwnerType || (monetization.EntitlementOwnerType = EntitlementOwnerType = {}));
 	
 	return monetization;
-}
-
-var oauth2 = {};
-
-var hasRequiredOauth2;
-
-function requireOauth2 () {
-	if (hasRequiredOauth2) return oauth2;
-	hasRequiredOauth2 = 1;
-	Object.defineProperty(oauth2, "__esModule", { value: true });
-	
-	return oauth2;
-}
-
-var poll = {};
-
-var hasRequiredPoll$1;
-
-function requirePoll$1 () {
-	if (hasRequiredPoll$1) return poll;
-	hasRequiredPoll$1 = 1;
-	Object.defineProperty(poll, "__esModule", { value: true });
-	
-	return poll;
-}
-
-var soundboard = {};
-
-var hasRequiredSoundboard;
-
-function requireSoundboard () {
-	if (hasRequiredSoundboard) return soundboard;
-	hasRequiredSoundboard = 1;
-	Object.defineProperty(soundboard, "__esModule", { value: true });
-	
-	return soundboard;
-}
-
-var stageInstance = {};
-
-var hasRequiredStageInstance$1;
-
-function requireStageInstance$1 () {
-	if (hasRequiredStageInstance$1) return stageInstance;
-	hasRequiredStageInstance$1 = 1;
-	Object.defineProperty(stageInstance, "__esModule", { value: true });
-	
-	return stageInstance;
-}
-
-var sticker = {};
-
-var hasRequiredSticker$1;
-
-function requireSticker$1 () {
-	if (hasRequiredSticker$1) return sticker;
-	hasRequiredSticker$1 = 1;
-	Object.defineProperty(sticker, "__esModule", { value: true });
-	
-	return sticker;
-}
-
-var template = {};
-
-var hasRequiredTemplate;
-
-function requireTemplate () {
-	if (hasRequiredTemplate) return template;
-	hasRequiredTemplate = 1;
-	Object.defineProperty(template, "__esModule", { value: true });
-	
-	return template;
-}
-
-var user$1 = {};
-
-var hasRequiredUser$2;
-
-function requireUser$2 () {
-	if (hasRequiredUser$2) return user$1;
-	hasRequiredUser$2 = 1;
-	Object.defineProperty(user$1, "__esModule", { value: true });
-	
-	return user$1;
-}
-
-var voice = {};
-
-var hasRequiredVoice;
-
-function requireVoice () {
-	if (hasRequiredVoice) return voice;
-	hasRequiredVoice = 1;
-	Object.defineProperty(voice, "__esModule", { value: true });
-	
-	return voice;
-}
-
-var webhook = {};
-
-var hasRequiredWebhook$1;
-
-function requireWebhook$1 () {
-	if (hasRequiredWebhook$1) return webhook;
-	hasRequiredWebhook$1 = 1;
-	Object.defineProperty(webhook, "__esModule", { value: true });
-	
-	return webhook;
 }
 
 var hasRequiredV10$3;
@@ -32221,26 +31799,8 @@ function requireV10$3 () {
 		exports.OAuth2Routes = exports.RouteBases = exports.CDNRoutes = exports.ImageFormat = exports.StickerPackApplicationId = exports.Routes = exports.APIVersion = void 0;
 		const internals_1 = requireInternals();
 		__exportStar(requireCommon$1(), exports);
-		__exportStar(requireApplication$1(), exports);
-		__exportStar(requireAuditLog(), exports);
-		__exportStar(requireAutoModeration(), exports);
 		__exportStar(requireChannel$1(), exports);
-		__exportStar(requireEmoji$2(), exports);
-		__exportStar(requireGateway(), exports);
-		__exportStar(requireGuild$1(), exports);
-		__exportStar(requireGuildScheduledEvent$1(), exports);
-		__exportStar(requireInteractions(), exports);
-		__exportStar(requireInvite$1(), exports);
 		__exportStar(requireMonetization(), exports);
-		__exportStar(requireOauth2(), exports);
-		__exportStar(requirePoll$1(), exports);
-		__exportStar(requireSoundboard(), exports);
-		__exportStar(requireStageInstance$1(), exports);
-		__exportStar(requireSticker$1(), exports);
-		__exportStar(requireTemplate(), exports);
-		__exportStar(requireUser$2(), exports);
-		__exportStar(requireVoice(), exports);
-		__exportStar(requireWebhook$1(), exports);
 		exports.APIVersion = '10';
 		exports.Routes = {
 		    /**
@@ -32383,7 +31943,24 @@ function requireV10$3 () {
 		    },
 		    /**
 		     * Route for:
+		     * - GET `/channels/{channel.id}/messages/pins`
+		     */
+		    channelMessagesPins(channelId) {
+		        return `/channels/${channelId}/messages/pins`;
+		    },
+		    /**
+		     * Route for:
+		     * - PUT    `/channels/{channel.id}/messages/pins/{message.id}`
+		     * - DELETE `/channels/{channel.id}/messages/pins/{message.id}`
+		     */
+		    channelMessagesPin(channelId, messageId) {
+		        return `/channels/${channelId}/messages/pins/${messageId}`;
+		    },
+		    /**
+		     * Route for:
 		     * - GET `/channels/{channel.id}/pins`
+		     *
+		     * @deprecated Use {@link Routes.channelMessagesPins} instead.
 		     */
 		    channelPins(channelId) {
 		        return `/channels/${channelId}/pins`;
@@ -32392,6 +31969,8 @@ function requireV10$3 () {
 		     * Route for:
 		     * - PUT    `/channels/{channel.id}/pins/{message.id}`
 		     * - DELETE `/channels/{channel.id}/pins/{message.id}`
+		     *
+		     * @deprecated Use {@link Routes.channelMessagesPin} instead.
 		     */
 		    channelPin(channelId, messageId) {
 		        return `/channels/${channelId}/pins/${messageId}`;
@@ -32424,6 +32003,8 @@ function requireV10$3 () {
 		    /**
 		     * Route for:
 		     * - POST `/guilds`
+		     *
+		     * @deprecated {@link https://discord.com/developers/docs/change-log#guild-create-deprecation}
 		     */
 		    guilds() {
 		        return '/guilds';
@@ -32432,7 +32013,7 @@ function requireV10$3 () {
 		     * Route for:
 		     * - GET    `/guilds/{guild.id}`
 		     * - PATCH  `/guilds/{guild.id}`
-		     * - DELETE `/guilds/{guild.id}`
+		     * - DELETE `/guilds/{guild.id}` (**deprecated**)
 		     */
 		    guild(guildId) {
 		        return `/guilds/${guildId}`;
@@ -32498,6 +32079,8 @@ function requireV10$3 () {
 		    /**
 		     * Route for:
 		     * - POST `/guilds/{guild.id}/mfa`
+		     *
+		     * @deprecated
 		     */
 		    guildMFA(guildId) {
 		        return `/guilds/${guildId}/mfa`;
@@ -32612,7 +32195,7 @@ function requireV10$3 () {
 		    /**
 		     * Route for:
 		     * - GET  `/guilds/templates/{template.code}`
-		     * - POST `/guilds/templates/{template.code}`
+		     * - POST `/guilds/templates/{template.code}` (**deprecated**)
 		     */
 		    template(code) {
 		        return `/guilds/templates/${code}`;
@@ -32703,7 +32286,7 @@ function requireV10$3 () {
 		     * - GET   `/users/{user.id}`
 		     * - PATCH `/users/@me`
 		     *
-		     * @param [userId] - The user ID, defaulted to `@me`
+		     * @param userId - The user ID, defaulted to `@me`
 		     */
 		    user(userId = '@me') {
 		        return `/users/${userId}`;
@@ -33409,6 +32992,15 @@ function requireV10$3 () {
 		     */
 		    soundboardSound(soundId) {
 		        return `/soundboard-sounds/${soundId}`;
+		    },
+		    /**
+		     * Route for:
+		     * - GET `/guild-tag-badges/{guild.id}/{badge}.{png|jpeg|webp}`
+		     *
+		     * This route supports the extensions: PNG, JPEG, WebP
+		     */
+		    guildTagBadge(guildId, guildTagBadge, format) {
+		        return `/guild-tag-badges/${guildId}/${guildTagBadge}.${format}`;
 		    },
 		};
 		for (const [key, fn] of Object.entries(exports.CDNRoutes)) {
@@ -37223,7 +36815,7 @@ function requireWeb () {
 	// src/lib/utils/constants.ts
 	var import_util = requireDist$b();
 	var import_v10 = requireV10();
-	var DefaultUserAgent = `DiscordBot (https://discord.js.org, 2.5.1)`;
+	var DefaultUserAgent = `DiscordBot (https://discord.js.org, 2.6.0)`;
 	var DefaultUserAgentAppendix = (0, import_util.getUserAgentAppendix)();
 	var DefaultRestOptions = {
 	  agent: null,
@@ -37640,6 +37232,16 @@ function requireWeb () {
 	    return `${this.cdn}${import_v102.CDNRoutes.soundboardSound(soundId)}`;
 	  }
 	  /**
+	   * Generates a URL for a guild tag badge.
+	   *
+	   * @param guildId - The guild id
+	   * @param badgeHash - The hash of the badge
+	   * @param options - Optional options for the badge
+	   */
+	  guildTagBadge(guildId, badgeHash, options) {
+	    return this.makeURL(`/guild-tag-badges/${guildId}/${badgeHash}`, options);
+	  }
+	  /**
 	   * Constructs the URL for the resource, checking whether or not `hash` starts with `a_` if `dynamic` is set to `true`.
 	   *
 	   * @param route - The base cdn route
@@ -37659,7 +37261,8 @@ function requireWeb () {
 	    allowedExtensions = ALLOWED_EXTENSIONS,
 	    base = this.cdn,
 	    extension = "webp",
-	    size
+	    size,
+	    animated
 	  } = {}) {
 	    extension = String(extension).toLowerCase();
 	    if (!allowedExtensions.includes(extension)) {
@@ -37671,6 +37274,9 @@ Must be one of: ${allowedExtensions.join(", ")}`);
 Must be one of: ${ALLOWED_SIZES.join(", ")}`);
 	    }
 	    const url = new URL(`${base}${route}.${extension}`);
+	    if (animated !== void 0) {
+	      url.searchParams.set("animated", String(animated));
+	    }
 	    if (size) {
 	      url.searchParams.set("size", String(size));
 	    }
@@ -38563,7 +38169,7 @@ ${flattened}` : error.message || flattened || "Unknown Error";
 	};
 
 	// src/shared.ts
-	var version = "2.5.1";
+	var version = "2.6.0";
 
 	// src/web.ts
 	setDefaultStrategy(fetch);
@@ -68472,6 +68078,21 @@ function requireConstants$1 () {
 		};
 
 		/**
+		 * Holographic color values for role styling.
+		 * When using `tertiaryColor`, the API enforces these specific values for holographic effect.
+		 *
+		 * @typedef {Object} HolographicStyle
+		 * @property {number} Primary 11127295 (0xA9FFFF)
+		 * @property {number} Secondary 16759788 (0xFFCCCC)
+		 * @property {number} Tertiary 16761760 (0xFFE0A0)
+		 */
+		exports.HolographicStyle = {
+		  Primary: 11_127_295,
+		  Secondary: 16_759_788,
+		  Tertiary: 16_761_760,
+		};
+
+		/**
 		 * @typedef {Object} Constants Constants that can be used in an enum or object-like way.
 		 * @property {number} MaxBulkDeletableMessageAge Max bulk deletable message age
 		 * @property {SweeperKey[]} SweeperKeys The possible names of items that can be swept in sweepers
@@ -68481,6 +68102,7 @@ function requireConstants$1 () {
 		 * @property {VoiceBasedChannelTypes} VoiceBasedChannelTypes The types of channels that are voice-based
 		 * @property {SelectMenuTypes} SelectMenuTypes The types of components that are select menus.
 		 * @property {Object} StickerFormatExtensionMap A mapping between sticker formats and their respective image formats.
+		 * @property {HolographicStyle} HolographicStyle Holographic color values for role styling.
 		 */ 
 	} (Constants));
 	return Constants;
@@ -69052,9 +68674,35 @@ function requireRole$1 () {
 	    if ('color' in data) {
 	      /**
 	       * The base 10 color of the role
+	       *
 	       * @type {number}
+	       * @deprecated Use {@link Role#colors} instead.
 	       */
 	      this.color = data.color;
+	    }
+
+	    /**
+	     * @typedef {Object} RoleColors
+	     * @property {number} primaryColor The primary color of the role
+	     * @property {?number} secondaryColor The secondary color of the role.
+	     * This will make the role a gradient between the other provided colors
+	     * @property {?number} tertiaryColor The tertiary color of the role.
+	     * When sending `tertiaryColor` the API enforces the role color to be a holographic style
+	     * with values of `primaryColor = 11127295`, `secondaryColor = 16759788`, and `tertiaryColor = 16761760`.
+	     * These values are available as a constant: `Constants.HolographicStyle`
+	     */
+
+	    if ('colors' in data) {
+	      /**
+	       * The colors of the role
+	       *
+	       * @type {RoleColors}
+	       */
+	      this.colors = {
+	        primaryColor: data.colors.primary_color,
+	        secondaryColor: data.colors.secondary_color,
+	        tertiaryColor: data.colors.tertiary_color,
+	      };
 	    }
 
 	    if ('hoist' in data) {
@@ -69168,7 +68816,7 @@ function requireRole$1 () {
 	   * @readonly
 	   */
 	  get hexColor() {
-	    return `#${this.color.toString(16).padStart(6, '0')}`;
+	    return `#${this.colors.primaryColor.toString(16).padStart(6, '0')}`;
 	  }
 
 	  /**
@@ -69229,6 +68877,8 @@ function requireRole$1 () {
 	   * @typedef {Object} RoleData
 	   * @property {string} [name] The name of the role
 	   * @property {ColorResolvable} [color] The color of the role, either a hex string or a base 10 number
+	   * <warn>This property is deprecated. Use `colors` instead.</warn>
+	   * @property {RoleColorsResolvable} [colors] The colors of the role
 	   * @property {boolean} [hoist] Whether or not the role should be hoisted
 	   * @property {number} [position] The position of the role
 	   * @property {PermissionResolvable} [permissions] The permissions of the role
@@ -69284,17 +68934,39 @@ function requireRole$1 () {
 
 	  /**
 	   * Sets a new color for the role.
+	   *
 	   * @param {ColorResolvable} color The color of the role
 	   * @param {string} [reason] Reason for changing the role's color
 	   * @returns {Promise<Role>}
+	   * @deprecated Use {@link Role#setColors} instead.
+	   */
+	  async setColor(color, reason) {
+	    return this.edit({ color, reason });
+	  }
+
+	  /**
+	   * Sets new colors for the role.
+	   *
+	   * @param {RoleColorsResolvable} colors The colors of the role
+	   * @param {string} [reason] Reason for changing the role's colors
+	   * @returns {Promise<Role>}
 	   * @example
-	   * // Set the color of a role
-	   * role.setColor('#FF0000')
-	   *   .then(updated => console.log(`Set color of role to ${updated.color}`))
+	   * // Set the colors of a role
+	   * role.setColors({ primaryColor: '#FF0000', secondaryColor: '#00FF00', tertiaryColor: '#0000FF' })
+	   *   .then(updated => console.log(`Set colors of role to ${updated.colors}`))
+	   *   .catch(console.error);
+	   * @example
+	   * // Set holographic colors using constants
+	   * role.setColors({
+	   *   primaryColor: Constants.HolographicStyle.Primary,
+	   *   secondaryColor: Constants.HolographicStyle.Secondary,
+	   *   tertiaryColor: Constants.HolographicStyle.Tertiary,
+	   * })
+	   *   .then(updated => console.log(`Set holographic colors for role ${updated.name}`))
 	   *   .catch(console.error);
 	   */
-	  setColor(color, reason) {
-	    return this.edit({ color, reason });
+	  async setColors(colors, reason) {
+	    return this.edit({ colors, reason });
 	  }
 
 	  /**
@@ -69432,7 +69104,9 @@ function requireRole$1 () {
 	      role &&
 	      this.id === role.id &&
 	      this.name === role.name &&
-	      this.color === role.color &&
+	      this.colors.primaryColor === role.colors.primaryColor &&
+	      this.colors.secondaryColor === role.colors.secondaryColor &&
+	      this.colors.tertiaryColor === role.colors.tertiaryColor &&
 	      this.hoist === role.hoist &&
 	      this.position === role.position &&
 	      this.permissions.bitfield === role.permissions.bitfield &&
@@ -70104,10 +69778,11 @@ function requireGuildChannel () {
 	      return new PermissionsBitField(PermissionsBitField.All).freeze();
 	    }
 
+	    const basePermissions = new PermissionsBitField([role.permissions, role.guild.roles.everyone.permissions]);
 	    const everyoneOverwrites = this.permissionOverwrites.cache.get(this.guild.id);
 	    const roleOverwrites = this.permissionOverwrites.cache.get(role.id);
 
-	    return role.permissions
+	    return basePermissions
 	      .remove(everyoneOverwrites?.deny ?? PermissionsBitField.DefaultBit)
 	      .add(everyoneOverwrites?.allow ?? PermissionsBitField.DefaultBit)
 	      .remove(roleOverwrites?.deny ?? PermissionsBitField.DefaultBit)
@@ -71094,17 +70769,38 @@ function requireTransformers () {
 	  };
 	}
 
+	/**
+	 * Transforms a collectibles object to a camel-cased variant.
+	 *
+	 * @param {APICollectibles} collectibles The collectibles to transform
+	 * @returns {Collectibles}
+	 * @ignore
+	 */
+	function _transformCollectibles(collectibles) {
+	  if (!collectibles.nameplate) return { nameplate: null };
+
+	  return {
+	    nameplate: {
+	      skuId: collectibles.nameplate.sku_id,
+	      asset: collectibles.nameplate.asset,
+	      label: collectibles.nameplate.label,
+	      palette: collectibles.nameplate.palette,
+	    },
+	  };
+	}
+
 	Transformers = {
 	  toSnakeCase,
 	  _transformAPIAutoModerationAction,
 	  _transformAPIMessageInteractionMetadata,
 	  _transformGuildScheduledEventRecurrenceRule,
 	  _transformAPIIncidentsData,
+	  _transformCollectibles,
 	};
 	return Transformers;
 }
 
-var version = "14.21.0";
+var version = "14.22.1";
 var require$$39 = {
 	version: version};
 
@@ -71785,7 +71481,7 @@ function requireEvents () {
 	 * @property {string} ChannelDelete channelDelete
 	 * @property {string} ChannelPinsUpdate channelPinsUpdate
 	 * @property {string} ChannelUpdate channelUpdate
-	 * @property {string} ClientReady ready
+	 * @property {string} ClientReady clientReady
 	 * @property {string} Debug debug
 	 * @property {string} EntitlementCreate entitlementCreate
 	 * @property {string} EntitlementUpdate entitlementUpdate
@@ -71862,7 +71558,7 @@ function requireEvents () {
 	 * @property {string} VoiceServerUpdate voiceServerUpdate
 	 * @property {string} VoiceStateUpdate voiceStateUpdate
 	 * @property {string} Warn warn
-	 * @property {string} WebhooksUpdate webhookUpdate
+	 * @property {string} WebhooksUpdate webhooksUpdate
 	 */
 
 	// JSDoc for IntelliSense purposes
@@ -71881,7 +71577,7 @@ function requireEvents () {
 	  ChannelDelete: 'channelDelete',
 	  ChannelPinsUpdate: 'channelPinsUpdate',
 	  ChannelUpdate: 'channelUpdate',
-	  ClientReady: 'ready',
+	  ClientReady: 'clientReady',
 	  Debug: 'debug',
 	  EntitlementCreate: 'entitlementCreate',
 	  EntitlementUpdate: 'entitlementUpdate',
@@ -71959,7 +71655,7 @@ function requireEvents () {
 	  VoiceServerUpdate: 'voiceServerUpdate',
 	  VoiceStateUpdate: 'voiceStateUpdate',
 	  Warn: 'warn',
-	  WebhooksUpdate: 'webhookUpdate',
+	  WebhooksUpdate: 'webhooksUpdate',
 	};
 	return Events;
 }
@@ -72751,7 +72447,7 @@ function requireCollector () {
 
 	  /**
 	   * Allows collectors to be consumed with for-await-of loops
-	   * @see {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for-await...of}
+	   * @see {@link https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/for-await...of}
 	   */
 	  async *[Symbol.asyncIterator]() {
 	    const queue = [];
@@ -74433,7 +74129,7 @@ function requireEmoji$1 () {
 
 	  /**
 	   * Returns a URL for the emoji or `null` if this is not a custom emoji.
-	   * @param {BaseImageURLOptions} [options] Options for the image URL
+	   * @param {EmojiURLOptions} [options] Options for the emoji URL
 	   * @returns {?string}
 	   */
 	  imageURL(options) {
@@ -76879,7 +76575,7 @@ function requireApplicationCommand () {
 	   * @returns {Promise<ApplicationCommand>}
 	   * @example
 	   * // Edit the name localizations of this command
-	   * command.setLocalizedNames({
+	   * command.setNameLocalizations({
 	   *   'en-GB': 'test',
 	   *   'pt-BR': 'teste',
 	   * })
@@ -77507,36 +77203,41 @@ function requireApplicationEmoji () {
 	     */
 	    this.application = application;
 
-	    /**
-	     * The user who created this emoji
-	     * @type {?User}
-	     */
-	    this.author = null;
-
-	    this.managed = null;
-	    this.requiresColons = null;
-
 	    this._patch(data);
 	  }
 
 	  _patch(data) {
 	    if ('name' in data) this.name = data.name;
-	    if (data.user) this.author = this.client.users._add(data.user);
+	    if (data.user) {
+	      /**
+	       * The user who created this emoji
+	       * @type {User}
+	       */
+	      this.author = this.client.users._add(data.user);
+	    }
 
 	    if ('managed' in data) {
 	      /**
-	       * Whether this emoji is managed by an external service
-	       * @type {?boolean}
+	       * Whether this emoji is managed by an external service. Always `false` for application emojis
+	       * @type {false}
 	       */
 	      this.managed = data.managed;
 	    }
 
 	    if ('require_colons' in data) {
 	      /**
-	       * Whether or not this emoji requires colons surrounding it
-	       * @type {?boolean}
+	       * Whether this emoji requires colons surrounding it. Always `true` for application emojis
+	       * @type {true}
 	       */
 	      this.requiresColons = data.require_colons;
+	    }
+
+	    if ('available' in data) {
+	      /**
+	       * Whether this emoji is available. Always `true` for application emojis
+	       * @type {true}
+	       */
+	      this.available = data.available;
 	    }
 	  }
 
@@ -77598,13 +77299,59 @@ function requireApplicationEmoji () {
 	        other.id === this.id &&
 	        other.name === this.name &&
 	        other.managed === this.managed &&
-	        other.requiresColons === this.requiresColons
+	        other.requiresColons === this.requiresColons &&
+	        other.available === this.available
 	      );
 	    }
 
 	    return other.id === this.id && other.name === this.name;
 	  }
 	}
+
+	/**
+	 * The emoji's name
+	 * @name name
+	 * @memberof ApplicationEmoji
+	 * @instance
+	 * @type {string}
+	 * @readonly
+	 */
+
+	/**
+	 * Whether the emoji is animated
+	 * @name animated
+	 * @memberof ApplicationEmoji
+	 * @instance
+	 * @type {boolean}
+	 * @readonly
+	 */
+
+	/**
+	 * Returns a URL for the emoji.
+	 * @method imageURL
+	 * @memberof ApplicationEmoji
+	 * @instance
+	 * @param {EmojiURLOptions} [options] Options for the image URL
+	 * @returns {string}
+	 */
+
+	/**
+	 * The time the emoji was created at
+	 * @name createdAt
+	 * @memberof ApplicationEmoji
+	 * @instance
+	 * @type {Date}
+	 * @readonly
+	 */
+
+	/**
+	 * The timestamp the emoji was created at
+	 * @name createdTimestamp
+	 * @memberof ApplicationEmoji
+	 * @instance
+	 * @type {number}
+	 * @readonly
+	 */
 
 	ApplicationEmoji_1 = ApplicationEmoji;
 	return ApplicationEmoji_1;
@@ -89753,7 +89500,7 @@ function requireBaseGuildEmoji () {
 	 * @method imageURL
 	 * @memberof BaseGuildEmoji
 	 * @instance
-	 * @param {BaseImageURLOptions} [options] Options for the image URL
+	 * @param {EmojiURLOptions} [options] Options for the emoji URL
 	 * @returns {string}
 	 */
 
@@ -89765,6 +89512,42 @@ function requireBaseGuildEmoji () {
 	 * @type {string}
 	 * @readonly
 	 * @deprecated Use {@link BaseGuildEmoji#imageURL} instead.
+	 */
+
+	/**
+	 * The emoji's name
+	 * @name name
+	 * @memberof BaseGuildEmoji
+	 * @instance
+	 * @type {string}
+	 * @readonly
+	 */
+
+	/**
+	 * Whether or not the emoji is animated
+	 * @name animated
+	 * @memberof BaseGuildEmoji
+	 * @instance
+	 * @type {boolean}
+	 * @readonly
+	 */
+
+	/**
+	 * The time the emoji was created at.
+	 * @name createdAt
+	 * @memberof BaseGuildEmoji
+	 * @instance
+	 * @type {Date}
+	 * @readonly
+	 */
+
+	/**
+	 * The timestamp the emoji was created at.
+	 * @name createdTimestamp
+	 * @memberof BaseGuildEmoji
+	 * @instance
+	 * @type {number}
+	 * @readonly
 	 */
 
 	BaseGuildEmoji_1 = BaseGuildEmoji;
@@ -90144,6 +89927,7 @@ function requireUser$1 () {
 	const { DiscordSnowflake } = /*@__PURE__*/ requireCjs$2();
 	const Base = requireBase();
 	const TextBasedChannel = requireTextBasedChannel();
+	const { _transformCollectibles } = requireTransformers();
 	const UserFlagsBitField = requireUserFlagsBitField();
 	const { emitDeprecationWarningForUserFetchFlags } = requireUtil();
 
@@ -90279,18 +90063,74 @@ function requireUser$1 () {
 	     * @property {string} asset The avatar decoration hash
 	     * @property {Snowflake} skuId The id of the avatar decoration's SKU
 	     */
-
-	    if (data.avatar_decoration_data) {
-	      /**
-	       * The user avatar decoration's data
-	       * @type {?AvatarDecorationData}
-	       */
-	      this.avatarDecorationData = {
-	        asset: data.avatar_decoration_data.asset,
-	        skuId: data.avatar_decoration_data.sku_id,
-	      };
+	    if ('avatar_decoration_data' in data) {
+	      if (data.avatar_decoration_data) {
+	        /**
+	         * The user avatar decoration's data
+	         *
+	         * @type {?AvatarDecorationData}
+	         */
+	        this.avatarDecorationData = {
+	          asset: data.avatar_decoration_data.asset,
+	          skuId: data.avatar_decoration_data.sku_id,
+	        };
+	      } else {
+	        this.avatarDecorationData = null;
+	      }
 	    } else {
-	      this.avatarDecorationData = null;
+	      this.avatarDecorationData ??= null;
+	    }
+
+	    /**
+	     * @typedef {Object} NameplateData
+	     * @property {Snowflake} skuId The id of the nameplate's SKU
+	     * @property {string} asset The nameplate's asset path
+	     * @property {string} label The nameplate's label
+	     * @property {NameplatePalette} palette Background color of the nameplate
+	     */
+
+	    /**
+	     * @typedef {Object} Collectibles
+	     * @property {?NameplateData} nameplate The user's nameplate data
+	     */
+
+	    if (data.collectibles) {
+	      /**
+	       * The user's collectibles
+	       *
+	       * @type {?Collectibles}
+	       */
+	      this.collectibles = _transformCollectibles(data.collectibles);
+	    } else {
+	      this.collectibles = null;
+	    }
+
+	    /**
+	     * @typedef {Object} UserPrimaryGuild
+	     * @property {?Snowflake} identityGuildId The id of the user's primary guild
+	     * @property {?boolean} identityEnabled Whether the user is displaying the primary guild's tag
+	     * @property {?string} tag The user's guild tag. Limited to 4 characters
+	     * @property {?string} badge The guild tag badge hash
+	     */
+
+	    if ('primary_guild' in data) {
+	      if (data.primary_guild) {
+	        /**
+	         * The primary guild of the user
+	         *
+	         * @type {?UserPrimaryGuild}
+	         */
+	        this.primaryGuild = {
+	          identityGuildId: data.primary_guild.identity_guild_id,
+	          identityEnabled: data.primary_guild.identity_enabled,
+	          tag: data.primary_guild.tag,
+	          badge: data.primary_guild.badge,
+	        };
+	      } else {
+	        this.primaryGuild = null;
+	      }
+	    } else {
+	      this.primaryGuild ??= null;
 	    }
 	  }
 
@@ -90384,6 +90224,18 @@ function requireUser$1 () {
 	  }
 
 	  /**
+	   * A link to the user's guild tag badge.
+	   *
+	   * @param {ImageURLOptions} [options={}] Options for the image URL
+	   * @returns {?string}
+	   */
+	  guildTagBadgeURL(options = {}) {
+	    return this.primaryGuild?.badge
+	      ? this.client.rest.cdn.guildTagBadge(this.primaryGuild.identityGuildId, this.primaryGuild.badge, options)
+	      : null;
+	  }
+
+	  /**
 	   * The tag of this user
 	   * <info>This user's username, or their legacy tag (e.g. `hydrabolt#0001`)
 	   * if they're using the legacy username system</info>
@@ -90453,7 +90305,15 @@ function requireUser$1 () {
 	      this.accentColor === user.accentColor &&
 	      this.avatarDecoration === user.avatarDecoration &&
 	      this.avatarDecorationData?.asset === user.avatarDecorationData?.asset &&
-	      this.avatarDecorationData?.skuId === user.avatarDecorationData?.skuId
+	      this.avatarDecorationData?.skuId === user.avatarDecorationData?.skuId &&
+	      this.collectibles?.nameplate?.skuId === user.collectibles?.nameplate?.skuId &&
+	      this.collectibles?.nameplate?.asset === user.collectibles?.nameplate?.asset &&
+	      this.collectibles?.nameplate?.label === user.collectibles?.nameplate?.label &&
+	      this.collectibles?.nameplate?.palette === user.collectibles?.nameplate?.palette &&
+	      this.primaryGuild?.identityGuildId === user.primaryGuild?.identityGuildId &&
+	      this.primaryGuild?.identityEnabled === user.primaryGuild?.identityEnabled &&
+	      this.primaryGuild?.tag === user.primaryGuild?.tag &&
+	      this.primaryGuild?.badge === user.primaryGuild?.badge
 	    );
 	  }
 
@@ -90478,6 +90338,18 @@ function requireUser$1 () {
 	      ('avatar_decoration_data' in user
 	        ? this.avatarDecorationData?.asset === user.avatar_decoration_data?.asset &&
 	          this.avatarDecorationData?.skuId === user.avatar_decoration_data?.sku_id
+	        : true) &&
+	      ('collectibles' in user
+	        ? this.collectibles?.nameplate?.skuId === user.collectibles?.nameplate?.sku_id &&
+	          this.collectibles?.nameplate?.asset === user.collectibles?.nameplate?.asset &&
+	          this.collectibles?.nameplate?.label === user.collectibles?.nameplate?.label &&
+	          this.collectibles?.nameplate?.palette === user.collectibles?.nameplate?.palette
+	        : true) &&
+	      ('primary_guild' in user
+	        ? this.primaryGuild?.identityGuildId === user.primary_guild?.identity_guild_id &&
+	          this.primaryGuild?.identityEnabled === user.primary_guild?.identity_enabled &&
+	          this.primaryGuild?.tag === user.primary_guild?.tag &&
+	          this.primaryGuild?.badge === user.primary_guild?.badge
 	        : true)
 	    );
 	  }
@@ -90527,6 +90399,7 @@ function requireUser$1 () {
 	    json.avatarURL = this.avatarURL();
 	    json.displayAvatarURL = this.displayAvatarURL();
 	    json.bannerURL = this.banner ? this.bannerURL() : this.banner;
+	    json.guildTagBadgeURL = this.guildTagBadgeURL();
 	    return json;
 	  }
 	}
@@ -93203,6 +93076,7 @@ function requireMessage$1 () {
 	    return Boolean(
 	      channel?.type === ChannelType.GuildAnnouncement &&
 	        !this.flags.has(MessageFlags.Crossposted) &&
+	        this.reference?.type !== MessageReferenceType.Forward &&
 	        this.type === MessageType.Default &&
 	        !this.poll &&
 	        channel.viewable &&
@@ -94521,7 +94395,7 @@ function requireGuildMemberRoleManager () {
 	   * @readonly
 	   */
 	  get color() {
-	    const coloredRoles = this.cache.filter(role => role.color);
+	    const coloredRoles = this.cache.filter(role => role.colors.primaryColor);
 	    if (!coloredRoles.size) return null;
 	    return coloredRoles.reduce((prev, role) => (role.comparePositionTo(prev) > 0 ? role : prev));
 	  }
@@ -94991,7 +94865,7 @@ function requireGuildMember () {
 	   * @readonly
 	   */
 	  get displayColor() {
-	    return this.roles.color?.color ?? 0;
+	    return this.roles.color?.colors.primaryColor ?? 0;
 	  }
 
 	  /**
@@ -95314,6 +95188,7 @@ function requireMessageManager () {
 	if (hasRequiredMessageManager) return MessageManager_1;
 	hasRequiredMessageManager = 1;
 
+	const process = require$$0$h;
 	const { Collection } = requireDist$7();
 	const { makeURLSearchParams } = requireWeb();
 	const { Routes } = requireV10();
@@ -95323,6 +95198,8 @@ function requireMessageManager () {
 	const MessagePayload = requireMessagePayload();
 	const { MakeCacheOverrideSymbol } = requireSymbols();
 	const { resolvePartialEmoji } = requireUtil();
+
+	let deprecationEmittedForFetchPinned = false;
 
 	/**
 	 * Manages API methods for Messages and holds their cache.
@@ -95431,18 +95308,82 @@ function requireMessageManager () {
 	  }
 
 	  /**
+	   * Options used to fetch pinned messages.
+	   *
+	   * @typedef {Object} FetchPinnedMessagesOptions
+	   * @property {DateResolvable} [before] Consider only pinned messages before this time
+	   * @property {number} [limit] The maximum number of pinned messages to return
+	   * @property {boolean} [cache] Whether to cache the pinned messages
+	   */
+
+	  /**
+	   * Data returned from fetching pinned messages.
+	   *
+	   * @typedef {Object} FetchPinnedMessagesResponse
+	   * @property {MessagePin[]} items The pinned messages
+	   * @property {boolean} hasMore Whether there are additional pinned messages that require a subsequent call
+	   */
+
+	  /**
+	   * Pinned message data returned from fetching pinned messages.
+	   *
+	   * @typedef {Object} MessagePin
+	   * @property {Date} pinnedAt The time the message was pinned at
+	   * @property {number} pinnedTimestamp The timestamp the message was pinned at
+	   * @property {Message} message The pinned message
+	   */
+
+	  /**
+	   * Fetches the pinned messages of this channel and returns a collection of them.
+	   * <info>The returned Collection does not contain any reaction data of the messages.
+	   * Those need to be fetched separately.</info>
+	   *
+	   * @param {FetchPinnedMessagesOptions} [options={}] Options for fetching pinned messages
+	   * @returns {Promise<FetchPinnedMessagesResponse>}
+	   * @example
+	   * // Get pinned messages
+	   * channel.messages.fetchPins()
+	   *   .then(messages => console.log(`Received ${messages.items.length} messages`))
+	   *   .catch(console.error);
+	   */
+	  async fetchPins(options = {}) {
+	    const data = await this.client.rest.get(Routes.channelMessagesPins(this.channel.id), {
+	      query: makeURLSearchParams({
+	        ...options,
+	        before: options.before && new Date(options.before).toISOString(),
+	      }),
+	    });
+
+	    return {
+	      items: data.items.map(item => ({
+	        pinnedTimestamp: Date.parse(item.pinned_at),
+	        get pinnedAt() {
+	          return new Date(this.pinnedTimestamp);
+	        },
+	        message: this._add(item.message, options.cache),
+	      })),
+	      hasMore: data.has_more,
+	    };
+	  }
+
+	  /**
 	   * Fetches the pinned messages of this channel and returns a collection of them.
 	   * <info>The returned Collection does not contain any reaction data of the messages.
 	   * Those need to be fetched separately.</info>
 	   * @param {boolean} [cache=true] Whether to cache the message(s)
+	   * @deprecated Use {@link MessageManager#fetchPins} instead.
 	   * @returns {Promise<Collection<Snowflake, Message>>}
-	   * @example
-	   * // Get pinned messages
-	   * channel.messages.fetchPinned()
-	   *   .then(messages => console.log(`Received ${messages.size} messages`))
-	   *   .catch(console.error);
 	   */
 	  async fetchPinned(cache = true) {
+	    if (!deprecationEmittedForFetchPinned) {
+	      process.emitWarning(
+	        'The MessageManager#fetchPinned() method is deprecated. Use MessageManager#fetchPins() instead.',
+	        'DeprecationWarning',
+	      );
+
+	      deprecationEmittedForFetchPinned = true;
+	    }
+
 	    const data = await this.client.rest.get(Routes.channelPins(this.channel.id));
 	    const messages = new Collection();
 	    for (const message of data) messages.set(message.id, this._add(message, cache));
@@ -95533,7 +95474,7 @@ function requireMessageManager () {
 	    message = this.resolveId(message);
 	    if (!message) throw new DiscordjsTypeError(ErrorCodes.InvalidType, 'message', 'MessageResolvable');
 
-	    await this.client.rest.put(Routes.channelPin(this.channel.id, message), { reason });
+	    await this.client.rest.put(Routes.channelMessagesPin(this.channel.id, message), { reason });
 	  }
 
 	  /**
@@ -95546,7 +95487,7 @@ function requireMessageManager () {
 	    message = this.resolveId(message);
 	    if (!message) throw new DiscordjsTypeError(ErrorCodes.InvalidType, 'message', 'MessageResolvable');
 
-	    await this.client.rest.delete(Routes.channelPin(this.channel.id, message), { reason });
+	    await this.client.rest.delete(Routes.channelMessagesPin(this.channel.id, message), { reason });
 	  }
 
 	  /**
@@ -97761,7 +97702,7 @@ function requireThreadChannel () {
 	  async edit(options) {
 	    const newData = await this.client.rest.patch(Routes.channel(this.id), {
 	      body: {
-	        name: (options.name ?? this.name).trim(),
+	        name: options.name,
 	        archived: options.archived,
 	        auto_archive_duration: options.autoArchiveDuration,
 	        rate_limit_per_user: options.rateLimitPerUser,
@@ -114712,6 +114653,7 @@ function requireWebSocketManager () {
 	const WebSocketShardEvents = requireWebSocketShardEvents();
 
 	let zlib;
+	let deprecationEmitted = false;
 
 	try {
 	  zlib = require('zlib-sync');
@@ -115072,6 +115014,22 @@ function requireWebSocketManager () {
 	    /**
 	     * Emitted when the client becomes ready to start working.
 	     * @event Client#ready
+	     * @deprecated Use {@link Client#event:clientReady} instead.
+	     * @param {Client} client The client
+	     */
+	    if (this.client.emit('ready', this.client) && !deprecationEmitted) {
+	      deprecationEmitted = true;
+
+	      process.emitWarning(
+	        // eslint-disable-next-line max-len
+	        'The ready event has been renamed to clientReady to distinguish it from the gateway READY event and will only emit under that name in v15. Please use clientReady instead.',
+	        'DeprecationWarning',
+	      );
+	    }
+
+	    /**
+	     * Emitted when the client becomes ready to start working.
+	     * @event Client#clientReady
 	     * @param {Client} client The client
 	     */
 	    this.client.emit(Events.ClientReady, this.client);
@@ -116860,13 +116818,13 @@ function requireGuildChannelManager () {
 	  async createWebhook({ channel, name, avatar, reason }) {
 	    const id = this.resolveId(channel);
 	    if (!id) throw new DiscordjsTypeError(ErrorCodes.InvalidType, 'channel', 'GuildChannelResolvable');
-	    if (typeof avatar === 'string' && !avatar.startsWith('data:')) {
-	      avatar = await resolveImage(avatar);
-	    }
+
+	    const resolvedImage = await resolveImage(avatar);
+
 	    const data = await this.client.rest.post(Routes.channelWebhooks(id), {
 	      body: {
 	        name,
-	        avatar,
+	        avatar: resolvedImage,
 	      },
 	      reason,
 	    });
@@ -119585,6 +119543,8 @@ function requireRoleManager () {
 	const { setPosition, resolveColor } = requireUtil();
 
 	let cacheWarningEmitted = false;
+	let deprecationEmittedForCreate = false;
+	let deprecationEmittedForEdit = false;
 
 	/**
 	 * Manages API methods for roles and stores their cache.
@@ -119631,7 +119591,7 @@ function requireRoleManager () {
 	   * @example
 	   * // Fetch a single role
 	   * message.guild.roles.fetch('222078108977594368')
-	   *   .then(role => console.log(`The role color is: ${role.color}`))
+	   *   .then(role => console.log(`The role color is: ${role.colors.primaryColor}`))
 	   *   .catch(console.error);
 	   */
 	  async fetch(id, { cache = true, force = false } = {}) {
@@ -119686,10 +119646,23 @@ function requireRoleManager () {
 	   */
 
 	  /**
+	   * @typedef {Object} RoleColorsResolvable
+	   * @property {ColorResolvable} primaryColor The primary color of the role
+	   * @property {ColorResolvable} [secondaryColor] The secondary color of the role.
+	   * This will make the role a gradient between the other provided colors
+	   * @property {ColorResolvable} [tertiaryColor] The tertiary color of the role.
+	   * When sending `tertiaryColor` the API enforces the role color to be a holographic style
+	   * with values of `primaryColor = 11127295`, `secondaryColor = 16759788`, and `tertiaryColor = 16761760`.
+	   * These values are available as a constant: `Constants.HolographicStyle`
+	   */
+
+	  /**
 	   * Options used to create a new role.
 	   * @typedef {Object} RoleCreateOptions
 	   * @property {string} [name] The name of the new role
 	   * @property {ColorResolvable} [color] The data to create the role with
+	   * <warn>This property is deprecated. Use `colors` instead.</warn>
+	   * @property {RoleColorsResolvable} [colors] The colors to create the role with
 	   * @property {boolean} [hoist] Whether or not the new role should be hoisted
 	   * @property {PermissionResolvable} [permissions] The permissions for the new role
 	   * @property {number} [position] The position of the new role
@@ -119715,15 +119688,30 @@ function requireRoleManager () {
 	   * // Create a new role with data and a reason
 	   * guild.roles.create({
 	   *   name: 'Super Cool Blue People',
-	   *   color: Colors.Blue,
 	   *   reason: 'we needed a role for Super Cool People',
+	   *   colors: {
+	   *     primaryColor: Colors.Blue,
+	   *   },
+	   * })
+	   *   .then(console.log)
+	   *   .catch(console.error);
+	   * @example
+	   * // Create a role with holographic colors
+	   * guild.roles.create({
+	   *   name: 'Holographic Role',
+	   *   reason: 'Creating a role with holographic effect',
+	   *   colors: {
+	   *     primaryColor: Constants.HolographicStyle.Primary,
+	   *     secondaryColor: Constants.HolographicStyle.Secondary,
+	   *     tertiaryColor: Constants.HolographicStyle.Tertiary,
+	   *   },
 	   * })
 	   *   .then(console.log)
 	   *   .catch(console.error);
 	   */
 	  async create(options = {}) {
-	    let { name, color, hoist, permissions, position, mentionable, reason, icon, unicodeEmoji } = options;
-	    color &&= resolveColor(color);
+	    let { permissions, icon } = options;
+	    const { name, color, hoist, position, mentionable, reason, unicodeEmoji } = options;
 	    if (permissions !== undefined) permissions = new PermissionsBitField(permissions);
 	    if (icon) {
 	      const guildEmojiURL = this.guild.emojis.resolve(icon)?.imageURL();
@@ -119731,10 +119719,30 @@ function requireRoleManager () {
 	      if (typeof icon !== 'string') icon = undefined;
 	    }
 
+	    let colors = options.colors && {
+	      primary_color: resolveColor(options.colors.primaryColor),
+	      secondary_color: options.colors.secondaryColor && resolveColor(options.colors.secondaryColor),
+	      tertiary_color: options.colors.tertiaryColor && resolveColor(options.colors.tertiaryColor),
+	    };
+
+	    if (color !== undefined) {
+	      if (!deprecationEmittedForCreate) {
+	        process.emitWarning(`Passing "color" to RoleManager#create() is deprecated. Use "colors" instead.`);
+	      }
+
+	      deprecationEmittedForCreate = true;
+
+	      colors = {
+	        primary_color: resolveColor(color),
+	        secondary_color: null,
+	        tertiary_color: null,
+	      };
+	    }
+
 	    const data = await this.client.rest.post(Routes.guildRoles(this.guild.id), {
 	      body: {
 	        name,
-	        color,
+	        colors,
 	        hoist,
 	        permissions,
 	        mentionable,
@@ -119783,9 +119791,29 @@ function requireRoleManager () {
 	      if (typeof icon !== 'string') icon = undefined;
 	    }
 
+	    let colors = options.colors && {
+	      primary_color: resolveColor(options.colors.primaryColor),
+	      secondary_color: options.colors.secondaryColor && resolveColor(options.colors.secondaryColor),
+	      tertiary_color: options.colors.tertiaryColor && resolveColor(options.colors.tertiaryColor),
+	    };
+
+	    if (options.color !== undefined) {
+	      if (!deprecationEmittedForEdit) {
+	        process.emitWarning(`Passing "color" to RoleManager#edit() is deprecated. Use "colors" instead.`);
+	      }
+
+	      deprecationEmittedForEdit = true;
+
+	      colors = {
+	        primary_color: resolveColor(options.color),
+	        secondary_color: null,
+	        tertiary_color: null,
+	      };
+	    }
+
 	    const body = {
 	      name: options.name,
-	      color: options.color === undefined ? undefined : resolveColor(options.color),
+	      colors,
 	      hoist: options.hoist,
 	      permissions: options.permissions === undefined ? undefined : new PermissionsBitField(options.permissions),
 	      mentionable: options.mentionable,
@@ -123875,7 +123903,7 @@ function requireClient$1 () {
 	  }
 
 	  /**
-	   * Calls {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/eval} on a script
+	   * Calls {@link https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/eval} on a script
 	   * with the client as `this`.
 	   * @param {string} script Script to eval
 	   * @returns {*}
@@ -123957,7 +123985,7 @@ function requireClient$1 () {
 	 */
 
 	/**
-	 * A {@link https://developer.twitter.com/en/docs/twitter-ids Twitter snowflake},
+	 * A {@link https://docs.x.com/resources/fundamentals/x-ids Twitter snowflake},
 	 * except the epoch is 2015-01-01T00:00:00.000Z.
 	 *
 	 * If we have a snowflake '266241948824764416' we can represent it as binary:
@@ -123989,6 +124017,11 @@ function requireClient$1 () {
 	/**
 	 * @external ImageURLOptions
 	 * @see {@link https://discord.js.org/docs/packages/rest/stable/ImageURLOptions:Interface}
+	 */
+
+	/**
+	 * @external EmojiURLOptions
+	 * @see {@link https://discord.js.org/docs/packages/rest/stable/EmojiURLOptions:TypeAlias}
 	 */
 
 	/**
@@ -125832,6 +125865,7 @@ function requireSrc () {
 		exports.Component = requireComponent();
 		exports.ContainerComponent = requireContainerComponent();
 		exports.ContextMenuCommandInteraction = requireContextMenuCommandInteraction();
+		exports.DirectoryChannel = requireDirectoryChannel();
 		exports.DMChannel = requireDMChannel();
 		exports.Embed = requireEmbed$1();
 		exports.EmbedBuilder = requireEmbedBuilder();
