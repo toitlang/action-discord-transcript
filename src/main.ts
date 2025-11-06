@@ -9,15 +9,15 @@ import {
   ChannelType,
   Client,
   Events,
-  FetchArchivedThreadOptions,
-  ForumChannel,
+  type FetchArchivedThreadOptions,
+  type ForumChannel,
   GatewayIntentBits,
-  Guild,
-  PublicThreadChannel
+  type Guild,
+  type PublicThreadChannel
 } from 'discord.js'
-import * as fs from 'fs'
-import * as path from 'path'
-import { fileURLToPath } from 'url'
+import * as fs from 'node:fs'
+import * as path from 'node:path'
+import { fileURLToPath } from 'node:url'
 import { generateGuildIndex } from './index-generator.js'
 
 const __filename = fileURLToPath(import.meta.url)
@@ -60,7 +60,7 @@ const client = new Client({
 async function fetchActiveThreads(
   forumChannel: ForumChannel
 ): Promise<Array<HelpThread>> {
-  const helpThreads = new Array<HelpThread>()
+  const helpThreads: HelpThread[] = []
   try {
     const fetched = await forumChannel.threads.fetchActive()
     console.log(
@@ -83,8 +83,8 @@ async function fetchArchivedThreads(
   forumChannel: ForumChannel,
   cutoffDate: Date | undefined
 ): Promise<Array<HelpThread>> {
-  const helpThreads = new Array<HelpThread>()
-  let beforeId: string | undefined = undefined
+  const helpThreads: HelpThread[] = []
+  let beforeId: string | undefined
 
   while (true) {
     try {
@@ -99,7 +99,7 @@ async function fetchArchivedThreads(
       if (fetched.threads.size === 0) break
 
       // Add fetched threads to our collection.
-      const fetchedThreads = new Array<HelpThread>()
+      const fetchedThreads: HelpThread[] = []
       fetched.threads.forEach((thread) => {
         fetchedThreads.push(thread as HelpThread)
       })
@@ -163,8 +163,8 @@ async function processHelpChannel(
     for (const [, channel] of channels) {
       // Skip if channel doesn't exist.
       if (!channel) continue
-      if (channel.name != 'help') continue
-      if (channel.type != ChannelType.GuildForum) continue
+      if (channel.name !== 'help') continue
+      if (channel.type !== ChannelType.GuildForum) continue
 
       const forumChannel = channel as ForumChannel
       const activeThreads = await fetchActiveThreads(forumChannel)
@@ -181,7 +181,7 @@ async function processHelpChannel(
         }
       }
 
-      let cutOffDate: Date | undefined = undefined
+      let cutOffDate: Date | undefined
       if (oldIndex) {
         // Find the most recent archived thread in the index.
         for (const threadId in oldIndex) {
@@ -281,7 +281,7 @@ async function processGuild(guild: Guild): Promise<void> {
 
       // Access the attachment data directly.
       fs.writeFileSync(filePath, attachment.attachment as Buffer)
-      if (oldEntry && oldEntry.filename != filename) {
+      if (oldEntry && oldEntry.filename !== filename) {
         // Delete the old file if the filename changed.
         const oldFilePath = path.join(TRANSCRIPT_DIR, oldEntry.filename)
         if (fs.existsSync(oldFilePath)) {
@@ -298,8 +298,6 @@ async function processGuild(guild: Guild): Promise<void> {
         `Error generating transcript for thread: ${displayName}:`,
         threadError instanceof Error ? threadError.message : String(threadError)
       )
-      // Continue to the next thread instead of failing.
-      continue
     }
   }
 
