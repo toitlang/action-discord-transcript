@@ -8266,9 +8266,9 @@ var hasRequiredConstants$e;
 function requireConstants$e () {
 	if (hasRequiredConstants$e) return constants$d;
 	hasRequiredConstants$e = 1;
-	(function (exports) {
-		Object.defineProperty(exports, "__esModule", { value: true });
-		exports.SPECIAL_HEADERS = exports.HEADER_STATE = exports.MINOR = exports.MAJOR = exports.CONNECTION_TOKEN_CHARS = exports.HEADER_CHARS = exports.TOKEN = exports.STRICT_TOKEN = exports.HEX = exports.URL_CHAR = exports.STRICT_URL_CHAR = exports.USERINFO_CHARS = exports.MARK = exports.ALPHANUM = exports.NUM = exports.HEX_MAP = exports.NUM_MAP = exports.ALPHA = exports.FINISH = exports.H_METHOD_MAP = exports.METHOD_MAP = exports.METHODS_RTSP = exports.METHODS_ICE = exports.METHODS_HTTP = exports.METHODS = exports.LENIENT_FLAGS = exports.FLAGS = exports.TYPE = exports.ERROR = void 0;
+	(function (exports$1) {
+		Object.defineProperty(exports$1, "__esModule", { value: true });
+		exports$1.SPECIAL_HEADERS = exports$1.HEADER_STATE = exports$1.MINOR = exports$1.MAJOR = exports$1.CONNECTION_TOKEN_CHARS = exports$1.HEADER_CHARS = exports$1.TOKEN = exports$1.STRICT_TOKEN = exports$1.HEX = exports$1.URL_CHAR = exports$1.STRICT_URL_CHAR = exports$1.USERINFO_CHARS = exports$1.MARK = exports$1.ALPHANUM = exports$1.NUM = exports$1.HEX_MAP = exports$1.NUM_MAP = exports$1.ALPHA = exports$1.FINISH = exports$1.H_METHOD_MAP = exports$1.METHOD_MAP = exports$1.METHODS_RTSP = exports$1.METHODS_ICE = exports$1.METHODS_HTTP = exports$1.METHODS = exports$1.LENIENT_FLAGS = exports$1.FLAGS = exports$1.TYPE = exports$1.ERROR = void 0;
 		const utils_1 = requireUtils$5();
 		(function (ERROR) {
 		    ERROR[ERROR["OK"] = 0] = "OK";
@@ -8296,12 +8296,12 @@ function requireConstants$e () {
 		    ERROR[ERROR["PAUSED_UPGRADE"] = 22] = "PAUSED_UPGRADE";
 		    ERROR[ERROR["PAUSED_H2_UPGRADE"] = 23] = "PAUSED_H2_UPGRADE";
 		    ERROR[ERROR["USER"] = 24] = "USER";
-		})(exports.ERROR || (exports.ERROR = {}));
+		})(exports$1.ERROR || (exports$1.ERROR = {}));
 		(function (TYPE) {
 		    TYPE[TYPE["BOTH"] = 0] = "BOTH";
 		    TYPE[TYPE["REQUEST"] = 1] = "REQUEST";
 		    TYPE[TYPE["RESPONSE"] = 2] = "RESPONSE";
-		})(exports.TYPE || (exports.TYPE = {}));
+		})(exports$1.TYPE || (exports$1.TYPE = {}));
 		(function (FLAGS) {
 		    FLAGS[FLAGS["CONNECTION_KEEP_ALIVE"] = 1] = "CONNECTION_KEEP_ALIVE";
 		    FLAGS[FLAGS["CONNECTION_CLOSE"] = 2] = "CONNECTION_CLOSE";
@@ -8313,12 +8313,12 @@ function requireConstants$e () {
 		    FLAGS[FLAGS["TRAILING"] = 128] = "TRAILING";
 		    // 1 << 8 is unused
 		    FLAGS[FLAGS["TRANSFER_ENCODING"] = 512] = "TRANSFER_ENCODING";
-		})(exports.FLAGS || (exports.FLAGS = {}));
+		})(exports$1.FLAGS || (exports$1.FLAGS = {}));
 		(function (LENIENT_FLAGS) {
 		    LENIENT_FLAGS[LENIENT_FLAGS["HEADERS"] = 1] = "HEADERS";
 		    LENIENT_FLAGS[LENIENT_FLAGS["CHUNKED_LENGTH"] = 2] = "CHUNKED_LENGTH";
 		    LENIENT_FLAGS[LENIENT_FLAGS["KEEP_ALIVE"] = 4] = "KEEP_ALIVE";
-		})(exports.LENIENT_FLAGS || (exports.LENIENT_FLAGS = {}));
+		})(exports$1.LENIENT_FLAGS || (exports$1.LENIENT_FLAGS = {}));
 		var METHODS;
 		(function (METHODS) {
 		    METHODS[METHODS["DELETE"] = 0] = "DELETE";
@@ -8378,8 +8378,8 @@ function requireConstants$e () {
 		    METHODS[METHODS["RECORD"] = 44] = "RECORD";
 		    /* RAOP */
 		    METHODS[METHODS["FLUSH"] = 45] = "FLUSH";
-		})(METHODS = exports.METHODS || (exports.METHODS = {}));
-		exports.METHODS_HTTP = [
+		})(METHODS = exports$1.METHODS || (exports$1.METHODS = {}));
+		exports$1.METHODS_HTTP = [
 		    METHODS.DELETE,
 		    METHODS.GET,
 		    METHODS.HEAD,
@@ -8417,10 +8417,10 @@ function requireConstants$e () {
 		    // TODO(indutny): should we allow it with HTTP?
 		    METHODS.SOURCE,
 		];
-		exports.METHODS_ICE = [
+		exports$1.METHODS_ICE = [
 		    METHODS.SOURCE,
 		];
-		exports.METHODS_RTSP = [
+		exports$1.METHODS_RTSP = [
 		    METHODS.OPTIONS,
 		    METHODS.DESCRIBE,
 		    METHODS.ANNOUNCE,
@@ -8437,59 +8437,59 @@ function requireConstants$e () {
 		    METHODS.GET,
 		    METHODS.POST,
 		];
-		exports.METHOD_MAP = utils_1.enumToMap(METHODS);
-		exports.H_METHOD_MAP = {};
-		Object.keys(exports.METHOD_MAP).forEach((key) => {
+		exports$1.METHOD_MAP = utils_1.enumToMap(METHODS);
+		exports$1.H_METHOD_MAP = {};
+		Object.keys(exports$1.METHOD_MAP).forEach((key) => {
 		    if (/^H/.test(key)) {
-		        exports.H_METHOD_MAP[key] = exports.METHOD_MAP[key];
+		        exports$1.H_METHOD_MAP[key] = exports$1.METHOD_MAP[key];
 		    }
 		});
 		(function (FINISH) {
 		    FINISH[FINISH["SAFE"] = 0] = "SAFE";
 		    FINISH[FINISH["SAFE_WITH_CB"] = 1] = "SAFE_WITH_CB";
 		    FINISH[FINISH["UNSAFE"] = 2] = "UNSAFE";
-		})(exports.FINISH || (exports.FINISH = {}));
-		exports.ALPHA = [];
+		})(exports$1.FINISH || (exports$1.FINISH = {}));
+		exports$1.ALPHA = [];
 		for (let i = 'A'.charCodeAt(0); i <= 'Z'.charCodeAt(0); i++) {
 		    // Upper case
-		    exports.ALPHA.push(String.fromCharCode(i));
+		    exports$1.ALPHA.push(String.fromCharCode(i));
 		    // Lower case
-		    exports.ALPHA.push(String.fromCharCode(i + 0x20));
+		    exports$1.ALPHA.push(String.fromCharCode(i + 0x20));
 		}
-		exports.NUM_MAP = {
+		exports$1.NUM_MAP = {
 		    0: 0, 1: 1, 2: 2, 3: 3, 4: 4,
 		    5: 5, 6: 6, 7: 7, 8: 8, 9: 9,
 		};
-		exports.HEX_MAP = {
+		exports$1.HEX_MAP = {
 		    0: 0, 1: 1, 2: 2, 3: 3, 4: 4,
 		    5: 5, 6: 6, 7: 7, 8: 8, 9: 9,
 		    A: 0XA, B: 0XB, C: 0XC, D: 0XD, E: 0XE, F: 0XF,
 		    a: 0xa, b: 0xb, c: 0xc, d: 0xd, e: 0xe, f: 0xf,
 		};
-		exports.NUM = [
+		exports$1.NUM = [
 		    '0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
 		];
-		exports.ALPHANUM = exports.ALPHA.concat(exports.NUM);
-		exports.MARK = ['-', '_', '.', '!', '~', '*', '\'', '(', ')'];
-		exports.USERINFO_CHARS = exports.ALPHANUM
-		    .concat(exports.MARK)
+		exports$1.ALPHANUM = exports$1.ALPHA.concat(exports$1.NUM);
+		exports$1.MARK = ['-', '_', '.', '!', '~', '*', '\'', '(', ')'];
+		exports$1.USERINFO_CHARS = exports$1.ALPHANUM
+		    .concat(exports$1.MARK)
 		    .concat(['%', ';', ':', '&', '=', '+', '$', ',']);
 		// TODO(indutny): use RFC
-		exports.STRICT_URL_CHAR = [
+		exports$1.STRICT_URL_CHAR = [
 		    '!', '"', '$', '%', '&', '\'',
 		    '(', ')', '*', '+', ',', '-', '.', '/',
 		    ':', ';', '<', '=', '>',
 		    '@', '[', '\\', ']', '^', '_',
 		    '`',
 		    '{', '|', '}', '~',
-		].concat(exports.ALPHANUM);
-		exports.URL_CHAR = exports.STRICT_URL_CHAR
+		].concat(exports$1.ALPHANUM);
+		exports$1.URL_CHAR = exports$1.STRICT_URL_CHAR
 		    .concat(['\t', '\f']);
 		// All characters with 0x80 bit set to 1
 		for (let i = 0x80; i <= 0xff; i++) {
-		    exports.URL_CHAR.push(i);
+		    exports$1.URL_CHAR.push(i);
 		}
-		exports.HEX = exports.NUM.concat(['a', 'b', 'c', 'd', 'e', 'f', 'A', 'B', 'C', 'D', 'E', 'F']);
+		exports$1.HEX = exports$1.NUM.concat(['a', 'b', 'c', 'd', 'e', 'f', 'A', 'B', 'C', 'D', 'E', 'F']);
 		/* Tokens as defined by rfc 2616. Also lowercases them.
 		 *        token       = 1*<any CHAR except CTLs or separators>
 		 *     separators     = "(" | ")" | "<" | ">" | "@"
@@ -8497,27 +8497,27 @@ function requireConstants$e () {
 		 *                    | "/" | "[" | "]" | "?" | "="
 		 *                    | "{" | "}" | SP | HT
 		 */
-		exports.STRICT_TOKEN = [
+		exports$1.STRICT_TOKEN = [
 		    '!', '#', '$', '%', '&', '\'',
 		    '*', '+', '-', '.',
 		    '^', '_', '`',
 		    '|', '~',
-		].concat(exports.ALPHANUM);
-		exports.TOKEN = exports.STRICT_TOKEN.concat([' ']);
+		].concat(exports$1.ALPHANUM);
+		exports$1.TOKEN = exports$1.STRICT_TOKEN.concat([' ']);
 		/*
 		 * Verify that a char is a valid visible (printable) US-ASCII
 		 * character or %x80-FF
 		 */
-		exports.HEADER_CHARS = ['\t'];
+		exports$1.HEADER_CHARS = ['\t'];
 		for (let i = 32; i <= 255; i++) {
 		    if (i !== 127) {
-		        exports.HEADER_CHARS.push(i);
+		        exports$1.HEADER_CHARS.push(i);
 		    }
 		}
 		// ',' = \x44
-		exports.CONNECTION_TOKEN_CHARS = exports.HEADER_CHARS.filter((c) => c !== 44);
-		exports.MAJOR = exports.NUM_MAP;
-		exports.MINOR = exports.MAJOR;
+		exports$1.CONNECTION_TOKEN_CHARS = exports$1.HEADER_CHARS.filter((c) => c !== 44);
+		exports$1.MAJOR = exports$1.NUM_MAP;
+		exports$1.MINOR = exports$1.MAJOR;
 		var HEADER_STATE;
 		(function (HEADER_STATE) {
 		    HEADER_STATE[HEADER_STATE["GENERAL"] = 0] = "GENERAL";
@@ -8529,8 +8529,8 @@ function requireConstants$e () {
 		    HEADER_STATE[HEADER_STATE["CONNECTION_CLOSE"] = 6] = "CONNECTION_CLOSE";
 		    HEADER_STATE[HEADER_STATE["CONNECTION_UPGRADE"] = 7] = "CONNECTION_UPGRADE";
 		    HEADER_STATE[HEADER_STATE["TRANSFER_ENCODING_CHUNKED"] = 8] = "TRANSFER_ENCODING_CHUNKED";
-		})(HEADER_STATE = exports.HEADER_STATE || (exports.HEADER_STATE = {}));
-		exports.SPECIAL_HEADERS = {
+		})(HEADER_STATE = exports$1.HEADER_STATE || (exports$1.HEADER_STATE = {}));
+		exports$1.SPECIAL_HEADERS = {
 		    'connection': HEADER_STATE.CONNECTION,
 		    'content-length': HEADER_STATE.CONTENT_LENGTH,
 		    'proxy-connection': HEADER_STATE.CONNECTION,
@@ -9369,10 +9369,10 @@ function requireClient$4 () {
 	const TIMEOUT_IDLE = 3;
 
 	class Parser {
-	  constructor (client, socket, { exports }) {
+	  constructor (client, socket, { exports: exports$1 }) {
 	    assert(Number.isFinite(client[kMaxHeadersSize]) && client[kMaxHeadersSize] > 0);
 
-	    this.llhttp = exports;
+	    this.llhttp = exports$1;
 	    this.ptr = this.llhttp.llhttp_alloc(constants.TYPE.RESPONSE);
 	    this.client = client;
 	    this.socket = socket;
@@ -25234,7 +25234,7 @@ var hasRequiredSummary;
 function requireSummary () {
 	if (hasRequiredSummary) return summary;
 	hasRequiredSummary = 1;
-	(function (exports) {
+	(function (exports$1) {
 		var __awaiter = (summary && summary.__awaiter) || function (thisArg, _arguments, P, generator) {
 		    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
 		    return new (P || (P = Promise))(function (resolve, reject) {
@@ -25244,13 +25244,13 @@ function requireSummary () {
 		        step((generator = generator.apply(thisArg, _arguments || [])).next());
 		    });
 		};
-		Object.defineProperty(exports, "__esModule", { value: true });
-		exports.summary = exports.markdownSummary = exports.SUMMARY_DOCS_URL = exports.SUMMARY_ENV_VAR = void 0;
+		Object.defineProperty(exports$1, "__esModule", { value: true });
+		exports$1.summary = exports$1.markdownSummary = exports$1.SUMMARY_DOCS_URL = exports$1.SUMMARY_ENV_VAR = void 0;
 		const os_1 = require$$0$4;
 		const fs_1 = require$$1$2;
 		const { access, appendFile, writeFile } = fs_1.promises;
-		exports.SUMMARY_ENV_VAR = 'GITHUB_STEP_SUMMARY';
-		exports.SUMMARY_DOCS_URL = 'https://docs.github.com/actions/using-workflows/workflow-commands-for-github-actions#adding-a-job-summary';
+		exports$1.SUMMARY_ENV_VAR = 'GITHUB_STEP_SUMMARY';
+		exports$1.SUMMARY_DOCS_URL = 'https://docs.github.com/actions/using-workflows/workflow-commands-for-github-actions#adding-a-job-summary';
 		class Summary {
 		    constructor() {
 		        this._buffer = '';
@@ -25266,9 +25266,9 @@ function requireSummary () {
 		            if (this._filePath) {
 		                return this._filePath;
 		            }
-		            const pathFromEnv = process.env[exports.SUMMARY_ENV_VAR];
+		            const pathFromEnv = process.env[exports$1.SUMMARY_ENV_VAR];
 		            if (!pathFromEnv) {
-		                throw new Error(`Unable to find environment variable for $${exports.SUMMARY_ENV_VAR}. Check if your runtime environment supports job summaries.`);
+		                throw new Error(`Unable to find environment variable for $${exports$1.SUMMARY_ENV_VAR}. Check if your runtime environment supports job summaries.`);
 		            }
 		            try {
 		                yield access(pathFromEnv, fs_1.constants.R_OK | fs_1.constants.W_OK);
@@ -25514,8 +25514,8 @@ function requireSummary () {
 		/**
 		 * @deprecated use `core.summary`
 		 */
-		exports.markdownSummary = _summary;
-		exports.summary = _summary;
+		exports$1.markdownSummary = _summary;
+		exports$1.summary = _summary;
 		
 	} (summary));
 	return summary;
@@ -25607,7 +25607,7 @@ var hasRequiredIoUtil;
 function requireIoUtil () {
 	if (hasRequiredIoUtil) return ioUtil;
 	hasRequiredIoUtil = 1;
-	(function (exports) {
+	(function (exports$1) {
 		var __createBinding = (ioUtil && ioUtil.__createBinding) || (Object.create ? (function(o, m, k, k2) {
 		    if (k2 === undefined) k2 = k;
 		    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
@@ -25637,22 +25637,22 @@ function requireIoUtil () {
 		    });
 		};
 		var _a;
-		Object.defineProperty(exports, "__esModule", { value: true });
-		exports.getCmdPath = exports.tryGetExecutablePath = exports.isRooted = exports.isDirectory = exports.exists = exports.READONLY = exports.UV_FS_O_EXLOCK = exports.IS_WINDOWS = exports.unlink = exports.symlink = exports.stat = exports.rmdir = exports.rm = exports.rename = exports.readlink = exports.readdir = exports.open = exports.mkdir = exports.lstat = exports.copyFile = exports.chmod = void 0;
+		Object.defineProperty(exports$1, "__esModule", { value: true });
+		exports$1.getCmdPath = exports$1.tryGetExecutablePath = exports$1.isRooted = exports$1.isDirectory = exports$1.exists = exports$1.READONLY = exports$1.UV_FS_O_EXLOCK = exports$1.IS_WINDOWS = exports$1.unlink = exports$1.symlink = exports$1.stat = exports$1.rmdir = exports$1.rm = exports$1.rename = exports$1.readlink = exports$1.readdir = exports$1.open = exports$1.mkdir = exports$1.lstat = exports$1.copyFile = exports$1.chmod = void 0;
 		const fs = __importStar(require$$1$2);
 		const path = __importStar(require$$1$5);
 		_a = fs.promises
 		// export const {open} = 'fs'
-		, exports.chmod = _a.chmod, exports.copyFile = _a.copyFile, exports.lstat = _a.lstat, exports.mkdir = _a.mkdir, exports.open = _a.open, exports.readdir = _a.readdir, exports.readlink = _a.readlink, exports.rename = _a.rename, exports.rm = _a.rm, exports.rmdir = _a.rmdir, exports.stat = _a.stat, exports.symlink = _a.symlink, exports.unlink = _a.unlink;
+		, exports$1.chmod = _a.chmod, exports$1.copyFile = _a.copyFile, exports$1.lstat = _a.lstat, exports$1.mkdir = _a.mkdir, exports$1.open = _a.open, exports$1.readdir = _a.readdir, exports$1.readlink = _a.readlink, exports$1.rename = _a.rename, exports$1.rm = _a.rm, exports$1.rmdir = _a.rmdir, exports$1.stat = _a.stat, exports$1.symlink = _a.symlink, exports$1.unlink = _a.unlink;
 		// export const {open} = 'fs'
-		exports.IS_WINDOWS = process.platform === 'win32';
+		exports$1.IS_WINDOWS = process.platform === 'win32';
 		// See https://github.com/nodejs/node/blob/d0153aee367422d0858105abec186da4dff0a0c5/deps/uv/include/uv/win.h#L691
-		exports.UV_FS_O_EXLOCK = 0x10000000;
-		exports.READONLY = fs.constants.O_RDONLY;
+		exports$1.UV_FS_O_EXLOCK = 0x10000000;
+		exports$1.READONLY = fs.constants.O_RDONLY;
 		function exists(fsPath) {
 		    return __awaiter(this, void 0, void 0, function* () {
 		        try {
-		            yield exports.stat(fsPath);
+		            yield exports$1.stat(fsPath);
 		        }
 		        catch (err) {
 		            if (err.code === 'ENOENT') {
@@ -25663,14 +25663,14 @@ function requireIoUtil () {
 		        return true;
 		    });
 		}
-		exports.exists = exists;
+		exports$1.exists = exists;
 		function isDirectory(fsPath, useStat = false) {
 		    return __awaiter(this, void 0, void 0, function* () {
-		        const stats = useStat ? yield exports.stat(fsPath) : yield exports.lstat(fsPath);
+		        const stats = useStat ? yield exports$1.stat(fsPath) : yield exports$1.lstat(fsPath);
 		        return stats.isDirectory();
 		    });
 		}
-		exports.isDirectory = isDirectory;
+		exports$1.isDirectory = isDirectory;
 		/**
 		 * On OSX/Linux, true if path starts with '/'. On Windows, true for paths like:
 		 * \, \hello, \\hello\share, C:, and C:\hello (and corresponding alternate separator cases).
@@ -25680,13 +25680,13 @@ function requireIoUtil () {
 		    if (!p) {
 		        throw new Error('isRooted() parameter "p" cannot be empty');
 		    }
-		    if (exports.IS_WINDOWS) {
+		    if (exports$1.IS_WINDOWS) {
 		        return (p.startsWith('\\') || /^[A-Z]:/i.test(p) // e.g. \ or \hello or \\hello
 		        ); // e.g. C: or C:\hello
 		    }
 		    return p.startsWith('/');
 		}
-		exports.isRooted = isRooted;
+		exports$1.isRooted = isRooted;
 		/**
 		 * Best effort attempt to determine whether a file exists and is executable.
 		 * @param filePath    file path to check
@@ -25698,7 +25698,7 @@ function requireIoUtil () {
 		        let stats = undefined;
 		        try {
 		            // test file exists
-		            stats = yield exports.stat(filePath);
+		            stats = yield exports$1.stat(filePath);
 		        }
 		        catch (err) {
 		            if (err.code !== 'ENOENT') {
@@ -25707,7 +25707,7 @@ function requireIoUtil () {
 		            }
 		        }
 		        if (stats && stats.isFile()) {
-		            if (exports.IS_WINDOWS) {
+		            if (exports$1.IS_WINDOWS) {
 		                // on Windows, test for valid extension
 		                const upperExt = path.extname(filePath).toUpperCase();
 		                if (extensions.some(validExt => validExt.toUpperCase() === upperExt)) {
@@ -25726,7 +25726,7 @@ function requireIoUtil () {
 		            filePath = originalFilePath + extension;
 		            stats = undefined;
 		            try {
-		                stats = yield exports.stat(filePath);
+		                stats = yield exports$1.stat(filePath);
 		            }
 		            catch (err) {
 		                if (err.code !== 'ENOENT') {
@@ -25735,12 +25735,12 @@ function requireIoUtil () {
 		                }
 		            }
 		            if (stats && stats.isFile()) {
-		                if (exports.IS_WINDOWS) {
+		                if (exports$1.IS_WINDOWS) {
 		                    // preserve the case of the actual file (since an extension was appended)
 		                    try {
 		                        const directory = path.dirname(filePath);
 		                        const upperName = path.basename(filePath).toUpperCase();
-		                        for (const actualName of yield exports.readdir(directory)) {
+		                        for (const actualName of yield exports$1.readdir(directory)) {
 		                            if (upperName === actualName.toUpperCase()) {
 		                                filePath = path.join(directory, actualName);
 		                                break;
@@ -25763,10 +25763,10 @@ function requireIoUtil () {
 		        return '';
 		    });
 		}
-		exports.tryGetExecutablePath = tryGetExecutablePath;
+		exports$1.tryGetExecutablePath = tryGetExecutablePath;
 		function normalizeSeparators(p) {
 		    p = p || '';
-		    if (exports.IS_WINDOWS) {
+		    if (exports$1.IS_WINDOWS) {
 		        // convert slashes on Windows
 		        p = p.replace(/\//g, '\\');
 		        // remove redundant slashes
@@ -25788,7 +25788,7 @@ function requireIoUtil () {
 		    var _a;
 		    return (_a = process.env['COMSPEC']) !== null && _a !== void 0 ? _a : `cmd.exe`;
 		}
-		exports.getCmdPath = getCmdPath;
+		exports$1.getCmdPath = getCmdPath;
 		
 	} (ioUtil));
 	return ioUtil;
@@ -26840,7 +26840,7 @@ var hasRequiredPlatform;
 function requirePlatform () {
 	if (hasRequiredPlatform) return platform;
 	hasRequiredPlatform = 1;
-	(function (exports) {
+	(function (exports$1) {
 		var __createBinding = (platform && platform.__createBinding) || (Object.create ? (function(o, m, k, k2) {
 		    if (k2 === undefined) k2 = k;
 		    var desc = Object.getOwnPropertyDescriptor(m, k);
@@ -26876,8 +26876,8 @@ function requirePlatform () {
 		var __importDefault = (platform && platform.__importDefault) || function (mod) {
 		    return (mod && mod.__esModule) ? mod : { "default": mod };
 		};
-		Object.defineProperty(exports, "__esModule", { value: true });
-		exports.getDetails = exports.isLinux = exports.isMacOS = exports.isWindows = exports.arch = exports.platform = void 0;
+		Object.defineProperty(exports$1, "__esModule", { value: true });
+		exports$1.getDetails = exports$1.isLinux = exports$1.isMacOS = exports$1.isWindows = exports$1.arch = exports$1.platform = void 0;
 		const os_1 = __importDefault(require$$0$4);
 		const exec = __importStar(requireExec());
 		const getWindowsInfo = () => __awaiter(void 0, void 0, void 0, function* () {
@@ -26914,25 +26914,25 @@ function requirePlatform () {
 		        version
 		    };
 		});
-		exports.platform = os_1.default.platform();
-		exports.arch = os_1.default.arch();
-		exports.isWindows = exports.platform === 'win32';
-		exports.isMacOS = exports.platform === 'darwin';
-		exports.isLinux = exports.platform === 'linux';
+		exports$1.platform = os_1.default.platform();
+		exports$1.arch = os_1.default.arch();
+		exports$1.isWindows = exports$1.platform === 'win32';
+		exports$1.isMacOS = exports$1.platform === 'darwin';
+		exports$1.isLinux = exports$1.platform === 'linux';
 		function getDetails() {
 		    return __awaiter(this, void 0, void 0, function* () {
-		        return Object.assign(Object.assign({}, (yield (exports.isWindows
+		        return Object.assign(Object.assign({}, (yield (exports$1.isWindows
 		            ? getWindowsInfo()
-		            : exports.isMacOS
+		            : exports$1.isMacOS
 		                ? getMacOsInfo()
-		                : getLinuxInfo()))), { platform: exports.platform,
-		            arch: exports.arch,
-		            isWindows: exports.isWindows,
-		            isMacOS: exports.isMacOS,
-		            isLinux: exports.isLinux });
+		                : getLinuxInfo()))), { platform: exports$1.platform,
+		            arch: exports$1.arch,
+		            isWindows: exports$1.isWindows,
+		            isMacOS: exports$1.isMacOS,
+		            isLinux: exports$1.isLinux });
 		    });
 		}
-		exports.getDetails = getDetails;
+		exports$1.getDetails = getDetails;
 		
 	} (platform));
 	return platform;
@@ -26943,7 +26943,7 @@ var hasRequiredCore;
 function requireCore () {
 	if (hasRequiredCore) return core;
 	hasRequiredCore = 1;
-	(function (exports) {
+	(function (exports$1) {
 		var __createBinding = (core && core.__createBinding) || (Object.create ? (function(o, m, k, k2) {
 		    if (k2 === undefined) k2 = k;
 		    var desc = Object.getOwnPropertyDescriptor(m, k);
@@ -26976,8 +26976,8 @@ function requireCore () {
 		        step((generator = generator.apply(thisArg, _arguments || [])).next());
 		    });
 		};
-		Object.defineProperty(exports, "__esModule", { value: true });
-		exports.platform = exports.toPlatformPath = exports.toWin32Path = exports.toPosixPath = exports.markdownSummary = exports.summary = exports.getIDToken = exports.getState = exports.saveState = exports.group = exports.endGroup = exports.startGroup = exports.info = exports.notice = exports.warning = exports.error = exports.debug = exports.isDebug = exports.setFailed = exports.setCommandEcho = exports.setOutput = exports.getBooleanInput = exports.getMultilineInput = exports.getInput = exports.addPath = exports.setSecret = exports.exportVariable = exports.ExitCode = void 0;
+		Object.defineProperty(exports$1, "__esModule", { value: true });
+		exports$1.platform = exports$1.toPlatformPath = exports$1.toWin32Path = exports$1.toPosixPath = exports$1.markdownSummary = exports$1.summary = exports$1.getIDToken = exports$1.getState = exports$1.saveState = exports$1.group = exports$1.endGroup = exports$1.startGroup = exports$1.info = exports$1.notice = exports$1.warning = exports$1.error = exports$1.debug = exports$1.isDebug = exports$1.setFailed = exports$1.setCommandEcho = exports$1.setOutput = exports$1.getBooleanInput = exports$1.getMultilineInput = exports$1.getInput = exports$1.addPath = exports$1.setSecret = exports$1.exportVariable = exports$1.ExitCode = void 0;
 		const command_1 = requireCommand();
 		const file_command_1 = requireFileCommand();
 		const utils_1 = requireUtils$6();
@@ -26997,7 +26997,7 @@ function requireCore () {
 		     * A code indicating that the action was a failure
 		     */
 		    ExitCode[ExitCode["Failure"] = 1] = "Failure";
-		})(ExitCode || (exports.ExitCode = ExitCode = {}));
+		})(ExitCode || (exports$1.ExitCode = ExitCode = {}));
 		//-----------------------------------------------------------------------
 		// Variables
 		//-----------------------------------------------------------------------
@@ -27016,7 +27016,7 @@ function requireCore () {
 		    }
 		    (0, command_1.issueCommand)('set-env', { name }, convertedVal);
 		}
-		exports.exportVariable = exportVariable;
+		exports$1.exportVariable = exportVariable;
 		/**
 		 * Registers a secret which will get masked from logs
 		 * @param secret value of the secret
@@ -27024,7 +27024,7 @@ function requireCore () {
 		function setSecret(secret) {
 		    (0, command_1.issueCommand)('add-mask', {}, secret);
 		}
-		exports.setSecret = setSecret;
+		exports$1.setSecret = setSecret;
 		/**
 		 * Prepends inputPath to the PATH (for this action and future actions)
 		 * @param inputPath
@@ -27039,7 +27039,7 @@ function requireCore () {
 		    }
 		    process.env['PATH'] = `${inputPath}${path.delimiter}${process.env['PATH']}`;
 		}
-		exports.addPath = addPath;
+		exports$1.addPath = addPath;
 		/**
 		 * Gets the value of an input.
 		 * Unless trimWhitespace is set to false in InputOptions, the value is also trimmed.
@@ -27059,7 +27059,7 @@ function requireCore () {
 		    }
 		    return val.trim();
 		}
-		exports.getInput = getInput;
+		exports$1.getInput = getInput;
 		/**
 		 * Gets the values of an multiline input.  Each value is also trimmed.
 		 *
@@ -27077,7 +27077,7 @@ function requireCore () {
 		    }
 		    return inputs.map(input => input.trim());
 		}
-		exports.getMultilineInput = getMultilineInput;
+		exports$1.getMultilineInput = getMultilineInput;
 		/**
 		 * Gets the input value of the boolean type in the YAML 1.2 "core schema" specification.
 		 * Support boolean input list: `true | True | TRUE | false | False | FALSE` .
@@ -27099,7 +27099,7 @@ function requireCore () {
 		    throw new TypeError(`Input does not meet YAML 1.2 "Core Schema" specification: ${name}\n` +
 		        `Support boolean input list: \`true | True | TRUE | false | False | FALSE\``);
 		}
-		exports.getBooleanInput = getBooleanInput;
+		exports$1.getBooleanInput = getBooleanInput;
 		/**
 		 * Sets the value of an output.
 		 *
@@ -27115,7 +27115,7 @@ function requireCore () {
 		    process.stdout.write(os.EOL);
 		    (0, command_1.issueCommand)('set-output', { name }, (0, utils_1.toCommandValue)(value));
 		}
-		exports.setOutput = setOutput;
+		exports$1.setOutput = setOutput;
 		/**
 		 * Enables or disables the echoing of commands into stdout for the rest of the step.
 		 * Echoing is disabled by default if ACTIONS_STEP_DEBUG is not set.
@@ -27124,7 +27124,7 @@ function requireCore () {
 		function setCommandEcho(enabled) {
 		    (0, command_1.issue)('echo', enabled ? 'on' : 'off');
 		}
-		exports.setCommandEcho = setCommandEcho;
+		exports$1.setCommandEcho = setCommandEcho;
 		//-----------------------------------------------------------------------
 		// Results
 		//-----------------------------------------------------------------------
@@ -27137,7 +27137,7 @@ function requireCore () {
 		    process.exitCode = ExitCode.Failure;
 		    error(message);
 		}
-		exports.setFailed = setFailed;
+		exports$1.setFailed = setFailed;
 		//-----------------------------------------------------------------------
 		// Logging Commands
 		//-----------------------------------------------------------------------
@@ -27147,7 +27147,7 @@ function requireCore () {
 		function isDebug() {
 		    return process.env['RUNNER_DEBUG'] === '1';
 		}
-		exports.isDebug = isDebug;
+		exports$1.isDebug = isDebug;
 		/**
 		 * Writes debug message to user log
 		 * @param message debug message
@@ -27155,7 +27155,7 @@ function requireCore () {
 		function debug(message) {
 		    (0, command_1.issueCommand)('debug', {}, message);
 		}
-		exports.debug = debug;
+		exports$1.debug = debug;
 		/**
 		 * Adds an error issue
 		 * @param message error issue message. Errors will be converted to string via toString()
@@ -27164,7 +27164,7 @@ function requireCore () {
 		function error(message, properties = {}) {
 		    (0, command_1.issueCommand)('error', (0, utils_1.toCommandProperties)(properties), message instanceof Error ? message.toString() : message);
 		}
-		exports.error = error;
+		exports$1.error = error;
 		/**
 		 * Adds a warning issue
 		 * @param message warning issue message. Errors will be converted to string via toString()
@@ -27173,7 +27173,7 @@ function requireCore () {
 		function warning(message, properties = {}) {
 		    (0, command_1.issueCommand)('warning', (0, utils_1.toCommandProperties)(properties), message instanceof Error ? message.toString() : message);
 		}
-		exports.warning = warning;
+		exports$1.warning = warning;
 		/**
 		 * Adds a notice issue
 		 * @param message notice issue message. Errors will be converted to string via toString()
@@ -27182,7 +27182,7 @@ function requireCore () {
 		function notice(message, properties = {}) {
 		    (0, command_1.issueCommand)('notice', (0, utils_1.toCommandProperties)(properties), message instanceof Error ? message.toString() : message);
 		}
-		exports.notice = notice;
+		exports$1.notice = notice;
 		/**
 		 * Writes info to log with console.log.
 		 * @param message info message
@@ -27190,7 +27190,7 @@ function requireCore () {
 		function info(message) {
 		    process.stdout.write(message + os.EOL);
 		}
-		exports.info = info;
+		exports$1.info = info;
 		/**
 		 * Begin an output group.
 		 *
@@ -27201,14 +27201,14 @@ function requireCore () {
 		function startGroup(name) {
 		    (0, command_1.issue)('group', name);
 		}
-		exports.startGroup = startGroup;
+		exports$1.startGroup = startGroup;
 		/**
 		 * End an output group.
 		 */
 		function endGroup() {
 		    (0, command_1.issue)('endgroup');
 		}
-		exports.endGroup = endGroup;
+		exports$1.endGroup = endGroup;
 		/**
 		 * Wrap an asynchronous function call in a group.
 		 *
@@ -27230,7 +27230,7 @@ function requireCore () {
 		        return result;
 		    });
 		}
-		exports.group = group;
+		exports$1.group = group;
 		//-----------------------------------------------------------------------
 		// Wrapper action state
 		//-----------------------------------------------------------------------
@@ -27248,7 +27248,7 @@ function requireCore () {
 		    }
 		    (0, command_1.issueCommand)('save-state', { name }, (0, utils_1.toCommandValue)(value));
 		}
-		exports.saveState = saveState;
+		exports$1.saveState = saveState;
 		/**
 		 * Gets the value of an state set by this action's main execution.
 		 *
@@ -27258,34 +27258,34 @@ function requireCore () {
 		function getState(name) {
 		    return process.env[`STATE_${name}`] || '';
 		}
-		exports.getState = getState;
+		exports$1.getState = getState;
 		function getIDToken(aud) {
 		    return __awaiter(this, void 0, void 0, function* () {
 		        return yield oidc_utils_1.OidcClient.getIDToken(aud);
 		    });
 		}
-		exports.getIDToken = getIDToken;
+		exports$1.getIDToken = getIDToken;
 		/**
 		 * Summary exports
 		 */
 		var summary_1 = requireSummary();
-		Object.defineProperty(exports, "summary", { enumerable: true, get: function () { return summary_1.summary; } });
+		Object.defineProperty(exports$1, "summary", { enumerable: true, get: function () { return summary_1.summary; } });
 		/**
 		 * @deprecated use core.summary
 		 */
 		var summary_2 = requireSummary();
-		Object.defineProperty(exports, "markdownSummary", { enumerable: true, get: function () { return summary_2.markdownSummary; } });
+		Object.defineProperty(exports$1, "markdownSummary", { enumerable: true, get: function () { return summary_2.markdownSummary; } });
 		/**
 		 * Path exports
 		 */
 		var path_utils_1 = requirePathUtils();
-		Object.defineProperty(exports, "toPosixPath", { enumerable: true, get: function () { return path_utils_1.toPosixPath; } });
-		Object.defineProperty(exports, "toWin32Path", { enumerable: true, get: function () { return path_utils_1.toWin32Path; } });
-		Object.defineProperty(exports, "toPlatformPath", { enumerable: true, get: function () { return path_utils_1.toPlatformPath; } });
+		Object.defineProperty(exports$1, "toPosixPath", { enumerable: true, get: function () { return path_utils_1.toPosixPath; } });
+		Object.defineProperty(exports$1, "toWin32Path", { enumerable: true, get: function () { return path_utils_1.toWin32Path; } });
+		Object.defineProperty(exports$1, "toPlatformPath", { enumerable: true, get: function () { return path_utils_1.toPlatformPath; } });
 		/**
 		 * Platform utilities exports
 		 */
-		exports.platform = __importStar(requirePlatform());
+		exports$1.platform = __importStar(requirePlatform());
 		
 	} (core));
 	return core;
@@ -28191,13 +28191,13 @@ var hasRequiredGlobals;
 function requireGlobals () {
 	if (hasRequiredGlobals) return globals$1;
 	hasRequiredGlobals = 1;
-	(function (exports) {
-		Object.defineProperty(exports, "__esModule", { value: true });
-		exports.FormattingPatterns = void 0;
+	(function (exports$1) {
+		Object.defineProperty(exports$1, "__esModule", { value: true });
+		exports$1.FormattingPatterns = void 0;
 		/**
 		 * @see {@link https://discord.com/developers/docs/reference#message-formatting-formats}
 		 */
-		exports.FormattingPatterns = {
+		exports$1.FormattingPatterns = {
 		    /**
 		     * Regular expression for matching a user mention, strictly without a nickname
 		     *
@@ -28293,7 +28293,7 @@ function requireGlobals () {
 		 *
 		 * @internal
 		 */
-		Object.freeze(exports.FormattingPatterns);
+		Object.freeze(exports$1.FormattingPatterns);
 		
 	} (globals$1));
 	return globals$1;
@@ -28321,9 +28321,9 @@ var hasRequiredCommon$3;
 function requireCommon$3 () {
 	if (hasRequiredCommon$3) return common$3;
 	hasRequiredCommon$3 = 1;
-	(function (exports) {
-		Object.defineProperty(exports, "__esModule", { value: true });
-		exports.PermissionFlagsBits = void 0;
+	(function (exports$1) {
+		Object.defineProperty(exports$1, "__esModule", { value: true });
+		exports$1.PermissionFlagsBits = void 0;
 		/**
 		 * @see {@link https://discord.com/developers/docs/topics/permissions#permissions-bitwise-permission-flags}
 		 *
@@ -28331,7 +28331,7 @@ function requireCommon$3 () {
 		 * may cause issues, try to use BigInts as much as possible or modules that can
 		 * replicate them in some way
 		 */
-		exports.PermissionFlagsBits = {
+		exports$1.PermissionFlagsBits = {
 		    /**
 		     * Allows creation of instant invites
 		     *
@@ -28623,7 +28623,7 @@ function requireCommon$3 () {
 		 *
 		 * @internal
 		 */
-		Object.freeze(exports.PermissionFlagsBits);
+		Object.freeze(exports$1.PermissionFlagsBits);
 		
 	} (common$3));
 	return common$3;
@@ -29834,7 +29834,7 @@ var hasRequiredChatInput;
 function requireChatInput () {
 	if (hasRequiredChatInput) return chatInput;
 	hasRequiredChatInput = 1;
-	(function (exports) {
+	(function (exports$1) {
 		var __createBinding = (chatInput && chatInput.__createBinding) || (Object.create ? (function(o, m, k, k2) {
 		    if (k2 === undefined) k2 = k;
 		    var desc = Object.getOwnPropertyDescriptor(m, k);
@@ -29846,11 +29846,11 @@ function requireChatInput () {
 		    if (k2 === undefined) k2 = k;
 		    o[k2] = m[k];
 		}));
-		var __exportStar = (chatInput && chatInput.__exportStar) || function(m, exports) {
-		    for (var p in m) if (p !== "default" && !Object.prototype.hasOwnProperty.call(exports, p)) __createBinding(exports, m, p);
+		var __exportStar = (chatInput && chatInput.__exportStar) || function(m, exports$1) {
+		    for (var p in m) if (p !== "default" && !Object.prototype.hasOwnProperty.call(exports$1, p)) __createBinding(exports$1, m, p);
 		};
-		Object.defineProperty(exports, "__esModule", { value: true });
-		__exportStar(requireShared(), exports);
+		Object.defineProperty(exports$1, "__esModule", { value: true });
+		__exportStar(requireShared(), exports$1);
 		
 	} (chatInput));
 	return chatInput;
@@ -29891,7 +29891,7 @@ var hasRequiredApplicationCommands;
 function requireApplicationCommands () {
 	if (hasRequiredApplicationCommands) return applicationCommands;
 	hasRequiredApplicationCommands = 1;
-	(function (exports) {
+	(function (exports$1) {
 		var __createBinding = (applicationCommands && applicationCommands.__createBinding) || (Object.create ? (function(o, m, k, k2) {
 		    if (k2 === undefined) k2 = k;
 		    var desc = Object.getOwnPropertyDescriptor(m, k);
@@ -29903,13 +29903,13 @@ function requireApplicationCommands () {
 		    if (k2 === undefined) k2 = k;
 		    o[k2] = m[k];
 		}));
-		var __exportStar = (applicationCommands && applicationCommands.__exportStar) || function(m, exports) {
-		    for (var p in m) if (p !== "default" && !Object.prototype.hasOwnProperty.call(exports, p)) __createBinding(exports, m, p);
+		var __exportStar = (applicationCommands && applicationCommands.__exportStar) || function(m, exports$1) {
+		    for (var p in m) if (p !== "default" && !Object.prototype.hasOwnProperty.call(exports$1, p)) __createBinding(exports$1, m, p);
 		};
-		Object.defineProperty(exports, "__esModule", { value: true });
-		exports.EntryPointCommandHandlerType = exports.InteractionContextType = exports.ApplicationIntegrationType = exports.ApplicationCommandType = void 0;
-		__exportStar(requireChatInput(), exports);
-		__exportStar(requirePermissions$1(), exports);
+		Object.defineProperty(exports$1, "__esModule", { value: true });
+		exports$1.EntryPointCommandHandlerType = exports$1.InteractionContextType = exports$1.ApplicationIntegrationType = exports$1.ApplicationCommandType = void 0;
+		__exportStar(requireChatInput(), exports$1);
+		__exportStar(requirePermissions$1(), exports$1);
 		/**
 		 * @see {@link https://discord.com/developers/docs/interactions/application-commands#application-command-object-application-command-types}
 		 */
@@ -29931,7 +29931,7 @@ function requireApplicationCommands () {
 		     * A UI-based command that represents the primary way to invoke an app's Activity
 		     */
 		    ApplicationCommandType[ApplicationCommandType["PrimaryEntryPoint"] = 4] = "PrimaryEntryPoint";
-		})(ApplicationCommandType || (exports.ApplicationCommandType = ApplicationCommandType = {}));
+		})(ApplicationCommandType || (exports$1.ApplicationCommandType = ApplicationCommandType = {}));
 		/**
 		 * @see {@link https://discord.com/developers/docs/resources/application#application-object-application-integration-types}
 		 */
@@ -29945,7 +29945,7 @@ function requireApplicationCommands () {
 		     * App is installable to users
 		     */
 		    ApplicationIntegrationType[ApplicationIntegrationType["UserInstall"] = 1] = "UserInstall";
-		})(ApplicationIntegrationType || (exports.ApplicationIntegrationType = ApplicationIntegrationType = {}));
+		})(ApplicationIntegrationType || (exports$1.ApplicationIntegrationType = ApplicationIntegrationType = {}));
 		/**
 		 * @see {@link https://discord.com/developers/docs/interactions/receiving-and-responding#interaction-object-interaction-context-types}
 		 */
@@ -29963,7 +29963,7 @@ function requireApplicationCommands () {
 		     * Interaction can be used within Group DMs and DMs other than the app's bot user
 		     */
 		    InteractionContextType[InteractionContextType["PrivateChannel"] = 2] = "PrivateChannel";
-		})(InteractionContextType || (exports.InteractionContextType = InteractionContextType = {}));
+		})(InteractionContextType || (exports$1.InteractionContextType = InteractionContextType = {}));
 		/**
 		 * @see {@link https://discord.com/developers/docs/interactions/application-commands#application-command-object-entry-point-command-handler-types}
 		 */
@@ -29978,7 +29978,7 @@ function requireApplicationCommands () {
 		     * the app
 		     */
 		    EntryPointCommandHandlerType[EntryPointCommandHandlerType["DiscordLaunchActivity"] = 2] = "DiscordLaunchActivity";
-		})(EntryPointCommandHandlerType || (exports.EntryPointCommandHandlerType = EntryPointCommandHandlerType = {}));
+		})(EntryPointCommandHandlerType || (exports$1.EntryPointCommandHandlerType = EntryPointCommandHandlerType = {}));
 		
 	} (applicationCommands));
 	return applicationCommands;
@@ -30061,7 +30061,7 @@ var hasRequiredInteractions;
 function requireInteractions () {
 	if (hasRequiredInteractions) return interactions;
 	hasRequiredInteractions = 1;
-	(function (exports) {
+	(function (exports$1) {
 		var __createBinding = (interactions && interactions.__createBinding) || (Object.create ? (function(o, m, k, k2) {
 		    if (k2 === undefined) k2 = k;
 		    var desc = Object.getOwnPropertyDescriptor(m, k);
@@ -30073,12 +30073,12 @@ function requireInteractions () {
 		    if (k2 === undefined) k2 = k;
 		    o[k2] = m[k];
 		}));
-		var __exportStar = (interactions && interactions.__exportStar) || function(m, exports) {
-		    for (var p in m) if (p !== "default" && !Object.prototype.hasOwnProperty.call(exports, p)) __createBinding(exports, m, p);
+		var __exportStar = (interactions && interactions.__exportStar) || function(m, exports$1) {
+		    for (var p in m) if (p !== "default" && !Object.prototype.hasOwnProperty.call(exports$1, p)) __createBinding(exports$1, m, p);
 		};
-		Object.defineProperty(exports, "__esModule", { value: true });
-		__exportStar(requireApplicationCommands(), exports);
-		__exportStar(requireResponses(), exports);
+		Object.defineProperty(exports$1, "__esModule", { value: true });
+		__exportStar(requireApplicationCommands(), exports$1);
+		__exportStar(requireResponses(), exports$1);
 		
 	} (interactions));
 	return interactions;
@@ -31185,7 +31185,7 @@ var hasRequiredV10$4;
 function requireV10$4 () {
 	if (hasRequiredV10$4) return v10$7;
 	hasRequiredV10$4 = 1;
-	(function (exports) {
+	(function (exports$1) {
 		var __createBinding = (v10$7 && v10$7.__createBinding) || (Object.create ? (function(o, m, k, k2) {
 		    if (k2 === undefined) k2 = k;
 		    var desc = Object.getOwnPropertyDescriptor(m, k);
@@ -31197,30 +31197,30 @@ function requireV10$4 () {
 		    if (k2 === undefined) k2 = k;
 		    o[k2] = m[k];
 		}));
-		var __exportStar = (v10$7 && v10$7.__exportStar) || function(m, exports) {
-		    for (var p in m) if (p !== "default" && !Object.prototype.hasOwnProperty.call(exports, p)) __createBinding(exports, m, p);
+		var __exportStar = (v10$7 && v10$7.__exportStar) || function(m, exports$1) {
+		    for (var p in m) if (p !== "default" && !Object.prototype.hasOwnProperty.call(exports$1, p)) __createBinding(exports$1, m, p);
 		};
-		Object.defineProperty(exports, "__esModule", { value: true });
-		__exportStar(requireCommon$3(), exports);
-		__exportStar(requireApplication$1(), exports);
-		__exportStar(requireAuditLog(), exports);
-		__exportStar(requireAutoModeration(), exports);
-		__exportStar(requireChannel$2(), exports);
-		__exportStar(requireGateway(), exports);
-		__exportStar(requireGuild$1(), exports);
-		__exportStar(requireGuildScheduledEvent$1(), exports);
-		__exportStar(requireInteractions(), exports);
-		__exportStar(requireInvite$1(), exports);
-		__exportStar(requireMessage$2(), exports);
-		__exportStar(requireMonetization$1(), exports);
-		__exportStar(requireOauth2(), exports);
-		__exportStar(requirePermissions(), exports);
-		__exportStar(requirePoll$1(), exports);
-		__exportStar(requireStageInstance$1(), exports);
-		__exportStar(requireSticker$1(), exports);
-		__exportStar(requireTeams(), exports);
-		__exportStar(requireUser$2(), exports);
-		__exportStar(requireWebhook$1(), exports);
+		Object.defineProperty(exports$1, "__esModule", { value: true });
+		__exportStar(requireCommon$3(), exports$1);
+		__exportStar(requireApplication$1(), exports$1);
+		__exportStar(requireAuditLog(), exports$1);
+		__exportStar(requireAutoModeration(), exports$1);
+		__exportStar(requireChannel$2(), exports$1);
+		__exportStar(requireGateway(), exports$1);
+		__exportStar(requireGuild$1(), exports$1);
+		__exportStar(requireGuildScheduledEvent$1(), exports$1);
+		__exportStar(requireInteractions(), exports$1);
+		__exportStar(requireInvite$1(), exports$1);
+		__exportStar(requireMessage$2(), exports$1);
+		__exportStar(requireMonetization$1(), exports$1);
+		__exportStar(requireOauth2(), exports$1);
+		__exportStar(requirePermissions(), exports$1);
+		__exportStar(requirePoll$1(), exports$1);
+		__exportStar(requireStageInstance$1(), exports$1);
+		__exportStar(requireSticker$1(), exports$1);
+		__exportStar(requireTeams(), exports$1);
+		__exportStar(requireUser$2(), exports$1);
+		__exportStar(requireWebhook$1(), exports$1);
 		
 	} (v10$7));
 	return v10$7;
@@ -31768,7 +31768,7 @@ var hasRequiredV10$3;
 function requireV10$3 () {
 	if (hasRequiredV10$3) return v10$5;
 	hasRequiredV10$3 = 1;
-	(function (exports) {
+	(function (exports$1) {
 		var __createBinding = (v10$5 && v10$5.__createBinding) || (Object.create ? (function(o, m, k, k2) {
 		    if (k2 === undefined) k2 = k;
 		    var desc = Object.getOwnPropertyDescriptor(m, k);
@@ -31780,17 +31780,17 @@ function requireV10$3 () {
 		    if (k2 === undefined) k2 = k;
 		    o[k2] = m[k];
 		}));
-		var __exportStar = (v10$5 && v10$5.__exportStar) || function(m, exports) {
-		    for (var p in m) if (p !== "default" && !Object.prototype.hasOwnProperty.call(exports, p)) __createBinding(exports, m, p);
+		var __exportStar = (v10$5 && v10$5.__exportStar) || function(m, exports$1) {
+		    for (var p in m) if (p !== "default" && !Object.prototype.hasOwnProperty.call(exports$1, p)) __createBinding(exports$1, m, p);
 		};
-		Object.defineProperty(exports, "__esModule", { value: true });
-		exports.OAuth2Routes = exports.RouteBases = exports.CDNRoutes = exports.ImageFormat = exports.StickerPackApplicationId = exports.Routes = exports.APIVersion = void 0;
+		Object.defineProperty(exports$1, "__esModule", { value: true });
+		exports$1.OAuth2Routes = exports$1.RouteBases = exports$1.CDNRoutes = exports$1.ImageFormat = exports$1.StickerPackApplicationId = exports$1.Routes = exports$1.APIVersion = void 0;
 		const internals_1 = requireInternals();
-		__exportStar(requireCommon$2(), exports);
-		__exportStar(requireChannel$1(), exports);
-		__exportStar(requireMonetization(), exports);
-		exports.APIVersion = '10';
-		exports.Routes = {
+		__exportStar(requireCommon$2(), exports$1);
+		__exportStar(requireChannel$1(), exports$1);
+		__exportStar(requireMonetization(), exports$1);
+		exports$1.APIVersion = '10';
+		exports$1.Routes = {
 		    /**
 		     * Route for:
 		     * - GET `/applications/{application.id}/role-connections/metadata`
@@ -32730,8 +32730,8 @@ function requireV10$3 () {
 		        return `/guilds/${guildId}/soundboard-sounds/${soundId}`;
 		    },
 		};
-		for (const [key, fn] of Object.entries(exports.Routes)) {
-		    exports.Routes[key] = (...args) => {
+		for (const [key, fn] of Object.entries(exports$1.Routes)) {
+		    exports$1.Routes[key] = (...args) => {
 		        const escaped = args.map((arg) => {
 		            if (arg) {
 		                // Skip already "safe" urls
@@ -32747,8 +32747,8 @@ function requireV10$3 () {
 		    };
 		}
 		// Freeze the object so it can't be changed
-		Object.freeze(exports.Routes);
-		exports.StickerPackApplicationId = '710982414301790216';
+		Object.freeze(exports$1.Routes);
+		exports$1.StickerPackApplicationId = '710982414301790216';
 		var ImageFormat;
 		(function (ImageFormat) {
 		    ImageFormat["JPEG"] = "jpeg";
@@ -32756,8 +32756,8 @@ function requireV10$3 () {
 		    ImageFormat["WebP"] = "webp";
 		    ImageFormat["GIF"] = "gif";
 		    ImageFormat["Lottie"] = "json";
-		})(ImageFormat || (exports.ImageFormat = ImageFormat = {}));
-		exports.CDNRoutes = {
+		})(ImageFormat || (exports$1.ImageFormat = ImageFormat = {}));
+		exports$1.CDNRoutes = {
 		    /**
 		     * Route for:
 		     * - GET `/emojis/{emoji.id}.{png|jpeg|webp|gif}`
@@ -32918,7 +32918,7 @@ function requireV10$3 () {
 		     * This route supports the extensions: PNG, JPEG, WebP
 		     */
 		    stickerPackBanner(stickerPackBannerAssetId, format) {
-		        return `/app-assets/${exports.StickerPackApplicationId}/store/${stickerPackBannerAssetId}.${format}`;
+		        return `/app-assets/${exports$1.StickerPackApplicationId}/store/${stickerPackBannerAssetId}.${format}`;
 		    },
 		    /**
 		     * Route for:
@@ -32991,8 +32991,8 @@ function requireV10$3 () {
 		        return `/guild-tag-badges/${guildId}/${guildTagBadge}.${format}`;
 		    },
 		};
-		for (const [key, fn] of Object.entries(exports.CDNRoutes)) {
-		    exports.CDNRoutes[key] = (...args) => {
+		for (const [key, fn] of Object.entries(exports$1.CDNRoutes)) {
+		    exports$1.CDNRoutes[key] = (...args) => {
 		        const escaped = args.map((arg) => {
 		            if (arg) {
 		                // Skip already "safe" urls
@@ -33008,9 +33008,9 @@ function requireV10$3 () {
 		    };
 		}
 		// Freeze the object so it can't be changed
-		Object.freeze(exports.CDNRoutes);
-		exports.RouteBases = {
-		    api: `https://discord.com/api/v${exports.APIVersion}`,
+		Object.freeze(exports$1.CDNRoutes);
+		exports$1.RouteBases = {
+		    api: `https://discord.com/api/v${exports$1.APIVersion}`,
 		    cdn: 'https://cdn.discordapp.com',
 		    media: 'https://media.discordapp.net',
 		    invite: 'https://discord.gg',
@@ -33019,17 +33019,17 @@ function requireV10$3 () {
 		    scheduledEvent: 'https://discord.com/events',
 		};
 		// Freeze bases object
-		Object.freeze(exports.RouteBases);
-		exports.OAuth2Routes = {
-		    authorizationURL: `${exports.RouteBases.api}${exports.Routes.oauth2Authorization()}`,
-		    tokenURL: `${exports.RouteBases.api}${exports.Routes.oauth2TokenExchange()}`,
+		Object.freeze(exports$1.RouteBases);
+		exports$1.OAuth2Routes = {
+		    authorizationURL: `${exports$1.RouteBases.api}${exports$1.Routes.oauth2Authorization()}`,
+		    tokenURL: `${exports$1.RouteBases.api}${exports$1.Routes.oauth2TokenExchange()}`,
 		    /**
 		     * @see {@link https://tools.ietf.org/html/rfc7009}
 		     */
-		    tokenRevocationURL: `${exports.RouteBases.api}${exports.Routes.oauth2TokenRevocation()}`,
+		    tokenRevocationURL: `${exports$1.RouteBases.api}${exports$1.Routes.oauth2TokenRevocation()}`,
 		};
 		// Freeze OAuth2 route object
-		Object.freeze(exports.OAuth2Routes);
+		Object.freeze(exports$1.OAuth2Routes);
 		
 	} (v10$5));
 	return v10$5;
@@ -33324,7 +33324,7 @@ var hasRequiredV10$2;
 function requireV10$2 () {
 	if (hasRequiredV10$2) return v10$3;
 	hasRequiredV10$2 = 1;
-	(function (exports) {
+	(function (exports$1) {
 		var __createBinding = (v10$3 && v10$3.__createBinding) || (Object.create ? (function(o, m, k, k2) {
 		    if (k2 === undefined) k2 = k;
 		    var desc = Object.getOwnPropertyDescriptor(m, k);
@@ -33336,13 +33336,13 @@ function requireV10$2 () {
 		    if (k2 === undefined) k2 = k;
 		    o[k2] = m[k];
 		}));
-		var __exportStar = (v10$3 && v10$3.__exportStar) || function(m, exports) {
-		    for (var p in m) if (p !== "default" && !Object.prototype.hasOwnProperty.call(exports, p)) __createBinding(exports, m, p);
+		var __exportStar = (v10$3 && v10$3.__exportStar) || function(m, exports$1) {
+		    for (var p in m) if (p !== "default" && !Object.prototype.hasOwnProperty.call(exports$1, p)) __createBinding(exports$1, m, p);
 		};
-		Object.defineProperty(exports, "__esModule", { value: true });
-		exports.RPCEvents = exports.RPCCommands = exports.RPCVersion = void 0;
-		__exportStar(requireCommon$1(), exports);
-		exports.RPCVersion = '1';
+		Object.defineProperty(exports$1, "__esModule", { value: true });
+		exports$1.RPCEvents = exports$1.RPCCommands = exports$1.RPCVersion = void 0;
+		__exportStar(requireCommon$1(), exports$1);
+		exports$1.RPCVersion = '1';
 		/**
 		 * @see {@link https://discord.com/developers/docs/topics/rpc#commands-and-events-rpc-commands}
 		 */
@@ -33537,7 +33537,7 @@ function requireV10$2 () {
 		     * @unstable
 		     */
 		    RPCCommands["ValidateApplication"] = "VALIDATE_APPLICATION";
-		})(RPCCommands || (exports.RPCCommands = RPCCommands = {}));
+		})(RPCCommands || (exports$1.RPCCommands = RPCCommands = {}));
 		/**
 		 * @see {@link https://discord.com/developers/docs/topics/rpc#commands-and-events-rpc-events}
 		 */
@@ -33621,7 +33621,7 @@ function requireV10$2 () {
 		     * Dispatches channel voice state objects
 		     */
 		    RPCEvents["VoiceStateUpdate"] = "VOICE_STATE_UPDATE";
-		})(RPCEvents || (exports.RPCEvents = RPCEvents = {}));
+		})(RPCEvents || (exports$1.RPCEvents = RPCEvents = {}));
 		
 	} (v10$3));
 	return v10$3;
@@ -33856,7 +33856,7 @@ var hasRequiredV10;
 function requireV10 () {
 	if (hasRequiredV10) return v10$a;
 	hasRequiredV10 = 1;
-	(function (exports) {
+	(function (exports$1) {
 		var __createBinding = (v10$a && v10$a.__createBinding) || (Object.create ? (function(o, m, k, k2) {
 		    if (k2 === undefined) k2 = k;
 		    var desc = Object.getOwnPropertyDescriptor(m, k);
@@ -33868,18 +33868,18 @@ function requireV10 () {
 		    if (k2 === undefined) k2 = k;
 		    o[k2] = m[k];
 		}));
-		var __exportStar = (v10$a && v10$a.__exportStar) || function(m, exports) {
-		    for (var p in m) if (p !== "default" && !Object.prototype.hasOwnProperty.call(exports, p)) __createBinding(exports, m, p);
+		var __exportStar = (v10$a && v10$a.__exportStar) || function(m, exports$1) {
+		    for (var p in m) if (p !== "default" && !Object.prototype.hasOwnProperty.call(exports$1, p)) __createBinding(exports$1, m, p);
 		};
-		Object.defineProperty(exports, "__esModule", { value: true });
-		exports.Utils = void 0;
-		__exportStar(require$$0$2, exports);
-		__exportStar(require$$1, exports);
-		__exportStar(require$$2, exports);
-		__exportStar(require$$3, exports);
-		__exportStar(require$$4, exports);
-		__exportStar(requireInternals(), exports);
-		exports.Utils = require$$6;
+		Object.defineProperty(exports$1, "__esModule", { value: true });
+		exports$1.Utils = void 0;
+		__exportStar(require$$0$2, exports$1);
+		__exportStar(require$$1, exports$1);
+		__exportStar(require$$2, exports$1);
+		__exportStar(require$$3, exports$1);
+		__exportStar(require$$4, exports$1);
+		__exportStar(requireInternals(), exports$1);
+		exports$1.Utils = require$$6;
 		
 	} (v10$a));
 	return v10$a;
@@ -35282,9 +35282,9 @@ var hasRequiredTree$2;
 function requireTree$2 () {
 	if (hasRequiredTree$2) return tree;
 	hasRequiredTree$2 = 1;
-	(function (exports) {
-		Object.defineProperty(exports, "__esModule", { value: true });
-		exports.createComplexNode = exports.createNode = exports.merge = void 0;
+	(function (exports$1) {
+		Object.defineProperty(exports$1, "__esModule", { value: true });
+		exports$1.createComplexNode = exports$1.createNode = exports$1.merge = void 0;
 		const createMatch = (leaf) => ({
 		    typename: leaf.typename,
 		    mime: leaf.info.mime,
@@ -35310,18 +35310,18 @@ function requireTree$2 () {
 		    }
 		    // Path exists already, Merge subtree
 		    if (tree.bytes[currentByte]) {
-		        tree.bytes[currentByte] = exports.merge(exports.createNode(node.typename, path, node.info), tree.bytes[currentByte]);
+		        tree.bytes[currentByte] = exports$1.merge(exports$1.createNode(node.typename, path, node.info), tree.bytes[currentByte]);
 		    }
 		    else { // Tree did not exist before
-		        tree.bytes[currentByte] = exports.createComplexNode(node.typename, path, node.info);
+		        tree.bytes[currentByte] = exports$1.createComplexNode(node.typename, path, node.info);
 		    }
 		    return tree;
 		};
-		exports.merge = merge;
+		exports$1.merge = merge;
 		const createNode = (typename, bytes, info) => {
 		    return { typename, bytes, info: info ? info : {} };
 		};
-		exports.createNode = createNode;
+		exports$1.createNode = createNode;
 		const createComplexNode = (typename, bytes, info) => {
 		    let obj = {
 		        bytes: {},
@@ -35339,10 +35339,10 @@ function requireTree$2 () {
 		            bytes: {},
 		        };
 		    }
-		    obj.bytes[currentKey] = exports.createComplexNode(typename, path, info);
+		    obj.bytes[currentKey] = exports$1.createComplexNode(typename, path, info);
 		    return obj;
 		};
-		exports.createComplexNode = createComplexNode; 
+		exports$1.createComplexNode = createComplexNode; 
 	} (tree));
 	return tree;
 }
@@ -35352,9 +35352,9 @@ var hasRequiredPatternTree;
 function requirePatternTree () {
 	if (hasRequiredPatternTree) return patternTree;
 	hasRequiredPatternTree = 1;
-	(function (exports) {
-		Object.defineProperty(exports, "__esModule", { value: true });
-		exports.createTree = exports.add = void 0;
+	(function (exports$1) {
+		Object.defineProperty(exports$1, "__esModule", { value: true });
+		exports$1.createTree = exports$1.add = void 0;
 		const toHex_1 = requireToHex();
 		const tree_1 = requireTree$2();
 		// https://en.wikipedia.org/wiki/List_of_file_signatures
@@ -35382,20 +35382,20 @@ function requirePatternTree () {
 		        }
 		    }
 		};
-		exports.add = add;
-		exports.add("gif", ["0x47", "0x49", "0x46", "0x38", "0x37", "0x61"], {
+		exports$1.add = add;
+		exports$1.add("gif", ["0x47", "0x49", "0x46", "0x38", "0x37", "0x61"], {
 		    mime: "image/gif",
 		    extension: "gif",
 		});
-		exports.add("gif", ["0x47", "0x49", "0x46", "0x38", "0x39", "0x61"], {
+		exports$1.add("gif", ["0x47", "0x49", "0x46", "0x38", "0x39", "0x61"], {
 		    mime: "image/gif",
 		    extension: "gif",
 		});
-		exports.add("jpg", ["0xFF", "0xD8", "0xFF"], {
+		exports$1.add("jpg", ["0xFF", "0xD8", "0xFF"], {
 		    mime: "image/jpeg",
 		    extension: "jpeg",
 		});
-		exports.add("webp", [
+		exports$1.add("webp", [
 		    "0x52",
 		    "0x49",
 		    "0x46",
@@ -35409,41 +35409,41 @@ function requirePatternTree () {
 		    "0x42",
 		    "0x50",
 		], { mime: "image/webp", extension: "webp" });
-		exports.add("heif", ["0x66", "0x74", "0x79", "0x70", "0x6D", "0x69", "0x66", "0x31"], { mime: "image/heif", extension: "heif" }, 4);
-		exports.add("heif", ["0x66", "0x74", "0x79", "0x70", "0x68", "0x65", "0x69", "0x63"], { mime: "image/heif", extension: "heic" }, 4);
-		exports.add("rpm", ["0xed", "0xab", "0xee", "0xdb"]);
-		exports.add("bin", ["0x53", "0x50", "0x30", "0x31"], {
+		exports$1.add("heif", ["0x66", "0x74", "0x79", "0x70", "0x6D", "0x69", "0x66", "0x31"], { mime: "image/heif", extension: "heif" }, 4);
+		exports$1.add("heif", ["0x66", "0x74", "0x79", "0x70", "0x68", "0x65", "0x69", "0x63"], { mime: "image/heif", extension: "heic" }, 4);
+		exports$1.add("rpm", ["0xed", "0xab", "0xee", "0xdb"]);
+		exports$1.add("bin", ["0x53", "0x50", "0x30", "0x31"], {
 		    mime: "application/octet-stream",
 		    extension: "bin",
 		});
-		exports.add("pic", ["0x00"]);
-		exports.add("pif", ["0x00"]);
-		exports.add("sea", ["0x00"]);
-		exports.add("ytr", ["0x00"]);
+		exports$1.add("pic", ["0x00"]);
+		exports$1.add("pif", ["0x00"]);
+		exports$1.add("sea", ["0x00"]);
+		exports$1.add("ytr", ["0x00"]);
 		// 66747970
 		// 6D703432
-		exports.add("mp4", ["0x66", "0x74", "0x79", "0x70"], { mime: "video/mp4", extension: "mp4" }, 0x4);
-		exports.add("ttf", ["0x00", "0x01", "0x00", "0x00", "0x00"], {
+		exports$1.add("mp4", ["0x66", "0x74", "0x79", "0x70"], { mime: "video/mp4", extension: "mp4" }, 0x4);
+		exports$1.add("ttf", ["0x00", "0x01", "0x00", "0x00", "0x00"], {
 		    mime: "font/ttf",
 		    extension: "ttf",
 		});
-		exports.add("otf", ["0x4F", "0x54", "0x54", "0x4F"], {
+		exports$1.add("otf", ["0x4F", "0x54", "0x54", "0x4F"], {
 		    mime: "font/otf",
 		    extension: "otf",
 		});
-		exports.add("eot", ["0x50", "0x4C"], {
+		exports$1.add("eot", ["0x50", "0x4C"], {
 		    mime: "application/vnd.ms-fontobject",
 		    extension: "eot",
 		});
-		exports.add("woff", ["0x77", "0x4F", "0x46", "0x46"], {
+		exports$1.add("woff", ["0x77", "0x4F", "0x46", "0x46"], {
 		    mime: "font/woff",
 		    extension: "woff",
 		});
-		exports.add("woff2", ["0x77", "0x4F", "0x46", "0x32"], {
+		exports$1.add("woff2", ["0x77", "0x4F", "0x46", "0x32"], {
 		    mime: "font/woff2",
 		    extension: "woff2",
 		});
-		exports.add("pdb", [
+		exports$1.add("pdb", [
 		    "0x00",
 		    "0x00",
 		    "0x00",
@@ -35469,18 +35469,18 @@ function requirePatternTree () {
 		    "0x00",
 		    "0x00",
 		]);
-		exports.add("dba", ["0xBE", "0xBA", "0xFE", "0xCA"]);
-		exports.add("dba2", ["0x00", "0x01", "0x42", "0x44"]);
-		exports.add("tda", ["0x00", "0x01", "0x44", "0x54"]);
-		exports.add("tda2", ["0x00", "0x01", "0x00", "0x00"]);
-		exports.add("ico", ["0x00", "0x00", "0x01", "0x00"], {
+		exports$1.add("dba", ["0xBE", "0xBA", "0xFE", "0xCA"]);
+		exports$1.add("dba2", ["0x00", "0x01", "0x42", "0x44"]);
+		exports$1.add("tda", ["0x00", "0x01", "0x44", "0x54"]);
+		exports$1.add("tda2", ["0x00", "0x01", "0x00", "0x00"]);
+		exports$1.add("ico", ["0x00", "0x00", "0x01", "0x00"], {
 		    mime: "image/x-icon",
 		    extension: "ico",
 		});
-		exports.add("3gp", ["0x66", "0x74", "0x79", "0x70", "0x33", "0x67"]);
-		exports.add("z", ["0x1F", "0x9D"]);
-		exports.add("tar.z", ["0x1F", "0xA0"]);
-		exports.add("bac", [
+		exports$1.add("3gp", ["0x66", "0x74", "0x79", "0x70", "0x33", "0x67"]);
+		exports$1.add("z", ["0x1F", "0x9D"]);
+		exports$1.add("tar.z", ["0x1F", "0xA0"]);
+		exports$1.add("bac", [
 		    "0x42",
 		    "0x41",
 		    "0x43",
@@ -35494,19 +35494,19 @@ function requirePatternTree () {
 		    "0x53",
 		    "0x4B",
 		]);
-		exports.add("bz2", ["0x42", "0x5A", "0x68"], {
+		exports$1.add("bz2", ["0x42", "0x5A", "0x68"], {
 		    mime: "application/x-bzip2",
 		    extension: "bz2",
 		});
-		exports.add("tif", ["0x49", "0x49", "0x2A", "0x00"], {
+		exports$1.add("tif", ["0x49", "0x49", "0x2A", "0x00"], {
 		    mime: "image/tiff",
 		    extension: "tif",
 		});
-		exports.add("tiff", ["0x4D", "0x4D", "0x00", "0x2A"], {
+		exports$1.add("tiff", ["0x4D", "0x4D", "0x00", "0x2A"], {
 		    mime: "image/tiff",
 		    extension: "tiff",
 		});
-		exports.add("cr2", [
+		exports$1.add("cr2", [
 		    "0x49",
 		    "0x49",
 		    "0x2A",
@@ -35518,14 +35518,14 @@ function requirePatternTree () {
 		    "0x43",
 		    "0x52",
 		]);
-		exports.add("cin", ["0x80", "0x2A", "0x5F", "0xD7"]);
-		exports.add("cin1", ["0x52", "0x4E", "0x43", "0x01"]);
-		exports.add("cin2", ["0x52", "0x4E", "0x43", "0x02"]);
-		exports.add("dpx", ["0x53", "0x44", "0x50", "0x58"]);
-		exports.add("dpx2", ["0x58", "0x50", "0x44", "0x53"]);
-		exports.add("exr", ["0x76", "0x2F", "0x31", "0x01"]);
-		exports.add("bpg", ["0x42", "0x50", "0x47", "0xFB"]);
-		exports.add("ilbm", [
+		exports$1.add("cin", ["0x80", "0x2A", "0x5F", "0xD7"]);
+		exports$1.add("cin1", ["0x52", "0x4E", "0x43", "0x01"]);
+		exports$1.add("cin2", ["0x52", "0x4E", "0x43", "0x02"]);
+		exports$1.add("dpx", ["0x53", "0x44", "0x50", "0x58"]);
+		exports$1.add("dpx2", ["0x58", "0x50", "0x44", "0x53"]);
+		exports$1.add("exr", ["0x76", "0x2F", "0x31", "0x01"]);
+		exports$1.add("bpg", ["0x42", "0x50", "0x47", "0xFB"]);
+		exports$1.add("ilbm", [
 		    "0x46",
 		    "0x4F",
 		    "0x52",
@@ -35539,7 +35539,7 @@ function requirePatternTree () {
 		    "0x42",
 		    "0x4D",
 		]);
-		exports.add("8svx", [
+		exports$1.add("8svx", [
 		    "0x46",
 		    "0x4F",
 		    "0x52",
@@ -35553,7 +35553,7 @@ function requirePatternTree () {
 		    "0x56",
 		    "0x58",
 		]);
-		exports.add("acbm", [
+		exports$1.add("acbm", [
 		    "0x46",
 		    "0x4F",
 		    "0x52",
@@ -35567,7 +35567,7 @@ function requirePatternTree () {
 		    "0x42",
 		    "0x4D",
 		]);
-		exports.add("anbm", [
+		exports$1.add("anbm", [
 		    "0x46",
 		    "0x4F",
 		    "0x52",
@@ -35581,7 +35581,7 @@ function requirePatternTree () {
 		    "0x42",
 		    "0x4D",
 		]);
-		exports.add("anim", [
+		exports$1.add("anim", [
 		    "0x46",
 		    "0x4F",
 		    "0x52",
@@ -35595,7 +35595,7 @@ function requirePatternTree () {
 		    "0x49",
 		    "0x4D",
 		]);
-		exports.add("faxx", [
+		exports$1.add("faxx", [
 		    "0x46",
 		    "0x4F",
 		    "0x52",
@@ -35609,7 +35609,7 @@ function requirePatternTree () {
 		    "0x58",
 		    "0x58",
 		]);
-		exports.add("ftxt", [
+		exports$1.add("ftxt", [
 		    "0x46",
 		    "0x4F",
 		    "0x52",
@@ -35623,7 +35623,7 @@ function requirePatternTree () {
 		    "0x58",
 		    "0x54",
 		]);
-		exports.add("smus", [
+		exports$1.add("smus", [
 		    "0x46",
 		    "0x4F",
 		    "0x52",
@@ -35637,7 +35637,7 @@ function requirePatternTree () {
 		    "0x55",
 		    "0x53",
 		]);
-		exports.add("cmus", [
+		exports$1.add("cmus", [
 		    "0x46",
 		    "0x4F",
 		    "0x52",
@@ -35651,7 +35651,7 @@ function requirePatternTree () {
 		    "0x55",
 		    "0x53",
 		]);
-		exports.add("yuvn", [
+		exports$1.add("yuvn", [
 		    "0x46",
 		    "0x4F",
 		    "0x52",
@@ -35665,7 +35665,7 @@ function requirePatternTree () {
 		    "0x56",
 		    "0x4E",
 		]);
-		exports.add("iff", [
+		exports$1.add("iff", [
 		    "0x46",
 		    "0x4F",
 		    "0x52",
@@ -35679,7 +35679,7 @@ function requirePatternTree () {
 		    "0x4E",
 		    "0x54",
 		]);
-		exports.add("aiff", [
+		exports$1.add("aiff", [
 		    "0x46",
 		    "0x4F",
 		    "0x52",
@@ -35693,179 +35693,179 @@ function requirePatternTree () {
 		    "0x46",
 		    "0x46",
 		], { mime: "audio/x-aiff", extension: "aiff" });
-		exports.add("idx", ["0x49", "0x4E", "0x44", "0x58"]);
-		exports.add("lz", ["0x4C", "0x5A", "0x49", "0x50"]);
-		exports.add("exe", ["0x4D", "0x5A"]);
-		exports.add("zip", ["0x50", "0x4B", "0x03", "0x04"], {
+		exports$1.add("idx", ["0x49", "0x4E", "0x44", "0x58"]);
+		exports$1.add("lz", ["0x4C", "0x5A", "0x49", "0x50"]);
+		exports$1.add("exe", ["0x4D", "0x5A"]);
+		exports$1.add("zip", ["0x50", "0x4B", "0x03", "0x04"], {
 		    mime: "application/zip",
 		    extension: "zip",
 		});
-		exports.add("zip", ["0x50", "0x4B", "0x05", "0x06"], {
+		exports$1.add("zip", ["0x50", "0x4B", "0x05", "0x06"], {
 		    mime: "application/zip",
 		    extension: "zip",
 		});
-		exports.add("zip", ["0x50", "0x4B", "0x07", "0x08"], {
+		exports$1.add("zip", ["0x50", "0x4B", "0x07", "0x08"], {
 		    mime: "application/zip",
 		    extension: "zip",
 		});
-		exports.add("jar", ["0x50", "0x4B", "0x03", "0x04"], {
+		exports$1.add("jar", ["0x50", "0x4B", "0x03", "0x04"], {
 		    mime: "application/java-archive",
 		    extension: "jar",
 		});
-		exports.add("jar", ["0x50", "0x4B", "0x05", "0x06"], {
+		exports$1.add("jar", ["0x50", "0x4B", "0x05", "0x06"], {
 		    mime: "application/java-archive",
 		    extension: "jar",
 		});
-		exports.add("jar", ["0x50", "0x4B", "0x07", "0x08"], {
+		exports$1.add("jar", ["0x50", "0x4B", "0x07", "0x08"], {
 		    mime: "application/java-archive",
 		    extension: "jar",
 		});
-		exports.add("odt", ["0x50", "0x4B", "0x03", "0x04"], {
+		exports$1.add("odt", ["0x50", "0x4B", "0x03", "0x04"], {
 		    mime: "application/vnd.oasis.opendocument.text",
 		    extension: "odt",
 		});
-		exports.add("odt", ["0x50", "0x4B", "0x05", "0x06"], {
+		exports$1.add("odt", ["0x50", "0x4B", "0x05", "0x06"], {
 		    mime: "application/vnd.oasis.opendocument.text",
 		    extension: "odt",
 		});
-		exports.add("odt", ["0x50", "0x4B", "0x07", "0x08"], {
+		exports$1.add("odt", ["0x50", "0x4B", "0x07", "0x08"], {
 		    mime: "application/vnd.oasis.opendocument.text",
 		    extension: "odt",
 		});
-		exports.add("ods", ["0x50", "0x4B", "0x03", "0x04"], {
+		exports$1.add("ods", ["0x50", "0x4B", "0x03", "0x04"], {
 		    mime: "application/vnd.oasis.opendocument.spreadsheet",
 		    extension: "ods",
 		});
-		exports.add("ods", ["0x50", "0x4B", "0x05", "0x06"], {
+		exports$1.add("ods", ["0x50", "0x4B", "0x05", "0x06"], {
 		    mime: "application/vnd.oasis.opendocument.spreadsheet",
 		    extension: "ods",
 		});
-		exports.add("ods", ["0x50", "0x4B", "0x07", "0x08"], {
+		exports$1.add("ods", ["0x50", "0x4B", "0x07", "0x08"], {
 		    mime: "application/vnd.oasis.opendocument.spreadsheet",
 		    extension: "ods",
 		});
-		exports.add("odp", ["0x50", "0x4B", "0x03", "0x04"], {
+		exports$1.add("odp", ["0x50", "0x4B", "0x03", "0x04"], {
 		    mime: "application/vnd.oasis.opendocument.presentation",
 		    extension: "odp",
 		});
-		exports.add("odp", ["0x50", "0x4B", "0x05", "0x06"], {
+		exports$1.add("odp", ["0x50", "0x4B", "0x05", "0x06"], {
 		    mime: "application/vnd.oasis.opendocument.presentation",
 		    extension: "odp",
 		});
-		exports.add("odp", ["0x50", "0x4B", "0x07", "0x08"], {
+		exports$1.add("odp", ["0x50", "0x4B", "0x07", "0x08"], {
 		    mime: "application/vnd.oasis.opendocument.presentation",
 		    extension: "odp",
 		});
-		exports.add("docx", ["0x50", "0x4B", "0x03", "0x04"], {
+		exports$1.add("docx", ["0x50", "0x4B", "0x03", "0x04"], {
 		    mime: "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
 		    extension: "docx",
 		});
-		exports.add("docx", ["0x50", "0x4B", "0x05", "0x06"], {
+		exports$1.add("docx", ["0x50", "0x4B", "0x05", "0x06"], {
 		    mime: "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
 		    extension: "docx",
 		});
-		exports.add("docx", ["0x50", "0x4B", "0x07", "0x08"], {
+		exports$1.add("docx", ["0x50", "0x4B", "0x07", "0x08"], {
 		    mime: "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
 		    extension: "docx",
 		});
-		exports.add("xlsx", ["0x50", "0x4B", "0x03", "0x04"], {
+		exports$1.add("xlsx", ["0x50", "0x4B", "0x03", "0x04"], {
 		    mime: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
 		    extension: "xlsx",
 		});
-		exports.add("xlsx", ["0x50", "0x4B", "0x05", "0x06"], {
+		exports$1.add("xlsx", ["0x50", "0x4B", "0x05", "0x06"], {
 		    mime: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
 		    extension: "xlsx",
 		});
-		exports.add("xlsx", ["0x50", "0x4B", "0x07", "0x08"], {
+		exports$1.add("xlsx", ["0x50", "0x4B", "0x07", "0x08"], {
 		    mime: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
 		    extension: "xlsx",
 		});
-		exports.add("pptx", ["0x50", "0x4B", "0x03", "0x04"], {
+		exports$1.add("pptx", ["0x50", "0x4B", "0x03", "0x04"], {
 		    mime: "application/vnd.openxmlformats-officedocument.presentationml.presentation",
 		    extension: "pptx",
 		});
-		exports.add("pptx", ["0x50", "0x4B", "0x05", "0x06"], {
+		exports$1.add("pptx", ["0x50", "0x4B", "0x05", "0x06"], {
 		    mime: "application/vnd.openxmlformats-officedocument.presentationml.presentation",
 		    extension: "pptx",
 		});
-		exports.add("pptx", ["0x50", "0x4B", "0x07", "0x08"], {
+		exports$1.add("pptx", ["0x50", "0x4B", "0x07", "0x08"], {
 		    mime: "application/vnd.openxmlformats-officedocument.presentationml.presentation",
 		    extension: "pptx",
 		});
-		exports.add("vsdx", ["0x50", "0x4B", "0x03", "0x04"], {
+		exports$1.add("vsdx", ["0x50", "0x4B", "0x03", "0x04"], {
 		    mime: "application/vnd.ms-visio.drawing",
 		    extension: "vsdx",
 		});
-		exports.add("vsdx", ["0x50", "0x4B", "0x05", "0x06"], {
+		exports$1.add("vsdx", ["0x50", "0x4B", "0x05", "0x06"], {
 		    mime: "application/vnd.ms-visio.drawing",
 		    extension: "vsdx",
 		});
-		exports.add("vsdx", ["0x50", "0x4B", "0x07", "0x08"], {
+		exports$1.add("vsdx", ["0x50", "0x4B", "0x07", "0x08"], {
 		    mime: "application/vnd.ms-visio.drawing",
 		    extension: "vsdx",
 		});
-		exports.add("apk", ["0x50", "0x4B", "0x03", "0x04"], {
+		exports$1.add("apk", ["0x50", "0x4B", "0x03", "0x04"], {
 		    mime: "application/vnd.android.package-archive",
 		    extension: "apk",
 		});
-		exports.add("apk", ["0x50", "0x4B", "0x05", "0x06"], {
+		exports$1.add("apk", ["0x50", "0x4B", "0x05", "0x06"], {
 		    mime: "application/vnd.android.package-archive",
 		    extension: "apk",
 		});
-		exports.add("apk", ["0x50", "0x4B", "0x07", "0x08"], {
+		exports$1.add("apk", ["0x50", "0x4B", "0x07", "0x08"], {
 		    mime: "application/vnd.android.package-archive",
 		    extension: "apk",
 		});
-		exports.add("aar", ["0x50", "0x4B", "0x03", "0x04"], {
+		exports$1.add("aar", ["0x50", "0x4B", "0x03", "0x04"], {
 		    mime: "application/vnd.android.package-archive",
 		    extension: "aar",
 		});
-		exports.add("aar", ["0x50", "0x4B", "0x05", "0x06"], {
+		exports$1.add("aar", ["0x50", "0x4B", "0x05", "0x06"], {
 		    mime: "application/vnd.android.package-archive",
 		    extension: "aar",
 		});
-		exports.add("aar", ["0x50", "0x4B", "0x07", "0x08"], {
+		exports$1.add("aar", ["0x50", "0x4B", "0x07", "0x08"], {
 		    mime: "application/vnd.android.package-archive",
 		    extension: "aar",
 		});
-		exports.add("rar", ["0x52", "0x61", "0x72", "0x21", "0x1A", "0x07", "0x00"], {
+		exports$1.add("rar", ["0x52", "0x61", "0x72", "0x21", "0x1A", "0x07", "0x00"], {
 		    mime: "application/vnd.rar",
 		    extension: "rar",
 		});
-		exports.add("rar", ["0x52", "0x61", "0x72", "0x21", "0x1A", "0x07", "0x01", "0x00"], {
+		exports$1.add("rar", ["0x52", "0x61", "0x72", "0x21", "0x1A", "0x07", "0x01", "0x00"], {
 		    mime: "application/vnd.rar",
 		    extension: "rar",
 		});
-		exports.add("rar", ["0x7F", "0x45", "0x4C", "0x46"], {
+		exports$1.add("rar", ["0x7F", "0x45", "0x4C", "0x46"], {
 		    mime: "application/vnd.rar",
 		    extension: "rar",
 		});
-		exports.add("png", ["0x89", "0x50", "0x4E", "0x47", "0x0D", "0x0A", "0x1A", "0x0A"], {
+		exports$1.add("png", ["0x89", "0x50", "0x4E", "0x47", "0x0D", "0x0A", "0x1A", "0x0A"], {
 		    mime: "image/png",
 		    extension: "png",
 		});
-		exports.add("apng", ["0x89", "0x50", "0x4E", "0x47", "0x0D", "0x0A", "0x1A", "0x0A"], {
+		exports$1.add("apng", ["0x89", "0x50", "0x4E", "0x47", "0x0D", "0x0A", "0x1A", "0x0A"], {
 		    mime: "image/apng",
 		    extension: "apng",
 		});
-		exports.add("class", ["0xCA", "0xFE", "0xBA", "0xBE"]);
-		exports.add("class", ["0xEF", "0xBB", "0xBF"]);
-		exports.add("class", ["0xFE", "0xed", "0xFA", "0xCE"], undefined, 0x1000);
-		exports.add("class", ["0xFE", "0xed", "0xFA", "0xCF"], undefined, 0x1000);
-		exports.add("class", ["0xCE", "0xFA", "0xed", "0xFE"]);
-		exports.add("class", ["0xCF", "0xFA", "0xed", "0xFE"]);
-		exports.add("class", ["0xFF", "0xFE"]);
-		exports.add("class", ["0xFF", "0xFE"]);
-		exports.add("class", ["0xFF", "0xFE", "0x00", "0x00"]);
-		exports.add("ps", ["0x25", "0x21", "0x50", "0x53"], {
+		exports$1.add("class", ["0xCA", "0xFE", "0xBA", "0xBE"]);
+		exports$1.add("class", ["0xEF", "0xBB", "0xBF"]);
+		exports$1.add("class", ["0xFE", "0xed", "0xFA", "0xCE"], undefined, 0x1000);
+		exports$1.add("class", ["0xFE", "0xed", "0xFA", "0xCF"], undefined, 0x1000);
+		exports$1.add("class", ["0xCE", "0xFA", "0xed", "0xFE"]);
+		exports$1.add("class", ["0xCF", "0xFA", "0xed", "0xFE"]);
+		exports$1.add("class", ["0xFF", "0xFE"]);
+		exports$1.add("class", ["0xFF", "0xFE"]);
+		exports$1.add("class", ["0xFF", "0xFE", "0x00", "0x00"]);
+		exports$1.add("ps", ["0x25", "0x21", "0x50", "0x53"], {
 		    mime: "application/postscript",
 		    extension: ".ps",
 		});
-		exports.add("pdf", ["0x25", "0x50", "0x44", "0x46"], {
+		exports$1.add("pdf", ["0x25", "0x50", "0x44", "0x46"], {
 		    mime: "application/pdf",
 		    extension: "pdf",
 		});
-		exports.add("asf", [
+		exports$1.add("asf", [
 		    "0x30",
 		    "0x26",
 		    "0xB2",
@@ -35883,7 +35883,7 @@ function requirePatternTree () {
 		    "0xCE",
 		    "0x6C",
 		]);
-		exports.add("wma", [
+		exports$1.add("wma", [
 		    "0x30",
 		    "0x26",
 		    "0xB2",
@@ -35901,7 +35901,7 @@ function requirePatternTree () {
 		    "0xCE",
 		    "0x6C",
 		]);
-		exports.add("wmv", [
+		exports$1.add("wmv", [
 		    "0x30",
 		    "0x26",
 		    "0xB2",
@@ -35919,7 +35919,7 @@ function requirePatternTree () {
 		    "0xCE",
 		    "0x6C",
 		]);
-		exports.add("deploymentimage", [
+		exports$1.add("deploymentimage", [
 		    "0x24",
 		    "0x53",
 		    "0x44",
@@ -35930,7 +35930,7 @@ function requirePatternTree () {
 		    "0x31",
 		]);
 		// ogg video ' theora'
-		exports.add("ogv", [
+		exports$1.add("ogv", [
 		    "0x4F",
 		    "0x67",
 		    "0x67",
@@ -35971,7 +35971,7 @@ function requirePatternTree () {
 		    extension: "ogv",
 		});
 		// ogg video '\x01video'
-		exports.add("ogm", [
+		exports$1.add("ogm", [
 		    "0x4F",
 		    "0x67",
 		    "0x67",
@@ -36012,7 +36012,7 @@ function requirePatternTree () {
 		    extension: "ogm",
 		});
 		// ogg audio ' FLAC'
-		exports.add("oga", [
+		exports$1.add("oga", [
 		    "0x4F",
 		    "0x67",
 		    "0x67",
@@ -36051,7 +36051,7 @@ function requirePatternTree () {
 		    extension: "oga",
 		});
 		// ogg audio 'Speex  '
-		exports.add("spx", [
+		exports$1.add("spx", [
 		    "0x4F",
 		    "0x67",
 		    "0x67",
@@ -36092,7 +36092,7 @@ function requirePatternTree () {
 		    extension: "spx",
 		});
 		// ogg audio '\x01vorbis '
-		exports.add("ogg", [
+		exports$1.add("ogg", [
 		    "0x4F",
 		    "0x67",
 		    "0x67",
@@ -36133,16 +36133,16 @@ function requirePatternTree () {
 		    extension: "ogg",
 		});
 		// default OGG container
-		exports.add("ogx", ["0x4F", "0x67", "0x67", "0x53"], {
+		exports$1.add("ogx", ["0x4F", "0x67", "0x67", "0x53"], {
 		    mime: "application/ogg",
 		    extension: "ogx",
 		});
-		exports.add("psd", ["0x38", "0x42", "0x50", "0x53"], {
+		exports$1.add("psd", ["0x38", "0x42", "0x50", "0x53"], {
 		    mime: "application/x-photoshop",
 		    extension: "psd",
 		});
-		exports.add("clip", ["0x43", "0x53", "0x46", "0x43", "0x48", "0x55", "0x4e", "0x4b"]);
-		exports.add("wav", [
+		exports$1.add("clip", ["0x43", "0x53", "0x46", "0x43", "0x48", "0x55", "0x4e", "0x4b"]);
+		exports$1.add("wav", [
 		    "0x52",
 		    "0x49",
 		    "0x46",
@@ -36156,7 +36156,7 @@ function requirePatternTree () {
 		    "0x56",
 		    "0x45",
 		], { mime: "audio/x-wav", extension: "wav" });
-		exports.add("avi", [
+		exports$1.add("avi", [
 		    "0x52",
 		    "0x49",
 		    "0x46",
@@ -36170,39 +36170,39 @@ function requirePatternTree () {
 		    "0x49",
 		    "0x20",
 		], { mime: "video/x-msvideo", extension: "avi" });
-		exports.add("mp3", ["0xFF", "0xFB"], { mime: "audio/mpeg", extension: "mp3" });
-		exports.add("mp3", ["0xFF", "0xF3"], { mime: "audio/mpeg", extension: "mp3" });
-		exports.add("mp3", ["0xFF", "0xF2"], { mime: "audio/mpeg", extension: "mp3" });
-		exports.add("mp3", ["0x49", "0x44", "0x33"], { mime: "audio/mpeg", extension: "mp3" });
-		exports.add("bmp", ["0x42", "0x4D"], { mime: "image/bmp", extension: "bmp" });
-		exports.add("iso", ["0x43", "0x44", "0x30", "0x30", "0x31"]);
-		exports.add("flac", ["0x66", "0x4C", "0x61", "0x43"]);
-		exports.add("mid", ["0x4D", "0x54", "0x68", "0x64"], {
+		exports$1.add("mp3", ["0xFF", "0xFB"], { mime: "audio/mpeg", extension: "mp3" });
+		exports$1.add("mp3", ["0xFF", "0xF3"], { mime: "audio/mpeg", extension: "mp3" });
+		exports$1.add("mp3", ["0xFF", "0xF2"], { mime: "audio/mpeg", extension: "mp3" });
+		exports$1.add("mp3", ["0x49", "0x44", "0x33"], { mime: "audio/mpeg", extension: "mp3" });
+		exports$1.add("bmp", ["0x42", "0x4D"], { mime: "image/bmp", extension: "bmp" });
+		exports$1.add("iso", ["0x43", "0x44", "0x30", "0x30", "0x31"]);
+		exports$1.add("flac", ["0x66", "0x4C", "0x61", "0x43"]);
+		exports$1.add("mid", ["0x4D", "0x54", "0x68", "0x64"], {
 		    mime: "audio/midi",
 		    extension: "mid",
 		});
-		exports.add("midi", ["0x4D", "0x54", "0x68", "0x64"], {
+		exports$1.add("midi", ["0x4D", "0x54", "0x68", "0x64"], {
 		    mime: "audio/midi",
 		    extension: "midi",
 		});
-		exports.add("doc", ["0xD0", "0xCF", "0x11", "0xE0", "0xA1", "0xB1", "0x1A", "0xE1"], {
+		exports$1.add("doc", ["0xD0", "0xCF", "0x11", "0xE0", "0xA1", "0xB1", "0x1A", "0xE1"], {
 		    mime: "application/msword",
 		    extension: "doc",
 		});
-		exports.add("xls", ["0xD0", "0xCF", "0x11", "0xE0", "0xA1", "0xB1", "0x1A", "0xE1"], {
+		exports$1.add("xls", ["0xD0", "0xCF", "0x11", "0xE0", "0xA1", "0xB1", "0x1A", "0xE1"], {
 		    mime: "application/vnd.ms-excel",
 		    extension: "xls",
 		});
-		exports.add("ppt", ["0xD0", "0xCF", "0x11", "0xE0", "0xA1", "0xB1", "0x1A", "0xE1"], {
+		exports$1.add("ppt", ["0xD0", "0xCF", "0x11", "0xE0", "0xA1", "0xB1", "0x1A", "0xE1"], {
 		    mime: "application/vnd.ms-powerpoint",
 		    extension: "ppt",
 		});
-		exports.add("msg", ["0xD0", "0xCF", "0x11", "0xE0", "0xA1", "0xB1", "0x1A", "0xE1"]);
-		exports.add("dex", ["0x64", "0x65", "0x78", "0x0A", "0x30", "0x33", "0x35", "0x00"]);
-		exports.add("vmdk", ["0x4B", "0x44", "0x4D"]);
-		exports.add("crx", ["0x43", "0x72", "0x32", "0x34"]);
-		exports.add("fh8", ["0x41", "0x47", "0x44", "0x33"]);
-		exports.add("cwk", [
+		exports$1.add("msg", ["0xD0", "0xCF", "0x11", "0xE0", "0xA1", "0xB1", "0x1A", "0xE1"]);
+		exports$1.add("dex", ["0x64", "0x65", "0x78", "0x0A", "0x30", "0x33", "0x35", "0x00"]);
+		exports$1.add("vmdk", ["0x4B", "0x44", "0x4D"]);
+		exports$1.add("crx", ["0x43", "0x72", "0x32", "0x34"]);
+		exports$1.add("fh8", ["0x41", "0x47", "0x44", "0x33"]);
+		exports$1.add("cwk", [
 		    "0x05",
 		    "0x07",
 		    "0x00",
@@ -36226,7 +36226,7 @@ function requirePatternTree () {
 		    "0x00",
 		    "0x01",
 		]);
-		exports.add("cwk", [
+		exports$1.add("cwk", [
 		    "0x06",
 		    "0x07",
 		    "0xE1",
@@ -36250,13 +36250,13 @@ function requirePatternTree () {
 		    "0x00",
 		    "0x01",
 		]);
-		exports.add("toast", ["0x45", "0x52", "0x02", "0x00", "0x00", "0x00"]);
-		exports.add("toast", ["0x8B", "0x45", "0x52", "0x02", "0x00", "0x00", "0x00"]);
-		exports.add("dmg", ["0x78", "0x01", "0x73", "0x0D", "0x62", "0x62", "0x60"]);
-		exports.add("xar", ["0x78", "0x61", "0x72", "0x21"]);
-		exports.add("dat", ["0x50", "0x4D", "0x4F", "0x43", "0x43", "0x4D", "0x4F", "0x43"]);
-		exports.add("nes", ["0x4E", "0x45", "0x53", "0x1A"]);
-		exports.add("tar", ["0x75", "0x73", "0x74", "0x61", "0x72", "0x00", "0x30", "0x30"], {
+		exports$1.add("toast", ["0x45", "0x52", "0x02", "0x00", "0x00", "0x00"]);
+		exports$1.add("toast", ["0x8B", "0x45", "0x52", "0x02", "0x00", "0x00", "0x00"]);
+		exports$1.add("dmg", ["0x78", "0x01", "0x73", "0x0D", "0x62", "0x62", "0x60"]);
+		exports$1.add("xar", ["0x78", "0x61", "0x72", "0x21"]);
+		exports$1.add("dat", ["0x50", "0x4D", "0x4F", "0x43", "0x43", "0x4D", "0x4F", "0x43"]);
+		exports$1.add("nes", ["0x4E", "0x45", "0x53", "0x1A"]);
+		exports$1.add("tar", ["0x75", "0x73", "0x74", "0x61", "0x72", "0x00", "0x30", "0x30"], {
 		    // As per Mozilla documentation available at:
 		    // https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types/Common_types
 		    // or wikipedia page:
@@ -36264,13 +36264,13 @@ function requirePatternTree () {
 		    mime: "application/x-tar",
 		    extension: "tar",
 		}, 0x101);
-		exports.add("tar", ["0x75", "0x73", "0x74", "0x61", "0x72", "0x20", "0x20", "0x00"], {
+		exports$1.add("tar", ["0x75", "0x73", "0x74", "0x61", "0x72", "0x20", "0x20", "0x00"], {
 		    mime: "application/x-tar",
 		    extension: "tar",
 		}, 0x101);
-		exports.add("tox", ["0x74", "0x6F", "0x78", "0x33"]);
-		exports.add("mlv", ["0x4D", "0x4C", "0x56", "0x49"]);
-		exports.add("windowsupdate", [
+		exports$1.add("tox", ["0x74", "0x6F", "0x78", "0x33"]);
+		exports$1.add("mlv", ["0x4D", "0x4C", "0x56", "0x49"]);
+		exports$1.add("windowsupdate", [
 		    "0x44",
 		    "0x43",
 		    "0x4D",
@@ -36280,131 +36280,131 @@ function requirePatternTree () {
 		    "0x33",
 		    "0x30",
 		]);
-		exports.add("7z", ["0x37", "0x7A", "0xBC", "0xAF", "0x27", "0x1C"], {
+		exports$1.add("7z", ["0x37", "0x7A", "0xBC", "0xAF", "0x27", "0x1C"], {
 		    mime: "application/x-7z-compressed",
 		    extension: "7z",
 		});
-		exports.add("gz", ["0x1F", "0x8B"], { mime: "application/gzip", extension: "gz" });
-		exports.add("tar.gz", ["0x1F", "0x8B"], {
+		exports$1.add("gz", ["0x1F", "0x8B"], { mime: "application/gzip", extension: "gz" });
+		exports$1.add("tar.gz", ["0x1F", "0x8B"], {
 		    mime: "application/gzip",
 		    extension: "tar.gz",
 		});
-		exports.add("xz", ["0xFD", "0x37", "0x7A", "0x58", "0x5A", "0x00", "0x00"], {
+		exports$1.add("xz", ["0xFD", "0x37", "0x7A", "0x58", "0x5A", "0x00", "0x00"], {
 		    mime: "application/gzip",
 		    extension: "xz",
 		});
-		exports.add("tar.xz", ["0xFD", "0x37", "0x7A", "0x58", "0x5A", "0x00", "0x00"], {
+		exports$1.add("tar.xz", ["0xFD", "0x37", "0x7A", "0x58", "0x5A", "0x00", "0x00"], {
 		    mime: "application/gzip",
 		    extension: "tar.xz",
 		});
-		exports.add("lz2", ["0x04", "0x22", "0x4D", "0x18"]);
-		exports.add("cab", ["0x4D", "0x53", "0x43", "0x46"]);
-		exports.add("mkv", ["0x1A", "0x45", "0xDF", "0xA3"], {
+		exports$1.add("lz2", ["0x04", "0x22", "0x4D", "0x18"]);
+		exports$1.add("cab", ["0x4D", "0x53", "0x43", "0x46"]);
+		exports$1.add("mkv", ["0x1A", "0x45", "0xDF", "0xA3"], {
 		    mime: "video/x-matroska",
 		    extension: "mkv",
 		});
-		exports.add("mka", ["0x1A", "0x45", "0xDF", "0xA3"], {
+		exports$1.add("mka", ["0x1A", "0x45", "0xDF", "0xA3"], {
 		    mime: "audio/x-matroska",
 		    extension: "mka",
 		});
-		exports.add("mks", ["0x1A", "0x45", "0xDF", "0xA3"], {
+		exports$1.add("mks", ["0x1A", "0x45", "0xDF", "0xA3"], {
 		    mime: "video/x-matroska",
 		    extension: "mks",
 		});
-		exports.add("mk3d", ["0x1A", "0x45", "0xDF", "0xA3"]);
-		exports.add("webm", ["0x1A", "0x45", "0xDF", "0xA3"], {
+		exports$1.add("mk3d", ["0x1A", "0x45", "0xDF", "0xA3"]);
+		exports$1.add("webm", ["0x1A", "0x45", "0xDF", "0xA3"], {
 		    mime: "audio/webm",
 		    extension: "webm",
 		});
-		exports.add("dcm", ["0x44", "0x49", "0x43", "0x4D"], undefined, 0x80);
-		exports.add("xml", ["0x3C", "0x3f", "0x78", "0x6d", "0x6C", "0x20"], {
+		exports$1.add("dcm", ["0x44", "0x49", "0x43", "0x4D"], undefined, 0x80);
+		exports$1.add("xml", ["0x3C", "0x3f", "0x78", "0x6d", "0x6C", "0x20"], {
 		    mime: "application/xml",
 		    extension: "xml",
 		});
-		exports.add("wasm", ["0x00", "0x61", "0x73", "0x6d"], {
+		exports$1.add("wasm", ["0x00", "0x61", "0x73", "0x6d"], {
 		    mime: "application/wasm",
 		    extension: "wasm",
 		});
-		exports.add("lep", ["0xCF", "0x84", "0x01"]);
-		exports.add("swf", ["0x43", "0x57", "0x53"], {
+		exports$1.add("lep", ["0xCF", "0x84", "0x01"]);
+		exports$1.add("swf", ["0x43", "0x57", "0x53"], {
 		    mime: "application/x-shockwave-flash",
 		    extension: "swf",
 		});
-		exports.add("swf", ["0x46", "0x57", "0x53"], {
+		exports$1.add("swf", ["0x46", "0x57", "0x53"], {
 		    mime: "application/x-shockwave-flash",
 		    extension: "swf",
 		});
-		exports.add("deb", ["0x21", "0x3C", "0x61", "0x72", "0x63", "0x68", "0x3E"]);
-		exports.add("rtf", ["0x7B", "0x5C", "0x72", "0x74", "0x66", "0x31"], {
+		exports$1.add("deb", ["0x21", "0x3C", "0x61", "0x72", "0x63", "0x68", "0x3E"]);
+		exports$1.add("rtf", ["0x7B", "0x5C", "0x72", "0x74", "0x66", "0x31"], {
 		    mime: "application/rtf",
 		    extension: "rtf",
 		});
-		exports.add("m2p", ["0x00", "0x00", "0x01", "0xBA"]);
-		exports.add("vob", ["0x00", "0x00", "0x01", "0xBA"]);
-		exports.add("mpg", ["0x00", "0x00", "0x01", "0xBA"], {
+		exports$1.add("m2p", ["0x00", "0x00", "0x01", "0xBA"]);
+		exports$1.add("vob", ["0x00", "0x00", "0x01", "0xBA"]);
+		exports$1.add("mpg", ["0x00", "0x00", "0x01", "0xBA"], {
 		    mime: "video/mpeg",
 		    extension: "mpg",
 		});
-		exports.add("mpeg", ["0x00", "0x00", "0x01", "0xBA"], {
+		exports$1.add("mpeg", ["0x00", "0x00", "0x01", "0xBA"], {
 		    mime: "video/mpeg",
 		    extension: "mpeg",
 		});
-		exports.add("mpeg", ["0x47"], { mime: "video/mpeg", extension: "mpeg" });
-		exports.add("mpeg", ["0x00", "0x00", "0x01", "0xB3"], {
+		exports$1.add("mpeg", ["0x47"], { mime: "video/mpeg", extension: "mpeg" });
+		exports$1.add("mpeg", ["0x00", "0x00", "0x01", "0xB3"], {
 		    mime: "video/mpeg",
 		    extension: "mpeg",
 		});
 		// mov 'free' TODO: find test file
-		exports.add("mov", ["0x66", "0x72", "0x65", "0x65"], {
+		exports$1.add("mov", ["0x66", "0x72", "0x65", "0x65"], {
 		    mime: "video/quicktime",
 		    extension: "mov",
 		}, 0x4);
 		// mov 'mdat'
-		exports.add("mov", ["0x6D", "0x64", "0x61", "0x74"], {
+		exports$1.add("mov", ["0x6D", "0x64", "0x61", "0x74"], {
 		    mime: "video/quicktime",
 		    extension: "mov",
 		}, 0x4);
 		// mov 'moov' TODO: find test file
-		exports.add("mov", ["0x6D", "0x6F", "0x6F", "0x76"], {
+		exports$1.add("mov", ["0x6D", "0x6F", "0x6F", "0x76"], {
 		    mime: "video/quicktime",
 		    extension: "mov",
 		}, 0x4);
 		// move 'wide' TODO: find test file
-		exports.add("mov", ["0x77", "0x69", "0x64", "0x65"], {
+		exports$1.add("mov", ["0x77", "0x69", "0x64", "0x65"], {
 		    mime: "video/quicktime",
 		    extension: "mov",
 		}, 0x4);
 		// mov 'ftypqt'
-		exports.add("mov", ["0x66", "0x74", "0x79", "0x70", "0x71", "0x74"], {
+		exports$1.add("mov", ["0x66", "0x74", "0x79", "0x70", "0x71", "0x74"], {
 		    mime: "video/quicktime",
 		    extension: "mov",
 		}, 0x4);
-		exports.add("hl2demo", ["0x48", "0x4C", "0x32", "0x44", "0x45", "0x4D", "0x4F"]);
-		exports.add("txt", ["0xEF", "0xBB", "0xBF"], {
+		exports$1.add("hl2demo", ["0x48", "0x4C", "0x32", "0x44", "0x45", "0x4D", "0x4F"]);
+		exports$1.add("txt", ["0xEF", "0xBB", "0xBF"], {
 		    mime: "text/plain; charset=UTF-8",
 		    extension: "txt",
 		});
-		exports.add("txt", ["0xFF", "0xFE"], {
+		exports$1.add("txt", ["0xFF", "0xFE"], {
 		    mime: "text/plain; charset=UTF-16LE",
 		    extension: "txt",
 		});
-		exports.add("txt", ["0xFE", "0xFF"], {
+		exports$1.add("txt", ["0xFE", "0xFF"], {
 		    mime: "text/plain; charset=UTF-16BE",
 		    extension: "txt",
 		});
-		exports.add("txt", ["0xFF", "0xFE", "0x00", "0x00"], {
+		exports$1.add("txt", ["0xFF", "0xFE", "0x00", "0x00"], {
 		    mime: "text/plain; charset=UTF-32LE",
 		    extension: "txt",
 		});
-		exports.add("txt", ["0x00", "0x00", "0xFE", "0xFF"], {
+		exports$1.add("txt", ["0x00", "0x00", "0xFE", "0xFF"], {
 		    mime: "text/plain; charset=UTF-32BE",
 		    extension: "txt",
 		});
-		exports.add("SubRip", ["0x31", "0x0D", "0x0A", "0x30", "0x30", "0x3A"], {
+		exports$1.add("SubRip", ["0x31", "0x0D", "0x0A", "0x30", "0x30", "0x3A"], {
 		    mime: "application/x-subrip",
 		    extension: "srt",
 		});
-		exports.add("WebVTT", [
+		exports$1.add("WebVTT", [
 		    "0xEF",
 		    "0xBB",
 		    "0xBF",
@@ -36419,7 +36419,7 @@ function requirePatternTree () {
 		    mime: "text/vtt",
 		    extension: "vtt",
 		});
-		exports.add("WebVTT", [
+		exports$1.add("WebVTT", [
 		    "0xEF",
 		    "0xBB",
 		    "0xBF",
@@ -36434,7 +36434,7 @@ function requirePatternTree () {
 		    mime: "text/vtt",
 		    extension: "vtt",
 		});
-		exports.add("WebVTT", [
+		exports$1.add("WebVTT", [
 		    "0xEF",
 		    "0xBB",
 		    "0xBF",
@@ -36449,7 +36449,7 @@ function requirePatternTree () {
 		    mime: "text/vtt",
 		    extension: "vtt",
 		});
-		exports.add("WebVTT", [
+		exports$1.add("WebVTT", [
 		    "0xEF",
 		    "0xBB",
 		    "0xBF",
@@ -36464,57 +36464,57 @@ function requirePatternTree () {
 		    mime: "text/vtt",
 		    extension: "vtt",
 		});
-		exports.add("WebVTT", ["0x57", "0x45", "0x42", "0x56", "0x54", "0x54", "0x0A"], {
+		exports$1.add("WebVTT", ["0x57", "0x45", "0x42", "0x56", "0x54", "0x54", "0x0A"], {
 		    mime: "text/vtt",
 		    extension: "vtt",
 		});
-		exports.add("WebVTT", ["0x57", "0x45", "0x42", "0x56", "0x54", "0x54", "0x0D"], {
+		exports$1.add("WebVTT", ["0x57", "0x45", "0x42", "0x56", "0x54", "0x54", "0x0D"], {
 		    mime: "text/vtt",
 		    extension: "vtt",
 		});
-		exports.add("WebVTT", ["0x57", "0x45", "0x42", "0x56", "0x54", "0x54", "0x20"], {
+		exports$1.add("WebVTT", ["0x57", "0x45", "0x42", "0x56", "0x54", "0x54", "0x20"], {
 		    mime: "text/vtt",
 		    extension: "vtt",
 		});
-		exports.add("WebVTT", ["0x57", "0x45", "0x42", "0x56", "0x54", "0x54", "0x09"], {
+		exports$1.add("WebVTT", ["0x57", "0x45", "0x42", "0x56", "0x54", "0x54", "0x09"], {
 		    mime: "text/vtt",
 		    extension: "vtt",
 		});
-		exports.add("Json", ["0x7B"], {
+		exports$1.add("Json", ["0x7B"], {
 		    mime: "application/json",
 		    extension: ".json",
 		});
-		exports.add("Json", ["0x5B"], {
+		exports$1.add("Json", ["0x5B"], {
 		    mime: "application/json",
 		    extension: ".json",
 		});
-		exports.add("ELF", ["0x7F", "0x45", "0x4C", "0x46"], {
+		exports$1.add("ELF", ["0x7F", "0x45", "0x4C", "0x46"], {
 		    mime: "application/x-executable",
 		    extension: ".elf",
 		});
-		exports.add("Mach-O", ["0xFE", "0xED", "0xFA", "0xC"], {
+		exports$1.add("Mach-O", ["0xFE", "0xED", "0xFA", "0xC"], {
 		    mime: "application/x-mach-binary",
 		    extension: ".o",
 		});
-		exports.add("Mach-O", ["0xFE", "0xED", "0xFA", "0xCF"], {
+		exports$1.add("Mach-O", ["0xFE", "0xED", "0xFA", "0xCF"], {
 		    mime: "application/x-executable",
 		    extension: "elf",
 		});
-		exports.add("EML", ["0x52", "0x65", "0x63", "0x65", "0x69", "0x76", "0x65", "0x64", "0x3A"], {
+		exports$1.add("EML", ["0x52", "0x65", "0x63", "0x65", "0x69", "0x76", "0x65", "0x64", "0x3A"], {
 		    mime: "message/rfc822",
 		    extension: ".eml",
 		});
-		exports.add("SVG", ["0x3c", "0x73", "0x76", "0x67"], {
+		exports$1.add("SVG", ["0x3c", "0x73", "0x76", "0x67"], {
 		    mime: "image/svg+xml",
 		    extension: "svg",
 		});
-		exports.add("avif", ["0x66", "0x74", "0x79", "0x70", "0x61", "0x76", "0x69", "0x66"], {
+		exports$1.add("avif", ["0x66", "0x74", "0x79", "0x70", "0x61", "0x76", "0x69", "0x66"], {
 		    mime: "image/avif",
 		    extension: "avif",
 		}, 4);
 		const createTree = () => tree;
-		exports.createTree = createTree;
-		exports.default = () => tree; 
+		exports$1.createTree = createTree;
+		exports$1.default = () => tree; 
 	} (patternTree));
 	return patternTree;
 }
@@ -36524,9 +36524,9 @@ var hasRequiredDist$8;
 function requireDist$8 () {
 	if (hasRequiredDist$8) return dist$7;
 	hasRequiredDist$8 = 1;
-	(function (exports) {
-		Object.defineProperty(exports, "__esModule", { value: true });
-		exports.register = exports.filetypeextension = exports.filetypemime = exports.filetypename = exports.filetypeinfo = void 0;
+	(function (exports$1) {
+		Object.defineProperty(exports$1, "__esModule", { value: true });
+		exports$1.register = exports$1.filetypeextension = exports$1.filetypemime = exports$1.filetypename = exports$1.filetypeinfo = void 0;
 		const pattern_tree_1 = requirePatternTree();
 		const toHex_1 = requireToHex();
 		const patternTree = pattern_tree_1.createTree();
@@ -36549,7 +36549,7 @@ function requireDist$8 () {
 		    }
 		    return walkTree(0, bytes, tree.noOffset);
 		};
-		exports.filetypeinfo = filetypeinfo;
+		exports$1.filetypeinfo = filetypeinfo;
 		const walkTree = (index, bytes, node) => {
 		    let step = node;
 		    let guessFile = [];
@@ -36570,21 +36570,21 @@ function requireDist$8 () {
 		        index += 1;
 		    }
 		};
-		exports.default = exports.filetypeinfo;
-		const filetypename = (bytes) => exports.filetypeinfo(bytes).map((e) => e.typename);
-		exports.filetypename = filetypename;
-		const filetypemime = (bytes) => exports.filetypeinfo(bytes)
+		exports$1.default = exports$1.filetypeinfo;
+		const filetypename = (bytes) => exports$1.filetypeinfo(bytes).map((e) => e.typename);
+		exports$1.filetypename = filetypename;
+		const filetypemime = (bytes) => exports$1.filetypeinfo(bytes)
 		    .map((e) => (e.mime ? e.mime : null))
 		    .filter((x) => x !== null);
-		exports.filetypemime = filetypemime;
-		const filetypeextension = (bytes) => exports.filetypeinfo(bytes)
+		exports$1.filetypemime = filetypemime;
+		const filetypeextension = (bytes) => exports$1.filetypeinfo(bytes)
 		    .map((e) => (e.extension ? e.extension : null))
 		    .filter((x) => x !== null);
-		exports.filetypeextension = filetypeextension;
+		exports$1.filetypeextension = filetypeextension;
 		const register = (typename, signature, additionalInfo, offset) => {
 		    pattern_tree_1.add(typename, signature, additionalInfo, offset);
 		};
-		exports.register = register; 
+		exports$1.register = register; 
 	} (dist$7));
 	return dist$7;
 }
@@ -42733,9 +42733,9 @@ var hasRequiredConstants$a;
 function requireConstants$a () {
 	if (hasRequiredConstants$a) return constants$9;
 	hasRequiredConstants$a = 1;
-	(function (exports) {
-		Object.defineProperty(exports, "__esModule", { value: true });
-		exports.SPECIAL_HEADERS = exports.HEADER_STATE = exports.MINOR = exports.MAJOR = exports.CONNECTION_TOKEN_CHARS = exports.HEADER_CHARS = exports.TOKEN = exports.STRICT_TOKEN = exports.HEX = exports.URL_CHAR = exports.STRICT_URL_CHAR = exports.USERINFO_CHARS = exports.MARK = exports.ALPHANUM = exports.NUM = exports.HEX_MAP = exports.NUM_MAP = exports.ALPHA = exports.FINISH = exports.H_METHOD_MAP = exports.METHOD_MAP = exports.METHODS_RTSP = exports.METHODS_ICE = exports.METHODS_HTTP = exports.METHODS = exports.LENIENT_FLAGS = exports.FLAGS = exports.TYPE = exports.ERROR = void 0;
+	(function (exports$1) {
+		Object.defineProperty(exports$1, "__esModule", { value: true });
+		exports$1.SPECIAL_HEADERS = exports$1.HEADER_STATE = exports$1.MINOR = exports$1.MAJOR = exports$1.CONNECTION_TOKEN_CHARS = exports$1.HEADER_CHARS = exports$1.TOKEN = exports$1.STRICT_TOKEN = exports$1.HEX = exports$1.URL_CHAR = exports$1.STRICT_URL_CHAR = exports$1.USERINFO_CHARS = exports$1.MARK = exports$1.ALPHANUM = exports$1.NUM = exports$1.HEX_MAP = exports$1.NUM_MAP = exports$1.ALPHA = exports$1.FINISH = exports$1.H_METHOD_MAP = exports$1.METHOD_MAP = exports$1.METHODS_RTSP = exports$1.METHODS_ICE = exports$1.METHODS_HTTP = exports$1.METHODS = exports$1.LENIENT_FLAGS = exports$1.FLAGS = exports$1.TYPE = exports$1.ERROR = void 0;
 		const utils_1 = requireUtils$4();
 		(function (ERROR) {
 		    ERROR[ERROR["OK"] = 0] = "OK";
@@ -42763,12 +42763,12 @@ function requireConstants$a () {
 		    ERROR[ERROR["PAUSED_UPGRADE"] = 22] = "PAUSED_UPGRADE";
 		    ERROR[ERROR["PAUSED_H2_UPGRADE"] = 23] = "PAUSED_H2_UPGRADE";
 		    ERROR[ERROR["USER"] = 24] = "USER";
-		})(exports.ERROR || (exports.ERROR = {}));
+		})(exports$1.ERROR || (exports$1.ERROR = {}));
 		(function (TYPE) {
 		    TYPE[TYPE["BOTH"] = 0] = "BOTH";
 		    TYPE[TYPE["REQUEST"] = 1] = "REQUEST";
 		    TYPE[TYPE["RESPONSE"] = 2] = "RESPONSE";
-		})(exports.TYPE || (exports.TYPE = {}));
+		})(exports$1.TYPE || (exports$1.TYPE = {}));
 		(function (FLAGS) {
 		    FLAGS[FLAGS["CONNECTION_KEEP_ALIVE"] = 1] = "CONNECTION_KEEP_ALIVE";
 		    FLAGS[FLAGS["CONNECTION_CLOSE"] = 2] = "CONNECTION_CLOSE";
@@ -42780,12 +42780,12 @@ function requireConstants$a () {
 		    FLAGS[FLAGS["TRAILING"] = 128] = "TRAILING";
 		    // 1 << 8 is unused
 		    FLAGS[FLAGS["TRANSFER_ENCODING"] = 512] = "TRANSFER_ENCODING";
-		})(exports.FLAGS || (exports.FLAGS = {}));
+		})(exports$1.FLAGS || (exports$1.FLAGS = {}));
 		(function (LENIENT_FLAGS) {
 		    LENIENT_FLAGS[LENIENT_FLAGS["HEADERS"] = 1] = "HEADERS";
 		    LENIENT_FLAGS[LENIENT_FLAGS["CHUNKED_LENGTH"] = 2] = "CHUNKED_LENGTH";
 		    LENIENT_FLAGS[LENIENT_FLAGS["KEEP_ALIVE"] = 4] = "KEEP_ALIVE";
-		})(exports.LENIENT_FLAGS || (exports.LENIENT_FLAGS = {}));
+		})(exports$1.LENIENT_FLAGS || (exports$1.LENIENT_FLAGS = {}));
 		var METHODS;
 		(function (METHODS) {
 		    METHODS[METHODS["DELETE"] = 0] = "DELETE";
@@ -42845,8 +42845,8 @@ function requireConstants$a () {
 		    METHODS[METHODS["RECORD"] = 44] = "RECORD";
 		    /* RAOP */
 		    METHODS[METHODS["FLUSH"] = 45] = "FLUSH";
-		})(METHODS = exports.METHODS || (exports.METHODS = {}));
-		exports.METHODS_HTTP = [
+		})(METHODS = exports$1.METHODS || (exports$1.METHODS = {}));
+		exports$1.METHODS_HTTP = [
 		    METHODS.DELETE,
 		    METHODS.GET,
 		    METHODS.HEAD,
@@ -42884,10 +42884,10 @@ function requireConstants$a () {
 		    // TODO(indutny): should we allow it with HTTP?
 		    METHODS.SOURCE,
 		];
-		exports.METHODS_ICE = [
+		exports$1.METHODS_ICE = [
 		    METHODS.SOURCE,
 		];
-		exports.METHODS_RTSP = [
+		exports$1.METHODS_RTSP = [
 		    METHODS.OPTIONS,
 		    METHODS.DESCRIBE,
 		    METHODS.ANNOUNCE,
@@ -42904,59 +42904,59 @@ function requireConstants$a () {
 		    METHODS.GET,
 		    METHODS.POST,
 		];
-		exports.METHOD_MAP = utils_1.enumToMap(METHODS);
-		exports.H_METHOD_MAP = {};
-		Object.keys(exports.METHOD_MAP).forEach((key) => {
+		exports$1.METHOD_MAP = utils_1.enumToMap(METHODS);
+		exports$1.H_METHOD_MAP = {};
+		Object.keys(exports$1.METHOD_MAP).forEach((key) => {
 		    if (/^H/.test(key)) {
-		        exports.H_METHOD_MAP[key] = exports.METHOD_MAP[key];
+		        exports$1.H_METHOD_MAP[key] = exports$1.METHOD_MAP[key];
 		    }
 		});
 		(function (FINISH) {
 		    FINISH[FINISH["SAFE"] = 0] = "SAFE";
 		    FINISH[FINISH["SAFE_WITH_CB"] = 1] = "SAFE_WITH_CB";
 		    FINISH[FINISH["UNSAFE"] = 2] = "UNSAFE";
-		})(exports.FINISH || (exports.FINISH = {}));
-		exports.ALPHA = [];
+		})(exports$1.FINISH || (exports$1.FINISH = {}));
+		exports$1.ALPHA = [];
 		for (let i = 'A'.charCodeAt(0); i <= 'Z'.charCodeAt(0); i++) {
 		    // Upper case
-		    exports.ALPHA.push(String.fromCharCode(i));
+		    exports$1.ALPHA.push(String.fromCharCode(i));
 		    // Lower case
-		    exports.ALPHA.push(String.fromCharCode(i + 0x20));
+		    exports$1.ALPHA.push(String.fromCharCode(i + 0x20));
 		}
-		exports.NUM_MAP = {
+		exports$1.NUM_MAP = {
 		    0: 0, 1: 1, 2: 2, 3: 3, 4: 4,
 		    5: 5, 6: 6, 7: 7, 8: 8, 9: 9,
 		};
-		exports.HEX_MAP = {
+		exports$1.HEX_MAP = {
 		    0: 0, 1: 1, 2: 2, 3: 3, 4: 4,
 		    5: 5, 6: 6, 7: 7, 8: 8, 9: 9,
 		    A: 0XA, B: 0XB, C: 0XC, D: 0XD, E: 0XE, F: 0XF,
 		    a: 0xa, b: 0xb, c: 0xc, d: 0xd, e: 0xe, f: 0xf,
 		};
-		exports.NUM = [
+		exports$1.NUM = [
 		    '0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
 		];
-		exports.ALPHANUM = exports.ALPHA.concat(exports.NUM);
-		exports.MARK = ['-', '_', '.', '!', '~', '*', '\'', '(', ')'];
-		exports.USERINFO_CHARS = exports.ALPHANUM
-		    .concat(exports.MARK)
+		exports$1.ALPHANUM = exports$1.ALPHA.concat(exports$1.NUM);
+		exports$1.MARK = ['-', '_', '.', '!', '~', '*', '\'', '(', ')'];
+		exports$1.USERINFO_CHARS = exports$1.ALPHANUM
+		    .concat(exports$1.MARK)
 		    .concat(['%', ';', ':', '&', '=', '+', '$', ',']);
 		// TODO(indutny): use RFC
-		exports.STRICT_URL_CHAR = [
+		exports$1.STRICT_URL_CHAR = [
 		    '!', '"', '$', '%', '&', '\'',
 		    '(', ')', '*', '+', ',', '-', '.', '/',
 		    ':', ';', '<', '=', '>',
 		    '@', '[', '\\', ']', '^', '_',
 		    '`',
 		    '{', '|', '}', '~',
-		].concat(exports.ALPHANUM);
-		exports.URL_CHAR = exports.STRICT_URL_CHAR
+		].concat(exports$1.ALPHANUM);
+		exports$1.URL_CHAR = exports$1.STRICT_URL_CHAR
 		    .concat(['\t', '\f']);
 		// All characters with 0x80 bit set to 1
 		for (let i = 0x80; i <= 0xff; i++) {
-		    exports.URL_CHAR.push(i);
+		    exports$1.URL_CHAR.push(i);
 		}
-		exports.HEX = exports.NUM.concat(['a', 'b', 'c', 'd', 'e', 'f', 'A', 'B', 'C', 'D', 'E', 'F']);
+		exports$1.HEX = exports$1.NUM.concat(['a', 'b', 'c', 'd', 'e', 'f', 'A', 'B', 'C', 'D', 'E', 'F']);
 		/* Tokens as defined by rfc 2616. Also lowercases them.
 		 *        token       = 1*<any CHAR except CTLs or separators>
 		 *     separators     = "(" | ")" | "<" | ">" | "@"
@@ -42964,27 +42964,27 @@ function requireConstants$a () {
 		 *                    | "/" | "[" | "]" | "?" | "="
 		 *                    | "{" | "}" | SP | HT
 		 */
-		exports.STRICT_TOKEN = [
+		exports$1.STRICT_TOKEN = [
 		    '!', '#', '$', '%', '&', '\'',
 		    '*', '+', '-', '.',
 		    '^', '_', '`',
 		    '|', '~',
-		].concat(exports.ALPHANUM);
-		exports.TOKEN = exports.STRICT_TOKEN.concat([' ']);
+		].concat(exports$1.ALPHANUM);
+		exports$1.TOKEN = exports$1.STRICT_TOKEN.concat([' ']);
 		/*
 		 * Verify that a char is a valid visible (printable) US-ASCII
 		 * character or %x80-FF
 		 */
-		exports.HEADER_CHARS = ['\t'];
+		exports$1.HEADER_CHARS = ['\t'];
 		for (let i = 32; i <= 255; i++) {
 		    if (i !== 127) {
-		        exports.HEADER_CHARS.push(i);
+		        exports$1.HEADER_CHARS.push(i);
 		    }
 		}
 		// ',' = \x44
-		exports.CONNECTION_TOKEN_CHARS = exports.HEADER_CHARS.filter((c) => c !== 44);
-		exports.MAJOR = exports.NUM_MAP;
-		exports.MINOR = exports.MAJOR;
+		exports$1.CONNECTION_TOKEN_CHARS = exports$1.HEADER_CHARS.filter((c) => c !== 44);
+		exports$1.MAJOR = exports$1.NUM_MAP;
+		exports$1.MINOR = exports$1.MAJOR;
 		var HEADER_STATE;
 		(function (HEADER_STATE) {
 		    HEADER_STATE[HEADER_STATE["GENERAL"] = 0] = "GENERAL";
@@ -42996,8 +42996,8 @@ function requireConstants$a () {
 		    HEADER_STATE[HEADER_STATE["CONNECTION_CLOSE"] = 6] = "CONNECTION_CLOSE";
 		    HEADER_STATE[HEADER_STATE["CONNECTION_UPGRADE"] = 7] = "CONNECTION_UPGRADE";
 		    HEADER_STATE[HEADER_STATE["TRANSFER_ENCODING_CHUNKED"] = 8] = "TRANSFER_ENCODING_CHUNKED";
-		})(HEADER_STATE = exports.HEADER_STATE || (exports.HEADER_STATE = {}));
-		exports.SPECIAL_HEADERS = {
+		})(HEADER_STATE = exports$1.HEADER_STATE || (exports$1.HEADER_STATE = {}));
+		exports$1.SPECIAL_HEADERS = {
 		    'connection': HEADER_STATE.CONNECTION,
 		    'content-length': HEADER_STATE.CONTENT_LENGTH,
 		    'proxy-connection': HEADER_STATE.CONNECTION,
@@ -47904,10 +47904,10 @@ function requireClientH1$1 () {
 	const TIMEOUT_KEEP_ALIVE = 8 | USE_NATIVE_TIMER;
 
 	class Parser {
-	  constructor (client, socket, { exports }) {
+	  constructor (client, socket, { exports: exports$1 }) {
 	    assert(Number.isFinite(client[kMaxHeadersSize]) && client[kMaxHeadersSize] > 0);
 
-	    this.llhttp = exports;
+	    this.llhttp = exports$1;
 	    this.ptr = this.llhttp.llhttp_alloc(constants.TYPE.RESPONSE);
 	    this.client = client;
 	    this.socket = socket;
@@ -67860,7 +67860,7 @@ var hasRequiredConstants$6;
 function requireConstants$6 () {
 	if (hasRequiredConstants$6) return Constants;
 	hasRequiredConstants$6 = 1;
-	(function (exports) {
+	(function (exports$1) {
 
 		const { ChannelType, MessageType, ComponentType, ImageFormat, StickerFormatType } = requireV10();
 
@@ -67868,7 +67868,7 @@ function requireConstants$6 () {
 		 * Max bulk deletable message age
 		 * @typedef {number} MaxBulkDeletableMessageAge
 		 */
-		exports.MaxBulkDeletableMessageAge = 1_209_600_000;
+		exports$1.MaxBulkDeletableMessageAge = 1_209_600_000;
 
 		/**
 		 * The name of an item to be swept in Sweepers
@@ -67890,7 +67890,7 @@ function requireConstants$6 () {
 		 * * `voiceStates`
 		 * @typedef {string} SweeperKey
 		 */
-		exports.SweeperKeys = [
+		exports$1.SweeperKeys = [
 		  'autoModerationRules',
 		  'applicationCommands',
 		  'bans',
@@ -67917,7 +67917,7 @@ function requireConstants$6 () {
 		 * * {@link MessageType.ContextMenuCommand}
 		 * @typedef {MessageType[]} NonSystemMessageTypes
 		 */
-		exports.NonSystemMessageTypes = [
+		exports$1.NonSystemMessageTypes = [
 		  MessageType.Default,
 		  MessageType.Reply,
 		  MessageType.ChatInputCommand,
@@ -67945,7 +67945,7 @@ function requireConstants$6 () {
 		 * * {@link ChannelType.GuildStageVoice}
 		 * @typedef {ChannelType[]} GuildTextBasedChannelTypes
 		 */
-		exports.GuildTextBasedChannelTypes = [
+		exports$1.GuildTextBasedChannelTypes = [
 		  ChannelType.GuildText,
 		  ChannelType.GuildAnnouncement,
 		  ChannelType.AnnouncementThread,
@@ -67982,7 +67982,7 @@ function requireConstants$6 () {
 		 * * {@link ChannelType.GroupDM}
 		 * @typedef {ChannelType[]} TextBasedChannelTypes
 		 */
-		exports.TextBasedChannelTypes = [...exports.GuildTextBasedChannelTypes, ChannelType.DM, ChannelType.GroupDM];
+		exports$1.TextBasedChannelTypes = [...exports$1.GuildTextBasedChannelTypes, ChannelType.DM, ChannelType.GroupDM];
 
 		/**
 		 * The types of channels that are text-based and can have messages sent into. The available types are:
@@ -67996,7 +67996,7 @@ function requireConstants$6 () {
 		 * * {@link ChannelType.GuildStageVoice}
 		 * @typedef {ChannelType[]} SendableChannels
 		 */
-		exports.SendableChannels = [...exports.GuildTextBasedChannelTypes, ChannelType.DM];
+		exports$1.SendableChannels = [...exports$1.GuildTextBasedChannelTypes, ChannelType.DM];
 
 		/**
 		 * The types of channels that are threads. The available types are:
@@ -68005,7 +68005,7 @@ function requireConstants$6 () {
 		 * * {@link ChannelType.PrivateThread}
 		 * @typedef {ChannelType[]} ThreadChannelTypes
 		 */
-		exports.ThreadChannelTypes = [ChannelType.AnnouncementThread, ChannelType.PublicThread, ChannelType.PrivateThread];
+		exports$1.ThreadChannelTypes = [ChannelType.AnnouncementThread, ChannelType.PublicThread, ChannelType.PrivateThread];
 
 		/**
 		 * The types of channels that are voice-based. The available types are:
@@ -68013,7 +68013,7 @@ function requireConstants$6 () {
 		 * * {@link ChannelType.GuildStageVoice}
 		 * @typedef {ChannelType[]} VoiceBasedChannelTypes
 		 */
-		exports.VoiceBasedChannelTypes = [ChannelType.GuildVoice, ChannelType.GuildStageVoice];
+		exports$1.VoiceBasedChannelTypes = [ChannelType.GuildVoice, ChannelType.GuildStageVoice];
 
 		/**
 		 * The types of select menus. The available types are:
@@ -68024,7 +68024,7 @@ function requireConstants$6 () {
 		 * * {@link ComponentType.ChannelSelect}
 		 * @typedef {ComponentType[]} SelectMenuTypes
 		 */
-		exports.SelectMenuTypes = [
+		exports$1.SelectMenuTypes = [
 		  ComponentType.StringSelect,
 		  ComponentType.UserSelect,
 		  ComponentType.RoleSelect,
@@ -68042,7 +68042,7 @@ function requireConstants$6 () {
 		 * * {@link MessageType.ThreadStarterMessage}
 		 * @typedef {MessageType[]} UndeletableMessageTypes
 		 */
-		exports.UndeletableMessageTypes = [
+		exports$1.UndeletableMessageTypes = [
 		  MessageType.RecipientAdd,
 		  MessageType.RecipientRemove,
 		  MessageType.Call,
@@ -68077,7 +68077,7 @@ function requireConstants$6 () {
 		 * @typedef {MessageType[]} DeletableMessageTypes
 		 * @deprecated This list will no longer be updated. Use {@link UndeletableMessageTypes} instead.
 		 */
-		exports.DeletableMessageTypes = [
+		exports$1.DeletableMessageTypes = [
 		  MessageType.AutoModerationAction,
 		  MessageType.ChannelFollowAdd,
 		  MessageType.ChannelPinnedMessage,
@@ -68109,7 +68109,7 @@ function requireConstants$6 () {
 		 * * {@link StickerFormatType.GIF} -> {@link ImageFormat.GIF}
 		 * @typedef {Object} StickerFormatExtensionMap
 		 */
-		exports.StickerFormatExtensionMap = {
+		exports$1.StickerFormatExtensionMap = {
 		  [StickerFormatType.PNG]: ImageFormat.PNG,
 		  [StickerFormatType.APNG]: ImageFormat.PNG,
 		  [StickerFormatType.Lottie]: ImageFormat.Lottie,
@@ -68125,7 +68125,7 @@ function requireConstants$6 () {
 		 * @property {number} Secondary 16759788 (0xFFCCCC)
 		 * @property {number} Tertiary 16761760 (0xFFE0A0)
 		 */
-		exports.HolographicStyle = {
+		exports$1.HolographicStyle = {
 		  Primary: 11_127_295,
 		  Secondary: 16_759_788,
 		  Tertiary: 16_761_760,
@@ -125791,7 +125791,7 @@ var hasRequiredSrc$1;
 function requireSrc$1 () {
 	if (hasRequiredSrc$1) return src$1;
 	hasRequiredSrc$1 = 1;
-	(function (exports) {
+	(function (exports$1) {
 
 		const { polyfillDispose } = requireDist$b();
 		const { __exportStar } = require$$0$3;
@@ -125799,249 +125799,249 @@ function requireSrc$1 () {
 		polyfillDispose();
 
 		// "Root" classes (starting points)
-		exports.BaseClient = requireBaseClient();
-		exports.Client = requireClient$2();
-		exports.Shard = requireShard();
-		exports.ShardClientUtil = requireShardClientUtil();
-		exports.ShardingManager = requireShardingManager();
-		exports.WebhookClient = requireWebhookClient();
+		exports$1.BaseClient = requireBaseClient();
+		exports$1.Client = requireClient$2();
+		exports$1.Shard = requireShard();
+		exports$1.ShardClientUtil = requireShardClientUtil();
+		exports$1.ShardingManager = requireShardingManager();
+		exports$1.WebhookClient = requireWebhookClient();
 
 		// Errors
-		exports.DiscordjsError = requireDJSError().DiscordjsError;
-		exports.DiscordjsTypeError = requireDJSError().DiscordjsTypeError;
-		exports.DiscordjsRangeError = requireDJSError().DiscordjsRangeError;
-		exports.DiscordjsErrorCodes = requireErrorCodes();
+		exports$1.DiscordjsError = requireDJSError().DiscordjsError;
+		exports$1.DiscordjsTypeError = requireDJSError().DiscordjsTypeError;
+		exports$1.DiscordjsRangeError = requireDJSError().DiscordjsRangeError;
+		exports$1.DiscordjsErrorCodes = requireErrorCodes();
 
 		// Utilities
-		exports.ActivityFlagsBitField = requireActivityFlagsBitField();
-		exports.ApplicationFlagsBitField = requireApplicationFlagsBitField();
-		exports.AttachmentFlagsBitField = requireAttachmentFlagsBitField();
-		exports.BaseManager = requireBaseManager();
-		exports.BitField = requireBitField();
-		exports.ChannelFlagsBitField = requireChannelFlagsBitField();
-		exports.Collection = requireDist$7().Collection;
-		exports.Constants = requireConstants$6();
-		exports.Colors = requireColors();
-		exports.Events = requireEvents$1();
-		exports.Formatters = requireFormatters();
-		exports.GuildMemberFlagsBitField = requireGuildMemberFlagsBitField().GuildMemberFlagsBitField;
-		exports.IntentsBitField = requireIntentsBitField();
-		exports.LimitedCollection = requireLimitedCollection();
-		exports.MessageFlagsBitField = requireMessageFlagsBitField();
-		exports.Options = requireOptions();
-		exports.Partials = requirePartials();
-		exports.PermissionsBitField = requirePermissionsBitField();
-		exports.RoleFlagsBitField = requireRoleFlagsBitField();
-		exports.ShardEvents = requireShardEvents();
-		exports.SKUFlagsBitField = requireSKUFlagsBitField().SKUFlagsBitField;
-		exports.Status = requireStatus();
-		exports.SnowflakeUtil = /*@__PURE__*/ requireCjs$2().DiscordSnowflake;
-		exports.Sweepers = requireSweepers();
-		exports.SystemChannelFlagsBitField = requireSystemChannelFlagsBitField();
-		exports.ThreadMemberFlagsBitField = requireThreadMemberFlagsBitField();
-		exports.UserFlagsBitField = requireUserFlagsBitField();
-		__exportStar(requireUtil$6(), exports);
-		exports.WebSocketShardEvents = requireWebSocketShardEvents();
-		exports.version = require$$39.version;
+		exports$1.ActivityFlagsBitField = requireActivityFlagsBitField();
+		exports$1.ApplicationFlagsBitField = requireApplicationFlagsBitField();
+		exports$1.AttachmentFlagsBitField = requireAttachmentFlagsBitField();
+		exports$1.BaseManager = requireBaseManager();
+		exports$1.BitField = requireBitField();
+		exports$1.ChannelFlagsBitField = requireChannelFlagsBitField();
+		exports$1.Collection = requireDist$7().Collection;
+		exports$1.Constants = requireConstants$6();
+		exports$1.Colors = requireColors();
+		exports$1.Events = requireEvents$1();
+		exports$1.Formatters = requireFormatters();
+		exports$1.GuildMemberFlagsBitField = requireGuildMemberFlagsBitField().GuildMemberFlagsBitField;
+		exports$1.IntentsBitField = requireIntentsBitField();
+		exports$1.LimitedCollection = requireLimitedCollection();
+		exports$1.MessageFlagsBitField = requireMessageFlagsBitField();
+		exports$1.Options = requireOptions();
+		exports$1.Partials = requirePartials();
+		exports$1.PermissionsBitField = requirePermissionsBitField();
+		exports$1.RoleFlagsBitField = requireRoleFlagsBitField();
+		exports$1.ShardEvents = requireShardEvents();
+		exports$1.SKUFlagsBitField = requireSKUFlagsBitField().SKUFlagsBitField;
+		exports$1.Status = requireStatus();
+		exports$1.SnowflakeUtil = /*@__PURE__*/ requireCjs$2().DiscordSnowflake;
+		exports$1.Sweepers = requireSweepers();
+		exports$1.SystemChannelFlagsBitField = requireSystemChannelFlagsBitField();
+		exports$1.ThreadMemberFlagsBitField = requireThreadMemberFlagsBitField();
+		exports$1.UserFlagsBitField = requireUserFlagsBitField();
+		__exportStar(requireUtil$6(), exports$1);
+		exports$1.WebSocketShardEvents = requireWebSocketShardEvents();
+		exports$1.version = require$$39.version;
 
 		// Managers
-		exports.ApplicationCommandManager = requireApplicationCommandManager();
-		exports.ApplicationEmojiManager = requireApplicationEmojiManager();
-		exports.ApplicationCommandPermissionsManager = requireApplicationCommandPermissionsManager();
-		exports.AutoModerationRuleManager = requireAutoModerationRuleManager();
-		exports.BaseGuildEmojiManager = requireBaseGuildEmojiManager();
-		exports.CachedManager = requireCachedManager();
-		exports.ChannelManager = requireChannelManager();
-		exports.ClientVoiceManager = requireClientVoiceManager();
-		exports.DataManager = requireDataManager();
-		exports.DMMessageManager = requireDMMessageManager();
-		exports.EntitlementManager = requireEntitlementManager().EntitlementManager;
-		exports.GuildApplicationCommandManager = requireGuildApplicationCommandManager();
-		exports.GuildBanManager = requireGuildBanManager();
-		exports.GuildChannelManager = requireGuildChannelManager();
-		exports.GuildEmojiManager = requireGuildEmojiManager();
-		exports.GuildEmojiRoleManager = requireGuildEmojiRoleManager();
-		exports.GuildForumThreadManager = requireGuildForumThreadManager();
-		exports.GuildInviteManager = requireGuildInviteManager();
-		exports.GuildManager = requireGuildManager();
-		exports.GuildMemberManager = requireGuildMemberManager();
-		exports.GuildMemberRoleManager = requireGuildMemberRoleManager();
-		exports.GuildMessageManager = requireGuildMessageManager();
-		exports.GuildScheduledEventManager = requireGuildScheduledEventManager();
-		exports.GuildSoundboardSoundManager = requireGuildSoundboardSoundManager().GuildSoundboardSoundManager;
-		exports.GuildStickerManager = requireGuildStickerManager();
-		exports.GuildTextThreadManager = requireGuildTextThreadManager();
-		exports.MessageManager = requireMessageManager();
-		exports.PermissionOverwriteManager = requirePermissionOverwriteManager();
-		exports.PresenceManager = requirePresenceManager();
-		exports.ReactionManager = requireReactionManager();
-		exports.ReactionUserManager = requireReactionUserManager();
-		exports.RoleManager = requireRoleManager();
-		exports.StageInstanceManager = requireStageInstanceManager();
-		exports.SubscriptionManager = requireSubscriptionManager().SubscriptionManager;
-		exports.ThreadManager = requireThreadManager();
-		exports.ThreadMemberManager = requireThreadMemberManager();
-		exports.UserManager = requireUserManager();
-		exports.VoiceStateManager = requireVoiceStateManager();
-		exports.WebSocketManager = requireWebSocketManager();
-		exports.WebSocketShard = requireWebSocketShard();
+		exports$1.ApplicationCommandManager = requireApplicationCommandManager();
+		exports$1.ApplicationEmojiManager = requireApplicationEmojiManager();
+		exports$1.ApplicationCommandPermissionsManager = requireApplicationCommandPermissionsManager();
+		exports$1.AutoModerationRuleManager = requireAutoModerationRuleManager();
+		exports$1.BaseGuildEmojiManager = requireBaseGuildEmojiManager();
+		exports$1.CachedManager = requireCachedManager();
+		exports$1.ChannelManager = requireChannelManager();
+		exports$1.ClientVoiceManager = requireClientVoiceManager();
+		exports$1.DataManager = requireDataManager();
+		exports$1.DMMessageManager = requireDMMessageManager();
+		exports$1.EntitlementManager = requireEntitlementManager().EntitlementManager;
+		exports$1.GuildApplicationCommandManager = requireGuildApplicationCommandManager();
+		exports$1.GuildBanManager = requireGuildBanManager();
+		exports$1.GuildChannelManager = requireGuildChannelManager();
+		exports$1.GuildEmojiManager = requireGuildEmojiManager();
+		exports$1.GuildEmojiRoleManager = requireGuildEmojiRoleManager();
+		exports$1.GuildForumThreadManager = requireGuildForumThreadManager();
+		exports$1.GuildInviteManager = requireGuildInviteManager();
+		exports$1.GuildManager = requireGuildManager();
+		exports$1.GuildMemberManager = requireGuildMemberManager();
+		exports$1.GuildMemberRoleManager = requireGuildMemberRoleManager();
+		exports$1.GuildMessageManager = requireGuildMessageManager();
+		exports$1.GuildScheduledEventManager = requireGuildScheduledEventManager();
+		exports$1.GuildSoundboardSoundManager = requireGuildSoundboardSoundManager().GuildSoundboardSoundManager;
+		exports$1.GuildStickerManager = requireGuildStickerManager();
+		exports$1.GuildTextThreadManager = requireGuildTextThreadManager();
+		exports$1.MessageManager = requireMessageManager();
+		exports$1.PermissionOverwriteManager = requirePermissionOverwriteManager();
+		exports$1.PresenceManager = requirePresenceManager();
+		exports$1.ReactionManager = requireReactionManager();
+		exports$1.ReactionUserManager = requireReactionUserManager();
+		exports$1.RoleManager = requireRoleManager();
+		exports$1.StageInstanceManager = requireStageInstanceManager();
+		exports$1.SubscriptionManager = requireSubscriptionManager().SubscriptionManager;
+		exports$1.ThreadManager = requireThreadManager();
+		exports$1.ThreadMemberManager = requireThreadMemberManager();
+		exports$1.UserManager = requireUserManager();
+		exports$1.VoiceStateManager = requireVoiceStateManager();
+		exports$1.WebSocketManager = requireWebSocketManager();
+		exports$1.WebSocketShard = requireWebSocketShard();
 
 		// Structures
-		exports.ActionRow = requireActionRow();
-		exports.ActionRowBuilder = requireActionRowBuilder();
-		exports.Activity = requirePresence().Activity;
-		exports.AnonymousGuild = requireAnonymousGuild();
-		exports.Application = requireApplication();
-		exports.ApplicationCommand = requireApplicationCommand();
-		exports.ApplicationEmoji = requireApplicationEmoji();
-		exports.ApplicationRoleConnectionMetadata =
+		exports$1.ActionRow = requireActionRow();
+		exports$1.ActionRowBuilder = requireActionRowBuilder();
+		exports$1.Activity = requirePresence().Activity;
+		exports$1.AnonymousGuild = requireAnonymousGuild();
+		exports$1.Application = requireApplication();
+		exports$1.ApplicationCommand = requireApplicationCommand();
+		exports$1.ApplicationEmoji = requireApplicationEmoji();
+		exports$1.ApplicationRoleConnectionMetadata =
 		  requireApplicationRoleConnectionMetadata().ApplicationRoleConnectionMetadata;
-		exports.AutocompleteInteraction = requireAutocompleteInteraction();
-		exports.AutoModerationActionExecution = requireAutoModerationActionExecution$1();
-		exports.AutoModerationRule = requireAutoModerationRule();
-		exports.Base = requireBase();
-		exports.BaseGuild = requireBaseGuild();
-		exports.BaseGuildEmoji = requireBaseGuildEmoji();
-		exports.BaseGuildTextChannel = requireBaseGuildTextChannel();
-		exports.BaseGuildVoiceChannel = requireBaseGuildVoiceChannel();
-		exports.ButtonBuilder = requireButtonBuilder();
-		exports.ButtonComponent = requireButtonComponent();
-		exports.ButtonInteraction = requireButtonInteraction();
-		exports.CategoryChannel = requireCategoryChannel();
-		exports.BaseChannel = requireBaseChannel().BaseChannel;
-		exports.ChatInputCommandInteraction = requireChatInputCommandInteraction();
-		exports.ClientApplication = requireClientApplication();
-		exports.ClientPresence = requireClientPresence();
-		exports.ClientUser = requireClientUser();
-		exports.CommandInteraction = requireCommandInteraction();
-		exports.Collector = requireCollector();
-		exports.CommandInteractionOptionResolver = requireCommandInteractionOptionResolver();
-		exports.Component = requireComponent();
-		exports.ContainerComponent = requireContainerComponent();
-		exports.ContextMenuCommandInteraction = requireContextMenuCommandInteraction();
-		exports.DirectoryChannel = requireDirectoryChannel();
-		exports.DMChannel = requireDMChannel();
-		exports.Embed = requireEmbed$1();
-		exports.EmbedBuilder = requireEmbedBuilder();
-		exports.Emoji = requireEmoji$1().Emoji;
-		exports.Entitlement = requireEntitlement().Entitlement;
-		exports.FileComponent = requireFileComponent();
-		exports.ForumChannel = requireForumChannel();
-		exports.Guild = requireGuild().Guild;
-		exports.GuildAuditLogs = requireGuildAuditLogs();
-		exports.GuildAuditLogsEntry = requireGuildAuditLogsEntry();
-		exports.GuildBan = requireGuildBan();
-		exports.GuildChannel = requireGuildChannel();
-		exports.GuildEmoji = requireGuildEmoji();
-		exports.GuildMember = requireGuildMember().GuildMember;
-		exports.GuildOnboarding = requireGuildOnboarding().GuildOnboarding;
-		exports.GuildOnboardingPrompt = requireGuildOnboardingPrompt().GuildOnboardingPrompt;
-		exports.GuildOnboardingPromptOption = requireGuildOnboardingPromptOption().GuildOnboardingPromptOption;
-		exports.GuildPreview = requireGuildPreview();
-		exports.GuildPreviewEmoji = requireGuildPreviewEmoji();
-		exports.GuildScheduledEvent = requireGuildScheduledEvent().GuildScheduledEvent;
-		exports.GuildTemplate = requireGuildTemplate();
-		exports.Integration = requireIntegration();
-		exports.IntegrationApplication = requireIntegrationApplication();
-		exports.InteractionCallback = requireInteractionCallback();
-		exports.InteractionCallbackResource = requireInteractionCallbackResource();
-		exports.InteractionCallbackResponse = requireInteractionCallbackResponse();
-		exports.BaseInteraction = requireBaseInteraction();
-		exports.InteractionCollector = requireInteractionCollector();
-		exports.InteractionResponse = requireInteractionResponse();
-		exports.InteractionWebhook = requireInteractionWebhook();
-		exports.Invite = requireInvite();
-		exports.InviteStageInstance = requireInviteStageInstance();
-		exports.InviteGuild = requireInviteGuild();
-		exports.Message = requireMessage$1().Message;
-		exports.Attachment = requireAttachment$1();
-		exports.AttachmentBuilder = requireAttachmentBuilder();
-		exports.ModalBuilder = requireModalBuilder();
-		exports.MediaChannel = requireMediaChannel();
-		exports.MediaGalleryComponent = requireMediaGalleryComponent();
-		exports.MediaGalleryItem = requireMediaGalleryItem();
-		exports.MessageCollector = requireMessageCollector();
-		exports.MessageComponentInteraction = requireMessageComponentInteraction();
-		exports.MessageContextMenuCommandInteraction = requireMessageContextMenuCommandInteraction();
-		exports.MessageMentions = requireMessageMentions();
-		exports.MessagePayload = requireMessagePayload();
-		exports.MessageReaction = requireMessageReaction();
-		exports.ModalSubmitInteraction = requireModalSubmitInteraction();
-		exports.ModalSubmitFields = requireModalSubmitFields();
-		exports.NewsChannel = requireNewsChannel();
-		exports.OAuth2Guild = requireOAuth2Guild();
-		exports.PartialGroupDMChannel = requirePartialGroupDMChannel();
-		exports.PermissionOverwrites = requirePermissionOverwrites();
-		exports.Poll = requirePoll().Poll;
-		exports.PollAnswer = requirePollAnswer().PollAnswer;
-		exports.PrimaryEntryPointCommandInteraction = requirePrimaryEntryPointCommandInteraction();
-		exports.Presence = requirePresence().Presence;
-		exports.ReactionCollector = requireReactionCollector();
-		exports.ReactionEmoji = requireReactionEmoji();
-		exports.RichPresenceAssets = requirePresence().RichPresenceAssets;
-		exports.Role = requireRole$1().Role;
-		exports.SectionComponent = requireSectionComponent();
-		exports.SelectMenuBuilder = requireSelectMenuBuilder();
-		exports.ChannelSelectMenuBuilder = requireChannelSelectMenuBuilder();
-		exports.MentionableSelectMenuBuilder = requireMentionableSelectMenuBuilder();
-		exports.RoleSelectMenuBuilder = requireRoleSelectMenuBuilder();
-		exports.StringSelectMenuBuilder = requireStringSelectMenuBuilder();
-		exports.UserSelectMenuBuilder = requireUserSelectMenuBuilder();
-		exports.BaseSelectMenuComponent = requireBaseSelectMenuComponent();
-		exports.SelectMenuComponent = requireSelectMenuComponent();
-		exports.ChannelSelectMenuComponent = requireChannelSelectMenuComponent();
-		exports.MentionableSelectMenuComponent = requireMentionableSelectMenuComponent();
-		exports.RoleSelectMenuComponent = requireRoleSelectMenuComponent();
-		exports.StringSelectMenuComponent = requireStringSelectMenuComponent();
-		exports.UserSelectMenuComponent = requireUserSelectMenuComponent();
-		exports.SelectMenuInteraction = requireSelectMenuInteraction();
-		exports.ChannelSelectMenuInteraction = requireChannelSelectMenuInteraction();
-		exports.MentionableSelectMenuInteraction = requireMentionableSelectMenuInteraction();
-		exports.MentionableSelectMenuInteraction = requireMentionableSelectMenuInteraction();
-		exports.RoleSelectMenuInteraction = requireRoleSelectMenuInteraction();
-		exports.StringSelectMenuInteraction = requireStringSelectMenuInteraction();
-		exports.UserSelectMenuInteraction = requireUserSelectMenuInteraction();
-		exports.SelectMenuOptionBuilder = requireSelectMenuOptionBuilder();
-		exports.SeparatorComponent = requireSeparatorComponent();
-		exports.SKU = requireSKU().SKU;
-		exports.SoundboardSound = requireSoundboardSound().SoundboardSound;
-		exports.StringSelectMenuOptionBuilder = requireStringSelectMenuOptionBuilder();
-		exports.StageChannel = requireStageChannel();
-		exports.StageInstance = requireStageInstance().StageInstance;
-		exports.Subscription = requireSubscription().Subscription;
-		exports.Sticker = requireSticker().Sticker;
-		exports.StickerPack = requireStickerPack();
-		exports.Team = requireTeam();
-		exports.TeamMember = requireTeamMember();
-		exports.TextChannel = requireTextChannel();
-		exports.TextDisplayComponent = requireTextDisplayComponent();
-		exports.TextInputBuilder = requireTextInputBuilder();
-		exports.TextInputComponent = requireTextInputComponent();
-		exports.ThreadChannel = requireThreadChannel();
-		exports.ThreadMember = requireThreadMember();
-		exports.ThreadOnlyChannel = requireThreadOnlyChannel();
-		exports.ThumbnailComponent = requireThumbnailComponent();
-		exports.Typing = requireTyping();
-		exports.UnfurledMediaItem = requireUnfurledMediaItem();
-		exports.User = requireUser$1();
-		exports.UserContextMenuCommandInteraction = requireUserContextMenuCommandInteraction();
-		exports.VoiceChannelEffect = requireVoiceChannelEffect();
-		exports.VoiceChannel = requireVoiceChannel();
-		exports.VoiceRegion = requireVoiceRegion();
-		exports.VoiceState = requireVoiceState();
-		exports.Webhook = requireWebhook();
-		exports.Widget = requireWidget();
-		exports.WidgetMember = requireWidgetMember();
-		exports.WelcomeChannel = requireWelcomeChannel();
-		exports.WelcomeScreen = requireWelcomeScreen();
+		exports$1.AutocompleteInteraction = requireAutocompleteInteraction();
+		exports$1.AutoModerationActionExecution = requireAutoModerationActionExecution$1();
+		exports$1.AutoModerationRule = requireAutoModerationRule();
+		exports$1.Base = requireBase();
+		exports$1.BaseGuild = requireBaseGuild();
+		exports$1.BaseGuildEmoji = requireBaseGuildEmoji();
+		exports$1.BaseGuildTextChannel = requireBaseGuildTextChannel();
+		exports$1.BaseGuildVoiceChannel = requireBaseGuildVoiceChannel();
+		exports$1.ButtonBuilder = requireButtonBuilder();
+		exports$1.ButtonComponent = requireButtonComponent();
+		exports$1.ButtonInteraction = requireButtonInteraction();
+		exports$1.CategoryChannel = requireCategoryChannel();
+		exports$1.BaseChannel = requireBaseChannel().BaseChannel;
+		exports$1.ChatInputCommandInteraction = requireChatInputCommandInteraction();
+		exports$1.ClientApplication = requireClientApplication();
+		exports$1.ClientPresence = requireClientPresence();
+		exports$1.ClientUser = requireClientUser();
+		exports$1.CommandInteraction = requireCommandInteraction();
+		exports$1.Collector = requireCollector();
+		exports$1.CommandInteractionOptionResolver = requireCommandInteractionOptionResolver();
+		exports$1.Component = requireComponent();
+		exports$1.ContainerComponent = requireContainerComponent();
+		exports$1.ContextMenuCommandInteraction = requireContextMenuCommandInteraction();
+		exports$1.DirectoryChannel = requireDirectoryChannel();
+		exports$1.DMChannel = requireDMChannel();
+		exports$1.Embed = requireEmbed$1();
+		exports$1.EmbedBuilder = requireEmbedBuilder();
+		exports$1.Emoji = requireEmoji$1().Emoji;
+		exports$1.Entitlement = requireEntitlement().Entitlement;
+		exports$1.FileComponent = requireFileComponent();
+		exports$1.ForumChannel = requireForumChannel();
+		exports$1.Guild = requireGuild().Guild;
+		exports$1.GuildAuditLogs = requireGuildAuditLogs();
+		exports$1.GuildAuditLogsEntry = requireGuildAuditLogsEntry();
+		exports$1.GuildBan = requireGuildBan();
+		exports$1.GuildChannel = requireGuildChannel();
+		exports$1.GuildEmoji = requireGuildEmoji();
+		exports$1.GuildMember = requireGuildMember().GuildMember;
+		exports$1.GuildOnboarding = requireGuildOnboarding().GuildOnboarding;
+		exports$1.GuildOnboardingPrompt = requireGuildOnboardingPrompt().GuildOnboardingPrompt;
+		exports$1.GuildOnboardingPromptOption = requireGuildOnboardingPromptOption().GuildOnboardingPromptOption;
+		exports$1.GuildPreview = requireGuildPreview();
+		exports$1.GuildPreviewEmoji = requireGuildPreviewEmoji();
+		exports$1.GuildScheduledEvent = requireGuildScheduledEvent().GuildScheduledEvent;
+		exports$1.GuildTemplate = requireGuildTemplate();
+		exports$1.Integration = requireIntegration();
+		exports$1.IntegrationApplication = requireIntegrationApplication();
+		exports$1.InteractionCallback = requireInteractionCallback();
+		exports$1.InteractionCallbackResource = requireInteractionCallbackResource();
+		exports$1.InteractionCallbackResponse = requireInteractionCallbackResponse();
+		exports$1.BaseInteraction = requireBaseInteraction();
+		exports$1.InteractionCollector = requireInteractionCollector();
+		exports$1.InteractionResponse = requireInteractionResponse();
+		exports$1.InteractionWebhook = requireInteractionWebhook();
+		exports$1.Invite = requireInvite();
+		exports$1.InviteStageInstance = requireInviteStageInstance();
+		exports$1.InviteGuild = requireInviteGuild();
+		exports$1.Message = requireMessage$1().Message;
+		exports$1.Attachment = requireAttachment$1();
+		exports$1.AttachmentBuilder = requireAttachmentBuilder();
+		exports$1.ModalBuilder = requireModalBuilder();
+		exports$1.MediaChannel = requireMediaChannel();
+		exports$1.MediaGalleryComponent = requireMediaGalleryComponent();
+		exports$1.MediaGalleryItem = requireMediaGalleryItem();
+		exports$1.MessageCollector = requireMessageCollector();
+		exports$1.MessageComponentInteraction = requireMessageComponentInteraction();
+		exports$1.MessageContextMenuCommandInteraction = requireMessageContextMenuCommandInteraction();
+		exports$1.MessageMentions = requireMessageMentions();
+		exports$1.MessagePayload = requireMessagePayload();
+		exports$1.MessageReaction = requireMessageReaction();
+		exports$1.ModalSubmitInteraction = requireModalSubmitInteraction();
+		exports$1.ModalSubmitFields = requireModalSubmitFields();
+		exports$1.NewsChannel = requireNewsChannel();
+		exports$1.OAuth2Guild = requireOAuth2Guild();
+		exports$1.PartialGroupDMChannel = requirePartialGroupDMChannel();
+		exports$1.PermissionOverwrites = requirePermissionOverwrites();
+		exports$1.Poll = requirePoll().Poll;
+		exports$1.PollAnswer = requirePollAnswer().PollAnswer;
+		exports$1.PrimaryEntryPointCommandInteraction = requirePrimaryEntryPointCommandInteraction();
+		exports$1.Presence = requirePresence().Presence;
+		exports$1.ReactionCollector = requireReactionCollector();
+		exports$1.ReactionEmoji = requireReactionEmoji();
+		exports$1.RichPresenceAssets = requirePresence().RichPresenceAssets;
+		exports$1.Role = requireRole$1().Role;
+		exports$1.SectionComponent = requireSectionComponent();
+		exports$1.SelectMenuBuilder = requireSelectMenuBuilder();
+		exports$1.ChannelSelectMenuBuilder = requireChannelSelectMenuBuilder();
+		exports$1.MentionableSelectMenuBuilder = requireMentionableSelectMenuBuilder();
+		exports$1.RoleSelectMenuBuilder = requireRoleSelectMenuBuilder();
+		exports$1.StringSelectMenuBuilder = requireStringSelectMenuBuilder();
+		exports$1.UserSelectMenuBuilder = requireUserSelectMenuBuilder();
+		exports$1.BaseSelectMenuComponent = requireBaseSelectMenuComponent();
+		exports$1.SelectMenuComponent = requireSelectMenuComponent();
+		exports$1.ChannelSelectMenuComponent = requireChannelSelectMenuComponent();
+		exports$1.MentionableSelectMenuComponent = requireMentionableSelectMenuComponent();
+		exports$1.RoleSelectMenuComponent = requireRoleSelectMenuComponent();
+		exports$1.StringSelectMenuComponent = requireStringSelectMenuComponent();
+		exports$1.UserSelectMenuComponent = requireUserSelectMenuComponent();
+		exports$1.SelectMenuInteraction = requireSelectMenuInteraction();
+		exports$1.ChannelSelectMenuInteraction = requireChannelSelectMenuInteraction();
+		exports$1.MentionableSelectMenuInteraction = requireMentionableSelectMenuInteraction();
+		exports$1.MentionableSelectMenuInteraction = requireMentionableSelectMenuInteraction();
+		exports$1.RoleSelectMenuInteraction = requireRoleSelectMenuInteraction();
+		exports$1.StringSelectMenuInteraction = requireStringSelectMenuInteraction();
+		exports$1.UserSelectMenuInteraction = requireUserSelectMenuInteraction();
+		exports$1.SelectMenuOptionBuilder = requireSelectMenuOptionBuilder();
+		exports$1.SeparatorComponent = requireSeparatorComponent();
+		exports$1.SKU = requireSKU().SKU;
+		exports$1.SoundboardSound = requireSoundboardSound().SoundboardSound;
+		exports$1.StringSelectMenuOptionBuilder = requireStringSelectMenuOptionBuilder();
+		exports$1.StageChannel = requireStageChannel();
+		exports$1.StageInstance = requireStageInstance().StageInstance;
+		exports$1.Subscription = requireSubscription().Subscription;
+		exports$1.Sticker = requireSticker().Sticker;
+		exports$1.StickerPack = requireStickerPack();
+		exports$1.Team = requireTeam();
+		exports$1.TeamMember = requireTeamMember();
+		exports$1.TextChannel = requireTextChannel();
+		exports$1.TextDisplayComponent = requireTextDisplayComponent();
+		exports$1.TextInputBuilder = requireTextInputBuilder();
+		exports$1.TextInputComponent = requireTextInputComponent();
+		exports$1.ThreadChannel = requireThreadChannel();
+		exports$1.ThreadMember = requireThreadMember();
+		exports$1.ThreadOnlyChannel = requireThreadOnlyChannel();
+		exports$1.ThumbnailComponent = requireThumbnailComponent();
+		exports$1.Typing = requireTyping();
+		exports$1.UnfurledMediaItem = requireUnfurledMediaItem();
+		exports$1.User = requireUser$1();
+		exports$1.UserContextMenuCommandInteraction = requireUserContextMenuCommandInteraction();
+		exports$1.VoiceChannelEffect = requireVoiceChannelEffect();
+		exports$1.VoiceChannel = requireVoiceChannel();
+		exports$1.VoiceRegion = requireVoiceRegion();
+		exports$1.VoiceState = requireVoiceState();
+		exports$1.Webhook = requireWebhook();
+		exports$1.Widget = requireWidget();
+		exports$1.WidgetMember = requireWidgetMember();
+		exports$1.WelcomeChannel = requireWelcomeChannel();
+		exports$1.WelcomeScreen = requireWelcomeScreen();
 
 		// External
-		__exportStar(requireV10(), exports);
-		__exportStar(requireDist$5(), exports);
-		__exportStar(requireDist$6(), exports);
-		__exportStar(requireWeb(), exports);
-		__exportStar(requireDist$b(), exports);
-		__exportStar(requireDist$3(), exports); 
+		__exportStar(requireV10(), exports$1);
+		__exportStar(requireDist$5(), exports$1);
+		__exportStar(requireDist$6(), exports$1);
+		__exportStar(requireWeb(), exports$1);
+		__exportStar(requireDist$b(), exports$1);
+		__exportStar(requireDist$3(), exports$1); 
 	} (src$1));
 	return src$1;
 }
@@ -126627,7 +126627,7 @@ var hasRequiredReact_development$1;
 function requireReact_development$1 () {
 	if (hasRequiredReact_development$1) return react_development$1.exports;
 	hasRequiredReact_development$1 = 1;
-	(function (module, exports) {
+	(function (module, exports$1) {
 		"production" !== process.env.NODE_ENV &&
 		  (function () {
 		    function defineDeprecationWarning(methodName, info) {
@@ -127355,7 +127355,7 @@ function requireReact_development$1 () {
 		        return resolveDispatcher().useMemoCache(size);
 		      }
 		    });
-		    exports.Children = {
+		    exports$1.Children = {
 		      map: mapChildren,
 		      forEach: function (children, forEachFunc, forEachContext) {
 		        mapChildren(
@@ -127388,16 +127388,16 @@ function requireReact_development$1 () {
 		        return children;
 		      }
 		    };
-		    exports.Component = Component;
-		    exports.Fragment = REACT_FRAGMENT_TYPE;
-		    exports.Profiler = REACT_PROFILER_TYPE;
-		    exports.PureComponent = PureComponent;
-		    exports.StrictMode = REACT_STRICT_MODE_TYPE;
-		    exports.Suspense = REACT_SUSPENSE_TYPE;
-		    exports.__CLIENT_INTERNALS_DO_NOT_USE_OR_WARN_USERS_THEY_CANNOT_UPGRADE =
+		    exports$1.Component = Component;
+		    exports$1.Fragment = REACT_FRAGMENT_TYPE;
+		    exports$1.Profiler = REACT_PROFILER_TYPE;
+		    exports$1.PureComponent = PureComponent;
+		    exports$1.StrictMode = REACT_STRICT_MODE_TYPE;
+		    exports$1.Suspense = REACT_SUSPENSE_TYPE;
+		    exports$1.__CLIENT_INTERNALS_DO_NOT_USE_OR_WARN_USERS_THEY_CANNOT_UPGRADE =
 		      ReactSharedInternals;
-		    exports.__COMPILER_RUNTIME = deprecatedAPIs;
-		    exports.act = function (callback) {
+		    exports$1.__COMPILER_RUNTIME = deprecatedAPIs;
+		    exports$1.act = function (callback) {
 		      var prevActQueue = ReactSharedInternals.actQueue,
 		        prevActScopeDepth = actScopeDepth;
 		      actScopeDepth++;
@@ -127508,16 +127508,16 @@ function requireReact_development$1 () {
 		        }
 		      };
 		    };
-		    exports.cache = function (fn) {
+		    exports$1.cache = function (fn) {
 		      return function () {
 		        return fn.apply(null, arguments);
 		      };
 		    };
-		    exports.captureOwnerStack = function () {
+		    exports$1.captureOwnerStack = function () {
 		      var getCurrentStack = ReactSharedInternals.getCurrentStack;
 		      return null === getCurrentStack ? null : getCurrentStack();
 		    };
-		    exports.cloneElement = function (element, config, children) {
+		    exports$1.cloneElement = function (element, config, children) {
 		      if (null === element || void 0 === element)
 		        throw Error(
 		          "The argument must be a React element, but you passed " +
@@ -127577,7 +127577,7 @@ function requireReact_development$1 () {
 		          isValidElement(owner) && owner._store && (owner._store.validated = 1);
 		      return props;
 		    };
-		    exports.createContext = function (defaultValue) {
+		    exports$1.createContext = function (defaultValue) {
 		      defaultValue = {
 		        $$typeof: REACT_CONTEXT_TYPE,
 		        _currentValue: defaultValue,
@@ -127595,7 +127595,7 @@ function requireReact_development$1 () {
 		      defaultValue._currentRenderer2 = null;
 		      return defaultValue;
 		    };
-		    exports.createElement = function (type, config, children) {
+		    exports$1.createElement = function (type, config, children) {
 		      for (var i = 2; i < arguments.length; i++) {
 		        var node = arguments[i];
 		        isValidElement(node) && node._store && (node._store.validated = 1);
@@ -127652,12 +127652,12 @@ function requireReact_development$1 () {
 		        propName ? createTask(getTaskName(type)) : unknownOwnerDebugTask
 		      );
 		    };
-		    exports.createRef = function () {
+		    exports$1.createRef = function () {
 		      var refObject = { current: null };
 		      Object.seal(refObject);
 		      return refObject;
 		    };
-		    exports.forwardRef = function (render) {
+		    exports$1.forwardRef = function (render) {
 		      null != render && render.$$typeof === REACT_MEMO_TYPE
 		        ? console.error(
 		            "forwardRef requires a render function but received a `memo` component. Instead of forwardRef(memo(...)), use memo(forwardRef(...))."
@@ -127698,15 +127698,15 @@ function requireReact_development$1 () {
 		      });
 		      return elementType;
 		    };
-		    exports.isValidElement = isValidElement;
-		    exports.lazy = function (ctor) {
+		    exports$1.isValidElement = isValidElement;
+		    exports$1.lazy = function (ctor) {
 		      return {
 		        $$typeof: REACT_LAZY_TYPE,
 		        _payload: { _status: -1, _result: ctor },
 		        _init: lazyInitializer
 		      };
 		    };
-		    exports.memo = function (type, compare) {
+		    exports$1.memo = function (type, compare) {
 		      null == type &&
 		        console.error(
 		          "memo: The first argument must be a component. Instead received: %s",
@@ -127734,7 +127734,7 @@ function requireReact_development$1 () {
 		      });
 		      return compare;
 		    };
-		    exports.startTransition = function (scope) {
+		    exports$1.startTransition = function (scope) {
 		      var prevTransition = ReactSharedInternals.T,
 		        currentTransition = {};
 		      ReactSharedInternals.T = currentTransition;
@@ -127762,23 +127762,23 @@ function requireReact_development$1 () {
 		          (ReactSharedInternals.T = prevTransition);
 		      }
 		    };
-		    exports.unstable_useCacheRefresh = function () {
+		    exports$1.unstable_useCacheRefresh = function () {
 		      return resolveDispatcher().useCacheRefresh();
 		    };
-		    exports.use = function (usable) {
+		    exports$1.use = function (usable) {
 		      return resolveDispatcher().use(usable);
 		    };
-		    exports.useActionState = function (action, initialState, permalink) {
+		    exports$1.useActionState = function (action, initialState, permalink) {
 		      return resolveDispatcher().useActionState(
 		        action,
 		        initialState,
 		        permalink
 		      );
 		    };
-		    exports.useCallback = function (callback, deps) {
+		    exports$1.useCallback = function (callback, deps) {
 		      return resolveDispatcher().useCallback(callback, deps);
 		    };
-		    exports.useContext = function (Context) {
+		    exports$1.useContext = function (Context) {
 		      var dispatcher = resolveDispatcher();
 		      Context.$$typeof === REACT_CONSUMER_TYPE &&
 		        console.error(
@@ -127786,13 +127786,13 @@ function requireReact_development$1 () {
 		        );
 		      return dispatcher.useContext(Context);
 		    };
-		    exports.useDebugValue = function (value, formatterFn) {
+		    exports$1.useDebugValue = function (value, formatterFn) {
 		      return resolveDispatcher().useDebugValue(value, formatterFn);
 		    };
-		    exports.useDeferredValue = function (value, initialValue) {
+		    exports$1.useDeferredValue = function (value, initialValue) {
 		      return resolveDispatcher().useDeferredValue(value, initialValue);
 		    };
-		    exports.useEffect = function (create, createDeps, update) {
+		    exports$1.useEffect = function (create, createDeps, update) {
 		      null == create &&
 		        console.warn(
 		          "React Hook useEffect requires an effect callback. Did you forget to pass a callback to the hook?"
@@ -127804,42 +127804,42 @@ function requireReact_development$1 () {
 		        );
 		      return dispatcher.useEffect(create, createDeps);
 		    };
-		    exports.useId = function () {
+		    exports$1.useId = function () {
 		      return resolveDispatcher().useId();
 		    };
-		    exports.useImperativeHandle = function (ref, create, deps) {
+		    exports$1.useImperativeHandle = function (ref, create, deps) {
 		      return resolveDispatcher().useImperativeHandle(ref, create, deps);
 		    };
-		    exports.useInsertionEffect = function (create, deps) {
+		    exports$1.useInsertionEffect = function (create, deps) {
 		      null == create &&
 		        console.warn(
 		          "React Hook useInsertionEffect requires an effect callback. Did you forget to pass a callback to the hook?"
 		        );
 		      return resolveDispatcher().useInsertionEffect(create, deps);
 		    };
-		    exports.useLayoutEffect = function (create, deps) {
+		    exports$1.useLayoutEffect = function (create, deps) {
 		      null == create &&
 		        console.warn(
 		          "React Hook useLayoutEffect requires an effect callback. Did you forget to pass a callback to the hook?"
 		        );
 		      return resolveDispatcher().useLayoutEffect(create, deps);
 		    };
-		    exports.useMemo = function (create, deps) {
+		    exports$1.useMemo = function (create, deps) {
 		      return resolveDispatcher().useMemo(create, deps);
 		    };
-		    exports.useOptimistic = function (passthrough, reducer) {
+		    exports$1.useOptimistic = function (passthrough, reducer) {
 		      return resolveDispatcher().useOptimistic(passthrough, reducer);
 		    };
-		    exports.useReducer = function (reducer, initialArg, init) {
+		    exports$1.useReducer = function (reducer, initialArg, init) {
 		      return resolveDispatcher().useReducer(reducer, initialArg, init);
 		    };
-		    exports.useRef = function (initialValue) {
+		    exports$1.useRef = function (initialValue) {
 		      return resolveDispatcher().useRef(initialValue);
 		    };
-		    exports.useState = function (initialState) {
+		    exports$1.useState = function (initialState) {
 		      return resolveDispatcher().useState(initialState);
 		    };
-		    exports.useSyncExternalStore = function (
+		    exports$1.useSyncExternalStore = function (
 		      subscribe,
 		      getSnapshot,
 		      getServerSnapshot
@@ -127850,10 +127850,10 @@ function requireReact_development$1 () {
 		        getServerSnapshot
 		      );
 		    };
-		    exports.useTransition = function () {
+		    exports$1.useTransition = function () {
 		      return resolveDispatcher().useTransition();
 		    };
-		    exports.version = "19.1.1";
+		    exports$1.version = "19.1.1";
 		    "undefined" !== typeof __REACT_DEVTOOLS_GLOBAL_HOOK__ &&
 		      "function" ===
 		        typeof __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStop &&
@@ -210672,7 +210672,7 @@ var hasRequiredReact_development;
 function requireReact_development () {
 	if (hasRequiredReact_development) return react_development.exports;
 	hasRequiredReact_development = 1;
-	(function (module, exports) {
+	(function (module, exports$1) {
 
 		if (process.env.NODE_ENV !== "production") {
 		  (function() {
@@ -213353,42 +213353,42 @@ function requireReact_development () {
 		  only: onlyChild
 		};
 
-		exports.Children = Children;
-		exports.Component = Component;
-		exports.Fragment = REACT_FRAGMENT_TYPE;
-		exports.Profiler = REACT_PROFILER_TYPE;
-		exports.PureComponent = PureComponent;
-		exports.StrictMode = REACT_STRICT_MODE_TYPE;
-		exports.Suspense = REACT_SUSPENSE_TYPE;
-		exports.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED = ReactSharedInternals;
-		exports.act = act;
-		exports.cloneElement = cloneElement$1;
-		exports.createContext = createContext;
-		exports.createElement = createElement$1;
-		exports.createFactory = createFactory;
-		exports.createRef = createRef;
-		exports.forwardRef = forwardRef;
-		exports.isValidElement = isValidElement;
-		exports.lazy = lazy;
-		exports.memo = memo;
-		exports.startTransition = startTransition;
-		exports.unstable_act = act;
-		exports.useCallback = useCallback;
-		exports.useContext = useContext;
-		exports.useDebugValue = useDebugValue;
-		exports.useDeferredValue = useDeferredValue;
-		exports.useEffect = useEffect;
-		exports.useId = useId;
-		exports.useImperativeHandle = useImperativeHandle;
-		exports.useInsertionEffect = useInsertionEffect;
-		exports.useLayoutEffect = useLayoutEffect;
-		exports.useMemo = useMemo;
-		exports.useReducer = useReducer;
-		exports.useRef = useRef;
-		exports.useState = useState;
-		exports.useSyncExternalStore = useSyncExternalStore;
-		exports.useTransition = useTransition;
-		exports.version = ReactVersion;
+		exports$1.Children = Children;
+		exports$1.Component = Component;
+		exports$1.Fragment = REACT_FRAGMENT_TYPE;
+		exports$1.Profiler = REACT_PROFILER_TYPE;
+		exports$1.PureComponent = PureComponent;
+		exports$1.StrictMode = REACT_STRICT_MODE_TYPE;
+		exports$1.Suspense = REACT_SUSPENSE_TYPE;
+		exports$1.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED = ReactSharedInternals;
+		exports$1.act = act;
+		exports$1.cloneElement = cloneElement$1;
+		exports$1.createContext = createContext;
+		exports$1.createElement = createElement$1;
+		exports$1.createFactory = createFactory;
+		exports$1.createRef = createRef;
+		exports$1.forwardRef = forwardRef;
+		exports$1.isValidElement = isValidElement;
+		exports$1.lazy = lazy;
+		exports$1.memo = memo;
+		exports$1.startTransition = startTransition;
+		exports$1.unstable_act = act;
+		exports$1.useCallback = useCallback;
+		exports$1.useContext = useContext;
+		exports$1.useDebugValue = useDebugValue;
+		exports$1.useDeferredValue = useDeferredValue;
+		exports$1.useEffect = useEffect;
+		exports$1.useId = useId;
+		exports$1.useImperativeHandle = useImperativeHandle;
+		exports$1.useInsertionEffect = useInsertionEffect;
+		exports$1.useLayoutEffect = useLayoutEffect;
+		exports$1.useMemo = useMemo;
+		exports$1.useReducer = useReducer;
+		exports$1.useRef = useRef;
+		exports$1.useState = useState;
+		exports$1.useSyncExternalStore = useSyncExternalStore;
+		exports$1.useTransition = useTransition;
+		exports$1.version = ReactVersion;
 		          /* global __REACT_DEVTOOLS_GLOBAL_HOOK__ */
 		if (
 		  typeof __REACT_DEVTOOLS_GLOBAL_HOOK__ !== 'undefined' &&
@@ -213448,15 +213448,15 @@ var hasRequiredAttachProps;
 function requireAttachProps () {
 	if (hasRequiredAttachProps) return attachProps;
 	hasRequiredAttachProps = 1;
-	(function (exports) {
-		Object.defineProperty(exports, "__esModule", { value: true });
-		exports.syncEvent = exports.isCoveredByReact = exports.transformReactEventName = exports.getClassName = exports.attachProps = void 0;
+	(function (exports$1) {
+		Object.defineProperty(exports$1, "__esModule", { value: true });
+		exports$1.syncEvent = exports$1.isCoveredByReact = exports$1.transformReactEventName = exports$1.getClassName = exports$1.attachProps = void 0;
 		const case_1 = /*@__PURE__*/ require_case();
 		const attachProps = (node, newProps, oldProps = {}) => {
 		    // some test frameworks don't render DOM elements, so we test here to make sure we are dealing with DOM first
 		    if (node instanceof Element) {
 		        // add any classes in className to the class list
-		        const className = exports.getClassName(node.classList, newProps, oldProps);
+		        const className = exports$1.getClassName(node.classList, newProps, oldProps);
 		        if (className !== '') {
 		            node.className = className;
 		        }
@@ -213472,8 +213472,8 @@ function requireAttachProps () {
 		            if (name.indexOf('on') === 0 && name[2] === name[2].toUpperCase()) {
 		                const eventName = name.substring(2);
 		                const eventNameLc = eventName[0].toLowerCase() + eventName.substring(1);
-		                if (!exports.isCoveredByReact(eventNameLc)) {
-		                    exports.syncEvent(node, eventNameLc, newProps[name]);
+		                if (!exports$1.isCoveredByReact(eventNameLc)) {
+		                    exports$1.syncEvent(node, eventNameLc, newProps[name]);
 		                }
 		            }
 		            else {
@@ -213486,7 +213486,7 @@ function requireAttachProps () {
 		        });
 		    }
 		};
-		exports.attachProps = attachProps;
+		exports$1.attachProps = attachProps;
 		const getClassName = (classList, newProps, oldProps) => {
 		    const newClassProp = newProps.className || newProps.class;
 		    const oldClassProp = oldProps.className || oldProps.class;
@@ -213511,7 +213511,7 @@ function requireAttachProps () {
 		    incomingPropClasses.forEach((s) => finalClassNames.push(s));
 		    return finalClassNames.join(' ');
 		};
-		exports.getClassName = getClassName;
+		exports$1.getClassName = getClassName;
 		/**
 		 * Transforms a React event name to a browser event name.
 		 */
@@ -213522,7 +213522,7 @@ function requireAttachProps () {
 		    }
 		    return eventNameSuffix;
 		};
-		exports.transformReactEventName = transformReactEventName;
+		exports$1.transformReactEventName = transformReactEventName;
 		/**
 		 * Checks if an event is supported in the current execution environment.
 		 * @license Modernizr 3.0.0pre (Custom Build) | MIT
@@ -213532,7 +213532,7 @@ function requireAttachProps () {
 		        return true;
 		    }
 		    else {
-		        const eventName = 'on' + exports.transformReactEventName(eventNameSuffix);
+		        const eventName = 'on' + exports$1.transformReactEventName(eventNameSuffix);
 		        let isSupported = eventName in document;
 		        if (!isSupported) {
 		            const element = document.createElement('div');
@@ -213542,7 +213542,7 @@ function requireAttachProps () {
 		        return isSupported;
 		    }
 		};
-		exports.isCoveredByReact = isCoveredByReact;
+		exports$1.isCoveredByReact = isCoveredByReact;
 		const syncEvent = (node, eventName, newEventHandler) => {
 		    const eventStore = node.__events || (node.__events = {});
 		    const oldEventHandler = eventStore[eventName];
@@ -213557,7 +213557,7 @@ function requireAttachProps () {
 		        }
 		    }));
 		};
-		exports.syncEvent = syncEvent;
+		exports$1.syncEvent = syncEvent;
 		const arrayToMap = (arr) => {
 		    const map = new Map();
 		    arr.forEach((s) => map.set(s, s));
@@ -213573,9 +213573,9 @@ var hasRequiredUtils$3;
 function requireUtils$3 () {
 	if (hasRequiredUtils$3) return utils$3;
 	hasRequiredUtils$3 = 1;
-	(function (exports) {
-		Object.defineProperty(exports, "__esModule", { value: true });
-		exports.defineCustomElement = exports.createForwardRef = exports.mergeRefs = exports.setRef = void 0;
+	(function (exports$1) {
+		Object.defineProperty(exports$1, "__esModule", { value: true });
+		exports$1.defineCustomElement = exports$1.createForwardRef = exports$1.mergeRefs = exports$1.setRef = void 0;
 		const tslib_1 = require$$0$3;
 		const react_1 = tslib_1.__importDefault(requireReact());
 		const setRef = (ref, value) => {
@@ -213587,15 +213587,15 @@ function requireUtils$3 () {
 		        ref.current = value;
 		    }
 		};
-		exports.setRef = setRef;
+		exports$1.setRef = setRef;
 		const mergeRefs = (...refs) => {
 		    return (value) => {
 		        refs.forEach((ref) => {
-		            exports.setRef(ref, value);
+		            exports$1.setRef(ref, value);
 		        });
 		    };
 		};
-		exports.mergeRefs = mergeRefs;
+		exports$1.mergeRefs = mergeRefs;
 		const createForwardRef = (ReactComponent, displayName) => {
 		    const forwardRef = (props, ref) => {
 		        return react_1.default.createElement(ReactComponent, Object.assign({}, props, { forwardedRef: ref }));
@@ -213603,15 +213603,15 @@ function requireUtils$3 () {
 		    forwardRef.displayName = displayName;
 		    return react_1.default.forwardRef(forwardRef);
 		};
-		exports.createForwardRef = createForwardRef;
+		exports$1.createForwardRef = createForwardRef;
 		const defineCustomElement = (tagName, customElement) => {
 		    if (customElement !== undefined && typeof customElements !== 'undefined' && !customElements.get(tagName)) {
 		        customElements.define(tagName, customElement);
 		    }
 		};
-		exports.defineCustomElement = defineCustomElement;
-		tslib_1.__exportStar(/*@__PURE__*/ requireAttachProps(), exports);
-		tslib_1.__exportStar(/*@__PURE__*/ require_case(), exports);
+		exports$1.defineCustomElement = defineCustomElement;
+		tslib_1.__exportStar(/*@__PURE__*/ requireAttachProps(), exports$1);
+		tslib_1.__exportStar(/*@__PURE__*/ require_case(), exports$1);
 		
 	} (utils$3));
 	return utils$3;
@@ -213718,17 +213718,17 @@ var hasRequiredScheduler_production_min;
 function requireScheduler_production_min () {
 	if (hasRequiredScheduler_production_min) return scheduler_production_min;
 	hasRequiredScheduler_production_min = 1;
-	(function (exports) {
+	(function (exports$1) {
 function f(a,b){var c=a.length;a.push(b);a:for(;0<c;){var d=c-1>>>1,e=a[d];if(0<g(e,b))a[d]=b,a[c]=e,c=d;else break a}}function h(a){return 0===a.length?null:a[0]}function k(a){if(0===a.length)return null;var b=a[0],c=a.pop();if(c!==b){a[0]=c;a:for(var d=0,e=a.length,w=e>>>1;d<w;){var m=2*(d+1)-1,C=a[m],n=m+1,x=a[n];if(0>g(C,c))n<e&&0>g(x,C)?(a[d]=x,a[n]=c,d=n):(a[d]=C,a[m]=c,d=m);else if(n<e&&0>g(x,c))a[d]=x,a[n]=c,d=n;else break a}}return b}
-		function g(a,b){var c=a.sortIndex-b.sortIndex;return 0!==c?c:a.id-b.id}if("object"===typeof performance&&"function"===typeof performance.now){var l=performance;exports.unstable_now=function(){return l.now()};}else {var p=Date,q=p.now();exports.unstable_now=function(){return p.now()-q};}var r=[],t=[],u=1,v=null,y=3,z=false,A=false,B=false,D="function"===typeof setTimeout?setTimeout:null,E="function"===typeof clearTimeout?clearTimeout:null,F="undefined"!==typeof setImmediate?setImmediate:null;
+		function g(a,b){var c=a.sortIndex-b.sortIndex;return 0!==c?c:a.id-b.id}if("object"===typeof performance&&"function"===typeof performance.now){var l=performance;exports$1.unstable_now=function(){return l.now()};}else {var p=Date,q=p.now();exports$1.unstable_now=function(){return p.now()-q};}var r=[],t=[],u=1,v=null,y=3,z=false,A=false,B=false,D="function"===typeof setTimeout?setTimeout:null,E="function"===typeof clearTimeout?clearTimeout:null,F="undefined"!==typeof setImmediate?setImmediate:null;
 		"undefined"!==typeof navigator&&void 0!==navigator.scheduling&&void 0!==navigator.scheduling.isInputPending&&navigator.scheduling.isInputPending.bind(navigator.scheduling);function G(a){for(var b=h(t);null!==b;){if(null===b.callback)k(t);else if(b.startTime<=a)k(t),b.sortIndex=b.expirationTime,f(r,b);else break;b=h(t);}}function H(a){B=false;G(a);if(!A)if(null!==h(r))A=true,I(J);else {var b=h(t);null!==b&&K(H,b.startTime-a);}}
-		function J(a,b){A=false;B&&(B=false,E(L),L=-1);z=true;var c=y;try{G(b);for(v=h(r);null!==v&&(!(v.expirationTime>b)||a&&!M());){var d=v.callback;if("function"===typeof d){v.callback=null;y=v.priorityLevel;var e=d(v.expirationTime<=b);b=exports.unstable_now();"function"===typeof e?v.callback=e:v===h(r)&&k(r);G(b);}else k(r);v=h(r);}if(null!==v)var w=!0;else {var m=h(t);null!==m&&K(H,m.startTime-b);w=!1;}return w}finally{v=null,y=c,z=false;}}var N=false,O=null,L=-1,P=5,Q=-1;
-		function M(){return exports.unstable_now()-Q<P?false:true}function R(){if(null!==O){var a=exports.unstable_now();Q=a;var b=true;try{b=O(!0,a);}finally{b?S():(N=false,O=null);}}else N=false;}var S;if("function"===typeof F)S=function(){F(R);};else if("undefined"!==typeof MessageChannel){var T=new MessageChannel,U=T.port2;T.port1.onmessage=R;S=function(){U.postMessage(null);};}else S=function(){D(R,0);};function I(a){O=a;N||(N=true,S());}function K(a,b){L=D(function(){a(exports.unstable_now());},b);}
-		exports.unstable_IdlePriority=5;exports.unstable_ImmediatePriority=1;exports.unstable_LowPriority=4;exports.unstable_NormalPriority=3;exports.unstable_Profiling=null;exports.unstable_UserBlockingPriority=2;exports.unstable_cancelCallback=function(a){a.callback=null;};exports.unstable_continueExecution=function(){A||z||(A=true,I(J));};
-		exports.unstable_forceFrameRate=function(a){0>a||125<a?console.error("forceFrameRate takes a positive int between 0 and 125, forcing frame rates higher than 125 fps is not supported"):P=0<a?Math.floor(1E3/a):5;};exports.unstable_getCurrentPriorityLevel=function(){return y};exports.unstable_getFirstCallbackNode=function(){return h(r)};exports.unstable_next=function(a){switch(y){case 1:case 2:case 3:var b=3;break;default:b=y;}var c=y;y=b;try{return a()}finally{y=c;}};exports.unstable_pauseExecution=function(){};
-		exports.unstable_requestPaint=function(){};exports.unstable_runWithPriority=function(a,b){switch(a){case 1:case 2:case 3:case 4:case 5:break;default:a=3;}var c=y;y=a;try{return b()}finally{y=c;}};
-		exports.unstable_scheduleCallback=function(a,b,c){var d=exports.unstable_now();"object"===typeof c&&null!==c?(c=c.delay,c="number"===typeof c&&0<c?d+c:d):c=d;switch(a){case 1:var e=-1;break;case 2:e=250;break;case 5:e=1073741823;break;case 4:e=1E4;break;default:e=5E3;}e=c+e;a={id:u++,callback:b,priorityLevel:a,startTime:c,expirationTime:e,sortIndex:-1};c>d?(a.sortIndex=c,f(t,a),null===h(r)&&a===h(t)&&(B?(E(L),L=-1):B=true,K(H,c-d))):(a.sortIndex=e,f(r,a),A||z||(A=true,I(J)));return a};
-		exports.unstable_shouldYield=M;exports.unstable_wrapCallback=function(a){var b=y;return function(){var c=y;y=b;try{return a.apply(this,arguments)}finally{y=c;}}}; 
+		function J(a,b){A=false;B&&(B=false,E(L),L=-1);z=true;var c=y;try{G(b);for(v=h(r);null!==v&&(!(v.expirationTime>b)||a&&!M());){var d=v.callback;if("function"===typeof d){v.callback=null;y=v.priorityLevel;var e=d(v.expirationTime<=b);b=exports$1.unstable_now();"function"===typeof e?v.callback=e:v===h(r)&&k(r);G(b);}else k(r);v=h(r);}if(null!==v)var w=!0;else {var m=h(t);null!==m&&K(H,m.startTime-b);w=!1;}return w}finally{v=null,y=c,z=false;}}var N=false,O=null,L=-1,P=5,Q=-1;
+		function M(){return exports$1.unstable_now()-Q<P?false:true}function R(){if(null!==O){var a=exports$1.unstable_now();Q=a;var b=true;try{b=O(!0,a);}finally{b?S():(N=false,O=null);}}else N=false;}var S;if("function"===typeof F)S=function(){F(R);};else if("undefined"!==typeof MessageChannel){var T=new MessageChannel,U=T.port2;T.port1.onmessage=R;S=function(){U.postMessage(null);};}else S=function(){D(R,0);};function I(a){O=a;N||(N=true,S());}function K(a,b){L=D(function(){a(exports$1.unstable_now());},b);}
+		exports$1.unstable_IdlePriority=5;exports$1.unstable_ImmediatePriority=1;exports$1.unstable_LowPriority=4;exports$1.unstable_NormalPriority=3;exports$1.unstable_Profiling=null;exports$1.unstable_UserBlockingPriority=2;exports$1.unstable_cancelCallback=function(a){a.callback=null;};exports$1.unstable_continueExecution=function(){A||z||(A=true,I(J));};
+		exports$1.unstable_forceFrameRate=function(a){0>a||125<a?console.error("forceFrameRate takes a positive int between 0 and 125, forcing frame rates higher than 125 fps is not supported"):P=0<a?Math.floor(1E3/a):5;};exports$1.unstable_getCurrentPriorityLevel=function(){return y};exports$1.unstable_getFirstCallbackNode=function(){return h(r)};exports$1.unstable_next=function(a){switch(y){case 1:case 2:case 3:var b=3;break;default:b=y;}var c=y;y=b;try{return a()}finally{y=c;}};exports$1.unstable_pauseExecution=function(){};
+		exports$1.unstable_requestPaint=function(){};exports$1.unstable_runWithPriority=function(a,b){switch(a){case 1:case 2:case 3:case 4:case 5:break;default:a=3;}var c=y;y=a;try{return b()}finally{y=c;}};
+		exports$1.unstable_scheduleCallback=function(a,b,c){var d=exports$1.unstable_now();"object"===typeof c&&null!==c?(c=c.delay,c="number"===typeof c&&0<c?d+c:d):c=d;switch(a){case 1:var e=-1;break;case 2:e=250;break;case 5:e=1073741823;break;case 4:e=1E4;break;default:e=5E3;}e=c+e;a={id:u++,callback:b,priorityLevel:a,startTime:c,expirationTime:e,sortIndex:-1};c>d?(a.sortIndex=c,f(t,a),null===h(r)&&a===h(t)&&(B?(E(L),L=-1):B=true,K(H,c-d))):(a.sortIndex=e,f(r,a),A||z||(A=true,I(J)));return a};
+		exports$1.unstable_shouldYield=M;exports$1.unstable_wrapCallback=function(a){var b=y;return function(){var c=y;y=b;try{return a.apply(this,arguments)}finally{y=c;}}}; 
 	} (scheduler_production_min));
 	return scheduler_production_min;
 }
@@ -213750,7 +213750,7 @@ var hasRequiredScheduler_development;
 function requireScheduler_development () {
 	if (hasRequiredScheduler_development) return scheduler_development;
 	hasRequiredScheduler_development = 1;
-	(function (exports) {
+	(function (exports$1) {
 
 		if (process.env.NODE_ENV !== "production") {
 		  (function() {
@@ -213864,14 +213864,14 @@ function requireScheduler_development () {
 		if (hasPerformanceNow) {
 		  var localPerformance = performance;
 
-		  exports.unstable_now = function () {
+		  exports$1.unstable_now = function () {
 		    return localPerformance.now();
 		  };
 		} else {
 		  var localDate = Date;
 		  var initialTime = localDate.now();
 
-		  exports.unstable_now = function () {
+		  exports$1.unstable_now = function () {
 		    return localDate.now() - initialTime;
 		  };
 		} // Max 31 bit integer. The max integer size in V8 for 32-bit systems.
@@ -213991,7 +213991,7 @@ function requireScheduler_development () {
 		      var didUserCallbackTimeout = currentTask.expirationTime <= currentTime;
 
 		      var continuationCallback = callback(didUserCallbackTimeout);
-		      currentTime = exports.unstable_now();
+		      currentTime = exports$1.unstable_now();
 
 		      if (typeof continuationCallback === 'function') {
 		        currentTask.callback = continuationCallback;
@@ -214090,7 +214090,7 @@ function requireScheduler_development () {
 		}
 
 		function unstable_scheduleCallback(priorityLevel, callback, options) {
-		  var currentTime = exports.unstable_now();
+		  var currentTime = exports$1.unstable_now();
 		  var startTime;
 
 		  if (typeof options === 'object' && options !== null) {
@@ -214210,7 +214210,7 @@ function requireScheduler_development () {
 		var startTime = -1;
 
 		function shouldYieldToHost() {
-		  var timeElapsed = exports.unstable_now() - startTime;
+		  var timeElapsed = exports$1.unstable_now() - startTime;
 
 		  if (timeElapsed < frameInterval) {
 		    // The main thread has only been blocked for a really short amount of time;
@@ -214243,7 +214243,7 @@ function requireScheduler_development () {
 
 		var performWorkUntilDeadline = function () {
 		  if (scheduledHostCallback !== null) {
-		    var currentTime = exports.unstable_now(); // Keep track of the start time so we can measure how long the main thread
+		    var currentTime = exports$1.unstable_now(); // Keep track of the start time so we can measure how long the main thread
 		    // has been blocked.
 
 		    startTime = currentTime;
@@ -214318,7 +214318,7 @@ function requireScheduler_development () {
 
 		function requestHostTimeout(callback, ms) {
 		  taskTimeoutID = localSetTimeout(function () {
-		    callback(exports.unstable_now());
+		    callback(exports$1.unstable_now());
 		  }, ms);
 		}
 
@@ -214330,24 +214330,24 @@ function requireScheduler_development () {
 		var unstable_requestPaint = requestPaint;
 		var unstable_Profiling =  null;
 
-		exports.unstable_IdlePriority = IdlePriority;
-		exports.unstable_ImmediatePriority = ImmediatePriority;
-		exports.unstable_LowPriority = LowPriority;
-		exports.unstable_NormalPriority = NormalPriority;
-		exports.unstable_Profiling = unstable_Profiling;
-		exports.unstable_UserBlockingPriority = UserBlockingPriority;
-		exports.unstable_cancelCallback = unstable_cancelCallback;
-		exports.unstable_continueExecution = unstable_continueExecution;
-		exports.unstable_forceFrameRate = forceFrameRate;
-		exports.unstable_getCurrentPriorityLevel = unstable_getCurrentPriorityLevel;
-		exports.unstable_getFirstCallbackNode = unstable_getFirstCallbackNode;
-		exports.unstable_next = unstable_next;
-		exports.unstable_pauseExecution = unstable_pauseExecution;
-		exports.unstable_requestPaint = unstable_requestPaint;
-		exports.unstable_runWithPriority = unstable_runWithPriority;
-		exports.unstable_scheduleCallback = unstable_scheduleCallback;
-		exports.unstable_shouldYield = shouldYieldToHost;
-		exports.unstable_wrapCallback = unstable_wrapCallback;
+		exports$1.unstable_IdlePriority = IdlePriority;
+		exports$1.unstable_ImmediatePriority = ImmediatePriority;
+		exports$1.unstable_LowPriority = LowPriority;
+		exports$1.unstable_NormalPriority = NormalPriority;
+		exports$1.unstable_Profiling = unstable_Profiling;
+		exports$1.unstable_UserBlockingPriority = UserBlockingPriority;
+		exports$1.unstable_cancelCallback = unstable_cancelCallback;
+		exports$1.unstable_continueExecution = unstable_continueExecution;
+		exports$1.unstable_forceFrameRate = forceFrameRate;
+		exports$1.unstable_getCurrentPriorityLevel = unstable_getCurrentPriorityLevel;
+		exports$1.unstable_getFirstCallbackNode = unstable_getFirstCallbackNode;
+		exports$1.unstable_next = unstable_next;
+		exports$1.unstable_pauseExecution = unstable_pauseExecution;
+		exports$1.unstable_requestPaint = unstable_requestPaint;
+		exports$1.unstable_runWithPriority = unstable_runWithPriority;
+		exports$1.unstable_scheduleCallback = unstable_scheduleCallback;
+		exports$1.unstable_shouldYield = shouldYieldToHost;
+		exports$1.unstable_wrapCallback = unstable_wrapCallback;
 		          /* global __REACT_DEVTOOLS_GLOBAL_HOOK__ */
 		if (
 		  typeof __REACT_DEVTOOLS_GLOBAL_HOOK__ !== 'undefined' &&
@@ -244745,13 +244745,13 @@ var hasRequiredReactComponentLib;
 function requireReactComponentLib () {
 	if (hasRequiredReactComponentLib) return reactComponentLib;
 	hasRequiredReactComponentLib = 1;
-	(function (exports) {
-		Object.defineProperty(exports, "__esModule", { value: true });
-		exports.createOverlayComponent = exports.createReactComponent = void 0;
+	(function (exports$1) {
+		Object.defineProperty(exports$1, "__esModule", { value: true });
+		exports$1.createOverlayComponent = exports$1.createReactComponent = void 0;
 		var createComponent_1 = /*@__PURE__*/ requireCreateComponent();
-		Object.defineProperty(exports, "createReactComponent", { enumerable: true, get: function () { return createComponent_1.createReactComponent; } });
+		Object.defineProperty(exports$1, "createReactComponent", { enumerable: true, get: function () { return createComponent_1.createReactComponent; } });
 		var createOverlayComponent_1 = /*@__PURE__*/ requireCreateOverlayComponent();
-		Object.defineProperty(exports, "createOverlayComponent", { enumerable: true, get: function () { return createOverlayComponent_1.createOverlayComponent; } });
+		Object.defineProperty(exports$1, "createOverlayComponent", { enumerable: true, get: function () { return createOverlayComponent_1.createOverlayComponent; } });
 		
 	} (reactComponentLib));
 	return reactComponentLib;
@@ -313515,13 +313515,13 @@ var hasRequiredDist$1;
 function requireDist$1 () {
 	if (hasRequiredDist$1) return dist;
 	hasRequiredDist$1 = 1;
-	(function (exports) {
+	(function (exports$1) {
 		var __importDefault = (dist && dist.__importDefault) || function (mod) {
 		    return (mod && mod.__esModule) ? mod : { "default": mod };
 		};
-		Object.defineProperty(exports, "__esModule", { value: true });
-		exports.rulesExtended = exports.rules = void 0;
-		exports.parse = parse;
+		Object.defineProperty(exports$1, "__esModule", { value: true });
+		exports$1.rulesExtended = exports$1.rules = void 0;
+		exports$1.parse = parse;
 		const simple_markdown_1 = __importDefault(require$$0$1);
 		// import all the rules
 		const everyone_1 = requireEveryone();
@@ -313545,7 +313545,7 @@ function requireDist$1 () {
 		const em_1 = requireEm();
 		const br_1 = requireBr();
 		// rules normal users can use
-		exports.rules = {
+		exports$1.rules = {
 		    blockQuote: blockQuote_1.blockQuote,
 		    codeBlock: codeBlock_1.codeBlock,
 		    newline: simple_markdown_1.default.defaultRules.newline,
@@ -313574,10 +313574,10 @@ function requireDist$1 () {
 		    timestamp: time_1.timestamp,
 		};
 		// for use in webhooks, embeds, etc
-		exports.rulesExtended = Object.assign(Object.assign({}, exports.rules), { link: simple_markdown_1.default.defaultRules.link });
+		exports$1.rulesExtended = Object.assign(Object.assign({}, exports$1.rules), { link: simple_markdown_1.default.defaultRules.link });
 		// build the parser
-		const parser = simple_markdown_1.default.parserFor(exports.rules);
-		const parserExtended = simple_markdown_1.default.parserFor(exports.rulesExtended);
+		const parser = simple_markdown_1.default.parserFor(exports$1.rules);
+		const parserExtended = simple_markdown_1.default.parserFor(exports$1.rulesExtended);
 		// parse function
 		function parse(input, type = 'normal') {
 		    if (type === 'normal')
@@ -313585,7 +313585,7 @@ function requireDist$1 () {
 		    else
 		        return parserExtended(input, { inline: true });
 		}
-		exports.default = parse; 
+		exports$1.default = parse; 
 	} (dist));
 	return dist;
 }
@@ -318575,12 +318575,12 @@ var hasRequiredConstants$3;
 function requireConstants$3 () {
 	if (hasRequiredConstants$3) return constants$3;
 	hasRequiredConstants$3 = 1;
-	(function (exports) {
-		Object.defineProperty(exports, "__esModule", { value: true });
-		exports.SPECIAL_HEADERS = exports.MINOR = exports.MAJOR = exports.HTAB_SP_VCHAR_OBS_TEXT = exports.QUOTED_STRING = exports.CONNECTION_TOKEN_CHARS = exports.HEADER_CHARS = exports.TOKEN = exports.HEX = exports.URL_CHAR = exports.USERINFO_CHARS = exports.MARK = exports.ALPHANUM = exports.NUM = exports.HEX_MAP = exports.NUM_MAP = exports.ALPHA = exports.STATUSES_HTTP = exports.H_METHOD_MAP = exports.METHOD_MAP = exports.METHODS_RTSP = exports.METHODS_ICE = exports.METHODS_HTTP = exports.HEADER_STATE = exports.FINISH = exports.STATUSES = exports.METHODS = exports.LENIENT_FLAGS = exports.FLAGS = exports.TYPE = exports.ERROR = void 0;
+	(function (exports$1) {
+		Object.defineProperty(exports$1, "__esModule", { value: true });
+		exports$1.SPECIAL_HEADERS = exports$1.MINOR = exports$1.MAJOR = exports$1.HTAB_SP_VCHAR_OBS_TEXT = exports$1.QUOTED_STRING = exports$1.CONNECTION_TOKEN_CHARS = exports$1.HEADER_CHARS = exports$1.TOKEN = exports$1.HEX = exports$1.URL_CHAR = exports$1.USERINFO_CHARS = exports$1.MARK = exports$1.ALPHANUM = exports$1.NUM = exports$1.HEX_MAP = exports$1.NUM_MAP = exports$1.ALPHA = exports$1.STATUSES_HTTP = exports$1.H_METHOD_MAP = exports$1.METHOD_MAP = exports$1.METHODS_RTSP = exports$1.METHODS_ICE = exports$1.METHODS_HTTP = exports$1.HEADER_STATE = exports$1.FINISH = exports$1.STATUSES = exports$1.METHODS = exports$1.LENIENT_FLAGS = exports$1.FLAGS = exports$1.TYPE = exports$1.ERROR = void 0;
 		const utils_1 = requireUtils();
 		// Emums
-		exports.ERROR = {
+		exports$1.ERROR = {
 		    OK: 0,
 		    INTERNAL: 1,
 		    STRICT: 2,
@@ -318619,12 +318619,12 @@ function requireConstants$3 () {
 		    CB_RESET: 31,
 		    CB_PROTOCOL_COMPLETE: 38,
 		};
-		exports.TYPE = {
+		exports$1.TYPE = {
 		    BOTH: 0, // default
 		    REQUEST: 1,
 		    RESPONSE: 2,
 		};
-		exports.FLAGS = {
+		exports$1.FLAGS = {
 		    CONNECTION_KEEP_ALIVE: 1 << 0,
 		    CONNECTION_CLOSE: 1 << 1,
 		    CONNECTION_UPGRADE: 1 << 2,
@@ -318636,7 +318636,7 @@ function requireConstants$3 () {
 		    // 1 << 8 is unused
 		    TRANSFER_ENCODING: 1 << 9,
 		};
-		exports.LENIENT_FLAGS = {
+		exports$1.LENIENT_FLAGS = {
 		    HEADERS: 1 << 0,
 		    CHUNKED_LENGTH: 1 << 1,
 		    KEEP_ALIVE: 1 << 2,
@@ -318648,7 +318648,7 @@ function requireConstants$3 () {
 		    OPTIONAL_CR_BEFORE_LF: 1 << 8,
 		    SPACES_AFTER_CHUNK_SIZE: 1 << 9,
 		};
-		exports.METHODS = {
+		exports$1.METHODS = {
 		    'DELETE': 0,
 		    'GET': 1,
 		    'HEAD': 2,
@@ -318709,7 +318709,7 @@ function requireConstants$3 () {
 		    /* DRAFT https://www.ietf.org/archive/id/draft-ietf-httpbis-safe-method-w-body-02.html */
 		    'QUERY': 46,
 		};
-		exports.STATUSES = {
+		exports$1.STATUSES = {
 		    CONTINUE: 100,
 		    SWITCHING_PROTOCOLS: 101,
 		    PROCESSING: 102,
@@ -318810,12 +318810,12 @@ function requireConstants$3 () {
 		    NETWORK_READ_TIMEOUT: 598, // Unofficial
 		    NETWORK_CONNECT_TIMEOUT: 599, // Unofficial
 		};
-		exports.FINISH = {
+		exports$1.FINISH = {
 		    SAFE: 0,
 		    SAFE_WITH_CB: 1,
 		    UNSAFE: 2,
 		};
-		exports.HEADER_STATE = {
+		exports$1.HEADER_STATE = {
 		    GENERAL: 0,
 		    CONNECTION: 1,
 		    CONTENT_LENGTH: 2,
@@ -318827,203 +318827,203 @@ function requireConstants$3 () {
 		    TRANSFER_ENCODING_CHUNKED: 8,
 		};
 		// C headers
-		exports.METHODS_HTTP = [
-		    exports.METHODS.DELETE,
-		    exports.METHODS.GET,
-		    exports.METHODS.HEAD,
-		    exports.METHODS.POST,
-		    exports.METHODS.PUT,
-		    exports.METHODS.CONNECT,
-		    exports.METHODS.OPTIONS,
-		    exports.METHODS.TRACE,
-		    exports.METHODS.COPY,
-		    exports.METHODS.LOCK,
-		    exports.METHODS.MKCOL,
-		    exports.METHODS.MOVE,
-		    exports.METHODS.PROPFIND,
-		    exports.METHODS.PROPPATCH,
-		    exports.METHODS.SEARCH,
-		    exports.METHODS.UNLOCK,
-		    exports.METHODS.BIND,
-		    exports.METHODS.REBIND,
-		    exports.METHODS.UNBIND,
-		    exports.METHODS.ACL,
-		    exports.METHODS.REPORT,
-		    exports.METHODS.MKACTIVITY,
-		    exports.METHODS.CHECKOUT,
-		    exports.METHODS.MERGE,
-		    exports.METHODS['M-SEARCH'],
-		    exports.METHODS.NOTIFY,
-		    exports.METHODS.SUBSCRIBE,
-		    exports.METHODS.UNSUBSCRIBE,
-		    exports.METHODS.PATCH,
-		    exports.METHODS.PURGE,
-		    exports.METHODS.MKCALENDAR,
-		    exports.METHODS.LINK,
-		    exports.METHODS.UNLINK,
-		    exports.METHODS.PRI,
+		exports$1.METHODS_HTTP = [
+		    exports$1.METHODS.DELETE,
+		    exports$1.METHODS.GET,
+		    exports$1.METHODS.HEAD,
+		    exports$1.METHODS.POST,
+		    exports$1.METHODS.PUT,
+		    exports$1.METHODS.CONNECT,
+		    exports$1.METHODS.OPTIONS,
+		    exports$1.METHODS.TRACE,
+		    exports$1.METHODS.COPY,
+		    exports$1.METHODS.LOCK,
+		    exports$1.METHODS.MKCOL,
+		    exports$1.METHODS.MOVE,
+		    exports$1.METHODS.PROPFIND,
+		    exports$1.METHODS.PROPPATCH,
+		    exports$1.METHODS.SEARCH,
+		    exports$1.METHODS.UNLOCK,
+		    exports$1.METHODS.BIND,
+		    exports$1.METHODS.REBIND,
+		    exports$1.METHODS.UNBIND,
+		    exports$1.METHODS.ACL,
+		    exports$1.METHODS.REPORT,
+		    exports$1.METHODS.MKACTIVITY,
+		    exports$1.METHODS.CHECKOUT,
+		    exports$1.METHODS.MERGE,
+		    exports$1.METHODS['M-SEARCH'],
+		    exports$1.METHODS.NOTIFY,
+		    exports$1.METHODS.SUBSCRIBE,
+		    exports$1.METHODS.UNSUBSCRIBE,
+		    exports$1.METHODS.PATCH,
+		    exports$1.METHODS.PURGE,
+		    exports$1.METHODS.MKCALENDAR,
+		    exports$1.METHODS.LINK,
+		    exports$1.METHODS.UNLINK,
+		    exports$1.METHODS.PRI,
 		    // TODO(indutny): should we allow it with HTTP?
-		    exports.METHODS.SOURCE,
-		    exports.METHODS.QUERY,
+		    exports$1.METHODS.SOURCE,
+		    exports$1.METHODS.QUERY,
 		];
-		exports.METHODS_ICE = [
-		    exports.METHODS.SOURCE,
+		exports$1.METHODS_ICE = [
+		    exports$1.METHODS.SOURCE,
 		];
-		exports.METHODS_RTSP = [
-		    exports.METHODS.OPTIONS,
-		    exports.METHODS.DESCRIBE,
-		    exports.METHODS.ANNOUNCE,
-		    exports.METHODS.SETUP,
-		    exports.METHODS.PLAY,
-		    exports.METHODS.PAUSE,
-		    exports.METHODS.TEARDOWN,
-		    exports.METHODS.GET_PARAMETER,
-		    exports.METHODS.SET_PARAMETER,
-		    exports.METHODS.REDIRECT,
-		    exports.METHODS.RECORD,
-		    exports.METHODS.FLUSH,
+		exports$1.METHODS_RTSP = [
+		    exports$1.METHODS.OPTIONS,
+		    exports$1.METHODS.DESCRIBE,
+		    exports$1.METHODS.ANNOUNCE,
+		    exports$1.METHODS.SETUP,
+		    exports$1.METHODS.PLAY,
+		    exports$1.METHODS.PAUSE,
+		    exports$1.METHODS.TEARDOWN,
+		    exports$1.METHODS.GET_PARAMETER,
+		    exports$1.METHODS.SET_PARAMETER,
+		    exports$1.METHODS.REDIRECT,
+		    exports$1.METHODS.RECORD,
+		    exports$1.METHODS.FLUSH,
 		    // For AirPlay
-		    exports.METHODS.GET,
-		    exports.METHODS.POST,
+		    exports$1.METHODS.GET,
+		    exports$1.METHODS.POST,
 		];
-		exports.METHOD_MAP = (0, utils_1.enumToMap)(exports.METHODS);
-		exports.H_METHOD_MAP = Object.fromEntries(Object.entries(exports.METHODS).filter(([k]) => k.startsWith('H')));
-		exports.STATUSES_HTTP = [
-		    exports.STATUSES.CONTINUE,
-		    exports.STATUSES.SWITCHING_PROTOCOLS,
-		    exports.STATUSES.PROCESSING,
-		    exports.STATUSES.EARLY_HINTS,
-		    exports.STATUSES.RESPONSE_IS_STALE,
-		    exports.STATUSES.REVALIDATION_FAILED,
-		    exports.STATUSES.DISCONNECTED_OPERATION,
-		    exports.STATUSES.HEURISTIC_EXPIRATION,
-		    exports.STATUSES.MISCELLANEOUS_WARNING,
-		    exports.STATUSES.OK,
-		    exports.STATUSES.CREATED,
-		    exports.STATUSES.ACCEPTED,
-		    exports.STATUSES.NON_AUTHORITATIVE_INFORMATION,
-		    exports.STATUSES.NO_CONTENT,
-		    exports.STATUSES.RESET_CONTENT,
-		    exports.STATUSES.PARTIAL_CONTENT,
-		    exports.STATUSES.MULTI_STATUS,
-		    exports.STATUSES.ALREADY_REPORTED,
-		    exports.STATUSES.TRANSFORMATION_APPLIED,
-		    exports.STATUSES.IM_USED,
-		    exports.STATUSES.MISCELLANEOUS_PERSISTENT_WARNING,
-		    exports.STATUSES.MULTIPLE_CHOICES,
-		    exports.STATUSES.MOVED_PERMANENTLY,
-		    exports.STATUSES.FOUND,
-		    exports.STATUSES.SEE_OTHER,
-		    exports.STATUSES.NOT_MODIFIED,
-		    exports.STATUSES.USE_PROXY,
-		    exports.STATUSES.SWITCH_PROXY,
-		    exports.STATUSES.TEMPORARY_REDIRECT,
-		    exports.STATUSES.PERMANENT_REDIRECT,
-		    exports.STATUSES.BAD_REQUEST,
-		    exports.STATUSES.UNAUTHORIZED,
-		    exports.STATUSES.PAYMENT_REQUIRED,
-		    exports.STATUSES.FORBIDDEN,
-		    exports.STATUSES.NOT_FOUND,
-		    exports.STATUSES.METHOD_NOT_ALLOWED,
-		    exports.STATUSES.NOT_ACCEPTABLE,
-		    exports.STATUSES.PROXY_AUTHENTICATION_REQUIRED,
-		    exports.STATUSES.REQUEST_TIMEOUT,
-		    exports.STATUSES.CONFLICT,
-		    exports.STATUSES.GONE,
-		    exports.STATUSES.LENGTH_REQUIRED,
-		    exports.STATUSES.PRECONDITION_FAILED,
-		    exports.STATUSES.PAYLOAD_TOO_LARGE,
-		    exports.STATUSES.URI_TOO_LONG,
-		    exports.STATUSES.UNSUPPORTED_MEDIA_TYPE,
-		    exports.STATUSES.RANGE_NOT_SATISFIABLE,
-		    exports.STATUSES.EXPECTATION_FAILED,
-		    exports.STATUSES.IM_A_TEAPOT,
-		    exports.STATUSES.PAGE_EXPIRED,
-		    exports.STATUSES.ENHANCE_YOUR_CALM,
-		    exports.STATUSES.MISDIRECTED_REQUEST,
-		    exports.STATUSES.UNPROCESSABLE_ENTITY,
-		    exports.STATUSES.LOCKED,
-		    exports.STATUSES.FAILED_DEPENDENCY,
-		    exports.STATUSES.TOO_EARLY,
-		    exports.STATUSES.UPGRADE_REQUIRED,
-		    exports.STATUSES.PRECONDITION_REQUIRED,
-		    exports.STATUSES.TOO_MANY_REQUESTS,
-		    exports.STATUSES.REQUEST_HEADER_FIELDS_TOO_LARGE_UNOFFICIAL,
-		    exports.STATUSES.REQUEST_HEADER_FIELDS_TOO_LARGE,
-		    exports.STATUSES.LOGIN_TIMEOUT,
-		    exports.STATUSES.NO_RESPONSE,
-		    exports.STATUSES.RETRY_WITH,
-		    exports.STATUSES.BLOCKED_BY_PARENTAL_CONTROL,
-		    exports.STATUSES.UNAVAILABLE_FOR_LEGAL_REASONS,
-		    exports.STATUSES.CLIENT_CLOSED_LOAD_BALANCED_REQUEST,
-		    exports.STATUSES.INVALID_X_FORWARDED_FOR,
-		    exports.STATUSES.REQUEST_HEADER_TOO_LARGE,
-		    exports.STATUSES.SSL_CERTIFICATE_ERROR,
-		    exports.STATUSES.SSL_CERTIFICATE_REQUIRED,
-		    exports.STATUSES.HTTP_REQUEST_SENT_TO_HTTPS_PORT,
-		    exports.STATUSES.INVALID_TOKEN,
-		    exports.STATUSES.CLIENT_CLOSED_REQUEST,
-		    exports.STATUSES.INTERNAL_SERVER_ERROR,
-		    exports.STATUSES.NOT_IMPLEMENTED,
-		    exports.STATUSES.BAD_GATEWAY,
-		    exports.STATUSES.SERVICE_UNAVAILABLE,
-		    exports.STATUSES.GATEWAY_TIMEOUT,
-		    exports.STATUSES.HTTP_VERSION_NOT_SUPPORTED,
-		    exports.STATUSES.VARIANT_ALSO_NEGOTIATES,
-		    exports.STATUSES.INSUFFICIENT_STORAGE,
-		    exports.STATUSES.LOOP_DETECTED,
-		    exports.STATUSES.BANDWIDTH_LIMIT_EXCEEDED,
-		    exports.STATUSES.NOT_EXTENDED,
-		    exports.STATUSES.NETWORK_AUTHENTICATION_REQUIRED,
-		    exports.STATUSES.WEB_SERVER_UNKNOWN_ERROR,
-		    exports.STATUSES.WEB_SERVER_IS_DOWN,
-		    exports.STATUSES.CONNECTION_TIMEOUT,
-		    exports.STATUSES.ORIGIN_IS_UNREACHABLE,
-		    exports.STATUSES.TIMEOUT_OCCURED,
-		    exports.STATUSES.SSL_HANDSHAKE_FAILED,
-		    exports.STATUSES.INVALID_SSL_CERTIFICATE,
-		    exports.STATUSES.RAILGUN_ERROR,
-		    exports.STATUSES.SITE_IS_OVERLOADED,
-		    exports.STATUSES.SITE_IS_FROZEN,
-		    exports.STATUSES.IDENTITY_PROVIDER_AUTHENTICATION_ERROR,
-		    exports.STATUSES.NETWORK_READ_TIMEOUT,
-		    exports.STATUSES.NETWORK_CONNECT_TIMEOUT,
+		exports$1.METHOD_MAP = (0, utils_1.enumToMap)(exports$1.METHODS);
+		exports$1.H_METHOD_MAP = Object.fromEntries(Object.entries(exports$1.METHODS).filter(([k]) => k.startsWith('H')));
+		exports$1.STATUSES_HTTP = [
+		    exports$1.STATUSES.CONTINUE,
+		    exports$1.STATUSES.SWITCHING_PROTOCOLS,
+		    exports$1.STATUSES.PROCESSING,
+		    exports$1.STATUSES.EARLY_HINTS,
+		    exports$1.STATUSES.RESPONSE_IS_STALE,
+		    exports$1.STATUSES.REVALIDATION_FAILED,
+		    exports$1.STATUSES.DISCONNECTED_OPERATION,
+		    exports$1.STATUSES.HEURISTIC_EXPIRATION,
+		    exports$1.STATUSES.MISCELLANEOUS_WARNING,
+		    exports$1.STATUSES.OK,
+		    exports$1.STATUSES.CREATED,
+		    exports$1.STATUSES.ACCEPTED,
+		    exports$1.STATUSES.NON_AUTHORITATIVE_INFORMATION,
+		    exports$1.STATUSES.NO_CONTENT,
+		    exports$1.STATUSES.RESET_CONTENT,
+		    exports$1.STATUSES.PARTIAL_CONTENT,
+		    exports$1.STATUSES.MULTI_STATUS,
+		    exports$1.STATUSES.ALREADY_REPORTED,
+		    exports$1.STATUSES.TRANSFORMATION_APPLIED,
+		    exports$1.STATUSES.IM_USED,
+		    exports$1.STATUSES.MISCELLANEOUS_PERSISTENT_WARNING,
+		    exports$1.STATUSES.MULTIPLE_CHOICES,
+		    exports$1.STATUSES.MOVED_PERMANENTLY,
+		    exports$1.STATUSES.FOUND,
+		    exports$1.STATUSES.SEE_OTHER,
+		    exports$1.STATUSES.NOT_MODIFIED,
+		    exports$1.STATUSES.USE_PROXY,
+		    exports$1.STATUSES.SWITCH_PROXY,
+		    exports$1.STATUSES.TEMPORARY_REDIRECT,
+		    exports$1.STATUSES.PERMANENT_REDIRECT,
+		    exports$1.STATUSES.BAD_REQUEST,
+		    exports$1.STATUSES.UNAUTHORIZED,
+		    exports$1.STATUSES.PAYMENT_REQUIRED,
+		    exports$1.STATUSES.FORBIDDEN,
+		    exports$1.STATUSES.NOT_FOUND,
+		    exports$1.STATUSES.METHOD_NOT_ALLOWED,
+		    exports$1.STATUSES.NOT_ACCEPTABLE,
+		    exports$1.STATUSES.PROXY_AUTHENTICATION_REQUIRED,
+		    exports$1.STATUSES.REQUEST_TIMEOUT,
+		    exports$1.STATUSES.CONFLICT,
+		    exports$1.STATUSES.GONE,
+		    exports$1.STATUSES.LENGTH_REQUIRED,
+		    exports$1.STATUSES.PRECONDITION_FAILED,
+		    exports$1.STATUSES.PAYLOAD_TOO_LARGE,
+		    exports$1.STATUSES.URI_TOO_LONG,
+		    exports$1.STATUSES.UNSUPPORTED_MEDIA_TYPE,
+		    exports$1.STATUSES.RANGE_NOT_SATISFIABLE,
+		    exports$1.STATUSES.EXPECTATION_FAILED,
+		    exports$1.STATUSES.IM_A_TEAPOT,
+		    exports$1.STATUSES.PAGE_EXPIRED,
+		    exports$1.STATUSES.ENHANCE_YOUR_CALM,
+		    exports$1.STATUSES.MISDIRECTED_REQUEST,
+		    exports$1.STATUSES.UNPROCESSABLE_ENTITY,
+		    exports$1.STATUSES.LOCKED,
+		    exports$1.STATUSES.FAILED_DEPENDENCY,
+		    exports$1.STATUSES.TOO_EARLY,
+		    exports$1.STATUSES.UPGRADE_REQUIRED,
+		    exports$1.STATUSES.PRECONDITION_REQUIRED,
+		    exports$1.STATUSES.TOO_MANY_REQUESTS,
+		    exports$1.STATUSES.REQUEST_HEADER_FIELDS_TOO_LARGE_UNOFFICIAL,
+		    exports$1.STATUSES.REQUEST_HEADER_FIELDS_TOO_LARGE,
+		    exports$1.STATUSES.LOGIN_TIMEOUT,
+		    exports$1.STATUSES.NO_RESPONSE,
+		    exports$1.STATUSES.RETRY_WITH,
+		    exports$1.STATUSES.BLOCKED_BY_PARENTAL_CONTROL,
+		    exports$1.STATUSES.UNAVAILABLE_FOR_LEGAL_REASONS,
+		    exports$1.STATUSES.CLIENT_CLOSED_LOAD_BALANCED_REQUEST,
+		    exports$1.STATUSES.INVALID_X_FORWARDED_FOR,
+		    exports$1.STATUSES.REQUEST_HEADER_TOO_LARGE,
+		    exports$1.STATUSES.SSL_CERTIFICATE_ERROR,
+		    exports$1.STATUSES.SSL_CERTIFICATE_REQUIRED,
+		    exports$1.STATUSES.HTTP_REQUEST_SENT_TO_HTTPS_PORT,
+		    exports$1.STATUSES.INVALID_TOKEN,
+		    exports$1.STATUSES.CLIENT_CLOSED_REQUEST,
+		    exports$1.STATUSES.INTERNAL_SERVER_ERROR,
+		    exports$1.STATUSES.NOT_IMPLEMENTED,
+		    exports$1.STATUSES.BAD_GATEWAY,
+		    exports$1.STATUSES.SERVICE_UNAVAILABLE,
+		    exports$1.STATUSES.GATEWAY_TIMEOUT,
+		    exports$1.STATUSES.HTTP_VERSION_NOT_SUPPORTED,
+		    exports$1.STATUSES.VARIANT_ALSO_NEGOTIATES,
+		    exports$1.STATUSES.INSUFFICIENT_STORAGE,
+		    exports$1.STATUSES.LOOP_DETECTED,
+		    exports$1.STATUSES.BANDWIDTH_LIMIT_EXCEEDED,
+		    exports$1.STATUSES.NOT_EXTENDED,
+		    exports$1.STATUSES.NETWORK_AUTHENTICATION_REQUIRED,
+		    exports$1.STATUSES.WEB_SERVER_UNKNOWN_ERROR,
+		    exports$1.STATUSES.WEB_SERVER_IS_DOWN,
+		    exports$1.STATUSES.CONNECTION_TIMEOUT,
+		    exports$1.STATUSES.ORIGIN_IS_UNREACHABLE,
+		    exports$1.STATUSES.TIMEOUT_OCCURED,
+		    exports$1.STATUSES.SSL_HANDSHAKE_FAILED,
+		    exports$1.STATUSES.INVALID_SSL_CERTIFICATE,
+		    exports$1.STATUSES.RAILGUN_ERROR,
+		    exports$1.STATUSES.SITE_IS_OVERLOADED,
+		    exports$1.STATUSES.SITE_IS_FROZEN,
+		    exports$1.STATUSES.IDENTITY_PROVIDER_AUTHENTICATION_ERROR,
+		    exports$1.STATUSES.NETWORK_READ_TIMEOUT,
+		    exports$1.STATUSES.NETWORK_CONNECT_TIMEOUT,
 		];
-		exports.ALPHA = [];
+		exports$1.ALPHA = [];
 		for (let i = 'A'.charCodeAt(0); i <= 'Z'.charCodeAt(0); i++) {
 		    // Upper case
-		    exports.ALPHA.push(String.fromCharCode(i));
+		    exports$1.ALPHA.push(String.fromCharCode(i));
 		    // Lower case
-		    exports.ALPHA.push(String.fromCharCode(i + 0x20));
+		    exports$1.ALPHA.push(String.fromCharCode(i + 0x20));
 		}
-		exports.NUM_MAP = {
+		exports$1.NUM_MAP = {
 		    0: 0, 1: 1, 2: 2, 3: 3, 4: 4,
 		    5: 5, 6: 6, 7: 7, 8: 8, 9: 9,
 		};
-		exports.HEX_MAP = {
+		exports$1.HEX_MAP = {
 		    0: 0, 1: 1, 2: 2, 3: 3, 4: 4,
 		    5: 5, 6: 6, 7: 7, 8: 8, 9: 9,
 		    A: 0XA, B: 0XB, C: 0XC, D: 0XD, E: 0XE, F: 0XF,
 		    a: 0xa, b: 0xb, c: 0xc, d: 0xd, e: 0xe, f: 0xf,
 		};
-		exports.NUM = [
+		exports$1.NUM = [
 		    '0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
 		];
-		exports.ALPHANUM = exports.ALPHA.concat(exports.NUM);
-		exports.MARK = ['-', '_', '.', '!', '~', '*', '\'', '(', ')'];
-		exports.USERINFO_CHARS = exports.ALPHANUM
-		    .concat(exports.MARK)
+		exports$1.ALPHANUM = exports$1.ALPHA.concat(exports$1.NUM);
+		exports$1.MARK = ['-', '_', '.', '!', '~', '*', '\'', '(', ')'];
+		exports$1.USERINFO_CHARS = exports$1.ALPHANUM
+		    .concat(exports$1.MARK)
 		    .concat(['%', ';', ':', '&', '=', '+', '$', ',']);
 		// TODO(indutny): use RFC
-		exports.URL_CHAR = [
+		exports$1.URL_CHAR = [
 		    '!', '"', '$', '%', '&', '\'',
 		    '(', ')', '*', '+', ',', '-', '.', '/',
 		    ':', ';', '<', '=', '>',
 		    '@', '[', '\\', ']', '^', '_',
 		    '`',
 		    '{', '|', '}', '~',
-		].concat(exports.ALPHANUM);
-		exports.HEX = exports.NUM.concat(['a', 'b', 'c', 'd', 'e', 'f', 'A', 'B', 'C', 'D', 'E', 'F']);
+		].concat(exports$1.ALPHANUM);
+		exports$1.HEX = exports$1.NUM.concat(['a', 'b', 'c', 'd', 'e', 'f', 'A', 'B', 'C', 'D', 'E', 'F']);
 		/* Tokens as defined by rfc 2616. Also lowercases them.
 		 *        token       = 1*<any CHAR except CTLs or separators>
 		 *     separators     = "(" | ")" | "<" | ">" | "@"
@@ -319031,80 +319031,80 @@ function requireConstants$3 () {
 		 *                    | "/" | "[" | "]" | "?" | "="
 		 *                    | "{" | "}" | SP | HT
 		 */
-		exports.TOKEN = [
+		exports$1.TOKEN = [
 		    '!', '#', '$', '%', '&', '\'',
 		    '*', '+', '-', '.',
 		    '^', '_', '`',
 		    '|', '~',
-		].concat(exports.ALPHANUM);
+		].concat(exports$1.ALPHANUM);
 		/*
 		 * Verify that a char is a valid visible (printable) US-ASCII
 		 * character or %x80-FF
 		 */
-		exports.HEADER_CHARS = ['\t'];
+		exports$1.HEADER_CHARS = ['\t'];
 		for (let i = 32; i <= 255; i++) {
 		    if (i !== 127) {
-		        exports.HEADER_CHARS.push(i);
+		        exports$1.HEADER_CHARS.push(i);
 		    }
 		}
 		// ',' = \x44
-		exports.CONNECTION_TOKEN_CHARS = exports.HEADER_CHARS.filter((c) => c !== 44);
-		exports.QUOTED_STRING = ['\t', ' '];
+		exports$1.CONNECTION_TOKEN_CHARS = exports$1.HEADER_CHARS.filter((c) => c !== 44);
+		exports$1.QUOTED_STRING = ['\t', ' '];
 		for (let i = 0x21; i <= 0xff; i++) {
 		    if (i !== 0x22 && i !== 0x5c) { // All characters in ASCII except \ and "
-		        exports.QUOTED_STRING.push(i);
+		        exports$1.QUOTED_STRING.push(i);
 		    }
 		}
-		exports.HTAB_SP_VCHAR_OBS_TEXT = ['\t', ' '];
+		exports$1.HTAB_SP_VCHAR_OBS_TEXT = ['\t', ' '];
 		// VCHAR: https://tools.ietf.org/html/rfc5234#appendix-B.1
 		for (let i = 0x21; i <= 0x7E; i++) {
-		    exports.HTAB_SP_VCHAR_OBS_TEXT.push(i);
+		    exports$1.HTAB_SP_VCHAR_OBS_TEXT.push(i);
 		}
 		// OBS_TEXT: https://datatracker.ietf.org/doc/html/rfc9110#name-collected-abnf
 		for (let i = 0x80; i <= 0xff; i++) {
-		    exports.HTAB_SP_VCHAR_OBS_TEXT.push(i);
+		    exports$1.HTAB_SP_VCHAR_OBS_TEXT.push(i);
 		}
-		exports.MAJOR = exports.NUM_MAP;
-		exports.MINOR = exports.MAJOR;
-		exports.SPECIAL_HEADERS = {
-		    'connection': exports.HEADER_STATE.CONNECTION,
-		    'content-length': exports.HEADER_STATE.CONTENT_LENGTH,
-		    'proxy-connection': exports.HEADER_STATE.CONNECTION,
-		    'transfer-encoding': exports.HEADER_STATE.TRANSFER_ENCODING,
-		    'upgrade': exports.HEADER_STATE.UPGRADE,
+		exports$1.MAJOR = exports$1.NUM_MAP;
+		exports$1.MINOR = exports$1.MAJOR;
+		exports$1.SPECIAL_HEADERS = {
+		    'connection': exports$1.HEADER_STATE.CONNECTION,
+		    'content-length': exports$1.HEADER_STATE.CONTENT_LENGTH,
+		    'proxy-connection': exports$1.HEADER_STATE.CONNECTION,
+		    'transfer-encoding': exports$1.HEADER_STATE.TRANSFER_ENCODING,
+		    'upgrade': exports$1.HEADER_STATE.UPGRADE,
 		};
-		exports.default = {
-		    ERROR: exports.ERROR,
-		    TYPE: exports.TYPE,
-		    FLAGS: exports.FLAGS,
-		    LENIENT_FLAGS: exports.LENIENT_FLAGS,
-		    METHODS: exports.METHODS,
-		    STATUSES: exports.STATUSES,
-		    FINISH: exports.FINISH,
-		    HEADER_STATE: exports.HEADER_STATE,
-		    ALPHA: exports.ALPHA,
-		    NUM_MAP: exports.NUM_MAP,
-		    HEX_MAP: exports.HEX_MAP,
-		    NUM: exports.NUM,
-		    ALPHANUM: exports.ALPHANUM,
-		    MARK: exports.MARK,
-		    USERINFO_CHARS: exports.USERINFO_CHARS,
-		    URL_CHAR: exports.URL_CHAR,
-		    HEX: exports.HEX,
-		    TOKEN: exports.TOKEN,
-		    HEADER_CHARS: exports.HEADER_CHARS,
-		    CONNECTION_TOKEN_CHARS: exports.CONNECTION_TOKEN_CHARS,
-		    QUOTED_STRING: exports.QUOTED_STRING,
-		    HTAB_SP_VCHAR_OBS_TEXT: exports.HTAB_SP_VCHAR_OBS_TEXT,
-		    MAJOR: exports.MAJOR,
-		    MINOR: exports.MINOR,
-		    SPECIAL_HEADERS: exports.SPECIAL_HEADERS,
-		    METHODS_HTTP: exports.METHODS_HTTP,
-		    METHODS_ICE: exports.METHODS_ICE,
-		    METHODS_RTSP: exports.METHODS_RTSP,
-		    METHOD_MAP: exports.METHOD_MAP,
-		    H_METHOD_MAP: exports.H_METHOD_MAP,
-		    STATUSES_HTTP: exports.STATUSES_HTTP,
+		exports$1.default = {
+		    ERROR: exports$1.ERROR,
+		    TYPE: exports$1.TYPE,
+		    FLAGS: exports$1.FLAGS,
+		    LENIENT_FLAGS: exports$1.LENIENT_FLAGS,
+		    METHODS: exports$1.METHODS,
+		    STATUSES: exports$1.STATUSES,
+		    FINISH: exports$1.FINISH,
+		    HEADER_STATE: exports$1.HEADER_STATE,
+		    ALPHA: exports$1.ALPHA,
+		    NUM_MAP: exports$1.NUM_MAP,
+		    HEX_MAP: exports$1.HEX_MAP,
+		    NUM: exports$1.NUM,
+		    ALPHANUM: exports$1.ALPHANUM,
+		    MARK: exports$1.MARK,
+		    USERINFO_CHARS: exports$1.USERINFO_CHARS,
+		    URL_CHAR: exports$1.URL_CHAR,
+		    HEX: exports$1.HEX,
+		    TOKEN: exports$1.TOKEN,
+		    HEADER_CHARS: exports$1.HEADER_CHARS,
+		    CONNECTION_TOKEN_CHARS: exports$1.CONNECTION_TOKEN_CHARS,
+		    QUOTED_STRING: exports$1.QUOTED_STRING,
+		    HTAB_SP_VCHAR_OBS_TEXT: exports$1.HTAB_SP_VCHAR_OBS_TEXT,
+		    MAJOR: exports$1.MAJOR,
+		    MINOR: exports$1.MINOR,
+		    SPECIAL_HEADERS: exports$1.SPECIAL_HEADERS,
+		    METHODS_HTTP: exports$1.METHODS_HTTP,
+		    METHODS_ICE: exports$1.METHODS_ICE,
+		    METHODS_RTSP: exports$1.METHODS_RTSP,
+		    METHOD_MAP: exports$1.METHOD_MAP,
+		    H_METHOD_MAP: exports$1.H_METHOD_MAP,
+		    STATUSES_HTTP: exports$1.STATUSES_HTTP,
 		}; 
 	} (constants$3));
 	return constants$3;
@@ -324196,8 +324196,8 @@ function requireClientH1 () {
 	     * @param {import('net').Socket} socket
 	     * @param {*} llhttp
 	     */
-	  constructor (client, socket, { exports }) {
-	    this.llhttp = exports;
+	  constructor (client, socket, { exports: exports$1 }) {
+	    this.llhttp = exports$1;
 	    this.ptr = this.llhttp.llhttp_alloc(constants.TYPE.RESPONSE);
 	    this.client = client;
 	    /**
@@ -349101,17 +349101,17 @@ var hasRequiredBrowser;
 function requireBrowser () {
 	if (hasRequiredBrowser) return browser.exports;
 	hasRequiredBrowser = 1;
-	(function (module, exports) {
+	(function (module, exports$1) {
 		/**
 		 * This is the web browser implementation of `debug()`.
 		 */
 
-		exports.formatArgs = formatArgs;
-		exports.save = save;
-		exports.load = load;
-		exports.useColors = useColors;
-		exports.storage = localstorage();
-		exports.destroy = (() => {
+		exports$1.formatArgs = formatArgs;
+		exports$1.save = save;
+		exports$1.load = load;
+		exports$1.useColors = useColors;
+		exports$1.storage = localstorage();
+		exports$1.destroy = (() => {
 			let warned = false;
 
 			return () => {
@@ -349126,7 +349126,7 @@ function requireBrowser () {
 		 * Colors.
 		 */
 
-		exports.colors = [
+		exports$1.colors = [
 			'#0000CC',
 			'#0000FF',
 			'#0033CC',
@@ -349291,7 +349291,7 @@ function requireBrowser () {
 		 *
 		 * @api public
 		 */
-		exports.log = console.debug || console.log || (() => {});
+		exports$1.log = console.debug || console.log || (() => {});
 
 		/**
 		 * Save `namespaces`.
@@ -349302,9 +349302,9 @@ function requireBrowser () {
 		function save(namespaces) {
 			try {
 				if (namespaces) {
-					exports.storage.setItem('debug', namespaces);
+					exports$1.storage.setItem('debug', namespaces);
 				} else {
-					exports.storage.removeItem('debug');
+					exports$1.storage.removeItem('debug');
 				}
 			} catch (error) {
 				// Swallow
@@ -349321,7 +349321,7 @@ function requireBrowser () {
 		function load() {
 			let r;
 			try {
-				r = exports.storage.getItem('debug') || exports.storage.getItem('DEBUG') ;
+				r = exports$1.storage.getItem('debug') || exports$1.storage.getItem('DEBUG') ;
 			} catch (error) {
 				// Swallow
 				// XXX (@Qix-) should we be logging these?
@@ -349357,7 +349357,7 @@ function requireBrowser () {
 			}
 		}
 
-		module.exports = requireCommon()(exports);
+		module.exports = requireCommon()(exports$1);
 
 		const {formatters} = module.exports;
 
@@ -349546,7 +349546,7 @@ var hasRequiredNode;
 function requireNode () {
 	if (hasRequiredNode) return node.exports;
 	hasRequiredNode = 1;
-	(function (module, exports) {
+	(function (module, exports$1) {
 		const tty = require$$1$6;
 		const util = require$$0$5;
 
@@ -349554,13 +349554,13 @@ function requireNode () {
 		 * This is the Node.js implementation of `debug()`.
 		 */
 
-		exports.init = init;
-		exports.log = log;
-		exports.formatArgs = formatArgs;
-		exports.save = save;
-		exports.load = load;
-		exports.useColors = useColors;
-		exports.destroy = util.deprecate(
+		exports$1.init = init;
+		exports$1.log = log;
+		exports$1.formatArgs = formatArgs;
+		exports$1.save = save;
+		exports$1.load = load;
+		exports$1.useColors = useColors;
+		exports$1.destroy = util.deprecate(
 			() => {},
 			'Instance method `debug.destroy()` is deprecated and no longer does anything. It will be removed in the next major version of `debug`.'
 		);
@@ -349569,7 +349569,7 @@ function requireNode () {
 		 * Colors.
 		 */
 
-		exports.colors = [6, 2, 3, 4, 5, 1];
+		exports$1.colors = [6, 2, 3, 4, 5, 1];
 
 		try {
 			// Optional dependency (as in, doesn't need to be installed, NOT like optionalDependencies in package.json)
@@ -349577,7 +349577,7 @@ function requireNode () {
 			const supportsColor = requireSupportsColor();
 
 			if (supportsColor && (supportsColor.stderr || supportsColor).level >= 2) {
-				exports.colors = [
+				exports$1.colors = [
 					20,
 					21,
 					26,
@@ -349666,7 +349666,7 @@ function requireNode () {
 		 *   $ DEBUG_COLORS=no DEBUG_DEPTH=10 DEBUG_SHOW_HIDDEN=enabled node script.js
 		 */
 
-		exports.inspectOpts = Object.keys(process.env).filter(key => {
+		exports$1.inspectOpts = Object.keys(process.env).filter(key => {
 			return /^debug_/i.test(key);
 		}).reduce((obj, key) => {
 			// Camel-case
@@ -349698,8 +349698,8 @@ function requireNode () {
 		 */
 
 		function useColors() {
-			return 'colors' in exports.inspectOpts ?
-				Boolean(exports.inspectOpts.colors) :
+			return 'colors' in exports$1.inspectOpts ?
+				Boolean(exports$1.inspectOpts.colors) :
 				tty.isatty(process.stderr.fd);
 		}
 
@@ -349725,7 +349725,7 @@ function requireNode () {
 		}
 
 		function getDate() {
-			if (exports.inspectOpts.hideDate) {
+			if (exports$1.inspectOpts.hideDate) {
 				return '';
 			}
 			return new Date().toISOString() + ' ';
@@ -349736,7 +349736,7 @@ function requireNode () {
 		 */
 
 		function log(...args) {
-			return process.stderr.write(util.formatWithOptions(exports.inspectOpts, ...args) + '\n');
+			return process.stderr.write(util.formatWithOptions(exports$1.inspectOpts, ...args) + '\n');
 		}
 
 		/**
@@ -349776,13 +349776,13 @@ function requireNode () {
 		function init(debug) {
 			debug.inspectOpts = {};
 
-			const keys = Object.keys(exports.inspectOpts);
+			const keys = Object.keys(exports$1.inspectOpts);
 			for (let i = 0; i < keys.length; i++) {
-				debug.inspectOpts[keys[i]] = exports.inspectOpts[keys[i]];
+				debug.inspectOpts[keys[i]] = exports$1.inspectOpts[keys[i]];
 			}
 		}
 
-		module.exports = requireCommon()(exports);
+		module.exports = requireCommon()(exports$1);
 
 		const {formatters} = module.exports;
 
@@ -349954,7 +349954,7 @@ var hasRequiredDist;
 function requireDist () {
 	if (hasRequiredDist) return dist$b;
 	hasRequiredDist = 1;
-	(function (exports) {
+	(function (exports$1) {
 		var __createBinding = (dist$b && dist$b.__createBinding) || (Object.create ? (function(o, m, k, k2) {
 		    if (k2 === undefined) k2 = k;
 		    var desc = Object.getOwnPropertyDescriptor(m, k);
@@ -349966,25 +349966,25 @@ function requireDist () {
 		    if (k2 === undefined) k2 = k;
 		    o[k2] = m[k];
 		}));
-		var __exportStar = (dist$b && dist$b.__exportStar) || function(m, exports) {
-		    for (var p in m) if (p !== "default" && !Object.prototype.hasOwnProperty.call(exports, p)) __createBinding(exports, m, p);
+		var __exportStar = (dist$b && dist$b.__exportStar) || function(m, exports$1) {
+		    for (var p in m) if (p !== "default" && !Object.prototype.hasOwnProperty.call(exports$1, p)) __createBinding(exports$1, m, p);
 		};
 		var __importDefault = (dist$b && dist$b.__importDefault) || function (mod) {
 		    return (mod && mod.__esModule) ? mod : { "default": mod };
 		};
-		Object.defineProperty(exports, "__esModule", { value: true });
-		exports.TranscriptImageDownloader = exports.DiscordMessages = void 0;
-		exports.generateFromMessages = generateFromMessages;
-		exports.createTranscript = createTranscript;
+		Object.defineProperty(exports$1, "__esModule", { value: true });
+		exports$1.TranscriptImageDownloader = exports$1.DiscordMessages = void 0;
+		exports$1.generateFromMessages = generateFromMessages;
+		exports$1.createTranscript = createTranscript;
 		const discord_js_1 = requireSrc$1();
 		const generator_1 = __importDefault(requireGenerator());
 		const types_1 = requireTypes();
 		const images_1 = requireImages();
 		// re-exports
 		var transcript_1 = requireTranscript();
-		Object.defineProperty(exports, "DiscordMessages", { enumerable: true, get: function () { return __importDefault(transcript_1).default; } });
+		Object.defineProperty(exports$1, "DiscordMessages", { enumerable: true, get: function () { return __importDefault(transcript_1).default; } });
 		var images_2 = requireImages();
-		Object.defineProperty(exports, "TranscriptImageDownloader", { enumerable: true, get: function () { return images_2.TranscriptImageDownloader; } });
+		Object.defineProperty(exports$1, "TranscriptImageDownloader", { enumerable: true, get: function () { return images_2.TranscriptImageDownloader; } });
 		// version check
 		const versionPrefix = discord_js_1.version.split('.')[0];
 		if (versionPrefix !== '14' && versionPrefix !== '15') {
@@ -350085,11 +350085,11 @@ function requireDist () {
 		    // generate the transcript
 		    return generateFromMessages(allMessages.reverse(), channel, options);
 		}
-		exports.default = {
+		exports$1.default = {
 		    createTranscript,
 		    generateFromMessages,
 		};
-		__exportStar(requireTypes(), exports);
+		__exportStar(requireTypes(), exports$1);
 		
 	} (dist$b));
 	return dist$b;
@@ -350160,8 +350160,8 @@ function generateGuildIndex(guildName, threads) {
 // Copyright (C) 2025 Toit contributors
 // Use of this source code is governed by an MIT-style license that can be
 // found in the LICENSE file.
-const __filename = fileURLToPath(import.meta.url);
-const __dirname$1 = path.dirname(__filename);
+const __filename$1 = fileURLToPath(import.meta.url);
+const __dirname$1 = path.dirname(__filename$1);
 const DISCORD_TOKEN = coreExports.getInput('discord-token');
 const GUILD_ID = coreExports.getInput('guild-id');
 const TRANSCRIPT_DIR = coreExports.getInput('transcript-directory');
