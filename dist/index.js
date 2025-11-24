@@ -45,8 +45,8 @@ import require$$1$6, { fileURLToPath } from 'node:url';
 import require$$1$7 from 'node:async_hooks';
 import require$$1$8 from 'node:console';
 import require$$1$9 from 'node:dns';
-import require$$0$l from 'node:timers';
-import require$$1$a from 'node:fs/promises';
+import require$$1$a from 'node:timers';
+import require$$1$b from 'node:fs/promises';
 import require$$6$3 from 'timers/promises';
 import require$$15 from 'process';
 import require$$4$3 from 'node:timers/promises';
@@ -54,7 +54,7 @@ import require$$9 from 'node:child_process';
 import * as fs from 'node:fs';
 import fs__default from 'node:fs';
 import require$$2$5 from 'node:sqlite';
-import require$$1$b from 'tty';
+import require$$1$c from 'tty';
 import require$$2$6 from 'sharp';
 
 var commonjsGlobal = typeof globalThis !== 'undefined' ? globalThis : typeof window !== 'undefined' ? window : typeof global !== 'undefined' ? global : typeof self !== 'undefined' ? self : {};
@@ -27338,8 +27338,9 @@ function requireDist$b () {
 	var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
 
 	// src/index.ts
-	var src_exports = {};
-	__export(src_exports, {
+	var index_exports = {};
+	__export(index_exports, {
+	  GatewayRateLimitError: () => GatewayRateLimitError,
 	  calculateShardId: () => calculateShardId,
 	  getUserAgentAppendix: () => getUserAgentAppendix,
 	  isEquatable: () => isEquatable,
@@ -27350,7 +27351,7 @@ function requireDist$b () {
 	  shouldUseGlobalFetchAndWebSocket: () => shouldUseGlobalFetchAndWebSocket,
 	  version: () => version
 	});
-	dist$a = __toCommonJS(src_exports);
+	dist$a = __toCommonJS(index_exports);
 
 	// src/functions/lazy.ts
 	function lazy(cb) {
@@ -27446,8 +27447,21 @@ function requireDist$b () {
 	}
 	__name(isEquatable, "isEquatable");
 
+	// src/gatewayRateLimitError.ts
+	var GatewayRateLimitError = class _GatewayRateLimitError extends Error {
+	  constructor(data, payload) {
+	    super(`Request with opcode ${data.opcode} was rate limited. Retry after ${data.retry_after} seconds.`);
+	    this.data = data;
+	    this.payload = payload;
+	  }
+	  static {
+	    __name(this, "GatewayRateLimitError");
+	  }
+	  name = _GatewayRateLimitError.name;
+	};
+
 	// src/index.ts
-	var version = "1.1.1";
+	var version = "1.2.0";
 	
 	return dist$a;
 }
@@ -28136,6 +28150,7 @@ function requireV10$5 () {
 	    GatewayDispatchEvents["MessageReactionRemoveEmoji"] = "MESSAGE_REACTION_REMOVE_EMOJI";
 	    GatewayDispatchEvents["MessageUpdate"] = "MESSAGE_UPDATE";
 	    GatewayDispatchEvents["PresenceUpdate"] = "PRESENCE_UPDATE";
+	    GatewayDispatchEvents["RateLimited"] = "RATE_LIMITED";
 	    GatewayDispatchEvents["Ready"] = "READY";
 	    GatewayDispatchEvents["Resumed"] = "RESUMED";
 	    GatewayDispatchEvents["StageInstanceCreate"] = "STAGE_INSTANCE_CREATE";
@@ -28276,8 +28291,8 @@ function requireGlobals () {
 		     *
 		     * The `timestamp` and `style` group properties are present on the `exec` result of this expression
 		     */
-		    // eslint-disable-next-line prefer-named-capture-group
-		    Timestamp: /<t:(?<timestamp>-?\d{1,13})(:(?<style>[DFRTdft]))?>/,
+		    // eslint-disable-next-line prefer-named-capture-group, unicorn/better-regex
+		    Timestamp: /<t:(?<timestamp>-?\d{1,13})(:(?<style>[DFRSTdfst]))?>/,
 		    /**
 		     * Regular expression for matching strictly default styled timestamps
 		     *
@@ -28632,6 +28647,12 @@ function requireCommon$3 () {
 		     * Applies to channel types: Text
 		     */
 		    PinMessages: 1n << 51n,
+		    /**
+		     * @unstable Allows for bypassing slowmode restrictions. Not (yet) documented.
+		     *
+		     * Applies to text-based and thread-based channel types.
+		     */
+		    BypassSlowmode: 1n << 52n,
 		};
 		/**
 		 * Freeze the object of bits, preventing any modifications to it
@@ -29605,6 +29626,12 @@ function requireGuild$1 () {
 	     * Guild has access to guest invites
 	     */
 	    GuildFeature["GuestsEnabled"] = "GUESTS_ENABLED";
+	    /**
+	     * Guild has migrated to the new pin messages permission
+	     *
+	     * @unstable This feature is currently not documented by Discord, but has known value
+	     */
+	    GuildFeature["PinPermissionMigrationComplete"] = "PIN_PERMISSION_MIGRATION_COMPLETE";
 	})(GuildFeature || (guild.GuildFeature = GuildFeature = {}));
 	/**
 	 * @see {@link https://discord.com/developers/docs/resources/guild#guild-member-object-guild-member-flags}
@@ -29692,6 +29719,9 @@ function requireGuild$1 () {
 	     */
 	    GuildWidgetStyle["Banner4"] = "banner4";
 	})(GuildWidgetStyle || (guild.GuildWidgetStyle = GuildWidgetStyle = {}));
+	/**
+	 * @unstable https://github.com/discord/discord-api-docs/pull/2547
+	 */
 	var MembershipScreeningFieldType;
 	(function (MembershipScreeningFieldType) {
 	    /**
@@ -30425,6 +30455,10 @@ function requireMessage$2 () {
 	     * Container associating a label and description with a component
 	     */
 	    ComponentType[ComponentType["Label"] = 18] = "Label";
+	    /**
+	     * Component for uploading files
+	     */
+	    ComponentType[ComponentType["FileUpload"] = 19] = "FileUpload";
 	    // EVERYTHING BELOW THIS LINE SHOULD BE OLD NAMES FOR RENAMED ENUM MEMBERS //
 	    /**
 	     * Select menu for picking from defined text options
@@ -31168,6 +31202,18 @@ function requireWebhook$1 () {
 	     * Entitlement was created
 	     */
 	    ApplicationWebhookEventType["EntitlementCreate"] = "ENTITLEMENT_CREATE";
+	    /**
+	     * Entitlement was updated
+	     *
+	     * @unstable This event is not yet documented but can be enabled from the developer portal
+	     */
+	    ApplicationWebhookEventType["EntitlementUpdate"] = "ENTITLEMENT_UPDATE";
+	    /**
+	     * Entitlement was deleted
+	     *
+	     * @unstable This event is not yet documented but can be enabled from the developer portal
+	     */
+	    ApplicationWebhookEventType["EntitlementDelete"] = "ENTITLEMENT_DELETE";
 	    /**
 	     * User was added to a Quest (currently unavailable)
 	     */
@@ -32124,6 +32170,15 @@ function requireV10$3 () {
 		    },
 		    /**
 		     * Route for:
+		     * - GET `/guilds/{guild.id}/roles/member-counts`
+		     *
+		     * @unstable
+		     */
+		    guildRoleMemberCounts(guildId) {
+		        return `/guilds/${guildId}/roles/member-counts`;
+		    },
+		    /**
+		     * Route for:
 		     * - GET  `/guilds/{guild.id}/prune`
 		     * - POST `/guilds/{guild.id}/prune`
 		     */
@@ -32497,6 +32552,8 @@ function requireV10$3 () {
 		     * Route for:
 		     * - GET   `/guilds/{guild.id}/member-verification`
 		     * - PATCH `/guilds/{guild.id}/member-verification`
+		     *
+		     * @unstable https://github.com/discord/discord-api-docs/pull/2547
 		     */
 		    guildMemberVerification(guildId) {
 		        return `/guilds/${guildId}/member-verification`;
@@ -33689,6 +33746,7 @@ function requireV10$1 () {
 	v10$1.isMessageComponentGuildInteraction = isMessageComponentGuildInteraction;
 	v10$1.isLinkButton = isLinkButton;
 	v10$1.isInteractionButton = isInteractionButton;
+	v10$1.isModalSubmitInteraction = isModalSubmitInteraction;
 	v10$1.isMessageComponentInteraction = isMessageComponentInteraction;
 	v10$1.isMessageComponentButtonInteraction = isMessageComponentButtonInteraction;
 	v10$1.isMessageComponentSelectMenuInteraction = isMessageComponentSelectMenuInteraction;
@@ -33697,7 +33755,7 @@ function requireV10$1 () {
 	const index_1 = require$$2;
 	// Interactions
 	/**
-	 * A type-guard check for DM interactions
+	 * A type guard check for DM interactions
 	 *
 	 * @param interaction - The interaction to check against
 	 * @returns A boolean that indicates if the interaction was received in a DM channel
@@ -33706,7 +33764,7 @@ function requireV10$1 () {
 	    return Reflect.has(interaction, 'user');
 	}
 	/**
-	 * A type-guard check for guild interactions
+	 * A type guard check for guild interactions
 	 *
 	 * @param interaction - The interaction to check against
 	 * @returns A boolean that indicates if the interaction was received in a guild
@@ -33716,7 +33774,7 @@ function requireV10$1 () {
 	}
 	// ApplicationCommandInteractions
 	/**
-	 * A type-guard check for DM application command interactions
+	 * A type guard check for DM application command interactions
 	 *
 	 * @param interaction - The application command interaction to check against
 	 * @returns A boolean that indicates if the application command interaction was received in a DM channel
@@ -33725,7 +33783,7 @@ function requireV10$1 () {
 	    return isDMInteraction(interaction);
 	}
 	/**
-	 * A type-guard check for guild application command interactions
+	 * A type guard check for guild application command interactions
 	 *
 	 * @param interaction - The interaction to check against
 	 * @returns A boolean that indicates if the application command interaction was received in a guild
@@ -33735,7 +33793,7 @@ function requireV10$1 () {
 	}
 	// MessageComponentInteractions
 	/**
-	 * A type-guard check for DM message component interactions
+	 * A type guard check for DM message component interactions
 	 *
 	 * @param interaction - The message component interaction to check against
 	 * @returns A boolean that indicates if the message component interaction was received in a DM channel
@@ -33744,7 +33802,7 @@ function requireV10$1 () {
 	    return isDMInteraction(interaction);
 	}
 	/**
-	 * A type-guard check for guild message component interactions
+	 * A type guard check for guild message component interactions
 	 *
 	 * @param interaction - The interaction to check against
 	 * @returns A boolean that indicates if the message component interaction was received in a guild
@@ -33754,7 +33812,7 @@ function requireV10$1 () {
 	}
 	// Buttons
 	/**
-	 * A type-guard check for buttons that have a `url` attached to them.
+	 * A type guard check for buttons that have a `url` attached to them.
 	 *
 	 * @param component - The button to check against
 	 * @returns A boolean that indicates if the button has a `url` attached to it
@@ -33763,7 +33821,7 @@ function requireV10$1 () {
 	    return component.style === index_1.ButtonStyle.Link;
 	}
 	/**
-	 * A type-guard check for buttons that have a `custom_id` attached to them.
+	 * A type guard check for buttons that have a `custom_id` attached to them.
 	 *
 	 * @param component - The button to check against
 	 * @returns A boolean that indicates if the button has a `custom_id` attached to it
@@ -33771,9 +33829,19 @@ function requireV10$1 () {
 	function isInteractionButton(component) {
 	    return ![index_1.ButtonStyle.Link, index_1.ButtonStyle.Premium].includes(component.style);
 	}
+	// Modal
+	/**
+	 * A type guard check for modals submit interactions
+	 *
+	 * @param interaction - The interaction to check against
+	 * @returns A boolean that indicates if the interaction is a modal submission
+	 */
+	function isModalSubmitInteraction(interaction) {
+	    return interaction.type === index_1.InteractionType.ModalSubmit;
+	}
 	// Message Components
 	/**
-	 * A type-guard check for message component interactions
+	 * A type guard check for message component interactions
 	 *
 	 * @param interaction - The interaction to check against
 	 * @returns A boolean that indicates if the interaction is a message component
@@ -33782,7 +33850,7 @@ function requireV10$1 () {
 	    return interaction.type === index_1.InteractionType.MessageComponent;
 	}
 	/**
-	 * A type-guard check for button message component interactions
+	 * A type guard check for button message component interactions
 	 *
 	 * @param interaction - The message component interaction to check against
 	 * @returns A boolean that indicates if the message component is a button
@@ -33791,7 +33859,7 @@ function requireV10$1 () {
 	    return interaction.data.component_type === index_1.ComponentType.Button;
 	}
 	/**
-	 * A type-guard check for select menu message component interactions
+	 * A type guard check for select menu message component interactions
 	 *
 	 * @param interaction - The message component interaction to check against
 	 * @returns A boolean that indicates if the message component is a select menu
@@ -33807,7 +33875,7 @@ function requireV10$1 () {
 	}
 	// Application Commands
 	/**
-	 * A type-guard check for chat input application commands.
+	 * A type guard check for chat input application commands.
 	 *
 	 * @param interaction - The interaction to check against
 	 * @returns A boolean that indicates if the interaction is a chat input application command
@@ -33816,7 +33884,7 @@ function requireV10$1 () {
 	    return interaction.data.type === index_1.ApplicationCommandType.ChatInput;
 	}
 	/**
-	 * A type-guard check for context menu application commands.
+	 * A type guard check for context menu application commands.
 	 *
 	 * @param interaction - The interaction to check against
 	 * @returns A boolean that indicates if the interaction is a context menu application command
@@ -33845,6 +33913,7 @@ const isMessageComponentDMInteraction = mod.isMessageComponentDMInteraction;
 const isMessageComponentGuildInteraction = mod.isMessageComponentGuildInteraction;
 const isMessageComponentInteraction = mod.isMessageComponentInteraction;
 const isMessageComponentSelectMenuInteraction = mod.isMessageComponentSelectMenuInteraction;
+const isModalSubmitInteraction = mod.isModalSubmitInteraction;
 
 var v10 = /*#__PURE__*/Object.freeze({
 	__proto__: null,
@@ -33861,7 +33930,8 @@ var v10 = /*#__PURE__*/Object.freeze({
 	isMessageComponentDMInteraction: isMessageComponentDMInteraction,
 	isMessageComponentGuildInteraction: isMessageComponentGuildInteraction,
 	isMessageComponentInteraction: isMessageComponentInteraction,
-	isMessageComponentSelectMenuInteraction: isMessageComponentSelectMenuInteraction
+	isMessageComponentSelectMenuInteraction: isMessageComponentSelectMenuInteraction,
+	isModalSubmitInteraction: isModalSubmitInteraction
 });
 
 var require$$6 = /*@__PURE__*/getAugmentedNamespace(v10);
@@ -38357,6 +38427,8 @@ function requireErrorCodes () {
 
 	 * @property {'ModalSubmitInteractionFieldNotFound'} ModalSubmitInteractionFieldNotFound
 	 * @property {'ModalSubmitInteractionFieldType'} ModalSubmitInteractionFieldType
+	 * @property {'ModalSubmitInteractionFieldEmpty'} ModalSubmitInteractionFieldEmpty
+	 * @property {'ModalSubmitInteractionFieldInvalidChannelType'} ModalSubmitInteractionFieldInvalidChannelType
 
 	 * @property {'InvalidMissingScopes'} InvalidMissingScopes
 	 * @property {'InvalidScopesWithPermissions'} InvalidScopesWithPermissions
@@ -38516,6 +38588,8 @@ function requireErrorCodes () {
 
 	  'ModalSubmitInteractionFieldNotFound',
 	  'ModalSubmitInteractionFieldType',
+	  'ModalSubmitInteractionFieldEmpty',
+	  'ModalSubmitInteractionFieldInvalidChannelType',
 
 	  'InvalidMissingScopes',
 	  'InvalidScopesWithPermissions',
@@ -38664,7 +38738,8 @@ function requireMessages () {
 	  [DjsErrorCodes.EmojiType]: 'Emoji must be a string or GuildEmoji/ReactionEmoji',
 	  [DjsErrorCodes.EmojiManaged]: 'Emoji is managed and has no Author.',
 	  [DjsErrorCodes.MissingManageGuildExpressionsPermission]: guild =>
-	    `Client must have Manage Guild Expressions permission in guild ${guild} to see emoji authors.`,
+	    // eslint-disable-next-line max-len
+	    `Client must have Create Guild Expressions or Manage Guild Expressions permission in guild ${guild} to see emoji authors.`,
 	  [DjsErrorCodes.MissingManageEmojisAndStickersPermission]: guild =>
 	    `Client must have Manage Emojis and Stickers permission in guild ${guild} to see emoji authors.`,
 
@@ -38710,6 +38785,10 @@ function requireMessages () {
 	    `Required field with custom id "${customId}" not found.`,
 	  [DjsErrorCodes.ModalSubmitInteractionFieldType]: (customId, type, expected) =>
 	    `Field with custom id "${customId}" is of type: ${type}; expected ${expected}.`,
+	  [DjsErrorCodes.ModalSubmitInteractionFieldEmpty]: (customId, type) =>
+	    `Required field with custom id "${customId}" is of type: ${type}; expected a non-empty value.`,
+	  [DjsErrorCodes.ModalSubmitInteractionFieldInvalidChannelType]: (customId, type, expected) =>
+	    `The type of channel of the field with custom id "${customId}" is: ${type}; expected ${expected}.`,
 
 	  [DjsErrorCodes.InvalidMissingScopes]: 'At least one valid scope must be provided for the invite',
 	  [DjsErrorCodes.InvalidScopesWithPermissions]: 'Permissions cannot be set without the bot scope.',
@@ -67329,8 +67408,8 @@ function requireDist$6 () {
 	var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
 
 	// src/index.ts
-	var src_exports = {};
-	__export(src_exports, {
+	var index_exports = {};
+	__export(index_exports, {
 	  Faces: () => Faces,
 	  GuildNavigationMentions: () => GuildNavigationMentions,
 	  HeadingLevel: () => HeadingLevel,
@@ -67342,6 +67421,7 @@ function requireDist$6 () {
 	  channelMention: () => channelMention,
 	  chatInputApplicationCommandMention: () => chatInputApplicationCommandMention,
 	  codeBlock: () => codeBlock,
+	  email: () => email,
 	  escapeBold: () => escapeBold,
 	  escapeBulletedList: () => escapeBulletedList,
 	  escapeCodeBlock: () => escapeCodeBlock,
@@ -67361,8 +67441,10 @@ function requireDist$6 () {
 	  hyperlink: () => hyperlink,
 	  inlineCode: () => inlineCode,
 	  italic: () => italic,
+	  linkedRoleMention: () => linkedRoleMention,
 	  messageLink: () => messageLink,
 	  orderedList: () => orderedList,
+	  phoneNumber: () => phoneNumber,
 	  quote: () => quote,
 	  roleMention: () => roleMention,
 	  spoiler: () => spoiler,
@@ -67375,7 +67457,7 @@ function requireDist$6 () {
 	  userMention: () => userMention,
 	  version: () => version
 	});
-	dist$5 = __toCommonJS(src_exports);
+	dist$5 = __toCommonJS(index_exports);
 
 	// src/escapers.ts
 	function escapeMarkdown(text, options = {}) {
@@ -67458,15 +67540,21 @@ function requireDist$6 () {
 	__name(escapeInlineCode, "escapeInlineCode");
 	function escapeItalic(text) {
 	  let idx = 0;
-	  const newText = text.replaceAll(/(?<=^|[^*])\*([^*]|\*\*|$)/g, (_, match) => {
-	    if (match === "**") return ++idx % 2 ? `\\*${match}` : `${match}\\*`;
-	    return `\\*${match}`;
-	  });
+	  const newText = text.replaceAll(
+	    /(?<=^|[^*])(?<!(?<!<)https?:\/\/\S*|<[^\s:]+:\/[^\s>]*)\*([^*]|\*\*|$)/g,
+	    (_, match) => {
+	      if (match === "**") return ++idx % 2 ? `\\*${match}` : `${match}\\*`;
+	      return `\\*${match}`;
+	    }
+	  );
 	  idx = 0;
-	  return newText.replaceAll(/(?<=^|[^_])(?<!<a?:.+|https?:\/\/\S+)_(?!:\d+>)([^_]|__|$)/g, (_, match) => {
-	    if (match === "__") return ++idx % 2 ? `\\_${match}` : `${match}\\_`;
-	    return `\\_${match}`;
-	  });
+	  return newText.replaceAll(
+	    /(?<=^|[^_])(?<!<a?:.+|(?<!<)https?:\/\/\S*|<[^\s:]:\/[^\s>]*)_(?!:\d+>)([^_]|__|$)/g,
+	    (_, match) => {
+	      if (match === "__") return ++idx % 2 ? `\\_${match}` : `${match}\\_`;
+	      return `\\_${match}`;
+	    }
+	  );
 	}
 	__name(escapeItalic, "escapeItalic");
 	function escapeBold(text) {
@@ -67579,6 +67667,10 @@ ${content}
 	  return `<@&${roleId}>`;
 	}
 	__name(roleMention, "roleMention");
+	function linkedRoleMention(roleId) {
+	  return `<id:linked-roles:${roleId}>`;
+	}
+	__name(linkedRoleMention, "linkedRoleMention");
 	function chatInputApplicationCommandMention(commandName, subcommandGroupName, subcommandName, commandId) {
 	  if (commandId !== void 0) {
 	    return `</${commandName} ${subcommandGroupName} ${subcommandName}:${commandId}>`;
@@ -67595,7 +67687,7 @@ ${content}
 	    animated: animated ?? false
 	  } : emojiIdOrOptions;
 	  const { id, animated: isAnimated, name: emojiName } = options;
-	  return `<${isAnimated ? "a" : ""}:${emojiName ?? "_"}:${id}>`;
+	  return `<${isAnimated ? "a" : ""}:${emojiName ?? "emoji"}:${id}>`;
 	}
 	__name(formatEmoji, "formatEmoji");
 	function channelLink(channelId, guildId) {
@@ -67654,6 +67746,23 @@ ${content}
 	  return skuId ? `${url}/${skuId}` : url;
 	}
 	__name(applicationDirectory, "applicationDirectory");
+	function email(email2, headers) {
+	  if (headers) {
+	    const searchParams = new URLSearchParams(
+	      Object.fromEntries(Object.entries(headers).map(([key, value]) => [key.toLowerCase(), value]))
+	    );
+	    return `<${email2}?${searchParams.toString()}>`;
+	  }
+	  return `<${email2}>`;
+	}
+	__name(email, "email");
+	function phoneNumber(phoneNumber2) {
+	  if (!phoneNumber2.startsWith("+")) {
+	    throw new Error('Phone number must start with a "+" sign.');
+	  }
+	  return `<${phoneNumber2}>`;
+	}
+	__name(phoneNumber, "phoneNumber");
 	var TimestampStyles = {
 	  /**
 	   * Short time format, consisting of hours and minutes.
@@ -67662,9 +67771,16 @@ ${content}
 	   */
 	  ShortTime: "t",
 	  /**
+	   * Medium time format, consisting of hours, minutes, and seconds.
+	   *
+	   * @example `16:20:30`
+	   */
+	  MediumTime: "T",
+	  /**
 	   * Long time format, consisting of hours, minutes, and seconds.
 	   *
 	   * @example `16:20:30`
+	   * @deprecated Use {@link TimestampStyles.MediumTime} instead.
 	   */
 	  LongTime: "T",
 	  /**
@@ -67676,21 +67792,47 @@ ${content}
 	  /**
 	   * Long date format, consisting of day, month, and year.
 	   *
-	   * @example `20 April 2021`
+	   * @example `April 20, 2021`
 	   */
 	  LongDate: "D",
+	  /**
+	   * Long date-short time format, consisting of long date and short time.
+	   *
+	   * @example `April 20, 2021 at 16:20`
+	   */
+	  LongDateShortTime: "f",
 	  /**
 	   * Short date-time format, consisting of short date and short time formats.
 	   *
 	   * @example `20 April 2021 16:20`
+	   * @deprecated Use {@link TimestampStyles.LongDateShortTime} instead.
 	   */
 	  ShortDateTime: "f",
+	  /**
+	   * Full date-short time format, consisting of full date and short time.
+	   *
+	   * @example `Tuesday, April 20, 2021 at 16:20`
+	   */
+	  FullDateShortTime: "F",
 	  /**
 	   * Long date-time format, consisting of long date and short time formats.
 	   *
 	   * @example `Tuesday, 20 April 2021 16:20`
+	   * @deprecated Use {@link TimestampStyles.FullDateShortTime} instead.
 	   */
 	  LongDateTime: "F",
+	  /**
+	   * Short date, short time format, consisting of short date and short time.
+	   *
+	   * @example `20/04/2021, 16:20`
+	   */
+	  ShortDateShortTime: "s",
+	  /**
+	   * Short date, medium time format, consisting of short date and medium time.
+	   *
+	   * @example `20/04/2021, 16:20:30`
+	   */
+	  ShortDateMediumTime: "S",
 	  /**
 	   * Relative time format, consisting of a relative duration format.
 	   *
@@ -67708,11 +67850,12 @@ ${content}
 	  GuildNavigationMentions2["Browse"] = "<id:browse>";
 	  GuildNavigationMentions2["Customize"] = "<id:customize>";
 	  GuildNavigationMentions2["Guide"] = "<id:guide>";
+	  GuildNavigationMentions2["LinkedRoles"] = "<id:linked-roles>";
 	  return GuildNavigationMentions2;
 	})(GuildNavigationMentions || {});
 
 	// src/index.ts
-	var version = "0.6.1";
+	var version = "0.6.2";
 	
 	return dist$5;
 }
@@ -68657,7 +68800,7 @@ function requireRole$1 () {
 	     */
 	    this.unicodeEmoji = null;
 
-	    if (data) this._patch(data);
+	    this._patch(data);
 	  }
 
 	  _patch(data) {
@@ -69172,7 +69315,7 @@ function requirePermissionOverwrites () {
 	     */
 	    Object.defineProperty(this, 'channel', { value: channel });
 
-	    if (data) this._patch(data);
+	    this._patch(data);
 	  }
 
 	  _patch(data) {
@@ -70803,8 +70946,8 @@ function requireTransformers () {
 	return Transformers;
 }
 
-var version = "14.22.1";
-var require$$39 = {
+var version = "14.25.1";
+var require$$40 = {
 	version: version};
 
 var LimitedCollection_1;
@@ -70892,7 +71035,7 @@ function requireOptions () {
 
 	const { DefaultRestOptions, DefaultUserAgentAppendix } = requireWeb();
 	const { toSnakeCase } = requireTransformers();
-	const { version } = require$$39;
+	const { version } = require$$40;
 
 	// TODO(ckohen): switch order of params so full manager is first and "type" is optional
 	/**
@@ -71258,923 +71401,135 @@ function requireBaseClient () {
 	return BaseClient_1;
 }
 
-var Enums;
-var hasRequiredEnums;
+var Poll = {};
 
-function requireEnums () {
-	if (hasRequiredEnums) return Enums;
-	hasRequiredEnums = 1;
+var PollAnswer = {};
 
-	function createEnum(keys) {
-	  const obj = {};
-	  for (const [index, key] of keys.entries()) {
-	    if (key === null) continue;
-	    obj[key] = index;
-	    obj[index] = key;
-	  }
-	  return obj;
-	}
+var Emoji = {};
 
-	Enums = { createEnum };
-	return Enums;
-}
+var hasRequiredEmoji$1;
 
-var Partials;
-var hasRequiredPartials;
+function requireEmoji$1 () {
+	if (hasRequiredEmoji$1) return Emoji;
+	hasRequiredEmoji$1 = 1;
 
-function requirePartials () {
-	if (hasRequiredPartials) return Partials;
-	hasRequiredPartials = 1;
+	const process = require$$0$k;
+	const { formatEmoji } = requireDist$6();
+	const { DiscordSnowflake } = /*@__PURE__*/ requireCjs$2();
+	const Base = requireBase();
 
-	const { createEnum } = requireEnums();
+	let deprecationEmittedForURL = false;
 
 	/**
-	 * The enumeration for partials.
-	 * ```js
-	 * import { Client, Partials } from 'discord.js';
-	 *
-	 * const client = new Client({
-	 *   intents: [
-	 *     // Intents...
-	 *   ],
-	 *   partials: [
-	 *     Partials.User, // We want to receive uncached users!
-	 *     Partials.Message // We want to receive uncached messages!
-	 *   ]
-	 * });
-	 * ```
-	 * @typedef {Object} Partials
-	 * @property {number} User The partial to receive uncached users.
-	 * @property {number} Channel The partial to receive uncached channels.
-	 * <info>This is required to receive direct messages!</info>
-	 * @property {number} GuildMember The partial to receive uncached guild members.
-	 * @property {number} Message The partial to receive uncached messages.
-	 * @property {number} Reaction The partial to receive uncached reactions.
-	 * @property {number} GuildScheduledEvent The partial to receive uncached guild scheduled events.
-	 * @property {number} ThreadMember The partial to receive uncached thread members.
-	 * @property {number} SoundboardSound The partial to receive uncached soundboard sounds.
+	 * Represents an emoji, see {@link ApplicationEmoji}, {@link GuildEmoji} and {@link ReactionEmoji}.
+	 * @extends {Base}
 	 */
+	let Emoji$1 = class Emoji extends Base {
+	  constructor(client, emoji) {
+	    super(client);
+	    /**
+	     * Whether or not the emoji is animated
+	     * @type {?boolean}
+	     */
+	    this.animated = emoji.animated ?? null;
 
-	// JSDoc for IntelliSense purposes
-	/**
-	 * @type {Partials}
-	 * @ignore
-	 */
-	Partials = createEnum([
-	  'User',
-	  'Channel',
-	  'GuildMember',
-	  'Message',
-	  'Reaction',
-	  'GuildScheduledEvent',
-	  'ThreadMember',
-	  'SoundboardSound',
-	]);
-	return Partials;
-}
+	    /**
+	     * The emoji's name
+	     * @type {?string}
+	     */
+	    this.name = emoji.name ?? null;
 
-var Action;
-var hasRequiredAction;
-
-function requireAction () {
-	if (hasRequiredAction) return Action;
-	hasRequiredAction = 1;
-
-	const Partials = requirePartials();
-
-	/*
-
-	ABOUT ACTIONS
-
-	Actions are similar to WebSocket Packet Handlers, but since introducing
-	the REST API methods, in order to prevent rewriting code to handle data,
-	"actions" have been introduced. They're basically what Packet Handlers
-	used to be but they're strictly for manipulating data and making sure
-	that WebSocket events don't clash with REST methods.
-
-	*/
-
-	class GenericAction {
-	  constructor(client) {
-	    this.client = client;
+	    /**
+	     * The emoji's id
+	     * @type {?Snowflake}
+	     */
+	    this.id = emoji.id ?? null;
 	  }
 
-	  handle(data) {
-	    return data;
+	  /**
+	   * The identifier of this emoji, used for message reactions
+	   * @type {string}
+	   * @readonly
+	   */
+	  get identifier() {
+	    if (this.id) return `${this.animated ? 'a:' : ''}${this.name}:${this.id}`;
+	    return encodeURIComponent(this.name);
 	  }
 
-	  getPayload(data, manager, id, partialType, cache) {
-	    return this.client.options.partials.includes(partialType) ? manager._add(data, cache) : manager.cache.get(id);
+	  /**
+	   * Returns a URL for the emoji or `null` if this is not a custom emoji.
+	   * @param {EmojiURLOptions} [options] Options for the emoji URL
+	   * @returns {?string}
+	   */
+	  imageURL(options) {
+	    return this.id && this.client.rest.cdn.emoji(this.id, options);
 	  }
 
-	  getChannel(data) {
-	    const payloadData = {};
-	    const id = data.channel_id ?? data.id;
-
-	    if (!('recipients' in data)) {
-	      // Try to resolve the recipient, but do not add the client user.
-	      const recipient = data.author ?? data.user ?? { id: data.user_id };
-	      if (recipient.id !== this.client.user.id) payloadData.recipients = [recipient];
+	  /**
+	   * Returns a URL for the emoji or `null` if this is not a custom emoji.
+	   * @type {?string}
+	   * @readonly
+	   * @deprecated Use {@link Emoji#imageURL} instead.
+	   */
+	  get url() {
+	    if (!deprecationEmittedForURL) {
+	      process.emitWarning('The Emoji#url getter is deprecated. Use Emoji#imageURL() instead.', 'DeprecationWarning');
+	      deprecationEmittedForURL = true;
 	    }
 
-	    if (id !== undefined) payloadData.id = id;
-
-	    return (
-	      data[this.client.actions.injectedChannel] ??
-	      this.getPayload({ ...data, ...payloadData }, this.client.channels, id, Partials.Channel)
-	    );
+	    return this.imageURL({ extension: this.animated ? 'gif' : 'png' });
 	  }
 
-	  getMessage(data, channel, cache) {
-	    const id = data.message_id ?? data.id;
-	    return (
-	      data[this.client.actions.injectedMessage] ??
-	      this.getPayload(
-	        {
-	          id,
-	          channel_id: channel.id,
-	          guild_id: data.guild_id ?? channel.guild?.id,
-	        },
-	        channel.messages,
-	        id,
-	        Partials.Message,
-	        cache,
-	      )
-	    );
+	  /**
+	   * The timestamp the emoji was created at, or null if unicode
+	   * @type {?number}
+	   * @readonly
+	   */
+	  get createdTimestamp() {
+	    return this.id && DiscordSnowflake.timestampFrom(this.id);
 	  }
 
-	  getReaction(data, message, user) {
-	    const id = data.emoji.id ?? decodeURIComponent(data.emoji.name);
-	    return this.getPayload(
-	      {
-	        emoji: data.emoji,
-	        count: message.partial ? null : 0,
-	        me: user?.id === this.client.user.id,
-	      },
-	      message.reactions,
-	      id,
-	      Partials.Reaction,
-	    );
+	  /**
+	   * The time the emoji was created at, or null if unicode
+	   * @type {?Date}
+	   * @readonly
+	   */
+	  get createdAt() {
+	    return this.id && new Date(this.createdTimestamp);
 	  }
 
-	  getMember(data, guild) {
-	    return this.getPayload(data, guild.members, data.user.id, Partials.GuildMember);
+	  /**
+	   * When concatenated with a string, this automatically returns the text required to form a graphical emoji on Discord
+	   * instead of the Emoji object.
+	   * @returns {string}
+	   * @example
+	   * // Send a custom emoji from a guild:
+	   * const emoji = guild.emojis.cache.first();
+	   * msg.channel.send(`Hello! ${emoji}`);
+	   * @example
+	   * // Send the emoji used in a reaction to the channel the reaction is part of
+	   * reaction.message.channel.send(`The emoji used was: ${reaction.emoji}`);
+	   */
+	  toString() {
+	    return this.id ? formatEmoji({ animated: this.animated, id: this.id, name: this.name }) : this.name;
 	  }
 
-	  getUser(data) {
-	    const id = data.user_id;
-	    return data[this.client.actions.injectedUser] ?? this.getPayload({ id }, this.client.users, id, Partials.User);
+	  toJSON() {
+	    const json = super.toJSON({
+	      guild: 'guildId',
+	      createdTimestamp: true,
+	      identifier: true,
+	    });
+	    json.imageURL = this.imageURL();
+	    return json;
 	  }
-
-	  getUserFromMember(data) {
-	    if (data.guild_id && data.member?.user) {
-	      const guild = this.client.guilds.cache.get(data.guild_id);
-	      if (guild) {
-	        return guild.members._add(data.member).user;
-	      } else {
-	        return this.client.users._add(data.member.user);
-	      }
-	    }
-	    return this.getUser(data);
-	  }
-
-	  getScheduledEvent(data, guild) {
-	    const id = data.guild_scheduled_event_id ?? data.id;
-	    return this.getPayload(
-	      { id, guild_id: data.guild_id ?? guild.id },
-	      guild.scheduledEvents,
-	      id,
-	      Partials.GuildScheduledEvent,
-	    );
-	  }
-
-	  getThreadMember(id, manager) {
-	    return this.getPayload({ user_id: id }, manager, id, Partials.ThreadMember, false);
-	  }
-
-	  getSoundboardSound(data, guild) {
-	    return this.getPayload(data, guild.soundboardSounds, data.sound_id, Partials.SoundboardSound);
-	  }
-
-	  spreadInjectedData(data) {
-	    return Object.fromEntries(Object.getOwnPropertySymbols(data).map(symbol => [symbol, data[symbol]]));
-	  }
-	}
-
-	Action = GenericAction;
-	return Action;
-}
-
-var Events;
-var hasRequiredEvents$1;
-
-function requireEvents$1 () {
-	if (hasRequiredEvents$1) return Events;
-	hasRequiredEvents$1 = 1;
-
-	/**
-	 * @typedef {Object} Events
-	 * @property {string} ApplicationCommandPermissionsUpdate applicationCommandPermissionsUpdate
-	 * @property {string} AutoModerationActionExecution autoModerationActionExecution
-	 * @property {string} AutoModerationRuleCreate autoModerationRuleCreate
-	 * @property {string} AutoModerationRuleDelete autoModerationRuleDelete
-	 * @property {string} AutoModerationRuleUpdate autoModerationRuleUpdate
-	 * @property {string} CacheSweep cacheSweep
-	 * @property {string} ChannelCreate channelCreate
-	 * @property {string} ChannelDelete channelDelete
-	 * @property {string} ChannelPinsUpdate channelPinsUpdate
-	 * @property {string} ChannelUpdate channelUpdate
-	 * @property {string} ClientReady clientReady
-	 * @property {string} Debug debug
-	 * @property {string} EntitlementCreate entitlementCreate
-	 * @property {string} EntitlementUpdate entitlementUpdate
-	 * @property {string} EntitlementDelete entitlementDelete
-	 * @property {string} Error error
-	 * @property {string} GuildAuditLogEntryCreate guildAuditLogEntryCreate
-	 * @property {string} GuildAvailable guildAvailable
-	 * @property {string} GuildBanAdd guildBanAdd
-	 * @property {string} GuildBanRemove guildBanRemove
-	 * @property {string} GuildCreate guildCreate
-	 * @property {string} GuildDelete guildDelete
-	 * @property {string} GuildEmojiCreate emojiCreate
-	 * @property {string} GuildEmojiDelete emojiDelete
-	 * @property {string} GuildEmojiUpdate emojiUpdate
-	 * @property {string} GuildIntegrationsUpdate guildIntegrationsUpdate
-	 * @property {string} GuildMemberAdd guildMemberAdd
-	 * @property {string} GuildMemberAvailable guildMemberAvailable
-	 * @property {string} GuildMemberRemove guildMemberRemove
-	 * @property {string} GuildMembersChunk guildMembersChunk
-	 * @property {string} GuildMemberUpdate guildMemberUpdate
-	 * @property {string} GuildRoleCreate roleCreate
-	 * @property {string} GuildRoleDelete roleDelete
-	 * @property {string} GuildRoleUpdate roleUpdate
-	 * @property {string} GuildScheduledEventCreate guildScheduledEventCreate
-	 * @property {string} GuildScheduledEventDelete guildScheduledEventDelete
-	 * @property {string} GuildScheduledEventUpdate guildScheduledEventUpdate
-	 * @property {string} GuildScheduledEventUserAdd guildScheduledEventUserAdd
-	 * @property {string} GuildScheduledEventUserRemove guildScheduledEventUserRemove
-	 * @property {string} GuildSoundboardSoundCreate guildSoundboardSoundCreate
-	 * @property {string} GuildSoundboardSoundDelete guildSoundboardSoundDelete
-	 * @property {string} GuildSoundboardSoundsUpdate guildSoundboardSoundsUpdate
-	 * @property {string} GuildSoundboardSoundUpdate guildSoundboardSoundUpdate
-	 * @property {string} GuildStickerCreate stickerCreate
-	 * @property {string} GuildStickerDelete stickerDelete
-	 * @property {string} GuildStickerUpdate stickerUpdate
-	 * @property {string} GuildUnavailable guildUnavailable
-	 * @property {string} GuildUpdate guildUpdate
-	 * @property {string} InteractionCreate interactionCreate
-	 * @property {string} Invalidated invalidated
-	 * @property {string} InviteCreate inviteCreate
-	 * @property {string} InviteDelete inviteDelete
-	 * @property {string} MessageBulkDelete messageDeleteBulk
-	 * @property {string} MessageCreate messageCreate
-	 * @property {string} MessageDelete messageDelete
-	 * @property {string} MessagePollVoteAdd messagePollVoteAdd
-	 * @property {string} MessagePollVoteRemove messagePollVoteRemove
-	 * @property {string} MessageReactionAdd messageReactionAdd
-	 * @property {string} MessageReactionRemove messageReactionRemove
-	 * @property {string} MessageReactionRemoveAll messageReactionRemoveAll
-	 * @property {string} MessageReactionRemoveEmoji messageReactionRemoveEmoji
-	 * @property {string} MessageUpdate messageUpdate
-	 * @property {string} PresenceUpdate presenceUpdate
-	 * @property {string} SoundboardSounds soundboardSounds
-	 * @property {string} ShardDisconnect shardDisconnect
-	 * @property {string} ShardError shardError
-	 * @property {string} ShardReady shardReady
-	 * @property {string} ShardReconnecting shardReconnecting
-	 * @property {string} ShardResume shardResume
-	 * @property {string} StageInstanceCreate stageInstanceCreate
-	 * @property {string} StageInstanceDelete stageInstanceDelete
-	 * @property {string} StageInstanceUpdate stageInstanceUpdate
-	 * @property {string} SubscriptionCreate subscriptionCreate
-	 * @property {string} SubscriptionUpdate subscriptionUpdate
-	 * @property {string} SubscriptionDelete subscriptionDelete
-	 * @property {string} ThreadCreate threadCreate
-	 * @property {string} ThreadDelete threadDelete
-	 * @property {string} ThreadListSync threadListSync
-	 * @property {string} ThreadMembersUpdate threadMembersUpdate
-	 * @property {string} ThreadMemberUpdate threadMemberUpdate
-	 * @property {string} ThreadUpdate threadUpdate
-	 * @property {string} TypingStart typingStart
-	 * @property {string} UserUpdate userUpdate
-	 * @property {string} VoiceChannelEffectSend voiceChannelEffectSend
-	 * @property {string} VoiceServerUpdate voiceServerUpdate
-	 * @property {string} VoiceStateUpdate voiceStateUpdate
-	 * @property {string} Warn warn
-	 * @property {string} WebhooksUpdate webhooksUpdate
-	 */
-
-	// JSDoc for IntelliSense purposes
-	/**
-	 * @type {Events}
-	 * @ignore
-	 */
-	Events = {
-	  ApplicationCommandPermissionsUpdate: 'applicationCommandPermissionsUpdate',
-	  AutoModerationActionExecution: 'autoModerationActionExecution',
-	  AutoModerationRuleCreate: 'autoModerationRuleCreate',
-	  AutoModerationRuleDelete: 'autoModerationRuleDelete',
-	  AutoModerationRuleUpdate: 'autoModerationRuleUpdate',
-	  CacheSweep: 'cacheSweep',
-	  ChannelCreate: 'channelCreate',
-	  ChannelDelete: 'channelDelete',
-	  ChannelPinsUpdate: 'channelPinsUpdate',
-	  ChannelUpdate: 'channelUpdate',
-	  ClientReady: 'clientReady',
-	  Debug: 'debug',
-	  EntitlementCreate: 'entitlementCreate',
-	  EntitlementUpdate: 'entitlementUpdate',
-	  EntitlementDelete: 'entitlementDelete',
-	  Error: 'error',
-	  GuildAuditLogEntryCreate: 'guildAuditLogEntryCreate',
-	  GuildAvailable: 'guildAvailable',
-	  GuildBanAdd: 'guildBanAdd',
-	  GuildBanRemove: 'guildBanRemove',
-	  GuildCreate: 'guildCreate',
-	  GuildDelete: 'guildDelete',
-	  GuildEmojiCreate: 'emojiCreate',
-	  GuildEmojiDelete: 'emojiDelete',
-	  GuildEmojiUpdate: 'emojiUpdate',
-	  GuildIntegrationsUpdate: 'guildIntegrationsUpdate',
-	  GuildMemberAdd: 'guildMemberAdd',
-	  GuildMemberAvailable: 'guildMemberAvailable',
-	  GuildMemberRemove: 'guildMemberRemove',
-	  GuildMembersChunk: 'guildMembersChunk',
-	  GuildMemberUpdate: 'guildMemberUpdate',
-	  GuildRoleCreate: 'roleCreate',
-	  GuildRoleDelete: 'roleDelete',
-	  GuildRoleUpdate: 'roleUpdate',
-	  GuildScheduledEventCreate: 'guildScheduledEventCreate',
-	  GuildScheduledEventDelete: 'guildScheduledEventDelete',
-	  GuildScheduledEventUpdate: 'guildScheduledEventUpdate',
-	  GuildScheduledEventUserAdd: 'guildScheduledEventUserAdd',
-	  GuildScheduledEventUserRemove: 'guildScheduledEventUserRemove',
-	  GuildSoundboardSoundCreate: 'guildSoundboardSoundCreate',
-	  GuildSoundboardSoundDelete: 'guildSoundboardSoundDelete',
-	  GuildSoundboardSoundsUpdate: 'guildSoundboardSoundsUpdate',
-	  GuildSoundboardSoundUpdate: 'guildSoundboardSoundUpdate',
-	  GuildStickerCreate: 'stickerCreate',
-	  GuildStickerDelete: 'stickerDelete',
-	  GuildStickerUpdate: 'stickerUpdate',
-	  GuildUnavailable: 'guildUnavailable',
-	  GuildUpdate: 'guildUpdate',
-	  InteractionCreate: 'interactionCreate',
-	  Invalidated: 'invalidated',
-	  InviteCreate: 'inviteCreate',
-	  InviteDelete: 'inviteDelete',
-	  MessageBulkDelete: 'messageDeleteBulk',
-	  MessageCreate: 'messageCreate',
-	  MessageDelete: 'messageDelete',
-	  MessagePollVoteAdd: 'messagePollVoteAdd',
-	  MessagePollVoteRemove: 'messagePollVoteRemove',
-	  MessageReactionAdd: 'messageReactionAdd',
-	  MessageReactionRemove: 'messageReactionRemove',
-	  MessageReactionRemoveAll: 'messageReactionRemoveAll',
-	  MessageReactionRemoveEmoji: 'messageReactionRemoveEmoji',
-	  MessageUpdate: 'messageUpdate',
-	  PresenceUpdate: 'presenceUpdate',
-	  SoundboardSounds: 'soundboardSounds',
-	  Raw: 'raw',
-	  ShardDisconnect: 'shardDisconnect',
-	  ShardError: 'shardError',
-	  ShardReady: 'shardReady',
-	  ShardReconnecting: 'shardReconnecting',
-	  ShardResume: 'shardResume',
-	  StageInstanceCreate: 'stageInstanceCreate',
-	  StageInstanceDelete: 'stageInstanceDelete',
-	  StageInstanceUpdate: 'stageInstanceUpdate',
-	  SubscriptionCreate: 'subscriptionCreate',
-	  SubscriptionUpdate: 'subscriptionUpdate',
-	  SubscriptionDelete: 'subscriptionDelete',
-	  ThreadCreate: 'threadCreate',
-	  ThreadDelete: 'threadDelete',
-	  ThreadListSync: 'threadListSync',
-	  ThreadMembersUpdate: 'threadMembersUpdate',
-	  ThreadMemberUpdate: 'threadMemberUpdate',
-	  ThreadUpdate: 'threadUpdate',
-	  TypingStart: 'typingStart',
-	  UserUpdate: 'userUpdate',
-	  VoiceChannelEffectSend: 'voiceChannelEffectSend',
-	  VoiceServerUpdate: 'voiceServerUpdate',
-	  VoiceStateUpdate: 'voiceStateUpdate',
-	  Warn: 'warn',
-	  WebhooksUpdate: 'webhooksUpdate',
 	};
-	return Events;
+
+	Emoji.Emoji = Emoji$1;
+	return Emoji;
 }
 
-var ApplicationCommandPermissionsUpdate;
-var hasRequiredApplicationCommandPermissionsUpdate;
-
-function requireApplicationCommandPermissionsUpdate () {
-	if (hasRequiredApplicationCommandPermissionsUpdate) return ApplicationCommandPermissionsUpdate;
-	hasRequiredApplicationCommandPermissionsUpdate = 1;
-
-	const Action = requireAction();
-	const Events = requireEvents$1();
-
-	/**
-	 * The data received in the {@link Client#event:applicationCommandPermissionsUpdate} event
-	 * @typedef {Object} ApplicationCommandPermissionsUpdateData
-	 * @property {Snowflake} id The id of the command or global entity that was updated
-	 * @property {Snowflake} guildId The id of the guild in which permissions were updated
-	 * @property {Snowflake} applicationId The id of the application that owns the command or entity being updated
-	 * @property {ApplicationCommandPermissions[]} permissions The updated permissions
-	 */
-
-	class ApplicationCommandPermissionsUpdateAction extends Action {
-	  handle(data) {
-	    const client = this.client;
-	    /**
-	     * Emitted whenever permissions for an application command in a guild were updated.
-	     * <warn>This includes permission updates for other applications in addition to the logged in client,
-	     * check `data.applicationId` to verify which application the update is for</warn>
-	     * @event Client#applicationCommandPermissionsUpdate
-	     * @param {ApplicationCommandPermissionsUpdateData} data The updated permissions
-	     */
-	    client.emit(Events.ApplicationCommandPermissionsUpdate, {
-	      permissions: data.permissions,
-	      id: data.id,
-	      guildId: data.guild_id,
-	      applicationId: data.application_id,
-	    });
-	  }
-	}
-
-	ApplicationCommandPermissionsUpdate = ApplicationCommandPermissionsUpdateAction;
-	return ApplicationCommandPermissionsUpdate;
-}
-
-var AutoModerationActionExecution_1$1;
-var hasRequiredAutoModerationActionExecution$1;
-
-function requireAutoModerationActionExecution$1 () {
-	if (hasRequiredAutoModerationActionExecution$1) return AutoModerationActionExecution_1$1;
-	hasRequiredAutoModerationActionExecution$1 = 1;
-
-	const { _transformAPIAutoModerationAction } = requireTransformers();
-
-	/**
-	 * Represents the structure of an executed action when an {@link AutoModerationRule} is triggered.
-	 */
-	class AutoModerationActionExecution {
-	  constructor(data, guild) {
-	    /**
-	     * The guild where this action was executed from.
-	     * @type {Guild}
-	     */
-	    this.guild = guild;
-
-	    /**
-	     * The action that was executed.
-	     * @type {AutoModerationAction}
-	     */
-	    this.action = _transformAPIAutoModerationAction(data.action);
-
-	    /**
-	     * The id of the auto moderation rule this action belongs to.
-	     * @type {Snowflake}
-	     */
-	    this.ruleId = data.rule_id;
-
-	    /**
-	     * The trigger type of the auto moderation rule which was triggered.
-	     * @type {AutoModerationRuleTriggerType}
-	     */
-	    this.ruleTriggerType = data.rule_trigger_type;
-
-	    /**
-	     * The id of the user that triggered this action.
-	     * @type {Snowflake}
-	     */
-	    this.userId = data.user_id;
-
-	    /**
-	     * The id of the channel where this action was triggered from.
-	     * @type {?Snowflake}
-	     */
-	    this.channelId = data.channel_id ?? null;
-
-	    /**
-	     * The id of the message that triggered this action.
-	     * <info>This will not be present if the message was blocked or the content was not part of any message.</info>
-	     * @type {?Snowflake}
-	     */
-	    this.messageId = data.message_id ?? null;
-
-	    /**
-	     * The id of any system auto moderation messages posted as a result of this action.
-	     * @type {?Snowflake}
-	     */
-	    this.alertSystemMessageId = data.alert_system_message_id ?? null;
-
-	    /**
-	     * The content that triggered this action.
-	     * <info>This property requires the {@link GatewayIntentBits.MessageContent} privileged gateway intent.</info>
-	     * @type {string}
-	     */
-	    this.content = data.content;
-
-	    /**
-	     * The word or phrase configured in the rule that triggered this action.
-	     * @type {?string}
-	     */
-	    this.matchedKeyword = data.matched_keyword ?? null;
-
-	    /**
-	     * The substring in content that triggered this action.
-	     * @type {?string}
-	     */
-	    this.matchedContent = data.matched_content ?? null;
-	  }
-
-	  /**
-	   * The auto moderation rule this action belongs to.
-	   * @type {?AutoModerationRule}
-	   * @readonly
-	   */
-	  get autoModerationRule() {
-	    return this.guild.autoModerationRules.cache.get(this.ruleId) ?? null;
-	  }
-
-	  /**
-	   * The channel where this action was triggered from.
-	   * @type {?(GuildTextBasedChannel|ForumChannel|MediaChannel)}
-	   * @readonly
-	   */
-	  get channel() {
-	    return this.guild.channels.cache.get(this.channelId) ?? null;
-	  }
-
-	  /**
-	   * The user that triggered this action.
-	   * @type {?User}
-	   * @readonly
-	   */
-	  get user() {
-	    return this.guild.client.users.cache.get(this.userId) ?? null;
-	  }
-
-	  /**
-	   * The guild member that triggered this action.
-	   * @type {?GuildMember}
-	   * @readonly
-	   */
-	  get member() {
-	    return this.guild.members.cache.get(this.userId) ?? null;
-	  }
-	}
-
-	AutoModerationActionExecution_1$1 = AutoModerationActionExecution;
-	return AutoModerationActionExecution_1$1;
-}
-
-var AutoModerationActionExecution_1;
-var hasRequiredAutoModerationActionExecution;
-
-function requireAutoModerationActionExecution () {
-	if (hasRequiredAutoModerationActionExecution) return AutoModerationActionExecution_1;
-	hasRequiredAutoModerationActionExecution = 1;
-
-	const Action = requireAction();
-	const AutoModerationActionExecution = requireAutoModerationActionExecution$1();
-	const Events = requireEvents$1();
-
-	class AutoModerationActionExecutionAction extends Action {
-	  handle(data) {
-	    const { client } = this;
-	    const guild = client.guilds.cache.get(data.guild_id);
-
-	    if (guild) {
-	      /**
-	       * Emitted whenever an auto moderation rule is triggered.
-	       * <info>This event requires the {@link PermissionFlagsBits.ManageGuild} permission.</info>
-	       * @event Client#autoModerationActionExecution
-	       * @param {AutoModerationActionExecution} autoModerationActionExecution The data of the execution
-	       */
-	      client.emit(Events.AutoModerationActionExecution, new AutoModerationActionExecution(data, guild));
-	    }
-
-	    return {};
-	  }
-	}
-
-	AutoModerationActionExecution_1 = AutoModerationActionExecutionAction;
-	return AutoModerationActionExecution_1;
-}
-
-var AutoModerationRuleCreate;
-var hasRequiredAutoModerationRuleCreate;
-
-function requireAutoModerationRuleCreate () {
-	if (hasRequiredAutoModerationRuleCreate) return AutoModerationRuleCreate;
-	hasRequiredAutoModerationRuleCreate = 1;
-
-	const Action = requireAction();
-	const Events = requireEvents$1();
-
-	class AutoModerationRuleCreateAction extends Action {
-	  handle(data) {
-	    const { client } = this;
-	    const guild = client.guilds.cache.get(data.guild_id);
-
-	    if (guild) {
-	      const autoModerationRule = guild.autoModerationRules._add(data);
-
-	      /**
-	       * Emitted whenever an auto moderation rule is created.
-	       * <info>This event requires the {@link PermissionFlagsBits.ManageGuild} permission.</info>
-	       * @event Client#autoModerationRuleCreate
-	       * @param {AutoModerationRule} autoModerationRule The created auto moderation rule
-	       */
-	      client.emit(Events.AutoModerationRuleCreate, autoModerationRule);
-	    }
-
-	    return {};
-	  }
-	}
-
-	AutoModerationRuleCreate = AutoModerationRuleCreateAction;
-	return AutoModerationRuleCreate;
-}
-
-var AutoModerationRuleDelete;
-var hasRequiredAutoModerationRuleDelete;
-
-function requireAutoModerationRuleDelete () {
-	if (hasRequiredAutoModerationRuleDelete) return AutoModerationRuleDelete;
-	hasRequiredAutoModerationRuleDelete = 1;
-
-	const Action = requireAction();
-	const Events = requireEvents$1();
-
-	class AutoModerationRuleDeleteAction extends Action {
-	  handle(data) {
-	    const { client } = this;
-	    const guild = client.guilds.cache.get(data.guild_id);
-
-	    if (guild) {
-	      const autoModerationRule = guild.autoModerationRules.cache.get(data.id);
-
-	      if (autoModerationRule) {
-	        guild.autoModerationRules.cache.delete(autoModerationRule.id);
-
-	        /**
-	         * Emitted whenever an auto moderation rule is deleted.
-	         * <info>This event requires the {@link PermissionFlagsBits.ManageGuild} permission.</info>
-	         * @event Client#autoModerationRuleDelete
-	         * @param {AutoModerationRule} autoModerationRule The deleted auto moderation rule
-	         */
-	        client.emit(Events.AutoModerationRuleDelete, autoModerationRule);
-	      }
-	    }
-
-	    return {};
-	  }
-	}
-
-	AutoModerationRuleDelete = AutoModerationRuleDeleteAction;
-	return AutoModerationRuleDelete;
-}
-
-var AutoModerationRuleUpdate;
-var hasRequiredAutoModerationRuleUpdate;
-
-function requireAutoModerationRuleUpdate () {
-	if (hasRequiredAutoModerationRuleUpdate) return AutoModerationRuleUpdate;
-	hasRequiredAutoModerationRuleUpdate = 1;
-
-	const Action = requireAction();
-	const Events = requireEvents$1();
-
-	class AutoModerationRuleUpdateAction extends Action {
-	  handle(data) {
-	    const { client } = this;
-	    const guild = client.guilds.cache.get(data.guild_id);
-
-	    if (guild) {
-	      const oldAutoModerationRule = guild.autoModerationRules.cache.get(data.id)?._clone() ?? null;
-	      const newAutoModerationRule = guild.autoModerationRules._add(data);
-
-	      /**
-	       * Emitted whenever an auto moderation rule gets updated.
-	       * <info>This event requires the {@link PermissionFlagsBits.ManageGuild} permission.</info>
-	       * @event Client#autoModerationRuleUpdate
-	       * @param {?AutoModerationRule} oldAutoModerationRule The auto moderation rule before the update
-	       * @param {AutoModerationRule} newAutoModerationRule The auto moderation rule after the update
-	       */
-	      client.emit(Events.AutoModerationRuleUpdate, oldAutoModerationRule, newAutoModerationRule);
-	    }
-
-	    return {};
-	  }
-	}
-
-	AutoModerationRuleUpdate = AutoModerationRuleUpdateAction;
-	return AutoModerationRuleUpdate;
-}
-
-var ChannelCreate;
-var hasRequiredChannelCreate;
-
-function requireChannelCreate () {
-	if (hasRequiredChannelCreate) return ChannelCreate;
-	hasRequiredChannelCreate = 1;
-
-	const Action = requireAction();
-	const Events = requireEvents$1();
-
-	class ChannelCreateAction extends Action {
-	  handle(data) {
-	    const client = this.client;
-	    const existing = client.channels.cache.has(data.id);
-	    const channel = client.channels._add(data);
-	    if (!existing && channel) {
-	      /**
-	       * Emitted whenever a guild channel is created.
-	       * @event Client#channelCreate
-	       * @param {GuildChannel} channel The channel that was created
-	       */
-	      client.emit(Events.ChannelCreate, channel);
-	    }
-	    return { channel };
-	  }
-	}
-
-	ChannelCreate = ChannelCreateAction;
-	return ChannelCreate;
-}
-
-var ChannelDelete;
-var hasRequiredChannelDelete;
-
-function requireChannelDelete () {
-	if (hasRequiredChannelDelete) return ChannelDelete;
-	hasRequiredChannelDelete = 1;
-
-	const Action = requireAction();
-	const Events = requireEvents$1();
-
-	class ChannelDeleteAction extends Action {
-	  handle(data) {
-	    const client = this.client;
-	    const channel = client.channels.cache.get(data.id);
-
-	    if (channel) {
-	      client.channels._remove(channel.id);
-	      /**
-	       * Emitted whenever a channel is deleted.
-	       * @event Client#channelDelete
-	       * @param {DMChannel|GuildChannel} channel The channel that was deleted
-	       */
-	      client.emit(Events.ChannelDelete, channel);
-	    }
-	  }
-	}
-
-	ChannelDelete = ChannelDeleteAction;
-	return ChannelDelete;
-}
-
-var CategoryChannelChildManager_1;
-var hasRequiredCategoryChannelChildManager;
-
-function requireCategoryChannelChildManager () {
-	if (hasRequiredCategoryChannelChildManager) return CategoryChannelChildManager_1;
-	hasRequiredCategoryChannelChildManager = 1;
-
-	const DataManager = requireDataManager();
-	const GuildChannel = requireGuildChannel();
-
-	/**
-	 * Manages API methods for CategoryChannels' children.
-	 * @extends {DataManager}
-	 */
-	class CategoryChannelChildManager extends DataManager {
-	  constructor(channel) {
-	    super(channel.client, GuildChannel);
-	    /**
-	     * The category channel this manager belongs to
-	     * @type {CategoryChannel}
-	     */
-	    this.channel = channel;
-	  }
-
-	  /**
-	   * The channels that are a part of this category
-	   * @type {Collection<Snowflake, GuildChannel>}
-	   * @readonly
-	   */
-	  get cache() {
-	    return this.guild.channels.cache.filter(channel => channel.parentId === this.channel.id);
-	  }
-
-	  /**
-	   * The guild this manager belongs to
-	   * @type {Guild}
-	   * @readonly
-	   */
-	  get guild() {
-	    return this.channel.guild;
-	  }
-
-	  /**
-	   * Options for creating a channel using {@link CategoryChannelChildManager#create}.
-	   * @typedef {Object} CategoryCreateChannelOptions
-	   * @property {string} name The name for the new channel
-	   * @property {ChannelType} [type=ChannelType.GuildText] The type of the new channel.
-	   * @property {string} [topic] The topic for the new channel
-	   * @property {boolean} [nsfw] Whether the new channel is NSFW
-	   * @property {number} [bitrate] Bitrate of the new channel in bits (only voice)
-	   * @property {number} [userLimit] Maximum amount of users allowed in the new channel (only voice)
-	   * @property {OverwriteResolvable[]|Collection<Snowflake, OverwriteResolvable>} [permissionOverwrites]
-	   * Permission overwrites of the new channel
-	   * @property {number} [position] Position of the new channel
-	   * @property {number} [rateLimitPerUser] The rate limit per user (slowmode) for the new channel in seconds
-	   * @property {string} [rtcRegion] The specific region of the new channel.
-	   * @property {VideoQualityMode} [videoQualityMode] The camera video quality mode of the voice channel
-	   * @property {number} [defaultThreadRateLimitPerUser] The initial rate limit per user (slowmode)
-	   * to set on newly created threads in a channel.
-	   * @property {GuildForumTagData[]} [availableTags] The tags that can be used in this channel (forum only).
-	   * @property {DefaultReactionEmoji} [defaultReactionEmoji]
-	   * The emoji to show in the add reaction button on a thread in a guild forum channel.
-	   * @property {ThreadAutoArchiveDuration} [defaultAutoArchiveDuration]
-	   * The default auto archive duration for all new threads in this channel
-	   * @property {SortOrderType} [defaultSortOrder] The default sort order mode used to order posts (forum only).
-	   * @property {ForumLayoutType} [defaultForumLayout] The default layout used to display posts (forum only).
-	   * @property {string} [reason] Reason for creating the new channel
-	   */
-
-	  /**
-	   * Creates a new channel within this category.
-	   * <info>You cannot create a channel of type {@link ChannelType.GuildCategory} inside a CategoryChannel.</info>
-	   * @param {CategoryCreateChannelOptions} options Options for creating the new channel
-	   * @returns {Promise<GuildChannel>}
-	   */
-	  create(options) {
-	    return this.guild.channels.create({
-	      ...options,
-	      parent: this.channel.id,
-	    });
-	  }
-	}
-
-	CategoryChannelChildManager_1 = CategoryChannelChildManager;
-	return CategoryChannelChildManager_1;
-}
-
-var CategoryChannel_1;
-var hasRequiredCategoryChannel;
-
-function requireCategoryChannel () {
-	if (hasRequiredCategoryChannel) return CategoryChannel_1;
-	hasRequiredCategoryChannel = 1;
-
-	const GuildChannel = requireGuildChannel();
-	const CategoryChannelChildManager = requireCategoryChannelChildManager();
-
-	/**
-	 * Represents a guild category channel on Discord.
-	 * @extends {GuildChannel}
-	 */
-	class CategoryChannel extends GuildChannel {
-	  /**
-	   * The id of the parent of this channel.
-	   * @name CategoryChannel#parentId
-	   * @type {null}
-	   */
-
-	  /**
-	   * The parent of this channel.
-	   * @name CategoryChannel#parent
-	   * @type {null}
-	   * @readonly
-	   */
-
-	  /**
-	   * Sets the category parent of this channel.
-	   * <warn>It is not possible to set the parent of a CategoryChannel.</warn>
-	   * @method setParent
-	   * @memberof CategoryChannel
-	   * @instance
-	   * @param {?CategoryChannelResolvable} channel The channel to set as parent
-	   * @param {SetParentOptions} [options={}] The options for setting the parent
-	   * @returns {Promise<GuildChannel>}
-	   */
-
-	  /**
-	   * A manager of the channels belonging to this category
-	   * @type {CategoryChannelChildManager}
-	   * @readonly
-	   */
-	  get children() {
-	    return new CategoryChannelChildManager(this);
-	  }
-	}
-
-	CategoryChannel_1 = CategoryChannel;
-	return CategoryChannel_1;
-}
+var PollAnswerVoterManager = {};
 
 var Collector_1;
 var hasRequiredCollector;
@@ -72184,7 +71539,7 @@ function requireCollector () {
 	hasRequiredCollector = 1;
 
 	const EventEmitter = require$$0$a;
-	const { setTimeout, clearTimeout } = require$$0$l;
+	const { setTimeout, clearTimeout } = require$$1$a;
 	const { Collection } = requireDist$7();
 	const { DiscordjsTypeError, ErrorCodes } = requireErrors$2();
 	const { flatten } = requireUtil$6();
@@ -72517,6 +71872,204 @@ function requireCollector () {
 
 	Collector_1 = Collector;
 	return Collector_1;
+}
+
+var Events;
+var hasRequiredEvents$1;
+
+function requireEvents$1 () {
+	if (hasRequiredEvents$1) return Events;
+	hasRequiredEvents$1 = 1;
+
+	/**
+	 * @typedef {Object} Events
+	 * @property {string} ApplicationCommandPermissionsUpdate applicationCommandPermissionsUpdate
+	 * @property {string} AutoModerationActionExecution autoModerationActionExecution
+	 * @property {string} AutoModerationRuleCreate autoModerationRuleCreate
+	 * @property {string} AutoModerationRuleDelete autoModerationRuleDelete
+	 * @property {string} AutoModerationRuleUpdate autoModerationRuleUpdate
+	 * @property {string} CacheSweep cacheSweep
+	 * @property {string} ChannelCreate channelCreate
+	 * @property {string} ChannelDelete channelDelete
+	 * @property {string} ChannelPinsUpdate channelPinsUpdate
+	 * @property {string} ChannelUpdate channelUpdate
+	 * @property {string} ClientReady clientReady
+	 * @property {string} Debug debug
+	 * @property {string} EntitlementCreate entitlementCreate
+	 * @property {string} EntitlementUpdate entitlementUpdate
+	 * @property {string} EntitlementDelete entitlementDelete
+	 * @property {string} Error error
+	 * @property {string} GuildAuditLogEntryCreate guildAuditLogEntryCreate
+	 * @property {string} GuildAvailable guildAvailable
+	 * @property {string} GuildBanAdd guildBanAdd
+	 * @property {string} GuildBanRemove guildBanRemove
+	 * @property {string} GuildCreate guildCreate
+	 * @property {string} GuildDelete guildDelete
+	 * @property {string} GuildEmojiCreate emojiCreate
+	 * @property {string} GuildEmojiDelete emojiDelete
+	 * @property {string} GuildEmojiUpdate emojiUpdate
+	 * @property {string} GuildIntegrationsUpdate guildIntegrationsUpdate
+	 * @property {string} GuildMemberAdd guildMemberAdd
+	 * @property {string} GuildMemberAvailable guildMemberAvailable
+	 * @property {string} GuildMemberRemove guildMemberRemove
+	 * @property {string} GuildMembersChunk guildMembersChunk
+	 * @property {string} GuildMemberUpdate guildMemberUpdate
+	 * @property {string} GuildRoleCreate roleCreate
+	 * @property {string} GuildRoleDelete roleDelete
+	 * @property {string} GuildRoleUpdate roleUpdate
+	 * @property {string} GuildScheduledEventCreate guildScheduledEventCreate
+	 * @property {string} GuildScheduledEventDelete guildScheduledEventDelete
+	 * @property {string} GuildScheduledEventUpdate guildScheduledEventUpdate
+	 * @property {string} GuildScheduledEventUserAdd guildScheduledEventUserAdd
+	 * @property {string} GuildScheduledEventUserRemove guildScheduledEventUserRemove
+	 * @property {string} GuildSoundboardSoundCreate guildSoundboardSoundCreate
+	 * @property {string} GuildSoundboardSoundDelete guildSoundboardSoundDelete
+	 * @property {string} GuildSoundboardSoundsUpdate guildSoundboardSoundsUpdate
+	 * @property {string} GuildSoundboardSoundUpdate guildSoundboardSoundUpdate
+	 * @property {string} GuildStickerCreate stickerCreate
+	 * @property {string} GuildStickerDelete stickerDelete
+	 * @property {string} GuildStickerUpdate stickerUpdate
+	 * @property {string} GuildUnavailable guildUnavailable
+	 * @property {string} GuildUpdate guildUpdate
+	 * @property {string} InteractionCreate interactionCreate
+	 * @property {string} Invalidated invalidated
+	 * @property {string} InviteCreate inviteCreate
+	 * @property {string} InviteDelete inviteDelete
+	 * @property {string} MessageBulkDelete messageDeleteBulk
+	 * @property {string} MessageCreate messageCreate
+	 * @property {string} MessageDelete messageDelete
+	 * @property {string} MessagePollVoteAdd messagePollVoteAdd
+	 * @property {string} MessagePollVoteRemove messagePollVoteRemove
+	 * @property {string} MessageReactionAdd messageReactionAdd
+	 * @property {string} MessageReactionRemove messageReactionRemove
+	 * @property {string} MessageReactionRemoveAll messageReactionRemoveAll
+	 * @property {string} MessageReactionRemoveEmoji messageReactionRemoveEmoji
+	 * @property {string} MessageUpdate messageUpdate
+	 * @property {string} PresenceUpdate presenceUpdate
+	 * @property {string} SoundboardSounds soundboardSounds
+	 * @property {string} ShardDisconnect shardDisconnect
+	 * @property {string} ShardError shardError
+	 * @property {string} ShardReady shardReady
+	 * @property {string} ShardReconnecting shardReconnecting
+	 * @property {string} ShardResume shardResume
+	 * @property {string} StageInstanceCreate stageInstanceCreate
+	 * @property {string} StageInstanceDelete stageInstanceDelete
+	 * @property {string} StageInstanceUpdate stageInstanceUpdate
+	 * @property {string} SubscriptionCreate subscriptionCreate
+	 * @property {string} SubscriptionUpdate subscriptionUpdate
+	 * @property {string} SubscriptionDelete subscriptionDelete
+	 * @property {string} ThreadCreate threadCreate
+	 * @property {string} ThreadDelete threadDelete
+	 * @property {string} ThreadListSync threadListSync
+	 * @property {string} ThreadMembersUpdate threadMembersUpdate
+	 * @property {string} ThreadMemberUpdate threadMemberUpdate
+	 * @property {string} ThreadUpdate threadUpdate
+	 * @property {string} TypingStart typingStart
+	 * @property {string} UserUpdate userUpdate
+	 * @property {string} VoiceChannelEffectSend voiceChannelEffectSend
+	 * @property {string} VoiceServerUpdate voiceServerUpdate
+	 * @property {string} VoiceStateUpdate voiceStateUpdate
+	 * @property {string} Warn warn
+	 * @property {string} WebhooksUpdate webhooksUpdate
+	 */
+
+	// JSDoc for IntelliSense purposes
+	/**
+	 * @type {Events}
+	 * @ignore
+	 */
+	Events = {
+	  ApplicationCommandPermissionsUpdate: 'applicationCommandPermissionsUpdate',
+	  AutoModerationActionExecution: 'autoModerationActionExecution',
+	  AutoModerationRuleCreate: 'autoModerationRuleCreate',
+	  AutoModerationRuleDelete: 'autoModerationRuleDelete',
+	  AutoModerationRuleUpdate: 'autoModerationRuleUpdate',
+	  CacheSweep: 'cacheSweep',
+	  ChannelCreate: 'channelCreate',
+	  ChannelDelete: 'channelDelete',
+	  ChannelPinsUpdate: 'channelPinsUpdate',
+	  ChannelUpdate: 'channelUpdate',
+	  ClientReady: 'clientReady',
+	  Debug: 'debug',
+	  EntitlementCreate: 'entitlementCreate',
+	  EntitlementUpdate: 'entitlementUpdate',
+	  EntitlementDelete: 'entitlementDelete',
+	  Error: 'error',
+	  GuildAuditLogEntryCreate: 'guildAuditLogEntryCreate',
+	  GuildAvailable: 'guildAvailable',
+	  GuildBanAdd: 'guildBanAdd',
+	  GuildBanRemove: 'guildBanRemove',
+	  GuildCreate: 'guildCreate',
+	  GuildDelete: 'guildDelete',
+	  GuildEmojiCreate: 'emojiCreate',
+	  GuildEmojiDelete: 'emojiDelete',
+	  GuildEmojiUpdate: 'emojiUpdate',
+	  GuildIntegrationsUpdate: 'guildIntegrationsUpdate',
+	  GuildMemberAdd: 'guildMemberAdd',
+	  GuildMemberAvailable: 'guildMemberAvailable',
+	  GuildMemberRemove: 'guildMemberRemove',
+	  GuildMembersChunk: 'guildMembersChunk',
+	  GuildMemberUpdate: 'guildMemberUpdate',
+	  GuildRoleCreate: 'roleCreate',
+	  GuildRoleDelete: 'roleDelete',
+	  GuildRoleUpdate: 'roleUpdate',
+	  GuildScheduledEventCreate: 'guildScheduledEventCreate',
+	  GuildScheduledEventDelete: 'guildScheduledEventDelete',
+	  GuildScheduledEventUpdate: 'guildScheduledEventUpdate',
+	  GuildScheduledEventUserAdd: 'guildScheduledEventUserAdd',
+	  GuildScheduledEventUserRemove: 'guildScheduledEventUserRemove',
+	  GuildSoundboardSoundCreate: 'guildSoundboardSoundCreate',
+	  GuildSoundboardSoundDelete: 'guildSoundboardSoundDelete',
+	  GuildSoundboardSoundsUpdate: 'guildSoundboardSoundsUpdate',
+	  GuildSoundboardSoundUpdate: 'guildSoundboardSoundUpdate',
+	  GuildStickerCreate: 'stickerCreate',
+	  GuildStickerDelete: 'stickerDelete',
+	  GuildStickerUpdate: 'stickerUpdate',
+	  GuildUnavailable: 'guildUnavailable',
+	  GuildUpdate: 'guildUpdate',
+	  InteractionCreate: 'interactionCreate',
+	  Invalidated: 'invalidated',
+	  InviteCreate: 'inviteCreate',
+	  InviteDelete: 'inviteDelete',
+	  MessageBulkDelete: 'messageDeleteBulk',
+	  MessageCreate: 'messageCreate',
+	  MessageDelete: 'messageDelete',
+	  MessagePollVoteAdd: 'messagePollVoteAdd',
+	  MessagePollVoteRemove: 'messagePollVoteRemove',
+	  MessageReactionAdd: 'messageReactionAdd',
+	  MessageReactionRemove: 'messageReactionRemove',
+	  MessageReactionRemoveAll: 'messageReactionRemoveAll',
+	  MessageReactionRemoveEmoji: 'messageReactionRemoveEmoji',
+	  MessageUpdate: 'messageUpdate',
+	  PresenceUpdate: 'presenceUpdate',
+	  SoundboardSounds: 'soundboardSounds',
+	  Raw: 'raw',
+	  ShardDisconnect: 'shardDisconnect',
+	  ShardError: 'shardError',
+	  ShardReady: 'shardReady',
+	  ShardReconnecting: 'shardReconnecting',
+	  ShardResume: 'shardResume',
+	  StageInstanceCreate: 'stageInstanceCreate',
+	  StageInstanceDelete: 'stageInstanceDelete',
+	  StageInstanceUpdate: 'stageInstanceUpdate',
+	  SubscriptionCreate: 'subscriptionCreate',
+	  SubscriptionUpdate: 'subscriptionUpdate',
+	  SubscriptionDelete: 'subscriptionDelete',
+	  ThreadCreate: 'threadCreate',
+	  ThreadDelete: 'threadDelete',
+	  ThreadListSync: 'threadListSync',
+	  ThreadMembersUpdate: 'threadMembersUpdate',
+	  ThreadMemberUpdate: 'threadMemberUpdate',
+	  ThreadUpdate: 'threadUpdate',
+	  TypingStart: 'typingStart',
+	  UserUpdate: 'userUpdate',
+	  VoiceChannelEffectSend: 'voiceChannelEffectSend',
+	  VoiceServerUpdate: 'voiceServerUpdate',
+	  VoiceStateUpdate: 'voiceStateUpdate',
+	  Warn: 'warn',
+	  WebhooksUpdate: 'webhooksUpdate',
+	};
+	return Events;
 }
 
 var InteractionCollector_1;
@@ -73847,6 +73400,43 @@ function requireInviteStageInstance () {
 	return InviteStageInstance_1;
 }
 
+var InviteFlagsBitField = {};
+
+var hasRequiredInviteFlagsBitField;
+
+function requireInviteFlagsBitField () {
+	if (hasRequiredInviteFlagsBitField) return InviteFlagsBitField;
+	hasRequiredInviteFlagsBitField = 1;
+
+	const { InviteFlags } = requireV10();
+	const BitField = requireBitField();
+
+	/**
+	 * Data structure that makes it easy to interact with a {@link GuildInvite#flags} bit field.
+	 *
+	 * @extends {BitField}
+	 */
+	let InviteFlagsBitField$1 = class InviteFlagsBitField extends BitField {
+	  /**
+	   * Numeric invite flags.
+	   *
+	   * @type {InviteFlags}
+	   * @memberof InviteFlagsBitField
+	   */
+	  static Flags = InviteFlags;
+	};
+
+	/**
+	 * @name InviteFlagsBitField
+	 * @kind constructor
+	 * @memberof InviteFlagsBitField
+	 * @param {BitFieldResolvable} [bits=0] Bit(s) to read from
+	 */
+
+	InviteFlagsBitField.InviteFlagsBitField = InviteFlagsBitField$1;
+	return InviteFlagsBitField;
+}
+
 var BaseGuild_1;
 var hasRequiredBaseGuild;
 
@@ -74079,130 +73669,6 @@ function requireAnonymousGuild () {
 	return AnonymousGuild_1;
 }
 
-var Emoji = {};
-
-var hasRequiredEmoji$1;
-
-function requireEmoji$1 () {
-	if (hasRequiredEmoji$1) return Emoji;
-	hasRequiredEmoji$1 = 1;
-
-	const process = require$$0$k;
-	const { formatEmoji } = requireDist$6();
-	const { DiscordSnowflake } = /*@__PURE__*/ requireCjs$2();
-	const Base = requireBase();
-
-	let deprecationEmittedForURL = false;
-
-	/**
-	 * Represents an emoji, see {@link ApplicationEmoji}, {@link GuildEmoji} and {@link ReactionEmoji}.
-	 * @extends {Base}
-	 */
-	let Emoji$1 = class Emoji extends Base {
-	  constructor(client, emoji) {
-	    super(client);
-	    /**
-	     * Whether or not the emoji is animated
-	     * @type {?boolean}
-	     */
-	    this.animated = emoji.animated ?? null;
-
-	    /**
-	     * The emoji's name
-	     * @type {?string}
-	     */
-	    this.name = emoji.name ?? null;
-
-	    /**
-	     * The emoji's id
-	     * @type {?Snowflake}
-	     */
-	    this.id = emoji.id ?? null;
-	  }
-
-	  /**
-	   * The identifier of this emoji, used for message reactions
-	   * @type {string}
-	   * @readonly
-	   */
-	  get identifier() {
-	    if (this.id) return `${this.animated ? 'a:' : ''}${this.name}:${this.id}`;
-	    return encodeURIComponent(this.name);
-	  }
-
-	  /**
-	   * Returns a URL for the emoji or `null` if this is not a custom emoji.
-	   * @param {EmojiURLOptions} [options] Options for the emoji URL
-	   * @returns {?string}
-	   */
-	  imageURL(options) {
-	    return this.id && this.client.rest.cdn.emoji(this.id, options);
-	  }
-
-	  /**
-	   * Returns a URL for the emoji or `null` if this is not a custom emoji.
-	   * @type {?string}
-	   * @readonly
-	   * @deprecated Use {@link Emoji#imageURL} instead.
-	   */
-	  get url() {
-	    if (!deprecationEmittedForURL) {
-	      process.emitWarning('The Emoji#url getter is deprecated. Use Emoji#imageURL() instead.', 'DeprecationWarning');
-	      deprecationEmittedForURL = true;
-	    }
-
-	    return this.imageURL({ extension: this.animated ? 'gif' : 'png' });
-	  }
-
-	  /**
-	   * The timestamp the emoji was created at, or null if unicode
-	   * @type {?number}
-	   * @readonly
-	   */
-	  get createdTimestamp() {
-	    return this.id && DiscordSnowflake.timestampFrom(this.id);
-	  }
-
-	  /**
-	   * The time the emoji was created at, or null if unicode
-	   * @type {?Date}
-	   * @readonly
-	   */
-	  get createdAt() {
-	    return this.id && new Date(this.createdTimestamp);
-	  }
-
-	  /**
-	   * When concatenated with a string, this automatically returns the text required to form a graphical emoji on Discord
-	   * instead of the Emoji object.
-	   * @returns {string}
-	   * @example
-	   * // Send a custom emoji from a guild:
-	   * const emoji = guild.emojis.cache.first();
-	   * msg.channel.send(`Hello! ${emoji}`);
-	   * @example
-	   * // Send the emoji used in a reaction to the channel the reaction is part of
-	   * reaction.message.channel.send(`The emoji used was: ${reaction.emoji}`);
-	   */
-	  toString() {
-	    return this.id ? formatEmoji({ animated: this.animated, id: this.id, name: this.name }) : this.name;
-	  }
-
-	  toJSON() {
-	    const json = super.toJSON({
-	      guild: 'guildId',
-	      createdTimestamp: true,
-	      identifier: true,
-	    });
-	    json.imageURL = this.imageURL();
-	    return json;
-	  }
-	};
-
-	Emoji.Emoji = Emoji$1;
-	return Emoji;
-}
-
 var WelcomeChannel_1;
 var hasRequiredWelcomeChannel;
 
@@ -74371,6 +73837,7 @@ function requireInvite () {
 	const IntegrationApplication = requireIntegrationApplication();
 	const InviteStageInstance = requireInviteStageInstance();
 	const { DiscordjsError, ErrorCodes } = requireErrors$2();
+	const { InviteFlagsBitField } = requireInviteFlagsBitField();
 
 	/**
 	 * Represents an invitation to a guild channel.
@@ -74587,6 +74054,17 @@ function requireInvite () {
 	    } else {
 	      this.guildScheduledEvent ??= null;
 	    }
+
+	    if ('flags' in data) {
+	      /**
+	       * The flags of this invite.
+	       *
+	       * @type {Readonly<InviteFlagsBitField>}
+	       */
+	      this.flags = new InviteFlagsBitField(data.flags).freeze();
+	    } else {
+	      this.flags ??= new InviteFlagsBitField().freeze();
+	    }
 	  }
 
 	  /**
@@ -74702,7 +74180,7 @@ function requireGuildTemplate () {
 	if (hasRequiredGuildTemplate) return GuildTemplate_1;
 	hasRequiredGuildTemplate = 1;
 
-	const { setTimeout, clearTimeout } = require$$0$l;
+	const { setTimeout, clearTimeout } = require$$1$a;
 	const { RouteBases, Routes } = requireV10();
 	const Base = requireBase();
 	const { resolveImage } = requireDataResolver();
@@ -74822,6 +74300,7 @@ function requireGuildTemplate () {
 	   * @param {string} name The name of the guild
 	   * @param {BufferResolvable|Base64Resolvable} [icon] The icon for the guild
 	   * @returns {Promise<Guild>}
+	   * @deprecated API related to guild ownership may no longer be used.
 	   */
 	  async createGuild(name, icon) {
 	    const { client } = this;
@@ -74952,7 +74431,7 @@ function requireDataResolver () {
 	hasRequiredDataResolver = 1;
 
 	const { Buffer } = require$$0$f;
-	const fs = require$$1$a;
+	const fs = require$$1$b;
 	const path = path__default;
 	const { fetch } = requireUndici$1();
 	const { DiscordjsError, DiscordjsTypeError, ErrorCodes } = requireErrors$2();
@@ -75523,7 +75002,7 @@ function requireApplicationRoleConnectionMetadata () {
 
 	    /**
 	     * The name localizations for this metadata field
-	     * @type {?Object<Locale, string>}
+	     * @type {?LocalizationMap}
 	     */
 	    this.nameLocalizations = data.name_localizations ?? null;
 
@@ -75535,7 +75014,7 @@ function requireApplicationRoleConnectionMetadata () {
 
 	    /**
 	     * The description localizations for this metadata field
-	     * @type {?Object<Locale, string>}
+	     * @type {?LocalizationMap}
 	     */
 	    this.descriptionLocalizations = data.description_localizations ?? null;
 
@@ -76339,7 +75818,7 @@ function requireApplicationCommand () {
 	    if ('name_localizations' in data) {
 	      /**
 	       * The name localizations for this command
-	       * @type {?Object<Locale, string>}
+	       * @type {?LocalizationMap}
 	       */
 	      this.nameLocalizations = data.name_localizations;
 	    } else {
@@ -76367,7 +75846,7 @@ function requireApplicationCommand () {
 	    if ('description_localizations' in data) {
 	      /**
 	       * The description localizations for this command
-	       * @type {?Object<Locale, string>}
+	       * @type {?LocalizationMap}
 	       */
 	      this.descriptionLocalizations = data.description_localizations;
 	    } else {
@@ -76493,11 +75972,11 @@ function requireApplicationCommand () {
 	   * @typedef {Object} ApplicationCommandData
 	   * @property {string} name The name of the command, must be in all lowercase if type is
 	   * {@link ApplicationCommandType.ChatInput}
-	   * @property {Object<Locale, string>} [nameLocalizations] The localizations for the command name
+	   * @property {LocalizationMap} [nameLocalizations] The localizations for the command name
 	   * @property {string} description The description of the command,
 	   * if type is {@link ApplicationCommandType.ChatInput} or {@link ApplicationCommandType.PrimaryEntryPoint}
 	   * @property {boolean} [nsfw] Whether the command is age-restricted
-	   * @property {Object<Locale, string>} [descriptionLocalizations] The localizations for the command description,
+	   * @property {LocalizationMap} [descriptionLocalizations] The localizations for the command description,
 	   * if type is {@link ApplicationCommandType.ChatInput} or {@link ApplicationCommandType.PrimaryEntryPoint}
 	   * @property {ApplicationCommandType} [type=ApplicationCommandType.ChatInput] The type of the command
 	   * @property {ApplicationCommandOptionData[]} [options] Options for the command
@@ -76519,9 +75998,9 @@ function requireApplicationCommand () {
 	   * @typedef {Object} ApplicationCommandOptionData
 	   * @property {ApplicationCommandOptionType} type The type of the option
 	   * @property {string} name The name of the option
-	   * @property {Object<Locale, string>} [nameLocalizations] The name localizations for the option
+	   * @property {LocalizationMap} [nameLocalizations] The name localizations for the option
 	   * @property {string} description The description of the option
-	   * @property {Object<Locale, string>} [descriptionLocalizations] The description localizations for the option
+	   * @property {LocalizationMap} [descriptionLocalizations] The description localizations for the option
 	   * @property {boolean} [autocomplete] Whether the autocomplete interaction is enabled for a
 	   * {@link ApplicationCommandOptionType.String}, {@link ApplicationCommandOptionType.Integer} or
 	   * {@link ApplicationCommandOptionType.Number} option
@@ -76543,7 +76022,7 @@ function requireApplicationCommand () {
 	  /**
 	   * @typedef {Object} ApplicationCommandOptionChoiceData
 	   * @property {string} name The name of the choice
-	   * @property {Object<Locale, string>} [nameLocalizations] The localized names for this choice
+	   * @property {LocalizationMap} [nameLocalizations] The localized names for this choice
 	   * @property {string|number} value The value of the choice
 	   */
 
@@ -76574,7 +76053,7 @@ function requireApplicationCommand () {
 
 	  /**
 	   * Edits the localized names of this ApplicationCommand
-	   * @param {Object<Locale, string>} nameLocalizations The new localized names for the command
+	   * @param {LocalizationMap} nameLocalizations The new localized names for the command
 	   * @returns {Promise<ApplicationCommand>}
 	   * @example
 	   * // Edit the name localizations of this command
@@ -76600,7 +76079,7 @@ function requireApplicationCommand () {
 
 	  /**
 	   * Edits the localized descriptions of this ApplicationCommand
-	   * @param {Object<Locale, string>} descriptionLocalizations The new localized descriptions for the command
+	   * @param {LocalizationMap} descriptionLocalizations The new localized descriptions for the command
 	   * @returns {Promise<ApplicationCommand>}
 	   * @example
 	   * // Edit the description localizations of this command
@@ -76816,10 +76295,10 @@ function requireApplicationCommand () {
 	   * @typedef {Object} ApplicationCommandOption
 	   * @property {ApplicationCommandOptionType} type The type of the option
 	   * @property {string} name The name of the option
-	   * @property {Object<Locale, string>} [nameLocalizations] The localizations for the option name
+	   * @property {LocalizationMap} [nameLocalizations] The localizations for the option name
 	   * @property {string} [nameLocalized] The localized name for this option
 	   * @property {string} description The description of the option
-	   * @property {Object<Locale, string>} [descriptionLocalizations] The localizations for the option description
+	   * @property {LocalizationMap} [descriptionLocalizations] The localizations for the option description
 	   * @property {string} [descriptionLocalized] The localized description for this option
 	   * @property {boolean} [required] Whether the option is required
 	   * @property {boolean} [autocomplete] Whether the autocomplete interaction is enabled for a
@@ -78528,9 +78007,9 @@ function requireClientApplication () {
 	   * Data for creating or editing an application role connection metadata.
 	   * @typedef {Object} ApplicationRoleConnectionMetadataEditOptions
 	   * @property {string} name The name of the metadata field
-	   * @property {?Object<Locale, string>} [nameLocalizations] The name localizations for the metadata field
+	   * @property {?LocalizationMap} [nameLocalizations] The name localizations for the metadata field
 	   * @property {string} description The description of the metadata field
-	   * @property {?Object<Locale, string>} [descriptionLocalizations] The description localizations for the metadata field
+	   * @property {?LocalizationMap} [descriptionLocalizations] The description localizations for the metadata field
 	   * @property {string} key The dictionary key of the metadata field
 	   * @property {ApplicationRoleConnectionMetadataType} type The type of the metadata field
 	   */
@@ -84523,17 +84002,21 @@ function requireDist$5 () {
 		  ChannelSelectMenuBuilder: () => ChannelSelectMenuBuilder,
 		  ComponentAssertions: () => Assertions_exports2,
 		  ComponentBuilder: () => ComponentBuilder,
-		  ComponentsV2Assertions: () => Assertions_exports4,
+		  ComponentsV2Assertions: () => Assertions_exports6,
 		  ContainerBuilder: () => ContainerBuilder,
-		  ContextMenuCommandAssertions: () => Assertions_exports7,
+		  ContextMenuCommandAssertions: () => Assertions_exports9,
 		  ContextMenuCommandBuilder: () => ContextMenuCommandBuilder,
 		  EmbedAssertions: () => Assertions_exports,
 		  EmbedBuilder: () => EmbedBuilder,
 		  FileBuilder: () => FileBuilder,
+		  FileUploadAssertions: () => Assertions_exports3,
+		  FileUploadBuilder: () => FileUploadBuilder,
+		  LabelAssertions: () => Assertions_exports5,
+		  LabelBuilder: () => LabelBuilder,
 		  MediaGalleryBuilder: () => MediaGalleryBuilder,
 		  MediaGalleryItemBuilder: () => MediaGalleryItemBuilder,
 		  MentionableSelectMenuBuilder: () => MentionableSelectMenuBuilder,
-		  ModalAssertions: () => Assertions_exports5,
+		  ModalAssertions: () => Assertions_exports7,
 		  ModalBuilder: () => ModalBuilder,
 		  RoleSelectMenuBuilder: () => RoleSelectMenuBuilder,
 		  SectionBuilder: () => SectionBuilder,
@@ -84544,7 +84027,7 @@ function requireDist$5 () {
 		  SharedSlashCommand: () => SharedSlashCommand,
 		  SharedSlashCommandOptions: () => SharedSlashCommandOptions,
 		  SharedSlashCommandSubcommands: () => SharedSlashCommandSubcommands,
-		  SlashCommandAssertions: () => Assertions_exports6,
+		  SlashCommandAssertions: () => Assertions_exports8,
 		  SlashCommandAttachmentOption: () => SlashCommandAttachmentOption,
 		  SlashCommandBooleanOption: () => SlashCommandBooleanOption,
 		  SlashCommandBuilder: () => SlashCommandBuilder,
@@ -84560,7 +84043,7 @@ function requireDist$5 () {
 		  StringSelectMenuBuilder: () => StringSelectMenuBuilder,
 		  StringSelectMenuOptionBuilder: () => StringSelectMenuOptionBuilder,
 		  TextDisplayBuilder: () => TextDisplayBuilder,
-		  TextInputAssertions: () => Assertions_exports3,
+		  TextInputAssertions: () => Assertions_exports4,
 		  TextInputBuilder: () => TextInputBuilder,
 		  ThumbnailBuilder: () => ThumbnailBuilder,
 		  UserSelectMenuBuilder: () => UserSelectMenuBuilder,
@@ -85058,7 +84541,7 @@ function requireDist$5 () {
 		__name(validateRequiredButtonParameters, "validateRequiredButtonParameters");
 
 		// src/components/ActionRow.ts
-		var import_v1019 = requireV10();
+		var import_v1024 = requireV10();
 
 		// src/components/Component.ts
 		var ComponentBuilder = class {
@@ -85096,7 +84579,7 @@ function requireDist$5 () {
 		};
 
 		// src/components/Components.ts
-		var import_v1018 = requireV10();
+		var import_v1023 = requireV10();
 
 		// src/components/button/Button.ts
 		var import_v102 = requireV10();
@@ -85222,8 +84705,159 @@ function requireDist$5 () {
 		  }
 		};
 
-		// src/components/selectMenu/ChannelSelectMenu.ts
+		// src/components/fileUpload/FileUpload.ts
+		var import_v104 = requireV10();
+
+		// src/components/fileUpload/Assertions.ts
+		var Assertions_exports3 = {};
+		__export(Assertions_exports3, {
+		  fileUploadPredicate: () => fileUploadPredicate
+		});
+		var import_shapeshift3 = /*@__PURE__*/ requireCjs();
 		var import_v103 = requireV10();
+		var fileUploadPredicate = import_shapeshift3.s.object({
+		  type: import_shapeshift3.s.literal(import_v103.ComponentType.FileUpload),
+		  id: idValidator.optional(),
+		  custom_id: customIdValidator,
+		  min_values: import_shapeshift3.s.number().greaterThanOrEqual(0).lessThanOrEqual(10).optional(),
+		  max_values: import_shapeshift3.s.number().greaterThanOrEqual(1).lessThanOrEqual(10).optional(),
+		  required: import_shapeshift3.s.boolean().optional()
+		});
+
+		// src/components/fileUpload/FileUpload.ts
+		var FileUploadBuilder = class extends ComponentBuilder {
+		  static {
+		    __name(this, "FileUploadBuilder");
+		  }
+		  /**
+		   * Creates a new file upload.
+		   *
+		   * @param data - The API data to create this file upload with
+		   * @example
+		   * Creating a file upload from an API data object:
+		   * ```ts
+		   * const fileUpload = new FileUploadBuilder({
+		   * 	custom_id: "file_upload",
+		   *  min_values: 2,
+		   *  max_values: 5,
+		   * });
+		   * ```
+		   * @example
+		   * Creating a file upload using setters and API data:
+		   * ```ts
+		   * const fileUpload = new FileUploadBuilder({
+		   * 	custom_id: "file_upload",
+		   *  min_values: 2,
+		   *  max_values: 5,
+		   * }).setRequired();
+		   * ```
+		   */
+		  constructor(data = {}) {
+		    super({ type: import_v104.ComponentType.FileUpload, ...data });
+		  }
+		  /**
+		   * Sets the custom id for this file upload.
+		   *
+		   * @param customId - The custom id to use
+		   */
+		  setCustomId(customId) {
+		    this.data.custom_id = customId;
+		    return this;
+		  }
+		  /**
+		   * Sets the minimum number of file uploads required.
+		   *
+		   * @param minValues - The minimum values that must be uploaded
+		   */
+		  setMinValues(minValues) {
+		    this.data.min_values = minValues;
+		    return this;
+		  }
+		  /**
+		   * Clears the minimum values.
+		   */
+		  clearMinValues() {
+		    this.data.min_values = void 0;
+		    return this;
+		  }
+		  /**
+		   * Sets the maximum number of file uploads required.
+		   *
+		   * @param maxValues - The maximum values that must be uploaded
+		   */
+		  setMaxValues(maxValues) {
+		    this.data.max_values = maxValues;
+		    return this;
+		  }
+		  /**
+		   * Clears the maximum values.
+		   */
+		  clearMaxValues() {
+		    this.data.max_values = void 0;
+		    return this;
+		  }
+		  /**
+		   * Sets whether this file upload is required.
+		   *
+		   * @param required - Whether this file upload is required
+		   */
+		  setRequired(required = true) {
+		    this.data.required = required;
+		    return this;
+		  }
+		  /**
+		   * {@inheritDoc ComponentBuilder.toJSON}
+		   */
+		  toJSON() {
+		    fileUploadPredicate.parse(this.data);
+		    return this.data;
+		  }
+		};
+
+		// src/components/label/Label.ts
+		var import_v1014 = requireV10();
+
+		// src/components/selectMenu/ChannelSelectMenu.ts
+		var import_v106 = requireV10();
+
+		// src/components/textInput/Assertions.ts
+		var Assertions_exports4 = {};
+		__export(Assertions_exports4, {
+		  labelValidator: () => labelValidator,
+		  maxLengthValidator: () => maxLengthValidator,
+		  minLengthValidator: () => minLengthValidator,
+		  placeholderValidator: () => placeholderValidator2,
+		  requiredValidator: () => requiredValidator,
+		  textInputPredicate: () => textInputPredicate,
+		  textInputStyleValidator: () => textInputStyleValidator,
+		  validateRequiredParameters: () => validateRequiredParameters,
+		  valueValidator: () => valueValidator
+		});
+		var import_shapeshift4 = /*@__PURE__*/ requireCjs();
+		var import_v105 = requireV10();
+		var textInputStyleValidator = import_shapeshift4.s.nativeEnum(import_v105.TextInputStyle).setValidationEnabled(isValidationEnabled);
+		var minLengthValidator = import_shapeshift4.s.number().int().greaterThanOrEqual(0).lessThanOrEqual(4e3).setValidationEnabled(isValidationEnabled);
+		var maxLengthValidator = import_shapeshift4.s.number().int().greaterThanOrEqual(1).lessThanOrEqual(4e3).setValidationEnabled(isValidationEnabled);
+		var requiredValidator = import_shapeshift4.s.boolean().setValidationEnabled(isValidationEnabled);
+		var valueValidator = import_shapeshift4.s.string().lengthLessThanOrEqual(4e3).setValidationEnabled(isValidationEnabled);
+		var placeholderValidator2 = import_shapeshift4.s.string().lengthLessThanOrEqual(100).setValidationEnabled(isValidationEnabled);
+		var labelValidator = import_shapeshift4.s.string().lengthGreaterThanOrEqual(1).lengthLessThanOrEqual(45).setValidationEnabled(isValidationEnabled);
+		var textInputPredicate = import_shapeshift4.s.object({
+		  type: import_shapeshift4.s.literal(import_v105.ComponentType.TextInput),
+		  custom_id: customIdValidator,
+		  style: textInputStyleValidator,
+		  id: idValidator.optional(),
+		  min_length: minLengthValidator.optional(),
+		  max_length: maxLengthValidator.optional(),
+		  placeholder: placeholderValidator2.optional(),
+		  value: valueValidator.optional(),
+		  required: requiredValidator.optional()
+		}).setValidationEnabled(isValidationEnabled);
+		function validateRequiredParameters(customId, style) {
+		  customIdValidator.parse(customId);
+		  textInputStyleValidator.parse(style);
+		}
+		__name(validateRequiredParameters, "validateRequiredParameters");
 
 		// src/components/selectMenu/BaseSelectMenu.ts
 		var BaseSelectMenuBuilder = class extends ComponentBuilder {
@@ -85276,6 +84910,16 @@ function requireDist$5 () {
 		    return this;
 		  }
 		  /**
+		   * Sets whether this select menu is required.
+		   *
+		   * @remarks Only for use in modals.
+		   * @param required - Whether this select menu is required
+		   */
+		  setRequired(required = true) {
+		    this.data.required = requiredValidator.parse(required);
+		    return this;
+		  }
+		  /**
 		   * {@inheritDoc ComponentBuilder.toJSON}
 		   */
 		  toJSON() {
@@ -85315,7 +84959,7 @@ function requireDist$5 () {
 		   * ```
 		   */
 		  constructor(data) {
-		    super({ ...data, type: import_v103.ComponentType.ChannelSelect });
+		    super({ ...data, type: import_v106.ComponentType.ChannelSelect });
 		  }
 		  /**
 		   * Adds channel types to this select menu.
@@ -85351,7 +84995,7 @@ function requireDist$5 () {
 		    this.data.default_values.push(
 		      ...normalizedValues.map((id) => ({
 		        id,
-		        type: import_v103.SelectMenuDefaultValueType.Channel
+		        type: import_v106.SelectMenuDefaultValueType.Channel
 		      }))
 		    );
 		    return this;
@@ -85366,7 +85010,7 @@ function requireDist$5 () {
 		    optionsLengthValidator.parse(normalizedValues.length);
 		    this.data.default_values = normalizedValues.map((id) => ({
 		      id,
-		      type: import_v103.SelectMenuDefaultValueType.Channel
+		      type: import_v106.SelectMenuDefaultValueType.Channel
 		    }));
 		    return this;
 		  }
@@ -85382,7 +85026,7 @@ function requireDist$5 () {
 		};
 
 		// src/components/selectMenu/MentionableSelectMenu.ts
-		var import_v104 = requireV10();
+		var import_v107 = requireV10();
 		var MentionableSelectMenuBuilder = class extends BaseSelectMenuBuilder {
 		  static {
 		    __name(this, "MentionableSelectMenuBuilder");
@@ -85410,7 +85054,7 @@ function requireDist$5 () {
 		   * ```
 		   */
 		  constructor(data) {
-		    super({ ...data, type: import_v104.ComponentType.MentionableSelect });
+		    super({ ...data, type: import_v107.ComponentType.MentionableSelect });
 		  }
 		  /**
 		   * Adds default roles to this auto populated select menu.
@@ -85424,7 +85068,7 @@ function requireDist$5 () {
 		    this.data.default_values.push(
 		      ...normalizedValues.map((id) => ({
 		        id,
-		        type: import_v104.SelectMenuDefaultValueType.Role
+		        type: import_v107.SelectMenuDefaultValueType.Role
 		      }))
 		    );
 		    return this;
@@ -85441,7 +85085,7 @@ function requireDist$5 () {
 		    this.data.default_values.push(
 		      ...normalizedValues.map((id) => ({
 		        id,
-		        type: import_v104.SelectMenuDefaultValueType.User
+		        type: import_v107.SelectMenuDefaultValueType.User
 		      }))
 		    );
 		    return this;
@@ -85472,7 +85116,7 @@ function requireDist$5 () {
 		};
 
 		// src/components/selectMenu/RoleSelectMenu.ts
-		var import_v105 = requireV10();
+		var import_v108 = requireV10();
 		var RoleSelectMenuBuilder = class extends BaseSelectMenuBuilder {
 		  static {
 		    __name(this, "RoleSelectMenuBuilder");
@@ -85500,7 +85144,7 @@ function requireDist$5 () {
 		   * ```
 		   */
 		  constructor(data) {
-		    super({ ...data, type: import_v105.ComponentType.RoleSelect });
+		    super({ ...data, type: import_v108.ComponentType.RoleSelect });
 		  }
 		  /**
 		   * Adds default roles to this auto populated select menu.
@@ -85514,7 +85158,7 @@ function requireDist$5 () {
 		    this.data.default_values.push(
 		      ...normalizedValues.map((id) => ({
 		        id,
-		        type: import_v105.SelectMenuDefaultValueType.Role
+		        type: import_v108.SelectMenuDefaultValueType.Role
 		      }))
 		    );
 		    return this;
@@ -85529,14 +85173,14 @@ function requireDist$5 () {
 		    optionsLengthValidator.parse(normalizedValues.length);
 		    this.data.default_values = normalizedValues.map((id) => ({
 		      id,
-		      type: import_v105.SelectMenuDefaultValueType.Role
+		      type: import_v108.SelectMenuDefaultValueType.Role
 		    }));
 		    return this;
 		  }
 		};
 
 		// src/components/selectMenu/StringSelectMenu.ts
-		var import_v106 = requireV10();
+		var import_v109 = requireV10();
 		var StringSelectMenuBuilder = class extends BaseSelectMenuBuilder {
 		  static {
 		    __name(this, "StringSelectMenuBuilder");
@@ -85578,7 +85222,7 @@ function requireDist$5 () {
 		   */
 		  constructor(data) {
 		    const { options, ...initData } = data ?? {};
-		    super({ ...initData, type: import_v106.ComponentType.StringSelect });
+		    super({ ...initData, type: import_v109.ComponentType.StringSelect });
 		    this.options = options?.map((option) => new StringSelectMenuOptionBuilder(option)) ?? [];
 		  }
 		  /**
@@ -85658,7 +85302,7 @@ function requireDist$5 () {
 		};
 
 		// src/components/selectMenu/UserSelectMenu.ts
-		var import_v107 = requireV10();
+		var import_v1010 = requireV10();
 		var UserSelectMenuBuilder = class extends BaseSelectMenuBuilder {
 		  static {
 		    __name(this, "UserSelectMenuBuilder");
@@ -85686,7 +85330,7 @@ function requireDist$5 () {
 		   * ```
 		   */
 		  constructor(data) {
-		    super({ ...data, type: import_v107.ComponentType.UserSelect });
+		    super({ ...data, type: import_v1010.ComponentType.UserSelect });
 		  }
 		  /**
 		   * Adds default users to this auto populated select menu.
@@ -85700,7 +85344,7 @@ function requireDist$5 () {
 		    this.data.default_values.push(
 		      ...normalizedValues.map((id) => ({
 		        id,
-		        type: import_v107.SelectMenuDefaultValueType.User
+		        type: import_v1010.SelectMenuDefaultValueType.User
 		      }))
 		    );
 		    return this;
@@ -85715,7 +85359,7 @@ function requireDist$5 () {
 		    optionsLengthValidator.parse(normalizedValues.length);
 		    this.data.default_values = normalizedValues.map((id) => ({
 		      id,
-		      type: import_v107.SelectMenuDefaultValueType.User
+		      type: import_v1010.SelectMenuDefaultValueType.User
 		    }));
 		    return this;
 		  }
@@ -85723,38 +85367,8 @@ function requireDist$5 () {
 
 		// src/components/textInput/TextInput.ts
 		var import_util = requireDist$b();
-		var import_v109 = requireV10();
+		var import_v1011 = requireV10();
 		var import_fast_deep_equal = __toESM(requireFastDeepEqual());
-
-		// src/components/textInput/Assertions.ts
-		var Assertions_exports3 = {};
-		__export(Assertions_exports3, {
-		  labelValidator: () => labelValidator,
-		  maxLengthValidator: () => maxLengthValidator,
-		  minLengthValidator: () => minLengthValidator,
-		  placeholderValidator: () => placeholderValidator2,
-		  requiredValidator: () => requiredValidator,
-		  textInputStyleValidator: () => textInputStyleValidator,
-		  validateRequiredParameters: () => validateRequiredParameters,
-		  valueValidator: () => valueValidator
-		});
-		var import_shapeshift3 = /*@__PURE__*/ requireCjs();
-		var import_v108 = requireV10();
-		var textInputStyleValidator = import_shapeshift3.s.nativeEnum(import_v108.TextInputStyle);
-		var minLengthValidator = import_shapeshift3.s.number().int().greaterThanOrEqual(0).lessThanOrEqual(4e3).setValidationEnabled(isValidationEnabled);
-		var maxLengthValidator = import_shapeshift3.s.number().int().greaterThanOrEqual(1).lessThanOrEqual(4e3).setValidationEnabled(isValidationEnabled);
-		var requiredValidator = import_shapeshift3.s.boolean();
-		var valueValidator = import_shapeshift3.s.string().lengthLessThanOrEqual(4e3).setValidationEnabled(isValidationEnabled);
-		var placeholderValidator2 = import_shapeshift3.s.string().lengthLessThanOrEqual(100).setValidationEnabled(isValidationEnabled);
-		var labelValidator = import_shapeshift3.s.string().lengthGreaterThanOrEqual(1).lengthLessThanOrEqual(45).setValidationEnabled(isValidationEnabled);
-		function validateRequiredParameters(customId, style, label) {
-		  customIdValidator.parse(customId);
-		  textInputStyleValidator.parse(style);
-		  labelValidator.parse(label);
-		}
-		__name(validateRequiredParameters, "validateRequiredParameters");
-
-		// src/components/textInput/TextInput.ts
 		var TextInputBuilder = class extends ComponentBuilder {
 		  static {
 		    __name(this, "TextInputBuilder");
@@ -85768,7 +85382,7 @@ function requireDist$5 () {
 		   * ```ts
 		   * const textInput = new TextInputBuilder({
 		   * 	custom_id: 'a cool text input',
-		   * 	label: 'Type something',
+		   * 	placeholder: 'Type something',
 		   * 	style: TextInputStyle.Short,
 		   * });
 		   * ```
@@ -85776,14 +85390,14 @@ function requireDist$5 () {
 		   * Creating a text input using setters and API data:
 		   * ```ts
 		   * const textInput = new TextInputBuilder({
-		   * 	label: 'Type something else',
+		   * 	placeholder: 'Type something else',
 		   * })
 		   * 	.setCustomId('woah')
 		   * 	.setStyle(TextInputStyle.Paragraph);
 		   * ```
 		   */
 		  constructor(data) {
-		    super({ type: import_v109.ComponentType.TextInput, ...data });
+		    super({ type: import_v1011.ComponentType.TextInput, ...data });
 		  }
 		  /**
 		   * Sets the custom id for this text input.
@@ -85798,6 +85412,7 @@ function requireDist$5 () {
 		   * Sets the label for this text input.
 		   *
 		   * @param label - The label to use
+		   * @deprecated Use a label builder to create a label (and optionally a description) instead.
 		   */
 		  setLabel(label) {
 		    this.data.label = labelValidator.parse(label);
@@ -85861,7 +85476,7 @@ function requireDist$5 () {
 		   * {@inheritDoc ComponentBuilder.toJSON}
 		   */
 		  toJSON() {
-		    validateRequiredParameters(this.data.custom_id, this.data.style, this.data.label);
+		    validateRequiredParameters(this.data.custom_id, this.data.style);
 		    return {
 		      ...this.data
 		    };
@@ -85877,12 +85492,232 @@ function requireDist$5 () {
 		  }
 		};
 
+		// src/components/label/Assertions.ts
+		var Assertions_exports5 = {};
+		__export(Assertions_exports5, {
+		  labelPredicate: () => labelPredicate
+		});
+		var import_shapeshift6 = /*@__PURE__*/ requireCjs();
+		var import_v1013 = requireV10();
+
+		// src/components/selectMenu/Assertions.ts
+		var import_shapeshift5 = /*@__PURE__*/ requireCjs();
+		var import_v1012 = requireV10();
+		var selectMenuBasePredicate = import_shapeshift5.s.object({
+		  id: idValidator.optional(),
+		  placeholder: import_shapeshift5.s.string().lengthLessThanOrEqual(150).optional(),
+		  min_values: import_shapeshift5.s.number().greaterThanOrEqual(0).lessThanOrEqual(25).optional(),
+		  max_values: import_shapeshift5.s.number().greaterThanOrEqual(0).lessThanOrEqual(25).optional(),
+		  custom_id: customIdValidator,
+		  disabled: import_shapeshift5.s.boolean().optional()
+		});
+		var selectMenuChannelPredicate = selectMenuBasePredicate.extend({
+		  type: import_shapeshift5.s.literal(import_v1012.ComponentType.ChannelSelect),
+		  channel_types: import_shapeshift5.s.nativeEnum(import_v1012.ChannelType).array().optional(),
+		  default_values: import_shapeshift5.s.object({ id: import_shapeshift5.s.string(), type: import_shapeshift5.s.literal(import_v1012.SelectMenuDefaultValueType.Channel) }).array().lengthLessThanOrEqual(25).optional()
+		}).setValidationEnabled(isValidationEnabled);
+		var selectMenuMentionablePredicate = selectMenuBasePredicate.extend({
+		  type: import_shapeshift5.s.literal(import_v1012.ComponentType.MentionableSelect),
+		  default_values: import_shapeshift5.s.object({
+		    id: import_shapeshift5.s.string(),
+		    type: import_shapeshift5.s.union([import_shapeshift5.s.literal(import_v1012.SelectMenuDefaultValueType.Role), import_shapeshift5.s.literal(import_v1012.SelectMenuDefaultValueType.User)])
+		  }).array().lengthLessThanOrEqual(25).optional()
+		}).setValidationEnabled(isValidationEnabled);
+		var selectMenuRolePredicate = selectMenuBasePredicate.extend({
+		  type: import_shapeshift5.s.literal(import_v1012.ComponentType.RoleSelect),
+		  default_values: import_shapeshift5.s.object({ id: import_shapeshift5.s.string(), type: import_shapeshift5.s.literal(import_v1012.SelectMenuDefaultValueType.Role) }).array().lengthLessThanOrEqual(25).optional()
+		}).setValidationEnabled(isValidationEnabled);
+		var selectMenuUserPredicate = selectMenuBasePredicate.extend({
+		  type: import_shapeshift5.s.literal(import_v1012.ComponentType.UserSelect),
+		  default_values: import_shapeshift5.s.object({ id: import_shapeshift5.s.string(), type: import_shapeshift5.s.literal(import_v1012.SelectMenuDefaultValueType.User) }).array().lengthLessThanOrEqual(25).optional()
+		}).setValidationEnabled(isValidationEnabled);
+		var selectMenuStringOptionPredicate = import_shapeshift5.s.object({
+		  label: labelValidator,
+		  value: import_shapeshift5.s.string().lengthGreaterThanOrEqual(1).lengthLessThanOrEqual(100),
+		  description: import_shapeshift5.s.string().lengthGreaterThanOrEqual(1).lengthLessThanOrEqual(100).optional(),
+		  emoji: emojiValidator.optional(),
+		  default: import_shapeshift5.s.boolean().optional()
+		}).setValidationEnabled(isValidationEnabled);
+		var selectMenuStringPredicate = selectMenuBasePredicate.extend({
+		  type: import_shapeshift5.s.literal(import_v1012.ComponentType.StringSelect),
+		  options: selectMenuStringOptionPredicate.array().lengthGreaterThanOrEqual(1).lengthLessThanOrEqual(25)
+		}).reshape((value) => {
+		  if (value.min_values !== void 0 && value.options.length < value.min_values) {
+		    return import_shapeshift5.Result.err(new RangeError(`The number of options must be greater than or equal to min_values`));
+		  }
+		  if (value.min_values !== void 0 && value.max_values !== void 0 && value.min_values > value.max_values) {
+		    return import_shapeshift5.Result.err(
+		      new RangeError(`The maximum amount of options must be greater than or equal to the minimum amount of options`)
+		    );
+		  }
+		  return import_shapeshift5.Result.ok(value);
+		}).setValidationEnabled(isValidationEnabled);
+
+		// src/components/label/Assertions.ts
+		var labelPredicate = import_shapeshift6.s.object({
+		  id: idValidator.optional(),
+		  type: import_shapeshift6.s.literal(import_v1013.ComponentType.Label),
+		  label: import_shapeshift6.s.string().lengthGreaterThanOrEqual(1).lengthLessThanOrEqual(45),
+		  description: import_shapeshift6.s.string().lengthGreaterThanOrEqual(1).lengthLessThanOrEqual(100).optional(),
+		  component: import_shapeshift6.s.union([
+		    textInputPredicate,
+		    selectMenuUserPredicate,
+		    selectMenuRolePredicate,
+		    selectMenuMentionablePredicate,
+		    selectMenuChannelPredicate,
+		    selectMenuStringPredicate,
+		    fileUploadPredicate
+		  ])
+		}).setValidationEnabled(isValidationEnabled);
+
+		// src/components/label/Label.ts
+		var LabelBuilder = class extends ComponentBuilder {
+		  static {
+		    __name(this, "LabelBuilder");
+		  }
+		  /**
+		   * @internal
+		   */
+		  data;
+		  /**
+		   * Creates a new label.
+		   *
+		   * @param data - The API data to create this label with
+		   * @example
+		   * Creating a label from an API data object:
+		   * ```ts
+		   * const label = new LabelBuilder({
+		   * 	label: "label",
+		   * 	component,
+		   * });
+		   * ```
+		   * @example
+		   * Creating a label using setters and API data:
+		   * ```ts
+		   * const label = new LabelBuilder({
+		   * 	label: 'label',
+		   * 	component,
+		   * }).setLabel('new text');
+		   * ```
+		   */
+		  constructor(data = {}) {
+		    super({ type: import_v1014.ComponentType.Label });
+		    const { component, ...rest } = data;
+		    this.data = {
+		      ...rest,
+		      component: component ? createComponentBuilder(component) : void 0,
+		      type: import_v1014.ComponentType.Label
+		    };
+		  }
+		  /**
+		   * Sets the label for this label.
+		   *
+		   * @param label - The label to use
+		   */
+		  setLabel(label) {
+		    this.data.label = label;
+		    return this;
+		  }
+		  /**
+		   * Sets the description for this label.
+		   *
+		   * @param description - The description to use
+		   */
+		  setDescription(description) {
+		    this.data.description = description;
+		    return this;
+		  }
+		  /**
+		   * Clears the description for this label.
+		   */
+		  clearDescription() {
+		    this.data.description = void 0;
+		    return this;
+		  }
+		  /**
+		   * Sets a string select menu component to this label.
+		   *
+		   * @param input - A function that returns a component builder or an already built builder
+		   */
+		  setStringSelectMenuComponent(input) {
+		    this.data.component = resolveBuilder(input, StringSelectMenuBuilder);
+		    return this;
+		  }
+		  /**
+		   * Sets a user select menu component to this label.
+		   *
+		   * @param input - A function that returns a component builder or an already built builder
+		   */
+		  setUserSelectMenuComponent(input) {
+		    this.data.component = resolveBuilder(input, UserSelectMenuBuilder);
+		    return this;
+		  }
+		  /**
+		   * Sets a role select menu component to this label.
+		   *
+		   * @param input - A function that returns a component builder or an already built builder
+		   */
+		  setRoleSelectMenuComponent(input) {
+		    this.data.component = resolveBuilder(input, RoleSelectMenuBuilder);
+		    return this;
+		  }
+		  /**
+		   * Sets a mentionable select menu component to this label.
+		   *
+		   * @param input - A function that returns a component builder or an already built builder
+		   */
+		  setMentionableSelectMenuComponent(input) {
+		    this.data.component = resolveBuilder(input, MentionableSelectMenuBuilder);
+		    return this;
+		  }
+		  /**
+		   * Sets a channel select menu component to this label.
+		   *
+		   * @param input - A function that returns a component builder or an already built builder
+		   */
+		  setChannelSelectMenuComponent(input) {
+		    this.data.component = resolveBuilder(input, ChannelSelectMenuBuilder);
+		    return this;
+		  }
+		  /**
+		   * Sets a text input component to this label.
+		   *
+		   * @param input - A function that returns a component builder or an already built builder
+		   */
+		  setTextInputComponent(input) {
+		    this.data.component = resolveBuilder(input, TextInputBuilder);
+		    return this;
+		  }
+		  /**
+		   * Sets a file upload component to this label.
+		   *
+		   * @param input - A function that returns a component builder or an already built builder
+		   */
+		  setFileUploadComponent(input) {
+		    this.data.component = resolveBuilder(input, FileUploadBuilder);
+		    return this;
+		  }
+		  /**
+		   * {@inheritDoc ComponentBuilder.toJSON}
+		   */
+		  toJSON() {
+		    const { component, ...rest } = this.data;
+		    const data = {
+		      ...rest,
+		      // The label predicate validates the component.
+		      component: component?.toJSON()
+		    };
+		    labelPredicate.parse(data);
+		    return data;
+		  }
+		};
+
 		// src/components/v2/Container.ts
-		var import_v1015 = requireV10();
+		var import_v1020 = requireV10();
 
 		// src/components/v2/Assertions.ts
-		var Assertions_exports4 = {};
-		__export(Assertions_exports4, {
+		var Assertions_exports6 = {};
+		__export(Assertions_exports6, {
 		  accessoryPredicate: () => accessoryPredicate,
 		  assertReturnOfBuilder: () => assertReturnOfBuilder,
 		  containerColorPredicate: () => containerColorPredicate,
@@ -85895,11 +85730,11 @@ function requireDist$5 () {
 		  unfurledMediaItemPredicate: () => unfurledMediaItemPredicate,
 		  validateComponentArray: () => validateComponentArray
 		});
-		var import_shapeshift4 = /*@__PURE__*/ requireCjs();
-		var import_v1011 = requireV10();
+		var import_shapeshift7 = /*@__PURE__*/ requireCjs();
+		var import_v1016 = requireV10();
 
 		// src/components/v2/Thumbnail.ts
-		var import_v1010 = requireV10();
+		var import_v1015 = requireV10();
 		var ThumbnailBuilder = class extends ComponentBuilder {
 		  static {
 		    __name(this, "ThumbnailBuilder");
@@ -85931,7 +85766,7 @@ function requireDist$5 () {
 		   */
 		  constructor(data = {}) {
 		    super({
-		      type: import_v1010.ComponentType.Thumbnail,
+		      type: import_v1015.ComponentType.Thumbnail,
 		      ...data,
 		      media: data.media ? { url: data.media.url } : void 0
 		    });
@@ -85980,33 +85815,33 @@ function requireDist$5 () {
 		};
 
 		// src/components/v2/Assertions.ts
-		var unfurledMediaItemPredicate = import_shapeshift4.s.object({
-		  url: import_shapeshift4.s.string().url(
+		var unfurledMediaItemPredicate = import_shapeshift7.s.object({
+		  url: import_shapeshift7.s.string().url(
 		    { allowedProtocols: ["http:", "https:", "attachment:"] },
 		    { message: "Invalid protocol for media URL. Must be http:, https:, or attachment:" }
 		  )
 		}).setValidationEnabled(isValidationEnabled);
-		var descriptionPredicate2 = import_shapeshift4.s.string().lengthGreaterThanOrEqual(1).lengthLessThanOrEqual(1024).setValidationEnabled(isValidationEnabled);
-		var filePredicate = import_shapeshift4.s.object({
-		  url: import_shapeshift4.s.string().url({ allowedProtocols: ["attachment:"] }, { message: "Invalid protocol for file URL. Must be attachment:" })
+		var descriptionPredicate2 = import_shapeshift7.s.string().lengthGreaterThanOrEqual(1).lengthLessThanOrEqual(1024).setValidationEnabled(isValidationEnabled);
+		var filePredicate = import_shapeshift7.s.object({
+		  url: import_shapeshift7.s.string().url({ allowedProtocols: ["attachment:"] }, { message: "Invalid protocol for file URL. Must be attachment:" })
 		}).setValidationEnabled(isValidationEnabled);
-		var spoilerPredicate = import_shapeshift4.s.boolean();
-		var dividerPredicate = import_shapeshift4.s.boolean();
-		var spacingPredicate = import_shapeshift4.s.nativeEnum(import_v1011.SeparatorSpacingSize);
-		var textDisplayContentPredicate = import_shapeshift4.s.string().lengthGreaterThanOrEqual(1).lengthLessThanOrEqual(4e3).setValidationEnabled(isValidationEnabled);
-		var accessoryPredicate = import_shapeshift4.s.instance(ButtonBuilder).or(import_shapeshift4.s.instance(ThumbnailBuilder)).setValidationEnabled(isValidationEnabled);
+		var spoilerPredicate = import_shapeshift7.s.boolean();
+		var dividerPredicate = import_shapeshift7.s.boolean();
+		var spacingPredicate = import_shapeshift7.s.nativeEnum(import_v1016.SeparatorSpacingSize);
+		var textDisplayContentPredicate = import_shapeshift7.s.string().lengthGreaterThanOrEqual(1).lengthLessThanOrEqual(4e3).setValidationEnabled(isValidationEnabled);
+		var accessoryPredicate = import_shapeshift7.s.instance(ButtonBuilder).or(import_shapeshift7.s.instance(ThumbnailBuilder)).setValidationEnabled(isValidationEnabled);
 		var containerColorPredicate = colorPredicate.nullish();
 		function assertReturnOfBuilder(input, ExpectedInstanceOf) {
-		  import_shapeshift4.s.instance(ExpectedInstanceOf).setValidationEnabled(isValidationEnabled).parse(input);
+		  import_shapeshift7.s.instance(ExpectedInstanceOf).setValidationEnabled(isValidationEnabled).parse(input);
 		}
 		__name(assertReturnOfBuilder, "assertReturnOfBuilder");
 		function validateComponentArray(input, min, max, ExpectedInstanceOf) {
-		  (ExpectedInstanceOf ? import_shapeshift4.s.instance(ExpectedInstanceOf) : import_shapeshift4.s.instance(ComponentBuilder)).array().lengthGreaterThanOrEqual(min).lengthLessThanOrEqual(max).setValidationEnabled(isValidationEnabled).parse(input);
+		  (ExpectedInstanceOf ? import_shapeshift7.s.instance(ExpectedInstanceOf) : import_shapeshift7.s.instance(ComponentBuilder)).array().lengthGreaterThanOrEqual(min).lengthLessThanOrEqual(max).setValidationEnabled(isValidationEnabled).parse(input);
 		}
 		__name(validateComponentArray, "validateComponentArray");
 
 		// src/components/v2/File.ts
-		var import_v1012 = requireV10();
+		var import_v1017 = requireV10();
 		var FileBuilder = class extends ComponentBuilder {
 		  static {
 		    __name(this, "FileBuilder");
@@ -86037,7 +85872,7 @@ function requireDist$5 () {
 		   * ```
 		   */
 		  constructor(data = {}) {
-		    super({ type: import_v1012.ComponentType.File, ...data, file: data.file ? { url: data.file.url } : void 0 });
+		    super({ type: import_v1017.ComponentType.File, ...data, file: data.file ? { url: data.file.url } : void 0 });
 		  }
 		  /**
 		   * Sets the spoiler status of this file.
@@ -86067,7 +85902,7 @@ function requireDist$5 () {
 		};
 
 		// src/components/v2/Separator.ts
-		var import_v1013 = requireV10();
+		var import_v1018 = requireV10();
 		var SeparatorBuilder = class extends ComponentBuilder {
 		  static {
 		    __name(this, "SeparatorBuilder");
@@ -86095,7 +85930,7 @@ function requireDist$5 () {
 		   */
 		  constructor(data = {}) {
 		    super({
-		      type: import_v1013.ComponentType.Separator,
+		      type: import_v1018.ComponentType.Separator,
 		      ...data
 		    });
 		  }
@@ -86133,7 +85968,7 @@ function requireDist$5 () {
 		};
 
 		// src/components/v2/TextDisplay.ts
-		var import_v1014 = requireV10();
+		var import_v1019 = requireV10();
 		var TextDisplayBuilder = class extends ComponentBuilder {
 		  static {
 		    __name(this, "TextDisplayBuilder");
@@ -86160,7 +85995,7 @@ function requireDist$5 () {
 		   */
 		  constructor(data = {}) {
 		    super({
-		      type: import_v1014.ComponentType.TextDisplay,
+		      type: import_v1019.ComponentType.TextDisplay,
 		      ...data
 		    });
 		  }
@@ -86222,7 +86057,7 @@ function requireDist$5 () {
 		   * ```
 		   */
 		  constructor({ components, ...data } = {}) {
-		    super({ type: import_v1015.ComponentType.Container, ...data });
+		    super({ type: import_v1020.ComponentType.Container, ...data });
 		    this.components = components?.map((component) => createComponentBuilder(component)) ?? [];
 		  }
 		  /**
@@ -86345,7 +86180,7 @@ function requireDist$5 () {
 		};
 
 		// src/components/v2/MediaGallery.ts
-		var import_v1016 = requireV10();
+		var import_v1021 = requireV10();
 
 		// src/components/v2/MediaGalleryItem.ts
 		var MediaGalleryItemBuilder = class {
@@ -86475,7 +86310,7 @@ function requireDist$5 () {
 		   * ```
 		   */
 		  constructor({ items, ...data } = {}) {
-		    super({ type: import_v1016.ComponentType.MediaGallery, ...data });
+		    super({ type: import_v1021.ComponentType.MediaGallery, ...data });
 		    this.items = items?.map((item) => new MediaGalleryItemBuilder(item)) ?? [];
 		  }
 		  /**
@@ -86525,7 +86360,7 @@ function requireDist$5 () {
 		};
 
 		// src/components/v2/Section.ts
-		var import_v1017 = requireV10();
+		var import_v1022 = requireV10();
 		var SectionBuilder = class extends ComponentBuilder {
 		  static {
 		    __name(this, "SectionBuilder");
@@ -86574,7 +86409,7 @@ function requireDist$5 () {
 		   * ```
 		   */
 		  constructor({ components, accessory, ...data } = {}) {
-		    super({ type: import_v1017.ComponentType.Section, ...data });
+		    super({ type: import_v1022.ComponentType.Section, ...data });
 		    this.components = components?.map((component) => createComponentBuilder(component)) ?? [];
 		    this.accessory = accessory ? createComponentBuilder(accessory) : void 0;
 		  }
@@ -86649,36 +86484,40 @@ function requireDist$5 () {
 		    return data;
 		  }
 		  switch (data.type) {
-		    case import_v1018.ComponentType.ActionRow:
+		    case import_v1023.ComponentType.ActionRow:
 		      return new ActionRowBuilder(data);
-		    case import_v1018.ComponentType.Button:
+		    case import_v1023.ComponentType.Button:
 		      return new ButtonBuilder(data);
-		    case import_v1018.ComponentType.StringSelect:
+		    case import_v1023.ComponentType.StringSelect:
 		      return new StringSelectMenuBuilder(data);
-		    case import_v1018.ComponentType.TextInput:
+		    case import_v1023.ComponentType.TextInput:
 		      return new TextInputBuilder(data);
-		    case import_v1018.ComponentType.UserSelect:
+		    case import_v1023.ComponentType.UserSelect:
 		      return new UserSelectMenuBuilder(data);
-		    case import_v1018.ComponentType.RoleSelect:
+		    case import_v1023.ComponentType.RoleSelect:
 		      return new RoleSelectMenuBuilder(data);
-		    case import_v1018.ComponentType.MentionableSelect:
+		    case import_v1023.ComponentType.MentionableSelect:
 		      return new MentionableSelectMenuBuilder(data);
-		    case import_v1018.ComponentType.ChannelSelect:
+		    case import_v1023.ComponentType.ChannelSelect:
 		      return new ChannelSelectMenuBuilder(data);
-		    case import_v1018.ComponentType.File:
+		    case import_v1023.ComponentType.File:
 		      return new FileBuilder(data);
-		    case import_v1018.ComponentType.Container:
+		    case import_v1023.ComponentType.Container:
 		      return new ContainerBuilder(data);
-		    case import_v1018.ComponentType.Section:
+		    case import_v1023.ComponentType.Section:
 		      return new SectionBuilder(data);
-		    case import_v1018.ComponentType.Separator:
+		    case import_v1023.ComponentType.Separator:
 		      return new SeparatorBuilder(data);
-		    case import_v1018.ComponentType.TextDisplay:
+		    case import_v1023.ComponentType.TextDisplay:
 		      return new TextDisplayBuilder(data);
-		    case import_v1018.ComponentType.Thumbnail:
+		    case import_v1023.ComponentType.Thumbnail:
 		      return new ThumbnailBuilder(data);
-		    case import_v1018.ComponentType.MediaGallery:
+		    case import_v1023.ComponentType.MediaGallery:
 		      return new MediaGalleryBuilder(data);
+		    case import_v1023.ComponentType.Label:
+		      return new LabelBuilder(data);
+		    case import_v1023.ComponentType.FileUpload:
+		      return new FileUploadBuilder(data);
 		    default:
 		      throw new Error(`Cannot properly serialize component type: ${data.type}`);
 		  }
@@ -86743,7 +86582,7 @@ function requireDist$5 () {
 		   * ```
 		   */
 		  constructor({ components, ...data } = {}) {
-		    super({ type: import_v1019.ComponentType.ActionRow, ...data });
+		    super({ type: import_v1024.ComponentType.ActionRow, ...data });
 		    this.components = components?.map((component) => createComponentBuilder(component)) ?? [];
 		  }
 		  /**
@@ -86775,16 +86614,19 @@ function requireDist$5 () {
 		  }
 		};
 
+		// src/interactions/modals/Modal.ts
+		var import_v1025 = requireV10();
+
 		// src/interactions/modals/Assertions.ts
-		var Assertions_exports5 = {};
-		__export(Assertions_exports5, {
+		var Assertions_exports7 = {};
+		__export(Assertions_exports7, {
 		  componentsValidator: () => componentsValidator,
 		  titleValidator: () => titleValidator,
 		  validateRequiredParameters: () => validateRequiredParameters2
 		});
-		var import_shapeshift5 = /*@__PURE__*/ requireCjs();
-		var titleValidator = import_shapeshift5.s.string().lengthGreaterThanOrEqual(1).lengthLessThanOrEqual(45).setValidationEnabled(isValidationEnabled);
-		var componentsValidator = import_shapeshift5.s.instance(ActionRowBuilder).array().lengthGreaterThanOrEqual(1).setValidationEnabled(isValidationEnabled);
+		var import_shapeshift8 = /*@__PURE__*/ requireCjs();
+		var titleValidator = import_shapeshift8.s.string().lengthGreaterThanOrEqual(1).lengthLessThanOrEqual(45).setValidationEnabled(isValidationEnabled);
+		var componentsValidator = import_shapeshift8.s.union([import_shapeshift8.s.instance(ActionRowBuilder), import_shapeshift8.s.instance(LabelBuilder), import_shapeshift8.s.instance(TextDisplayBuilder)]).array().lengthGreaterThanOrEqual(1).setValidationEnabled(isValidationEnabled);
 		function validateRequiredParameters2(customId, title, components) {
 		  customIdValidator.parse(customId);
 		  titleValidator.parse(title);
@@ -86836,19 +86678,121 @@ function requireDist$5 () {
 		   * Adds components to this modal.
 		   *
 		   * @param components - The components to add
+		   * @deprecated Use {@link ModalBuilder.addLabelComponents} or {@link ModalBuilder.addTextDisplayComponents} instead
 		   */
 		  addComponents(...components) {
 		    this.components.push(
-		      ...normalizeArray(components).map(
-		        (component) => component instanceof ActionRowBuilder ? component : new ActionRowBuilder(component)
-		      )
+		      ...normalizeArray(components).map((component, idx) => {
+		        if (component instanceof ActionRowBuilder || component instanceof LabelBuilder || component instanceof TextDisplayBuilder) {
+		          return component;
+		        }
+		        if (component instanceof TextInputBuilder) {
+		          return new ActionRowBuilder().addComponents(component);
+		        }
+		        if ("type" in component) {
+		          if (component.type === import_v1025.ComponentType.ActionRow) {
+		            return new ActionRowBuilder(component);
+		          }
+		          if (component.type === import_v1025.ComponentType.Label) {
+		            return new LabelBuilder(component);
+		          }
+		          if (component.type === import_v1025.ComponentType.TextDisplay) {
+		            return new TextDisplayBuilder(component);
+		          }
+		          if (component.type === import_v1025.ComponentType.TextInput) {
+		            return new ActionRowBuilder().addComponents(
+		              new TextInputBuilder(component)
+		            );
+		          }
+		        }
+		        throw new TypeError(`Invalid component passed in ModalBuilder.addComponents at index ${idx}!`);
+		      })
 		    );
+		    return this;
+		  }
+		  /**
+		   * Adds label components to this modal.
+		   *
+		   * @param components - The components to add
+		   */
+		  addLabelComponents(...components) {
+		    const normalized = normalizeArray(components);
+		    const resolved = normalized.map((label) => resolveBuilder(label, LabelBuilder));
+		    this.components.push(...resolved);
+		    return this;
+		  }
+		  /**
+		   * Adds text display components to this modal.
+		   *
+		   * @param components - The components to add
+		   */
+		  addTextDisplayComponents(...components) {
+		    const normalized = normalizeArray(components);
+		    const resolved = normalized.map((row) => resolveBuilder(row, TextDisplayBuilder));
+		    this.components.push(...resolved);
+		    return this;
+		  }
+		  /**
+		   * Adds action rows to this modal.
+		   *
+		   * @param components - The components to add
+		   * @deprecated Use {@link ModalBuilder.addLabelComponents} instead
+		   */
+		  addActionRowComponents(...components) {
+		    const normalized = normalizeArray(components);
+		    const resolved = normalized.map((row) => resolveBuilder(row, ActionRowBuilder));
+		    this.components.push(...resolved);
+		    return this;
+		  }
+		  /**
+		   * Sets the labels for this modal.
+		   *
+		   * @param components - The components to set
+		   */
+		  setLabelComponents(...components) {
+		    const normalized = normalizeArray(components);
+		    this.spliceLabelComponents(0, this.components.length, ...normalized);
+		    return this;
+		  }
+		  /**
+		   * Removes, replaces, or inserts labels for this modal.
+		   *
+		   * @remarks
+		   * This method behaves similarly
+		   * to {@link https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array/splice | Array.prototype.splice()}.
+		   * The maximum amount of labels that can be added is 5.
+		   *
+		   * It's useful for modifying and adjusting order of the already-existing labels of a modal.
+		   * @example
+		   * Remove the first label:
+		   * ```ts
+		   * modal.spliceLabelComponents(0, 1);
+		   * ```
+		   * @example
+		   * Remove the first n labels:
+		   * ```ts
+		   * const n = 4;
+		   * modal.spliceLabelComponents(0, n);
+		   * ```
+		   * @example
+		   * Remove the last label:
+		   * ```ts
+		   * modal.spliceLabelComponents(-1, 1);
+		   * ```
+		   * @param index - The index to start at
+		   * @param deleteCount - The number of labels to remove
+		   * @param labels - The replacing label objects
+		   */
+		  spliceLabelComponents(index, deleteCount, ...labels) {
+		    const resolved = labels.map((label) => resolveBuilder(label, LabelBuilder));
+		    this.components.splice(index, deleteCount, ...resolved);
 		    return this;
 		  }
 		  /**
 		   * Sets components for this modal.
 		   *
 		   * @param components - The components to set
+		   * @deprecated Use {@link ModalBuilder.setLabelComponents} instead
 		   */
 		  setComponents(...components) {
 		    this.components.splice(0, this.components.length, ...normalizeArray(components));
@@ -86867,8 +86811,8 @@ function requireDist$5 () {
 		};
 
 		// src/interactions/slashCommands/Assertions.ts
-		var Assertions_exports6 = {};
-		__export(Assertions_exports6, {
+		var Assertions_exports8 = {};
+		__export(Assertions_exports8, {
 		  assertReturnOfBuilder: () => assertReturnOfBuilder2,
 		  contextsPredicate: () => contextsPredicate,
 		  integrationTypesPredicate: () => integrationTypesPredicate,
@@ -86886,20 +86830,20 @@ function requireDist$5 () {
 		  validateRequired: () => validateRequired,
 		  validateRequiredParameters: () => validateRequiredParameters3
 		});
-		var import_shapeshift6 = /*@__PURE__*/ requireCjs();
-		var import_v1020 = requireV10();
-		var namePredicate = import_shapeshift6.s.string().lengthGreaterThanOrEqual(1).lengthLessThanOrEqual(32).regex(/^[\p{Ll}\p{Lm}\p{Lo}\p{N}\p{sc=Devanagari}\p{sc=Thai}_-]+$/u).setValidationEnabled(isValidationEnabled);
+		var import_shapeshift9 = /*@__PURE__*/ requireCjs();
+		var import_v1026 = requireV10();
+		var namePredicate = import_shapeshift9.s.string().lengthGreaterThanOrEqual(1).lengthLessThanOrEqual(32).regex(/^[\p{Ll}\p{Lm}\p{Lo}\p{N}\p{sc=Devanagari}\p{sc=Thai}_-]+$/u).setValidationEnabled(isValidationEnabled);
 		function validateName(name) {
 		  namePredicate.parse(name);
 		}
 		__name(validateName, "validateName");
-		var descriptionPredicate3 = import_shapeshift6.s.string().lengthGreaterThanOrEqual(1).lengthLessThanOrEqual(100).setValidationEnabled(isValidationEnabled);
-		var localePredicate = import_shapeshift6.s.nativeEnum(import_v1020.Locale);
+		var descriptionPredicate3 = import_shapeshift9.s.string().lengthGreaterThanOrEqual(1).lengthLessThanOrEqual(100).setValidationEnabled(isValidationEnabled);
+		var localePredicate = import_shapeshift9.s.nativeEnum(import_v1026.Locale);
 		function validateDescription(description) {
 		  descriptionPredicate3.parse(description);
 		}
 		__name(validateDescription, "validateDescription");
-		var maxArrayLengthPredicate = import_shapeshift6.s.unknown().array().lengthLessThanOrEqual(25).setValidationEnabled(isValidationEnabled);
+		var maxArrayLengthPredicate = import_shapeshift9.s.unknown().array().lengthLessThanOrEqual(25).setValidationEnabled(isValidationEnabled);
 		function validateLocale(locale) {
 		  return localePredicate.parse(locale);
 		}
@@ -86914,7 +86858,7 @@ function requireDist$5 () {
 		  validateMaxOptionsLength(options);
 		}
 		__name(validateRequiredParameters3, "validateRequiredParameters");
-		var booleanPredicate = import_shapeshift6.s.boolean();
+		var booleanPredicate = import_shapeshift9.s.boolean();
 		function validateDefaultPermission(value) {
 		  booleanPredicate.parse(value);
 		}
@@ -86923,29 +86867,29 @@ function requireDist$5 () {
 		  booleanPredicate.parse(required);
 		}
 		__name(validateRequired, "validateRequired");
-		var choicesLengthPredicate = import_shapeshift6.s.number().lessThanOrEqual(25).setValidationEnabled(isValidationEnabled);
+		var choicesLengthPredicate = import_shapeshift9.s.number().lessThanOrEqual(25).setValidationEnabled(isValidationEnabled);
 		function validateChoicesLength(amountAdding, choices) {
 		  choicesLengthPredicate.parse((choices?.length ?? 0) + amountAdding);
 		}
 		__name(validateChoicesLength, "validateChoicesLength");
 		function assertReturnOfBuilder2(input, ExpectedInstanceOf) {
-		  import_shapeshift6.s.instance(ExpectedInstanceOf).parse(input);
+		  import_shapeshift9.s.instance(ExpectedInstanceOf).parse(input);
 		}
 		__name(assertReturnOfBuilder2, "assertReturnOfBuilder");
-		var localizationMapPredicate = import_shapeshift6.s.object(Object.fromEntries(Object.values(import_v1020.Locale).map((locale) => [locale, import_shapeshift6.s.string().nullish()]))).strict().nullish().setValidationEnabled(isValidationEnabled);
+		var localizationMapPredicate = import_shapeshift9.s.object(Object.fromEntries(Object.values(import_v1026.Locale).map((locale) => [locale, import_shapeshift9.s.string().nullish()]))).strict().nullish().setValidationEnabled(isValidationEnabled);
 		function validateLocalizationMap(value) {
 		  localizationMapPredicate.parse(value);
 		}
 		__name(validateLocalizationMap, "validateLocalizationMap");
-		var dmPermissionPredicate = import_shapeshift6.s.boolean().nullish();
+		var dmPermissionPredicate = import_shapeshift9.s.boolean().nullish();
 		function validateDMPermission(value) {
 		  dmPermissionPredicate.parse(value);
 		}
 		__name(validateDMPermission, "validateDMPermission");
-		var memberPermissionPredicate = import_shapeshift6.s.union([
-		  import_shapeshift6.s.bigint().transform((value) => value.toString()),
-		  import_shapeshift6.s.number().safeInt().transform((value) => value.toString()),
-		  import_shapeshift6.s.string().regex(/^\d+$/)
+		var memberPermissionPredicate = import_shapeshift9.s.union([
+		  import_shapeshift9.s.bigint().transform((value) => value.toString()),
+		  import_shapeshift9.s.number().safeInt().transform((value) => value.toString()),
+		  import_shapeshift9.s.string().regex(/^\d+$/)
 		]).nullish();
 		function validateDefaultMemberPermissions(permissions) {
 		  return memberPermissionPredicate.parse(permissions);
@@ -86955,11 +86899,11 @@ function requireDist$5 () {
 		  booleanPredicate.parse(value);
 		}
 		__name(validateNSFW, "validateNSFW");
-		var contextsPredicate = import_shapeshift6.s.array(
-		  import_shapeshift6.s.nativeEnum(import_v1020.InteractionContextType).setValidationEnabled(isValidationEnabled)
+		var contextsPredicate = import_shapeshift9.s.array(
+		  import_shapeshift9.s.nativeEnum(import_v1026.InteractionContextType).setValidationEnabled(isValidationEnabled)
 		);
-		var integrationTypesPredicate = import_shapeshift6.s.array(
-		  import_shapeshift6.s.nativeEnum(import_v1020.ApplicationIntegrationType).setValidationEnabled(isValidationEnabled)
+		var integrationTypesPredicate = import_shapeshift9.s.array(
+		  import_shapeshift9.s.nativeEnum(import_v1026.ApplicationIntegrationType).setValidationEnabled(isValidationEnabled)
 		);
 
 		// src/interactions/slashCommands/SlashCommandBuilder.ts
@@ -87079,7 +87023,7 @@ function requireDist$5 () {
 		};
 
 		// src/interactions/slashCommands/mixins/SharedSlashCommand.ts
-		var import_v1021 = requireV10();
+		var import_v1027 = requireV10();
 		var SharedSlashCommand = class {
 		  static {
 		    __name(this, "SharedSlashCommand");
@@ -87184,14 +87128,14 @@ function requireDist$5 () {
 		    validateLocalizationMap(this.description_localizations);
 		    return {
 		      ...this,
-		      type: import_v1021.ApplicationCommandType.ChatInput,
+		      type: import_v1027.ApplicationCommandType.ChatInput,
 		      options: this.options.map((option) => option.toJSON())
 		    };
 		  }
 		};
 
 		// src/interactions/slashCommands/options/attachment.ts
-		var import_v1022 = requireV10();
+		var import_v1028 = requireV10();
 
 		// src/interactions/slashCommands/mixins/ApplicationCommandOptionBase.ts
 		var ApplicationCommandOptionBase = class extends SharedNameAndDescription {
@@ -87233,7 +87177,7 @@ function requireDist$5 () {
 		  /**
 		   * The type of this option.
 		   */
-		  type = import_v1022.ApplicationCommandOptionType.Attachment;
+		  type = import_v1028.ApplicationCommandOptionType.Attachment;
 		  /**
 		   * {@inheritDoc ApplicationCommandOptionBase.toJSON}
 		   */
@@ -87244,7 +87188,7 @@ function requireDist$5 () {
 		};
 
 		// src/interactions/slashCommands/options/boolean.ts
-		var import_v1023 = requireV10();
+		var import_v1029 = requireV10();
 		var SlashCommandBooleanOption = class extends ApplicationCommandOptionBase {
 		  static {
 		    __name(this, "SlashCommandBooleanOption");
@@ -87252,7 +87196,7 @@ function requireDist$5 () {
 		  /**
 		   * The type of this option.
 		   */
-		  type = import_v1023.ApplicationCommandOptionType.Boolean;
+		  type = import_v1029.ApplicationCommandOptionType.Boolean;
 		  /**
 		   * {@inheritDoc ApplicationCommandOptionBase.toJSON}
 		   */
@@ -87263,25 +87207,25 @@ function requireDist$5 () {
 		};
 
 		// src/interactions/slashCommands/options/channel.ts
-		var import_v1025 = requireV10();
+		var import_v1031 = requireV10();
 		var import_ts_mixer = require$$5;
 
 		// src/interactions/slashCommands/mixins/ApplicationCommandOptionChannelTypesMixin.ts
-		var import_shapeshift7 = /*@__PURE__*/ requireCjs();
-		var import_v1024 = requireV10();
+		var import_shapeshift10 = /*@__PURE__*/ requireCjs();
+		var import_v1030 = requireV10();
 		var allowedChannelTypes = [
-		  import_v1024.ChannelType.GuildText,
-		  import_v1024.ChannelType.GuildVoice,
-		  import_v1024.ChannelType.GuildCategory,
-		  import_v1024.ChannelType.GuildAnnouncement,
-		  import_v1024.ChannelType.AnnouncementThread,
-		  import_v1024.ChannelType.PublicThread,
-		  import_v1024.ChannelType.PrivateThread,
-		  import_v1024.ChannelType.GuildStageVoice,
-		  import_v1024.ChannelType.GuildForum,
-		  import_v1024.ChannelType.GuildMedia
+		  import_v1030.ChannelType.GuildText,
+		  import_v1030.ChannelType.GuildVoice,
+		  import_v1030.ChannelType.GuildCategory,
+		  import_v1030.ChannelType.GuildAnnouncement,
+		  import_v1030.ChannelType.AnnouncementThread,
+		  import_v1030.ChannelType.PublicThread,
+		  import_v1030.ChannelType.PrivateThread,
+		  import_v1030.ChannelType.GuildStageVoice,
+		  import_v1030.ChannelType.GuildForum,
+		  import_v1030.ChannelType.GuildMedia
 		];
-		var channelTypesPredicate = import_shapeshift7.s.array(import_shapeshift7.s.union(allowedChannelTypes.map((type) => import_shapeshift7.s.literal(type))));
+		var channelTypesPredicate = import_shapeshift10.s.array(import_shapeshift10.s.union(allowedChannelTypes.map((type) => import_shapeshift10.s.literal(type))));
 		var ApplicationCommandOptionChannelTypesMixin = class {
 		  static {
 		    __name(this, "ApplicationCommandOptionChannelTypesMixin");
@@ -87309,7 +87253,7 @@ function requireDist$5 () {
 		  /**
 		   * The type of this option.
 		   */
-		  type = import_v1025.ApplicationCommandOptionType.Channel;
+		  type = import_v1031.ApplicationCommandOptionType.Channel;
 		  /**
 		   * {@inheritDoc ApplicationCommandOptionBase.toJSON}
 		   */
@@ -87324,8 +87268,8 @@ function requireDist$5 () {
 		], SlashCommandChannelOption);
 
 		// src/interactions/slashCommands/options/integer.ts
-		var import_shapeshift10 = /*@__PURE__*/ requireCjs();
-		var import_v1027 = requireV10();
+		var import_shapeshift13 = /*@__PURE__*/ requireCjs();
+		var import_v1033 = requireV10();
 		var import_ts_mixer2 = require$$5;
 
 		// src/interactions/slashCommands/mixins/ApplicationCommandNumericOptionMinMaxValueMixin.ts
@@ -87344,8 +87288,8 @@ function requireDist$5 () {
 		};
 
 		// src/interactions/slashCommands/mixins/ApplicationCommandOptionWithAutocompleteMixin.ts
-		var import_shapeshift8 = /*@__PURE__*/ requireCjs();
-		var booleanPredicate2 = import_shapeshift8.s.boolean();
+		var import_shapeshift11 = /*@__PURE__*/ requireCjs();
+		var booleanPredicate2 = import_shapeshift11.s.boolean();
 		var ApplicationCommandOptionWithAutocompleteMixin = class {
 		  static {
 		    __name(this, "ApplicationCommandOptionWithAutocompleteMixin");
@@ -87376,14 +87320,14 @@ function requireDist$5 () {
 		};
 
 		// src/interactions/slashCommands/mixins/ApplicationCommandOptionWithChoicesMixin.ts
-		var import_shapeshift9 = /*@__PURE__*/ requireCjs();
-		var import_v1026 = requireV10();
-		var stringPredicate = import_shapeshift9.s.string().lengthGreaterThanOrEqual(1).lengthLessThanOrEqual(100);
-		var numberPredicate = import_shapeshift9.s.number().greaterThan(Number.NEGATIVE_INFINITY).lessThan(Number.POSITIVE_INFINITY);
-		var choicesPredicate = import_shapeshift9.s.object({
+		var import_shapeshift12 = /*@__PURE__*/ requireCjs();
+		var import_v1032 = requireV10();
+		var stringPredicate = import_shapeshift12.s.string().lengthGreaterThanOrEqual(1).lengthLessThanOrEqual(100);
+		var numberPredicate = import_shapeshift12.s.number().greaterThan(Number.NEGATIVE_INFINITY).lessThan(Number.POSITIVE_INFINITY);
+		var choicesPredicate = import_shapeshift12.s.object({
 		  name: stringPredicate,
 		  name_localizations: localizationMapPredicate,
-		  value: import_shapeshift9.s.union([stringPredicate, numberPredicate])
+		  value: import_shapeshift12.s.union([stringPredicate, numberPredicate])
 		}).array();
 		var ApplicationCommandOptionWithChoicesMixin = class {
 		  static {
@@ -87415,7 +87359,7 @@ function requireDist$5 () {
 		    }
 		    validateChoicesLength(normalizedChoices.length, this.choices);
 		    for (const { name, name_localizations, value } of normalizedChoices) {
-		      if (this.type === import_v1026.ApplicationCommandOptionType.String) {
+		      if (this.type === import_v1032.ApplicationCommandOptionType.String) {
 		        stringPredicate.parse(value);
 		      } else {
 		        numberPredicate.parse(value);
@@ -87442,12 +87386,12 @@ function requireDist$5 () {
 		};
 
 		// src/interactions/slashCommands/options/integer.ts
-		var numberValidator = import_shapeshift10.s.number().int();
+		var numberValidator = import_shapeshift13.s.number().int();
 		var SlashCommandIntegerOption = class extends ApplicationCommandOptionBase {
 		  /**
 		   * The type of this option.
 		   */
-		  type = import_v1027.ApplicationCommandOptionType.Integer;
+		  type = import_v1033.ApplicationCommandOptionType.Integer;
 		  /**
 		   * {@inheritDoc ApplicationCommandNumericOptionMinMaxValueMixin.setMaxValue}
 		   */
@@ -87485,7 +87429,7 @@ function requireDist$5 () {
 		], SlashCommandIntegerOption);
 
 		// src/interactions/slashCommands/options/mentionable.ts
-		var import_v1028 = requireV10();
+		var import_v1034 = requireV10();
 		var SlashCommandMentionableOption = class extends ApplicationCommandOptionBase {
 		  static {
 		    __name(this, "SlashCommandMentionableOption");
@@ -87493,7 +87437,7 @@ function requireDist$5 () {
 		  /**
 		   * The type of this option.
 		   */
-		  type = import_v1028.ApplicationCommandOptionType.Mentionable;
+		  type = import_v1034.ApplicationCommandOptionType.Mentionable;
 		  /**
 		   * {@inheritDoc ApplicationCommandOptionBase.toJSON}
 		   */
@@ -87504,15 +87448,15 @@ function requireDist$5 () {
 		};
 
 		// src/interactions/slashCommands/options/number.ts
-		var import_shapeshift11 = /*@__PURE__*/ requireCjs();
-		var import_v1029 = requireV10();
+		var import_shapeshift14 = /*@__PURE__*/ requireCjs();
+		var import_v1035 = requireV10();
 		var import_ts_mixer3 = require$$5;
-		var numberValidator2 = import_shapeshift11.s.number();
+		var numberValidator2 = import_shapeshift14.s.number();
 		var SlashCommandNumberOption = class extends ApplicationCommandOptionBase {
 		  /**
 		   * The type of this option.
 		   */
-		  type = import_v1029.ApplicationCommandOptionType.Number;
+		  type = import_v1035.ApplicationCommandOptionType.Number;
 		  /**
 		   * {@inheritDoc ApplicationCommandNumericOptionMinMaxValueMixin.setMaxValue}
 		   */
@@ -87550,7 +87494,7 @@ function requireDist$5 () {
 		], SlashCommandNumberOption);
 
 		// src/interactions/slashCommands/options/role.ts
-		var import_v1030 = requireV10();
+		var import_v1036 = requireV10();
 		var SlashCommandRoleOption = class extends ApplicationCommandOptionBase {
 		  static {
 		    __name(this, "SlashCommandRoleOption");
@@ -87558,7 +87502,7 @@ function requireDist$5 () {
 		  /**
 		   * The type of this option.
 		   */
-		  type = import_v1030.ApplicationCommandOptionType.Role;
+		  type = import_v1036.ApplicationCommandOptionType.Role;
 		  /**
 		   * {@inheritDoc ApplicationCommandOptionBase.toJSON}
 		   */
@@ -87569,16 +87513,16 @@ function requireDist$5 () {
 		};
 
 		// src/interactions/slashCommands/options/string.ts
-		var import_shapeshift12 = /*@__PURE__*/ requireCjs();
-		var import_v1031 = requireV10();
+		var import_shapeshift15 = /*@__PURE__*/ requireCjs();
+		var import_v1037 = requireV10();
 		var import_ts_mixer4 = require$$5;
-		var minLengthValidator2 = import_shapeshift12.s.number().greaterThanOrEqual(0).lessThanOrEqual(6e3);
-		var maxLengthValidator2 = import_shapeshift12.s.number().greaterThanOrEqual(1).lessThanOrEqual(6e3);
+		var minLengthValidator2 = import_shapeshift15.s.number().greaterThanOrEqual(0).lessThanOrEqual(6e3);
+		var maxLengthValidator2 = import_shapeshift15.s.number().greaterThanOrEqual(1).lessThanOrEqual(6e3);
 		var SlashCommandStringOption = class extends ApplicationCommandOptionBase {
 		  /**
 		   * The type of this option.
 		   */
-		  type = import_v1031.ApplicationCommandOptionType.String;
+		  type = import_v1037.ApplicationCommandOptionType.String;
 		  /**
 		   * The maximum length of this option.
 		   */
@@ -87624,7 +87568,7 @@ function requireDist$5 () {
 		], SlashCommandStringOption);
 
 		// src/interactions/slashCommands/options/user.ts
-		var import_v1032 = requireV10();
+		var import_v1038 = requireV10();
 		var SlashCommandUserOption = class extends ApplicationCommandOptionBase {
 		  static {
 		    __name(this, "SlashCommandUserOption");
@@ -87632,7 +87576,7 @@ function requireDist$5 () {
 		  /**
 		   * The type of this option.
 		   */
-		  type = import_v1032.ApplicationCommandOptionType.User;
+		  type = import_v1038.ApplicationCommandOptionType.User;
 		  /**
 		   * {@inheritDoc ApplicationCommandOptionBase.toJSON}
 		   */
@@ -87738,7 +87682,7 @@ function requireDist$5 () {
 		};
 
 		// src/interactions/slashCommands/SlashCommandSubcommands.ts
-		var import_v1033 = requireV10();
+		var import_v1039 = requireV10();
 		var import_ts_mixer5 = require$$5;
 		var SlashCommandSubcommandGroupBuilder = class {
 		  /**
@@ -87776,7 +87720,7 @@ function requireDist$5 () {
 		  toJSON() {
 		    validateRequiredParameters3(this.name, this.description, this.options);
 		    return {
-		      type: import_v1033.ApplicationCommandOptionType.SubcommandGroup,
+		      type: import_v1039.ApplicationCommandOptionType.SubcommandGroup,
 		      name: this.name,
 		      name_localizations: this.name_localizations,
 		      description: this.description,
@@ -87812,7 +87756,7 @@ function requireDist$5 () {
 		  toJSON() {
 		    validateRequiredParameters3(this.name, this.description, this.options);
 		    return {
-		      type: import_v1033.ApplicationCommandOptionType.Subcommand,
+		      type: import_v1039.ApplicationCommandOptionType.Subcommand,
 		      name: this.name,
 		      name_localizations: this.name_localizations,
 		      description: this.description,
@@ -87920,8 +87864,8 @@ function requireDist$5 () {
 		], SlashCommandBuilder);
 
 		// src/interactions/contextMenuCommands/Assertions.ts
-		var Assertions_exports7 = {};
-		__export(Assertions_exports7, {
+		var Assertions_exports9 = {};
+		__export(Assertions_exports9, {
 		  contextsPredicate: () => contextsPredicate2,
 		  integrationTypesPredicate: () => integrationTypesPredicate2,
 		  validateDMPermission: () => validateDMPermission2,
@@ -87931,11 +87875,11 @@ function requireDist$5 () {
 		  validateRequiredParameters: () => validateRequiredParameters4,
 		  validateType: () => validateType
 		});
-		var import_shapeshift13 = /*@__PURE__*/ requireCjs();
-		var import_v1034 = requireV10();
-		var namePredicate2 = import_shapeshift13.s.string().lengthGreaterThanOrEqual(1).lengthLessThanOrEqual(32).regex(/^( *[\p{P}\p{L}\p{N}\p{sc=Devanagari}\p{sc=Thai}]+ *)+$/u).setValidationEnabled(isValidationEnabled);
-		var typePredicate = import_shapeshift13.s.union([import_shapeshift13.s.literal(import_v1034.ApplicationCommandType.User), import_shapeshift13.s.literal(import_v1034.ApplicationCommandType.Message)]).setValidationEnabled(isValidationEnabled);
-		var booleanPredicate3 = import_shapeshift13.s.boolean();
+		var import_shapeshift16 = /*@__PURE__*/ requireCjs();
+		var import_v1040 = requireV10();
+		var namePredicate2 = import_shapeshift16.s.string().lengthGreaterThanOrEqual(1).lengthLessThanOrEqual(32).regex(/\S/).setValidationEnabled(isValidationEnabled);
+		var typePredicate = import_shapeshift16.s.union([import_shapeshift16.s.literal(import_v1040.ApplicationCommandType.User), import_shapeshift16.s.literal(import_v1040.ApplicationCommandType.Message)]).setValidationEnabled(isValidationEnabled);
+		var booleanPredicate3 = import_shapeshift16.s.boolean();
 		function validateDefaultPermission2(value) {
 		  booleanPredicate3.parse(value);
 		}
@@ -87953,25 +87897,25 @@ function requireDist$5 () {
 		  validateType(type);
 		}
 		__name(validateRequiredParameters4, "validateRequiredParameters");
-		var dmPermissionPredicate2 = import_shapeshift13.s.boolean().nullish();
+		var dmPermissionPredicate2 = import_shapeshift16.s.boolean().nullish();
 		function validateDMPermission2(value) {
 		  dmPermissionPredicate2.parse(value);
 		}
 		__name(validateDMPermission2, "validateDMPermission");
-		var memberPermissionPredicate2 = import_shapeshift13.s.union([
-		  import_shapeshift13.s.bigint().transform((value) => value.toString()),
-		  import_shapeshift13.s.number().safeInt().transform((value) => value.toString()),
-		  import_shapeshift13.s.string().regex(/^\d+$/)
+		var memberPermissionPredicate2 = import_shapeshift16.s.union([
+		  import_shapeshift16.s.bigint().transform((value) => value.toString()),
+		  import_shapeshift16.s.number().safeInt().transform((value) => value.toString()),
+		  import_shapeshift16.s.string().regex(/^\d+$/)
 		]).nullish();
 		function validateDefaultMemberPermissions2(permissions) {
 		  return memberPermissionPredicate2.parse(permissions);
 		}
 		__name(validateDefaultMemberPermissions2, "validateDefaultMemberPermissions");
-		var contextsPredicate2 = import_shapeshift13.s.array(
-		  import_shapeshift13.s.nativeEnum(import_v1034.InteractionContextType).setValidationEnabled(isValidationEnabled)
+		var contextsPredicate2 = import_shapeshift16.s.array(
+		  import_shapeshift16.s.nativeEnum(import_v1040.InteractionContextType).setValidationEnabled(isValidationEnabled)
 		);
-		var integrationTypesPredicate2 = import_shapeshift13.s.array(
-		  import_shapeshift13.s.nativeEnum(import_v1034.ApplicationIntegrationType).setValidationEnabled(isValidationEnabled)
+		var integrationTypesPredicate2 = import_shapeshift16.s.array(
+		  import_shapeshift16.s.nativeEnum(import_v1040.ApplicationIntegrationType).setValidationEnabled(isValidationEnabled)
 		);
 
 		// src/interactions/contextMenuCommands/ContextMenuCommandBuilder.ts
@@ -88152,7 +88096,7 @@ function requireDist$5 () {
 		__name(embedLength, "embedLength");
 
 		// src/index.ts
-		var version = "1.11.2";
+		var version = "1.13.0";
 		
 	} (dist$4));
 	return dist$4.exports;
@@ -88706,222 +88650,6 @@ function requireMessageMentions () {
 
 	MessageMentions_1 = MessageMentions;
 	return MessageMentions_1;
-}
-
-var Poll = {};
-
-var PollAnswer = {};
-
-var hasRequiredPollAnswer;
-
-function requirePollAnswer () {
-	if (hasRequiredPollAnswer) return PollAnswer;
-	hasRequiredPollAnswer = 1;
-
-	const Base = requireBase();
-	const { Emoji } = requireEmoji$1();
-
-	/**
-	 * Represents an answer to a {@link Poll}
-	 * @extends {Base}
-	 */
-	let PollAnswer$1 = class PollAnswer extends Base {
-	  constructor(client, data, poll) {
-	    super(client);
-
-	    /**
-	     * The {@link Poll} this answer is part of
-	     * @name PollAnswer#poll
-	     * @type {Poll}
-	     * @readonly
-	     */
-	    Object.defineProperty(this, 'poll', { value: poll });
-
-	    /**
-	     * The id of this answer
-	     * @type {number}
-	     */
-	    this.id = data.answer_id;
-
-	    /**
-	     * The text of this answer
-	     * @type {?string}
-	     */
-	    this.text = data.poll_media.text ?? null;
-
-	    /**
-	     * The raw emoji of this answer
-	     * @name PollAnswer#_emoji
-	     * @type {?APIPartialEmoji}
-	     * @private
-	     */
-	    Object.defineProperty(this, '_emoji', { value: data.poll_media.emoji ?? null });
-
-	    this._patch(data);
-	  }
-
-	  _patch(data) {
-	    // This `count` field comes from `poll.results.answer_counts`
-	    if ('count' in data) {
-	      /**
-	       * The amount of votes this answer has
-	       * @type {number}
-	       */
-	      this.voteCount = data.count;
-	    } else {
-	      this.voteCount ??= 0;
-	    }
-	  }
-
-	  /**
-	   * The emoji of this answer
-	   * @type {?(GuildEmoji|Emoji)}
-	   */
-	  get emoji() {
-	    if (!this._emoji || (!this._emoji.id && !this._emoji.name)) return null;
-	    return this.client.emojis.cache.get(this._emoji.id) ?? new Emoji(this.client, this._emoji);
-	  }
-
-	  /**
-	   * Options used for fetching voters of a poll answer.
-	   * @typedef {Object} BaseFetchPollAnswerVotersOptions
-	   * @property {number} [limit] The maximum number of voters to fetch
-	   * @property {Snowflake} [after] The user id to fetch voters after
-	   */
-
-	  /**
-	   * Fetches the users that voted for this answer.
-	   * @param {BaseFetchPollAnswerVotersOptions} [options={}] The options for fetching voters
-	   * @returns {Promise<Collection<Snowflake, User>>}
-	   */
-	  fetchVoters({ after, limit } = {}) {
-	    return this.poll.message.channel.messages.fetchPollAnswerVoters({
-	      messageId: this.poll.message.id,
-	      answerId: this.id,
-	      after,
-	      limit,
-	    });
-	  }
-	};
-
-	PollAnswer.PollAnswer = PollAnswer$1;
-	return PollAnswer;
-}
-
-var hasRequiredPoll;
-
-function requirePoll () {
-	if (hasRequiredPoll) return Poll;
-	hasRequiredPoll = 1;
-
-	const { Collection } = requireDist$7();
-	const Base = requireBase();
-	const { PollAnswer } = requirePollAnswer();
-	const { DiscordjsError } = requireDJSError();
-	const { ErrorCodes } = requireErrors$2();
-
-	/**
-	 * Represents a Poll
-	 * @extends {Base}
-	 */
-	let Poll$1 = class Poll extends Base {
-	  constructor(client, data, message) {
-	    super(client);
-
-	    /**
-	     * The message that started this poll
-	     * @name Poll#message
-	     * @type {Message}
-	     * @readonly
-	     */
-
-	    Object.defineProperty(this, 'message', { value: message });
-
-	    /**
-	     * The media for a poll's question
-	     * @typedef {Object} PollQuestionMedia
-	     * @property {string} text The text of this question
-	     */
-
-	    /**
-	     * The media for this poll's question
-	     * @type {PollQuestionMedia}
-	     */
-	    this.question = {
-	      text: data.question.text,
-	    };
-
-	    /**
-	     * The answers of this poll
-	     * @type {Collection<number, PollAnswer>}
-	     */
-	    this.answers = data.answers.reduce(
-	      (acc, answer) => acc.set(answer.answer_id, new PollAnswer(this.client, answer, this)),
-	      new Collection(),
-	    );
-
-	    /**
-	     * The timestamp when this poll expires
-	     * @type {number}
-	     */
-	    this.expiresTimestamp = Date.parse(data.expiry);
-
-	    /**
-	     * Whether this poll allows multiple answers
-	     * @type {boolean}
-	     */
-	    this.allowMultiselect = data.allow_multiselect;
-
-	    /**
-	     * The layout type of this poll
-	     * @type {PollLayoutType}
-	     */
-	    this.layoutType = data.layout_type;
-
-	    this._patch(data);
-	  }
-
-	  _patch(data) {
-	    if (data.results) {
-	      /**
-	       * Whether this poll's results have been precisely counted
-	       * @type {boolean}
-	       */
-	      this.resultsFinalized = data.results.is_finalized;
-
-	      for (const answerResult of data.results.answer_counts) {
-	        const answer = this.answers.get(answerResult.id);
-	        answer?._patch(answerResult);
-	      }
-	    } else {
-	      this.resultsFinalized ??= false;
-	    }
-	  }
-
-	  /**
-	   * The date when this poll expires
-	   * @type {Date}
-	   * @readonly
-	   */
-	  get expiresAt() {
-	    return new Date(this.expiresTimestamp);
-	  }
-
-	  /**
-	   * Ends this poll.
-	   * @returns {Promise<Message>}
-	   */
-	  async end() {
-	    if (Date.now() > this.expiresTimestamp) {
-	      throw new DiscordjsError(ErrorCodes.PollAlreadyExpired);
-	    }
-
-	    return this.message.channel.messages.endPoll(this.message.id);
-	  }
-	};
-
-	Poll.Poll = Poll$1;
-	return Poll;
 }
 
 var ReactionCollector_1;
@@ -89595,7 +89323,15 @@ function requireGuildEmojiRoleManager () {
 	   * @readonly
 	   */
 	  get cache() {
-	    return this.guild.roles.cache.filter(role => this.emoji._roles.includes(role.id));
+	    const cache = new Collection();
+	    for (const roleId of this.emoji._roles) {
+	      const role = this.guild.roles.cache.get(roleId);
+	      if (role !== undefined) {
+	        cache.set(roleId, role);
+	      }
+	    }
+
+	    return cache;
 	  }
 
 	  /**
@@ -89876,555 +89612,6 @@ function requireReactionEmoji () {
 
 	ReactionEmoji_1 = ReactionEmoji;
 	return ReactionEmoji_1;
-}
-
-var UserFlagsBitField_1;
-var hasRequiredUserFlagsBitField;
-
-function requireUserFlagsBitField () {
-	if (hasRequiredUserFlagsBitField) return UserFlagsBitField_1;
-	hasRequiredUserFlagsBitField = 1;
-
-	const { UserFlags } = requireV10();
-	const BitField = requireBitField();
-
-	/**
-	 * Data structure that makes it easy to interact with a {@link User#flags} bitfield.
-	 * @extends {BitField}
-	 */
-	class UserFlagsBitField extends BitField {
-	  /**
-	   * Numeric user flags.
-	   * @type {UserFlags}
-	   * @memberof UserFlagsBitField
-	   */
-	  static Flags = UserFlags;
-	}
-
-	/**
-	 * @name UserFlagsBitField
-	 * @kind constructor
-	 * @memberof UserFlagsBitField
-	 * @param {BitFieldResolvable} [bits=0] Bit(s) to read from
-	 */
-
-	/**
-	 * Bitfield of the packed bits
-	 * @type {number}
-	 * @name UserFlagsBitField#bitfield
-	 */
-
-	UserFlagsBitField_1 = UserFlagsBitField;
-	return UserFlagsBitField_1;
-}
-
-var User_1;
-var hasRequiredUser$1;
-
-function requireUser$1 () {
-	if (hasRequiredUser$1) return User_1;
-	hasRequiredUser$1 = 1;
-
-	const { userMention } = requireDist$6();
-	const { calculateUserDefaultAvatarIndex } = requireWeb();
-	const { DiscordSnowflake } = /*@__PURE__*/ requireCjs$2();
-	const Base = requireBase();
-	const TextBasedChannel = requireTextBasedChannel();
-	const { _transformCollectibles } = requireTransformers();
-	const UserFlagsBitField = requireUserFlagsBitField();
-	const { emitDeprecationWarningForUserFetchFlags } = requireUtil$6();
-
-	/**
-	 * Represents a user on Discord.
-	 * @implements {TextBasedChannel}
-	 * @extends {Base}
-	 */
-	class User extends Base {
-	  constructor(client, data) {
-	    super(client);
-
-	    /**
-	     * The user's id
-	     * @type {Snowflake}
-	     */
-	    this.id = data.id;
-
-	    this.bot = null;
-
-	    this.system = null;
-
-	    this.flags = null;
-
-	    this._patch(data);
-	  }
-
-	  _patch(data) {
-	    if ('username' in data) {
-	      /**
-	       * The username of the user
-	       * @type {?string}
-	       */
-	      this.username = data.username;
-	    } else {
-	      this.username ??= null;
-	    }
-
-	    if ('global_name' in data) {
-	      /**
-	       * The global name of this user
-	       * @type {?string}
-	       */
-	      this.globalName = data.global_name;
-	    } else {
-	      this.globalName ??= null;
-	    }
-
-	    if ('bot' in data) {
-	      /**
-	       * Whether or not the user is a bot
-	       * @type {?boolean}
-	       */
-	      this.bot = Boolean(data.bot);
-	    } else if (!this.partial && typeof this.bot !== 'boolean') {
-	      this.bot = false;
-	    }
-
-	    if ('discriminator' in data) {
-	      /**
-	       * The discriminator of this user
-	       * <info>`'0'`, or a 4-digit stringified number if they're using the legacy username system</info>
-	       * @type {?string}
-	       */
-	      this.discriminator = data.discriminator;
-	    } else {
-	      this.discriminator ??= null;
-	    }
-
-	    if ('avatar' in data) {
-	      /**
-	       * The user avatar's hash
-	       * @type {?string}
-	       */
-	      this.avatar = data.avatar;
-	    } else {
-	      this.avatar ??= null;
-	    }
-
-	    if ('banner' in data) {
-	      /**
-	       * The user banner's hash
-	       * <info>The user must be force fetched for this property to be present or be updated</info>
-	       * @type {?string}
-	       */
-	      this.banner = data.banner;
-	    } else if (this.banner !== null) {
-	      this.banner ??= undefined;
-	    }
-
-	    if ('accent_color' in data) {
-	      /**
-	       * The base 10 accent color of the user's banner
-	       * <info>The user must be force fetched for this property to be present or be updated</info>
-	       * @type {?number}
-	       */
-	      this.accentColor = data.accent_color;
-	    } else if (this.accentColor !== null) {
-	      this.accentColor ??= undefined;
-	    }
-
-	    if ('system' in data) {
-	      /**
-	       * Whether the user is an Official Discord System user (part of the urgent message system)
-	       * @type {?boolean}
-	       */
-	      this.system = Boolean(data.system);
-	    } else if (!this.partial && typeof this.system !== 'boolean') {
-	      this.system = false;
-	    }
-
-	    if ('public_flags' in data) {
-	      /**
-	       * The flags for this user
-	       * @type {?UserFlagsBitField}
-	       */
-	      this.flags = new UserFlagsBitField(data.public_flags);
-	    }
-
-	    if ('avatar_decoration' in data) {
-	      /**
-	       * The user avatar decoration's hash
-	       * @type {?string}
-	       * @deprecated Use `avatarDecorationData` instead
-	       */
-	      this.avatarDecoration = data.avatar_decoration;
-	    } else {
-	      this.avatarDecoration ??= null;
-	    }
-
-	    /**
-	     * @typedef {Object} AvatarDecorationData
-	     * @property {string} asset The avatar decoration hash
-	     * @property {Snowflake} skuId The id of the avatar decoration's SKU
-	     */
-	    if ('avatar_decoration_data' in data) {
-	      if (data.avatar_decoration_data) {
-	        /**
-	         * The user avatar decoration's data
-	         *
-	         * @type {?AvatarDecorationData}
-	         */
-	        this.avatarDecorationData = {
-	          asset: data.avatar_decoration_data.asset,
-	          skuId: data.avatar_decoration_data.sku_id,
-	        };
-	      } else {
-	        this.avatarDecorationData = null;
-	      }
-	    } else {
-	      this.avatarDecorationData ??= null;
-	    }
-
-	    /**
-	     * @typedef {Object} NameplateData
-	     * @property {Snowflake} skuId The id of the nameplate's SKU
-	     * @property {string} asset The nameplate's asset path
-	     * @property {string} label The nameplate's label
-	     * @property {NameplatePalette} palette Background color of the nameplate
-	     */
-
-	    /**
-	     * @typedef {Object} Collectibles
-	     * @property {?NameplateData} nameplate The user's nameplate data
-	     */
-
-	    if (data.collectibles) {
-	      /**
-	       * The user's collectibles
-	       *
-	       * @type {?Collectibles}
-	       */
-	      this.collectibles = _transformCollectibles(data.collectibles);
-	    } else {
-	      this.collectibles = null;
-	    }
-
-	    /**
-	     * @typedef {Object} UserPrimaryGuild
-	     * @property {?Snowflake} identityGuildId The id of the user's primary guild
-	     * @property {?boolean} identityEnabled Whether the user is displaying the primary guild's tag
-	     * @property {?string} tag The user's guild tag. Limited to 4 characters
-	     * @property {?string} badge The guild tag badge hash
-	     */
-
-	    if ('primary_guild' in data) {
-	      if (data.primary_guild) {
-	        /**
-	         * The primary guild of the user
-	         *
-	         * @type {?UserPrimaryGuild}
-	         */
-	        this.primaryGuild = {
-	          identityGuildId: data.primary_guild.identity_guild_id,
-	          identityEnabled: data.primary_guild.identity_enabled,
-	          tag: data.primary_guild.tag,
-	          badge: data.primary_guild.badge,
-	        };
-	      } else {
-	        this.primaryGuild = null;
-	      }
-	    } else {
-	      this.primaryGuild ??= null;
-	    }
-	  }
-
-	  /**
-	   * Whether this User is a partial
-	   * @type {boolean}
-	   * @readonly
-	   */
-	  get partial() {
-	    return typeof this.username !== 'string';
-	  }
-
-	  /**
-	   * The timestamp the user was created at
-	   * @type {number}
-	   * @readonly
-	   */
-	  get createdTimestamp() {
-	    return DiscordSnowflake.timestampFrom(this.id);
-	  }
-
-	  /**
-	   * The time the user was created at
-	   * @type {Date}
-	   * @readonly
-	   */
-	  get createdAt() {
-	    return new Date(this.createdTimestamp);
-	  }
-
-	  /**
-	   * A link to the user's avatar.
-	   * @param {ImageURLOptions} [options={}] Options for the image URL
-	   * @returns {?string}
-	   */
-	  avatarURL(options = {}) {
-	    return this.avatar && this.client.rest.cdn.avatar(this.id, this.avatar, options);
-	  }
-
-	  /**
-	   * A link to the user's avatar decoration.
-	   * @param {BaseImageURLOptions} [options={}] Options for the image URL
-	   * @returns {?string}
-	   */
-	  avatarDecorationURL(options = {}) {
-	    if (this.avatarDecorationData) {
-	      return this.client.rest.cdn.avatarDecoration(this.avatarDecorationData.asset);
-	    }
-
-	    return this.avatarDecoration && this.client.rest.cdn.avatarDecoration(this.id, this.avatarDecoration, options);
-	  }
-
-	  /**
-	   * A link to the user's default avatar
-	   * @type {string}
-	   * @readonly
-	   */
-	  get defaultAvatarURL() {
-	    const index = this.discriminator === '0' ? calculateUserDefaultAvatarIndex(this.id) : this.discriminator % 5;
-	    return this.client.rest.cdn.defaultAvatar(index);
-	  }
-
-	  /**
-	   * A link to the user's avatar if they have one.
-	   * Otherwise a link to their default avatar will be returned.
-	   * @param {ImageURLOptions} [options={}] Options for the image URL
-	   * @returns {string}
-	   */
-	  displayAvatarURL(options) {
-	    return this.avatarURL(options) ?? this.defaultAvatarURL;
-	  }
-
-	  /**
-	   * The hexadecimal version of the user accent color, with a leading hash
-	   * <info>The user must be force fetched for this property to be present</info>
-	   * @type {?string}
-	   * @readonly
-	   */
-	  get hexAccentColor() {
-	    if (typeof this.accentColor !== 'number') return this.accentColor;
-	    return `#${this.accentColor.toString(16).padStart(6, '0')}`;
-	  }
-
-	  /**
-	   * A link to the user's banner. See {@link User#banner} for more info
-	   * @param {ImageURLOptions} [options={}] Options for the image URL
-	   * @returns {?string}
-	   */
-	  bannerURL(options = {}) {
-	    return this.banner && this.client.rest.cdn.banner(this.id, this.banner, options);
-	  }
-
-	  /**
-	   * A link to the user's guild tag badge.
-	   *
-	   * @param {ImageURLOptions} [options={}] Options for the image URL
-	   * @returns {?string}
-	   */
-	  guildTagBadgeURL(options = {}) {
-	    return this.primaryGuild?.badge
-	      ? this.client.rest.cdn.guildTagBadge(this.primaryGuild.identityGuildId, this.primaryGuild.badge, options)
-	      : null;
-	  }
-
-	  /**
-	   * The tag of this user
-	   * <info>This user's username, or their legacy tag (e.g. `hydrabolt#0001`)
-	   * if they're using the legacy username system</info>
-	   * @type {?string}
-	   * @readonly
-	   */
-	  get tag() {
-	    return typeof this.username === 'string'
-	      ? this.discriminator === '0'
-	        ? this.username
-	        : `${this.username}#${this.discriminator}`
-	      : null;
-	  }
-
-	  /**
-	   * The global name of this user, or their username if they don't have one
-	   * @type {?string}
-	   * @readonly
-	   */
-	  get displayName() {
-	    return this.globalName ?? this.username;
-	  }
-
-	  /**
-	   * The DM between the client's user and this user
-	   * @type {?DMChannel}
-	   * @readonly
-	   */
-	  get dmChannel() {
-	    return this.client.users.dmChannel(this.id);
-	  }
-
-	  /**
-	   * Creates a DM channel between the client and the user.
-	   * @param {boolean} [force=false] Whether to skip the cache check and request the API
-	   * @returns {Promise<DMChannel>}
-	   */
-	  createDM(force = false) {
-	    return this.client.users.createDM(this.id, { force });
-	  }
-
-	  /**
-	   * Deletes a DM channel (if one exists) between the client and the user. Resolves with the channel if successful.
-	   * @returns {Promise<DMChannel>}
-	   */
-	  deleteDM() {
-	    return this.client.users.deleteDM(this.id);
-	  }
-
-	  /**
-	   * Checks if the user is equal to another.
-	   * It compares id, username, discriminator, avatar, banner, accent color, and bot flags.
-	   * It is recommended to compare equality by using `user.id === user2.id` unless you want to compare all properties.
-	   * @param {User} user User to compare with
-	   * @returns {boolean}
-	   */
-	  equals(user) {
-	    return (
-	      user &&
-	      this.id === user.id &&
-	      this.username === user.username &&
-	      this.discriminator === user.discriminator &&
-	      this.globalName === user.globalName &&
-	      this.avatar === user.avatar &&
-	      this.flags?.bitfield === user.flags?.bitfield &&
-	      this.banner === user.banner &&
-	      this.accentColor === user.accentColor &&
-	      this.avatarDecoration === user.avatarDecoration &&
-	      this.avatarDecorationData?.asset === user.avatarDecorationData?.asset &&
-	      this.avatarDecorationData?.skuId === user.avatarDecorationData?.skuId &&
-	      this.collectibles?.nameplate?.skuId === user.collectibles?.nameplate?.skuId &&
-	      this.collectibles?.nameplate?.asset === user.collectibles?.nameplate?.asset &&
-	      this.collectibles?.nameplate?.label === user.collectibles?.nameplate?.label &&
-	      this.collectibles?.nameplate?.palette === user.collectibles?.nameplate?.palette &&
-	      this.primaryGuild?.identityGuildId === user.primaryGuild?.identityGuildId &&
-	      this.primaryGuild?.identityEnabled === user.primaryGuild?.identityEnabled &&
-	      this.primaryGuild?.tag === user.primaryGuild?.tag &&
-	      this.primaryGuild?.badge === user.primaryGuild?.badge
-	    );
-	  }
-
-	  /**
-	   * Compares the user with an API user object
-	   * @param {APIUser} user The API user object to compare
-	   * @returns {boolean}
-	   * @private
-	   */
-	  _equals(user) {
-	    return (
-	      user &&
-	      this.id === user.id &&
-	      this.username === user.username &&
-	      this.discriminator === user.discriminator &&
-	      this.globalName === user.global_name &&
-	      this.avatar === user.avatar &&
-	      this.flags?.bitfield === user.public_flags &&
-	      ('banner' in user ? this.banner === user.banner : true) &&
-	      ('accent_color' in user ? this.accentColor === user.accent_color : true) &&
-	      ('avatar_decoration' in user ? this.avatarDecoration === user.avatar_decoration : true) &&
-	      ('avatar_decoration_data' in user
-	        ? this.avatarDecorationData?.asset === user.avatar_decoration_data?.asset &&
-	          this.avatarDecorationData?.skuId === user.avatar_decoration_data?.sku_id
-	        : true) &&
-	      ('collectibles' in user
-	        ? this.collectibles?.nameplate?.skuId === user.collectibles?.nameplate?.sku_id &&
-	          this.collectibles?.nameplate?.asset === user.collectibles?.nameplate?.asset &&
-	          this.collectibles?.nameplate?.label === user.collectibles?.nameplate?.label &&
-	          this.collectibles?.nameplate?.palette === user.collectibles?.nameplate?.palette
-	        : true) &&
-	      ('primary_guild' in user
-	        ? this.primaryGuild?.identityGuildId === user.primary_guild?.identity_guild_id &&
-	          this.primaryGuild?.identityEnabled === user.primary_guild?.identity_enabled &&
-	          this.primaryGuild?.tag === user.primary_guild?.tag &&
-	          this.primaryGuild?.badge === user.primary_guild?.badge
-	        : true)
-	    );
-	  }
-
-	  /**
-	   * Fetches this user's flags.
-	   * @param {boolean} [force=false] Whether to skip the cache check and request the API
-	   * @returns {Promise<UserFlagsBitField>}
-	   * @deprecated <warn>This method is deprecated and will be removed in the next major version.
-	   * Flags may still be retrieved via {@link User#fetch}.</warn>
-	   */
-	  fetchFlags(force = false) {
-	    emitDeprecationWarningForUserFetchFlags(this.constructor.name);
-	    return this.client.users.fetchFlags(this.id, { force });
-	  }
-
-	  /**
-	   * Fetches this user.
-	   * @param {boolean} [force=true] Whether to skip the cache check and request the API
-	   * @returns {Promise<User>}
-	   */
-	  fetch(force = true) {
-	    return this.client.users.fetch(this.id, { force });
-	  }
-
-	  /**
-	   * When concatenated with a string, this automatically returns the user's mention instead of the User object.
-	   * @returns {string}
-	   * @example
-	   * // Logs: Hello from <@123456789012345678>!
-	   * console.log(`Hello from ${user}!`);
-	   */
-	  toString() {
-	    return userMention(this.id);
-	  }
-
-	  toJSON(...props) {
-	    const json = super.toJSON(
-	      {
-	        createdTimestamp: true,
-	        defaultAvatarURL: true,
-	        hexAccentColor: true,
-	        tag: true,
-	      },
-	      ...props,
-	    );
-	    json.avatarURL = this.avatarURL();
-	    json.displayAvatarURL = this.displayAvatarURL();
-	    json.bannerURL = this.banner ? this.bannerURL() : this.banner;
-	    json.guildTagBadgeURL = this.guildTagBadgeURL();
-	    return json;
-	  }
-	}
-
-	/**
-	 * Sends a message to this user.
-	 * @method send
-	 * @memberof User
-	 * @instance
-	 * @param {string|MessagePayload|MessageCreateOptions} options The options to provide
-	 * @returns {Promise<Message>}
-	 * @example
-	 * // Send a direct message
-	 * user.send('Hello!')
-	 *   .then(message => console.log(`Sent message: ${message.content} to ${user.tag}`))
-	 *   .catch(console.error);
-	 */
-
-	TextBasedChannel.applyToClass(User);
-
-	User_1 = User;
-	return User_1;
 }
 
 var ReactionUserManager_1;
@@ -91371,6 +90558,68 @@ function requireFileComponent () {
 	return FileComponent_1;
 }
 
+var LabelComponent_1;
+var hasRequiredLabelComponent;
+
+function requireLabelComponent () {
+	if (hasRequiredLabelComponent) return LabelComponent_1;
+	hasRequiredLabelComponent = 1;
+
+	const Component = requireComponent();
+	const { createComponent } = requireComponents$1();
+
+	/**
+	 * Represents a label component
+	 *
+	 * @extends {Component}
+	 */
+	class LabelComponent extends Component {
+	  constructor({ component, ...data }) {
+	    super(data);
+
+	    /**
+	     * The component in this label
+	     *
+	     * @type {Component}
+	     * @readonly
+	     */
+	    this.component = createComponent(component);
+	  }
+
+	  /**
+	   * The label of the component
+	   *
+	   * @type {string}
+	   * @readonly
+	   */
+	  get label() {
+	    return this.data.label;
+	  }
+
+	  /**
+	   * The description of this component
+	   *
+	   * @type {?string}
+	   * @readonly
+	   */
+	  get description() {
+	    return this.data.description ?? null;
+	  }
+
+	  /**
+	   * Returns the API-compatible JSON for this component
+	   *
+	   * @returns {APILabelComponent}
+	   */
+	  toJSON() {
+	    return { ...this.data, component: this.component.toJSON() };
+	  }
+	}
+
+	LabelComponent_1 = LabelComponent;
+	return LabelComponent_1;
+}
+
 var MediaGalleryItem_1;
 var hasRequiredMediaGalleryItem;
 
@@ -92030,6 +91279,26 @@ function requireComponents$1 () {
 	 */
 
 	/**
+	 * @typedef {Object} ModalComponentData
+	 * @property {string} title The title of the modal
+	 * @property {string} customId The custom id of the modal
+	 * @property {Array<ActionRow|TextDisplayComponentData|LabelData>} components The components within this modal
+	 */
+
+	/**
+	 * @typedef {StringSelectMenuComponentData|TextInputComponentData|UserSelectMenuComponentData|
+	 * RoleSelectMenuComponentData|MentionableSelectMenuComponentData|ChannelSelectMenuComponentData|
+	 * FileUploadComponentData} ComponentInLabelData
+	 */
+
+	/**
+	 * @typedef {BaseComponentData} LabelData
+	 * @property {string} label The label to use
+	 * @property {string} [description] The optional description for the label
+	 * @property {ComponentInLabelData} component The component within the label
+	 */
+
+	/**
 	 * @typedef {BaseComponentData} ButtonComponentData
 	 * @property {ButtonStyle} style The style of the button
 	 * @property {boolean} [disabled] Whether this button is disabled
@@ -92037,6 +91306,50 @@ function requireComponents$1 () {
 	 * @property {APIMessageComponentEmoji} [emoji] The emoji on this button
 	 * @property {string} [customId] The custom id of the button
 	 * @property {string} [url] The URL of the button
+	 */
+
+	/**
+	 * @typedef {BaseComponentData} FileUploadComponentData
+	 * @property {string} customId The custom id of the file upload
+	 * @property {number} [minValues] The minimum number of files that can be uploaded (0-10)
+	 * @property {number} [maxValues] The maximum number of files that can be uploaded (1-10)
+	 * @property {boolean} [required] Whether this component is required in modals
+	 */
+
+	/**
+	 * @typedef {BaseComponentData} BaseSelectMenuComponentData
+	 * @property {string} customId The custom id of the select menu
+	 * @property {boolean} [disabled] Whether the select menu is disabled or not
+	 * @property {number} [maxValues] The maximum amount of options that can be selected
+	 * @property {number} [minValues] The minimum amount of options that can be selected
+	 * @property {string} [placeholder] The placeholder of the select menu
+	 * @property {boolean} [required] Whether this component is required in modals
+	 */
+
+	/**
+	 * @typedef {BaseSelectMenuComponentData} StringSelectMenuComponentData
+	 * @property {SelectMenuComponentOptionData[]} [options] The options in this select menu
+	 */
+
+	/**
+	 * @typedef {BaseSelectMenuComponentData} UserSelectMenuComponentData
+	 * @property {APISelectMenuDefaultValue[]} [defaultValues] The default selected values in this select menu
+	 */
+
+	/**
+	 * @typedef {BaseSelectMenuComponentData} RoleSelectMenuComponentData
+	 * @property {APISelectMenuDefaultValue[]} [defaultValues] The default selected values in this select menu
+	 */
+
+	/**
+	 * @typedef {BaseSelectMenuComponentData} MentionableSelectMenuComponentData
+	 * @property {APISelectMenuDefaultValue[]} [defaultValues] The default selected values in this select menu
+	 */
+
+	/**
+	 * @typedef {BaseSelectMenuComponentData} ChannelSelectMenuComponentData
+	 * @property {APISelectMenuDefaultValue[]} [defaultValues] The default selected values in this select menu
+	 * @property {ChannelType[]} [channelTypes] The types of channels that can be selected
 	 */
 
 	/**
@@ -92214,6 +91527,7 @@ function requireComponents$1 () {
 	const Component = requireComponent();
 	const ContainerComponent = requireContainerComponent();
 	const FileComponent = requireFileComponent();
+	const LabelComponent = requireLabelComponent();
 	const MediaGalleryComponent = requireMediaGalleryComponent();
 	const MentionableSelectMenuBuilder = requireMentionableSelectMenuBuilder();
 	const MentionableSelectMenuComponent = requireMentionableSelectMenuComponent();
@@ -92246,6 +91560,7 @@ function requireComponents$1 () {
 	  [ComponentType.Section]: SectionComponent,
 	  [ComponentType.Separator]: SeparatorComponent,
 	  [ComponentType.Thumbnail]: ThumbnailComponent,
+	  [ComponentType.Label]: LabelComponent,
 	};
 
 	const ComponentTypeToBuilder = {
@@ -92709,11 +92024,15 @@ function requireMessage$1 () {
 	    }
 
 	    if (data.poll) {
-	      /**
-	       * The poll that was sent with the message
-	       * @type {?Poll}
-	       */
-	      this.poll = new Poll(this.client, data.poll, this);
+	      if (this.poll) {
+	        this.poll._patch(data.poll);
+	      } else {
+	        /**
+	         * The poll that was sent with the message
+	         * @type {?Poll}
+	         */
+	        this.poll = new Poll(this.client, data.poll, this, this.channel);
+	      }
 	    } else {
 	      this.poll ??= null;
 	    }
@@ -92886,7 +92205,7 @@ function requireMessage$1 () {
 	   * Similar to createReactionCollector but in promise form.
 	   * Resolves with a collection of reactions that pass the specified filter.
 	   * @param {AwaitReactionsOptions} [options={}] Optional options to pass to the internal collector
-	   * @returns {Promise<Collection<string | Snowflake, MessageReaction>>}
+	   * @returns {Promise<Collection<string|Snowflake, MessageReaction>>}
 	   * @example
 	   * // Create a reaction collector
 	   * const filter = (reaction, user) => reaction.emoji.name === '👌' && user.id === 'someId'
@@ -93044,11 +92363,16 @@ function requireMessage$1 () {
 	   */
 	  get pinnable() {
 	    const { channel } = this;
-	    return Boolean(
-	      !this.system &&
-	        (!this.guild ||
-	          (channel?.viewable &&
-	            channel?.permissionsFor(this.client.user)?.has(PermissionFlagsBits.ManageMessages, false))),
+	    if (this.system) return false;
+	    if (!this.guild) return true;
+	    if (!channel || channel.isVoiceBased() || !channel.viewable) return false;
+
+	    const permissions = channel?.permissionsFor(this.client.user);
+	    if (!permissions) return false;
+
+	    return (
+	      permissions.has(PermissionFlagsBits.ReadMessageHistory | PermissionFlagsBits.PinMessages) ||
+	      permissions.has(PermissionFlagsBits.ReadMessageHistory | PermissionFlagsBits.ManageMessages)
 	    );
 	  }
 
@@ -93425,7 +92749,7 @@ function requireWebhook () {
 	     * @readonly
 	     */
 	    Object.defineProperty(this, 'client', { value: client });
-	    if (data) this._patch(data);
+	    this._patch(data);
 	  }
 
 	  _patch(data) {
@@ -94366,8 +93690,17 @@ function requireGuildMemberRoleManager () {
 	   * @readonly
 	   */
 	  get cache() {
-	    const everyone = this.guild.roles.everyone;
-	    return this.guild.roles.cache.filter(role => this.member._roles.includes(role.id)).set(everyone.id, everyone);
+	    const cache = new Collection();
+	    cache.set(this.guild.id, this.guild.roles.everyone);
+
+	    for (const roleId of this.member._roles) {
+	      const role = this.guild.roles.cache.get(roleId);
+	      if (role !== undefined) {
+	        cache.set(roleId, role);
+	      }
+	    }
+
+	    return cache;
 	  }
 
 	  /**
@@ -94559,7 +93892,8 @@ function requireGuildMemberFlagsBitField () {
 	 */
 	let GuildMemberFlagsBitField$1 = class GuildMemberFlagsBitField extends BitField {
 	  /**
-	   * Numeric guild guild member flags.
+	   * Numeric guild member flags.
+	   *
 	   * @type {GuildMemberFlags}
 	   * @memberof GuildMemberFlagsBitField
 	   */
@@ -94623,12 +93957,6 @@ function requireGuildMember () {
 	    this.guild = guild;
 
 	    /**
-	     * The timestamp the member joined the guild at
-	     * @type {?number}
-	     */
-	    this.joinedTimestamp = null;
-
-	    /**
 	     * The last timestamp this member started boosting the guild
 	     * @type {?number}
 	     */
@@ -94660,7 +93988,7 @@ function requireGuildMember () {
 	     */
 	    Object.defineProperty(this, '_roles', { value: [], writable: true });
 
-	    if (data) this._patch(data);
+	    this._patch(data);
 	  }
 
 	  _patch(data) {
@@ -94693,7 +94021,17 @@ function requireGuildMember () {
 	      this.banner ??= null;
 	    }
 
-	    if ('joined_at' in data) this.joinedTimestamp = Date.parse(data.joined_at);
+	    if ('joined_at' in data) {
+	      /**
+	       * The timestamp the member joined the guild at
+	       *
+	       * @type {?number}
+	       */
+	      this.joinedTimestamp = data.joined_at && Date.parse(data.joined_at);
+	    } else {
+	      this.joinedTimestamp ??= null;
+	    }
+
 	    if ('premium_since' in data) {
 	      this.premiumSinceTimestamp = data.premium_since ? Date.parse(data.premium_since) : null;
 	    }
@@ -95020,7 +94358,9 @@ function requireGuildMember () {
 	   *   .catch(console.error);
 	   */
 	  setNickname(nick, reason) {
-	    return this.edit({ nick, reason });
+	    return this.user.id === this.client.user.id
+	      ? this.guild.members.editMe({ nick, reason })
+	      : this.edit({ nick, reason });
 	  }
 
 	  /**
@@ -95302,12 +94642,12 @@ function requireMessageManager () {
 	    return this._add(data, cache);
 	  }
 
-	  async _fetchMany(options = {}) {
+	  async _fetchMany({ cache, ...apiOptions } = {}) {
 	    const data = await this.client.rest.get(Routes.channelMessages(this.channel.id), {
-	      query: makeURLSearchParams(options),
+	      query: makeURLSearchParams(apiOptions),
 	    });
 
-	    return data.reduce((_data, message) => _data.set(message.id, this._add(message, options.cache)), new Collection());
+	    return data.reduce((_data, message) => _data.set(message.id, this._add(message, cache)), new Collection());
 	  }
 
 	  /**
@@ -95337,8 +94677,8 @@ function requireMessageManager () {
 	   */
 
 	  /**
-	   * Fetches the pinned messages of this channel and returns a collection of them.
-	   * <info>The returned Collection does not contain any reaction data of the messages.
+	   * Fetches the pinned messages of this channel, returning a paginated result.
+	   * <info>The returned messages do not contain any reaction data.
 	   * Those need to be fetched separately.</info>
 	   *
 	   * @param {FetchPinnedMessagesOptions} [options={}] Options for fetching pinned messages
@@ -95349,11 +94689,11 @@ function requireMessageManager () {
 	   *   .then(messages => console.log(`Received ${messages.items.length} messages`))
 	   *   .catch(console.error);
 	   */
-	  async fetchPins(options = {}) {
+	  async fetchPins({ cache, ...apiOptions } = {}) {
 	    const data = await this.client.rest.get(Routes.channelMessagesPins(this.channel.id), {
 	      query: makeURLSearchParams({
-	        ...options,
-	        before: options.before && new Date(options.before).toISOString(),
+	        ...apiOptions,
+	        before: apiOptions.before && new Date(apiOptions.before).toISOString(),
 	      }),
 	    });
 
@@ -95363,7 +94703,7 @@ function requireMessageManager () {
 	        get pinnedAt() {
 	          return new Date(this.pinnedTimestamp);
 	        },
-	        message: this._add(item.message, options.cache),
+	        message: this._add(item.message, cache),
 	      })),
 	      hasMore: data.has_more,
 	    };
@@ -96459,6 +95799,1662 @@ function requireTextBasedChannel () {
 	return TextBasedChannel_1;
 }
 
+var UserFlagsBitField_1;
+var hasRequiredUserFlagsBitField;
+
+function requireUserFlagsBitField () {
+	if (hasRequiredUserFlagsBitField) return UserFlagsBitField_1;
+	hasRequiredUserFlagsBitField = 1;
+
+	const { UserFlags } = requireV10();
+	const BitField = requireBitField();
+
+	/**
+	 * Data structure that makes it easy to interact with a {@link User#flags} bitfield.
+	 * @extends {BitField}
+	 */
+	class UserFlagsBitField extends BitField {
+	  /**
+	   * Numeric user flags.
+	   * @type {UserFlags}
+	   * @memberof UserFlagsBitField
+	   */
+	  static Flags = UserFlags;
+	}
+
+	/**
+	 * @name UserFlagsBitField
+	 * @kind constructor
+	 * @memberof UserFlagsBitField
+	 * @param {BitFieldResolvable} [bits=0] Bit(s) to read from
+	 */
+
+	/**
+	 * Bitfield of the packed bits
+	 * @type {number}
+	 * @name UserFlagsBitField#bitfield
+	 */
+
+	UserFlagsBitField_1 = UserFlagsBitField;
+	return UserFlagsBitField_1;
+}
+
+var User_1;
+var hasRequiredUser$1;
+
+function requireUser$1 () {
+	if (hasRequiredUser$1) return User_1;
+	hasRequiredUser$1 = 1;
+
+	const { userMention } = requireDist$6();
+	const { calculateUserDefaultAvatarIndex } = requireWeb();
+	const { DiscordSnowflake } = /*@__PURE__*/ requireCjs$2();
+	const Base = requireBase();
+	const TextBasedChannel = requireTextBasedChannel();
+	const { _transformCollectibles } = requireTransformers();
+	const UserFlagsBitField = requireUserFlagsBitField();
+	const { emitDeprecationWarningForUserFetchFlags } = requireUtil$6();
+
+	/**
+	 * Represents a user on Discord.
+	 * @implements {TextBasedChannel}
+	 * @extends {Base}
+	 */
+	class User extends Base {
+	  constructor(client, data) {
+	    super(client);
+
+	    /**
+	     * The user's id
+	     * @type {Snowflake}
+	     */
+	    this.id = data.id;
+
+	    this.bot = null;
+
+	    this.system = null;
+
+	    this.flags = null;
+
+	    this._patch(data);
+	  }
+
+	  _patch(data) {
+	    if ('username' in data) {
+	      /**
+	       * The username of the user
+	       * @type {?string}
+	       */
+	      this.username = data.username;
+	    } else {
+	      this.username ??= null;
+	    }
+
+	    if ('global_name' in data) {
+	      /**
+	       * The global name of this user
+	       * @type {?string}
+	       */
+	      this.globalName = data.global_name;
+	    } else {
+	      this.globalName ??= null;
+	    }
+
+	    if ('bot' in data) {
+	      /**
+	       * Whether or not the user is a bot
+	       * @type {?boolean}
+	       */
+	      this.bot = Boolean(data.bot);
+	    } else if (!this.partial && typeof this.bot !== 'boolean') {
+	      this.bot = false;
+	    }
+
+	    if ('discriminator' in data) {
+	      /**
+	       * The discriminator of this user
+	       * <info>`'0'`, or a 4-digit stringified number if they're using the legacy username system</info>
+	       * @type {?string}
+	       */
+	      this.discriminator = data.discriminator;
+	    } else {
+	      this.discriminator ??= null;
+	    }
+
+	    if ('avatar' in data) {
+	      /**
+	       * The user avatar's hash
+	       * @type {?string}
+	       */
+	      this.avatar = data.avatar;
+	    } else {
+	      this.avatar ??= null;
+	    }
+
+	    if ('banner' in data) {
+	      /**
+	       * The user banner's hash
+	       * <info>The user must be force fetched for this property to be present or be updated</info>
+	       * @type {?string}
+	       */
+	      this.banner = data.banner;
+	    } else if (this.banner !== null) {
+	      this.banner ??= undefined;
+	    }
+
+	    if ('accent_color' in data) {
+	      /**
+	       * The base 10 accent color of the user's banner
+	       * <info>The user must be force fetched for this property to be present or be updated</info>
+	       * @type {?number}
+	       */
+	      this.accentColor = data.accent_color;
+	    } else if (this.accentColor !== null) {
+	      this.accentColor ??= undefined;
+	    }
+
+	    if ('system' in data) {
+	      /**
+	       * Whether the user is an Official Discord System user (part of the urgent message system)
+	       * @type {?boolean}
+	       */
+	      this.system = Boolean(data.system);
+	    } else if (!this.partial && typeof this.system !== 'boolean') {
+	      this.system = false;
+	    }
+
+	    if ('public_flags' in data) {
+	      /**
+	       * The flags for this user
+	       * @type {?UserFlagsBitField}
+	       */
+	      this.flags = new UserFlagsBitField(data.public_flags);
+	    }
+
+	    if ('avatar_decoration' in data) {
+	      /**
+	       * The user avatar decoration's hash
+	       * @type {?string}
+	       * @deprecated Use `avatarDecorationData` instead
+	       */
+	      this.avatarDecoration = data.avatar_decoration;
+	    } else {
+	      this.avatarDecoration ??= null;
+	    }
+
+	    /**
+	     * @typedef {Object} AvatarDecorationData
+	     * @property {string} asset The avatar decoration hash
+	     * @property {Snowflake} skuId The id of the avatar decoration's SKU
+	     */
+	    if ('avatar_decoration_data' in data) {
+	      if (data.avatar_decoration_data) {
+	        /**
+	         * The user avatar decoration's data
+	         *
+	         * @type {?AvatarDecorationData}
+	         */
+	        this.avatarDecorationData = {
+	          asset: data.avatar_decoration_data.asset,
+	          skuId: data.avatar_decoration_data.sku_id,
+	        };
+	      } else {
+	        this.avatarDecorationData = null;
+	      }
+	    } else {
+	      this.avatarDecorationData ??= null;
+	    }
+
+	    /**
+	     * @typedef {Object} NameplateData
+	     * @property {Snowflake} skuId The id of the nameplate's SKU
+	     * @property {string} asset The nameplate's asset path
+	     * @property {string} label The nameplate's label
+	     * @property {NameplatePalette} palette Background color of the nameplate
+	     */
+
+	    /**
+	     * @typedef {Object} Collectibles
+	     * @property {?NameplateData} nameplate The user's nameplate data
+	     */
+
+	    if (data.collectibles) {
+	      /**
+	       * The user's collectibles
+	       *
+	       * @type {?Collectibles}
+	       */
+	      this.collectibles = _transformCollectibles(data.collectibles);
+	    } else {
+	      this.collectibles = null;
+	    }
+
+	    /**
+	     * @typedef {Object} UserPrimaryGuild
+	     * @property {?Snowflake} identityGuildId The id of the user's primary guild
+	     * @property {?boolean} identityEnabled Whether the user is displaying the primary guild's tag
+	     * @property {?string} tag The user's guild tag. Limited to 4 characters
+	     * @property {?string} badge The guild tag badge hash
+	     */
+
+	    if ('primary_guild' in data) {
+	      if (data.primary_guild) {
+	        /**
+	         * The primary guild of the user
+	         *
+	         * @type {?UserPrimaryGuild}
+	         */
+	        this.primaryGuild = {
+	          identityGuildId: data.primary_guild.identity_guild_id,
+	          identityEnabled: data.primary_guild.identity_enabled,
+	          tag: data.primary_guild.tag,
+	          badge: data.primary_guild.badge,
+	        };
+	      } else {
+	        this.primaryGuild = null;
+	      }
+	    } else {
+	      this.primaryGuild ??= null;
+	    }
+	  }
+
+	  /**
+	   * Whether this User is a partial
+	   * @type {boolean}
+	   * @readonly
+	   */
+	  get partial() {
+	    return typeof this.username !== 'string';
+	  }
+
+	  /**
+	   * The timestamp the user was created at
+	   * @type {number}
+	   * @readonly
+	   */
+	  get createdTimestamp() {
+	    return DiscordSnowflake.timestampFrom(this.id);
+	  }
+
+	  /**
+	   * The time the user was created at
+	   * @type {Date}
+	   * @readonly
+	   */
+	  get createdAt() {
+	    return new Date(this.createdTimestamp);
+	  }
+
+	  /**
+	   * A link to the user's avatar.
+	   * @param {ImageURLOptions} [options={}] Options for the image URL
+	   * @returns {?string}
+	   */
+	  avatarURL(options = {}) {
+	    return this.avatar && this.client.rest.cdn.avatar(this.id, this.avatar, options);
+	  }
+
+	  /**
+	   * A link to the user's avatar decoration.
+	   * @param {BaseImageURLOptions} [options={}] Options for the image URL
+	   * @returns {?string}
+	   */
+	  avatarDecorationURL(options = {}) {
+	    if (this.avatarDecorationData) {
+	      return this.client.rest.cdn.avatarDecoration(this.avatarDecorationData.asset);
+	    }
+
+	    return this.avatarDecoration && this.client.rest.cdn.avatarDecoration(this.id, this.avatarDecoration, options);
+	  }
+
+	  /**
+	   * A link to the user's default avatar
+	   * @type {string}
+	   * @readonly
+	   */
+	  get defaultAvatarURL() {
+	    const index =
+	      this.discriminator === '0' || this.discriminator === '0000'
+	        ? calculateUserDefaultAvatarIndex(this.id)
+	        : this.discriminator % 5;
+
+	    return this.client.rest.cdn.defaultAvatar(index);
+	  }
+
+	  /**
+	   * A link to the user's avatar if they have one.
+	   * Otherwise a link to their default avatar will be returned.
+	   * @param {ImageURLOptions} [options={}] Options for the image URL
+	   * @returns {string}
+	   */
+	  displayAvatarURL(options) {
+	    return this.avatarURL(options) ?? this.defaultAvatarURL;
+	  }
+
+	  /**
+	   * The hexadecimal version of the user accent color, with a leading hash
+	   * <info>The user must be force fetched for this property to be present</info>
+	   * @type {?string}
+	   * @readonly
+	   */
+	  get hexAccentColor() {
+	    if (typeof this.accentColor !== 'number') return this.accentColor;
+	    return `#${this.accentColor.toString(16).padStart(6, '0')}`;
+	  }
+
+	  /**
+	   * A link to the user's banner. See {@link User#banner} for more info
+	   * @param {ImageURLOptions} [options={}] Options for the image URL
+	   * @returns {?string}
+	   */
+	  bannerURL(options = {}) {
+	    return this.banner && this.client.rest.cdn.banner(this.id, this.banner, options);
+	  }
+
+	  /**
+	   * A link to the user's guild tag badge.
+	   *
+	   * @param {ImageURLOptions} [options={}] Options for the image URL
+	   * @returns {?string}
+	   */
+	  guildTagBadgeURL(options = {}) {
+	    return this.primaryGuild?.badge
+	      ? this.client.rest.cdn.guildTagBadge(this.primaryGuild.identityGuildId, this.primaryGuild.badge, options)
+	      : null;
+	  }
+
+	  /**
+	   * The tag of this user
+	   * <info>This user's username, or their legacy tag (e.g. `hydrabolt#0001`)
+	   * if they're using the legacy username system</info>
+	   * @type {?string}
+	   * @readonly
+	   */
+	  get tag() {
+	    return typeof this.username === 'string'
+	      ? this.discriminator === '0' || this.discriminator === '0000'
+	        ? this.username
+	        : `${this.username}#${this.discriminator}`
+	      : null;
+	  }
+
+	  /**
+	   * The global name of this user, or their username if they don't have one
+	   * @type {?string}
+	   * @readonly
+	   */
+	  get displayName() {
+	    return this.globalName ?? this.username;
+	  }
+
+	  /**
+	   * The DM between the client's user and this user
+	   * @type {?DMChannel}
+	   * @readonly
+	   */
+	  get dmChannel() {
+	    return this.client.users.dmChannel(this.id);
+	  }
+
+	  /**
+	   * Creates a DM channel between the client and the user.
+	   * @param {boolean} [force=false] Whether to skip the cache check and request the API
+	   * @returns {Promise<DMChannel>}
+	   */
+	  createDM(force = false) {
+	    return this.client.users.createDM(this.id, { force });
+	  }
+
+	  /**
+	   * Deletes a DM channel (if one exists) between the client and the user. Resolves with the channel if successful.
+	   * @returns {Promise<DMChannel>}
+	   */
+	  deleteDM() {
+	    return this.client.users.deleteDM(this.id);
+	  }
+
+	  /**
+	   * Checks if the user is equal to another.
+	   * It compares id, username, discriminator, avatar, banner, accent color, and bot flags.
+	   * It is recommended to compare equality by using `user.id === user2.id` unless you want to compare all properties.
+	   * @param {User} user User to compare with
+	   * @returns {boolean}
+	   */
+	  equals(user) {
+	    return (
+	      user &&
+	      this.id === user.id &&
+	      this.username === user.username &&
+	      this.discriminator === user.discriminator &&
+	      this.globalName === user.globalName &&
+	      this.avatar === user.avatar &&
+	      this.flags?.bitfield === user.flags?.bitfield &&
+	      this.banner === user.banner &&
+	      this.accentColor === user.accentColor &&
+	      this.avatarDecoration === user.avatarDecoration &&
+	      this.avatarDecorationData?.asset === user.avatarDecorationData?.asset &&
+	      this.avatarDecorationData?.skuId === user.avatarDecorationData?.skuId &&
+	      this.collectibles?.nameplate?.skuId === user.collectibles?.nameplate?.skuId &&
+	      this.collectibles?.nameplate?.asset === user.collectibles?.nameplate?.asset &&
+	      this.collectibles?.nameplate?.label === user.collectibles?.nameplate?.label &&
+	      this.collectibles?.nameplate?.palette === user.collectibles?.nameplate?.palette &&
+	      this.primaryGuild?.identityGuildId === user.primaryGuild?.identityGuildId &&
+	      this.primaryGuild?.identityEnabled === user.primaryGuild?.identityEnabled &&
+	      this.primaryGuild?.tag === user.primaryGuild?.tag &&
+	      this.primaryGuild?.badge === user.primaryGuild?.badge
+	    );
+	  }
+
+	  /**
+	   * Compares the user with an API user object
+	   * @param {APIUser} user The API user object to compare
+	   * @returns {boolean}
+	   * @private
+	   */
+	  _equals(user) {
+	    return (
+	      user &&
+	      this.id === user.id &&
+	      this.username === user.username &&
+	      this.discriminator === user.discriminator &&
+	      this.globalName === user.global_name &&
+	      this.avatar === user.avatar &&
+	      this.flags?.bitfield === user.public_flags &&
+	      ('banner' in user ? this.banner === user.banner : true) &&
+	      ('accent_color' in user ? this.accentColor === user.accent_color : true) &&
+	      ('avatar_decoration' in user ? this.avatarDecoration === user.avatar_decoration : true) &&
+	      ('avatar_decoration_data' in user
+	        ? this.avatarDecorationData?.asset === user.avatar_decoration_data?.asset &&
+	          this.avatarDecorationData?.skuId === user.avatar_decoration_data?.sku_id
+	        : true) &&
+	      ('collectibles' in user
+	        ? this.collectibles?.nameplate?.skuId === user.collectibles?.nameplate?.sku_id &&
+	          this.collectibles?.nameplate?.asset === user.collectibles?.nameplate?.asset &&
+	          this.collectibles?.nameplate?.label === user.collectibles?.nameplate?.label &&
+	          this.collectibles?.nameplate?.palette === user.collectibles?.nameplate?.palette
+	        : true) &&
+	      ('primary_guild' in user
+	        ? this.primaryGuild?.identityGuildId === user.primary_guild?.identity_guild_id &&
+	          this.primaryGuild?.identityEnabled === user.primary_guild?.identity_enabled &&
+	          this.primaryGuild?.tag === user.primary_guild?.tag &&
+	          this.primaryGuild?.badge === user.primary_guild?.badge
+	        : true)
+	    );
+	  }
+
+	  /**
+	   * Fetches this user's flags.
+	   * @param {boolean} [force=false] Whether to skip the cache check and request the API
+	   * @returns {Promise<UserFlagsBitField>}
+	   * @deprecated <warn>This method is deprecated and will be removed in the next major version.
+	   * Flags may still be retrieved via {@link User#fetch}.</warn>
+	   */
+	  fetchFlags(force = false) {
+	    emitDeprecationWarningForUserFetchFlags(this.constructor.name);
+	    return this.client.users.fetchFlags(this.id, { force });
+	  }
+
+	  /**
+	   * Fetches this user.
+	   * @param {boolean} [force=true] Whether to skip the cache check and request the API
+	   * @returns {Promise<User>}
+	   */
+	  fetch(force = true) {
+	    return this.client.users.fetch(this.id, { force });
+	  }
+
+	  /**
+	   * When concatenated with a string, this automatically returns the user's mention instead of the User object.
+	   * @returns {string}
+	   * @example
+	   * // Logs: Hello from <@123456789012345678>!
+	   * console.log(`Hello from ${user}!`);
+	   */
+	  toString() {
+	    return userMention(this.id);
+	  }
+
+	  toJSON(...props) {
+	    const json = super.toJSON(
+	      {
+	        createdTimestamp: true,
+	        defaultAvatarURL: true,
+	        hexAccentColor: true,
+	        tag: true,
+	      },
+	      ...props,
+	    );
+	    json.avatarURL = this.avatarURL();
+	    json.displayAvatarURL = this.displayAvatarURL();
+	    json.bannerURL = this.banner ? this.bannerURL() : this.banner;
+	    json.guildTagBadgeURL = this.guildTagBadgeURL();
+	    return json;
+	  }
+	}
+
+	/**
+	 * Sends a message to this user.
+	 * @method send
+	 * @memberof User
+	 * @instance
+	 * @param {string|MessagePayload|MessageCreateOptions} options The options to provide
+	 * @returns {Promise<Message>}
+	 * @example
+	 * // Send a direct message
+	 * user.send('Hello!')
+	 *   .then(message => console.log(`Sent message: ${message.content} to ${user.tag}`))
+	 *   .catch(console.error);
+	 */
+
+	TextBasedChannel.applyToClass(User);
+
+	User_1 = User;
+	return User_1;
+}
+
+var hasRequiredPollAnswerVoterManager;
+
+function requirePollAnswerVoterManager () {
+	if (hasRequiredPollAnswerVoterManager) return PollAnswerVoterManager;
+	hasRequiredPollAnswerVoterManager = 1;
+
+	const { Collection } = requireDist$7();
+	const { makeURLSearchParams } = requireWeb();
+	const { Routes } = requireV10();
+	const CachedManager = requireCachedManager();
+	const User = requireUser$1();
+
+	/**
+	 * Manages API methods for users who voted on a poll and stores their cache.
+	 * @extends {CachedManager}
+	 */
+	let PollAnswerVoterManager$1 = class PollAnswerVoterManager extends CachedManager {
+	  constructor(answer) {
+	    super(answer.client, User);
+
+	    /**
+	     * The poll answer that this manager belongs to
+	     * @type {PollAnswer}
+	     */
+	    this.answer = answer;
+	  }
+
+	  /**
+	   * The cache of this manager
+	   * @type {Collection<Snowflake, User>}
+	   * @name PollAnswerVoterManager#cache
+	   */
+
+	  /**
+	   * Fetches the users that voted on this poll answer. Resolves with a collection of users, mapped by their ids.
+	   * @param {BaseFetchPollAnswerVotersOptions} [options={}] Options for fetching the users
+	   * @returns {Promise<Collection<Snowflake, User>>}
+	   */
+	  async fetch({ after, limit } = {}) {
+	    const poll = this.answer.poll;
+	    const query = makeURLSearchParams({ limit, after });
+	    const data = await this.client.rest.get(Routes.pollAnswerVoters(poll.channelId, poll.messageId, this.answer.id), {
+	      query,
+	    });
+
+	    return data.users.reduce((coll, rawUser) => {
+	      const user = this.client.users._add(rawUser);
+	      this.cache.set(user.id, user);
+	      return coll.set(user.id, user);
+	    }, new Collection());
+	  }
+	};
+
+	PollAnswerVoterManager.PollAnswerVoterManager = PollAnswerVoterManager$1;
+	return PollAnswerVoterManager;
+}
+
+var hasRequiredPollAnswer;
+
+function requirePollAnswer () {
+	if (hasRequiredPollAnswer) return PollAnswer;
+	hasRequiredPollAnswer = 1;
+
+	const process = require$$0$k;
+	const Base = requireBase();
+	const { Emoji } = requireEmoji$1();
+	const { PollAnswerVoterManager } = requirePollAnswerVoterManager();
+
+	let deprecationEmittedForFetchVoters = false;
+
+	/**
+	 * Represents an answer to a {@link Poll}
+	 * @extends {Base}
+	 */
+	let PollAnswer$1 = class PollAnswer extends Base {
+	  constructor(client, data, poll) {
+	    super(client);
+
+	    /**
+	     * The {@link Poll} this answer is part of
+	     * @name PollAnswer#poll
+	     * @type {Poll|PartialPoll}
+	     * @readonly
+	     */
+	    Object.defineProperty(this, 'poll', { value: poll });
+
+	    /**
+	     * The id of this answer
+	     * @type {number}
+	     */
+	    this.id = data.answer_id;
+
+	    /**
+	     * The manager of the voters for this answer
+	     * @type {PollAnswerVoterManager}
+	     */
+	    this.voters = new PollAnswerVoterManager(this);
+
+	    /**
+	     * The raw emoji of this answer
+	     * @name PollAnswer#_emoji
+	     * @type {?APIPartialEmoji}
+	     * @private
+	     */
+	    Object.defineProperty(this, '_emoji', { value: null, writable: true });
+
+	    this._patch(data);
+	  }
+
+	  _patch(data) {
+	    // This `count` field comes from `poll.results.answer_counts`
+	    if ('count' in data) {
+	      /**
+	       * The amount of votes this answer has
+	       * @type {number}
+	       */
+	      this.voteCount = data.count;
+	    } else {
+	      this.voteCount ??= this.voters.cache.size;
+	    }
+
+	    /**
+	     * The text of this answer
+	     * @type {?string}
+	     */
+	    this.text ??= data.poll_media?.text ?? null;
+
+	    if (data.poll_media?.emoji) {
+	      this._emoji = data.poll_media.emoji;
+	    }
+	  }
+
+	  /**
+	   * The emoji of this answer
+	   * @type {?(GuildEmoji|Emoji)}
+	   */
+	  get emoji() {
+	    if (!this._emoji || (!this._emoji.id && !this._emoji.name)) return null;
+	    return this.client.emojis.cache.get(this._emoji.id) ?? new Emoji(this.client, this._emoji);
+	  }
+
+	  /**
+	   * Whether this poll answer is a partial.
+	   * @type {boolean}
+	   * @readonly
+	   */
+	  get partial() {
+	    return this.poll.partial || (this.text === null && this.emoji === null);
+	  }
+
+	  /**
+	   * Options used for fetching voters of a poll answer.
+	   * @typedef {Object} BaseFetchPollAnswerVotersOptions
+	   * @property {number} [limit] The maximum number of voters to fetch
+	   * @property {Snowflake} [after] The user id to fetch voters after
+	   */
+
+	  /**
+	   * Fetches the users that voted for this answer.
+	   * @param {BaseFetchPollAnswerVotersOptions} [options={}] The options for fetching voters
+	   * @returns {Promise<Collection<Snowflake, User>>}
+	   * @deprecated Use {@link PollAnswerVoterManager#fetch} instead
+	   */
+	  fetchVoters({ after, limit } = {}) {
+	    if (!deprecationEmittedForFetchVoters) {
+	      process.emitWarning('PollAnswer#fetchVoters is deprecated. Use PollAnswer#voters#fetch instead.');
+
+	      deprecationEmittedForFetchVoters = true;
+	    }
+
+	    return this.voters.fetch({ after, limit });
+	  }
+	};
+
+	PollAnswer.PollAnswer = PollAnswer$1;
+	return PollAnswer;
+}
+
+var hasRequiredPoll;
+
+function requirePoll () {
+	if (hasRequiredPoll) return Poll;
+	hasRequiredPoll = 1;
+
+	const { Collection } = requireDist$7();
+	const Base = requireBase();
+	const { PollAnswer } = requirePollAnswer();
+	const { DiscordjsError } = requireDJSError();
+	const { ErrorCodes } = requireErrors$2();
+
+	/**
+	 * Represents a Poll
+	 * @extends {Base}
+	 */
+	let Poll$1 = class Poll extends Base {
+	  constructor(client, data, message, channel) {
+	    super(client);
+
+	    /**
+	     * The id of the channel that this poll is in
+	     * @type {Snowflake}
+	     */
+	    this.channelId = data.channel_id ?? channel.id;
+
+	    /**
+	     * The channel that this poll is in
+	     * @name Poll#channel
+	     * @type {TextBasedChannel}
+	     * @readonly
+	     */
+
+	    Object.defineProperty(this, 'channel', { value: channel });
+
+	    /**
+	     * The id of the message that started this poll
+	     * @type {Snowflake}
+	     */
+	    this.messageId = data.message_id ?? message.id;
+
+	    /**
+	     * The message that started this poll
+	     * @name Poll#message
+	     * @type {Message}
+	     * @readonly
+	     */
+
+	    Object.defineProperty(this, 'message', { value: message });
+
+	    /**
+	     * The answers of this poll
+	     * @type {Collection<number, PollAnswer|PartialPollAnswer>}
+	     */
+	    this.answers = new Collection();
+
+	    this._patch(data);
+	  }
+
+	  _patch(data) {
+	    if (data.answers) {
+	      for (const answer of data.answers) {
+	        const existing = this.answers.get(answer.answer_id);
+	        if (existing) {
+	          existing._patch(answer);
+	        } else {
+	          this.answers.set(answer.answer_id, new PollAnswer(this.client, answer, this));
+	        }
+	      }
+	    }
+
+	    if (data.results) {
+	      /**
+	       * Whether this poll's results have been precisely counted
+	       * @type {boolean}
+	       */
+	      this.resultsFinalized = data.results.is_finalized;
+
+	      for (const answerResult of data.results.answer_counts) {
+	        const answer = this.answers.get(answerResult.id);
+	        answer?._patch(answerResult);
+	      }
+	    } else {
+	      this.resultsFinalized ??= false;
+	    }
+
+	    if ('allow_multiselect' in data) {
+	      /**
+	       * Whether this poll allows multiple answers
+	       * @type {boolean}
+	       */
+	      this.allowMultiselect = data.allow_multiselect;
+	    } else {
+	      this.allowMultiselect ??= null;
+	    }
+
+	    if ('layout_type' in data) {
+	      /**
+	       * The layout type of this poll
+	       * @type {PollLayoutType}
+	       */
+	      this.layoutType = data.layout_type;
+	    } else {
+	      this.layoutType ??= null;
+	    }
+
+	    if ('expiry' in data) {
+	      /**
+	       * The timestamp when this poll expires
+	       * @type {?number}
+	       */
+	      this.expiresTimestamp = data.expiry && Date.parse(data.expiry);
+	    } else {
+	      this.expiresTimestamp ??= null;
+	    }
+
+	    if (data.question) {
+	      /**
+	       * The media for a poll's question
+	       * @typedef {Object} PollQuestionMedia
+	       * @property {?string} text The text of this question
+	       */
+
+	      /**
+	       * The media for this poll's question
+	       * @type {PollQuestionMedia}
+	       */
+	      this.question = {
+	        text: data.question.text,
+	      };
+	    } else {
+	      this.question ??= {
+	        text: null,
+	      };
+	    }
+	  }
+
+	  /**
+	   * The date when this poll expires
+	   * @type {?Date}
+	   * @readonly
+	   */
+	  get expiresAt() {
+	    return this.expiresTimestamp && new Date(this.expiresTimestamp);
+	  }
+
+	  /**
+	   * Whether this poll is a partial
+	   * @type {boolean}
+	   * @readonly
+	   */
+	  get partial() {
+	    return this.allowMultiselect === null;
+	  }
+
+	  /**
+	   * Fetches the message that started this poll, then updates the poll from the fetched message.
+	   * @returns {Promise<Poll>}
+	   */
+	  async fetch() {
+	    await this.channel.messages.fetch(this.messageId);
+
+	    return this;
+	  }
+
+	  /**
+	   * Ends this poll.
+	   * @returns {Promise<Message>}
+	   */
+	  async end() {
+	    if (this.expiresTimestamp !== null && Date.now() > this.expiresTimestamp) {
+	      throw new DiscordjsError(ErrorCodes.PollAlreadyExpired);
+	    }
+
+	    return this.channel.messages.endPoll(this.messageId);
+	  }
+	};
+
+	Poll.Poll = Poll$1;
+	return Poll;
+}
+
+var Enums;
+var hasRequiredEnums;
+
+function requireEnums () {
+	if (hasRequiredEnums) return Enums;
+	hasRequiredEnums = 1;
+
+	function createEnum(keys) {
+	  const obj = {};
+	  for (const [index, key] of keys.entries()) {
+	    if (key === null) continue;
+	    obj[key] = index;
+	    obj[index] = key;
+	  }
+	  return obj;
+	}
+
+	Enums = { createEnum };
+	return Enums;
+}
+
+var Partials;
+var hasRequiredPartials;
+
+function requirePartials () {
+	if (hasRequiredPartials) return Partials;
+	hasRequiredPartials = 1;
+
+	const { createEnum } = requireEnums();
+
+	/**
+	 * The enumeration for partials.
+	 * ```js
+	 * import { Client, Partials } from 'discord.js';
+	 *
+	 * const client = new Client({
+	 *   intents: [
+	 *     // Intents...
+	 *   ],
+	 *   partials: [
+	 *     Partials.User, // We want to receive uncached users!
+	 *     Partials.Message // We want to receive uncached messages!
+	 *   ]
+	 * });
+	 * ```
+	 * @typedef {Object} Partials
+	 * @property {number} User The partial to receive uncached users.
+	 * @property {number} Channel The partial to receive uncached channels.
+	 * <info>This is required to receive direct messages!</info>
+	 * @property {number} GuildMember The partial to receive uncached guild members.
+	 * @property {number} Message The partial to receive uncached messages.
+	 * @property {number} Reaction The partial to receive uncached reactions.
+	 * @property {number} GuildScheduledEvent The partial to receive uncached guild scheduled events.
+	 * @property {number} ThreadMember The partial to receive uncached thread members.
+	 * @property {number} SoundboardSound The partial to receive uncached soundboard sounds.
+	 * @property {number} Poll The partial to receive uncached polls.
+	 * @property {number} PollAnswer The partial to receive uncached poll answers.
+	 */
+
+	// JSDoc for IntelliSense purposes
+	/**
+	 * @type {Partials}
+	 * @ignore
+	 */
+	Partials = createEnum([
+	  'User',
+	  'Channel',
+	  'GuildMember',
+	  'Message',
+	  'Reaction',
+	  'GuildScheduledEvent',
+	  'ThreadMember',
+	  'SoundboardSound',
+	  'Poll',
+	  'PollAnswer',
+	]);
+	return Partials;
+}
+
+var Action;
+var hasRequiredAction;
+
+function requireAction () {
+	if (hasRequiredAction) return Action;
+	hasRequiredAction = 1;
+
+	const { Poll } = requirePoll();
+	const { PollAnswer } = requirePollAnswer();
+	const Partials = requirePartials();
+
+	/*
+
+	ABOUT ACTIONS
+
+	Actions are similar to WebSocket Packet Handlers, but since introducing
+	the REST API methods, in order to prevent rewriting code to handle data,
+	"actions" have been introduced. They're basically what Packet Handlers
+	used to be but they're strictly for manipulating data and making sure
+	that WebSocket events don't clash with REST methods.
+
+	*/
+
+	class GenericAction {
+	  constructor(client) {
+	    this.client = client;
+	  }
+
+	  handle(data) {
+	    return data;
+	  }
+
+	  getPayload(data, manager, id, partialType, cache) {
+	    return this.client.options.partials.includes(partialType) ? manager._add(data, cache) : manager.cache.get(id);
+	  }
+
+	  getChannel(data) {
+	    const payloadData = {};
+	    const id = data.channel_id ?? data.id;
+
+	    if (!('recipients' in data)) {
+	      // Try to resolve the recipient, but do not add the client user.
+	      const recipient = data.author ?? data.user ?? { id: data.user_id };
+	      if (recipient.id !== this.client.user.id) payloadData.recipients = [recipient];
+	    }
+
+	    if (id !== undefined) payloadData.id = id;
+
+	    return (
+	      data[this.client.actions.injectedChannel] ??
+	      this.getPayload({ ...data, ...payloadData }, this.client.channels, id, Partials.Channel)
+	    );
+	  }
+
+	  getMessage(data, channel, cache) {
+	    const id = data.message_id ?? data.id;
+	    return (
+	      data[this.client.actions.injectedMessage] ??
+	      this.getPayload(
+	        {
+	          id,
+	          channel_id: channel.id,
+	          guild_id: data.guild_id ?? channel.guild?.id,
+	        },
+	        channel.messages,
+	        id,
+	        Partials.Message,
+	        cache,
+	      )
+	    );
+	  }
+
+	  getPoll(data, message, channel) {
+	    const includePollPartial = this.client.options.partials.includes(Partials.Poll);
+	    const includePollAnswerPartial = this.client.options.partials.includes(Partials.PollAnswer);
+	    if (message.partial && (!includePollPartial || !includePollAnswerPartial)) return null;
+
+	    if (!message.poll && includePollPartial) {
+	      message.poll = new Poll(this.client, data, message, channel);
+	    }
+
+	    if (message.poll && !message.poll.answers.has(data.answer_id) && includePollAnswerPartial) {
+	      const pollAnswer = new PollAnswer(this.client, data, message.poll);
+	      message.poll.answers.set(data.answer_id, pollAnswer);
+	    }
+
+	    return message.poll;
+	  }
+
+	  getReaction(data, message, user) {
+	    const id = data.emoji.id ?? decodeURIComponent(data.emoji.name);
+	    return this.getPayload(
+	      {
+	        emoji: data.emoji,
+	        count: message.partial ? null : 0,
+	        me: user?.id === this.client.user.id,
+	      },
+	      message.reactions,
+	      id,
+	      Partials.Reaction,
+	    );
+	  }
+
+	  getMember(data, guild) {
+	    return this.getPayload(data, guild.members, data.user.id, Partials.GuildMember);
+	  }
+
+	  getUser(data) {
+	    const id = data.user_id;
+	    return data[this.client.actions.injectedUser] ?? this.getPayload({ id }, this.client.users, id, Partials.User);
+	  }
+
+	  getUserFromMember(data) {
+	    if (data.guild_id && data.member?.user) {
+	      const guild = this.client.guilds.cache.get(data.guild_id);
+	      if (guild) {
+	        return guild.members._add(data.member).user;
+	      } else {
+	        return this.client.users._add(data.member.user);
+	      }
+	    }
+	    return this.getUser(data);
+	  }
+
+	  getScheduledEvent(data, guild) {
+	    const id = data.guild_scheduled_event_id ?? data.id;
+	    return this.getPayload(
+	      { id, guild_id: data.guild_id ?? guild.id },
+	      guild.scheduledEvents,
+	      id,
+	      Partials.GuildScheduledEvent,
+	    );
+	  }
+
+	  getThreadMember(id, manager) {
+	    return this.getPayload({ user_id: id }, manager, id, Partials.ThreadMember, false);
+	  }
+
+	  getSoundboardSound(data, guild) {
+	    return this.getPayload(data, guild.soundboardSounds, data.sound_id, Partials.SoundboardSound);
+	  }
+
+	  spreadInjectedData(data) {
+	    return Object.fromEntries(Object.getOwnPropertySymbols(data).map(symbol => [symbol, data[symbol]]));
+	  }
+	}
+
+	Action = GenericAction;
+	return Action;
+}
+
+var ApplicationCommandPermissionsUpdate;
+var hasRequiredApplicationCommandPermissionsUpdate;
+
+function requireApplicationCommandPermissionsUpdate () {
+	if (hasRequiredApplicationCommandPermissionsUpdate) return ApplicationCommandPermissionsUpdate;
+	hasRequiredApplicationCommandPermissionsUpdate = 1;
+
+	const Action = requireAction();
+	const Events = requireEvents$1();
+
+	/**
+	 * The data received in the {@link Client#event:applicationCommandPermissionsUpdate} event
+	 * @typedef {Object} ApplicationCommandPermissionsUpdateData
+	 * @property {Snowflake} id The id of the command or global entity that was updated
+	 * @property {Snowflake} guildId The id of the guild in which permissions were updated
+	 * @property {Snowflake} applicationId The id of the application that owns the command or entity being updated
+	 * @property {ApplicationCommandPermissions[]} permissions The updated permissions
+	 */
+
+	class ApplicationCommandPermissionsUpdateAction extends Action {
+	  handle(data) {
+	    const client = this.client;
+	    /**
+	     * Emitted whenever permissions for an application command in a guild were updated.
+	     * <warn>This includes permission updates for other applications in addition to the logged in client,
+	     * check `data.applicationId` to verify which application the update is for</warn>
+	     * @event Client#applicationCommandPermissionsUpdate
+	     * @param {ApplicationCommandPermissionsUpdateData} data The updated permissions
+	     */
+	    client.emit(Events.ApplicationCommandPermissionsUpdate, {
+	      permissions: data.permissions,
+	      id: data.id,
+	      guildId: data.guild_id,
+	      applicationId: data.application_id,
+	    });
+	  }
+	}
+
+	ApplicationCommandPermissionsUpdate = ApplicationCommandPermissionsUpdateAction;
+	return ApplicationCommandPermissionsUpdate;
+}
+
+var AutoModerationActionExecution_1$1;
+var hasRequiredAutoModerationActionExecution$1;
+
+function requireAutoModerationActionExecution$1 () {
+	if (hasRequiredAutoModerationActionExecution$1) return AutoModerationActionExecution_1$1;
+	hasRequiredAutoModerationActionExecution$1 = 1;
+
+	const { _transformAPIAutoModerationAction } = requireTransformers();
+
+	/**
+	 * Represents the structure of an executed action when an {@link AutoModerationRule} is triggered.
+	 */
+	class AutoModerationActionExecution {
+	  constructor(data, guild) {
+	    /**
+	     * The guild where this action was executed from.
+	     * @type {Guild}
+	     */
+	    this.guild = guild;
+
+	    /**
+	     * The action that was executed.
+	     * @type {AutoModerationAction}
+	     */
+	    this.action = _transformAPIAutoModerationAction(data.action);
+
+	    /**
+	     * The id of the auto moderation rule this action belongs to.
+	     * @type {Snowflake}
+	     */
+	    this.ruleId = data.rule_id;
+
+	    /**
+	     * The trigger type of the auto moderation rule which was triggered.
+	     * @type {AutoModerationRuleTriggerType}
+	     */
+	    this.ruleTriggerType = data.rule_trigger_type;
+
+	    /**
+	     * The id of the user that triggered this action.
+	     * @type {Snowflake}
+	     */
+	    this.userId = data.user_id;
+
+	    /**
+	     * The id of the channel where this action was triggered from.
+	     * @type {?Snowflake}
+	     */
+	    this.channelId = data.channel_id ?? null;
+
+	    /**
+	     * The id of the message that triggered this action.
+	     * <info>This will not be present if the message was blocked or the content was not part of any message.</info>
+	     * @type {?Snowflake}
+	     */
+	    this.messageId = data.message_id ?? null;
+
+	    /**
+	     * The id of any system auto moderation messages posted as a result of this action.
+	     * @type {?Snowflake}
+	     */
+	    this.alertSystemMessageId = data.alert_system_message_id ?? null;
+
+	    /**
+	     * The content that triggered this action.
+	     * <info>This property requires the {@link GatewayIntentBits.MessageContent} privileged gateway intent.</info>
+	     * @type {string}
+	     */
+	    this.content = data.content;
+
+	    /**
+	     * The word or phrase configured in the rule that triggered this action.
+	     * @type {?string}
+	     */
+	    this.matchedKeyword = data.matched_keyword ?? null;
+
+	    /**
+	     * The substring in content that triggered this action.
+	     * @type {?string}
+	     */
+	    this.matchedContent = data.matched_content ?? null;
+	  }
+
+	  /**
+	   * The auto moderation rule this action belongs to.
+	   * @type {?AutoModerationRule}
+	   * @readonly
+	   */
+	  get autoModerationRule() {
+	    return this.guild.autoModerationRules.cache.get(this.ruleId) ?? null;
+	  }
+
+	  /**
+	   * The channel where this action was triggered from.
+	   * @type {?(GuildTextBasedChannel|ForumChannel|MediaChannel)}
+	   * @readonly
+	   */
+	  get channel() {
+	    return this.guild.channels.cache.get(this.channelId) ?? null;
+	  }
+
+	  /**
+	   * The user that triggered this action.
+	   * @type {?User}
+	   * @readonly
+	   */
+	  get user() {
+	    return this.guild.client.users.cache.get(this.userId) ?? null;
+	  }
+
+	  /**
+	   * The guild member that triggered this action.
+	   * @type {?GuildMember}
+	   * @readonly
+	   */
+	  get member() {
+	    return this.guild.members.cache.get(this.userId) ?? null;
+	  }
+	}
+
+	AutoModerationActionExecution_1$1 = AutoModerationActionExecution;
+	return AutoModerationActionExecution_1$1;
+}
+
+var AutoModerationActionExecution_1;
+var hasRequiredAutoModerationActionExecution;
+
+function requireAutoModerationActionExecution () {
+	if (hasRequiredAutoModerationActionExecution) return AutoModerationActionExecution_1;
+	hasRequiredAutoModerationActionExecution = 1;
+
+	const Action = requireAction();
+	const AutoModerationActionExecution = requireAutoModerationActionExecution$1();
+	const Events = requireEvents$1();
+
+	class AutoModerationActionExecutionAction extends Action {
+	  handle(data) {
+	    const { client } = this;
+	    const guild = client.guilds.cache.get(data.guild_id);
+
+	    if (guild) {
+	      /**
+	       * Emitted whenever an auto moderation rule is triggered.
+	       * <info>This event requires the {@link PermissionFlagsBits.ManageGuild} permission.</info>
+	       * @event Client#autoModerationActionExecution
+	       * @param {AutoModerationActionExecution} autoModerationActionExecution The data of the execution
+	       */
+	      client.emit(Events.AutoModerationActionExecution, new AutoModerationActionExecution(data, guild));
+	    }
+
+	    return {};
+	  }
+	}
+
+	AutoModerationActionExecution_1 = AutoModerationActionExecutionAction;
+	return AutoModerationActionExecution_1;
+}
+
+var AutoModerationRuleCreate;
+var hasRequiredAutoModerationRuleCreate;
+
+function requireAutoModerationRuleCreate () {
+	if (hasRequiredAutoModerationRuleCreate) return AutoModerationRuleCreate;
+	hasRequiredAutoModerationRuleCreate = 1;
+
+	const Action = requireAction();
+	const Events = requireEvents$1();
+
+	class AutoModerationRuleCreateAction extends Action {
+	  handle(data) {
+	    const { client } = this;
+	    const guild = client.guilds.cache.get(data.guild_id);
+
+	    if (guild) {
+	      const autoModerationRule = guild.autoModerationRules._add(data);
+
+	      /**
+	       * Emitted whenever an auto moderation rule is created.
+	       * <info>This event requires the {@link PermissionFlagsBits.ManageGuild} permission.</info>
+	       * @event Client#autoModerationRuleCreate
+	       * @param {AutoModerationRule} autoModerationRule The created auto moderation rule
+	       */
+	      client.emit(Events.AutoModerationRuleCreate, autoModerationRule);
+	    }
+
+	    return {};
+	  }
+	}
+
+	AutoModerationRuleCreate = AutoModerationRuleCreateAction;
+	return AutoModerationRuleCreate;
+}
+
+var AutoModerationRuleDelete;
+var hasRequiredAutoModerationRuleDelete;
+
+function requireAutoModerationRuleDelete () {
+	if (hasRequiredAutoModerationRuleDelete) return AutoModerationRuleDelete;
+	hasRequiredAutoModerationRuleDelete = 1;
+
+	const Action = requireAction();
+	const Events = requireEvents$1();
+
+	class AutoModerationRuleDeleteAction extends Action {
+	  handle(data) {
+	    const { client } = this;
+	    const guild = client.guilds.cache.get(data.guild_id);
+
+	    if (guild) {
+	      const autoModerationRule = guild.autoModerationRules.cache.get(data.id);
+
+	      if (autoModerationRule) {
+	        guild.autoModerationRules.cache.delete(autoModerationRule.id);
+
+	        /**
+	         * Emitted whenever an auto moderation rule is deleted.
+	         * <info>This event requires the {@link PermissionFlagsBits.ManageGuild} permission.</info>
+	         * @event Client#autoModerationRuleDelete
+	         * @param {AutoModerationRule} autoModerationRule The deleted auto moderation rule
+	         */
+	        client.emit(Events.AutoModerationRuleDelete, autoModerationRule);
+	      }
+	    }
+
+	    return {};
+	  }
+	}
+
+	AutoModerationRuleDelete = AutoModerationRuleDeleteAction;
+	return AutoModerationRuleDelete;
+}
+
+var AutoModerationRuleUpdate;
+var hasRequiredAutoModerationRuleUpdate;
+
+function requireAutoModerationRuleUpdate () {
+	if (hasRequiredAutoModerationRuleUpdate) return AutoModerationRuleUpdate;
+	hasRequiredAutoModerationRuleUpdate = 1;
+
+	const Action = requireAction();
+	const Events = requireEvents$1();
+
+	class AutoModerationRuleUpdateAction extends Action {
+	  handle(data) {
+	    const { client } = this;
+	    const guild = client.guilds.cache.get(data.guild_id);
+
+	    if (guild) {
+	      const oldAutoModerationRule = guild.autoModerationRules.cache.get(data.id)?._clone() ?? null;
+	      const newAutoModerationRule = guild.autoModerationRules._add(data);
+
+	      /**
+	       * Emitted whenever an auto moderation rule gets updated.
+	       * <info>This event requires the {@link PermissionFlagsBits.ManageGuild} permission.</info>
+	       * @event Client#autoModerationRuleUpdate
+	       * @param {?AutoModerationRule} oldAutoModerationRule The auto moderation rule before the update
+	       * @param {AutoModerationRule} newAutoModerationRule The auto moderation rule after the update
+	       */
+	      client.emit(Events.AutoModerationRuleUpdate, oldAutoModerationRule, newAutoModerationRule);
+	    }
+
+	    return {};
+	  }
+	}
+
+	AutoModerationRuleUpdate = AutoModerationRuleUpdateAction;
+	return AutoModerationRuleUpdate;
+}
+
+var ChannelCreate;
+var hasRequiredChannelCreate;
+
+function requireChannelCreate () {
+	if (hasRequiredChannelCreate) return ChannelCreate;
+	hasRequiredChannelCreate = 1;
+
+	const Action = requireAction();
+	const Events = requireEvents$1();
+
+	class ChannelCreateAction extends Action {
+	  handle(data) {
+	    const client = this.client;
+	    const existing = client.channels.cache.has(data.id);
+	    const channel = client.channels._add(data);
+	    if (!existing && channel) {
+	      /**
+	       * Emitted whenever a guild channel is created.
+	       * @event Client#channelCreate
+	       * @param {GuildChannel} channel The channel that was created
+	       */
+	      client.emit(Events.ChannelCreate, channel);
+	    }
+	    return { channel };
+	  }
+	}
+
+	ChannelCreate = ChannelCreateAction;
+	return ChannelCreate;
+}
+
+var ChannelDelete;
+var hasRequiredChannelDelete;
+
+function requireChannelDelete () {
+	if (hasRequiredChannelDelete) return ChannelDelete;
+	hasRequiredChannelDelete = 1;
+
+	const Action = requireAction();
+	const Events = requireEvents$1();
+
+	class ChannelDeleteAction extends Action {
+	  handle(data) {
+	    const client = this.client;
+	    const channel = client.channels.cache.get(data.id);
+
+	    if (channel) {
+	      client.channels._remove(channel.id);
+	      /**
+	       * Emitted whenever a channel is deleted.
+	       * @event Client#channelDelete
+	       * @param {DMChannel|GuildChannel} channel The channel that was deleted
+	       */
+	      client.emit(Events.ChannelDelete, channel);
+	    }
+	  }
+	}
+
+	ChannelDelete = ChannelDeleteAction;
+	return ChannelDelete;
+}
+
+var CategoryChannelChildManager_1;
+var hasRequiredCategoryChannelChildManager;
+
+function requireCategoryChannelChildManager () {
+	if (hasRequiredCategoryChannelChildManager) return CategoryChannelChildManager_1;
+	hasRequiredCategoryChannelChildManager = 1;
+
+	const DataManager = requireDataManager();
+	const GuildChannel = requireGuildChannel();
+
+	/**
+	 * Manages API methods for CategoryChannels' children.
+	 * @extends {DataManager}
+	 */
+	class CategoryChannelChildManager extends DataManager {
+	  constructor(channel) {
+	    super(channel.client, GuildChannel);
+	    /**
+	     * The category channel this manager belongs to
+	     * @type {CategoryChannel}
+	     */
+	    this.channel = channel;
+	  }
+
+	  /**
+	   * The channels that are a part of this category
+	   * @type {Collection<Snowflake, GuildChannel>}
+	   * @readonly
+	   */
+	  get cache() {
+	    return this.guild.channels.cache.filter(channel => channel.parentId === this.channel.id);
+	  }
+
+	  /**
+	   * The guild this manager belongs to
+	   * @type {Guild}
+	   * @readonly
+	   */
+	  get guild() {
+	    return this.channel.guild;
+	  }
+
+	  /**
+	   * Options for creating a channel using {@link CategoryChannelChildManager#create}.
+	   * @typedef {Object} CategoryCreateChannelOptions
+	   * @property {string} name The name for the new channel
+	   * @property {ChannelType} [type=ChannelType.GuildText] The type of the new channel.
+	   * @property {string} [topic] The topic for the new channel
+	   * @property {boolean} [nsfw] Whether the new channel is NSFW
+	   * @property {number} [bitrate] Bitrate of the new channel in bits (only voice)
+	   * @property {number} [userLimit] Maximum amount of users allowed in the new channel (only voice)
+	   * @property {OverwriteResolvable[]|Collection<Snowflake, OverwriteResolvable>} [permissionOverwrites]
+	   * Permission overwrites of the new channel
+	   * @property {number} [position] Position of the new channel
+	   * @property {number} [rateLimitPerUser] The rate limit per user (slowmode) for the new channel in seconds
+	   * @property {string} [rtcRegion] The specific region of the new channel.
+	   * @property {VideoQualityMode} [videoQualityMode] The camera video quality mode of the voice channel
+	   * @property {number} [defaultThreadRateLimitPerUser] The initial rate limit per user (slowmode)
+	   * to set on newly created threads in a channel.
+	   * @property {GuildForumTagData[]} [availableTags] The tags that can be used in this channel (forum only).
+	   * @property {DefaultReactionEmoji} [defaultReactionEmoji]
+	   * The emoji to show in the add reaction button on a thread in a guild forum channel.
+	   * @property {ThreadAutoArchiveDuration} [defaultAutoArchiveDuration]
+	   * The default auto archive duration for all new threads in this channel
+	   * @property {SortOrderType} [defaultSortOrder] The default sort order mode used to order posts (forum only).
+	   * @property {ForumLayoutType} [defaultForumLayout] The default layout used to display posts (forum only).
+	   * @property {string} [reason] Reason for creating the new channel
+	   */
+
+	  /**
+	   * Creates a new channel within this category.
+	   * <info>You cannot create a channel of type {@link ChannelType.GuildCategory} inside a CategoryChannel.</info>
+	   * @param {CategoryCreateChannelOptions} options Options for creating the new channel
+	   * @returns {Promise<GuildChannel>}
+	   */
+	  create(options) {
+	    return this.guild.channels.create({
+	      ...options,
+	      parent: this.channel.id,
+	    });
+	  }
+	}
+
+	CategoryChannelChildManager_1 = CategoryChannelChildManager;
+	return CategoryChannelChildManager_1;
+}
+
+var CategoryChannel_1;
+var hasRequiredCategoryChannel;
+
+function requireCategoryChannel () {
+	if (hasRequiredCategoryChannel) return CategoryChannel_1;
+	hasRequiredCategoryChannel = 1;
+
+	const GuildChannel = requireGuildChannel();
+	const CategoryChannelChildManager = requireCategoryChannelChildManager();
+
+	/**
+	 * Represents a guild category channel on Discord.
+	 * @extends {GuildChannel}
+	 */
+	class CategoryChannel extends GuildChannel {
+	  /**
+	   * The id of the parent of this channel.
+	   * @name CategoryChannel#parentId
+	   * @type {null}
+	   */
+
+	  /**
+	   * The parent of this channel.
+	   * @name CategoryChannel#parent
+	   * @type {null}
+	   * @readonly
+	   */
+
+	  /**
+	   * Sets the category parent of this channel.
+	   * <warn>It is not possible to set the parent of a CategoryChannel.</warn>
+	   * @method setParent
+	   * @memberof CategoryChannel
+	   * @instance
+	   * @param {?CategoryChannelResolvable} channel The channel to set as parent
+	   * @param {SetParentOptions} [options={}] The options for setting the parent
+	   * @returns {Promise<GuildChannel>}
+	   */
+
+	  /**
+	   * A manager of the channels belonging to this category
+	   * @type {CategoryChannelChildManager}
+	   * @readonly
+	   */
+	  get children() {
+	    return new CategoryChannelChildManager(this);
+	  }
+	}
+
+	CategoryChannel_1 = CategoryChannel;
+	return CategoryChannel_1;
+}
+
 var DMMessageManager_1;
 var hasRequiredDMMessageManager;
 
@@ -96976,6 +97972,7 @@ function requireThreadMemberFlagsBitField () {
 	if (hasRequiredThreadMemberFlagsBitField) return ThreadMemberFlagsBitField_1;
 	hasRequiredThreadMemberFlagsBitField = 1;
 
+	const { ThreadMemberFlags } = requireV10();
 	const BitField = requireBitField();
 
 	/**
@@ -96985,10 +97982,10 @@ function requireThreadMemberFlagsBitField () {
 	class ThreadMemberFlagsBitField extends BitField {
 	  /**
 	   * Numeric thread member flags. There are currently no bitflags relevant to bots for this.
-	   * @type {Object<string, number>}
+	   * @type {ThreadMemberFlags}
 	   * @memberof ThreadMemberFlagsBitField
 	   */
-	  static Flags = {};
+	  static Flags = ThreadMemberFlags;
 	}
 
 	/**
@@ -97403,7 +98400,7 @@ function requireThreadChannel () {
 	     * @type {ThreadMemberManager}
 	     */
 	    this.members = new ThreadMemberManager(this);
-	    if (data) this._patch(data);
+	    this._patch(data);
 	  }
 
 	  _patch(data) {
@@ -102846,13 +103843,6 @@ function requireInteractionResponses () {
 	let deprecationEmittedForFetchReplyOption = false;
 
 	/**
-	 * @typedef {Object} ModalComponentData
-	 * @property {string} title The title of the modal
-	 * @property {string} customId The custom id of the modal
-	 * @property {ActionRow[]} components The components within this modal
-	 */
-
-	/**
 	 * Interface for classes that support shared interaction response types.
 	 * @interface
 	 */
@@ -103595,14 +104585,19 @@ function requireCommandInteraction () {
 	  }
 
 	  /**
-	   * Represents the resolved data of a received command interaction.
-	   * @typedef {Object} CommandInteractionResolvedData
+	   * @typedef {Object} BaseInteractionResolvedData
 	   * @property {Collection<Snowflake, User>} [users] The resolved users
 	   * @property {Collection<Snowflake, GuildMember|APIGuildMember>} [members] The resolved guild members
 	   * @property {Collection<Snowflake, Role|APIRole>} [roles] The resolved roles
 	   * @property {Collection<Snowflake, BaseChannel|APIChannel>} [channels] The resolved channels
-	   * @property {Collection<Snowflake, Message|APIMessage>} [messages] The resolved messages
 	   * @property {Collection<Snowflake, Attachment>} [attachments] The resolved attachments
+	   */
+
+	  /**
+	   * Represents the resolved data of a received command interaction.
+	   *
+	   * @typedef {BaseInteractionResolvedData} CommandInteractionResolvedData
+	   * @property {Collection<Snowflake, Message|APIMessage>} [messages] The resolved messages
 	   */
 
 	  /**
@@ -103921,22 +104916,47 @@ function requireModalSubmitFields () {
 	const { DiscordjsTypeError, ErrorCodes } = requireErrors$2();
 
 	/**
+	 * @typedef {Object} ModalSelectedMentionables
+	 * @property {Collection<Snowflake, User>} users The selected users
+	 * @property {Collection<Snowflake, GuildMember | APIGuildMember>} members The selected members
+	 * @property {Collection<Snowflake, Role | APIRole>} roles The selected roles
+	 */
+
+	/**
 	 * Represents the serialized fields from a modal submit interaction
 	 */
 	class ModalSubmitFields {
-	  constructor(components) {
+	  constructor(components, resolved) {
 	    /**
 	     * The components within the modal
-	     * @type {ActionRowModalData[]}
+	     *
+	     * @type {Array<ActionRowModalData|LabelModalData|TextDisplayModalData>}
 	     */
 	    this.components = components;
+
+	    /**
+	     * The interaction resolved data
+	     *
+	     * @name ModalSubmitFields#resolved
+	     * @type {?Readonly<BaseInteractionResolvedData>}
+	     */
+	    Object.defineProperty(this, 'resolved', { value: resolved ? Object.freeze(resolved) : null });
 
 	    /**
 	     * The extracted fields from the modal
 	     * @type {Collection<string, ModalData>}
 	     */
 	    this.fields = components.reduce((accumulator, next) => {
-	      next.components.forEach(component => accumulator.set(component.customId, component));
+	      // For legacy support of action rows
+	      if ('components' in next) {
+	        for (const component of next.components) accumulator.set(component.customId, component);
+	      }
+
+	      // For label components
+	      if ('component' in next) {
+	        accumulator.set(next.component.customId, next.component);
+	      }
+
 	      return accumulator;
 	    }, new Collection());
 	  }
@@ -103959,12 +104979,164 @@ function requireModalSubmitFields () {
 	  }
 
 	  /**
+	   * Gets a component by custom id and property and checks its type.
+	   *
+	   * @param {string} customId The custom id of the component.
+	   * @param {ComponentType[]} allowedTypes The allowed types of the component.
+	   * @param {string[]} properties The properties to check for for `required`.
+	   * @param {boolean} required Whether to throw an error if the component value(s) are not found.
+	   * @returns {ModalData} The option, if found.
+	   * @private
+	   */
+	  _getTypedComponent(customId, allowedTypes, properties, required) {
+	    const component = this.getField(customId);
+	    if (!allowedTypes.includes(component.type)) {
+	      throw new DiscordjsTypeError(
+	        ErrorCodes.ModalSubmitInteractionFieldNotFound,
+	        customId,
+	        component.type,
+	        allowedTypes.join(', '),
+	      );
+	    } else if (required && properties.every(prop => component[prop] === null || component[prop] === undefined)) {
+	      throw new DiscordjsTypeError(ErrorCodes.ModalSubmitInteractionFieldEmpty, customId, component.type);
+	    }
+
+	    return component;
+	  }
+
+	  /**
 	   * Gets the value of a text input component given a custom id
 	   * @param {string} customId The custom id of the text input component
 	   * @returns {string}
 	   */
 	  getTextInputValue(customId) {
-	    return this.getField(customId, ComponentType.TextInput).value;
+	    return this._getTypedComponent(customId, [ComponentType.TextInput]).value;
+	  }
+
+	  /**
+	   * Gets the values of a string select component given a custom id
+	   *
+	   * @param {string} customId The custom id of the string select component
+	   * @returns {string[]}
+	   */
+	  getStringSelectValues(customId) {
+	    return this._getTypedComponent(customId, [ComponentType.StringSelect]).values;
+	  }
+
+	  /**
+	   * Gets users component
+	   *
+	   * @param {string} customId The custom id of the component
+	   * @param {boolean} [required=false] Whether to throw an error if the component value is not found or empty
+	   * @returns {?Collection<Snowflake, User>} The selected users, or null if none were selected and not required
+	   */
+	  getSelectedUsers(customId, required = false) {
+	    const component = this._getTypedComponent(
+	      customId,
+	      [ComponentType.UserSelect, ComponentType.MentionableSelect],
+	      ['users'],
+	      required,
+	    );
+	    return component.users ?? null;
+	  }
+
+	  /**
+	   * Gets roles component
+	   *
+	   * @param {string} customId The custom id of the component
+	   * @param {boolean} [required=false] Whether to throw an error if the component value is not found or empty
+	   * @returns {?Collection<Snowflake, Role|APIRole>} The selected roles, or null if none were selected and not required
+	   */
+	  getSelectedRoles(customId, required = false) {
+	    const component = this._getTypedComponent(
+	      customId,
+	      [ComponentType.RoleSelect, ComponentType.MentionableSelect],
+	      ['roles'],
+	      required,
+	    );
+	    return component.roles ?? null;
+	  }
+
+	  /**
+	   * Gets channels component
+	   *
+	   * @param {string} customId The custom id of the component
+	   * @param {boolean} [required=false] Whether to throw an error if the component value is not found or empty
+	   * @param {ChannelType[]} [channelTypes=[]] The allowed types of channels. If empty, all channel types are allowed.
+	   * @returns {?Collection<Snowflake, GuildChannel|ThreadChannel|APIChannel>} The selected channels,
+	   * or null if none were selected and not required
+	   */
+	  getSelectedChannels(customId, required = false, channelTypes = []) {
+	    const component = this._getTypedComponent(customId, [ComponentType.ChannelSelect], ['channels'], required);
+	    const channels = component.channels;
+	    if (channels && channelTypes.length > 0) {
+	      for (const channel of channels.values()) {
+	        if (!channelTypes.includes(channel.type)) {
+	          throw new DiscordjsTypeError(
+	            ErrorCodes.ModalSubmitInteractionComponentInvalidChannelType,
+	            customId,
+	            channel.type,
+	            channelTypes.join(', '),
+	          );
+	        }
+	      }
+	    }
+
+	    return channels ?? null;
+	  }
+
+	  /**
+	   * Gets members component
+	   *
+	   * @param {string} customId The custom id of the component
+	   * @returns {?Collection<Snowflake, GuildMember|APIGuildMember>} The selected members,
+	   * or null if none were selected or the users were not present in the guild
+	   */
+	  getSelectedMembers(customId) {
+	    const component = this._getTypedComponent(
+	      customId,
+	      [ComponentType.UserSelect, ComponentType.MentionableSelect],
+	      ['members'],
+	      false,
+	    );
+	    return component.members ?? null;
+	  }
+
+	  /**
+	   * Gets mentionables component
+	   *
+	   * @param {string} customId The custom id of the component
+	   * @param {boolean} [required=false] Whether to throw an error if the component value is not found or empty
+	   * @returns {?ModalSelectedMentionables} The selected mentionables, or null if none were selected and not required
+	   */
+	  getSelectedMentionables(customId, required = false) {
+	    const component = this._getTypedComponent(
+	      customId,
+	      [ComponentType.MentionableSelect],
+	      ['users', 'members', 'roles'],
+	      required,
+	    );
+
+	    if (component.users || component.members || component.roles) {
+	      return {
+	        users: component.users ?? new Collection(),
+	        members: component.members ?? new Collection(),
+	        roles: component.roles ?? new Collection(),
+	      };
+	    }
+
+	    return null;
+	  }
+
+	  /**
+	   * Gets file upload component
+	   *
+	   * @param {string} customId The custom id of the component
+	   * @param {boolean} [required=false] Whether to throw an error if the component value is not found or empty
+	   * @returns {?Collection<Snowflake, Attachment>} The uploaded files, or null if none were uploaded and not required
+	   */
+	  getUploadedFiles(customId, required = false) {
+	    return this._getTypedComponent(customId, [ComponentType.FileUpload], ['attachments'], required).attachments ?? null;
 	  }
 	}
 
@@ -103979,25 +105151,62 @@ function requireModalSubmitInteraction () {
 	if (hasRequiredModalSubmitInteraction) return ModalSubmitInteraction_1;
 	hasRequiredModalSubmitInteraction = 1;
 
+	const { Collection } = requireDist$7();
 	const { lazy } = requireDist$b();
 	const BaseInteraction = requireBaseInteraction();
 	const InteractionWebhook = requireInteractionWebhook();
 	const ModalSubmitFields = requireModalSubmitFields();
 	const InteractionResponses = requireInteractionResponses();
+	const { transformResolved } = requireUtil$6();
 
 	const getMessage = lazy(() => requireMessage$1().Message);
+	const getAttachment = lazy(() => requireAttachment$1());
 
 	/**
-	 * @typedef {Object} ModalData
-	 * @property {string} value The value of the field
+	 * @typedef {Object} BaseModalData
 	 * @property {ComponentType} type The component type of the field
-	 * @property {string} customId The custom id of the field
+	 * @property {number} id The id of the field
 	 */
 
 	/**
-	 * @typedef {Object} ActionRowModalData
-	 * @property {ModalData[]} components The components of this action row
-	 * @property {ComponentType} type The component type of the action row
+	 * @typedef {BaseModalData} FileUploadModalData
+	 * @property {string} customId The custom id of the file upload
+	 * @property {Snowflake[]} values The values of the file upload
+	 * @property {Collection<Snowflake, Attachment>} [attachments] The resolved attachments
+	 */
+
+	/**
+	 * @typedef {BaseModalData} TextInputModalData
+	 * @property {string} customId The custom id of the field
+	 * @property {string} value The value of the field
+	 */
+
+	/**
+	 * @typedef {BaseModalData} SelectMenuModalData
+	 * @property {string} customId The custom id of the field
+	 * @property {string[]} values The values of the field
+	 * @property {Collection<Snowflake, GuildMember|APIGuildMember>} [members] The resolved members
+	 * @property {Collection<Snowflake, User|APIUser>} [users] The resolved users
+	 * @property {Collection<Snowflake, Role|APIRole>} [roles] The resolved roles
+	 * @property {Collection<Snowflake, BaseChannel|APIChannel>} [channels] The resolved channels
+	 */
+
+	/**
+	 * @typedef {BaseModalData} TextDisplayModalData
+	 */
+
+	/**
+	 * @typedef {SelectMenuModalData|TextInputModalData|FileUploadModalData} ModalData
+	 */
+
+	/**
+	 * @typedef {BaseModalData} LabelModalData
+	 * @property {ModalData} component The component within the label
+	 */
+
+	/**
+	 * @typedef {BaseModalData} ActionRowModalData
+	 * @property {TextInputModalData[]} components The components of this action row
 	 */
 
 	/**
@@ -104026,15 +105235,24 @@ function requireModalSubmitInteraction () {
 
 	    /**
 	     * The components within the modal
-	     * @type {ActionRowModalData[]}
+	     *
+	     * @type {Array<ActionRowModalData | LabelModalData | TextDisplayModalData>}
 	     */
-	    this.components = data.data.components?.map(component => ModalSubmitInteraction.transformComponent(component));
+	    this.components = data.data.components?.map(component =>
+	      ModalSubmitInteraction.transformComponent(component, data.data.resolved, {
+	        client: this.client,
+	        guild: this.guild,
+	      }),
+	    );
 
 	    /**
 	     * The fields within the modal
 	     * @type {ModalSubmitFields}
 	     */
-	    this.fields = new ModalSubmitFields(this.components);
+	    this.fields = new ModalSubmitFields(
+	      this.components,
+	      transformResolved({ client: this.client, guild: this.guild, channel: this.channel }, data.data.resolved),
+	    );
 
 	    /**
 	     * Whether the reply to this interaction has been deferred
@@ -104064,19 +105282,102 @@ function requireModalSubmitInteraction () {
 	  /**
 	   * Transforms component data to discord.js-compatible data
 	   * @param {*} rawComponent The data to transform
+	   * @param {APIInteractionDataResolved} [resolved] The resolved data for the interaction
+	   * @param {*} [extra] Extra data required for the transformation
 	   * @returns {ModalData[]}
 	   */
-	  static transformComponent(rawComponent) {
-	    return rawComponent.components
-	      ? {
-	          type: rawComponent.type,
-	          components: rawComponent.components.map(component => this.transformComponent(component)),
+	  static transformComponent(rawComponent, resolved, { client, guild } = {}) {
+	    if ('components' in rawComponent) {
+	      return {
+	        type: rawComponent.type,
+	        id: rawComponent.id,
+	        components: rawComponent.components.map(component =>
+	          this.transformComponent(component, resolved, { client, guild }),
+	        ),
+	      };
+	    }
+
+	    if ('component' in rawComponent) {
+	      return {
+	        type: rawComponent.type,
+	        id: rawComponent.id,
+	        component: this.transformComponent(rawComponent.component, resolved, { client, guild }),
+	      };
+	    }
+
+	    const data = {
+	      type: rawComponent.type,
+	      id: rawComponent.id,
+	    };
+
+	    // Text display components do not have custom ids.
+	    if ('custom_id' in rawComponent) data.customId = rawComponent.custom_id;
+
+	    if ('value' in rawComponent) data.value = rawComponent.value;
+
+	    if (rawComponent.values) {
+	      data.values = rawComponent.values;
+
+	      /* eslint-disable max-depth */
+	      if (resolved) {
+	        const { members, users, channels, roles, attachments } = resolved;
+	        const valueSet = new Set(rawComponent.values);
+
+	        if (users) {
+	          data.users = new Collection();
+
+	          for (const [id, user] of Object.entries(users)) {
+	            if (valueSet.has(id)) {
+	              data.users.set(id, client.users._add(user));
+	            }
+	          }
 	        }
-	      : {
-	          value: rawComponent.value,
-	          type: rawComponent.type,
-	          customId: rawComponent.custom_id,
-	        };
+
+	        if (channels) {
+	          data.channels = new Collection();
+
+	          for (const [id, apiChannel] of Object.entries(channels)) {
+	            if (valueSet.has(id)) {
+	              data.channels.set(id, client.channels._add(apiChannel, guild) ?? apiChannel);
+	            }
+	          }
+	        }
+
+	        if (members) {
+	          data.members = new Collection();
+
+	          for (const [id, member] of Object.entries(members)) {
+	            if (valueSet.has(id)) {
+	              const user = users?.[id];
+	              data.members.set(id, guild?.members._add({ user, ...member }) ?? member);
+	            }
+	          }
+	        }
+
+	        if (roles) {
+	          data.roles = new Collection();
+
+	          for (const [id, role] of Object.entries(roles)) {
+	            if (valueSet.has(id)) {
+	              data.roles.set(id, guild?.roles._add(role) ?? role);
+	            }
+	          }
+	        }
+
+	        if (attachments) {
+	          data.attachments = new Collection();
+	          for (const [id, attachment] of Object.entries(attachments)) {
+	            if (valueSet.has(id)) {
+	              data.attachments.set(id, new (getAttachment())(attachment));
+	            }
+	          }
+	        }
+	      }
+
+	      /* eslint-enable max-depth */
+	    }
+
+	    return data;
 	  }
 
 	  /**
@@ -104639,10 +105940,17 @@ function requireMessagePollVoteAdd () {
 	    const message = this.getMessage(data, channel);
 	    if (!message) return false;
 
-	    const { poll } = message;
+	    const poll = this.getPoll(data, message, channel);
+	    if (!poll) return false;
 
-	    const answer = poll?.answers.get(data.answer_id);
+	    const answer = poll.answers.get(data.answer_id);
 	    if (!answer) return false;
+
+	    const user = this.getUser(data);
+
+	    if (user) {
+	      answer.voters._add(user);
+	    }
 
 	    answer.voteCount++;
 
@@ -104680,12 +105988,17 @@ function requireMessagePollVoteRemove () {
 	    const message = this.getMessage(data, channel);
 	    if (!message) return false;
 
-	    const { poll } = message;
+	    const poll = this.getPoll(data, message, channel);
+	    if (!poll) return false;
 
-	    const answer = poll?.answers.get(data.answer_id);
+	    const answer = poll.answers.get(data.answer_id);
 	    if (!answer) return false;
 
-	    answer.voteCount--;
+	    answer.voters.cache.delete(data.user_id);
+
+	    if (answer.voteCount > 0) {
+	      answer.voteCount--;
+	    }
 
 	    /**
 	     * Emitted whenever a user removes their vote in a poll.
@@ -105620,74 +106933,74 @@ function requireActionsManager () {
 	  constructor(client) {
 	    this.client = client;
 
-	    this.register(requireApplicationCommandPermissionsUpdate());
-	    this.register(requireAutoModerationActionExecution());
-	    this.register(requireAutoModerationRuleCreate());
-	    this.register(requireAutoModerationRuleDelete());
-	    this.register(requireAutoModerationRuleUpdate());
-	    this.register(requireChannelCreate());
-	    this.register(requireChannelDelete());
-	    this.register(requireChannelUpdate());
-	    this.register(requireEntitlementCreate());
-	    this.register(requireEntitlementDelete());
-	    this.register(requireEntitlementUpdate());
-	    this.register(requireGuildAuditLogEntryCreate());
-	    this.register(requireGuildBanAdd());
-	    this.register(requireGuildBanRemove());
-	    this.register(requireGuildChannelsPositionUpdate());
-	    this.register(requireGuildDelete());
-	    this.register(requireGuildEmojiCreate());
-	    this.register(requireGuildEmojiDelete());
-	    this.register(requireGuildEmojiUpdate());
-	    this.register(requireGuildEmojisUpdate());
-	    this.register(requireGuildIntegrationsUpdate());
-	    this.register(requireGuildMemberRemove());
-	    this.register(requireGuildMemberUpdate());
-	    this.register(requireGuildRoleCreate());
-	    this.register(requireGuildRoleDelete());
-	    this.register(requireGuildRoleUpdate());
-	    this.register(requireGuildRolesPositionUpdate());
-	    this.register(requireGuildScheduledEventCreate());
-	    this.register(requireGuildScheduledEventDelete());
-	    this.register(requireGuildScheduledEventUpdate());
-	    this.register(requireGuildScheduledEventUserAdd());
-	    this.register(requireGuildScheduledEventUserRemove());
-	    this.register(requireGuildSoundboardSoundDelete());
-	    this.register(requireGuildStickerCreate());
-	    this.register(requireGuildStickerDelete());
-	    this.register(requireGuildStickerUpdate());
-	    this.register(requireGuildStickersUpdate());
-	    this.register(requireGuildUpdate());
-	    this.register(requireInteractionCreate());
-	    this.register(requireInviteCreate());
-	    this.register(requireInviteDelete());
-	    this.register(requireMessageCreate());
-	    this.register(requireMessageDelete());
-	    this.register(requireMessageDeleteBulk());
-	    this.register(requireMessagePollVoteAdd());
-	    this.register(requireMessagePollVoteRemove());
-	    this.register(requireMessageReactionAdd());
-	    this.register(requireMessageReactionRemove());
-	    this.register(requireMessageReactionRemoveAll());
-	    this.register(requireMessageReactionRemoveEmoji());
-	    this.register(requireMessageUpdate());
-	    this.register(requirePresenceUpdate());
-	    this.register(requireStageInstanceCreate());
-	    this.register(requireStageInstanceDelete());
-	    this.register(requireStageInstanceUpdate());
-	    this.register(requireThreadCreate());
-	    this.register(requireThreadDelete());
-	    this.register(requireThreadListSync());
-	    this.register(requireThreadMemberUpdate());
-	    this.register(requireThreadMembersUpdate());
-	    this.register(requireTypingStart());
-	    this.register(requireUserUpdate());
-	    this.register(requireVoiceStateUpdate());
-	    this.register(requireWebhooksUpdate());
+	    this.ApplicationCommandPermissionsUpdate = this.load(requireApplicationCommandPermissionsUpdate());
+	    this.AutoModerationActionExecution = this.load(requireAutoModerationActionExecution());
+	    this.AutoModerationRuleCreate = this.load(requireAutoModerationRuleCreate());
+	    this.AutoModerationRuleDelete = this.load(requireAutoModerationRuleDelete());
+	    this.AutoModerationRuleUpdate = this.load(requireAutoModerationRuleUpdate());
+	    this.ChannelCreate = this.load(requireChannelCreate());
+	    this.ChannelDelete = this.load(requireChannelDelete());
+	    this.ChannelUpdate = this.load(requireChannelUpdate());
+	    this.EntitlementCreate = this.load(requireEntitlementCreate());
+	    this.EntitlementDelete = this.load(requireEntitlementDelete());
+	    this.EntitlementUpdate = this.load(requireEntitlementUpdate());
+	    this.GuildAuditLogEntryCreate = this.load(requireGuildAuditLogEntryCreate());
+	    this.GuildBanAdd = this.load(requireGuildBanAdd());
+	    this.GuildBanRemove = this.load(requireGuildBanRemove());
+	    this.GuildChannelsPositionUpdate = this.load(requireGuildChannelsPositionUpdate());
+	    this.GuildDelete = this.load(requireGuildDelete());
+	    this.GuildEmojiCreate = this.load(requireGuildEmojiCreate());
+	    this.GuildEmojiDelete = this.load(requireGuildEmojiDelete());
+	    this.GuildEmojiUpdate = this.load(requireGuildEmojiUpdate());
+	    this.GuildEmojisUpdate = this.load(requireGuildEmojisUpdate());
+	    this.GuildIntegrationsUpdate = this.load(requireGuildIntegrationsUpdate());
+	    this.GuildMemberRemove = this.load(requireGuildMemberRemove());
+	    this.GuildMemberUpdate = this.load(requireGuildMemberUpdate());
+	    this.GuildRoleCreate = this.load(requireGuildRoleCreate());
+	    this.GuildRoleDelete = this.load(requireGuildRoleDelete());
+	    this.GuildRoleUpdate = this.load(requireGuildRoleUpdate());
+	    this.GuildRolesPositionUpdate = this.load(requireGuildRolesPositionUpdate());
+	    this.GuildScheduledEventCreate = this.load(requireGuildScheduledEventCreate());
+	    this.GuildScheduledEventDelete = this.load(requireGuildScheduledEventDelete());
+	    this.GuildScheduledEventUpdate = this.load(requireGuildScheduledEventUpdate());
+	    this.GuildScheduledEventUserAdd = this.load(requireGuildScheduledEventUserAdd());
+	    this.GuildScheduledEventUserRemove = this.load(requireGuildScheduledEventUserRemove());
+	    this.GuildSoundboardSoundDelete = this.load(requireGuildSoundboardSoundDelete());
+	    this.GuildStickerCreate = this.load(requireGuildStickerCreate());
+	    this.GuildStickerDelete = this.load(requireGuildStickerDelete());
+	    this.GuildStickerUpdate = this.load(requireGuildStickerUpdate());
+	    this.GuildStickersUpdate = this.load(requireGuildStickersUpdate());
+	    this.GuildUpdate = this.load(requireGuildUpdate());
+	    this.InteractionCreate = this.load(requireInteractionCreate());
+	    this.InviteCreate = this.load(requireInviteCreate());
+	    this.InviteDelete = this.load(requireInviteDelete());
+	    this.MessageCreate = this.load(requireMessageCreate());
+	    this.MessageDelete = this.load(requireMessageDelete());
+	    this.MessageDeleteBulk = this.load(requireMessageDeleteBulk());
+	    this.MessagePollVoteAdd = this.load(requireMessagePollVoteAdd());
+	    this.MessagePollVoteRemove = this.load(requireMessagePollVoteRemove());
+	    this.MessageReactionAdd = this.load(requireMessageReactionAdd());
+	    this.MessageReactionRemove = this.load(requireMessageReactionRemove());
+	    this.MessageReactionRemoveAll = this.load(requireMessageReactionRemoveAll());
+	    this.MessageReactionRemoveEmoji = this.load(requireMessageReactionRemoveEmoji());
+	    this.MessageUpdate = this.load(requireMessageUpdate());
+	    this.PresenceUpdate = this.load(requirePresenceUpdate());
+	    this.StageInstanceCreate = this.load(requireStageInstanceCreate());
+	    this.StageInstanceDelete = this.load(requireStageInstanceDelete());
+	    this.StageInstanceUpdate = this.load(requireStageInstanceUpdate());
+	    this.ThreadCreate = this.load(requireThreadCreate());
+	    this.ThreadDelete = this.load(requireThreadDelete());
+	    this.ThreadListSync = this.load(requireThreadListSync());
+	    this.ThreadMemberUpdate = this.load(requireThreadMemberUpdate());
+	    this.ThreadMembersUpdate = this.load(requireThreadMembersUpdate());
+	    this.TypingStart = this.load(requireTypingStart());
+	    this.UserUpdate = this.load(requireUserUpdate());
+	    this.VoiceStateUpdate = this.load(requireVoiceStateUpdate());
+	    this.WebhooksUpdate = this.load(requireWebhooksUpdate());
 	  }
 
-	  register(Action) {
-	    this[Action.name.replace(/Action$/, '')] = new Action(this.client);
+	  load(Action) {
+	    return new Action(this.client);
 	  }
 	}
 
@@ -112810,7 +114123,7 @@ function requireWebSocketShard () {
 
 	const EventEmitter = require$$0$a;
 	const process = require$$0$k;
-	const { setTimeout, clearTimeout } = require$$0$l;
+	const { setTimeout, clearTimeout } = require$$1$a;
 	const { GatewayIntentBits } = requireV10();
 	const Status = requireStatus();
 	const WebSocketShardEvents = requireWebSocketShardEvents();
@@ -113869,6 +115182,39 @@ function requirePRESENCE_UPDATE () {
 	return PRESENCE_UPDATE;
 }
 
+var RATE_LIMITED;
+var hasRequiredRATE_LIMITED;
+
+function requireRATE_LIMITED () {
+	if (hasRequiredRATE_LIMITED) return RATE_LIMITED;
+	hasRequiredRATE_LIMITED = 1;
+
+	const process = require$$0$k;
+	const { GatewayOpcodes } = requireV10();
+
+	const emittedFor = new Set();
+
+	RATE_LIMITED = (_, { d: data }) => {
+	  switch (data.opcode) {
+	    case GatewayOpcodes.RequestGuildMembers: {
+	      break;
+	    }
+
+	    default: {
+	      if (!emittedFor.has(data.opcode)) {
+	        process.emitWarning(
+	          // eslint-disable-next-line max-len
+	          `Hit a gateway rate limit on opcode ${data.opcode} (${GatewayOpcodes[data.opcode]}). If the discord.js version you're using is up-to-date, please open an issue on GitHub.`,
+	        );
+
+	        emittedFor.add(data.opcode);
+	      }
+	    }
+	  }
+	};
+	return RATE_LIMITED;
+}
+
 var ClientUser_1;
 var hasRequiredClientUser;
 
@@ -114603,6 +115949,7 @@ function requireHandlers () {
 	  ['MESSAGE_REACTION_REMOVE_EMOJI', requireMESSAGE_REACTION_REMOVE_EMOJI()],
 	  ['MESSAGE_UPDATE', requireMESSAGE_UPDATE()],
 	  ['PRESENCE_UPDATE', requirePRESENCE_UPDATE()],
+	  ['RATE_LIMITED', requireRATE_LIMITED()],
 	  ['READY', requireREADY()],
 	  ['RESUMED', requireRESUMED()],
 	  ['SOUNDBOARD_SOUNDS', requireSOUNDBOARD_SOUNDS()],
@@ -114639,7 +115986,7 @@ function requireWebSocketManager () {
 
 	const EventEmitter = require$$0$a;
 	const process = require$$0$k;
-	const { setImmediate } = require$$0$l;
+	const { setImmediate } = require$$1$a;
 	const { Collection } = requireDist$7();
 	const {
 	  WebSocketManager: WSWebSocketManager,
@@ -116454,12 +117801,12 @@ function requireGuildBanManager () {
 	    return this._add(data, cache);
 	  }
 
-	  async _fetchMany(options = {}) {
+	  async _fetchMany({ cache, ...apiOptions } = {}) {
 	    const data = await this.client.rest.get(Routes.guildBans(this.guild.id), {
-	      query: makeURLSearchParams(options),
+	      query: makeURLSearchParams(apiOptions),
 	    });
 
-	    return data.reduce((col, ban) => col.set(ban.user.id, this._add(ban, options.cache)), new Collection());
+	    return data.reduce((col, ban) => col.set(ban.user.id, this._add(ban, cache)), new Collection());
 	  }
 
 	  /**
@@ -117279,7 +118626,7 @@ function requireGuildEmojiManager () {
 
 	    const { me } = this.guild.members;
 	    if (!me) throw new DiscordjsError(ErrorCodes.GuildUncachedMe);
-	    if (!me.permissions.has(PermissionFlagsBits.ManageGuildExpressions)) {
+	    if (!me.permissions.any(PermissionFlagsBits.CreateGuildExpressions | PermissionFlagsBits.ManageGuildExpressions)) {
 	      throw new DiscordjsError(ErrorCodes.MissingManageGuildExpressionsPermission, this.guild);
 	    }
 
@@ -117523,19 +118870,24 @@ function requireGuildMemberManager () {
 	if (hasRequiredGuildMemberManager) return GuildMemberManager_1;
 	hasRequiredGuildMemberManager = 1;
 
-	const { setTimeout, clearTimeout } = require$$0$l;
+	const { process } = require$$0$k;
+	const { setTimeout, clearTimeout } = require$$1$a;
 	const { Collection } = requireDist$7();
 	const { makeURLSearchParams } = requireWeb();
+	const { GatewayRateLimitError } = requireDist$b();
 	const { DiscordSnowflake } = /*@__PURE__*/ requireCjs$2();
-	const { Routes, GatewayOpcodes } = requireV10();
+	const { Routes, GatewayOpcodes, GatewayDispatchEvents } = requireV10();
 	const CachedManager = requireCachedManager();
 	const { DiscordjsError, DiscordjsTypeError, DiscordjsRangeError, ErrorCodes } = requireErrors$2();
 	const BaseGuildVoiceChannel = requireBaseGuildVoiceChannel();
 	const { GuildMember } = requireGuildMember();
 	const { Role } = requireRole$1();
+	const { resolveImage } = requireDataResolver();
 	const Events = requireEvents$1();
 	const { GuildMemberFlagsBitField } = requireGuildMemberFlagsBitField();
 	const Partials = requirePartials();
+
+	let deprecatedEmittedForEditSoleNickname = false;
 
 	/**
 	 * Manages API methods for GuildMembers and stores their cache.
@@ -117758,19 +119110,25 @@ function requireGuildMemberManager () {
 
 	    return new Promise((resolve, reject) => {
 	      if (!query && !users) query = '';
-	      this.guild.shard.send({
-	        op: GatewayOpcodes.RequestGuildMembers,
-	        d: {
-	          guild_id: this.guild.id,
-	          presences,
-	          user_ids: users,
-	          query,
-	          nonce,
-	          limit,
-	        },
-	      });
 	      const fetchedMembers = new Collection();
 	      let i = 0;
+
+	      const cleanup = () => {
+	        /* eslint-disable no-use-before-define */
+	        clearTimeout(timeout);
+
+	        this.client.removeListener(Events.Raw, rateLimitHandler);
+	        this.client.decrementMaxListeners();
+	        this.client.removeListener(Events.GuildMembersChunk, handler);
+	        this.client.decrementMaxListeners();
+	        /* eslint-enable no-use-before-define */
+	      };
+
+	      const timeout = setTimeout(() => {
+	        cleanup();
+	        reject(new DiscordjsError(ErrorCodes.GuildMembersTimeout));
+	      }, time).unref();
+
 	      const handler = (members, _, chunk) => {
 	        if (chunk.nonce !== nonce) return;
 	        timeout.refresh();
@@ -117779,19 +119137,37 @@ function requireGuildMemberManager () {
 	          fetchedMembers.set(member.id, member);
 	        }
 	        if (members.size < 1_000 || (limit && fetchedMembers.size >= limit) || i === chunk.count) {
-	          clearTimeout(timeout);
-	          this.client.removeListener(Events.GuildMembersChunk, handler);
-	          this.client.decrementMaxListeners();
+	          cleanup();
 	          resolve(users && !Array.isArray(users) && fetchedMembers.size ? fetchedMembers.first() : fetchedMembers);
 	        }
 	      };
-	      const timeout = setTimeout(() => {
-	        this.client.removeListener(Events.GuildMembersChunk, handler);
-	        this.client.decrementMaxListeners();
-	        reject(new DiscordjsError(ErrorCodes.GuildMembersTimeout));
-	      }, time).unref();
+
+	      const requestData = {
+	        guild_id: this.guild.id,
+	        presences,
+	        user_ids: users,
+	        query,
+	        nonce,
+	        limit,
+	      };
+
+	      const rateLimitHandler = payload => {
+	        if (payload.t === GatewayDispatchEvents.RateLimited && payload.d.meta.nonce === nonce) {
+	          cleanup();
+	          reject(new GatewayRateLimitError(payload.d, requestData));
+	        }
+	      };
+
+	      this.client.incrementMaxListeners();
+	      this.client.on(Events.Raw, rateLimitHandler);
+
 	      this.client.incrementMaxListeners();
 	      this.client.on(Events.GuildMembersChunk, handler);
+
+	      this.guild.shard.send({
+	        op: GatewayOpcodes.RequestGuildMembers,
+	        d: requestData,
+	      });
 	    });
 	  }
 
@@ -117859,8 +119235,8 @@ function requireGuildMemberManager () {
 	   */
 
 	  /**
-	   * Edits a member of the guild.
-	   * <info>The user must be a member of the guild</info>
+	   * Edits a member of a guild.
+	   *
 	   * @param {UserResolvable} user The member to edit
 	   * @param {GuildMemberEditOptions} options The options to provide
 	   * @returns {Promise<GuildMember>}
@@ -117895,18 +119271,67 @@ function requireGuildMemberManager () {
 	    }
 
 	    let endpoint;
+
 	    if (id === this.client.user.id) {
 	      const keys = Object.keys(options);
-	      if (keys.length === 1 && keys[0] === 'nick') endpoint = Routes.guildMember(this.guild.id);
-	      else endpoint = Routes.guildMember(this.guild.id, id);
-	    } else {
-	      endpoint = Routes.guildMember(this.guild.id, id);
+
+	      if (keys.length === 1 && keys[0] === 'nick') {
+	        // For modifying the current application's nickname only, we use the /guilds/{guild.id}/members/@me endpoint.
+	        // This endpoint only requires the CHANGE_NICKNAME permission.
+	        // The other endpoint would require the MANAGE_NICKNAMES permission.
+	        // In v15, this will be split out, so emit a deprecation.
+	        endpoint = Routes.guildMember(this.guild.id, '@me');
+
+	        if (!deprecatedEmittedForEditSoleNickname) {
+	          process.emitWarning(
+	            // eslint-disable-next-line max-len
+	            "You should use GuildMemberManager#editMe() when changing your nickname. Due to Discord's API changes, GuildMemberManager#edit() will end up requiring MANAGE_NICKNAMES in v15.",
+	            'DeprecationWarning',
+	          );
+
+	          deprecatedEmittedForEditSoleNickname = true;
+	        }
+	      }
 	    }
+
+	    endpoint ??= Routes.guildMember(this.guild.id, id);
 	    const d = await this.client.rest.patch(endpoint, { body: options, reason });
 
 	    const clone = this.cache.get(id)?._clone();
 	    clone?._patch(d);
 	    return clone ?? this._add(d, false);
+	  }
+
+	  /**
+	   * The data for editing the current application's guild member.
+	   *
+	   * @typedef {Object} GuildMemberEditMeOptions
+	   * @property {?string} [nick] The nickname to set
+	   * @property {?(BufferResolvable|Base64Resolvable)} [banner] The banner to set
+	   * @property {?(BufferResolvable|Base64Resolvable)} [avatar] The avatar to set
+	   * @property {?string} [bio] The bio to set
+	   * @property {string} [reason] The reason to use
+	   */
+
+	  /**
+	   * Edits the current application's guild member in a guild.
+	   *
+	   * @param {GuildMemberEditMeOptions} options The options to provide
+	   * @returns {Promise<GuildMember>}
+	   */
+	  async editMe({ reason, ...options }) {
+	    const data = await this.client.rest.patch(Routes.guildMember(this.guild.id, '@me'), {
+	      body: {
+	        ...options,
+	        banner: options.banner && (await resolveImage(options.banner)),
+	        avatar: options.avatar && (await resolveImage(options.avatar)),
+	      },
+	      reason,
+	    });
+
+	    const clone = this.me?._clone();
+	    clone?._patch(data);
+	    return clone ?? this._add(data, false);
 	  }
 
 	  /**
@@ -121102,6 +122527,7 @@ function requireGuild () {
 	   * @property {number} [afkTimeout] The AFK timeout of the guild
 	   * @property {?(BufferResolvable|Base64Resolvable)} [icon] The icon of the guild
 	   * @property {GuildMemberResolvable} [owner] The owner of the guild
+	   * <warn>This property is **deprecated** as API related to guild ownership may no longer be used.</warn>
 	   * @property {?(BufferResolvable|Base64Resolvable)} [splash] The invite splash image of the guild
 	   * @property {?(BufferResolvable|Base64Resolvable)} [discoverySplash] The discovery splash image of the guild
 	   * @property {?(BufferResolvable|Base64Resolvable)} [banner] The banner of the guild
@@ -121467,12 +122893,7 @@ function requireGuild () {
 	   * @param {GuildMemberResolvable} owner The new owner of the guild
 	   * @param {string} [reason] Reason for setting the new owner
 	   * @returns {Promise<Guild>}
-	   * @example
-	   * // Edit the guild owner
-	   * guild.setOwner(guild.members.cache.first())
-	   *  .then(guild => guild.fetchOwner())
-	   *  .then(owner => console.log(`Updated the guild owner to ${owner.displayName}`))
-	   *  .catch(console.error);
+	   * @deprecated API related to guild ownership may no longer be used.
 	   */
 	  setOwner(owner, reason) {
 	    return this.edit({ owner, reason });
@@ -121615,11 +123036,7 @@ function requireGuild () {
 	   * @param {GuildMFALevel} level The MFA level
 	   * @param {string} [reason] Reason for changing the guild's MFA level
 	   * @returns {Promise<Guild>}
-	   * @example
-	   * // Set the MFA level of the guild to Elevated
-	   * guild.setMFALevel(GuildMFALevel.Elevated)
-	   *   .then(guild => console.log("Set guild's MFA level to Elevated"))
-	   *   .catch(console.error);
+	   * @deprecated API related to guild ownership may no longer be used.
 	   */
 	  async setMFALevel(level, reason) {
 	    await this.client.rest.post(Routes.guildMFA(this.id), {
@@ -121649,6 +123066,7 @@ function requireGuild () {
 	  /**
 	   * Deletes the guild.
 	   * @returns {Promise<Guild>}
+	   * @deprecated API related to guild ownership may no longer be used.
 	   * @example
 	   * // Delete a guild
 	   * guild.delete()
@@ -121818,7 +123236,7 @@ function requireGuildManager () {
 	hasRequiredGuildManager = 1;
 
 	const process = require$$0$k;
-	const { setTimeout, clearTimeout } = require$$0$l;
+	const { setTimeout, clearTimeout } = require$$1$a;
 	const { Collection } = requireDist$7();
 	const { makeURLSearchParams } = requireWeb();
 	const { GatewayOpcodes, Routes, RouteBases } = requireV10();
@@ -121980,6 +123398,7 @@ function requireGuildManager () {
 	   * Creates a guild.
 	   * <warn>This is only available to bots in fewer than 10 guilds.</warn>
 	   * @param {GuildCreateOptions} options Options for creating the guild
+	   * @deprecated API related to guild ownership may no longer be used.
 	   * @returns {Promise<Guild>} The guild that was created
 	   */
 	  async create({
@@ -122889,7 +124308,7 @@ function requireSweepers () {
 	if (hasRequiredSweepers) return Sweepers_1;
 	hasRequiredSweepers = 1;
 
-	const { setInterval, clearInterval } = require$$0$l;
+	const { setInterval, clearInterval } = require$$1$a;
 	const { ThreadChannelTypes, SweeperKeys } = requireConstants$6();
 	const Events = requireEvents$1();
 	const { DiscordjsTypeError, ErrorCodes } = requireErrors$2();
@@ -124081,7 +125500,7 @@ function requireShard () {
 	const EventEmitter = require$$0$a;
 	const path = path__default;
 	const process = require$$0$k;
-	const { setTimeout, clearTimeout } = require$$0$l;
+	const { setTimeout, clearTimeout } = require$$1$a;
 	const { setTimeout: sleep } = require$$4$3;
 	const { SHARE_ENV } = require$$5$3;
 	const { DiscordjsError, ErrorCodes } = requireErrors$2();
@@ -125775,6 +127194,7 @@ function requireSrc$1 () {
 		exports$1.Formatters = requireFormatters();
 		exports$1.GuildMemberFlagsBitField = requireGuildMemberFlagsBitField().GuildMemberFlagsBitField;
 		exports$1.IntentsBitField = requireIntentsBitField();
+		exports$1.InviteFlagsBitField = requireInviteFlagsBitField().InviteFlagsBitField;
 		exports$1.LimitedCollection = requireLimitedCollection();
 		exports$1.MessageFlagsBitField = requireMessageFlagsBitField();
 		exports$1.Options = requireOptions();
@@ -125791,7 +127211,7 @@ function requireSrc$1 () {
 		exports$1.UserFlagsBitField = requireUserFlagsBitField();
 		__exportStar(requireUtil$6(), exports$1);
 		exports$1.WebSocketShardEvents = requireWebSocketShardEvents();
-		exports$1.version = require$$39.version;
+		exports$1.version = require$$40.version;
 
 		// Managers
 		exports$1.ApplicationCommandManager = requireApplicationCommandManager();
@@ -125822,6 +127242,7 @@ function requireSrc$1 () {
 		exports$1.GuildTextThreadManager = requireGuildTextThreadManager();
 		exports$1.MessageManager = requireMessageManager();
 		exports$1.PermissionOverwriteManager = requirePermissionOverwriteManager();
+		exports$1.PollAnswerVoterManager = requirePollAnswerVoterManager().PollAnswerVoterManager;
 		exports$1.PresenceManager = requirePresenceManager();
 		exports$1.ReactionManager = requireReactionManager();
 		exports$1.ReactionUserManager = requireReactionUserManager();
@@ -125902,6 +127323,7 @@ function requireSrc$1 () {
 		exports$1.Invite = requireInvite();
 		exports$1.InviteStageInstance = requireInviteStageInstance();
 		exports$1.InviteGuild = requireInviteGuild();
+		exports$1.LabelComponent = requireLabelComponent();
 		exports$1.Message = requireMessage$1().Message;
 		exports$1.Attachment = requireAttachment$1();
 		exports$1.AttachmentBuilder = requireAttachmentBuilder();
@@ -332082,9 +333504,9 @@ function requireSnapshotRecorder () {
 	if (hasRequiredSnapshotRecorder) return snapshotRecorder;
 	hasRequiredSnapshotRecorder = 1;
 
-	const { writeFile, readFile, mkdir } = require$$1$a;
+	const { writeFile, readFile, mkdir } = require$$1$b;
 	const { dirname, resolve } = path__default;
-	const { setTimeout, clearTimeout } = require$$0$l;
+	const { setTimeout, clearTimeout } = require$$1$a;
 	const { InvalidArgumentError, UndiciError } = requireErrors();
 	const { hashId, isUrlExcludedFactory, normalizeHeaders, createHeaderFilters } = requireSnapshotUtils();
 
@@ -349347,7 +350769,7 @@ function requireSupportsColor () {
 	if (hasRequiredSupportsColor) return supportsColor_1;
 	hasRequiredSupportsColor = 1;
 	const os = require$$0$4;
-	const tty = require$$1$b;
+	const tty = require$$1$c;
 	const hasFlag = requireHasFlag();
 
 	const {env} = process;
@@ -349493,7 +350915,7 @@ function requireNode () {
 	if (hasRequiredNode) return node.exports;
 	hasRequiredNode = 1;
 	(function (module, exports$1) {
-		const tty = require$$1$b;
+		const tty = require$$1$c;
 		const util = require$$0$5;
 
 		/**
