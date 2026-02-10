@@ -56,7 +56,7 @@ uploads the transcript to the gh-pages branch of the repository.
 
 ## Output
 
-The transcript directory contains an HMTL file for each thread in the #help
+The transcript directory contains an HTML file for each thread in the #help
 forum.
 
 In addition, the output directory contains a `index.html` file that links to all
