@@ -28782,6 +28782,8 @@ function requireGlobals () {
 	(function (exports$1) {
 		Object.defineProperty(exports$1, "__esModule", { value: true });
 		exports$1.FormattingPatterns = void 0;
+		const timestampStyles = 'DFRSTdfst';
+		const timestampLength = 13;
 		/**
 		 * @see {@link https://discord.com/developers/docs/reference#message-formatting-formats}
 		 */
@@ -28849,20 +28851,19 @@ function requireGlobals () {
 		     *
 		     * The `timestamp` and `style` group properties are present on the `exec` result of this expression
 		     */
-		    // eslint-disable-next-line prefer-named-capture-group, unicorn/better-regex
-		    Timestamp: /<t:(?<timestamp>-?\d{1,13})(:(?<style>[DFRSTdfst]))?>/,
+		    Timestamp: new RegExp(`<t:(?<timestamp>-?\\d{1,${timestampLength}})(:(?<style>[${timestampStyles}]))?>`),
 		    /**
 		     * Regular expression for matching strictly default styled timestamps
 		     *
 		     * The `timestamp` group property is present on the `exec` result of this expression
 		     */
-		    DefaultStyledTimestamp: /<t:(?<timestamp>-?\d{1,13})>/,
+		    DefaultStyledTimestamp: new RegExp(`<t:(?<timestamp>-?\\d{1,${timestampLength}})>`),
 		    /**
 		     * Regular expression for matching strictly custom styled timestamps
 		     *
 		     * The `timestamp` and `style` group properties are present on the `exec` result of this expression
 		     */
-		    StyledTimestamp: /<t:(?<timestamp>-?\d{1,13}):(?<style>[DFRTdft])>/,
+		    StyledTimestamp: new RegExp(`<t:(?<timestamp>-?\\d{1,${timestampLength}}):(?<style>[${timestampStyles}])>`),
 		    /**
 		     * Regular expression for matching a guild navigation mention
 		     *
@@ -28949,7 +28950,7 @@ function requireCommon$3 () {
 		     */
 		    ManageGuild: 1n << 5n,
 		    /**
-		     * Allows for the addition of reactions to messages
+		     * Allows for the addition of reactions to messages. This permission does not apply to reacting with an existing reaction on a message
 		     *
 		     * Applies to channel types: Text, Voice, Stage
 		     */
@@ -29145,9 +29146,9 @@ function requireCommon$3 () {
 		     */
 		    SendMessagesInThreads: 1n << 38n,
 		    /**
-		     * Allows for using Activities (applications with the {@link ApplicationFlags.Embedded} flag) in a voice channel
+		     * Allows for using Activities (applications with the {@link ApplicationFlags.Embedded} flag)
 		     *
-		     * Applies to channel types: Voice
+		     * Applies to channel types: Text, Voice
 		     */
 		    UseEmbeddedActivities: 1n << 39n,
 		    /**
@@ -29206,9 +29207,9 @@ function requireCommon$3 () {
 		     */
 		    PinMessages: 1n << 51n,
 		    /**
-		     * @unstable Allows for bypassing slowmode restrictions. Not (yet) documented.
+		     * Allows bypassing slowmode restrictions
 		     *
-		     * Applies to text-based and thread-based channel types.
+		     * Applies to channel types: Text, Voice, Stage
 		     */
 		    BypassSlowmode: 1n << 52n,
 		};
@@ -29234,7 +29235,7 @@ function requireApplication$1 () {
 	 * Types extracted from https://discord.com/developers/docs/resources/application
 	 */
 	Object.defineProperty(application, "__esModule", { value: true });
-	application.ApplicationWebhookEventStatus = application.ApplicationRoleConnectionMetadataType = application.ApplicationFlags = void 0;
+	application.ApplicationWebhookEventStatus = application.ActivityLocationKind = application.ApplicationRoleConnectionMetadataType = application.ApplicationFlags = void 0;
 	/**
 	 * @see {@link https://discord.com/developers/docs/resources/application#application-object-application-flags}
 	 */
@@ -29348,6 +29349,20 @@ function requireApplication$1 () {
 	     */
 	    ApplicationRoleConnectionMetadataType[ApplicationRoleConnectionMetadataType["BooleanNotEqual"] = 8] = "BooleanNotEqual";
 	})(ApplicationRoleConnectionMetadataType || (application.ApplicationRoleConnectionMetadataType = ApplicationRoleConnectionMetadataType = {}));
+	/**
+	 * @see {@link https://discord.com/developers/docs/resources/application#get-application-activity-instance-activity-location-kind-enum}
+	 */
+	var ActivityLocationKind;
+	(function (ActivityLocationKind) {
+	    /**
+	     * Location is a guild channel
+	     */
+	    ActivityLocationKind["GuildChannel"] = "gc";
+	    /**
+	     * Location is a private channel, such as a DM or GDM
+	     */
+	    ActivityLocationKind["PrivateChannel"] = "pc";
+	})(ActivityLocationKind || (application.ActivityLocationKind = ActivityLocationKind = {}));
 	/**
 	 * @see {@link https://discord.com/developers/docs/resources/application#application-object-application-event-webhook-status}
 	 */
@@ -30736,7 +30751,7 @@ function requireMessage$2 () {
 	hasRequiredMessage$2 = 1;
 	// Types extracted from https://discord.com/developers/docs/resources/message.
 	Object.defineProperty(message$1, "__esModule", { value: true });
-	message$1.SeparatorSpacingSize = message$1.UnfurledMediaItemLoadingState = message$1.SelectMenuDefaultValueType = message$1.TextInputStyle = message$1.ButtonStyle = message$1.ComponentType = message$1.AllowedMentionsTypes = message$1.AttachmentFlags = message$1.EmbedType = message$1.MessageFlags = message$1.MessageReferenceType = message$1.MessageActivityType = message$1.MessageType = void 0;
+	message$1.MessageSearchSortMode = message$1.MessageSearchEmbedType = message$1.MessageSearchHasType = message$1.MessageSearchAuthorType = message$1.SeparatorSpacingSize = message$1.UnfurledMediaItemLoadingState = message$1.SelectMenuDefaultValueType = message$1.TextInputStyle = message$1.ButtonStyle = message$1.ComponentType = message$1.AllowedMentionsTypes = message$1.AttachmentFlags = message$1.EmbedType = message$1.BaseThemeType = message$1.MessageFlags = message$1.MessageReferenceType = message$1.MessageActivityType = message$1.MessageType = void 0;
 	/**
 	 * @see {@link https://discord.com/developers/docs/resources/message#message-object-message-types}
 	 */
@@ -30872,6 +30887,17 @@ function requireMessage$2 () {
 	     */
 	    MessageFlags[MessageFlags["IsComponentsV2"] = 32768] = "IsComponentsV2";
 	})(MessageFlags || (message$1.MessageFlags = MessageFlags = {}));
+	/**
+	 * @see https://docs.discord.com/developers/resources/message#base-theme-types
+	 */
+	var BaseThemeType;
+	(function (BaseThemeType) {
+	    BaseThemeType[BaseThemeType["Unset"] = 0] = "Unset";
+	    BaseThemeType[BaseThemeType["Dark"] = 1] = "Dark";
+	    BaseThemeType[BaseThemeType["Light"] = 2] = "Light";
+	    BaseThemeType[BaseThemeType["Darker"] = 3] = "Darker";
+	    BaseThemeType[BaseThemeType["Midnight"] = 4] = "Midnight";
+	})(BaseThemeType || (message$1.BaseThemeType = BaseThemeType = {}));
 	/**
 	 * @see {@link https://discord.com/developers/docs/resources/message#embed-object-embed-types}
 	 */
@@ -31017,6 +31043,18 @@ function requireMessage$2 () {
 	     * Component for uploading files
 	     */
 	    ComponentType[ComponentType["FileUpload"] = 19] = "FileUpload";
+	    /**
+	     * Single-choice set of radio group option
+	     */
+	    ComponentType[ComponentType["RadioGroup"] = 21] = "RadioGroup";
+	    /**
+	     * Multi-select group of checkboxes
+	     */
+	    ComponentType[ComponentType["CheckboxGroup"] = 22] = "CheckboxGroup";
+	    /**
+	     * Single checkbox for binary choice
+	     */
+	    ComponentType[ComponentType["Checkbox"] = 23] = "Checkbox";
 	    // EVERYTHING BELOW THIS LINE SHOULD BE OLD NAMES FOR RENAMED ENUM MEMBERS //
 	    /**
 	     * Select menu for picking from defined text options
@@ -31093,6 +31131,159 @@ function requireMessage$2 () {
 	    SeparatorSpacingSize[SeparatorSpacingSize["Small"] = 1] = "Small";
 	    SeparatorSpacingSize[SeparatorSpacingSize["Large"] = 2] = "Large";
 	})(SeparatorSpacingSize || (message$1.SeparatorSpacingSize = SeparatorSpacingSize = {}));
+	/**
+	 * @remarks All types can be negated by prefixing them with `-`, which means results will not include messages that match the type.
+	 * @see {@link https://docs.discord.com/developers/resources/message#search-guild-messages-author-types}
+	 */
+	var MessageSearchAuthorType;
+	(function (MessageSearchAuthorType) {
+	    /**
+	     * Return messages sent by user accounts
+	     */
+	    MessageSearchAuthorType["User"] = "user";
+	    /**
+	     * Return messages sent by bot accounts
+	     */
+	    MessageSearchAuthorType["Bot"] = "bot";
+	    /**
+	     * Return messages sent by webhooks
+	     */
+	    MessageSearchAuthorType["Webhook"] = "webhook";
+	    /**
+	     * Return messages not sent by user accounts
+	     */
+	    MessageSearchAuthorType["NotUser"] = "-user";
+	    /**
+	     * Return messages not sent by bot accounts
+	     */
+	    MessageSearchAuthorType["NotBot"] = "-bot";
+	    /**
+	     * Return messages not sent by webhooks
+	     */
+	    MessageSearchAuthorType["NotWebhook"] = "-webhook";
+	})(MessageSearchAuthorType || (message$1.MessageSearchAuthorType = MessageSearchAuthorType = {}));
+	/**
+	 * @remarks All types can be negated by prefixing them with `-`, which means results will not include messages that match the type.
+	 * @see {@link https://docs.discord.com/developers/resources/message#search-guild-messages-search-has-types}
+	 */
+	var MessageSearchHasType;
+	(function (MessageSearchHasType) {
+	    /**
+	     * Return messages that have an image
+	     */
+	    MessageSearchHasType["Image"] = "image";
+	    /**
+	     * Return messages that have a sound attachment
+	     */
+	    MessageSearchHasType["Sound"] = "sound";
+	    /**
+	     * Return messages that have a video
+	     */
+	    MessageSearchHasType["Video"] = "video";
+	    /**
+	     * Return messages that have an attachment
+	     */
+	    MessageSearchHasType["File"] = "file";
+	    /**
+	     * Return messages that have a sent sticker
+	     */
+	    MessageSearchHasType["Sticker"] = "sticker";
+	    /**
+	     * Return messages that have an embed
+	     */
+	    MessageSearchHasType["Embed"] = "embed";
+	    /**
+	     * Return messages that have a link
+	     */
+	    MessageSearchHasType["Link"] = "link";
+	    /**
+	     * Return messages that have a poll
+	     */
+	    MessageSearchHasType["Poll"] = "poll";
+	    /**
+	     * Return messages that have a forwarded message
+	     */
+	    MessageSearchHasType["Snapshot"] = "snapshot";
+	    /**
+	     * Return messages that don't have an image
+	     */
+	    MessageSearchHasType["NotImage"] = "-image";
+	    /**
+	     * Return messages that don't have a sound attachment
+	     */
+	    MessageSearchHasType["NotSound"] = "-sound";
+	    /**
+	     * Return messages that don't have a video
+	     */
+	    MessageSearchHasType["NotVideo"] = "-video";
+	    /**
+	     * Return messages that don't have an attachment
+	     */
+	    MessageSearchHasType["NotFile"] = "-file";
+	    /**
+	     * Return messages that don't have a sent sticker
+	     */
+	    MessageSearchHasType["NotSticker"] = "-sticker";
+	    /**
+	     * Return messages that don't have an embed
+	     */
+	    MessageSearchHasType["NotEmbed"] = "-embed";
+	    /**
+	     * Return messages that don't have a link
+	     */
+	    MessageSearchHasType["NotLink"] = "-link";
+	    /**
+	     * Return messages that don't have a poll
+	     */
+	    MessageSearchHasType["NotPoll"] = "-poll";
+	    /**
+	     * Return messages that don't have a forwarded message
+	     */
+	    MessageSearchHasType["NotSnapshot"] = "-snapshot";
+	})(MessageSearchHasType || (message$1.MessageSearchHasType = MessageSearchHasType = {}));
+	/**
+	 * @remarks These do not correspond 1:1 to actual {@link https://docs.discord.com/developers/resources/message#embed-object-embed-types | embed types} and encompass a wider range of actual types.
+	 * @see {@link https://docs.discord.com/developers/resources/message#search-guild-messages-search-embed-types}
+	 */
+	var MessageSearchEmbedType;
+	(function (MessageSearchEmbedType) {
+	    /**
+	     * Return messages that have an image embed
+	     */
+	    MessageSearchEmbedType["Image"] = "image";
+	    /**
+	     * Return messages that have a video embed
+	     */
+	    MessageSearchEmbedType["Video"] = "video";
+	    /**
+	     * Return messages that have a gifv embed
+	     *
+	     * @remarks Messages sent before February 24, 2026 may not be properly indexed under the `gif` embed type.
+	     */
+	    MessageSearchEmbedType["Gif"] = "gif";
+	    /**
+	     * Return messages that have a sound embed
+	     */
+	    MessageSearchEmbedType["Sound"] = "sound";
+	    /**
+	     * Return messages that have an article embed
+	     */
+	    MessageSearchEmbedType["Article"] = "article";
+	})(MessageSearchEmbedType || (message$1.MessageSearchEmbedType = MessageSearchEmbedType = {}));
+	/**
+	 * @see {@link https://docs.discord.com/developers/resources/message#search-guild-messages-search-sort-modes}
+	 */
+	var MessageSearchSortMode;
+	(function (MessageSearchSortMode) {
+	    /**
+	     * Sort by the message creation time (default)
+	     */
+	    MessageSearchSortMode["Timestamp"] = "timestamp";
+	    /**
+	     * Sort by the relevance of the message to the search query
+	     */
+	    MessageSearchSortMode["Relevance"] = "relevance";
+	})(MessageSearchSortMode || (message$1.MessageSearchSortMode = MessageSearchSortMode = {}));
 	
 	return message$1;
 }
@@ -31762,14 +31953,10 @@ function requireWebhook$1 () {
 	    ApplicationWebhookEventType["EntitlementCreate"] = "ENTITLEMENT_CREATE";
 	    /**
 	     * Entitlement was updated
-	     *
-	     * @unstable This event is not yet documented but can be enabled from the developer portal
 	     */
 	    ApplicationWebhookEventType["EntitlementUpdate"] = "ENTITLEMENT_UPDATE";
 	    /**
 	     * Entitlement was deleted
-	     *
-	     * @unstable This event is not yet documented but can be enabled from the developer portal
 	     */
 	    ApplicationWebhookEventType["EntitlementDelete"] = "ENTITLEMENT_DELETE";
 	    /**
@@ -31850,6 +32037,7 @@ var mod$3 = /*@__PURE__*/getDefaultExportFromCjs(v10Exports$3);
 
 const APIApplicationCommandPermissionsConstant = mod$3.APIApplicationCommandPermissionsConstant;
 const ActivityFlags = mod$3.ActivityFlags;
+const ActivityLocationKind = mod$3.ActivityLocationKind;
 const ActivityPlatform = mod$3.ActivityPlatform;
 const ActivityType = mod$3.ActivityType;
 const AllowedMentionsTypes = mod$3.AllowedMentionsTypes;
@@ -31869,6 +32057,7 @@ const AutoModerationActionType = mod$3.AutoModerationActionType;
 const AutoModerationRuleEventType = mod$3.AutoModerationRuleEventType;
 const AutoModerationRuleKeywordPresetType = mod$3.AutoModerationRuleKeywordPresetType;
 const AutoModerationRuleTriggerType = mod$3.AutoModerationRuleTriggerType;
+const BaseThemeType = mod$3.BaseThemeType;
 const ButtonStyle = mod$3.ButtonStyle;
 const ChannelFlags = mod$3.ChannelFlags;
 const ChannelType = mod$3.ChannelType;
@@ -31909,6 +32098,10 @@ const MembershipScreeningFieldType = mod$3.MembershipScreeningFieldType;
 const MessageActivityType = mod$3.MessageActivityType;
 const MessageFlags = mod$3.MessageFlags;
 const MessageReferenceType = mod$3.MessageReferenceType;
+const MessageSearchAuthorType = mod$3.MessageSearchAuthorType;
+const MessageSearchEmbedType = mod$3.MessageSearchEmbedType;
+const MessageSearchHasType = mod$3.MessageSearchHasType;
+const MessageSearchSortMode = mod$3.MessageSearchSortMode;
 const MessageType = mod$3.MessageType;
 const NameplatePalette = mod$3.NameplatePalette;
 const OAuth2Scopes = mod$3.OAuth2Scopes;
@@ -31942,6 +32135,7 @@ var v10$6 = /*#__PURE__*/Object.freeze({
 	__proto__: null,
 	APIApplicationCommandPermissionsConstant: APIApplicationCommandPermissionsConstant,
 	ActivityFlags: ActivityFlags,
+	ActivityLocationKind: ActivityLocationKind,
 	ActivityPlatform: ActivityPlatform,
 	ActivityType: ActivityType,
 	AllowedMentionsTypes: AllowedMentionsTypes,
@@ -31961,6 +32155,7 @@ var v10$6 = /*#__PURE__*/Object.freeze({
 	AutoModerationRuleEventType: AutoModerationRuleEventType,
 	AutoModerationRuleKeywordPresetType: AutoModerationRuleKeywordPresetType,
 	AutoModerationRuleTriggerType: AutoModerationRuleTriggerType,
+	BaseThemeType: BaseThemeType,
 	ButtonStyle: ButtonStyle,
 	ChannelFlags: ChannelFlags,
 	ChannelType: ChannelType,
@@ -32001,6 +32196,10 @@ var v10$6 = /*#__PURE__*/Object.freeze({
 	MessageActivityType: MessageActivityType,
 	MessageFlags: MessageFlags,
 	MessageReferenceType: MessageReferenceType,
+	MessageSearchAuthorType: MessageSearchAuthorType,
+	MessageSearchEmbedType: MessageSearchEmbedType,
+	MessageSearchHasType: MessageSearchHasType,
+	MessageSearchSortMode: MessageSearchSortMode,
 	MessageType: MessageType,
 	NameplatePalette: NameplatePalette,
 	OAuth2Scopes: OAuth2Scopes,
@@ -32066,7 +32265,7 @@ function requireCommon$2 () {
 	if (hasRequiredCommon$2) return common$2;
 	hasRequiredCommon$2 = 1;
 	Object.defineProperty(common$2, "__esModule", { value: true });
-	common$2.Locale = common$2.RESTJSONErrorCodes = void 0;
+	common$2.Locale = common$2.CannotSendMessagesToThisUserErrorCodes = common$2.RESTJSONErrorCodes = void 0;
 	/**
 	 * @see {@link https://discord.com/developers/docs/topics/opcodes-and-status-codes#json-json-error-codes}
 	 */
@@ -32194,6 +32393,9 @@ function requireCommon$2 () {
 	    RESTJSONErrorCodes[RESTJSONErrorCodes["GuildWidgetDisabled"] = 50004] = "GuildWidgetDisabled";
 	    RESTJSONErrorCodes[RESTJSONErrorCodes["CannotEditMessageAuthoredByAnotherUser"] = 50005] = "CannotEditMessageAuthoredByAnotherUser";
 	    RESTJSONErrorCodes[RESTJSONErrorCodes["CannotSendAnEmptyMessage"] = 50006] = "CannotSendAnEmptyMessage";
+	    /**
+	     * @see {@link RESTJSONErrorCodes.CannotSendMessagesToThisUserDueToHavingNoMutualGuilds} for a similar error code
+	     */
 	    RESTJSONErrorCodes[RESTJSONErrorCodes["CannotSendMessagesToThisUser"] = 50007] = "CannotSendMessagesToThisUser";
 	    RESTJSONErrorCodes[RESTJSONErrorCodes["CannotSendMessagesInNonTextChannel"] = 50008] = "CannotSendMessagesInNonTextChannel";
 	    RESTJSONErrorCodes[RESTJSONErrorCodes["ChannelVerificationLevelTooHighForYouToGainAccess"] = 50009] = "ChannelVerificationLevelTooHighForYouToGainAccess";
@@ -32245,6 +32447,10 @@ function requireCommon$2 () {
 	    RESTJSONErrorCodes[RESTJSONErrorCodes["ProvidedFileDurationExceedsMaximumLength"] = 50124] = "ProvidedFileDurationExceedsMaximumLength";
 	    RESTJSONErrorCodes[RESTJSONErrorCodes["OwnerCannotBePendingMember"] = 50131] = "OwnerCannotBePendingMember";
 	    RESTJSONErrorCodes[RESTJSONErrorCodes["OwnershipCannotBeMovedToABotUser"] = 50132] = "OwnershipCannotBeMovedToABotUser";
+	    RESTJSONErrorCodes[RESTJSONErrorCodes["FailedToResizeAssetBelowTheMaximumSize"] = 50138] = "FailedToResizeAssetBelowTheMaximumSize";
+	    /**
+	     * @deprecated This name is incorrect. Use {@link RESTJSONErrorCodes.FailedToResizeAssetBelowTheMaximumSize} instead
+	     */
 	    RESTJSONErrorCodes[RESTJSONErrorCodes["FailedToResizeAssetBelowTheMinimumSize"] = 50138] = "FailedToResizeAssetBelowTheMinimumSize";
 	    RESTJSONErrorCodes[RESTJSONErrorCodes["CannotMixSubscriptionAndNonSubscriptionRolesForAnEmoji"] = 50144] = "CannotMixSubscriptionAndNonSubscriptionRolesForAnEmoji";
 	    RESTJSONErrorCodes[RESTJSONErrorCodes["CannotConvertBetweenPremiumEmojiAndNormalEmoji"] = 50145] = "CannotConvertBetweenPremiumEmojiAndNormalEmoji";
@@ -32258,11 +32464,16 @@ function requireCommon$2 () {
 	    RESTJSONErrorCodes[RESTJSONErrorCodes["YouCannotSendVoiceMessagesInThisChannel"] = 50173] = "YouCannotSendVoiceMessagesInThisChannel";
 	    RESTJSONErrorCodes[RESTJSONErrorCodes["TheUserAccountMustFirstBeVerified"] = 50178] = "TheUserAccountMustFirstBeVerified";
 	    RESTJSONErrorCodes[RESTJSONErrorCodes["ProvidedFileDoesNotHaveAValidDuration"] = 50192] = "ProvidedFileDoesNotHaveAValidDuration";
+	    /**
+	     * @see {@link RESTJSONErrorCodes.CannotSendMessagesToThisUser} for a similar error code
+	     */
+	    RESTJSONErrorCodes[RESTJSONErrorCodes["CannotSendMessagesToThisUserDueToHavingNoMutualGuilds"] = 50278] = "CannotSendMessagesToThisUserDueToHavingNoMutualGuilds";
 	    RESTJSONErrorCodes[RESTJSONErrorCodes["YouDoNotHavePermissionToSendThisSticker"] = 50600] = "YouDoNotHavePermissionToSendThisSticker";
 	    RESTJSONErrorCodes[RESTJSONErrorCodes["TwoFactorAuthenticationIsRequired"] = 60003] = "TwoFactorAuthenticationIsRequired";
 	    RESTJSONErrorCodes[RESTJSONErrorCodes["NoUsersWithDiscordTagExist"] = 80004] = "NoUsersWithDiscordTagExist";
 	    RESTJSONErrorCodes[RESTJSONErrorCodes["ReactionWasBlocked"] = 90001] = "ReactionWasBlocked";
 	    RESTJSONErrorCodes[RESTJSONErrorCodes["UserCannotUseBurstReactions"] = 90002] = "UserCannotUseBurstReactions";
+	    RESTJSONErrorCodes[RESTJSONErrorCodes["IndexNotYetAvailable"] = 110000] = "IndexNotYetAvailable";
 	    RESTJSONErrorCodes[RESTJSONErrorCodes["ApplicationNotYetAvailable"] = 110001] = "ApplicationNotYetAvailable";
 	    RESTJSONErrorCodes[RESTJSONErrorCodes["APIResourceOverloaded"] = 130000] = "APIResourceOverloaded";
 	    RESTJSONErrorCodes[RESTJSONErrorCodes["TheStageIsAlreadyOpen"] = 150006] = "TheStageIsAlreadyOpen";
@@ -32297,7 +32508,24 @@ function requireCommon$2 () {
 	    RESTJSONErrorCodes[RESTJSONErrorCodes["CannotEditAPollMessage"] = 520003] = "CannotEditAPollMessage";
 	    RESTJSONErrorCodes[RESTJSONErrorCodes["CannotUseAnEmojiIncludedWithThePoll"] = 520004] = "CannotUseAnEmojiIncludedWithThePoll";
 	    RESTJSONErrorCodes[RESTJSONErrorCodes["CannotExpireANonPollMessage"] = 520006] = "CannotExpireANonPollMessage";
+	    RESTJSONErrorCodes[RESTJSONErrorCodes["ProvisionalAccountsPermissionNotGranted"] = 530000] = "ProvisionalAccountsPermissionNotGranted";
+	    RESTJSONErrorCodes[RESTJSONErrorCodes["IdTokenJWTExpired"] = 530001] = "IdTokenJWTExpired";
+	    RESTJSONErrorCodes[RESTJSONErrorCodes["IdTokenJWTIssuerMismatch"] = 530002] = "IdTokenJWTIssuerMismatch";
+	    RESTJSONErrorCodes[RESTJSONErrorCodes["IdTokenJWTAudienceMismatch"] = 530003] = "IdTokenJWTAudienceMismatch";
+	    RESTJSONErrorCodes[RESTJSONErrorCodes["IdTokenJWTIssuedTooLongAgo"] = 530004] = "IdTokenJWTIssuedTooLongAgo";
+	    RESTJSONErrorCodes[RESTJSONErrorCodes["FailedToGenerateUniqueUsername"] = 530006] = "FailedToGenerateUniqueUsername";
+	    RESTJSONErrorCodes[RESTJSONErrorCodes["InvalidClientSecret"] = 530007] = "InvalidClientSecret";
 	})(RESTJSONErrorCodes || (common$2.RESTJSONErrorCodes = RESTJSONErrorCodes = {}));
+	/**
+	 * JSON Error Codes that represent "Cannot send messages to this user".
+	 * Discord uses two different error codes for this error:
+	 * - {@link RESTJSONErrorCodes.CannotSendMessagesToThisUser} (50_007)
+	 * - {@link RESTJSONErrorCodes.CannotSendMessagesToThisUserDueToHavingNoMutualGuilds} (50_278)
+	 */
+	common$2.CannotSendMessagesToThisUserErrorCodes = [
+	    RESTJSONErrorCodes.CannotSendMessagesToThisUser,
+	    RESTJSONErrorCodes.CannotSendMessagesToThisUserDueToHavingNoMutualGuilds,
+	];
 	/**
 	 * @see {@link https://discord.com/developers/docs/reference#locales}
 	 */
@@ -32668,6 +32896,13 @@ function requireV10$3 () {
 		    },
 		    /**
 		     * Route for:
+		     * - GET `/guilds/{guild.id}/messages/search`
+		     */
+		    guildMessagesSearch(guildId) {
+		        return `/guilds/${guildId}/messages/search`;
+		    },
+		    /**
+		     * Route for:
 		     * - PATCH `/guilds/{guild.id}/members/@me/nick`
 		     *
 		     * @deprecated Use {@link Routes.guildMember} instead.
@@ -32729,8 +32964,6 @@ function requireV10$3 () {
 		    /**
 		     * Route for:
 		     * - GET `/guilds/{guild.id}/roles/member-counts`
-		     *
-		     * @unstable
 		     */
 		    guildRoleMemberCounts(guildId) {
 		        return `/guilds/${guildId}/roles/member-counts`;
@@ -33262,6 +33495,13 @@ function requireV10$3 () {
 		    },
 		    /**
 		     * Route for:
+		     * - GET `/applications/{application.id}/activity-instances/{instance_id}`
+		     */
+		    applicationActivityInstance(applicationId, instanceId) {
+		        return `/applications/${applicationId}/activity-instances/${instanceId}`;
+		    },
+		    /**
+		     * Route for:
 		     * - GET `/applications/{application.id}/entitlements`
 		     * - POST `/applications/{application.id}/entitlements`
 		     */
@@ -33361,7 +33601,7 @@ function requireV10$3 () {
 		    },
 		};
 		for (const [key, fn] of Object.entries(exports$1.Routes)) {
-		    exports$1.Routes[key] = (...args) => {
+		    exports$1.Routes[key] = ((...args) => {
 		        const escaped = args.map((arg) => {
 		            if (arg) {
 		                // Skip already "safe" urls
@@ -33374,7 +33614,7 @@ function requireV10$3 () {
 		        });
 		        // eslint-disable-next-line no-useless-call
 		        return fn.call(null, ...escaped);
-		    };
+		    });
 		}
 		// Freeze the object so it can't be changed
 		Object.freeze(exports$1.Routes);
@@ -33622,7 +33862,7 @@ function requireV10$3 () {
 		    },
 		};
 		for (const [key, fn] of Object.entries(exports$1.CDNRoutes)) {
-		    exports$1.CDNRoutes[key] = (...args) => {
+		    exports$1.CDNRoutes[key] = ((...args) => {
 		        const escaped = args.map((arg) => {
 		            if (arg) {
 		                // Skip already "safe" urls
@@ -33635,7 +33875,7 @@ function requireV10$3 () {
 		        });
 		        // eslint-disable-next-line no-useless-call
 		        return fn.call(null, ...escaped);
-		    };
+		    });
 		}
 		// Freeze the object so it can't be changed
 		Object.freeze(exports$1.CDNRoutes);
@@ -33670,6 +33910,7 @@ var mod$2 = /*@__PURE__*/getDefaultExportFromCjs(v10Exports$2);
 
 const APIVersion = mod$2.APIVersion;
 const CDNRoutes = mod$2.CDNRoutes;
+const CannotSendMessagesToThisUserErrorCodes = mod$2.CannotSendMessagesToThisUserErrorCodes;
 const EntitlementOwnerType = mod$2.EntitlementOwnerType;
 const ImageFormat = mod$2.ImageFormat;
 const Locale = mod$2.Locale;
@@ -33684,6 +33925,7 @@ var v10$4 = /*#__PURE__*/Object.freeze({
 	__proto__: null,
 	APIVersion: APIVersion,
 	CDNRoutes: CDNRoutes,
+	CannotSendMessagesToThisUserErrorCodes: CannotSendMessagesToThisUserErrorCodes,
 	EntitlementOwnerType: EntitlementOwnerType,
 	ImageFormat: ImageFormat,
 	Locale: Locale,
@@ -34511,9 +34753,31 @@ function requireV10 () {
 		    if (k2 === undefined) k2 = k;
 		    o[k2] = m[k];
 		}));
+		var __setModuleDefault = (v10$a && v10$a.__setModuleDefault) || (Object.create ? (function(o, v) {
+		    Object.defineProperty(o, "default", { enumerable: true, value: v });
+		}) : function(o, v) {
+		    o["default"] = v;
+		});
 		var __exportStar = (v10$a && v10$a.__exportStar) || function(m, exports$1) {
 		    for (var p in m) if (p !== "default" && !Object.prototype.hasOwnProperty.call(exports$1, p)) __createBinding(exports$1, m, p);
 		};
+		var __importStar = (v10$a && v10$a.__importStar) || (function () {
+		    var ownKeys = function(o) {
+		        ownKeys = Object.getOwnPropertyNames || function (o) {
+		            var ar = [];
+		            for (var k in o) if (Object.prototype.hasOwnProperty.call(o, k)) ar[ar.length] = k;
+		            return ar;
+		        };
+		        return ownKeys(o);
+		    };
+		    return function (mod) {
+		        if (mod && mod.__esModule) return mod;
+		        var result = {};
+		        if (mod != null) for (var k = ownKeys(mod), i = 0; i < k.length; i++) if (k[i] !== "default") __createBinding(result, mod, k[i]);
+		        __setModuleDefault(result, mod);
+		        return result;
+		    };
+		})();
 		Object.defineProperty(exports$1, "__esModule", { value: true });
 		exports$1.Utils = void 0;
 		__exportStar(require$$0$2, exports$1);
@@ -34522,7 +34786,7 @@ function requireV10 () {
 		__exportStar(require$$3, exports$1);
 		__exportStar(require$$4, exports$1);
 		__exportStar(requireInternals(), exports$1);
-		exports$1.Utils = require$$6;
+		exports$1.Utils = __importStar(require$$6);
 		
 	} (v10$a));
 	return v10$a;
@@ -35098,31 +35362,31 @@ function requireDist$a () {
 	return dist$9;
 }
 
-var cjs$2 = {};
+var cjs$3 = {};
 
-var hasRequiredCjs$2;
+var hasRequiredCjs$3;
 
-function requireCjs$2 () {
-	if (hasRequiredCjs$2) return cjs$2;
-	hasRequiredCjs$2 = 1;
+function requireCjs$3 () {
+	if (hasRequiredCjs$3) return cjs$3;
+	hasRequiredCjs$3 = 1;
 
 	var __defProp = Object.defineProperty;
 	var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
 	var __name = (target, value) => __defProp(target, "name", { value, configurable: true });
-	var __publicField = (obj, key, value) => {
-	  __defNormalProp(obj, typeof key !== "symbol" ? key + "" : key, value);
-	  return value;
-	};
+	var __publicField = (obj, key, value) => __defNormalProp(obj, typeof key !== "symbol" ? key + "" : key, value);
 
 	// src/lib/Snowflake.ts
 	var IncrementSymbol = Symbol("@sapphire/snowflake.increment");
 	var EpochSymbol = Symbol("@sapphire/snowflake.epoch");
+	var EpochNumberSymbol = Symbol("@sapphire/snowflake.epoch.number");
 	var ProcessIdSymbol = Symbol("@sapphire/snowflake.processId");
 	var WorkerIdSymbol = Symbol("@sapphire/snowflake.workerId");
 	var MaximumWorkerId = 0b11111n;
 	var MaximumProcessId = 0b11111n;
 	var MaximumIncrement = 0b111111111111n;
-	var _a, _b, _c, _d;
+	var TimestampFieldDivisor = 2 ** 22;
+	var _a, _b, _c, _d, _e;
+	_e = EpochSymbol, _d = EpochNumberSymbol, _c = IncrementSymbol, _b = ProcessIdSymbol, _a = WorkerIdSymbol;
 	var _Snowflake = class _Snowflake {
 	  /**
 	   * @param epoch the epoch to use
@@ -35137,29 +35401,41 @@ function requireCjs$2 () {
 	     * Internal reference of the epoch passed in the constructor
 	     * @internal
 	     */
-	    __publicField(this, _a);
+	    __publicField(this, _e);
+	    /**
+	     * Internal reference of the epoch passed in the constructor as a number
+	     * @internal
+	     */
+	    __publicField(this, _d);
 	    /**
 	     * Internal incrementor for generating snowflakes
 	     * @internal
 	     */
-	    __publicField(this, _b, 0n);
+	    __publicField(this, _c, 0n);
 	    /**
 	     * The process ID that will be used by default in the generate method
 	     * @internal
 	     */
-	    __publicField(this, _c, 1n);
+	    __publicField(this, _b, 1n);
 	    /**
 	     * The worker ID that will be used by default in the generate method
 	     * @internal
 	     */
-	    __publicField(this, _d, 0n);
+	    __publicField(this, _a, 0n);
 	    this[EpochSymbol] = BigInt(epoch instanceof Date ? epoch.getTime() : epoch);
+	    this[EpochNumberSymbol] = Number(this[EpochSymbol]);
 	  }
 	  /**
-	   * The epoch for this snowflake
+	   * The epoch for this snowflake, as a bigint
 	   */
 	  get epoch() {
 	    return this[EpochSymbol];
+	  }
+	  /**
+	   * The epoch for this snowflake, as a number
+	   */
+	  get epochNumber() {
+	    return this[EpochNumberSymbol];
 	  }
 	  /**
 	   * Gets the configured process ID
@@ -35205,10 +35481,8 @@ function requireCjs$2 () {
 	    workerId = this[WorkerIdSymbol],
 	    processId = this[ProcessIdSymbol]
 	  } = {}) {
-	    if (timestamp instanceof Date)
-	      timestamp = BigInt(timestamp.getTime());
-	    else if (typeof timestamp === "number")
-	      timestamp = BigInt(timestamp);
+	    if (timestamp instanceof Date) timestamp = BigInt(timestamp.getTime());
+	    else if (typeof timestamp === "number") timestamp = BigInt(timestamp);
 	    else if (typeof timestamp !== "bigint") {
 	      throw new TypeError(`"timestamp" argument must be a number, bigint, or Date (received ${typeof timestamp})`);
 	    }
@@ -35246,7 +35520,7 @@ function requireCjs$2 () {
 	   * @returns The UNIX timestamp that is stored in `id`.
 	   */
 	  timestampFrom(id) {
-	    return Number((BigInt(id) >> 22n) + this[EpochSymbol]);
+	    return Math.floor(Number(id) / TimestampFieldDivisor) + this[EpochNumberSymbol];
 	  }
 	  /**
 	   * Returns a number indicating whether a reference snowflake comes before, or after, or is same as the given
@@ -35272,7 +35546,6 @@ function requireCjs$2 () {
 	    return typeA === typeof b ? typeA === "string" ? cmpString(a, b) : cmpBigInt(a, b) : cmpBigInt(BigInt(a), BigInt(b));
 	  }
 	};
-	_a = EpochSymbol, _b = IncrementSymbol, _c = ProcessIdSymbol, _d = WorkerIdSymbol;
 	__name(_Snowflake, "Snowflake");
 	var Snowflake = _Snowflake;
 	function cmpBigInt(a, b) {
@@ -35290,15 +35563,15 @@ function requireCjs$2 () {
 	// src/lib/TwitterSnowflake.ts
 	var TwitterSnowflake = new Snowflake(1288834974657n);
 
-	cjs$2.DiscordSnowflake = DiscordSnowflake;
-	cjs$2.MaximumIncrement = MaximumIncrement;
-	cjs$2.MaximumProcessId = MaximumProcessId;
-	cjs$2.MaximumWorkerId = MaximumWorkerId;
-	cjs$2.Snowflake = Snowflake;
-	cjs$2.TwitterSnowflake = TwitterSnowflake;
+	cjs$3.DiscordSnowflake = DiscordSnowflake;
+	cjs$3.MaximumIncrement = MaximumIncrement;
+	cjs$3.MaximumProcessId = MaximumProcessId;
+	cjs$3.MaximumWorkerId = MaximumWorkerId;
+	cjs$3.Snowflake = Snowflake;
+	cjs$3.TwitterSnowflake = TwitterSnowflake;
 	
 	
-	return cjs$2;
+	return cjs$3;
 }
 
 var dist$8;
@@ -36817,9 +37090,14 @@ function requirePatternTree () {
 		exports$1.add("mp3", ["0xFF", "0xF3"], { mime: "audio/mpeg", extension: "mp3" });
 		exports$1.add("mp3", ["0xFF", "0xF2"], { mime: "audio/mpeg", extension: "mp3" });
 		exports$1.add("mp3", ["0x49", "0x44", "0x33"], { mime: "audio/mpeg", extension: "mp3" });
+		exports$1.add("aac", ["0xFF", "0xF1"], { mime: "audio/aac", extension: "aac" });
+		exports$1.add("aac", ["0xFF", "0xF9"], { mime: "audio/aac", extension: "aac" });
 		exports$1.add("bmp", ["0x42", "0x4D"], { mime: "image/bmp", extension: "bmp" });
 		exports$1.add("iso", ["0x43", "0x44", "0x30", "0x30", "0x31"]);
-		exports$1.add("flac", ["0x66", "0x4C", "0x61", "0x43"]);
+		exports$1.add("flac", ["0x66", "0x4C", "0x61", "0x43"], {
+		    mime: "audio/flac",
+		    extension: "flac",
+		});
 		exports$1.add("mid", ["0x4D", "0x54", "0x68", "0x64"], {
 		    mime: "audio/midi",
 		    extension: "mid",
@@ -37143,6 +37421,14 @@ function requirePatternTree () {
 		    mime: "application/x-executable",
 		    extension: "elf",
 		});
+		exports$1.add("sqlite", ["0x53", "0x51", "0x4C", "0x69", "0x74", "0x65", "0x20", "0x66", "0x6F", "0x72", "0x6D", "0x61", "0x74", "0x20", "0x33", "0x00"], {
+		    mime: "application/vnd.sqlite3",
+		    extension: ".sqlite",
+		});
+		exports$1.add("sqlite", ["0x53", "0x51", "0x4C", "0x69", "0x74", "0x65", "0x20", "0x66", "0x6F", "0x72", "0x6D", "0x61", "0x74", "0x20", "0x33", "0x00"], {
+		    mime: "application/vnd.sqlite3",
+		    extension: ".sqlite3",
+		});
 		exports$1.add("EML", ["0x52", "0x65", "0x63", "0x65", "0x69", "0x76", "0x65", "0x64", "0x3A"], {
 		    mime: "message/rfc822",
 		    extension: ".eml",
@@ -37232,13 +37518,13 @@ function requireDist$8 () {
 	return dist$7;
 }
 
-var cjs$1 = {};
+var cjs$2 = {};
 
-var hasRequiredCjs$1;
+var hasRequiredCjs$2;
 
-function requireCjs$1 () {
-	if (hasRequiredCjs$1) return cjs$1;
-	hasRequiredCjs$1 = 1;
+function requireCjs$2 () {
+	if (hasRequiredCjs$2) return cjs$2;
+	hasRequiredCjs$2 = 1;
 
 	var __defProp = Object.defineProperty;
 	var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
@@ -37372,10 +37658,10 @@ function requireCjs$1 () {
 	__name(_AsyncQueue, "AsyncQueue");
 	var AsyncQueue = _AsyncQueue;
 
-	cjs$1.AsyncQueue = AsyncQueue;
+	cjs$2.AsyncQueue = AsyncQueue;
 	
 	
-	return cjs$1;
+	return cjs$2;
 }
 
 var web;
@@ -37446,7 +37732,7 @@ function requireWeb () {
 	// src/lib/utils/constants.ts
 	var import_util = requireDist$b();
 	var import_v10 = requireV10();
-	var DefaultUserAgent = `DiscordBot (https://discord.js.org, 2.6.0)`;
+	var DefaultUserAgent = `DiscordBot (https://discord.js.org, 2.6.1)`;
 	var DefaultUserAgentAppendix = (0, import_util.getUserAgentAppendix)();
 	var DefaultRestOptions = {
 	  agent: null,
@@ -38007,7 +38293,7 @@ ${flattened}` : error.message || flattened || "Unknown Error";
 
 	// src/lib/REST.ts
 	var import_collection = requireDist$a();
-	var import_snowflake = /*@__PURE__*/ requireCjs$2();
+	var import_snowflake = /*@__PURE__*/ requireCjs$3();
 	var import_async_event_emitter = /*@__PURE__*/ requireDist$9();
 	var import_magic_bytes = requireDist$8();
 
@@ -38192,7 +38478,7 @@ ${flattened}` : error.message || flattened || "Unknown Error";
 	};
 
 	// src/lib/handlers/SequentialHandler.ts
-	var import_async_queue = /*@__PURE__*/ requireCjs$1();
+	var import_async_queue = /*@__PURE__*/ requireCjs$2();
 	var SequentialHandler = class {
 	  /**
 	   * @param manager - The request manager
@@ -38800,7 +39086,7 @@ ${flattened}` : error.message || flattened || "Unknown Error";
 	};
 
 	// src/shared.ts
-	var version = "2.6.0";
+	var version = "2.6.1";
 
 	// src/web.ts
 	setDefaultStrategy(fetch);
@@ -39387,15 +39673,19 @@ function requireDJSError () {
 	 * @ignore
 	 */
 	function makeDiscordjsError(Base) {
-	  return class DiscordjsError extends Base {
+	  return class extends Base {
+	    static {
+	      Object.defineProperty(this, 'name', { value: `Discordjs${Base.name}` });
+	    }
+
 	    constructor(code, ...args) {
 	      super(message(code, args));
 	      this.code = code;
-	      Error.captureStackTrace?.(this, DiscordjsError);
+	      Error.captureStackTrace(this, this.constructor);
 	    }
 
 	    get name() {
-	      return `${super.name} [${this.code}]`;
+	      return `${this.constructor.name} [${this.code}]`;
 	    }
 	  };
 	}
@@ -40506,14 +40796,22 @@ function requireErrors$1 () {
 	if (hasRequiredErrors$1) return errors$1;
 	hasRequiredErrors$1 = 1;
 
+	const kUndiciError = Symbol.for('undici.error.UND_ERR');
 	class UndiciError extends Error {
 	  constructor (message) {
 	    super(message);
 	    this.name = 'UndiciError';
 	    this.code = 'UND_ERR';
 	  }
+
+	  static [Symbol.hasInstance] (instance) {
+	    return instance && instance[kUndiciError] === true
+	  }
+
+	  [kUndiciError] = true
 	}
 
+	const kConnectTimeoutError = Symbol.for('undici.error.UND_ERR_CONNECT_TIMEOUT');
 	class ConnectTimeoutError extends UndiciError {
 	  constructor (message) {
 	    super(message);
@@ -40521,8 +40819,15 @@ function requireErrors$1 () {
 	    this.message = message || 'Connect Timeout Error';
 	    this.code = 'UND_ERR_CONNECT_TIMEOUT';
 	  }
+
+	  static [Symbol.hasInstance] (instance) {
+	    return instance && instance[kConnectTimeoutError] === true
+	  }
+
+	  [kConnectTimeoutError] = true
 	}
 
+	const kHeadersTimeoutError = Symbol.for('undici.error.UND_ERR_HEADERS_TIMEOUT');
 	class HeadersTimeoutError extends UndiciError {
 	  constructor (message) {
 	    super(message);
@@ -40530,8 +40835,15 @@ function requireErrors$1 () {
 	    this.message = message || 'Headers Timeout Error';
 	    this.code = 'UND_ERR_HEADERS_TIMEOUT';
 	  }
+
+	  static [Symbol.hasInstance] (instance) {
+	    return instance && instance[kHeadersTimeoutError] === true
+	  }
+
+	  [kHeadersTimeoutError] = true
 	}
 
+	const kHeadersOverflowError = Symbol.for('undici.error.UND_ERR_HEADERS_OVERFLOW');
 	class HeadersOverflowError extends UndiciError {
 	  constructor (message) {
 	    super(message);
@@ -40539,8 +40851,15 @@ function requireErrors$1 () {
 	    this.message = message || 'Headers Overflow Error';
 	    this.code = 'UND_ERR_HEADERS_OVERFLOW';
 	  }
+
+	  static [Symbol.hasInstance] (instance) {
+	    return instance && instance[kHeadersOverflowError] === true
+	  }
+
+	  [kHeadersOverflowError] = true
 	}
 
+	const kBodyTimeoutError = Symbol.for('undici.error.UND_ERR_BODY_TIMEOUT');
 	class BodyTimeoutError extends UndiciError {
 	  constructor (message) {
 	    super(message);
@@ -40548,8 +40867,15 @@ function requireErrors$1 () {
 	    this.message = message || 'Body Timeout Error';
 	    this.code = 'UND_ERR_BODY_TIMEOUT';
 	  }
+
+	  static [Symbol.hasInstance] (instance) {
+	    return instance && instance[kBodyTimeoutError] === true
+	  }
+
+	  [kBodyTimeoutError] = true
 	}
 
+	const kResponseStatusCodeError = Symbol.for('undici.error.UND_ERR_RESPONSE_STATUS_CODE');
 	class ResponseStatusCodeError extends UndiciError {
 	  constructor (message, statusCode, headers, body) {
 	    super(message);
@@ -40561,8 +40887,15 @@ function requireErrors$1 () {
 	    this.statusCode = statusCode;
 	    this.headers = headers;
 	  }
+
+	  static [Symbol.hasInstance] (instance) {
+	    return instance && instance[kResponseStatusCodeError] === true
+	  }
+
+	  [kResponseStatusCodeError] = true
 	}
 
+	const kInvalidArgumentError = Symbol.for('undici.error.UND_ERR_INVALID_ARG');
 	class InvalidArgumentError extends UndiciError {
 	  constructor (message) {
 	    super(message);
@@ -40570,8 +40903,15 @@ function requireErrors$1 () {
 	    this.message = message || 'Invalid Argument Error';
 	    this.code = 'UND_ERR_INVALID_ARG';
 	  }
+
+	  static [Symbol.hasInstance] (instance) {
+	    return instance && instance[kInvalidArgumentError] === true
+	  }
+
+	  [kInvalidArgumentError] = true
 	}
 
+	const kInvalidReturnValueError = Symbol.for('undici.error.UND_ERR_INVALID_RETURN_VALUE');
 	class InvalidReturnValueError extends UndiciError {
 	  constructor (message) {
 	    super(message);
@@ -40579,16 +40919,31 @@ function requireErrors$1 () {
 	    this.message = message || 'Invalid Return Value Error';
 	    this.code = 'UND_ERR_INVALID_RETURN_VALUE';
 	  }
+
+	  static [Symbol.hasInstance] (instance) {
+	    return instance && instance[kInvalidReturnValueError] === true
+	  }
+
+	  [kInvalidReturnValueError] = true
 	}
 
+	const kAbortError = Symbol.for('undici.error.UND_ERR_ABORT');
 	class AbortError extends UndiciError {
 	  constructor (message) {
 	    super(message);
 	    this.name = 'AbortError';
 	    this.message = message || 'The operation was aborted';
+	    this.code = 'UND_ERR_ABORT';
 	  }
+
+	  static [Symbol.hasInstance] (instance) {
+	    return instance && instance[kAbortError] === true
+	  }
+
+	  [kAbortError] = true
 	}
 
+	const kRequestAbortedError = Symbol.for('undici.error.UND_ERR_ABORTED');
 	class RequestAbortedError extends AbortError {
 	  constructor (message) {
 	    super(message);
@@ -40596,8 +40951,15 @@ function requireErrors$1 () {
 	    this.message = message || 'Request aborted';
 	    this.code = 'UND_ERR_ABORTED';
 	  }
+
+	  static [Symbol.hasInstance] (instance) {
+	    return instance && instance[kRequestAbortedError] === true
+	  }
+
+	  [kRequestAbortedError] = true
 	}
 
+	const kInformationalError = Symbol.for('undici.error.UND_ERR_INFO');
 	class InformationalError extends UndiciError {
 	  constructor (message) {
 	    super(message);
@@ -40605,8 +40967,15 @@ function requireErrors$1 () {
 	    this.message = message || 'Request information';
 	    this.code = 'UND_ERR_INFO';
 	  }
+
+	  static [Symbol.hasInstance] (instance) {
+	    return instance && instance[kInformationalError] === true
+	  }
+
+	  [kInformationalError] = true
 	}
 
+	const kRequestContentLengthMismatchError = Symbol.for('undici.error.UND_ERR_REQ_CONTENT_LENGTH_MISMATCH');
 	class RequestContentLengthMismatchError extends UndiciError {
 	  constructor (message) {
 	    super(message);
@@ -40614,8 +40983,15 @@ function requireErrors$1 () {
 	    this.message = message || 'Request body length does not match content-length header';
 	    this.code = 'UND_ERR_REQ_CONTENT_LENGTH_MISMATCH';
 	  }
+
+	  static [Symbol.hasInstance] (instance) {
+	    return instance && instance[kRequestContentLengthMismatchError] === true
+	  }
+
+	  [kRequestContentLengthMismatchError] = true
 	}
 
+	const kResponseContentLengthMismatchError = Symbol.for('undici.error.UND_ERR_RES_CONTENT_LENGTH_MISMATCH');
 	class ResponseContentLengthMismatchError extends UndiciError {
 	  constructor (message) {
 	    super(message);
@@ -40623,8 +40999,15 @@ function requireErrors$1 () {
 	    this.message = message || 'Response body length does not match content-length header';
 	    this.code = 'UND_ERR_RES_CONTENT_LENGTH_MISMATCH';
 	  }
+
+	  static [Symbol.hasInstance] (instance) {
+	    return instance && instance[kResponseContentLengthMismatchError] === true
+	  }
+
+	  [kResponseContentLengthMismatchError] = true
 	}
 
+	const kClientDestroyedError = Symbol.for('undici.error.UND_ERR_DESTROYED');
 	class ClientDestroyedError extends UndiciError {
 	  constructor (message) {
 	    super(message);
@@ -40632,8 +41015,15 @@ function requireErrors$1 () {
 	    this.message = message || 'The client is destroyed';
 	    this.code = 'UND_ERR_DESTROYED';
 	  }
+
+	  static [Symbol.hasInstance] (instance) {
+	    return instance && instance[kClientDestroyedError] === true
+	  }
+
+	  [kClientDestroyedError] = true
 	}
 
+	const kClientClosedError = Symbol.for('undici.error.UND_ERR_CLOSED');
 	class ClientClosedError extends UndiciError {
 	  constructor (message) {
 	    super(message);
@@ -40641,8 +41031,15 @@ function requireErrors$1 () {
 	    this.message = message || 'The client is closed';
 	    this.code = 'UND_ERR_CLOSED';
 	  }
+
+	  static [Symbol.hasInstance] (instance) {
+	    return instance && instance[kClientClosedError] === true
+	  }
+
+	  [kClientClosedError] = true
 	}
 
+	const kSocketError = Symbol.for('undici.error.UND_ERR_SOCKET');
 	class SocketError extends UndiciError {
 	  constructor (message, socket) {
 	    super(message);
@@ -40651,8 +41048,15 @@ function requireErrors$1 () {
 	    this.code = 'UND_ERR_SOCKET';
 	    this.socket = socket;
 	  }
+
+	  static [Symbol.hasInstance] (instance) {
+	    return instance && instance[kSocketError] === true
+	  }
+
+	  [kSocketError] = true
 	}
 
+	const kNotSupportedError = Symbol.for('undici.error.UND_ERR_NOT_SUPPORTED');
 	class NotSupportedError extends UndiciError {
 	  constructor (message) {
 	    super(message);
@@ -40660,8 +41064,15 @@ function requireErrors$1 () {
 	    this.message = message || 'Not supported error';
 	    this.code = 'UND_ERR_NOT_SUPPORTED';
 	  }
+
+	  static [Symbol.hasInstance] (instance) {
+	    return instance && instance[kNotSupportedError] === true
+	  }
+
+	  [kNotSupportedError] = true
 	}
 
+	const kBalancedPoolMissingUpstreamError = Symbol.for('undici.error.UND_ERR_BPL_MISSING_UPSTREAM');
 	class BalancedPoolMissingUpstreamError extends UndiciError {
 	  constructor (message) {
 	    super(message);
@@ -40669,8 +41080,15 @@ function requireErrors$1 () {
 	    this.message = message || 'No upstream has been added to the BalancedPool';
 	    this.code = 'UND_ERR_BPL_MISSING_UPSTREAM';
 	  }
+
+	  static [Symbol.hasInstance] (instance) {
+	    return instance && instance[kBalancedPoolMissingUpstreamError] === true
+	  }
+
+	  [kBalancedPoolMissingUpstreamError] = true
 	}
 
+	const kHTTPParserError = Symbol.for('undici.error.UND_ERR_HTTP_PARSER');
 	class HTTPParserError extends Error {
 	  constructor (message, code, data) {
 	    super(message);
@@ -40678,8 +41096,15 @@ function requireErrors$1 () {
 	    this.code = code ? `HPE_${code}` : undefined;
 	    this.data = data ? data.toString() : undefined;
 	  }
+
+	  static [Symbol.hasInstance] (instance) {
+	    return instance && instance[kHTTPParserError] === true
+	  }
+
+	  [kHTTPParserError] = true
 	}
 
+	const kResponseExceededMaxSizeError = Symbol.for('undici.error.UND_ERR_RES_EXCEEDED_MAX_SIZE');
 	class ResponseExceededMaxSizeError extends UndiciError {
 	  constructor (message) {
 	    super(message);
@@ -40687,8 +41112,15 @@ function requireErrors$1 () {
 	    this.message = message || 'Response content exceeded max size';
 	    this.code = 'UND_ERR_RES_EXCEEDED_MAX_SIZE';
 	  }
+
+	  static [Symbol.hasInstance] (instance) {
+	    return instance && instance[kResponseExceededMaxSizeError] === true
+	  }
+
+	  [kResponseExceededMaxSizeError] = true
 	}
 
+	const kRequestRetryError = Symbol.for('undici.error.UND_ERR_REQ_RETRY');
 	class RequestRetryError extends UndiciError {
 	  constructor (message, code, { headers, data }) {
 	    super(message);
@@ -40699,8 +41131,15 @@ function requireErrors$1 () {
 	    this.data = data;
 	    this.headers = headers;
 	  }
+
+	  static [Symbol.hasInstance] (instance) {
+	    return instance && instance[kRequestRetryError] === true
+	  }
+
+	  [kRequestRetryError] = true
 	}
 
+	const kResponseError = Symbol.for('undici.error.UND_ERR_RESPONSE');
 	class ResponseError extends UndiciError {
 	  constructor (message, code, { headers, data }) {
 	    super(message);
@@ -40711,8 +41150,15 @@ function requireErrors$1 () {
 	    this.data = data;
 	    this.headers = headers;
 	  }
+
+	  static [Symbol.hasInstance] (instance) {
+	    return instance && instance[kResponseError] === true
+	  }
+
+	  [kResponseError] = true
 	}
 
+	const kSecureProxyConnectionError = Symbol.for('undici.error.UND_ERR_PRX_TLS');
 	class SecureProxyConnectionError extends UndiciError {
 	  constructor (cause, message, options) {
 	    super(message, { cause, ...(options ?? {}) });
@@ -40720,6 +41166,30 @@ function requireErrors$1 () {
 	    this.message = message || 'Secure Proxy Connection failed';
 	    this.code = 'UND_ERR_PRX_TLS';
 	    this.cause = cause;
+	  }
+
+	  static [Symbol.hasInstance] (instance) {
+	    return instance && instance[kSecureProxyConnectionError] === true
+	  }
+
+	  [kSecureProxyConnectionError] = true
+	}
+
+	const kMessageSizeExceededError = Symbol.for('undici.error.UND_ERR_WS_MESSAGE_SIZE_EXCEEDED');
+	class MessageSizeExceededError extends UndiciError {
+	  constructor (message) {
+	    super(message);
+	    this.name = 'MessageSizeExceededError';
+	    this.message = message || 'Max decompressed message size exceeded';
+	    this.code = 'UND_ERR_WS_MESSAGE_SIZE_EXCEEDED';
+	  }
+
+	  static [Symbol.hasInstance] (instance) {
+	    return instance && instance[kMessageSizeExceededError] === true
+	  }
+
+	  get [kMessageSizeExceededError] () {
+	    return true
 	  }
 	}
 
@@ -40746,7 +41216,8 @@ function requireErrors$1 () {
 	  ResponseExceededMaxSizeError,
 	  RequestRetryError,
 	  ResponseError,
-	  SecureProxyConnectionError
+	  SecureProxyConnectionError,
+	  MessageSizeExceededError
 	};
 	return errors$1;
 }
@@ -42047,6 +42518,10 @@ function requireRequest$3 () {
 	      throw new InvalidArgumentError('upgrade must be a string')
 	    }
 
+	    if (upgrade && !isValidHeaderValue(upgrade)) {
+	      throw new InvalidArgumentError('invalid upgrade header')
+	    }
+
 	    if (headersTimeout != null && (!Number.isFinite(headersTimeout) || headersTimeout < 0)) {
 	      throw new InvalidArgumentError('invalid headersTimeout')
 	    }
@@ -42341,13 +42816,19 @@ function requireRequest$3 () {
 	    val = `${val}`;
 	  }
 
-	  if (request.host === null && headerName === 'host') {
+	  if (headerName === 'host') {
+	    if (request.host !== null) {
+	      throw new InvalidArgumentError('duplicate host header')
+	    }
 	    if (typeof val !== 'string') {
 	      throw new InvalidArgumentError('invalid host header')
 	    }
 	    // Consumed by Client
 	    request.host = val;
-	  } else if (request.contentLength === null && headerName === 'content-length') {
+	  } else if (headerName === 'content-length') {
+	    if (request.contentLength !== null) {
+	      throw new InvalidArgumentError('duplicate content-length header')
+	    }
 	    request.contentLength = parseInt(val, 10);
 	    if (!Number.isFinite(request.contentLength)) {
 	      throw new InvalidArgumentError('invalid content-length header')
@@ -48128,10 +48609,6 @@ function requireBody$1 () {
 	  // 1. Let « out1, out2 » be the result of teeing body’s stream.
 	  const [out1, out2] = body.stream.tee();
 
-	  if (hasFinalizationRegistry) {
-	    streamRegistry.register(instance, new WeakRef(out1));
-	  }
-
 	  // 2. Set body’s stream to out1.
 	  body.stream = out1;
 
@@ -52219,13 +52696,14 @@ function requireProxyAgent$1 () {
 	if (hasRequiredProxyAgent$1) return proxyAgent$1;
 	hasRequiredProxyAgent$1 = 1;
 
-	const { kProxy, kClose, kDestroy, kInterceptors } = requireSymbols$6();
+	const { kProxy, kClose, kDestroy, kDispatch, kInterceptors } = requireSymbols$6();
 	const { URL } = require$$1$2;
 	const Agent = requireAgent$1();
 	const Pool = requirePool$1();
 	const DispatcherBase = requireDispatcherBase$1();
 	const { InvalidArgumentError, RequestAbortedError, SecureProxyConnectionError } = requireErrors$1();
 	const buildConnector = requireConnect$1();
+	const Client = requireClient$3();
 
 	const kAgent = Symbol('proxy agent');
 	const kClient = Symbol('proxy client');
@@ -52233,6 +52711,7 @@ function requireProxyAgent$1 () {
 	const kRequestTls = Symbol('request tls settings');
 	const kProxyTls = Symbol('proxy tls settings');
 	const kConnectEndpoint = Symbol('connect endpoint function');
+	const kTunnelProxy = Symbol('tunnel proxy');
 
 	function defaultProtocolPort (protocol) {
 	  return protocol === 'https:' ? 443 : 80
@@ -52243,6 +52722,69 @@ function requireProxyAgent$1 () {
 	}
 
 	const noop = () => {};
+
+	function defaultAgentFactory (origin, opts) {
+	  if (opts.connections === 1) {
+	    return new Client(origin, opts)
+	  }
+	  return new Pool(origin, opts)
+	}
+
+	class Http1ProxyWrapper extends DispatcherBase {
+	  #client
+
+	  constructor (proxyUrl, { headers = {}, connect, factory }) {
+	    super();
+	    if (!proxyUrl) {
+	      throw new InvalidArgumentError('Proxy URL is mandatory')
+	    }
+
+	    this[kProxyHeaders] = headers;
+	    if (factory) {
+	      this.#client = factory(proxyUrl, { connect });
+	    } else {
+	      this.#client = new Client(proxyUrl, { connect });
+	    }
+	  }
+
+	  [kDispatch] (opts, handler) {
+	    const onHeaders = handler.onHeaders;
+	    handler.onHeaders = function (statusCode, data, resume) {
+	      if (statusCode === 407) {
+	        if (typeof handler.onError === 'function') {
+	          handler.onError(new InvalidArgumentError('Proxy Authentication Required (407)'));
+	        }
+	        return
+	      }
+	      if (onHeaders) onHeaders.call(this, statusCode, data, resume);
+	    };
+
+	    // Rewrite request as an HTTP1 Proxy request, without tunneling.
+	    const {
+	      origin,
+	      path = '/',
+	      headers = {}
+	    } = opts;
+
+	    opts.path = origin + path;
+
+	    if (!('host' in headers) && !('Host' in headers)) {
+	      const { host } = new URL(origin);
+	      headers.host = host;
+	    }
+	    opts.headers = { ...this[kProxyHeaders], ...headers };
+
+	    return this.#client[kDispatch](opts, handler)
+	  }
+
+	  async [kClose] () {
+	    return this.#client.close()
+	  }
+
+	  async [kDestroy] (err) {
+	    return this.#client.destroy(err)
+	  }
+	}
 
 	class ProxyAgent extends DispatcherBase {
 	  constructor (opts) {
@@ -52257,6 +52799,8 @@ function requireProxyAgent$1 () {
 	      throw new InvalidArgumentError('Proxy opts.clientFactory must be a function.')
 	    }
 
+	    const { proxyTunnel = true } = opts;
+
 	    const url = this.#getUrl(opts);
 	    const { href, origin, port, protocol, username, password, hostname: proxyHostname } = url;
 
@@ -52267,6 +52811,7 @@ function requireProxyAgent$1 () {
 	    this[kRequestTls] = opts.requestTls;
 	    this[kProxyTls] = opts.proxyTls;
 	    this[kProxyHeaders] = opts.headers || {};
+	    this[kTunnelProxy] = proxyTunnel;
 
 	    if (opts.auth && opts.token) {
 	      throw new InvalidArgumentError('opts.auth cannot be used in combination with opts.token')
@@ -52281,9 +52826,23 @@ function requireProxyAgent$1 () {
 
 	    const connect = buildConnector({ ...opts.proxyTls });
 	    this[kConnectEndpoint] = buildConnector({ ...opts.requestTls });
+
+	    const agentFactory = opts.factory || defaultAgentFactory;
+	    const factory = (origin, options) => {
+	      const { protocol } = new URL(origin);
+	      if (!this[kTunnelProxy] && protocol === 'http:' && this[kProxy].protocol === 'http:') {
+	        return new Http1ProxyWrapper(this[kProxy].uri, {
+	          headers: this[kProxyHeaders],
+	          connect,
+	          factory: agentFactory
+	        })
+	      }
+	      return agentFactory(origin, options)
+	    };
 	    this[kClient] = clientFactory(url, { connect });
 	    this[kAgent] = new Agent({
 	      ...opts,
+	      factory,
 	      connect: async (opts, callback) => {
 	        let requestedPath = opts.host;
 	        if (!opts.port) {
@@ -54531,6 +55090,11 @@ function requireMockErrors$1 () {
 
 	const { UndiciError } = requireErrors$1();
 
+	const kMockNotMatchedError = Symbol.for('undici.error.UND_MOCK_ERR_MOCK_NOT_MATCHED');
+
+	/**
+	 * The request does not match any registered mock dispatches.
+	 */
 	class MockNotMatchedError extends UndiciError {
 	  constructor (message) {
 	    super(message);
@@ -54539,6 +55103,12 @@ function requireMockErrors$1 () {
 	    this.message = message || 'The request does not match any registered mock dispatches';
 	    this.code = 'UND_MOCK_ERR_MOCK_NOT_MATCHED';
 	  }
+
+	  static [Symbol.hasInstance] (instance) {
+	    return instance && instance[kMockNotMatchedError] === true
+	  }
+
+	  [kMockNotMatchedError] = true
 	}
 
 	mockErrors$1 = {
@@ -57163,6 +57733,11 @@ function requireResponse$1 () {
 
 	    // 2. Let clonedResponse be the result of cloning this’s response.
 	    const clonedResponse = cloneResponse(this[kState]);
+
+	    // Note: To re-register because of a new stream.
+	    if (hasFinalizationRegistry && this[kState].body?.stream) {
+	      streamRegistry.register(this, new WeakRef(this[kState].body.stream));
+	    }
 
 	    // 3. Return the result of creating a Response object, given
 	    // clonedResponse, this’s headers’s guard, and this’s relevant Realm.
@@ -60671,20 +61246,12 @@ function requireFetch$1 () {
 	            return
 	          }
 
-	          /** @type {string[]} */
-	          let codings = [];
 	          let location = '';
 
 	          const headersList = new HeadersList();
 
 	          for (let i = 0; i < rawHeaders.length; i += 2) {
 	            headersList.append(bufferToLowerCasedHeaderName(rawHeaders[i]), rawHeaders[i + 1].toString('latin1'), true);
-	          }
-	          const contentEncoding = headersList.get('content-encoding', true);
-	          if (contentEncoding) {
-	            // https://www.rfc-editor.org/rfc/rfc7231#section-3.1.2.1
-	            // "All content-coding values are case-insensitive..."
-	            codings = contentEncoding.toLowerCase().split(',').map((x) => x.trim());
 	          }
 	          location = headersList.get('location', true);
 
@@ -60696,9 +61263,23 @@ function requireFetch$1 () {
 	            redirectStatusSet.has(status);
 
 	          // https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Encoding
-	          if (codings.length !== 0 && request.method !== 'HEAD' && request.method !== 'CONNECT' && !nullBodyStatus.includes(status) && !willFollow) {
+	          if (request.method !== 'HEAD' && request.method !== 'CONNECT' && !nullBodyStatus.includes(status) && !willFollow) {
+	            // https://www.rfc-editor.org/rfc/rfc7231#section-3.1.2.1
+	            const contentEncoding = headersList.get('content-encoding', true);
+	            // "All content-coding values are case-insensitive..."
+	            /** @type {string[]} */
+	            const codings = contentEncoding ? contentEncoding.toLowerCase().split(',') : [];
+
+	            // Limit the number of content-encodings to prevent resource exhaustion.
+	            // CVE fix similar to urllib3 (GHSA-gm62-xv2j-4w53) and curl (CVE-2022-32206).
+	            const maxContentEncodings = 5;
+	            if (codings.length > maxContentEncodings) {
+	              reject(new Error(`too many content-encodings in response: ${codings.length}, maximum allowed is ${maxContentEncodings}`));
+	              return true
+	            }
+
 	            for (let i = codings.length - 1; i >= 0; --i) {
-	              const coding = codings[i];
+	              const coding = codings[i].trim();
 	              // https://www.rfc-editor.org/rfc/rfc9112.html#section-7.2
 	              if (coding === 'x-gzip' || coding === 'gzip') {
 	                decoders.push(zlib.createGunzip({
@@ -64604,6 +65185,12 @@ function requireUtil$8 () {
 	 * @param {string} value
 	 */
 	function isValidClientWindowBits (value) {
+	  // Must have at least one character
+	  if (value.length === 0) {
+	    return false
+	  }
+
+	  // Check all characters are ASCII digits
 	  for (let i = 0; i < value.length; i++) {
 	    const byte = value.charCodeAt(i);
 
@@ -64612,7 +65199,9 @@ function requireUtil$8 () {
 	    }
 	  }
 
-	  return true
+	  // Check numeric range: zlib requires windowBits in range 8-15
+	  const num = Number.parseInt(value, 10);
+	  return num >= 8 && num <= 15
 	}
 
 	// https://nodejs.org/api/intl.html#detecting-internationalization-support
@@ -65142,10 +65731,14 @@ function requirePermessageDeflate$2 () {
 
 	const { createInflateRaw, Z_DEFAULT_WINDOWBITS } = require$$0$c;
 	const { isValidClientWindowBits } = requireUtil$8();
+	const { MessageSizeExceededError } = requireErrors$1();
 
 	const tail = Buffer.from([0x00, 0x00, 0xff, 0xff]);
 	const kBuffer = Symbol('kBuffer');
 	const kLength = Symbol('kLength');
+
+	// Default maximum decompressed message size: 4 MB
+	const kDefaultMaxDecompressedSize = 4 * 1024 * 1024;
 
 	class PerMessageDeflate {
 	  /** @type {import('node:zlib').InflateRaw} */
@@ -65153,6 +65746,15 @@ function requirePermessageDeflate$2 () {
 
 	  #options = {}
 
+	  /** @type {boolean} */
+	  #aborted = false
+
+	  /** @type {Function|null} */
+	  #currentCallback = null
+
+	  /**
+	   * @param {Map<string, string>} extensions
+	   */
 	  constructor (extensions) {
 	    this.#options.serverNoContextTakeover = extensions.has('server_no_context_takeover');
 	    this.#options.serverMaxWindowBits = extensions.get('server_max_window_bits');
@@ -65163,6 +65765,11 @@ function requirePermessageDeflate$2 () {
 	    // 1.  Append 4 octets of 0x00 0x00 0xff 0xff to the tail end of the
 	    //     payload of the message.
 	    // 2.  Decompress the resulting data using DEFLATE.
+
+	    if (this.#aborted) {
+	      callback(new MessageSizeExceededError());
+	      return
+	    }
 
 	    if (!this.#inflate) {
 	      let windowBits = Z_DEFAULT_WINDOWBITS;
@@ -65176,13 +65783,37 @@ function requirePermessageDeflate$2 () {
 	        windowBits = Number.parseInt(this.#options.serverMaxWindowBits);
 	      }
 
-	      this.#inflate = createInflateRaw({ windowBits });
+	      try {
+	        this.#inflate = createInflateRaw({ windowBits });
+	      } catch (err) {
+	        callback(err);
+	        return
+	      }
 	      this.#inflate[kBuffer] = [];
 	      this.#inflate[kLength] = 0;
 
 	      this.#inflate.on('data', (data) => {
-	        this.#inflate[kBuffer].push(data);
+	        if (this.#aborted) {
+	          return
+	        }
+
 	        this.#inflate[kLength] += data.length;
+
+	        if (this.#inflate[kLength] > kDefaultMaxDecompressedSize) {
+	          this.#aborted = true;
+	          this.#inflate.removeAllListeners();
+	          this.#inflate.destroy();
+	          this.#inflate = null;
+
+	          if (this.#currentCallback) {
+	            const cb = this.#currentCallback;
+	            this.#currentCallback = null;
+	            cb(new MessageSizeExceededError());
+	          }
+	          return
+	        }
+
+	        this.#inflate[kBuffer].push(data);
 	      });
 
 	      this.#inflate.on('error', (err) => {
@@ -65191,16 +65822,22 @@ function requirePermessageDeflate$2 () {
 	      });
 	    }
 
+	    this.#currentCallback = callback;
 	    this.#inflate.write(chunk);
 	    if (fin) {
 	      this.#inflate.write(tail);
 	    }
 
 	    this.#inflate.flush(() => {
+	      if (this.#aborted || !this.#inflate) {
+	        return
+	      }
+
 	      const full = Buffer.concat(this.#inflate[kBuffer], this.#inflate[kLength]);
 
 	      this.#inflate[kBuffer].length = 0;
 	      this.#inflate[kLength] = 0;
+	      this.#currentCallback = null;
 
 	      callback(null, full);
 	    });
@@ -65255,6 +65892,10 @@ function requireReceiver$2 () {
 	  /** @type {Map<string, PerMessageDeflate>} */
 	  #extensions
 
+	  /**
+	   * @param {import('./websocket').WebSocket} ws
+	   * @param {Map<string, string>|null} extensions
+	   */
 	  constructor (ws, extensions) {
 	    super();
 
@@ -65397,6 +66038,7 @@ function requireReceiver$2 () {
 
 	        const buffer = this.consume(8);
 	        const upper = buffer.readUInt32BE(0);
+	        const lower = buffer.readUInt32BE(4);
 
 	        // 2^31 is the maximum bytes an arraybuffer can contain
 	        // on 32-bit systems. Although, on 64-bit systems, this is
@@ -65404,14 +66046,12 @@ function requireReceiver$2 () {
 	        // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Errors/Invalid_array_length
 	        // https://source.chromium.org/chromium/chromium/src/+/main:v8/src/common/globals.h;drc=1946212ac0100668f14eb9e2843bdd846e510a1e;bpv=1;bpt=1;l=1275
 	        // https://source.chromium.org/chromium/chromium/src/+/main:v8/src/objects/js-array-buffer.h;l=34;drc=1946212ac0100668f14eb9e2843bdd846e510a1e
-	        if (upper > 2 ** 31 - 1) {
+	        if (upper !== 0 || lower > 2 ** 31 - 1) {
 	          failWebsocketConnection(this.ws, 'Received payload length > 2^31 bytes.');
 	          return
 	        }
 
-	        const lower = buffer.readUInt32BE(4);
-
-	        this.#info.payloadLength = (upper << 8) + lower;
+	        this.#info.payloadLength = lower;
 	        this.#state = parserStates.READ_DATA;
 	      } else if (this.#state === parserStates.READ_DATA) {
 	        if (this.#byteOffset < this.#info.payloadLength) {
@@ -65441,7 +66081,7 @@ function requireReceiver$2 () {
 	          } else {
 	            this.#extensions.get('permessage-deflate').decompress(body, this.#info.fin, (error, data) => {
 	              if (error) {
-	                closeWebSocketConnection(this.ws, 1007, error.message, error.message.length);
+	                failWebsocketConnection(this.ws, error.message);
 	                return
 	              }
 
@@ -66193,7 +66833,7 @@ function requireWebsocket$2 () {
 	   * @see https://websockets.spec.whatwg.org/#feedback-from-the-protocol
 	   */
 	  #onConnectionEstablished (response, parsedExtensions) {
-	    // processResponse is called when the "response’s header list has been received and initialized."
+	    // processResponse is called when the "response's header list has been received and initialized."
 	    // once this happens, the connection is open
 	    this[kResponse] = response;
 
@@ -67938,6 +68578,209 @@ function requireAttachment$1 () {
 	return Attachment_1;
 }
 
+var cjs$1 = {};
+
+var hasRequiredCjs$1;
+
+function requireCjs$1 () {
+	if (hasRequiredCjs$1) return cjs$1;
+	hasRequiredCjs$1 = 1;
+
+	var __defProp = Object.defineProperty;
+	var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
+	var __name = (target, value) => __defProp(target, "name", { value, configurable: true });
+	var __publicField = (obj, key, value) => {
+	  __defNormalProp(obj, typeof key !== "symbol" ? key + "" : key, value);
+	  return value;
+	};
+
+	// src/lib/Snowflake.ts
+	var IncrementSymbol = Symbol("@sapphire/snowflake.increment");
+	var EpochSymbol = Symbol("@sapphire/snowflake.epoch");
+	var ProcessIdSymbol = Symbol("@sapphire/snowflake.processId");
+	var WorkerIdSymbol = Symbol("@sapphire/snowflake.workerId");
+	var MaximumWorkerId = 0b11111n;
+	var MaximumProcessId = 0b11111n;
+	var MaximumIncrement = 0b111111111111n;
+	var _a, _b, _c, _d;
+	var _Snowflake = class _Snowflake {
+	  /**
+	   * @param epoch the epoch to use
+	   */
+	  constructor(epoch) {
+	    /**
+	     * Alias for {@link deconstruct}
+	     */
+	    // eslint-disable-next-line @typescript-eslint/unbound-method
+	    __publicField(this, "decode", this.deconstruct);
+	    /**
+	     * Internal reference of the epoch passed in the constructor
+	     * @internal
+	     */
+	    __publicField(this, _a);
+	    /**
+	     * Internal incrementor for generating snowflakes
+	     * @internal
+	     */
+	    __publicField(this, _b, 0n);
+	    /**
+	     * The process ID that will be used by default in the generate method
+	     * @internal
+	     */
+	    __publicField(this, _c, 1n);
+	    /**
+	     * The worker ID that will be used by default in the generate method
+	     * @internal
+	     */
+	    __publicField(this, _d, 0n);
+	    this[EpochSymbol] = BigInt(epoch instanceof Date ? epoch.getTime() : epoch);
+	  }
+	  /**
+	   * The epoch for this snowflake
+	   */
+	  get epoch() {
+	    return this[EpochSymbol];
+	  }
+	  /**
+	   * Gets the configured process ID
+	   */
+	  get processId() {
+	    return this[ProcessIdSymbol];
+	  }
+	  /**
+	   * Sets the process ID that will be used by default for the {@link generate} method
+	   * @param value The new value, will be coerced to BigInt and masked with `0b11111n`
+	   */
+	  set processId(value) {
+	    this[ProcessIdSymbol] = BigInt(value) & MaximumProcessId;
+	  }
+	  /**
+	   * Gets the configured worker ID
+	   */
+	  get workerId() {
+	    return this[WorkerIdSymbol];
+	  }
+	  /**
+	   * Sets the worker ID that will be used by default for the {@link generate} method
+	   * @param value The new value, will be coerced to BigInt and masked with `0b11111n`
+	   */
+	  set workerId(value) {
+	    this[WorkerIdSymbol] = BigInt(value) & MaximumWorkerId;
+	  }
+	  /**
+	   * Generates a snowflake given an epoch and optionally a timestamp
+	   * @param options options to pass into the generator, see {@link SnowflakeGenerateOptions}
+	   *
+	   * **note** when `increment` is not provided it defaults to the private `increment` of the instance
+	   * @example
+	   * ```typescript
+	   * const epoch = new Date('2000-01-01T00:00:00.000Z');
+	   * const snowflake = new Snowflake(epoch).generate();
+	   * ```
+	   * @returns A unique snowflake
+	   */
+	  generate({
+	    increment,
+	    timestamp = Date.now(),
+	    workerId = this[WorkerIdSymbol],
+	    processId = this[ProcessIdSymbol]
+	  } = {}) {
+	    if (timestamp instanceof Date)
+	      timestamp = BigInt(timestamp.getTime());
+	    else if (typeof timestamp === "number")
+	      timestamp = BigInt(timestamp);
+	    else if (typeof timestamp !== "bigint") {
+	      throw new TypeError(`"timestamp" argument must be a number, bigint, or Date (received ${typeof timestamp})`);
+	    }
+	    if (typeof increment !== "bigint") {
+	      increment = this[IncrementSymbol];
+	      this[IncrementSymbol] = increment + 1n & MaximumIncrement;
+	    }
+	    return timestamp - this[EpochSymbol] << 22n | (workerId & MaximumWorkerId) << 17n | (processId & MaximumProcessId) << 12n | increment & MaximumIncrement;
+	  }
+	  /**
+	   * Deconstructs a snowflake given a snowflake ID
+	   * @param id the snowflake to deconstruct
+	   * @returns a deconstructed snowflake
+	   * @example
+	   * ```typescript
+	   * const epoch = new Date('2000-01-01T00:00:00.000Z');
+	   * const snowflake = new Snowflake(epoch).deconstruct('3971046231244935168');
+	   * ```
+	   */
+	  deconstruct(id) {
+	    const bigIntId = BigInt(id);
+	    const epoch = this[EpochSymbol];
+	    return {
+	      id: bigIntId,
+	      timestamp: (bigIntId >> 22n) + epoch,
+	      workerId: bigIntId >> 17n & MaximumWorkerId,
+	      processId: bigIntId >> 12n & MaximumProcessId,
+	      increment: bigIntId & MaximumIncrement,
+	      epoch
+	    };
+	  }
+	  /**
+	   * Retrieves the timestamp field's value from a snowflake.
+	   * @param id The snowflake to get the timestamp value from.
+	   * @returns The UNIX timestamp that is stored in `id`.
+	   */
+	  timestampFrom(id) {
+	    return Number((BigInt(id) >> 22n) + this[EpochSymbol]);
+	  }
+	  /**
+	   * Returns a number indicating whether a reference snowflake comes before, or after, or is same as the given
+	   * snowflake in sort order.
+	   * @param a The first snowflake to compare.
+	   * @param b The second snowflake to compare.
+	   * @returns `-1` if `a` is older than `b`, `0` if `a` and `b` are equals, `1` if `a` is newer than `b`.
+	   * @example Sort snowflakes in ascending order
+	   * ```typescript
+	   * const ids = ['737141877803057244', '1056191128120082432', '254360814063058944'];
+	   * console.log(ids.sort((a, b) => Snowflake.compare(a, b)));
+	   * // → ['254360814063058944', '737141877803057244', '1056191128120082432'];
+	   * ```
+	   * @example Sort snowflakes in descending order
+	   * ```typescript
+	   * const ids = ['737141877803057244', '1056191128120082432', '254360814063058944'];
+	   * console.log(ids.sort((a, b) => -Snowflake.compare(a, b)));
+	   * // → ['1056191128120082432', '737141877803057244', '254360814063058944'];
+	   * ```
+	   */
+	  static compare(a, b) {
+	    const typeA = typeof a;
+	    return typeA === typeof b ? typeA === "string" ? cmpString(a, b) : cmpBigInt(a, b) : cmpBigInt(BigInt(a), BigInt(b));
+	  }
+	};
+	_a = EpochSymbol, _b = IncrementSymbol, _c = ProcessIdSymbol, _d = WorkerIdSymbol;
+	__name(_Snowflake, "Snowflake");
+	var Snowflake = _Snowflake;
+	function cmpBigInt(a, b) {
+	  return a === b ? 0 : a < b ? -1 : 1;
+	}
+	__name(cmpBigInt, "cmpBigInt");
+	function cmpString(a, b) {
+	  return a === b ? 0 : a.length < b.length ? -1 : a.length > b.length ? 1 : a < b ? -1 : 1;
+	}
+	__name(cmpString, "cmpString");
+
+	// src/lib/DiscordSnowflake.ts
+	var DiscordSnowflake = new Snowflake(1420070400000n);
+
+	// src/lib/TwitterSnowflake.ts
+	var TwitterSnowflake = new Snowflake(1288834974657n);
+
+	cjs$1.DiscordSnowflake = DiscordSnowflake;
+	cjs$1.MaximumIncrement = MaximumIncrement;
+	cjs$1.MaximumProcessId = MaximumProcessId;
+	cjs$1.MaximumWorkerId = MaximumWorkerId;
+	cjs$1.Snowflake = Snowflake;
+	cjs$1.TwitterSnowflake = TwitterSnowflake;
+	
+	
+	return cjs$1;
+}
+
 var BaseChannel = {};
 
 var dist$5;
@@ -68819,7 +69662,7 @@ function requireBaseChannel () {
 	hasRequiredBaseChannel = 1;
 
 	const { channelLink, channelMention } = requireDist$6();
-	const { DiscordSnowflake } = /*@__PURE__*/ requireCjs$2();
+	const { DiscordSnowflake } = /*@__PURE__*/ requireCjs$1();
 	const { ChannelType, Routes } = requireV10();
 	const Base = requireBase();
 	const ChannelFlagsBitField = requireChannelFlagsBitField();
@@ -69325,7 +70168,7 @@ function requireRole$1 () {
 	hasRequiredRole$1 = 1;
 
 	const { roleMention } = requireDist$6();
-	const { DiscordSnowflake } = /*@__PURE__*/ requireCjs$2();
+	const { DiscordSnowflake } = /*@__PURE__*/ requireCjs$1();
 	const { PermissionFlagsBits } = requireV10();
 	const Base = requireBase();
 	const { DiscordjsError, ErrorCodes } = requireErrors$2();
@@ -70232,7 +71075,7 @@ function requireGuildChannel () {
 	if (hasRequiredGuildChannel) return GuildChannel_1;
 	hasRequiredGuildChannel = 1;
 
-	const { Snowflake } = /*@__PURE__*/ requireCjs$2();
+	const { Snowflake } = /*@__PURE__*/ requireCjs$1();
 	const { PermissionFlagsBits, ChannelType } = requireV10();
 	const { BaseChannel } = requireBaseChannel();
 	const { DiscordjsError, ErrorCodes } = requireErrors$2();
@@ -71504,7 +72347,7 @@ function requireTransformers () {
 	return Transformers;
 }
 
-var version = "14.25.1";
+var version = "14.26.2";
 var require$$40 = {
 	version: version};
 
@@ -71973,7 +72816,7 @@ function requireEmoji$1 () {
 
 	const process = require$$0$d;
 	const { formatEmoji } = requireDist$6();
-	const { DiscordSnowflake } = /*@__PURE__*/ requireCjs$2();
+	const { DiscordSnowflake } = /*@__PURE__*/ requireCjs$1();
 	const Base = requireBase();
 
 	let deprecationEmittedForURL = false;
@@ -73069,7 +73912,7 @@ function requireGuildScheduledEvent () {
 	if (hasRequiredGuildScheduledEvent) return GuildScheduledEvent;
 	hasRequiredGuildScheduledEvent = 1;
 
-	const { DiscordSnowflake } = /*@__PURE__*/ requireCjs$2();
+	const { DiscordSnowflake } = /*@__PURE__*/ requireCjs$1();
 	const { GuildScheduledEventStatus, GuildScheduledEventEntityType, RouteBases } = requireV10();
 	const Base = requireBase();
 	const { DiscordjsError, ErrorCodes } = requireErrors$2();
@@ -73611,7 +74454,7 @@ function requireApplication () {
 	if (hasRequiredApplication) return Application_1;
 	hasRequiredApplication = 1;
 
-	const { DiscordSnowflake } = /*@__PURE__*/ requireCjs$2();
+	const { DiscordSnowflake } = /*@__PURE__*/ requireCjs$1();
 	const Base = requireBase();
 
 	/**
@@ -74003,7 +74846,7 @@ function requireBaseGuild () {
 	hasRequiredBaseGuild = 1;
 
 	const { makeURLSearchParams } = requireWeb();
-	const { DiscordSnowflake } = /*@__PURE__*/ requireCjs$2();
+	const { DiscordSnowflake } = /*@__PURE__*/ requireCjs$1();
 	const { Routes, GuildFeature } = requireV10();
 	const Base = requireBase();
 
@@ -74645,7 +75488,7 @@ function requireInvite () {
 	    if (!guild.members.me) throw new DiscordjsError(ErrorCodes.GuildUncachedMe);
 	    return Boolean(
 	      this.channel?.permissionsFor(this.client.user).has(PermissionFlagsBits.ManageChannels, false) ||
-	        guild.members.me.permissions.has(PermissionFlagsBits.ManageGuild),
+	      guild.members.me.permissions.has(PermissionFlagsBits.ManageGuild),
 	    );
 	  }
 
@@ -75189,7 +76032,7 @@ function requireBaseInteraction () {
 
 	const { deprecate } = require$$0$a;
 	const { Collection } = requireDist$7();
-	const { DiscordSnowflake } = /*@__PURE__*/ requireCjs$2();
+	const { DiscordSnowflake } = /*@__PURE__*/ requireCjs$1();
 	const { InteractionType, ApplicationCommandType, ComponentType } = requireV10();
 	const Base = requireBase();
 	const { SelectMenuTypes } = requireConstants$6();
@@ -75689,7 +76532,7 @@ function requireTeam () {
 	hasRequiredTeam = 1;
 
 	const { Collection } = requireDist$7();
-	const { DiscordSnowflake } = /*@__PURE__*/ requireCjs$2();
+	const { DiscordSnowflake } = /*@__PURE__*/ requireCjs$1();
 	const Base = requireBase();
 	const TeamMember = requireTeamMember();
 
@@ -76303,7 +77146,7 @@ function requireApplicationCommand () {
 	if (hasRequiredApplicationCommand) return ApplicationCommand_1;
 	hasRequiredApplicationCommand = 1;
 
-	const { DiscordSnowflake } = /*@__PURE__*/ requireCjs$2();
+	const { DiscordSnowflake } = /*@__PURE__*/ requireCjs$1();
 	const { ApplicationCommandOptionType } = requireV10();
 	const isEqual = requireFastDeepEqual();
 	const Base = requireBase();
@@ -84547,8 +85390,8 @@ function requireDist$5 () {
 		};
 
 		// src/index.ts
-		var src_exports = {};
-		__export(src_exports, {
+		var index_exports = {};
+		__export(index_exports, {
 		  ActionRowBuilder: () => ActionRowBuilder,
 		  ApplicationCommandNumericOptionMinMaxValueMixin: () => ApplicationCommandNumericOptionMinMaxValueMixin,
 		  ApplicationCommandOptionBase: () => ApplicationCommandOptionBase,
@@ -84558,26 +85401,33 @@ function requireDist$5 () {
 		  BaseSelectMenuBuilder: () => BaseSelectMenuBuilder,
 		  ButtonBuilder: () => ButtonBuilder,
 		  ChannelSelectMenuBuilder: () => ChannelSelectMenuBuilder,
+		  CheckboxAssertions: () => Assertions_exports3,
+		  CheckboxBuilder: () => CheckboxBuilder,
+		  CheckboxGroupBuilder: () => CheckboxGroupBuilder,
+		  CheckboxGroupOptionBuilder: () => CheckboxGroupOptionBuilder,
 		  ComponentAssertions: () => Assertions_exports2,
 		  ComponentBuilder: () => ComponentBuilder,
-		  ComponentsV2Assertions: () => Assertions_exports6,
+		  ComponentsV2Assertions: () => Assertions_exports8,
 		  ContainerBuilder: () => ContainerBuilder,
-		  ContextMenuCommandAssertions: () => Assertions_exports9,
+		  ContextMenuCommandAssertions: () => Assertions_exports11,
 		  ContextMenuCommandBuilder: () => ContextMenuCommandBuilder,
 		  EmbedAssertions: () => Assertions_exports,
 		  EmbedBuilder: () => EmbedBuilder,
 		  FileBuilder: () => FileBuilder,
-		  FileUploadAssertions: () => Assertions_exports3,
+		  FileUploadAssertions: () => Assertions_exports4,
 		  FileUploadBuilder: () => FileUploadBuilder,
-		  LabelAssertions: () => Assertions_exports5,
+		  LabelAssertions: () => Assertions_exports7,
 		  LabelBuilder: () => LabelBuilder,
 		  MediaGalleryBuilder: () => MediaGalleryBuilder,
 		  MediaGalleryItemBuilder: () => MediaGalleryItemBuilder,
 		  MentionableSelectMenuBuilder: () => MentionableSelectMenuBuilder,
-		  ModalAssertions: () => Assertions_exports7,
+		  ModalAssertions: () => Assertions_exports9,
 		  ModalBuilder: () => ModalBuilder,
+		  RadioGroupBuilder: () => RadioGroupBuilder,
+		  RadioGroupOptionBuilder: () => RadioGroupOptionBuilder,
 		  RoleSelectMenuBuilder: () => RoleSelectMenuBuilder,
 		  SectionBuilder: () => SectionBuilder,
+		  SelectMenuAssertions: () => Assertions_exports6,
 		  SelectMenuBuilder: () => StringSelectMenuBuilder,
 		  SelectMenuOptionBuilder: () => StringSelectMenuOptionBuilder,
 		  SeparatorBuilder: () => SeparatorBuilder,
@@ -84585,7 +85435,7 @@ function requireDist$5 () {
 		  SharedSlashCommand: () => SharedSlashCommand,
 		  SharedSlashCommandOptions: () => SharedSlashCommandOptions,
 		  SharedSlashCommandSubcommands: () => SharedSlashCommandSubcommands,
-		  SlashCommandAssertions: () => Assertions_exports8,
+		  SlashCommandAssertions: () => Assertions_exports10,
 		  SlashCommandAttachmentOption: () => SlashCommandAttachmentOption,
 		  SlashCommandBooleanOption: () => SlashCommandBooleanOption,
 		  SlashCommandBuilder: () => SlashCommandBuilder,
@@ -84601,7 +85451,7 @@ function requireDist$5 () {
 		  StringSelectMenuBuilder: () => StringSelectMenuBuilder,
 		  StringSelectMenuOptionBuilder: () => StringSelectMenuOptionBuilder,
 		  TextDisplayBuilder: () => TextDisplayBuilder,
-		  TextInputAssertions: () => Assertions_exports4,
+		  TextInputAssertions: () => Assertions_exports5,
 		  TextInputBuilder: () => TextInputBuilder,
 		  ThumbnailBuilder: () => ThumbnailBuilder,
 		  UserSelectMenuBuilder: () => UserSelectMenuBuilder,
@@ -84614,7 +85464,7 @@ function requireDist$5 () {
 		  resolveBuilder: () => resolveBuilder,
 		  version: () => version
 		});
-		module.exports = __toCommonJS(src_exports);
+		module.exports = __toCommonJS(index_exports);
 
 		// src/messages/embed/Assertions.ts
 		var Assertions_exports = {};
@@ -84755,7 +85605,7 @@ function requireDist$5 () {
 		   *
 		   * @remarks
 		   * This method behaves similarly
-		   * to {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/splice | Array.prototype.splice()}.
+		   * to {@link https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array/splice | Array.prototype.splice()}.
 		   * The maximum amount of fields that can be added is 25.
 		   *
 		   * It's useful for modifying and adjusting order of the already-existing fields of an embed.
@@ -84916,7 +85766,7 @@ function requireDist$5 () {
 		};
 
 		// src/index.ts
-		__reExport(src_exports, requireDist$6(), module.exports);
+		__reExport(index_exports, requireDist$6(), module.exports);
 
 		// src/components/Assertions.ts
 		var Assertions_exports2 = {};
@@ -85099,7 +85949,7 @@ function requireDist$5 () {
 		__name(validateRequiredButtonParameters, "validateRequiredButtonParameters");
 
 		// src/components/ActionRow.ts
-		var import_v1024 = requireV10();
+		var import_v1028 = requireV10();
 
 		// src/components/Component.ts
 		var ComponentBuilder = class {
@@ -85137,7 +85987,7 @@ function requireDist$5 () {
 		};
 
 		// src/components/Components.ts
-		var import_v1023 = requireV10();
+		var import_v1027 = requireV10();
 
 		// src/components/button/Button.ts
 		var import_v102 = requireV10();
@@ -85263,23 +86113,580 @@ function requireDist$5 () {
 		  }
 		};
 
-		// src/components/fileUpload/FileUpload.ts
+		// src/components/checkbox/Checkbox.ts
 		var import_v104 = requireV10();
 
-		// src/components/fileUpload/Assertions.ts
+		// src/components/checkbox/Assertions.ts
 		var Assertions_exports3 = {};
 		__export(Assertions_exports3, {
-		  fileUploadPredicate: () => fileUploadPredicate
+		  checkboxGroupOptionPredicate: () => checkboxGroupOptionPredicate,
+		  checkboxGroupPredicate: () => checkboxGroupPredicate,
+		  checkboxPredicate: () => checkboxPredicate,
+		  radioGroupOptionPredicate: () => radioGroupOptionPredicate,
+		  radioGroupPredicate: () => radioGroupPredicate
 		});
 		var import_shapeshift3 = /*@__PURE__*/ requireCjs();
 		var import_v103 = requireV10();
-		var fileUploadPredicate = import_shapeshift3.s.object({
-		  type: import_shapeshift3.s.literal(import_v103.ComponentType.FileUpload),
+		var checkboxPredicate = import_shapeshift3.s.object({
+		  type: import_shapeshift3.s.literal(import_v103.ComponentType.Checkbox),
+		  custom_id: customIdValidator,
+		  id: idValidator.optional(),
+		  default: import_shapeshift3.s.boolean().optional()
+		}).setValidationEnabled(isValidationEnabled);
+		var checkboxGroupOptionPredicate = import_shapeshift3.s.object({
+		  label: import_shapeshift3.s.string().lengthGreaterThanOrEqual(1).lengthLessThanOrEqual(100),
+		  value: import_shapeshift3.s.string().lengthGreaterThanOrEqual(1).lengthLessThanOrEqual(100),
+		  description: import_shapeshift3.s.string().lengthLessThanOrEqual(100).optional(),
+		  default: import_shapeshift3.s.boolean().optional()
+		}).setValidationEnabled(isValidationEnabled);
+		var checkboxGroupPredicate = import_shapeshift3.s.object({
+		  type: import_shapeshift3.s.literal(import_v103.ComponentType.CheckboxGroup),
+		  custom_id: customIdValidator,
+		  id: idValidator.optional(),
+		  options: import_shapeshift3.s.array(checkboxGroupOptionPredicate).lengthGreaterThanOrEqual(1).lengthLessThanOrEqual(10),
+		  min_values: import_shapeshift3.s.number().int().greaterThanOrEqual(0).lessThanOrEqual(10).optional(),
+		  max_values: import_shapeshift3.s.number().int().greaterThanOrEqual(1).lessThanOrEqual(10).optional(),
+		  required: import_shapeshift3.s.boolean().optional()
+		}).reshape((data) => {
+		  if (data.min_values !== void 0 && data.max_values !== void 0 && data.min_values > data.max_values) {
+		    return import_shapeshift3.Result.err(new RangeError("min_values cannot be greater than max_values"));
+		  }
+		  if (data.max_values !== void 0 && data.max_values > data.options.length) {
+		    return import_shapeshift3.Result.err(new RangeError("max_values cannot be greater than the number of options"));
+		  }
+		  if (data.min_values !== void 0 && data.min_values > data.options.length) {
+		    return import_shapeshift3.Result.err(new RangeError("min_values cannot be greater than the number of options"));
+		  }
+		  if (data.required === true && data.min_values === 0) {
+		    return import_shapeshift3.Result.err(new RangeError("If required is true, min_values must be at least 1"));
+		  }
+		  const defaultCount = data.options.filter((option) => option.default === true).length;
+		  if (data.max_values !== void 0 && defaultCount > data.max_values) {
+		    return import_shapeshift3.Result.err(new RangeError("The number of default options cannot be greater than max_values"));
+		  }
+		  const values = data.options.map((option) => option.value);
+		  const uniqueValues = new Set(values);
+		  if (uniqueValues.size !== values.length) {
+		    return import_shapeshift3.Result.err(new RangeError("Each option in a checkbox group must have a unique value"));
+		  }
+		  return import_shapeshift3.Result.ok(data);
+		}).setValidationEnabled(isValidationEnabled);
+		var radioGroupOptionPredicate = checkboxGroupOptionPredicate;
+		var radioGroupPredicate = import_shapeshift3.s.object({
+		  type: import_shapeshift3.s.literal(import_v103.ComponentType.RadioGroup),
+		  custom_id: customIdValidator,
+		  id: idValidator.optional(),
+		  options: import_shapeshift3.s.array(radioGroupOptionPredicate).lengthGreaterThanOrEqual(2).lengthLessThanOrEqual(10),
+		  required: import_shapeshift3.s.boolean().optional()
+		}).reshape((data) => {
+		  const defaultCount = data.options.filter((option) => option.default === true).length;
+		  if (defaultCount > 1) {
+		    return import_shapeshift3.Result.err(new RangeError("There can be at most one default option in a radio group"));
+		  }
+		  const values = data.options.map((option) => option.value);
+		  const uniqueValues = new Set(values);
+		  if (uniqueValues.size !== values.length) {
+		    return import_shapeshift3.Result.err(new RangeError("Each option in a radio group must have a unique value"));
+		  }
+		  return import_shapeshift3.Result.ok(data);
+		}).setValidationEnabled(isValidationEnabled);
+
+		// src/components/checkbox/Checkbox.ts
+		var CheckboxBuilder = class extends ComponentBuilder {
+		  static {
+		    __name(this, "CheckboxBuilder");
+		  }
+		  /**
+		   * Creates a new checkbox from API data.
+		   *
+		   * @param data - The API data to create this checkbox with
+		   * @example
+		   * Creating a checkbox from an API data object:
+		   * ```ts
+		   * const checkbox = new CheckboxBuilder({
+		   * 	custom_id: 'accept_terms',
+		   * 	default: false,
+		   * });
+		   * ```
+		   * @example
+		   * Creating a checkbox using setters and API data:
+		   * ```ts
+		   * const checkbox = new CheckboxBuilder()
+		   * 	.setCustomId('subscribe_newsletter')
+		   * 	.setDefault(true);
+		   * ```
+		   */
+		  constructor(data) {
+		    super({ type: import_v104.ComponentType.Checkbox, ...data });
+		  }
+		  /**
+		   * Sets the custom id of this checkbox.
+		   *
+		   * @param customId - The custom id to use
+		   */
+		  setCustomId(customId) {
+		    this.data.custom_id = customId;
+		    return this;
+		  }
+		  /**
+		   * Sets whether this checkbox is checked by default.
+		   *
+		   * @param isDefault - Whether the checkbox should be checked by default
+		   */
+		  setDefault(isDefault) {
+		    this.data.default = isDefault;
+		    return this;
+		  }
+		  /**
+		   * {@inheritDoc ComponentBuilder.toJSON}
+		   */
+		  toJSON() {
+		    checkboxPredicate.parse(this.data);
+		    return {
+		      ...this.data
+		    };
+		  }
+		};
+
+		// src/components/checkbox/CheckboxGroup.ts
+		var import_v105 = requireV10();
+
+		// src/components/checkbox/CheckboxGroupOption.ts
+		var CheckboxGroupOptionBuilder = class {
+		  /**
+		   * Creates a new checkbox group option from API data.
+		   *
+		   * @param data - The API data to create this checkbox group option with
+		   * @example
+		   * Creating a checkbox group option from an API data object:
+		   * ```ts
+		   * const option = new CheckboxGroupOptionBuilder({
+		   * 	label: 'Option 1',
+		   * 	value: 'option_1',
+		   * });
+		   * ```
+		   * @example
+		   * Creating a checkbox group option using setters and API data:
+		   * ```ts
+		   * const option = new CheckboxGroupOptionBuilder()
+		   * 	.setLabel('Option 2')
+		   * 	.setValue('option_2');
+		   * ```
+		   */
+		  constructor(data = {}) {
+		    this.data = data;
+		  }
+		  static {
+		    __name(this, "CheckboxGroupOptionBuilder");
+		  }
+		  /**
+		   * Sets the label for this option.
+		   *
+		   * @param label - The label to use
+		   */
+		  setLabel(label) {
+		    this.data.label = label;
+		    return this;
+		  }
+		  /**
+		   * Sets the value for this option.
+		   *
+		   * @param value - The value to use
+		   */
+		  setValue(value) {
+		    this.data.value = value;
+		    return this;
+		  }
+		  /**
+		   * Sets the description for this option.
+		   *
+		   * @param description - The description to use
+		   */
+		  setDescription(description) {
+		    this.data.description = description;
+		    return this;
+		  }
+		  /**
+		   * Sets whether this option is selected by default.
+		   *
+		   * @param isDefault - Whether the option should be selected by default
+		   */
+		  setDefault(isDefault) {
+		    this.data.default = isDefault;
+		    return this;
+		  }
+		  /**
+		   * {@inheritDoc ComponentBuilder.toJSON}
+		   */
+		  toJSON() {
+		    checkboxGroupOptionPredicate.parse(this.data);
+		    return {
+		      ...this.data
+		    };
+		  }
+		};
+
+		// src/components/checkbox/CheckboxGroup.ts
+		var CheckboxGroupBuilder = class extends ComponentBuilder {
+		  static {
+		    __name(this, "CheckboxGroupBuilder");
+		  }
+		  /**
+		   * The options within this checkbox group.
+		   */
+		  options;
+		  /**
+		   * Creates a new checkbox group from API data.
+		   *
+		   * @param data - The API data to create this checkbox group with
+		   * @example
+		   * Creating a checkbox group from an API data object:
+		   * ```ts
+		   * const checkboxGroup = new CheckboxGroupBuilder({
+		   * 	custom_id: 'select_options',
+		   * 	options: [
+		   * 		{ label: 'Option 1', value: 'option_1' },
+		   * 		{ label: 'Option 2', value: 'option_2' },
+		   * 	],
+		   * });
+		   * ```
+		   * @example
+		   * Creating a checkbox group using setters and API data:
+		   * ```ts
+		   * const checkboxGroup = new CheckboxGroupBuilder()
+		   * 	.setCustomId('choose_items')
+		   * 	.setOptions([
+		   * 		{ label: 'Item A', value: 'item_a' },
+		   * 		{ label: 'Item B', value: 'item_b' },
+		   * 	])
+		   * 	.setMinValues(1)
+		   * 	.setMaxValues(2);
+		   * ```
+		   */
+		  constructor(data) {
+		    const { options, ...initData } = data ?? {};
+		    super({ ...initData, type: import_v105.ComponentType.CheckboxGroup });
+		    this.options = options?.map((option) => new CheckboxGroupOptionBuilder(option)) ?? [];
+		  }
+		  /**
+		   * Sets the custom id of this checkbox group.
+		   *
+		   * @param customId - The custom id to use
+		   */
+		  setCustomId(customId) {
+		    this.data.custom_id = customId;
+		    return this;
+		  }
+		  /**
+		   * Adds options to this checkbox group.
+		   *
+		   * @param options - The options to add
+		   */
+		  addOptions(...options) {
+		    const normalizedOptions = normalizeArray(options);
+		    this.options.push(
+		      ...normalizedOptions.map((normalizedOption) => {
+		        const json = "toJSON" in normalizedOption ? normalizedOption.toJSON() : normalizedOption;
+		        const option = new CheckboxGroupOptionBuilder(json);
+		        checkboxGroupOptionPredicate.parse(option.toJSON());
+		        return option;
+		      })
+		    );
+		    return this;
+		  }
+		  /**
+		   * Sets the options for this checkbox group.
+		   *
+		   * @param options - The options to use
+		   */
+		  setOptions(...options) {
+		    return this.spliceOptions(0, this.options.length, ...options);
+		  }
+		  /**
+		   * Removes, replaces, or inserts options for this checkbox group.
+		   *
+		   * @remarks
+		   * This method behaves similarly
+		   * to {@link https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array/splice | Array.prototype.splice()}.
+		   * It's useful for modifying and adjusting the order of existing options.
+		   * @param index - The index to start at
+		   * @param deleteCount - The number of options to remove
+		   * @param options - The replacing option objects or builders
+		   */
+		  spliceOptions(index, deleteCount, ...options) {
+		    const normalizedOptions = normalizeArray(options);
+		    const clone = [...this.options];
+		    clone.splice(
+		      index,
+		      deleteCount,
+		      ...normalizedOptions.map((normalizedOption) => {
+		        const json = "toJSON" in normalizedOption ? normalizedOption.toJSON() : normalizedOption;
+		        const option = new CheckboxGroupOptionBuilder(json);
+		        checkboxGroupOptionPredicate.parse(option.toJSON());
+		        return option;
+		      })
+		    );
+		    this.options.splice(0, this.options.length, ...clone);
+		    return this;
+		  }
+		  /**
+		   * Sets the minimum number of options that must be selected.
+		   *
+		   * @param minValues - The minimum number of options that must be selected
+		   */
+		  setMinValues(minValues) {
+		    this.data.min_values = minValues;
+		    return this;
+		  }
+		  /**
+		   * Sets the maximum number of options that can be selected.
+		   *
+		   * @param maxValues - The maximum number of options that can be selected
+		   */
+		  setMaxValues(maxValues) {
+		    this.data.max_values = maxValues;
+		    return this;
+		  }
+		  /**
+		   * Sets whether selecting options is required.
+		   *
+		   * @param required - Whether selecting options is required
+		   */
+		  setRequired(required) {
+		    this.data.required = required;
+		    return this;
+		  }
+		  /**
+		   * {@inheritDoc ComponentBuilder.toJSON}
+		   */
+		  toJSON() {
+		    const data = {
+		      ...this.data,
+		      options: this.options.map((option) => option.toJSON())
+		    };
+		    checkboxGroupPredicate.parse(data);
+		    return data;
+		  }
+		};
+
+		// src/components/checkbox/RadioGroup.ts
+		var import_v106 = requireV10();
+
+		// src/components/checkbox/RadioGroupOption.ts
+		var RadioGroupOptionBuilder = class {
+		  /**
+		   * Creates a new radio group option from API data.
+		   *
+		   * @param data - The API data to create this radio group option with
+		   * @example
+		   * Creating a radio group option from an API data object:
+		   * ```ts
+		   * const option = new RadioGroupOptionBuilder({
+		   * 	label: 'Option 1',
+		   * 	value: 'option_1',
+		   * });
+		   * ```
+		   * @example
+		   * Creating a radio group option using setters and API data:
+		   * ```ts
+		   * const option = new RadioGroupOptionBuilder()
+		   * 	.setLabel('Option 2')
+		   * 	.setValue('option_2');
+		   * ```
+		   */
+		  constructor(data = {}) {
+		    this.data = data;
+		  }
+		  static {
+		    __name(this, "RadioGroupOptionBuilder");
+		  }
+		  /**
+		   * Sets the label for this option.
+		   *
+		   * @param label - The label to use
+		   */
+		  setLabel(label) {
+		    this.data.label = label;
+		    return this;
+		  }
+		  /**
+		   * Sets the value for this option.
+		   *
+		   * @param value - The value to use
+		   */
+		  setValue(value) {
+		    this.data.value = value;
+		    return this;
+		  }
+		  /**
+		   * Sets the description for this option.
+		   *
+		   * @param description - The description to use
+		   */
+		  setDescription(description) {
+		    this.data.description = description;
+		    return this;
+		  }
+		  /**
+		   * Sets whether this option is selected by default.
+		   *
+		   * @param isDefault - Whether the option should be selected by default
+		   */
+		  setDefault(isDefault) {
+		    this.data.default = isDefault;
+		    return this;
+		  }
+		  /**
+		   * {@inheritDoc ComponentBuilder.toJSON}
+		   */
+		  toJSON() {
+		    radioGroupOptionPredicate.parse(this.data);
+		    return {
+		      ...this.data
+		    };
+		  }
+		};
+
+		// src/components/checkbox/RadioGroup.ts
+		var RadioGroupBuilder = class extends ComponentBuilder {
+		  static {
+		    __name(this, "RadioGroupBuilder");
+		  }
+		  /**
+		   * The options within this radio group.
+		   */
+		  options;
+		  /**
+		   * Creates a new radio group from API data.
+		   *
+		   * @param data - The API data to create this radio group with
+		   * @example
+		   * Creating a radio group from an API data object:
+		   * ```ts
+		   * const radioGroup = new RadioGroupBuilder({
+		   * 	custom_id: 'select_options',
+		   * 	options: [
+		   * 		{ label: 'Option 1', value: 'option_1' },
+		   * 		{ label: 'Option 2', value: 'option_2' },
+		   * 	],
+		   * });
+		   * ```
+		   * @example
+		   * Creating a radio group using setters and API data:
+		   * ```ts
+		   * const radioGroup = new RadioGroupBuilder()
+		   * 	.setCustomId('choose_items')
+		   * 	.setOptions([
+		   * 		{ label: 'Item A', value: 'item_a' },
+		   * 		{ label: 'Item B', value: 'item_b' },
+		   * 	])
+		   * ```
+		   */
+		  constructor(data) {
+		    const { options, ...initData } = data ?? {};
+		    super({ ...initData, type: import_v106.ComponentType.RadioGroup });
+		    this.options = options?.map((option) => new RadioGroupOptionBuilder(option)) ?? [];
+		  }
+		  /**
+		   * Sets the custom id of this radio group.
+		   *
+		   * @param customId - The custom id to use
+		   */
+		  setCustomId(customId) {
+		    this.data.custom_id = customId;
+		    return this;
+		  }
+		  /**
+		   * Adds options to this radio group.
+		   *
+		   * @param options - The options to add
+		   */
+		  addOptions(...options) {
+		    const normalizedOptions = normalizeArray(options);
+		    this.options.push(
+		      ...normalizedOptions.map((normalizedOption) => {
+		        const json = "toJSON" in normalizedOption ? normalizedOption.toJSON() : normalizedOption;
+		        const option = new RadioGroupOptionBuilder(json);
+		        radioGroupOptionPredicate.parse(option.toJSON());
+		        return option;
+		      })
+		    );
+		    return this;
+		  }
+		  /**
+		   * Sets the options for this radio group.
+		   *
+		   * @param options - The options to use
+		   */
+		  setOptions(...options) {
+		    return this.spliceOptions(0, this.options.length, ...options);
+		  }
+		  /**
+		   * Removes, replaces, or inserts options for this radio group.
+		   *
+		   * @remarks
+		   * This method behaves similarly
+		   * to {@link https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array/splice | Array.prototype.splice()}.
+		   * It's useful for modifying and adjusting the order of existing options.
+		   * @param index - The index to start at
+		   * @param deleteCount - The number of options to remove
+		   * @param options - The replacing option objects or builders
+		   */
+		  spliceOptions(index, deleteCount, ...options) {
+		    const normalizedOptions = normalizeArray(options);
+		    const clone = [...this.options];
+		    clone.splice(
+		      index,
+		      deleteCount,
+		      ...normalizedOptions.map((normalizedOption) => {
+		        const json = "toJSON" in normalizedOption ? normalizedOption.toJSON() : normalizedOption;
+		        const option = new RadioGroupOptionBuilder(json);
+		        radioGroupOptionPredicate.parse(option.toJSON());
+		        return option;
+		      })
+		    );
+		    this.options.splice(0, this.options.length, ...clone);
+		    return this;
+		  }
+		  /**
+		   * Sets whether selecting options is required.
+		   *
+		   * @param required - Whether selecting options is required
+		   */
+		  setRequired(required) {
+		    this.data.required = required;
+		    return this;
+		  }
+		  /**
+		   * {@inheritDoc ComponentBuilder.toJSON}
+		   */
+		  toJSON() {
+		    const data = {
+		      ...this.data,
+		      options: this.options.map((option) => option.toJSON())
+		    };
+		    radioGroupPredicate.parse(data);
+		    return data;
+		  }
+		};
+
+		// src/components/fileUpload/FileUpload.ts
+		var import_v108 = requireV10();
+
+		// src/components/fileUpload/Assertions.ts
+		var Assertions_exports4 = {};
+		__export(Assertions_exports4, {
+		  fileUploadPredicate: () => fileUploadPredicate
+		});
+		var import_shapeshift4 = /*@__PURE__*/ requireCjs();
+		var import_v107 = requireV10();
+		var fileUploadPredicate = import_shapeshift4.s.object({
+		  type: import_shapeshift4.s.literal(import_v107.ComponentType.FileUpload),
 		  id: idValidator.optional(),
 		  custom_id: customIdValidator,
-		  min_values: import_shapeshift3.s.number().greaterThanOrEqual(0).lessThanOrEqual(10).optional(),
-		  max_values: import_shapeshift3.s.number().greaterThanOrEqual(1).lessThanOrEqual(10).optional(),
-		  required: import_shapeshift3.s.boolean().optional()
+		  min_values: import_shapeshift4.s.number().greaterThanOrEqual(0).lessThanOrEqual(10).optional(),
+		  max_values: import_shapeshift4.s.number().greaterThanOrEqual(1).lessThanOrEqual(10).optional(),
+		  required: import_shapeshift4.s.boolean().optional()
 		});
 
 		// src/components/fileUpload/FileUpload.ts
@@ -85311,7 +86718,7 @@ function requireDist$5 () {
 		   * ```
 		   */
 		  constructor(data = {}) {
-		    super({ type: import_v104.ComponentType.FileUpload, ...data });
+		    super({ type: import_v108.ComponentType.FileUpload, ...data });
 		  }
 		  /**
 		   * Sets the custom id for this file upload.
@@ -85341,7 +86748,7 @@ function requireDist$5 () {
 		  /**
 		   * Sets the maximum number of file uploads required.
 		   *
-		   * @param maxValues - The maximum values that must be uploaded
+		   * @param maxValues - The maximum values that can be uploaded
 		   */
 		  setMaxValues(maxValues) {
 		    this.data.max_values = maxValues;
@@ -85373,14 +86780,14 @@ function requireDist$5 () {
 		};
 
 		// src/components/label/Label.ts
-		var import_v1014 = requireV10();
+		var import_v1018 = requireV10();
 
 		// src/components/selectMenu/ChannelSelectMenu.ts
-		var import_v106 = requireV10();
+		var import_v1010 = requireV10();
 
 		// src/components/textInput/Assertions.ts
-		var Assertions_exports4 = {};
-		__export(Assertions_exports4, {
+		var Assertions_exports5 = {};
+		__export(Assertions_exports5, {
 		  labelValidator: () => labelValidator,
 		  maxLengthValidator: () => maxLengthValidator,
 		  minLengthValidator: () => minLengthValidator,
@@ -85391,17 +86798,17 @@ function requireDist$5 () {
 		  validateRequiredParameters: () => validateRequiredParameters,
 		  valueValidator: () => valueValidator
 		});
-		var import_shapeshift4 = /*@__PURE__*/ requireCjs();
-		var import_v105 = requireV10();
-		var textInputStyleValidator = import_shapeshift4.s.nativeEnum(import_v105.TextInputStyle).setValidationEnabled(isValidationEnabled);
-		var minLengthValidator = import_shapeshift4.s.number().int().greaterThanOrEqual(0).lessThanOrEqual(4e3).setValidationEnabled(isValidationEnabled);
-		var maxLengthValidator = import_shapeshift4.s.number().int().greaterThanOrEqual(1).lessThanOrEqual(4e3).setValidationEnabled(isValidationEnabled);
-		var requiredValidator = import_shapeshift4.s.boolean().setValidationEnabled(isValidationEnabled);
-		var valueValidator = import_shapeshift4.s.string().lengthLessThanOrEqual(4e3).setValidationEnabled(isValidationEnabled);
-		var placeholderValidator2 = import_shapeshift4.s.string().lengthLessThanOrEqual(100).setValidationEnabled(isValidationEnabled);
-		var labelValidator = import_shapeshift4.s.string().lengthGreaterThanOrEqual(1).lengthLessThanOrEqual(45).setValidationEnabled(isValidationEnabled);
-		var textInputPredicate = import_shapeshift4.s.object({
-		  type: import_shapeshift4.s.literal(import_v105.ComponentType.TextInput),
+		var import_shapeshift5 = /*@__PURE__*/ requireCjs();
+		var import_v109 = requireV10();
+		var textInputStyleValidator = import_shapeshift5.s.nativeEnum(import_v109.TextInputStyle).setValidationEnabled(isValidationEnabled);
+		var minLengthValidator = import_shapeshift5.s.number().int().greaterThanOrEqual(0).lessThanOrEqual(4e3).setValidationEnabled(isValidationEnabled);
+		var maxLengthValidator = import_shapeshift5.s.number().int().greaterThanOrEqual(1).lessThanOrEqual(4e3).setValidationEnabled(isValidationEnabled);
+		var requiredValidator = import_shapeshift5.s.boolean().setValidationEnabled(isValidationEnabled);
+		var valueValidator = import_shapeshift5.s.string().lengthLessThanOrEqual(4e3).setValidationEnabled(isValidationEnabled);
+		var placeholderValidator2 = import_shapeshift5.s.string().lengthLessThanOrEqual(100).setValidationEnabled(isValidationEnabled);
+		var labelValidator = import_shapeshift5.s.string().lengthGreaterThanOrEqual(1).lengthLessThanOrEqual(45).setValidationEnabled(isValidationEnabled);
+		var textInputPredicate = import_shapeshift5.s.object({
+		  type: import_shapeshift5.s.literal(import_v109.ComponentType.TextInput),
 		  custom_id: customIdValidator,
 		  style: textInputStyleValidator,
 		  id: idValidator.optional(),
@@ -85441,9 +86848,9 @@ function requireDist$5 () {
 		    return this;
 		  }
 		  /**
-		   * Sets the maximum values that must be selected in the select menu.
+		   * Sets the maximum values that can be selected in the select menu.
 		   *
-		   * @param maxValues - The maximum values that must be selected
+		   * @param maxValues - The maximum values that can be selected
 		   */
 		  setMaxValues(maxValues) {
 		    this.data.max_values = minMaxValidator.parse(maxValues);
@@ -85517,7 +86924,7 @@ function requireDist$5 () {
 		   * ```
 		   */
 		  constructor(data) {
-		    super({ ...data, type: import_v106.ComponentType.ChannelSelect });
+		    super({ ...data, type: import_v1010.ComponentType.ChannelSelect });
 		  }
 		  /**
 		   * Adds channel types to this select menu.
@@ -85553,7 +86960,7 @@ function requireDist$5 () {
 		    this.data.default_values.push(
 		      ...normalizedValues.map((id) => ({
 		        id,
-		        type: import_v106.SelectMenuDefaultValueType.Channel
+		        type: import_v1010.SelectMenuDefaultValueType.Channel
 		      }))
 		    );
 		    return this;
@@ -85568,7 +86975,7 @@ function requireDist$5 () {
 		    optionsLengthValidator.parse(normalizedValues.length);
 		    this.data.default_values = normalizedValues.map((id) => ({
 		      id,
-		      type: import_v106.SelectMenuDefaultValueType.Channel
+		      type: import_v1010.SelectMenuDefaultValueType.Channel
 		    }));
 		    return this;
 		  }
@@ -85584,7 +86991,7 @@ function requireDist$5 () {
 		};
 
 		// src/components/selectMenu/MentionableSelectMenu.ts
-		var import_v107 = requireV10();
+		var import_v1011 = requireV10();
 		var MentionableSelectMenuBuilder = class extends BaseSelectMenuBuilder {
 		  static {
 		    __name(this, "MentionableSelectMenuBuilder");
@@ -85612,7 +87019,7 @@ function requireDist$5 () {
 		   * ```
 		   */
 		  constructor(data) {
-		    super({ ...data, type: import_v107.ComponentType.MentionableSelect });
+		    super({ ...data, type: import_v1011.ComponentType.MentionableSelect });
 		  }
 		  /**
 		   * Adds default roles to this auto populated select menu.
@@ -85626,7 +87033,7 @@ function requireDist$5 () {
 		    this.data.default_values.push(
 		      ...normalizedValues.map((id) => ({
 		        id,
-		        type: import_v107.SelectMenuDefaultValueType.Role
+		        type: import_v1011.SelectMenuDefaultValueType.Role
 		      }))
 		    );
 		    return this;
@@ -85643,7 +87050,7 @@ function requireDist$5 () {
 		    this.data.default_values.push(
 		      ...normalizedValues.map((id) => ({
 		        id,
-		        type: import_v107.SelectMenuDefaultValueType.User
+		        type: import_v1011.SelectMenuDefaultValueType.User
 		      }))
 		    );
 		    return this;
@@ -85674,7 +87081,7 @@ function requireDist$5 () {
 		};
 
 		// src/components/selectMenu/RoleSelectMenu.ts
-		var import_v108 = requireV10();
+		var import_v1012 = requireV10();
 		var RoleSelectMenuBuilder = class extends BaseSelectMenuBuilder {
 		  static {
 		    __name(this, "RoleSelectMenuBuilder");
@@ -85702,7 +87109,7 @@ function requireDist$5 () {
 		   * ```
 		   */
 		  constructor(data) {
-		    super({ ...data, type: import_v108.ComponentType.RoleSelect });
+		    super({ ...data, type: import_v1012.ComponentType.RoleSelect });
 		  }
 		  /**
 		   * Adds default roles to this auto populated select menu.
@@ -85716,7 +87123,7 @@ function requireDist$5 () {
 		    this.data.default_values.push(
 		      ...normalizedValues.map((id) => ({
 		        id,
-		        type: import_v108.SelectMenuDefaultValueType.Role
+		        type: import_v1012.SelectMenuDefaultValueType.Role
 		      }))
 		    );
 		    return this;
@@ -85731,14 +87138,78 @@ function requireDist$5 () {
 		    optionsLengthValidator.parse(normalizedValues.length);
 		    this.data.default_values = normalizedValues.map((id) => ({
 		      id,
-		      type: import_v108.SelectMenuDefaultValueType.Role
+		      type: import_v1012.SelectMenuDefaultValueType.Role
 		    }));
 		    return this;
 		  }
 		};
 
 		// src/components/selectMenu/StringSelectMenu.ts
-		var import_v109 = requireV10();
+		var import_v1014 = requireV10();
+
+		// src/components/selectMenu/Assertions.ts
+		var Assertions_exports6 = {};
+		__export(Assertions_exports6, {
+		  selectMenuChannelPredicate: () => selectMenuChannelPredicate,
+		  selectMenuMentionablePredicate: () => selectMenuMentionablePredicate,
+		  selectMenuRolePredicate: () => selectMenuRolePredicate,
+		  selectMenuStringOptionPredicate: () => selectMenuStringOptionPredicate,
+		  selectMenuStringPredicate: () => selectMenuStringPredicate,
+		  selectMenuUserPredicate: () => selectMenuUserPredicate
+		});
+		var import_shapeshift6 = /*@__PURE__*/ requireCjs();
+		var import_v1013 = requireV10();
+		var selectMenuBasePredicate = import_shapeshift6.s.object({
+		  id: idValidator.optional(),
+		  placeholder: import_shapeshift6.s.string().lengthLessThanOrEqual(150).optional(),
+		  min_values: import_shapeshift6.s.number().greaterThanOrEqual(0).lessThanOrEqual(25).optional(),
+		  max_values: import_shapeshift6.s.number().greaterThanOrEqual(0).lessThanOrEqual(25).optional(),
+		  custom_id: customIdValidator,
+		  disabled: import_shapeshift6.s.boolean().optional()
+		});
+		var selectMenuChannelPredicate = selectMenuBasePredicate.extend({
+		  type: import_shapeshift6.s.literal(import_v1013.ComponentType.ChannelSelect),
+		  channel_types: import_shapeshift6.s.nativeEnum(import_v1013.ChannelType).array().optional(),
+		  default_values: import_shapeshift6.s.object({ id: import_shapeshift6.s.string(), type: import_shapeshift6.s.literal(import_v1013.SelectMenuDefaultValueType.Channel) }).array().lengthLessThanOrEqual(25).optional()
+		}).setValidationEnabled(isValidationEnabled);
+		var selectMenuMentionablePredicate = selectMenuBasePredicate.extend({
+		  type: import_shapeshift6.s.literal(import_v1013.ComponentType.MentionableSelect),
+		  default_values: import_shapeshift6.s.object({
+		    id: import_shapeshift6.s.string(),
+		    type: import_shapeshift6.s.union([import_shapeshift6.s.literal(import_v1013.SelectMenuDefaultValueType.Role), import_shapeshift6.s.literal(import_v1013.SelectMenuDefaultValueType.User)])
+		  }).array().lengthLessThanOrEqual(25).optional()
+		}).setValidationEnabled(isValidationEnabled);
+		var selectMenuRolePredicate = selectMenuBasePredicate.extend({
+		  type: import_shapeshift6.s.literal(import_v1013.ComponentType.RoleSelect),
+		  default_values: import_shapeshift6.s.object({ id: import_shapeshift6.s.string(), type: import_shapeshift6.s.literal(import_v1013.SelectMenuDefaultValueType.Role) }).array().lengthLessThanOrEqual(25).optional()
+		}).setValidationEnabled(isValidationEnabled);
+		var selectMenuUserPredicate = selectMenuBasePredicate.extend({
+		  type: import_shapeshift6.s.literal(import_v1013.ComponentType.UserSelect),
+		  default_values: import_shapeshift6.s.object({ id: import_shapeshift6.s.string(), type: import_shapeshift6.s.literal(import_v1013.SelectMenuDefaultValueType.User) }).array().lengthLessThanOrEqual(25).optional()
+		}).setValidationEnabled(isValidationEnabled);
+		var selectMenuStringOptionPredicate = import_shapeshift6.s.object({
+		  label: import_shapeshift6.s.string().lengthGreaterThanOrEqual(1).lengthLessThanOrEqual(100),
+		  value: import_shapeshift6.s.string().lengthGreaterThanOrEqual(1).lengthLessThanOrEqual(100),
+		  description: import_shapeshift6.s.string().lengthGreaterThanOrEqual(1).lengthLessThanOrEqual(100).optional(),
+		  emoji: emojiValidator.optional(),
+		  default: import_shapeshift6.s.boolean().optional()
+		}).setValidationEnabled(isValidationEnabled);
+		var selectMenuStringPredicate = selectMenuBasePredicate.extend({
+		  type: import_shapeshift6.s.literal(import_v1013.ComponentType.StringSelect),
+		  options: selectMenuStringOptionPredicate.array().lengthGreaterThanOrEqual(1).lengthLessThanOrEqual(25)
+		}).reshape((value) => {
+		  if (value.min_values !== void 0 && value.options.length < value.min_values) {
+		    return import_shapeshift6.Result.err(new RangeError(`The number of options must be greater than or equal to min_values`));
+		  }
+		  if (value.min_values !== void 0 && value.max_values !== void 0 && value.min_values > value.max_values) {
+		    return import_shapeshift6.Result.err(
+		      new RangeError(`The maximum amount of options must be greater than or equal to the minimum amount of options`)
+		    );
+		  }
+		  return import_shapeshift6.Result.ok(value);
+		}).setValidationEnabled(isValidationEnabled);
+
+		// src/components/selectMenu/StringSelectMenu.ts
 		var StringSelectMenuBuilder = class extends BaseSelectMenuBuilder {
 		  static {
 		    __name(this, "StringSelectMenuBuilder");
@@ -85780,7 +87251,7 @@ function requireDist$5 () {
 		   */
 		  constructor(data) {
 		    const { options, ...initData } = data ?? {};
-		    super({ ...initData, type: import_v109.ComponentType.StringSelect });
+		    super({ ...initData, type: import_v1014.ComponentType.StringSelect });
 		    this.options = options?.map((option) => new StringSelectMenuOptionBuilder(option)) ?? [];
 		  }
 		  /**
@@ -85793,7 +87264,7 @@ function requireDist$5 () {
 		    optionsLengthValidator.parse(this.options.length + normalizedOptions.length);
 		    this.options.push(
 		      ...normalizedOptions.map(
-		        (normalizedOption) => normalizedOption instanceof StringSelectMenuOptionBuilder ? normalizedOption : new StringSelectMenuOptionBuilder(jsonOptionValidator.parse(normalizedOption))
+		        (normalizedOption) => normalizedOption instanceof StringSelectMenuOptionBuilder ? normalizedOption : new StringSelectMenuOptionBuilder(selectMenuStringOptionPredicate.parse(normalizedOption))
 		      )
 		    );
 		    return this;
@@ -85811,7 +87282,7 @@ function requireDist$5 () {
 		   *
 		   * @remarks
 		   * This method behaves similarly
-		   * to {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/slice | Array.prototype.splice()}.
+		   * to {@link https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array/splice | Array.prototype.splice()}.
 		   * It's useful for modifying and adjusting the order of existing options.
 		   * @example
 		   * Remove the first option:
@@ -85840,7 +87311,7 @@ function requireDist$5 () {
 		      index,
 		      deleteCount,
 		      ...normalizedOptions.map(
-		        (normalizedOption) => normalizedOption instanceof StringSelectMenuOptionBuilder ? normalizedOption : new StringSelectMenuOptionBuilder(jsonOptionValidator.parse(normalizedOption))
+		        (normalizedOption) => normalizedOption instanceof StringSelectMenuOptionBuilder ? normalizedOption : new StringSelectMenuOptionBuilder(selectMenuStringOptionPredicate.parse(normalizedOption))
 		      )
 		    );
 		    optionsLengthValidator.parse(clone.length);
@@ -85860,7 +87331,7 @@ function requireDist$5 () {
 		};
 
 		// src/components/selectMenu/UserSelectMenu.ts
-		var import_v1010 = requireV10();
+		var import_v1015 = requireV10();
 		var UserSelectMenuBuilder = class extends BaseSelectMenuBuilder {
 		  static {
 		    __name(this, "UserSelectMenuBuilder");
@@ -85888,7 +87359,7 @@ function requireDist$5 () {
 		   * ```
 		   */
 		  constructor(data) {
-		    super({ ...data, type: import_v1010.ComponentType.UserSelect });
+		    super({ ...data, type: import_v1015.ComponentType.UserSelect });
 		  }
 		  /**
 		   * Adds default users to this auto populated select menu.
@@ -85902,7 +87373,7 @@ function requireDist$5 () {
 		    this.data.default_values.push(
 		      ...normalizedValues.map((id) => ({
 		        id,
-		        type: import_v1010.SelectMenuDefaultValueType.User
+		        type: import_v1015.SelectMenuDefaultValueType.User
 		      }))
 		    );
 		    return this;
@@ -85917,7 +87388,7 @@ function requireDist$5 () {
 		    optionsLengthValidator.parse(normalizedValues.length);
 		    this.data.default_values = normalizedValues.map((id) => ({
 		      id,
-		      type: import_v1010.SelectMenuDefaultValueType.User
+		      type: import_v1015.SelectMenuDefaultValueType.User
 		    }));
 		    return this;
 		  }
@@ -85925,7 +87396,7 @@ function requireDist$5 () {
 
 		// src/components/textInput/TextInput.ts
 		var import_util = requireDist$b();
-		var import_v1011 = requireV10();
+		var import_v1016 = requireV10();
 		var import_fast_deep_equal = __toESM(requireFastDeepEqual());
 		var TextInputBuilder = class extends ComponentBuilder {
 		  static {
@@ -85955,7 +87426,7 @@ function requireDist$5 () {
 		   * ```
 		   */
 		  constructor(data) {
-		    super({ type: import_v1011.ComponentType.TextInput, ...data });
+		    super({ type: import_v1016.ComponentType.TextInput, ...data });
 		  }
 		  /**
 		   * Sets the custom id for this text input.
@@ -86051,80 +87522,28 @@ function requireDist$5 () {
 		};
 
 		// src/components/label/Assertions.ts
-		var Assertions_exports5 = {};
-		__export(Assertions_exports5, {
+		var Assertions_exports7 = {};
+		__export(Assertions_exports7, {
 		  labelPredicate: () => labelPredicate
 		});
-		var import_shapeshift6 = /*@__PURE__*/ requireCjs();
-		var import_v1013 = requireV10();
-
-		// src/components/selectMenu/Assertions.ts
-		var import_shapeshift5 = /*@__PURE__*/ requireCjs();
-		var import_v1012 = requireV10();
-		var selectMenuBasePredicate = import_shapeshift5.s.object({
+		var import_shapeshift7 = /*@__PURE__*/ requireCjs();
+		var import_v1017 = requireV10();
+		var labelPredicate = import_shapeshift7.s.object({
 		  id: idValidator.optional(),
-		  placeholder: import_shapeshift5.s.string().lengthLessThanOrEqual(150).optional(),
-		  min_values: import_shapeshift5.s.number().greaterThanOrEqual(0).lessThanOrEqual(25).optional(),
-		  max_values: import_shapeshift5.s.number().greaterThanOrEqual(0).lessThanOrEqual(25).optional(),
-		  custom_id: customIdValidator,
-		  disabled: import_shapeshift5.s.boolean().optional()
-		});
-		var selectMenuChannelPredicate = selectMenuBasePredicate.extend({
-		  type: import_shapeshift5.s.literal(import_v1012.ComponentType.ChannelSelect),
-		  channel_types: import_shapeshift5.s.nativeEnum(import_v1012.ChannelType).array().optional(),
-		  default_values: import_shapeshift5.s.object({ id: import_shapeshift5.s.string(), type: import_shapeshift5.s.literal(import_v1012.SelectMenuDefaultValueType.Channel) }).array().lengthLessThanOrEqual(25).optional()
-		}).setValidationEnabled(isValidationEnabled);
-		var selectMenuMentionablePredicate = selectMenuBasePredicate.extend({
-		  type: import_shapeshift5.s.literal(import_v1012.ComponentType.MentionableSelect),
-		  default_values: import_shapeshift5.s.object({
-		    id: import_shapeshift5.s.string(),
-		    type: import_shapeshift5.s.union([import_shapeshift5.s.literal(import_v1012.SelectMenuDefaultValueType.Role), import_shapeshift5.s.literal(import_v1012.SelectMenuDefaultValueType.User)])
-		  }).array().lengthLessThanOrEqual(25).optional()
-		}).setValidationEnabled(isValidationEnabled);
-		var selectMenuRolePredicate = selectMenuBasePredicate.extend({
-		  type: import_shapeshift5.s.literal(import_v1012.ComponentType.RoleSelect),
-		  default_values: import_shapeshift5.s.object({ id: import_shapeshift5.s.string(), type: import_shapeshift5.s.literal(import_v1012.SelectMenuDefaultValueType.Role) }).array().lengthLessThanOrEqual(25).optional()
-		}).setValidationEnabled(isValidationEnabled);
-		var selectMenuUserPredicate = selectMenuBasePredicate.extend({
-		  type: import_shapeshift5.s.literal(import_v1012.ComponentType.UserSelect),
-		  default_values: import_shapeshift5.s.object({ id: import_shapeshift5.s.string(), type: import_shapeshift5.s.literal(import_v1012.SelectMenuDefaultValueType.User) }).array().lengthLessThanOrEqual(25).optional()
-		}).setValidationEnabled(isValidationEnabled);
-		var selectMenuStringOptionPredicate = import_shapeshift5.s.object({
-		  label: labelValidator,
-		  value: import_shapeshift5.s.string().lengthGreaterThanOrEqual(1).lengthLessThanOrEqual(100),
-		  description: import_shapeshift5.s.string().lengthGreaterThanOrEqual(1).lengthLessThanOrEqual(100).optional(),
-		  emoji: emojiValidator.optional(),
-		  default: import_shapeshift5.s.boolean().optional()
-		}).setValidationEnabled(isValidationEnabled);
-		var selectMenuStringPredicate = selectMenuBasePredicate.extend({
-		  type: import_shapeshift5.s.literal(import_v1012.ComponentType.StringSelect),
-		  options: selectMenuStringOptionPredicate.array().lengthGreaterThanOrEqual(1).lengthLessThanOrEqual(25)
-		}).reshape((value) => {
-		  if (value.min_values !== void 0 && value.options.length < value.min_values) {
-		    return import_shapeshift5.Result.err(new RangeError(`The number of options must be greater than or equal to min_values`));
-		  }
-		  if (value.min_values !== void 0 && value.max_values !== void 0 && value.min_values > value.max_values) {
-		    return import_shapeshift5.Result.err(
-		      new RangeError(`The maximum amount of options must be greater than or equal to the minimum amount of options`)
-		    );
-		  }
-		  return import_shapeshift5.Result.ok(value);
-		}).setValidationEnabled(isValidationEnabled);
-
-		// src/components/label/Assertions.ts
-		var labelPredicate = import_shapeshift6.s.object({
-		  id: idValidator.optional(),
-		  type: import_shapeshift6.s.literal(import_v1013.ComponentType.Label),
-		  label: import_shapeshift6.s.string().lengthGreaterThanOrEqual(1).lengthLessThanOrEqual(45),
-		  description: import_shapeshift6.s.string().lengthGreaterThanOrEqual(1).lengthLessThanOrEqual(100).optional(),
-		  component: import_shapeshift6.s.union([
+		  type: import_shapeshift7.s.literal(import_v1017.ComponentType.Label),
+		  label: import_shapeshift7.s.string().lengthGreaterThanOrEqual(1).lengthLessThanOrEqual(45),
+		  description: import_shapeshift7.s.string().lengthGreaterThanOrEqual(1).lengthLessThanOrEqual(100).optional(),
+		  component: import_shapeshift7.s.union([
 		    textInputPredicate,
 		    selectMenuUserPredicate,
 		    selectMenuRolePredicate,
 		    selectMenuMentionablePredicate,
 		    selectMenuChannelPredicate,
 		    selectMenuStringPredicate,
-		    fileUploadPredicate
+		    fileUploadPredicate,
+		    checkboxPredicate,
+		    checkboxGroupPredicate,
+		    radioGroupPredicate
 		  ])
 		}).setValidationEnabled(isValidationEnabled);
 
@@ -86159,12 +87578,12 @@ function requireDist$5 () {
 		   * ```
 		   */
 		  constructor(data = {}) {
-		    super({ type: import_v1014.ComponentType.Label });
+		    super({ type: import_v1018.ComponentType.Label });
 		    const { component, ...rest } = data;
 		    this.data = {
 		      ...rest,
 		      component: component ? createComponentBuilder(component) : void 0,
-		      type: import_v1014.ComponentType.Label
+		      type: import_v1018.ComponentType.Label
 		    };
 		  }
 		  /**
@@ -86256,6 +87675,33 @@ function requireDist$5 () {
 		    return this;
 		  }
 		  /**
+		   * Sets a checkbox component to this label.
+		   *
+		   * @param input - A function that returns a component builder or an already built builder
+		   */
+		  setCheckboxComponent(input) {
+		    this.data.component = resolveBuilder(input, CheckboxBuilder);
+		    return this;
+		  }
+		  /**
+		   * Sets a checkbox group component to this label.
+		   *
+		   * @param input - A function that returns a component builder or an already built builder
+		   */
+		  setCheckboxGroupComponent(input) {
+		    this.data.component = resolveBuilder(input, CheckboxGroupBuilder);
+		    return this;
+		  }
+		  /**
+		   * Sets a radio group component to this label.
+		   *
+		   * @param input - A function that returns a component builder or an already built builder
+		   */
+		  setRadioGroupComponent(input) {
+		    this.data.component = resolveBuilder(input, RadioGroupBuilder);
+		    return this;
+		  }
+		  /**
 		   * {@inheritDoc ComponentBuilder.toJSON}
 		   */
 		  toJSON() {
@@ -86271,11 +87717,11 @@ function requireDist$5 () {
 		};
 
 		// src/components/v2/Container.ts
-		var import_v1020 = requireV10();
+		var import_v1024 = requireV10();
 
 		// src/components/v2/Assertions.ts
-		var Assertions_exports6 = {};
-		__export(Assertions_exports6, {
+		var Assertions_exports8 = {};
+		__export(Assertions_exports8, {
 		  accessoryPredicate: () => accessoryPredicate,
 		  assertReturnOfBuilder: () => assertReturnOfBuilder,
 		  containerColorPredicate: () => containerColorPredicate,
@@ -86288,11 +87734,11 @@ function requireDist$5 () {
 		  unfurledMediaItemPredicate: () => unfurledMediaItemPredicate,
 		  validateComponentArray: () => validateComponentArray
 		});
-		var import_shapeshift7 = /*@__PURE__*/ requireCjs();
-		var import_v1016 = requireV10();
+		var import_shapeshift8 = /*@__PURE__*/ requireCjs();
+		var import_v1020 = requireV10();
 
 		// src/components/v2/Thumbnail.ts
-		var import_v1015 = requireV10();
+		var import_v1019 = requireV10();
 		var ThumbnailBuilder = class extends ComponentBuilder {
 		  static {
 		    __name(this, "ThumbnailBuilder");
@@ -86324,7 +87770,7 @@ function requireDist$5 () {
 		   */
 		  constructor(data = {}) {
 		    super({
-		      type: import_v1015.ComponentType.Thumbnail,
+		      type: import_v1019.ComponentType.Thumbnail,
 		      ...data,
 		      media: data.media ? { url: data.media.url } : void 0
 		    });
@@ -86373,33 +87819,33 @@ function requireDist$5 () {
 		};
 
 		// src/components/v2/Assertions.ts
-		var unfurledMediaItemPredicate = import_shapeshift7.s.object({
-		  url: import_shapeshift7.s.string().url(
+		var unfurledMediaItemPredicate = import_shapeshift8.s.object({
+		  url: import_shapeshift8.s.string().url(
 		    { allowedProtocols: ["http:", "https:", "attachment:"] },
 		    { message: "Invalid protocol for media URL. Must be http:, https:, or attachment:" }
 		  )
 		}).setValidationEnabled(isValidationEnabled);
-		var descriptionPredicate2 = import_shapeshift7.s.string().lengthGreaterThanOrEqual(1).lengthLessThanOrEqual(1024).setValidationEnabled(isValidationEnabled);
-		var filePredicate = import_shapeshift7.s.object({
-		  url: import_shapeshift7.s.string().url({ allowedProtocols: ["attachment:"] }, { message: "Invalid protocol for file URL. Must be attachment:" })
+		var descriptionPredicate2 = import_shapeshift8.s.string().lengthGreaterThanOrEqual(1).lengthLessThanOrEqual(1024).setValidationEnabled(isValidationEnabled);
+		var filePredicate = import_shapeshift8.s.object({
+		  url: import_shapeshift8.s.string().url({ allowedProtocols: ["attachment:"] }, { message: "Invalid protocol for file URL. Must be attachment:" })
 		}).setValidationEnabled(isValidationEnabled);
-		var spoilerPredicate = import_shapeshift7.s.boolean();
-		var dividerPredicate = import_shapeshift7.s.boolean();
-		var spacingPredicate = import_shapeshift7.s.nativeEnum(import_v1016.SeparatorSpacingSize);
-		var textDisplayContentPredicate = import_shapeshift7.s.string().lengthGreaterThanOrEqual(1).lengthLessThanOrEqual(4e3).setValidationEnabled(isValidationEnabled);
-		var accessoryPredicate = import_shapeshift7.s.instance(ButtonBuilder).or(import_shapeshift7.s.instance(ThumbnailBuilder)).setValidationEnabled(isValidationEnabled);
+		var spoilerPredicate = import_shapeshift8.s.boolean();
+		var dividerPredicate = import_shapeshift8.s.boolean();
+		var spacingPredicate = import_shapeshift8.s.nativeEnum(import_v1020.SeparatorSpacingSize);
+		var textDisplayContentPredicate = import_shapeshift8.s.string().lengthGreaterThanOrEqual(1).lengthLessThanOrEqual(4e3).setValidationEnabled(isValidationEnabled);
+		var accessoryPredicate = import_shapeshift8.s.instance(ButtonBuilder).or(import_shapeshift8.s.instance(ThumbnailBuilder)).setValidationEnabled(isValidationEnabled);
 		var containerColorPredicate = colorPredicate.nullish();
 		function assertReturnOfBuilder(input, ExpectedInstanceOf) {
-		  import_shapeshift7.s.instance(ExpectedInstanceOf).setValidationEnabled(isValidationEnabled).parse(input);
+		  import_shapeshift8.s.instance(ExpectedInstanceOf).setValidationEnabled(isValidationEnabled).parse(input);
 		}
 		__name(assertReturnOfBuilder, "assertReturnOfBuilder");
 		function validateComponentArray(input, min, max, ExpectedInstanceOf) {
-		  (ExpectedInstanceOf ? import_shapeshift7.s.instance(ExpectedInstanceOf) : import_shapeshift7.s.instance(ComponentBuilder)).array().lengthGreaterThanOrEqual(min).lengthLessThanOrEqual(max).setValidationEnabled(isValidationEnabled).parse(input);
+		  (ExpectedInstanceOf ? import_shapeshift8.s.instance(ExpectedInstanceOf) : import_shapeshift8.s.instance(ComponentBuilder)).array().lengthGreaterThanOrEqual(min).lengthLessThanOrEqual(max).setValidationEnabled(isValidationEnabled).parse(input);
 		}
 		__name(validateComponentArray, "validateComponentArray");
 
 		// src/components/v2/File.ts
-		var import_v1017 = requireV10();
+		var import_v1021 = requireV10();
 		var FileBuilder = class extends ComponentBuilder {
 		  static {
 		    __name(this, "FileBuilder");
@@ -86430,7 +87876,7 @@ function requireDist$5 () {
 		   * ```
 		   */
 		  constructor(data = {}) {
-		    super({ type: import_v1017.ComponentType.File, ...data, file: data.file ? { url: data.file.url } : void 0 });
+		    super({ type: import_v1021.ComponentType.File, ...data, file: data.file ? { url: data.file.url } : void 0 });
 		  }
 		  /**
 		   * Sets the spoiler status of this file.
@@ -86460,7 +87906,7 @@ function requireDist$5 () {
 		};
 
 		// src/components/v2/Separator.ts
-		var import_v1018 = requireV10();
+		var import_v1022 = requireV10();
 		var SeparatorBuilder = class extends ComponentBuilder {
 		  static {
 		    __name(this, "SeparatorBuilder");
@@ -86488,7 +87934,7 @@ function requireDist$5 () {
 		   */
 		  constructor(data = {}) {
 		    super({
-		      type: import_v1018.ComponentType.Separator,
+		      type: import_v1022.ComponentType.Separator,
 		      ...data
 		    });
 		  }
@@ -86526,7 +87972,7 @@ function requireDist$5 () {
 		};
 
 		// src/components/v2/TextDisplay.ts
-		var import_v1019 = requireV10();
+		var import_v1023 = requireV10();
 		var TextDisplayBuilder = class extends ComponentBuilder {
 		  static {
 		    __name(this, "TextDisplayBuilder");
@@ -86553,7 +87999,7 @@ function requireDist$5 () {
 		   */
 		  constructor(data = {}) {
 		    super({
-		      type: import_v1019.ComponentType.TextDisplay,
+		      type: import_v1023.ComponentType.TextDisplay,
 		      ...data
 		    });
 		  }
@@ -86611,11 +88057,12 @@ function requireDist$5 () {
 		   * 		},
 		   * 	],
 		   * })
-		   * 	.addComponents(separator, section);
+		   *  .addSeparatorComponents(separator)
+		   *  .addSectionComponents(section);
 		   * ```
 		   */
 		  constructor({ components, ...data } = {}) {
-		    super({ type: import_v1020.ComponentType.Container, ...data });
+		    super({ type: import_v1024.ComponentType.Container, ...data });
 		    this.components = components?.map((component) => createComponentBuilder(component)) ?? [];
 		  }
 		  /**
@@ -86738,7 +88185,7 @@ function requireDist$5 () {
 		};
 
 		// src/components/v2/MediaGallery.ts
-		var import_v1021 = requireV10();
+		var import_v1025 = requireV10();
 
 		// src/components/v2/MediaGalleryItem.ts
 		var MediaGalleryItemBuilder = class {
@@ -86868,7 +88315,7 @@ function requireDist$5 () {
 		   * ```
 		   */
 		  constructor({ items, ...data } = {}) {
-		    super({ type: import_v1021.ComponentType.MediaGallery, ...data });
+		    super({ type: import_v1025.ComponentType.MediaGallery, ...data });
 		    this.items = items?.map((item) => new MediaGalleryItemBuilder(item)) ?? [];
 		  }
 		  /**
@@ -86918,7 +88365,7 @@ function requireDist$5 () {
 		};
 
 		// src/components/v2/Section.ts
-		var import_v1022 = requireV10();
+		var import_v1026 = requireV10();
 		var SectionBuilder = class extends ComponentBuilder {
 		  static {
 		    __name(this, "SectionBuilder");
@@ -86967,7 +88414,7 @@ function requireDist$5 () {
 		   * ```
 		   */
 		  constructor({ components, accessory, ...data } = {}) {
-		    super({ type: import_v1022.ComponentType.Section, ...data });
+		    super({ type: import_v1026.ComponentType.Section, ...data });
 		    this.components = components?.map((component) => createComponentBuilder(component)) ?? [];
 		    this.accessory = accessory ? createComponentBuilder(accessory) : void 0;
 		  }
@@ -87042,40 +88489,46 @@ function requireDist$5 () {
 		    return data;
 		  }
 		  switch (data.type) {
-		    case import_v1023.ComponentType.ActionRow:
+		    case import_v1027.ComponentType.ActionRow:
 		      return new ActionRowBuilder(data);
-		    case import_v1023.ComponentType.Button:
+		    case import_v1027.ComponentType.Button:
 		      return new ButtonBuilder(data);
-		    case import_v1023.ComponentType.StringSelect:
+		    case import_v1027.ComponentType.StringSelect:
 		      return new StringSelectMenuBuilder(data);
-		    case import_v1023.ComponentType.TextInput:
+		    case import_v1027.ComponentType.TextInput:
 		      return new TextInputBuilder(data);
-		    case import_v1023.ComponentType.UserSelect:
+		    case import_v1027.ComponentType.UserSelect:
 		      return new UserSelectMenuBuilder(data);
-		    case import_v1023.ComponentType.RoleSelect:
+		    case import_v1027.ComponentType.RoleSelect:
 		      return new RoleSelectMenuBuilder(data);
-		    case import_v1023.ComponentType.MentionableSelect:
+		    case import_v1027.ComponentType.MentionableSelect:
 		      return new MentionableSelectMenuBuilder(data);
-		    case import_v1023.ComponentType.ChannelSelect:
+		    case import_v1027.ComponentType.ChannelSelect:
 		      return new ChannelSelectMenuBuilder(data);
-		    case import_v1023.ComponentType.File:
+		    case import_v1027.ComponentType.File:
 		      return new FileBuilder(data);
-		    case import_v1023.ComponentType.Container:
+		    case import_v1027.ComponentType.Container:
 		      return new ContainerBuilder(data);
-		    case import_v1023.ComponentType.Section:
+		    case import_v1027.ComponentType.Section:
 		      return new SectionBuilder(data);
-		    case import_v1023.ComponentType.Separator:
+		    case import_v1027.ComponentType.Separator:
 		      return new SeparatorBuilder(data);
-		    case import_v1023.ComponentType.TextDisplay:
+		    case import_v1027.ComponentType.TextDisplay:
 		      return new TextDisplayBuilder(data);
-		    case import_v1023.ComponentType.Thumbnail:
+		    case import_v1027.ComponentType.Thumbnail:
 		      return new ThumbnailBuilder(data);
-		    case import_v1023.ComponentType.MediaGallery:
+		    case import_v1027.ComponentType.MediaGallery:
 		      return new MediaGalleryBuilder(data);
-		    case import_v1023.ComponentType.Label:
+		    case import_v1027.ComponentType.Label:
 		      return new LabelBuilder(data);
-		    case import_v1023.ComponentType.FileUpload:
+		    case import_v1027.ComponentType.FileUpload:
 		      return new FileUploadBuilder(data);
+		    case import_v1027.ComponentType.Checkbox:
+		      return new CheckboxBuilder(data);
+		    case import_v1027.ComponentType.CheckboxGroup:
+		      return new CheckboxGroupBuilder(data);
+		    case import_v1027.ComponentType.RadioGroup:
+		      return new RadioGroupBuilder(data);
 		    default:
 		      throw new Error(`Cannot properly serialize component type: ${data.type}`);
 		  }
@@ -87140,7 +88593,7 @@ function requireDist$5 () {
 		   * ```
 		   */
 		  constructor({ components, ...data } = {}) {
-		    super({ type: import_v1024.ComponentType.ActionRow, ...data });
+		    super({ type: import_v1028.ComponentType.ActionRow, ...data });
 		    this.components = components?.map((component) => createComponentBuilder(component)) ?? [];
 		  }
 		  /**
@@ -87173,18 +88626,18 @@ function requireDist$5 () {
 		};
 
 		// src/interactions/modals/Modal.ts
-		var import_v1025 = requireV10();
+		var import_v1029 = requireV10();
 
 		// src/interactions/modals/Assertions.ts
-		var Assertions_exports7 = {};
-		__export(Assertions_exports7, {
+		var Assertions_exports9 = {};
+		__export(Assertions_exports9, {
 		  componentsValidator: () => componentsValidator,
 		  titleValidator: () => titleValidator,
 		  validateRequiredParameters: () => validateRequiredParameters2
 		});
-		var import_shapeshift8 = /*@__PURE__*/ requireCjs();
-		var titleValidator = import_shapeshift8.s.string().lengthGreaterThanOrEqual(1).lengthLessThanOrEqual(45).setValidationEnabled(isValidationEnabled);
-		var componentsValidator = import_shapeshift8.s.union([import_shapeshift8.s.instance(ActionRowBuilder), import_shapeshift8.s.instance(LabelBuilder), import_shapeshift8.s.instance(TextDisplayBuilder)]).array().lengthGreaterThanOrEqual(1).setValidationEnabled(isValidationEnabled);
+		var import_shapeshift9 = /*@__PURE__*/ requireCjs();
+		var titleValidator = import_shapeshift9.s.string().lengthGreaterThanOrEqual(1).lengthLessThanOrEqual(45).setValidationEnabled(isValidationEnabled);
+		var componentsValidator = import_shapeshift9.s.union([import_shapeshift9.s.instance(ActionRowBuilder), import_shapeshift9.s.instance(LabelBuilder), import_shapeshift9.s.instance(TextDisplayBuilder)]).array().lengthGreaterThanOrEqual(1).setValidationEnabled(isValidationEnabled);
 		function validateRequiredParameters2(customId, title, components) {
 		  customIdValidator.parse(customId);
 		  titleValidator.parse(title);
@@ -87248,16 +88701,16 @@ function requireDist$5 () {
 		          return new ActionRowBuilder().addComponents(component);
 		        }
 		        if ("type" in component) {
-		          if (component.type === import_v1025.ComponentType.ActionRow) {
+		          if (component.type === import_v1029.ComponentType.ActionRow) {
 		            return new ActionRowBuilder(component);
 		          }
-		          if (component.type === import_v1025.ComponentType.Label) {
+		          if (component.type === import_v1029.ComponentType.Label) {
 		            return new LabelBuilder(component);
 		          }
-		          if (component.type === import_v1025.ComponentType.TextDisplay) {
+		          if (component.type === import_v1029.ComponentType.TextDisplay) {
 		            return new TextDisplayBuilder(component);
 		          }
-		          if (component.type === import_v1025.ComponentType.TextInput) {
+		          if (component.type === import_v1029.ComponentType.TextInput) {
 		            return new ActionRowBuilder().addComponents(
 		              new TextInputBuilder(component)
 		            );
@@ -87369,8 +88822,8 @@ function requireDist$5 () {
 		};
 
 		// src/interactions/slashCommands/Assertions.ts
-		var Assertions_exports8 = {};
-		__export(Assertions_exports8, {
+		var Assertions_exports10 = {};
+		__export(Assertions_exports10, {
 		  assertReturnOfBuilder: () => assertReturnOfBuilder2,
 		  contextsPredicate: () => contextsPredicate,
 		  integrationTypesPredicate: () => integrationTypesPredicate,
@@ -87388,20 +88841,20 @@ function requireDist$5 () {
 		  validateRequired: () => validateRequired,
 		  validateRequiredParameters: () => validateRequiredParameters3
 		});
-		var import_shapeshift9 = /*@__PURE__*/ requireCjs();
-		var import_v1026 = requireV10();
-		var namePredicate = import_shapeshift9.s.string().lengthGreaterThanOrEqual(1).lengthLessThanOrEqual(32).regex(/^[\p{Ll}\p{Lm}\p{Lo}\p{N}\p{sc=Devanagari}\p{sc=Thai}_-]+$/u).setValidationEnabled(isValidationEnabled);
+		var import_shapeshift10 = /*@__PURE__*/ requireCjs();
+		var import_v1030 = requireV10();
+		var namePredicate = import_shapeshift10.s.string().lengthGreaterThanOrEqual(1).lengthLessThanOrEqual(32).regex(/^[\p{Ll}\p{Lm}\p{Lo}\p{N}\p{sc=Devanagari}\p{sc=Thai}_-]+$/u).setValidationEnabled(isValidationEnabled);
 		function validateName(name) {
 		  namePredicate.parse(name);
 		}
 		__name(validateName, "validateName");
-		var descriptionPredicate3 = import_shapeshift9.s.string().lengthGreaterThanOrEqual(1).lengthLessThanOrEqual(100).setValidationEnabled(isValidationEnabled);
-		var localePredicate = import_shapeshift9.s.nativeEnum(import_v1026.Locale);
+		var descriptionPredicate3 = import_shapeshift10.s.string().lengthGreaterThanOrEqual(1).lengthLessThanOrEqual(100).setValidationEnabled(isValidationEnabled);
+		var localePredicate = import_shapeshift10.s.nativeEnum(import_v1030.Locale);
 		function validateDescription(description) {
 		  descriptionPredicate3.parse(description);
 		}
 		__name(validateDescription, "validateDescription");
-		var maxArrayLengthPredicate = import_shapeshift9.s.unknown().array().lengthLessThanOrEqual(25).setValidationEnabled(isValidationEnabled);
+		var maxArrayLengthPredicate = import_shapeshift10.s.unknown().array().lengthLessThanOrEqual(25).setValidationEnabled(isValidationEnabled);
 		function validateLocale(locale) {
 		  return localePredicate.parse(locale);
 		}
@@ -87416,7 +88869,7 @@ function requireDist$5 () {
 		  validateMaxOptionsLength(options);
 		}
 		__name(validateRequiredParameters3, "validateRequiredParameters");
-		var booleanPredicate = import_shapeshift9.s.boolean();
+		var booleanPredicate = import_shapeshift10.s.boolean();
 		function validateDefaultPermission(value) {
 		  booleanPredicate.parse(value);
 		}
@@ -87425,29 +88878,29 @@ function requireDist$5 () {
 		  booleanPredicate.parse(required);
 		}
 		__name(validateRequired, "validateRequired");
-		var choicesLengthPredicate = import_shapeshift9.s.number().lessThanOrEqual(25).setValidationEnabled(isValidationEnabled);
+		var choicesLengthPredicate = import_shapeshift10.s.number().lessThanOrEqual(25).setValidationEnabled(isValidationEnabled);
 		function validateChoicesLength(amountAdding, choices) {
 		  choicesLengthPredicate.parse((choices?.length ?? 0) + amountAdding);
 		}
 		__name(validateChoicesLength, "validateChoicesLength");
 		function assertReturnOfBuilder2(input, ExpectedInstanceOf) {
-		  import_shapeshift9.s.instance(ExpectedInstanceOf).parse(input);
+		  import_shapeshift10.s.instance(ExpectedInstanceOf).parse(input);
 		}
 		__name(assertReturnOfBuilder2, "assertReturnOfBuilder");
-		var localizationMapPredicate = import_shapeshift9.s.object(Object.fromEntries(Object.values(import_v1026.Locale).map((locale) => [locale, import_shapeshift9.s.string().nullish()]))).strict().nullish().setValidationEnabled(isValidationEnabled);
+		var localizationMapPredicate = import_shapeshift10.s.object(Object.fromEntries(Object.values(import_v1030.Locale).map((locale) => [locale, import_shapeshift10.s.string().nullish()]))).strict().nullish().setValidationEnabled(isValidationEnabled);
 		function validateLocalizationMap(value) {
 		  localizationMapPredicate.parse(value);
 		}
 		__name(validateLocalizationMap, "validateLocalizationMap");
-		var dmPermissionPredicate = import_shapeshift9.s.boolean().nullish();
+		var dmPermissionPredicate = import_shapeshift10.s.boolean().nullish();
 		function validateDMPermission(value) {
 		  dmPermissionPredicate.parse(value);
 		}
 		__name(validateDMPermission, "validateDMPermission");
-		var memberPermissionPredicate = import_shapeshift9.s.union([
-		  import_shapeshift9.s.bigint().transform((value) => value.toString()),
-		  import_shapeshift9.s.number().safeInt().transform((value) => value.toString()),
-		  import_shapeshift9.s.string().regex(/^\d+$/)
+		var memberPermissionPredicate = import_shapeshift10.s.union([
+		  import_shapeshift10.s.bigint().transform((value) => value.toString()),
+		  import_shapeshift10.s.number().safeInt().transform((value) => value.toString()),
+		  import_shapeshift10.s.string().regex(/^\d+$/)
 		]).nullish();
 		function validateDefaultMemberPermissions(permissions) {
 		  return memberPermissionPredicate.parse(permissions);
@@ -87457,11 +88910,11 @@ function requireDist$5 () {
 		  booleanPredicate.parse(value);
 		}
 		__name(validateNSFW, "validateNSFW");
-		var contextsPredicate = import_shapeshift9.s.array(
-		  import_shapeshift9.s.nativeEnum(import_v1026.InteractionContextType).setValidationEnabled(isValidationEnabled)
+		var contextsPredicate = import_shapeshift10.s.array(
+		  import_shapeshift10.s.nativeEnum(import_v1030.InteractionContextType).setValidationEnabled(isValidationEnabled)
 		);
-		var integrationTypesPredicate = import_shapeshift9.s.array(
-		  import_shapeshift9.s.nativeEnum(import_v1026.ApplicationIntegrationType).setValidationEnabled(isValidationEnabled)
+		var integrationTypesPredicate = import_shapeshift10.s.array(
+		  import_shapeshift10.s.nativeEnum(import_v1030.ApplicationIntegrationType).setValidationEnabled(isValidationEnabled)
 		);
 
 		// src/interactions/slashCommands/SlashCommandBuilder.ts
@@ -87581,7 +89034,7 @@ function requireDist$5 () {
 		};
 
 		// src/interactions/slashCommands/mixins/SharedSlashCommand.ts
-		var import_v1027 = requireV10();
+		var import_v1031 = requireV10();
 		var SharedSlashCommand = class {
 		  static {
 		    __name(this, "SharedSlashCommand");
@@ -87686,14 +89139,14 @@ function requireDist$5 () {
 		    validateLocalizationMap(this.description_localizations);
 		    return {
 		      ...this,
-		      type: import_v1027.ApplicationCommandType.ChatInput,
+		      type: import_v1031.ApplicationCommandType.ChatInput,
 		      options: this.options.map((option) => option.toJSON())
 		    };
 		  }
 		};
 
 		// src/interactions/slashCommands/options/attachment.ts
-		var import_v1028 = requireV10();
+		var import_v1032 = requireV10();
 
 		// src/interactions/slashCommands/mixins/ApplicationCommandOptionBase.ts
 		var ApplicationCommandOptionBase = class extends SharedNameAndDescription {
@@ -87735,7 +89188,7 @@ function requireDist$5 () {
 		  /**
 		   * The type of this option.
 		   */
-		  type = import_v1028.ApplicationCommandOptionType.Attachment;
+		  type = import_v1032.ApplicationCommandOptionType.Attachment;
 		  /**
 		   * {@inheritDoc ApplicationCommandOptionBase.toJSON}
 		   */
@@ -87746,7 +89199,7 @@ function requireDist$5 () {
 		};
 
 		// src/interactions/slashCommands/options/boolean.ts
-		var import_v1029 = requireV10();
+		var import_v1033 = requireV10();
 		var SlashCommandBooleanOption = class extends ApplicationCommandOptionBase {
 		  static {
 		    __name(this, "SlashCommandBooleanOption");
@@ -87754,7 +89207,7 @@ function requireDist$5 () {
 		  /**
 		   * The type of this option.
 		   */
-		  type = import_v1029.ApplicationCommandOptionType.Boolean;
+		  type = import_v1033.ApplicationCommandOptionType.Boolean;
 		  /**
 		   * {@inheritDoc ApplicationCommandOptionBase.toJSON}
 		   */
@@ -87765,25 +89218,25 @@ function requireDist$5 () {
 		};
 
 		// src/interactions/slashCommands/options/channel.ts
-		var import_v1031 = requireV10();
+		var import_v1035 = requireV10();
 		var import_ts_mixer = require$$5;
 
 		// src/interactions/slashCommands/mixins/ApplicationCommandOptionChannelTypesMixin.ts
-		var import_shapeshift10 = /*@__PURE__*/ requireCjs();
-		var import_v1030 = requireV10();
+		var import_shapeshift11 = /*@__PURE__*/ requireCjs();
+		var import_v1034 = requireV10();
 		var allowedChannelTypes = [
-		  import_v1030.ChannelType.GuildText,
-		  import_v1030.ChannelType.GuildVoice,
-		  import_v1030.ChannelType.GuildCategory,
-		  import_v1030.ChannelType.GuildAnnouncement,
-		  import_v1030.ChannelType.AnnouncementThread,
-		  import_v1030.ChannelType.PublicThread,
-		  import_v1030.ChannelType.PrivateThread,
-		  import_v1030.ChannelType.GuildStageVoice,
-		  import_v1030.ChannelType.GuildForum,
-		  import_v1030.ChannelType.GuildMedia
+		  import_v1034.ChannelType.GuildText,
+		  import_v1034.ChannelType.GuildVoice,
+		  import_v1034.ChannelType.GuildCategory,
+		  import_v1034.ChannelType.GuildAnnouncement,
+		  import_v1034.ChannelType.AnnouncementThread,
+		  import_v1034.ChannelType.PublicThread,
+		  import_v1034.ChannelType.PrivateThread,
+		  import_v1034.ChannelType.GuildStageVoice,
+		  import_v1034.ChannelType.GuildForum,
+		  import_v1034.ChannelType.GuildMedia
 		];
-		var channelTypesPredicate = import_shapeshift10.s.array(import_shapeshift10.s.union(allowedChannelTypes.map((type) => import_shapeshift10.s.literal(type))));
+		var channelTypesPredicate = import_shapeshift11.s.array(import_shapeshift11.s.union(allowedChannelTypes.map((type) => import_shapeshift11.s.literal(type))));
 		var ApplicationCommandOptionChannelTypesMixin = class {
 		  static {
 		    __name(this, "ApplicationCommandOptionChannelTypesMixin");
@@ -87811,7 +89264,7 @@ function requireDist$5 () {
 		  /**
 		   * The type of this option.
 		   */
-		  type = import_v1031.ApplicationCommandOptionType.Channel;
+		  type = import_v1035.ApplicationCommandOptionType.Channel;
 		  /**
 		   * {@inheritDoc ApplicationCommandOptionBase.toJSON}
 		   */
@@ -87826,8 +89279,8 @@ function requireDist$5 () {
 		], SlashCommandChannelOption);
 
 		// src/interactions/slashCommands/options/integer.ts
-		var import_shapeshift13 = /*@__PURE__*/ requireCjs();
-		var import_v1033 = requireV10();
+		var import_shapeshift14 = /*@__PURE__*/ requireCjs();
+		var import_v1037 = requireV10();
 		var import_ts_mixer2 = require$$5;
 
 		// src/interactions/slashCommands/mixins/ApplicationCommandNumericOptionMinMaxValueMixin.ts
@@ -87846,8 +89299,8 @@ function requireDist$5 () {
 		};
 
 		// src/interactions/slashCommands/mixins/ApplicationCommandOptionWithAutocompleteMixin.ts
-		var import_shapeshift11 = /*@__PURE__*/ requireCjs();
-		var booleanPredicate2 = import_shapeshift11.s.boolean();
+		var import_shapeshift12 = /*@__PURE__*/ requireCjs();
+		var booleanPredicate2 = import_shapeshift12.s.boolean();
 		var ApplicationCommandOptionWithAutocompleteMixin = class {
 		  static {
 		    __name(this, "ApplicationCommandOptionWithAutocompleteMixin");
@@ -87878,14 +89331,14 @@ function requireDist$5 () {
 		};
 
 		// src/interactions/slashCommands/mixins/ApplicationCommandOptionWithChoicesMixin.ts
-		var import_shapeshift12 = /*@__PURE__*/ requireCjs();
-		var import_v1032 = requireV10();
-		var stringPredicate = import_shapeshift12.s.string().lengthGreaterThanOrEqual(1).lengthLessThanOrEqual(100);
-		var numberPredicate = import_shapeshift12.s.number().greaterThan(Number.NEGATIVE_INFINITY).lessThan(Number.POSITIVE_INFINITY);
-		var choicesPredicate = import_shapeshift12.s.object({
+		var import_shapeshift13 = /*@__PURE__*/ requireCjs();
+		var import_v1036 = requireV10();
+		var stringPredicate = import_shapeshift13.s.string().lengthGreaterThanOrEqual(1).lengthLessThanOrEqual(100);
+		var numberPredicate = import_shapeshift13.s.number().greaterThan(Number.NEGATIVE_INFINITY).lessThan(Number.POSITIVE_INFINITY);
+		var choicesPredicate = import_shapeshift13.s.object({
 		  name: stringPredicate,
 		  name_localizations: localizationMapPredicate,
-		  value: import_shapeshift12.s.union([stringPredicate, numberPredicate])
+		  value: import_shapeshift13.s.union([stringPredicate, numberPredicate])
 		}).array();
 		var ApplicationCommandOptionWithChoicesMixin = class {
 		  static {
@@ -87917,7 +89370,7 @@ function requireDist$5 () {
 		    }
 		    validateChoicesLength(normalizedChoices.length, this.choices);
 		    for (const { name, name_localizations, value } of normalizedChoices) {
-		      if (this.type === import_v1032.ApplicationCommandOptionType.String) {
+		      if (this.type === import_v1036.ApplicationCommandOptionType.String) {
 		        stringPredicate.parse(value);
 		      } else {
 		        numberPredicate.parse(value);
@@ -87944,12 +89397,12 @@ function requireDist$5 () {
 		};
 
 		// src/interactions/slashCommands/options/integer.ts
-		var numberValidator = import_shapeshift13.s.number().int();
+		var numberValidator = import_shapeshift14.s.number().int();
 		var SlashCommandIntegerOption = class extends ApplicationCommandOptionBase {
 		  /**
 		   * The type of this option.
 		   */
-		  type = import_v1033.ApplicationCommandOptionType.Integer;
+		  type = import_v1037.ApplicationCommandOptionType.Integer;
 		  /**
 		   * {@inheritDoc ApplicationCommandNumericOptionMinMaxValueMixin.setMaxValue}
 		   */
@@ -87987,7 +89440,7 @@ function requireDist$5 () {
 		], SlashCommandIntegerOption);
 
 		// src/interactions/slashCommands/options/mentionable.ts
-		var import_v1034 = requireV10();
+		var import_v1038 = requireV10();
 		var SlashCommandMentionableOption = class extends ApplicationCommandOptionBase {
 		  static {
 		    __name(this, "SlashCommandMentionableOption");
@@ -87995,7 +89448,7 @@ function requireDist$5 () {
 		  /**
 		   * The type of this option.
 		   */
-		  type = import_v1034.ApplicationCommandOptionType.Mentionable;
+		  type = import_v1038.ApplicationCommandOptionType.Mentionable;
 		  /**
 		   * {@inheritDoc ApplicationCommandOptionBase.toJSON}
 		   */
@@ -88006,15 +89459,15 @@ function requireDist$5 () {
 		};
 
 		// src/interactions/slashCommands/options/number.ts
-		var import_shapeshift14 = /*@__PURE__*/ requireCjs();
-		var import_v1035 = requireV10();
+		var import_shapeshift15 = /*@__PURE__*/ requireCjs();
+		var import_v1039 = requireV10();
 		var import_ts_mixer3 = require$$5;
-		var numberValidator2 = import_shapeshift14.s.number();
+		var numberValidator2 = import_shapeshift15.s.number();
 		var SlashCommandNumberOption = class extends ApplicationCommandOptionBase {
 		  /**
 		   * The type of this option.
 		   */
-		  type = import_v1035.ApplicationCommandOptionType.Number;
+		  type = import_v1039.ApplicationCommandOptionType.Number;
 		  /**
 		   * {@inheritDoc ApplicationCommandNumericOptionMinMaxValueMixin.setMaxValue}
 		   */
@@ -88052,7 +89505,7 @@ function requireDist$5 () {
 		], SlashCommandNumberOption);
 
 		// src/interactions/slashCommands/options/role.ts
-		var import_v1036 = requireV10();
+		var import_v1040 = requireV10();
 		var SlashCommandRoleOption = class extends ApplicationCommandOptionBase {
 		  static {
 		    __name(this, "SlashCommandRoleOption");
@@ -88060,7 +89513,7 @@ function requireDist$5 () {
 		  /**
 		   * The type of this option.
 		   */
-		  type = import_v1036.ApplicationCommandOptionType.Role;
+		  type = import_v1040.ApplicationCommandOptionType.Role;
 		  /**
 		   * {@inheritDoc ApplicationCommandOptionBase.toJSON}
 		   */
@@ -88071,16 +89524,16 @@ function requireDist$5 () {
 		};
 
 		// src/interactions/slashCommands/options/string.ts
-		var import_shapeshift15 = /*@__PURE__*/ requireCjs();
-		var import_v1037 = requireV10();
+		var import_shapeshift16 = /*@__PURE__*/ requireCjs();
+		var import_v1041 = requireV10();
 		var import_ts_mixer4 = require$$5;
-		var minLengthValidator2 = import_shapeshift15.s.number().greaterThanOrEqual(0).lessThanOrEqual(6e3);
-		var maxLengthValidator2 = import_shapeshift15.s.number().greaterThanOrEqual(1).lessThanOrEqual(6e3);
+		var minLengthValidator2 = import_shapeshift16.s.number().greaterThanOrEqual(0).lessThanOrEqual(6e3);
+		var maxLengthValidator2 = import_shapeshift16.s.number().greaterThanOrEqual(1).lessThanOrEqual(6e3);
 		var SlashCommandStringOption = class extends ApplicationCommandOptionBase {
 		  /**
 		   * The type of this option.
 		   */
-		  type = import_v1037.ApplicationCommandOptionType.String;
+		  type = import_v1041.ApplicationCommandOptionType.String;
 		  /**
 		   * The maximum length of this option.
 		   */
@@ -88126,7 +89579,7 @@ function requireDist$5 () {
 		], SlashCommandStringOption);
 
 		// src/interactions/slashCommands/options/user.ts
-		var import_v1038 = requireV10();
+		var import_v1042 = requireV10();
 		var SlashCommandUserOption = class extends ApplicationCommandOptionBase {
 		  static {
 		    __name(this, "SlashCommandUserOption");
@@ -88134,7 +89587,7 @@ function requireDist$5 () {
 		  /**
 		   * The type of this option.
 		   */
-		  type = import_v1038.ApplicationCommandOptionType.User;
+		  type = import_v1042.ApplicationCommandOptionType.User;
 		  /**
 		   * {@inheritDoc ApplicationCommandOptionBase.toJSON}
 		   */
@@ -88240,7 +89693,7 @@ function requireDist$5 () {
 		};
 
 		// src/interactions/slashCommands/SlashCommandSubcommands.ts
-		var import_v1039 = requireV10();
+		var import_v1043 = requireV10();
 		var import_ts_mixer5 = require$$5;
 		var SlashCommandSubcommandGroupBuilder = class {
 		  /**
@@ -88278,7 +89731,7 @@ function requireDist$5 () {
 		  toJSON() {
 		    validateRequiredParameters3(this.name, this.description, this.options);
 		    return {
-		      type: import_v1039.ApplicationCommandOptionType.SubcommandGroup,
+		      type: import_v1043.ApplicationCommandOptionType.SubcommandGroup,
 		      name: this.name,
 		      name_localizations: this.name_localizations,
 		      description: this.description,
@@ -88314,7 +89767,7 @@ function requireDist$5 () {
 		  toJSON() {
 		    validateRequiredParameters3(this.name, this.description, this.options);
 		    return {
-		      type: import_v1039.ApplicationCommandOptionType.Subcommand,
+		      type: import_v1043.ApplicationCommandOptionType.Subcommand,
 		      name: this.name,
 		      name_localizations: this.name_localizations,
 		      description: this.description,
@@ -88422,8 +89875,8 @@ function requireDist$5 () {
 		], SlashCommandBuilder);
 
 		// src/interactions/contextMenuCommands/Assertions.ts
-		var Assertions_exports9 = {};
-		__export(Assertions_exports9, {
+		var Assertions_exports11 = {};
+		__export(Assertions_exports11, {
 		  contextsPredicate: () => contextsPredicate2,
 		  integrationTypesPredicate: () => integrationTypesPredicate2,
 		  validateDMPermission: () => validateDMPermission2,
@@ -88433,11 +89886,11 @@ function requireDist$5 () {
 		  validateRequiredParameters: () => validateRequiredParameters4,
 		  validateType: () => validateType
 		});
-		var import_shapeshift16 = /*@__PURE__*/ requireCjs();
-		var import_v1040 = requireV10();
-		var namePredicate2 = import_shapeshift16.s.string().lengthGreaterThanOrEqual(1).lengthLessThanOrEqual(32).regex(/\S/).setValidationEnabled(isValidationEnabled);
-		var typePredicate = import_shapeshift16.s.union([import_shapeshift16.s.literal(import_v1040.ApplicationCommandType.User), import_shapeshift16.s.literal(import_v1040.ApplicationCommandType.Message)]).setValidationEnabled(isValidationEnabled);
-		var booleanPredicate3 = import_shapeshift16.s.boolean();
+		var import_shapeshift17 = /*@__PURE__*/ requireCjs();
+		var import_v1044 = requireV10();
+		var namePredicate2 = import_shapeshift17.s.string().lengthGreaterThanOrEqual(1).lengthLessThanOrEqual(32).regex(/\S/).setValidationEnabled(isValidationEnabled);
+		var typePredicate = import_shapeshift17.s.union([import_shapeshift17.s.literal(import_v1044.ApplicationCommandType.User), import_shapeshift17.s.literal(import_v1044.ApplicationCommandType.Message)]).setValidationEnabled(isValidationEnabled);
+		var booleanPredicate3 = import_shapeshift17.s.boolean();
 		function validateDefaultPermission2(value) {
 		  booleanPredicate3.parse(value);
 		}
@@ -88455,25 +89908,25 @@ function requireDist$5 () {
 		  validateType(type);
 		}
 		__name(validateRequiredParameters4, "validateRequiredParameters");
-		var dmPermissionPredicate2 = import_shapeshift16.s.boolean().nullish();
+		var dmPermissionPredicate2 = import_shapeshift17.s.boolean().nullish();
 		function validateDMPermission2(value) {
 		  dmPermissionPredicate2.parse(value);
 		}
 		__name(validateDMPermission2, "validateDMPermission");
-		var memberPermissionPredicate2 = import_shapeshift16.s.union([
-		  import_shapeshift16.s.bigint().transform((value) => value.toString()),
-		  import_shapeshift16.s.number().safeInt().transform((value) => value.toString()),
-		  import_shapeshift16.s.string().regex(/^\d+$/)
+		var memberPermissionPredicate2 = import_shapeshift17.s.union([
+		  import_shapeshift17.s.bigint().transform((value) => value.toString()),
+		  import_shapeshift17.s.number().safeInt().transform((value) => value.toString()),
+		  import_shapeshift17.s.string().regex(/^\d+$/)
 		]).nullish();
 		function validateDefaultMemberPermissions2(permissions) {
 		  return memberPermissionPredicate2.parse(permissions);
 		}
 		__name(validateDefaultMemberPermissions2, "validateDefaultMemberPermissions");
-		var contextsPredicate2 = import_shapeshift16.s.array(
-		  import_shapeshift16.s.nativeEnum(import_v1040.InteractionContextType).setValidationEnabled(isValidationEnabled)
+		var contextsPredicate2 = import_shapeshift17.s.array(
+		  import_shapeshift17.s.nativeEnum(import_v1044.InteractionContextType).setValidationEnabled(isValidationEnabled)
 		);
-		var integrationTypesPredicate2 = import_shapeshift16.s.array(
-		  import_shapeshift16.s.nativeEnum(import_v1040.ApplicationIntegrationType).setValidationEnabled(isValidationEnabled)
+		var integrationTypesPredicate2 = import_shapeshift17.s.array(
+		  import_shapeshift17.s.nativeEnum(import_v1044.ApplicationIntegrationType).setValidationEnabled(isValidationEnabled)
 		);
 
 		// src/interactions/contextMenuCommands/ContextMenuCommandBuilder.ts
@@ -88654,7 +90107,7 @@ function requireDist$5 () {
 		__name(embedLength, "embedLength");
 
 		// src/index.ts
-		var version = "1.13.0";
+		var version = "1.14.1";
 		
 	} (dist$4));
 	return dist$4.exports;
@@ -89455,7 +90908,7 @@ function requireSticker () {
 	if (hasRequiredSticker) return Sticker;
 	hasRequiredSticker = 1;
 
-	const { DiscordSnowflake } = /*@__PURE__*/ requireCjs$2();
+	const { DiscordSnowflake } = /*@__PURE__*/ requireCjs$1();
 	const { Routes } = requireV10();
 	const Base = requireBase();
 	const { DiscordjsError, ErrorCodes } = requireErrors$2();
@@ -91846,7 +93299,8 @@ function requireComponents$1 () {
 	/**
 	 * @typedef {StringSelectMenuComponentData|TextInputComponentData|UserSelectMenuComponentData|
 	 * RoleSelectMenuComponentData|MentionableSelectMenuComponentData|ChannelSelectMenuComponentData|
-	 * FileUploadComponentData} ComponentInLabelData
+	 * FileUploadComponentData|RadioGroupComponentData|CheckboxGroupComponentData|
+	 * CheckboxComponentData} ComponentInLabelData
 	 */
 
 	/**
@@ -91872,6 +93326,44 @@ function requireComponents$1 () {
 	 * @property {number} [minValues] The minimum number of files that can be uploaded (0-10)
 	 * @property {number} [maxValues] The maximum number of files that can be uploaded (1-10)
 	 * @property {boolean} [required] Whether this component is required in modals
+	 */
+
+	/**
+	 * @typedef {Object} RadioGroupOption
+	 * @property {string} value The value of the radio group option
+	 * @property {string} label The label to use
+	 * @property {string} [description] The optional description for the radio group option
+	 * @property {boolean} [default] Whether this option is default selected
+	 */
+
+	/**
+	 * @typedef {BaseComponentData} RadioGroupComponentData
+	 * @property {string} customId The custom id of the radio group
+	 * @property {RadioGroupOption[]} options The options in this radio group (2-10)
+	 * @property {boolean} [required] Whether this component is required in modals
+	 */
+
+	/**
+	 * @typedef {Object} CheckboxGroupOption
+	 * @property {string} value The value of the checkbox group option
+	 * @property {string} label The label to use
+	 * @property {string} [description] The optional description for the checkbox group option
+	 * @property {boolean} [default] Whether this option is default selected
+	 */
+
+	/**
+	 * @typedef {BaseComponentData} CheckboxGroupComponentData
+	 * @property {string} customId The custom id of the checkbox group
+	 * @property {CheckboxGroupOption[]} options The options in this checkbox group
+	 * @property {number} [minValues] The minimum number of options that must be selected (0-10)
+	 * @property {number} [maxValues] The maximum number of options that can be selected (defaults to options length)
+	 * @property {boolean} [required] Whether this component is required in modals
+	 */
+
+	/**
+	 * @typedef {BaseComponentData} CheckboxComponentData
+	 * @property {string} customId The custom id of the checkbox
+	 * @property {boolean} [default] Whether this component is default selected in modals
 	 */
 
 	/**
@@ -92142,7 +93634,7 @@ function requireMessage$1 () {
 
 	const { Collection } = requireDist$7();
 	const { messageLink } = requireDist$6();
-	const { DiscordSnowflake } = /*@__PURE__*/ requireCjs$2();
+	const { DiscordSnowflake } = /*@__PURE__*/ requireCjs$1();
 	const {
 	  InteractionType,
 	  ChannelType,
@@ -92851,8 +94343,8 @@ function requireMessage$1 () {
 	  get editable() {
 	    const precheck = Boolean(
 	      this.author.id === this.client.user.id &&
-	        (!this.guild || this.channel?.viewable) &&
-	        this.reference?.type !== MessageReferenceType.Forward,
+	      (!this.guild || this.channel?.viewable) &&
+	      this.reference?.type !== MessageReferenceType.Forward,
 	    );
 
 	    // Regardless of permissions thread messages cannot be edited if
@@ -92928,10 +94420,7 @@ function requireMessage$1 () {
 	    const permissions = channel?.permissionsFor(this.client.user);
 	    if (!permissions) return false;
 
-	    return (
-	      permissions.has(PermissionFlagsBits.ReadMessageHistory | PermissionFlagsBits.PinMessages) ||
-	      permissions.has(PermissionFlagsBits.ReadMessageHistory | PermissionFlagsBits.ManageMessages)
-	    );
+	    return permissions.has(PermissionFlagsBits.ReadMessageHistory | PermissionFlagsBits.PinMessages);
 	  }
 
 	  /**
@@ -92960,12 +94449,12 @@ function requireMessage$1 () {
 	    const { channel } = this;
 	    return Boolean(
 	      channel?.type === ChannelType.GuildAnnouncement &&
-	        !this.flags.has(MessageFlags.Crossposted) &&
-	        this.reference?.type !== MessageReferenceType.Forward &&
-	        this.type === MessageType.Default &&
-	        !this.poll &&
-	        channel.viewable &&
-	        channel.permissionsFor(this.client.user)?.has(bitfield, false),
+	      !this.flags.has(MessageFlags.Crossposted) &&
+	      this.reference?.type !== MessageReferenceType.Forward &&
+	      this.type === MessageType.Default &&
+	      !this.poll &&
+	      channel.viewable &&
+	      channel.permissionsFor(this.client.user)?.has(bitfield, false),
 	    );
 	  }
 
@@ -93287,7 +94776,7 @@ function requireWebhook () {
 
 	const { makeURLSearchParams } = requireWeb();
 	const { lazy } = requireDist$b();
-	const { DiscordSnowflake } = /*@__PURE__*/ requireCjs$2();
+	const { DiscordSnowflake } = /*@__PURE__*/ requireCjs$1();
 	const { Routes, WebhookType } = requireV10();
 	const MessagePayload = requireMessagePayload();
 	const { DiscordjsError, ErrorCodes } = requireErrors$2();
@@ -95534,7 +97023,7 @@ function requireMessagePayload () {
 
 	const { Buffer } = require$$0$5;
 	const { lazy, isJSONEncodable } = requireDist$b();
-	const { DiscordSnowflake } = /*@__PURE__*/ requireCjs$2();
+	const { DiscordSnowflake } = /*@__PURE__*/ requireCjs$1();
 	const { MessageFlags, MessageReferenceType } = requireV10();
 	const { DiscordjsError, DiscordjsRangeError, ErrorCodes } = requireErrors$2();
 	const { resolveFile } = requireDataResolver();
@@ -95910,7 +97399,7 @@ function requireTextBasedChannel () {
 	hasRequiredTextBasedChannel = 1;
 
 	const { Collection } = requireDist$7();
-	const { DiscordSnowflake } = /*@__PURE__*/ requireCjs$2();
+	const { DiscordSnowflake } = /*@__PURE__*/ requireCjs$1();
 	const { InteractionType, Routes } = requireV10();
 	const { DiscordjsTypeError, DiscordjsError, ErrorCodes } = requireErrors$2();
 	const { MaxBulkDeletableMessageAge } = requireConstants$6();
@@ -96406,7 +97895,7 @@ function requireUser$1 () {
 
 	const { userMention } = requireDist$6();
 	const { calculateUserDefaultAvatarIndex } = requireWeb();
-	const { DiscordSnowflake } = /*@__PURE__*/ requireCjs$2();
+	const { DiscordSnowflake } = /*@__PURE__*/ requireCjs$1();
 	const Base = requireBase();
 	const TextBasedChannel = requireTextBasedChannel();
 	const { _transformCollectibles } = requireTransformers();
@@ -97356,6 +98845,7 @@ function requireAction () {
 	if (hasRequiredAction) return Action;
 	hasRequiredAction = 1;
 
+	const { ChannelType } = requireV10();
 	const { Poll } = requirePoll();
 	const { PollAnswer } = requirePollAnswer();
 	const Partials = requirePartials();
@@ -97389,10 +98879,16 @@ function requireAction () {
 	    const payloadData = {};
 	    const id = data.channel_id ?? data.id;
 
-	    if (!('recipients' in data)) {
-	      // Try to resolve the recipient, but do not add the client user.
+	    if ('recipients' in data) {
+	      // Try to resolve the recipient, but do not add if already existing in recipients.
 	      const recipient = data.author ?? data.user ?? { id: data.user_id };
-	      if (recipient.id !== this.client.user.id) payloadData.recipients = [recipient];
+	      if (!data.recipients.some(existingRecipient => recipient.id === existingRecipient.id)) {
+	        payloadData.recipients = [...data.recipients, recipient];
+	      }
+	    } else if (data.type === ChannelType.DM || data.type === ChannelType.GroupDM) {
+	      // Try to resolve the recipient.
+	      const recipient = data.author ?? data.user ?? { id: data.user_id };
+	      payloadData.recipients = [recipient];
 	    }
 
 	    if (id !== undefined) payloadData.id = id;
@@ -98075,16 +99571,18 @@ function requireDMChannel () {
 	    super._patch(data);
 
 	    if (data.recipients) {
-	      const recipient = data.recipients[0];
-
 	      /**
-	       * The recipient's id
-	       * @type {Snowflake}
+	       * The recipients' ids
+	       * @type {Snowflake[]}
 	       */
-	      this.recipientId = recipient.id;
+	      this.recipientIds = [
+	        ...new Set([...(this.recipientIds ?? []), ...data.recipients.map(recipient => recipient.id)]),
+	      ];
 
-	      if ('username' in recipient || this.client.options.partials.includes(Partials.User)) {
-	        this.client.users._add(recipient);
+	      for (const recipient of data.recipients) {
+	        if ('username' in recipient || this.client.options.partials.includes(Partials.User)) {
+	          this.client.users._add(recipient);
+	        }
 	      }
 	    }
 
@@ -98114,6 +99612,18 @@ function requireDMChannel () {
 	   */
 	  get partial() {
 	    return this.lastMessageId === undefined;
+	  }
+
+	  /**
+	   * The recipient's id.
+	   * <info>For DMChannel the client user is not a part of this might return a wrong id.
+	   * This will return `null` in the next major version.</info>
+	   * @type {Snowflake}
+	   * @readonly
+	   */
+	  get recipientId() {
+	    // To not be a breaking change this returns the arbitrary first id if this is not a DMChannel with the client user
+	    return this.recipientIds.find(recipientId => recipientId !== this.client.user.id) ?? this.recipientIds[0];
 	  }
 
 	  /**
@@ -101891,7 +103401,7 @@ function requireStageInstance () {
 	if (hasRequiredStageInstance) return StageInstance;
 	hasRequiredStageInstance = 1;
 
-	const { DiscordSnowflake } = /*@__PURE__*/ requireCjs$2();
+	const { DiscordSnowflake } = /*@__PURE__*/ requireCjs$1();
 	const Base = requireBase();
 
 	/**
@@ -102066,7 +103576,7 @@ function requireGuildAuditLogsEntry () {
 	if (hasRequiredGuildAuditLogsEntry) return GuildAuditLogsEntry_1;
 	hasRequiredGuildAuditLogsEntry = 1;
 
-	const { DiscordSnowflake } = /*@__PURE__*/ requireCjs$2();
+	const { DiscordSnowflake } = /*@__PURE__*/ requireCjs$1();
 	const { AuditLogOptionsType, AuditLogEvent } = requireV10();
 	const AutoModerationRule = requireAutoModerationRule();
 	const { GuildOnboardingPrompt } = requireGuildOnboardingPrompt();
@@ -104092,7 +105602,7 @@ function requireInteractionCallback () {
 	if (hasRequiredInteractionCallback) return InteractionCallback_1;
 	hasRequiredInteractionCallback = 1;
 
-	const { DiscordSnowflake } = /*@__PURE__*/ requireCjs$2();
+	const { DiscordSnowflake } = /*@__PURE__*/ requireCjs$1();
 
 	/**
 	 * Represents an interaction callback response from Discord
@@ -104275,7 +105785,7 @@ function requireInteractionResponse () {
 	if (hasRequiredInteractionResponse) return InteractionResponse_1;
 	hasRequiredInteractionResponse = 1;
 
-	const { DiscordSnowflake } = /*@__PURE__*/ requireCjs$2();
+	const { DiscordSnowflake } = /*@__PURE__*/ requireCjs$1();
 	const { InteractionType } = requireV10();
 	const { DiscordjsError, ErrorCodes } = requireErrors$2();
 
@@ -105696,6 +107206,37 @@ function requireModalSubmitFields () {
 	  getUploadedFiles(customId, required = false) {
 	    return this._getTypedComponent(customId, [ComponentType.FileUpload], ['attachments'], required).attachments ?? null;
 	  }
+
+	  /**
+	   * Get radio group component
+	   *
+	   * @param {string} customId The custom id of the component
+	   * @param {boolean} [required=false] Whether to throw an error if the component value is not found or empty
+	   * @returns {?string} The selected radio group option value, or null if none were selected and not required
+	   */
+	  getRadioGroup(customId, required = false) {
+	    return this._getTypedComponent(customId, [ComponentType.RadioGroup], ['value'], required).value;
+	  }
+
+	  /**
+	   * Get checkbox group component
+	   *
+	   * @param {string} customId The custom id of the component
+	   * @returns {string[]} The selected checkbox group option values
+	   */
+	  getCheckboxGroup(customId) {
+	    return this._getTypedComponent(customId, [ComponentType.CheckboxGroup]).values;
+	  }
+
+	  /**
+	   * Get checkbox component
+	   *
+	   * @param {string} customId The custom id of the component
+	   * @returns {boolean} Whether this checkbox was selected
+	   */
+	  getCheckbox(customId) {
+	    return this._getTypedComponent(customId, [ComponentType.Checkbox]).value;
+	  }
 	}
 
 	ModalSubmitFields_1 = ModalSubmitFields;
@@ -105734,6 +107275,24 @@ function requireModalSubmitInteraction () {
 	 */
 
 	/**
+	 * @typedef {BaseModalData} RadioGroupModalData
+	 * @property {string} customId The custom id of the radio group
+	 * @property {?string} value The value selected for the radio group
+	 */
+
+	/**
+	 * @typedef {BaseModalData} CheckboxGroupModalData
+	 * @property {string} customId The custom id of the checkbox group
+	 * @property {string[]} values The values selected for the checkbox group
+	 */
+
+	/**
+	 * @typedef {BaseModalData} CheckboxModalData
+	 * @property {string} customId The custom id of the checkbox
+	 * @property {boolean} value Whether this checkbox was selected
+	 */
+
+	/**
 	 * @typedef {BaseModalData} TextInputModalData
 	 * @property {string} customId The custom id of the field
 	 * @property {string} value The value of the field
@@ -105754,7 +107313,8 @@ function requireModalSubmitInteraction () {
 	 */
 
 	/**
-	 * @typedef {SelectMenuModalData|TextInputModalData|FileUploadModalData} ModalData
+	 * @typedef {SelectMenuModalData|TextInputModalData|FileUploadModalData|RadioGroupModalData|
+	 * CheckboxGroupModalData|CheckboxModalData} ModalData
 	 */
 
 	/**
@@ -106179,7 +107739,9 @@ function requireInteractionCreate () {
 	    const client = this.client;
 
 	    // Resolve and cache partial channels for Interaction#channel getter
-	    const channel = data.channel && this.getChannel(data.channel);
+	    const channel =
+	      data.channel &&
+	      this.getChannel({ ...data.channel, ...('recipients' in data.channel ? { user: data.user } : undefined) });
 
 	    // Do not emit this for interactions that cache messages that are non-text-based.
 	    let InteractionClass;
@@ -113623,7 +115185,7 @@ function requireDist$3 () {
 	var import_node_zlib = require$$0$e;
 	var import_collection5 = requireDist$4();
 	var import_util2 = requireDist$b();
-	var import_async_queue2 = /*@__PURE__*/ requireCjs$1();
+	var import_async_queue2 = /*@__PURE__*/ requireCjs$2();
 	var import_async_event_emitter = /*@__PURE__*/ requireDist$9();
 	var import_v102 = requireV10();
 	var import_ws = requireWs();
@@ -113637,7 +115199,7 @@ function requireDist$3 () {
 	// src/throttling/SimpleIdentifyThrottler.ts
 	var import_promises = require$$6$1;
 	var import_collection3 = requireDist$4();
-	var import_async_queue = /*@__PURE__*/ requireCjs$1();
+	var import_async_queue = /*@__PURE__*/ requireCjs$2();
 	var SimpleIdentifyThrottler = class {
 	  constructor(maxConcurrency) {
 	    this.maxConcurrency = maxConcurrency;
@@ -117703,7 +119265,7 @@ function requireGuildPreview () {
 	hasRequiredGuildPreview = 1;
 
 	const { Collection } = requireDist$7();
-	const { DiscordSnowflake } = /*@__PURE__*/ requireCjs$2();
+	const { DiscordSnowflake } = /*@__PURE__*/ requireCjs$1();
 	const { Routes } = requireV10();
 	const Base = requireBase();
 	const GuildPreviewEmoji = requireGuildPreviewEmoji();
@@ -119433,7 +120995,7 @@ function requireGuildMemberManager () {
 	const { Collection } = requireDist$7();
 	const { makeURLSearchParams } = requireWeb();
 	const { GatewayRateLimitError } = requireDist$b();
-	const { DiscordSnowflake } = /*@__PURE__*/ requireCjs$2();
+	const { DiscordSnowflake } = /*@__PURE__*/ requireCjs$1();
 	const { Routes, GatewayOpcodes, GatewayDispatchEvents } = requireV10();
 	const CachedManager = requireCachedManager();
 	const { DiscordjsError, DiscordjsTypeError, DiscordjsRangeError, ErrorCodes } = requireErrors$2();
@@ -120400,7 +121962,7 @@ function requireSoundboardSound () {
 	if (hasRequiredSoundboardSound) return SoundboardSound;
 	hasRequiredSoundboardSound = 1;
 
-	const { DiscordSnowflake } = /*@__PURE__*/ requireCjs$2();
+	const { DiscordSnowflake } = /*@__PURE__*/ requireCjs$1();
 	const Base = requireBase();
 	const { Emoji } = requireEmoji$1();
 	const { DiscordjsError, ErrorCodes } = requireErrors$2();
@@ -122255,7 +123817,7 @@ function requireGuild () {
 
 	const { Collection } = requireDist$7();
 	const { makeURLSearchParams } = requireWeb();
-	const { DiscordSnowflake } = /*@__PURE__*/ requireCjs$2();
+	const { DiscordSnowflake } = /*@__PURE__*/ requireCjs$1();
 	const { ChannelType, GuildPremiumTier, Routes, GuildFeature } = requireV10();
 	const AnonymousGuild = requireAnonymousGuild();
 	const GuildAuditLogs = requireGuildAuditLogs();
@@ -124250,9 +125812,14 @@ function requireUserManager () {
 	   * @private
 	   */
 	  dmChannel(userId) {
+	    const expectedRecipientIds = [userId, this.client.user.id];
 	    return (
-	      this.client.channels.cache.find(channel => channel.type === ChannelType.DM && channel.recipientId === userId) ??
-	      null
+	      this.client.channels.cache.find(
+	        channel =>
+	          channel.type === ChannelType.DM &&
+	          channel.recipientId === userId &&
+	          channel.recipientIds.every(id => expectedRecipientIds.includes(id)),
+	      ) ?? null
 	    );
 	  }
 
@@ -124456,7 +126023,7 @@ function requireStickerPack () {
 	hasRequiredStickerPack = 1;
 
 	const { Collection } = requireDist$7();
-	const { DiscordSnowflake } = /*@__PURE__*/ requireCjs$2();
+	const { DiscordSnowflake } = /*@__PURE__*/ requireCjs$1();
 	const Base = requireBase();
 	const { Sticker } = requireSticker();
 
@@ -127762,7 +129329,7 @@ function requireSrc$1 () {
 		exports$1.ShardEvents = requireShardEvents();
 		exports$1.SKUFlagsBitField = requireSKUFlagsBitField().SKUFlagsBitField;
 		exports$1.Status = requireStatus();
-		exports$1.SnowflakeUtil = /*@__PURE__*/ requireCjs$2().DiscordSnowflake;
+		exports$1.SnowflakeUtil = /*@__PURE__*/ requireCjs$1().DiscordSnowflake;
 		exports$1.Sweepers = requireSweepers();
 		exports$1.SystemChannelFlagsBitField = requireSystemChannelFlagsBitField();
 		exports$1.ThreadMemberFlagsBitField = requireThreadMemberFlagsBitField();
