@@ -72347,7 +72347,7 @@ function requireTransformers () {
 	return Transformers;
 }
 
-var version = "14.26.2";
+var version = "14.26.3";
 var require$$40 = {
 	version: version};
 
@@ -76471,6 +76471,9 @@ function requireTeamMember () {
 	       * @deprecated Use {@link TeamMember#role} instead.
 	       */
 	      this.permissions = data.permissions;
+	    } else {
+	      // Discord stopped sending this field at some point on or before 2026-04-14.
+	      this.permissions ??= [];
 	    }
 
 	    if ('membership_state' in data) {
