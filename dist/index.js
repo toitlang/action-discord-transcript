@@ -28622,7 +28622,7 @@ function requireV10$5 () {
 	 * Types extracted from https://discord.com/developers/docs/topics/gateway
 	 */
 	Object.defineProperty(v10$9, "__esModule", { value: true });
-	v10$9.VoiceChannelEffectSendAnimationType = v10$9.GatewayDispatchEvents = v10$9.GatewayIntentBits = v10$9.GatewayCloseCodes = v10$9.GatewayOpcodes = v10$9.GatewayVersion = void 0;
+	v10$9.GatewayRequestChannelInfoField = v10$9.VoiceChannelEffectSendAnimationType = v10$9.GatewayDispatchEvents = v10$9.GatewayIntentBits = v10$9.GatewayCloseCodes = v10$9.GatewayOpcodes = v10$9.GatewayVersion = void 0;
 	v10$9.GatewayVersion = '10';
 	/**
 	 * @see {@link https://discord.com/developers/docs/topics/opcodes-and-status-codes#gateway-gateway-opcodes}
@@ -28678,6 +28678,10 @@ function requireV10$5 () {
 	     * Request information about soundboard sounds in a set of guilds
 	     */
 	    GatewayOpcodes[GatewayOpcodes["RequestSoundboardSounds"] = 31] = "RequestSoundboardSounds";
+	    /**
+	     * Request ephemeral channel data for channels in a guild.
+	     */
+	    GatewayOpcodes[GatewayOpcodes["RequestChannelInfo"] = 43] = "RequestChannelInfo";
 	})(GatewayOpcodes || (v10$9.GatewayOpcodes = GatewayOpcodes = {}));
 	/**
 	 * @see {@link https://discord.com/developers/docs/topics/opcodes-and-status-codes#gateway-gateway-close-event-codes}
@@ -28808,6 +28812,7 @@ function requireV10$5 () {
 	    GatewayDispatchEvents["AutoModerationRuleUpdate"] = "AUTO_MODERATION_RULE_UPDATE";
 	    GatewayDispatchEvents["ChannelCreate"] = "CHANNEL_CREATE";
 	    GatewayDispatchEvents["ChannelDelete"] = "CHANNEL_DELETE";
+	    GatewayDispatchEvents["ChannelInfo"] = "CHANNEL_INFO";
 	    GatewayDispatchEvents["ChannelPinsUpdate"] = "CHANNEL_PINS_UPDATE";
 	    GatewayDispatchEvents["ChannelUpdate"] = "CHANNEL_UPDATE";
 	    GatewayDispatchEvents["EntitlementCreate"] = "ENTITLEMENT_CREATE";
@@ -28874,6 +28879,8 @@ function requireV10$5 () {
 	    GatewayDispatchEvents["TypingStart"] = "TYPING_START";
 	    GatewayDispatchEvents["UserUpdate"] = "USER_UPDATE";
 	    GatewayDispatchEvents["VoiceChannelEffectSend"] = "VOICE_CHANNEL_EFFECT_SEND";
+	    GatewayDispatchEvents["VoiceChannelStartTimeUpdate"] = "VOICE_CHANNEL_START_TIME_UPDATE";
+	    GatewayDispatchEvents["VoiceChannelStatusUpdate"] = "VOICE_CHANNEL_STATUS_UPDATE";
 	    GatewayDispatchEvents["VoiceServerUpdate"] = "VOICE_SERVER_UPDATE";
 	    GatewayDispatchEvents["VoiceStateUpdate"] = "VOICE_STATE_UPDATE";
 	    GatewayDispatchEvents["WebhooksUpdate"] = "WEBHOOKS_UPDATE";
@@ -28892,6 +28899,11 @@ function requireV10$5 () {
 	     */
 	    VoiceChannelEffectSendAnimationType[VoiceChannelEffectSendAnimationType["Basic"] = 1] = "Basic";
 	})(VoiceChannelEffectSendAnimationType || (v10$9.VoiceChannelEffectSendAnimationType = VoiceChannelEffectSendAnimationType = {}));
+	var GatewayRequestChannelInfoField;
+	(function (GatewayRequestChannelInfoField) {
+	    GatewayRequestChannelInfoField["Status"] = "status";
+	    GatewayRequestChannelInfoField["VoiceStartTime"] = "voice_start_time";
+	})(GatewayRequestChannelInfoField || (v10$9.GatewayRequestChannelInfoField = GatewayRequestChannelInfoField = {}));
 	// #endregion Shared
 	
 	return v10$9;
@@ -28904,6 +28916,7 @@ const GatewayCloseCodes = mod$5.GatewayCloseCodes;
 const GatewayDispatchEvents = mod$5.GatewayDispatchEvents;
 const GatewayIntentBits = mod$5.GatewayIntentBits;
 const GatewayOpcodes = mod$5.GatewayOpcodes;
+const GatewayRequestChannelInfoField = mod$5.GatewayRequestChannelInfoField;
 const GatewayVersion = mod$5.GatewayVersion;
 const VoiceChannelEffectSendAnimationType = mod$5.VoiceChannelEffectSendAnimationType;
 
@@ -28913,6 +28926,7 @@ var v10$8 = /*#__PURE__*/Object.freeze({
 	GatewayDispatchEvents: GatewayDispatchEvents,
 	GatewayIntentBits: GatewayIntentBits,
 	GatewayOpcodes: GatewayOpcodes,
+	GatewayRequestChannelInfoField: GatewayRequestChannelInfoField,
 	GatewayVersion: GatewayVersion,
 	VoiceChannelEffectSendAnimationType: VoiceChannelEffectSendAnimationType,
 	default: mod$5
@@ -29337,6 +29351,12 @@ function requireCommon$3 () {
 		     */
 		    SendVoiceMessages: 1n << 46n,
 		    /**
+		     * Allows setting voice channel status
+		     *
+		     * Applies to channel types: Voice
+		     */
+		    SetVoiceChannelStatus: 1n << 48n,
+		    /**
 		     * Allows sending polls
 		     *
 		     * Applies to channel types: Text, Voice, Stage
@@ -29617,6 +29637,8 @@ function requireAuditLog () {
 	    AuditLogEvent[AuditLogEvent["OnboardingUpdate"] = 167] = "OnboardingUpdate";
 	    AuditLogEvent[AuditLogEvent["HomeSettingsCreate"] = 190] = "HomeSettingsCreate";
 	    AuditLogEvent[AuditLogEvent["HomeSettingsUpdate"] = 191] = "HomeSettingsUpdate";
+	    AuditLogEvent[AuditLogEvent["VoiceChannelStatusCreate"] = 192] = "VoiceChannelStatusCreate";
+	    AuditLogEvent[AuditLogEvent["VoiceChannelStatusDelete"] = 193] = "VoiceChannelStatusDelete";
 	})(AuditLogEvent || (auditLog.AuditLogEvent = AuditLogEvent = {}));
 	var AuditLogOptionsType;
 	(function (AuditLogOptionsType) {
@@ -30850,25 +30872,25 @@ function requireInteractions () {
 	return interactions;
 }
 
-var invite = {};
+var invite$1 = {};
 
-var hasRequiredInvite$1;
+var hasRequiredInvite$2;
 
-function requireInvite$1 () {
-	if (hasRequiredInvite$1) return invite;
-	hasRequiredInvite$1 = 1;
+function requireInvite$2 () {
+	if (hasRequiredInvite$2) return invite$1;
+	hasRequiredInvite$2 = 1;
 	/**
 	 * Types extracted from https://discord.com/developers/docs/resources/invite
 	 */
-	Object.defineProperty(invite, "__esModule", { value: true });
-	invite.InviteTargetType = invite.InviteType = invite.InviteFlags = void 0;
+	Object.defineProperty(invite$1, "__esModule", { value: true });
+	invite$1.InviteTargetType = invite$1.InviteType = invite$1.InviteFlags = void 0;
 	/**
 	 * @see {@link https://discord.com/developers/docs/resources/invite#invite-object-guild-invite-flags}
 	 */
 	var InviteFlags;
 	(function (InviteFlags) {
 	    InviteFlags[InviteFlags["IsGuestInvite"] = 1] = "IsGuestInvite";
-	})(InviteFlags || (invite.InviteFlags = InviteFlags = {}));
+	})(InviteFlags || (invite$1.InviteFlags = InviteFlags = {}));
 	/**
 	 * @see {@link https://discord.com/developers/docs/resources/invite#invite-object-invite-types}
 	 */
@@ -30877,7 +30899,7 @@ function requireInvite$1 () {
 	    InviteType[InviteType["Guild"] = 0] = "Guild";
 	    InviteType[InviteType["GroupDM"] = 1] = "GroupDM";
 	    InviteType[InviteType["Friend"] = 2] = "Friend";
-	})(InviteType || (invite.InviteType = InviteType = {}));
+	})(InviteType || (invite$1.InviteType = InviteType = {}));
 	/**
 	 * @see {@link https://discord.com/developers/docs/resources/invite#invite-object-invite-target-types}
 	 */
@@ -30885,9 +30907,9 @@ function requireInvite$1 () {
 	(function (InviteTargetType) {
 	    InviteTargetType[InviteTargetType["Stream"] = 1] = "Stream";
 	    InviteTargetType[InviteTargetType["EmbeddedApplication"] = 2] = "EmbeddedApplication";
-	})(InviteTargetType || (invite.InviteTargetType = InviteTargetType = {}));
+	})(InviteTargetType || (invite$1.InviteTargetType = InviteTargetType = {}));
 	
-	return invite;
+	return invite$1;
 }
 
 var message$1 = {};
@@ -31587,13 +31609,13 @@ function requireMonetization$1 () {
 	     */
 	    SubscriptionStatus[SubscriptionStatus["Active"] = 0] = "Active";
 	    /**
-	     * Subscription is active but will not renew.
-	     */
-	    SubscriptionStatus[SubscriptionStatus["Ending"] = 1] = "Ending";
-	    /**
 	     * Subscription is inactive and not being charged.
 	     */
-	    SubscriptionStatus[SubscriptionStatus["Inactive"] = 2] = "Inactive";
+	    SubscriptionStatus[SubscriptionStatus["Inactive"] = 1] = "Inactive";
+	    /**
+	     * Subscription is active but will not renew.
+	     */
+	    SubscriptionStatus[SubscriptionStatus["Ending"] = 2] = "Ending";
 	})(SubscriptionStatus || (monetization$1.SubscriptionStatus = SubscriptionStatus = {}));
 	
 	return monetization$1;
@@ -31640,6 +31662,13 @@ function requireOauth2 () {
 	     * @see {@link https://discord.com/developers/docs/resources/user#get-current-user}
 	     */
 	    OAuth2Scopes["Identify"] = "identify";
+	    /**
+	     * Allows your app to read a user's Nitro subscription type as defined by `premium_type` on the
+	     * {@link https://docs.discord.com/developers/resources/user#user-object-user-structure | User object} - only available to approved partners
+	     *
+	     * @see {@link https://docs.discord.com/developers/resources/user#user-object-user-structure}
+	     */
+	    OAuth2Scopes["IdentifyPremium"] = "identify.premium";
 	    /**
 	     * Allows {@link https://discord.com/developers/docs/resources/user#get-current-user-guilds | `/users/@me/guilds`}
 	     * to return basic information about all of a user's guilds
@@ -32219,7 +32248,7 @@ function requireV10$4 () {
 		__exportStar(requireGuild$1(), exports);
 		__exportStar(requireGuildScheduledEvent$1(), exports);
 		__exportStar(requireInteractions(), exports);
-		__exportStar(requireInvite$1(), exports);
+		__exportStar(requireInvite$2(), exports);
 		__exportStar(requireMessage$2(), exports);
 		__exportStar(requireMonetization$1(), exports);
 		__exportStar(requireOauth2(), exports);
@@ -32526,10 +32555,13 @@ function requireCommon$2 () {
 	    RESTJSONErrorCodes[RESTJSONErrorCodes["UnknownGuildScheduledEventUser"] = 10071] = "UnknownGuildScheduledEventUser";
 	    RESTJSONErrorCodes[RESTJSONErrorCodes["UnknownTag"] = 10087] = "UnknownTag";
 	    RESTJSONErrorCodes[RESTJSONErrorCodes["UnknownSound"] = 10097] = "UnknownSound";
+	    RESTJSONErrorCodes[RESTJSONErrorCodes["UnknownInviteTargetUsersJob"] = 10124] = "UnknownInviteTargetUsersJob";
+	    RESTJSONErrorCodes[RESTJSONErrorCodes["UnknownInviteTargetUsers"] = 10129] = "UnknownInviteTargetUsers";
 	    RESTJSONErrorCodes[RESTJSONErrorCodes["BotsCannotUseThisEndpoint"] = 20001] = "BotsCannotUseThisEndpoint";
 	    RESTJSONErrorCodes[RESTJSONErrorCodes["OnlyBotsCanUseThisEndpoint"] = 20002] = "OnlyBotsCanUseThisEndpoint";
 	    RESTJSONErrorCodes[RESTJSONErrorCodes["ExplicitContentCannotBeSentToTheDesiredRecipient"] = 20009] = "ExplicitContentCannotBeSentToTheDesiredRecipient";
 	    RESTJSONErrorCodes[RESTJSONErrorCodes["NotAuthorizedToPerformThisActionOnThisApplication"] = 20012] = "NotAuthorizedToPerformThisActionOnThisApplication";
+	    RESTJSONErrorCodes[RESTJSONErrorCodes["ThisActionRequiresAPremiumSubscription"] = 20015] = "ThisActionRequiresAPremiumSubscription";
 	    RESTJSONErrorCodes[RESTJSONErrorCodes["ActionCannotBePerformedDueToSlowmodeRateLimit"] = 20016] = "ActionCannotBePerformedDueToSlowmodeRateLimit";
 	    RESTJSONErrorCodes[RESTJSONErrorCodes["TheMazeIsntMeantForYou"] = 20017] = "TheMazeIsntMeantForYou";
 	    RESTJSONErrorCodes[RESTJSONErrorCodes["OnlyTheOwnerOfThisAccountCanPerformThisAction"] = 20018] = "OnlyTheOwnerOfThisAccountCanPerformThisAction";
@@ -32678,6 +32710,7 @@ function requireCommon$2 () {
 	    RESTJSONErrorCodes[RESTJSONErrorCodes["VoiceMessagesMustHaveSupportingMetadata"] = 50161] = "VoiceMessagesMustHaveSupportingMetadata";
 	    RESTJSONErrorCodes[RESTJSONErrorCodes["VoiceMessagesCannotBeEdited"] = 50162] = "VoiceMessagesCannotBeEdited";
 	    RESTJSONErrorCodes[RESTJSONErrorCodes["CannotDeleteGuildSubscriptionIntegration"] = 50163] = "CannotDeleteGuildSubscriptionIntegration";
+	    RESTJSONErrorCodes[RESTJSONErrorCodes["CannotSendVoiceEffectWhenUserIsServerMutedDeafenedOrSuppressed"] = 50167] = "CannotSendVoiceEffectWhenUserIsServerMutedDeafenedOrSuppressed";
 	    RESTJSONErrorCodes[RESTJSONErrorCodes["YouCannotSendVoiceMessagesInThisChannel"] = 50173] = "YouCannotSendVoiceMessagesInThisChannel";
 	    RESTJSONErrorCodes[RESTJSONErrorCodes["TheUserAccountMustFirstBeVerified"] = 50178] = "TheUserAccountMustFirstBeVerified";
 	    RESTJSONErrorCodes[RESTJSONErrorCodes["ProvidedFileDoesNotHaveAValidDuration"] = 50192] = "ProvidedFileDoesNotHaveAValidDuration";
@@ -32716,6 +32749,7 @@ function requireCommon$2 () {
 	    RESTJSONErrorCodes[RESTJSONErrorCodes["WebhooksCanOnlyCreateThreadsInForumChannels"] = 220003] = "WebhooksCanOnlyCreateThreadsInForumChannels";
 	    RESTJSONErrorCodes[RESTJSONErrorCodes["WebhookServicesCannotBeUsedInForumChannels"] = 220004] = "WebhookServicesCannotBeUsedInForumChannels";
 	    RESTJSONErrorCodes[RESTJSONErrorCodes["MessageBlockedByHarmfulLinksFilter"] = 240000] = "MessageBlockedByHarmfulLinksFilter";
+	    RESTJSONErrorCodes[RESTJSONErrorCodes["AccessToJoiningNewServersHasBeenLimitedForTheUser"] = 340015] = "AccessToJoiningNewServersHasBeenLimitedForTheUser";
 	    RESTJSONErrorCodes[RESTJSONErrorCodes["CannotEnableOnboardingRequirementsAreNotMet"] = 350000] = "CannotEnableOnboardingRequirementsAreNotMet";
 	    RESTJSONErrorCodes[RESTJSONErrorCodes["CannotUpdateOnboardingWhileBelowRequirements"] = 350001] = "CannotUpdateOnboardingWhileBelowRequirements";
 	    RESTJSONErrorCodes[RESTJSONErrorCodes["AccessToFileUploadsHasBeenLimitedForThisGuild"] = 400001] = "AccessToFileUploadsHasBeenLimitedForThisGuild";
@@ -32813,6 +32847,41 @@ function requireChannel$1 () {
 	return channel$1;
 }
 
+var invite = {};
+
+var hasRequiredInvite$1;
+
+function requireInvite$1 () {
+	if (hasRequiredInvite$1) return invite;
+	hasRequiredInvite$1 = 1;
+	Object.defineProperty(invite, "__esModule", { value: true });
+	invite.InviteTargetUsersJobStatus = void 0;
+	/**
+	 * @see {@link https://docs.discord.com/developers/resources/invite#get-target-users-job-status}
+	 */
+	var InviteTargetUsersJobStatus;
+	(function (InviteTargetUsersJobStatus) {
+	    /**
+	     * The default value.
+	     */
+	    InviteTargetUsersJobStatus[InviteTargetUsersJobStatus["Unspecified"] = 0] = "Unspecified";
+	    /**
+	     * The job is still being processed.
+	     */
+	    InviteTargetUsersJobStatus[InviteTargetUsersJobStatus["Processing"] = 1] = "Processing";
+	    /**
+	     * The job has been completed successfully.
+	     */
+	    InviteTargetUsersJobStatus[InviteTargetUsersJobStatus["Completed"] = 2] = "Completed";
+	    /**
+	     * The job has failed; see `error_message` field for more details.
+	     */
+	    InviteTargetUsersJobStatus[InviteTargetUsersJobStatus["Failed"] = 3] = "Failed";
+	})(InviteTargetUsersJobStatus || (invite.InviteTargetUsersJobStatus = InviteTargetUsersJobStatus = {}));
+	
+	return invite;
+}
+
 var monetization = {};
 
 var hasRequiredMonetization;
@@ -32859,6 +32928,7 @@ function requireV10$3 () {
 		const internals_1 = requireInternals();
 		__exportStar(requireCommon$2(), exports);
 		__exportStar(requireChannel$1(), exports);
+		__exportStar(requireInvite$1(), exports);
 		__exportStar(requireMonetization(), exports);
 		exports.APIVersion = '10';
 		exports.Routes = {
@@ -33041,6 +33111,13 @@ function requireV10$3 () {
 		     */
 		    channelRecipient(channelId, userId) {
 		        return `/channels/${channelId}/recipients/${userId}`;
+		    },
+		    /**
+		     * Route for:
+		     * - PUT `/channels/{channel.id}/voice-status`
+		     */
+		    channelVoiceStatus(channelId) {
+		        return `/channels/${channelId}/voice-status`;
 		    },
 		    /**
 		     * Route for:
@@ -33267,6 +33344,21 @@ function requireV10$3 () {
 		    },
 		    /**
 		     * Route for:
+		     * - GET `/invites/{invite.code}/target-users`
+		     * - PUT `/invites/{invite.code}/target-users`
+		     */
+		    inviteTargetUsers(code) {
+		        return `/invites/${code}/target-users`;
+		    },
+		    /**
+		     * Route for:
+		     * - GET `/invites/{invite.code}/target-users/job-status`
+		     */
+		    inviteTargetUsersJobStatus(code) {
+		        return `/invites/${code}/target-users/job-status`;
+		    },
+		    /**
+		     * Route for:
 		     * - GET  `/guilds/templates/{template.code}`
 		     * - POST `/guilds/templates/{template.code}` (**deprecated**)
 		     */
@@ -33366,8 +33458,9 @@ function requireV10$3 () {
 		    },
 		    /**
 		     * Route for:
-		     * - GET `/users/@me/applications/{application.id}/role-connection`
-		     * - PUT `/users/@me/applications/{application.id}/role-connection`
+		     * - GET    `/users/@me/applications/{application.id}/role-connection`
+		     * - PUT    `/users/@me/applications/{application.id}/role-connection`
+		     * - DELETE `/users/@me/applications/{application.id}/role-connection`
 		     */
 		    userApplicationRoleConnection(applicationId) {
 		        return `/users/@me/applications/${applicationId}/role-connection`;
@@ -34137,6 +34230,7 @@ const CDNRoutes = mod$2.CDNRoutes;
 const CannotSendMessagesToThisUserErrorCodes = mod$2.CannotSendMessagesToThisUserErrorCodes;
 const EntitlementOwnerType = mod$2.EntitlementOwnerType;
 const ImageFormat = mod$2.ImageFormat;
+const InviteTargetUsersJobStatus = mod$2.InviteTargetUsersJobStatus;
 const Locale = mod$2.Locale;
 const OAuth2Routes = mod$2.OAuth2Routes;
 const RESTJSONErrorCodes = mod$2.RESTJSONErrorCodes;
@@ -34152,6 +34246,7 @@ var v10$4 = /*#__PURE__*/Object.freeze({
 	CannotSendMessagesToThisUserErrorCodes: CannotSendMessagesToThisUserErrorCodes,
 	EntitlementOwnerType: EntitlementOwnerType,
 	ImageFormat: ImageFormat,
+	InviteTargetUsersJobStatus: InviteTargetUsersJobStatus,
 	Locale: Locale,
 	OAuth2Routes: OAuth2Routes,
 	RESTJSONErrorCodes: RESTJSONErrorCodes,
@@ -70873,8 +70968,9 @@ function requireAttachment$1 () {
 	if (hasRequiredAttachment$1) return Attachment_1;
 	hasRequiredAttachment$1 = 1;
 
+	const { AttachmentFlags } = requireV10();
 	const AttachmentFlagsBitField = requireAttachmentFlagsBitField();
-	const { basename, flatten } = requireUtil$6();
+	const { flatten } = requireUtil$6();
 
 	/**
 	 * @typedef {Object} AttachmentPayload
@@ -71025,7 +71121,7 @@ function requireAttachment$1 () {
 	   * @readonly
 	   */
 	  get spoiler() {
-	    return basename(this.url ?? this.name).startsWith('SPOILER_');
+	    return this.flags.has(AttachmentFlags.IsSpoiler);
 	  }
 
 	  toJSON() {
@@ -74806,7 +74902,7 @@ function requireTransformers () {
 	return Transformers;
 }
 
-var version = "14.26.4";
+var version = "14.26.5";
 var require$$40 = {
 	version: version};
 
